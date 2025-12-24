@@ -1,5 +1,5 @@
 id	category	authors	year	title	url	notes
-clay_p_vs_np	problem	Clay Mathematics Institute	2000	P vs NP (Millennium Problem statement)	https://www.claymath.org/millennium/p-vs-np/	HTML
+clay_p_vs_np	problem	Clay Mathematics Institute	2000	P vs NP (Millennium Problem statement)	https://www.claymath.org/wp-content/uploads/2022/06/pvsnp.pdf	PDF (official statement)
 sipser_book	textbook	Michael Sipser	2012	Introduction to the Theory of Computation (book page)	https://math.mit.edu/~sipser/book.html	HTML
 goldreich_np	textbook	Oded Goldreich	2008	P, NP, and NP-Completeness (notes)	https://www.wisdom.weizmann.ac.il/~oded/CC/bc-1.pdf	PDF
 arora_barak	textbook	Sanjeev Arora, Boaz Barak	2009	Computational Complexity: A Modern Approach (draft)	https://users.cs.duke.edu/~reif/courses/complectures/books/AB/ABbook.pdf	PDF (large)
