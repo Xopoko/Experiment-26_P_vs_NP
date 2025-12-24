@@ -24,3 +24,10 @@ shamir_1992	interactive	Adi Shamir	1992	IP = PSPACE	http://crypto.cs.mcgill.ca/~
 nisan_wigderson_1994	hvr	Noam Nisan, Avi Wigderson	1994	Hardness vs. Randomness	https://www.math.ias.edu/~avi/PUBLICATIONS/MYPAPERS/NOAM/HARDNESS/final.pdf	PDF
 odonnell_course	course	Ryan O'Donnell	—	Complexity Theory (lecture notes)	https://www.cs.cmu.edu/~odonnell/complexity/	HTML
 odonnell_lecture14	course	Ryan O'Donnell	2009	Lecture 14: The Switching Lemma (15-855)	https://www.cs.cmu.edu/~odonnell/complexity/lecture14.pdf	PDF (switching lemma + PARITY ∉ AC0)
+fortnow_cacm_2009	survey	Lance Fortnow	2009	The Status of the P versus NP Problem	https://courses.cs.duke.edu/spring16/compsci590.4/CACM-Fortnow.pdf	PDF (CACM survey)
+van_melkebeek_2007_survey	survey	Dieter van Melkebeek	2007	A Survey of Lower Bounds for Satisfiability and Related Problems	https://eccc.weizmann.ac.il/report/2007/099/download/	PDF (ECCC report 2007/099)
+de_wolf_resolutionlowerbound	proof_complexity	Ronald de Wolf	—	Pigeonhole and resolution (notes)	https://homepages.cwi.nl/~rdewolf/resolutionlowerbound.pdf	PDF (Haken lower bound via Beame–Pitassi style proof)
+uva_relativization_lecture5_2021	barriers	Ronald de Haan	2021	Lecture 5: Relativization and the Baker-Gill-Solovay Theorem	https://staff.science.uva.nl/r.dehaan/complexity2021/files/lecture5.pdf	PDF (course notes; BGS theorem)
+buss_1987_php_frege	proof_complexity	Samuel R. Buss	1987	Polynomial Size Proofs of the Propositional Pigeonhole Principle	https://mathweb.ucsd.edu/~sbuss/ResearchWeb/php_PolyFrege/FregePHP.pdf	PDF (Frege has poly-size proofs; host may need --insecure)
+beame_et_al_1992_php_bounded_depth_frege	proof_complexity	Paul Beame, Russell Impagliazzo, Jan Krajíček, Toniann Pitassi, Pavel Pudlák, Alan Woods	1992	Exponential Lower Bounds for the Pigeonhole Principle (bounded-depth Frege)	https://homes.cs.washington.edu/~beame/papers/php.pdf	PDF (AC0-Frege lower bound)
+buss_cutting_planes_notes	proof_complexity	Samuel R. Buss	—	Cutting planes, connectivity, and threshold logic	https://mathweb.ucsd.edu/~sbuss/ResearchWeb/cuttingplanes/paper.pdf	PDF (Cutting Planes overview; host may need --insecure)

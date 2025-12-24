@@ -27,8 +27,16 @@ class Resource:
         url = self.url.lower()
         if ".pdf" in url:
             return True
-        path = urlparse(url).path
-        return "/pdf/" in path or path.endswith("/pdf")
+        parsed = urlparse(url)
+        path = parsed.path
+        if "/pdf/" in path or path.endswith("/pdf"):
+            return True
+
+        # Some repositories serve PDFs behind a stable `/download` endpoint without a `.pdf` suffix.
+        if parsed.netloc.endswith("eccc.weizmann.ac.il") and path.rstrip("/").endswith("/download"):
+            return True
+
+        return False
 
 
 def _read_manifest(path: Path) -> list[Resource]:
