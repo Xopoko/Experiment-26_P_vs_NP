@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import runpy
 import sys
 import traceback
 from pathlib import Path
@@ -32,13 +33,15 @@ def _assert_no_magics(cell_index: int, source: str) -> None:
 
 
 def main(argv: list[str]) -> int:
-    parser = argparse.ArgumentParser(description="Execute all code cells in a .ipynb (no Jupyter required).")
+    parser = argparse.ArgumentParser(
+        description="Run project checks from a .py file or execute code cells from a legacy .ipynb (no Jupyter required)."
+    )
     parser.add_argument(
         "path",
         nargs="?",
         type=Path,
-        default=Path("P_vs_NP.ipynb"),
-        help="Notebook path (default: P_vs_NP.ipynb)",
+        default=Path("code/verify_checks.py"),
+        help="Path to a .py checks file or a legacy .ipynb (default: code/verify_checks.py)",
     )
     parser.add_argument(
         "--allow-magics",
@@ -46,6 +49,20 @@ def main(argv: list[str]) -> int:
         help="Do not fail on lines starting with ! or % (not recommended).",
     )
     args = parser.parse_args(argv)
+
+    if args.path.suffix == ".py":
+        try:
+            runpy.run_path(str(args.path), run_name="__main__")
+        except Exception as exc:  # noqa: BLE001 - show full context
+            print(f"FAILED: {args.path}: {exc}", file=sys.stderr)
+            traceback.print_exc()
+            return 1
+        print(f"OK: executed {args.path}")
+        return 0
+
+    if args.path.suffix != ".ipynb":
+        print(f"FAILED: {args.path}: expected .py or .ipynb", file=sys.stderr)
+        return 2
 
     nb = json.loads(args.path.read_text(encoding="utf-8"))
     code_cells = _iter_code_cells(nb)

@@ -12,4 +12,4 @@
 - Some publisher/DOI links may be blocked (403); see `notes` in `resources/manifest.tsv` for alternatives.
 - If a host has broken TLS certs: add `--insecure`
 - If you get `CERTIFICATE_VERIFY_FAILED` in a minimal environment, install CA certs (preferred) or use `--insecure`.
-- Verify notebook code-cells (no Jupyter): `python3 scripts/verify_notebook.py P_vs_NP.ipynb`
+- Run project checks (no Jupyter): `python3 scripts/verify_notebook.py`
