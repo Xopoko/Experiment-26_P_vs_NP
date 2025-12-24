@@ -37,6 +37,7 @@ dinur_2007_pcp	pcp	Irit Dinur	2007	The PCP Theorem by Gap Amplification	https://
 nisan_wigderson_1994	hvr	Noam Nisan, Avi Wigderson	1994	Hardness vs. Randomness	https://www.math.ias.edu/~avi/PUBLICATIONS/MYPAPERS/NOAM/HARDNESS/final.pdf	PDF
 odonnell_course	course	Ryan O'Donnell	—	Complexity Theory (lecture notes)	https://www.cs.cmu.edu/~odonnell/complexity/	HTML
 odonnell_lecture14	course	Ryan O'Donnell	2009	Lecture 14: The Switching Lemma (15-855)	https://www.cs.cmu.edu/~odonnell/complexity/lecture14.pdf	PDF (switching lemma + PARITY ∉ AC0)
+uw_hierarchy_2022_lecture5	course	Anup Rao	2022	Lecture 5: Hierarchy Theorems (CSEP 531)	https://homes.cs.washington.edu/~anuprao/pubs/CSEP531Wi2022/lecture4.pdf	PDF (universal simulation + time hierarchy)
 fortnow_cacm_2009	survey	Lance Fortnow	2009	The Status of the P versus NP Problem	https://courses.cs.duke.edu/spring16/compsci590.4/CACM-Fortnow.pdf	PDF (CACM survey)
 fortnow_pvnp50_2021	survey	Lance Fortnow	2021	Fifty Years of P Versus NP and the Possibility of the Impossible	https://lance.fortnow.com/papers/files/pvnp50.pdf	PDF (50-year survey)
 aaronson_pnp_2017	survey	Scott Aaronson	2017	P = NP	https://eccc.weizmann.ac.il/report/2017/004/download/	PDF (ECCC TR17-004 survey)
