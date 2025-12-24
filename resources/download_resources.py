@@ -90,6 +90,21 @@ def _download(
         out_path.write_bytes(resp.read())
 
 
+def _looks_like_pdf(path: Path) -> bool:
+    try:
+        with path.open("rb") as f:
+            head = f.read(1024)
+    except OSError:
+        return False
+    return b"%PDF-" in head
+
+
+def _rename_overwrite(src: Path, dst: Path) -> None:
+    if dst.exists():
+        dst.unlink()
+    src.rename(dst)
+
+
 def _print_table(resources: Iterable[Resource]) -> None:
     rows = list(resources)
     if not rows:
@@ -212,6 +227,26 @@ def main(argv: list[str]) -> int:
                 timeout_sec=args.timeout,
                 verify_tls=not args.insecure,
             )
+            expected_pdf = r.is_pdf
+            actual_pdf = _looks_like_pdf(out_path)
+
+            if expected_pdf and not actual_pdf:
+                failures += 1
+                html_path = out_path.with_suffix(".html")
+                _rename_overwrite(out_path, html_path)
+                print(
+                    f"FAIL {r.id}: expected PDF but got non-PDF content -> {html_path}",
+                    file=sys.stderr,
+                )
+                continue
+
+            if (not expected_pdf) and actual_pdf:
+                pdf_path = out_path.with_suffix(".pdf")
+                _rename_overwrite(out_path, pdf_path)
+                out_path = pdf_path
+                print(f"OK   {r.id} -> {out_path} (detected PDF)")
+                continue
+
             print(f"OK   {r.id} -> {out_path}")
         except Exception as e:  # noqa: BLE001 - CLI: show all failures
             failures += 1

@@ -21,6 +21,9 @@ fss_1984	circuits	Merrick Furst, James Saxe, Michael Sipser	1984	Parity, circuit
 smolensky_1987	circuits	Roman Smolensky	1987	Algebraic methods in the theory of lower bounds for Boolean circuit complexity	https://www.cs.bu.edu/faculty/gacs/courses/cs535/papers/p77-smolensky.pdf	PDF (AC0[p])
 razborov_1985_monotone	circuits	Alexander Razborov	1985	Lower bounds for the monotone complexity of some Boolean functions	https://people.cs.uchicago.edu/~razborov/files/clique.pdf	PDF (monotone CLIQUE; TLS cert broken → use --insecure)
 shamir_1992	interactive	Adi Shamir	1992	IP = PSPACE	http://crypto.cs.mcgill.ca/~crepeau/COMP647/2007/TOPIC01/Shamir-IP=PSPACE.pdf	PDF
+arora_safra_1998_pcp	pcp	Sanjeev Arora, Shmuel Safra	1998	Probabilistic Checking of Proofs: A New Characterization of NP	https://www.cs.umd.edu/~gasarch/TOPICS/pcp/AS.pdf	PDF (PCP theorem; copy)
+almss_1998_pcp	pcp	Sanjeev Arora, Carsten Lund, Rajeev Motwani, Madhu Sudan, Mario Szegedy	1998	Proof Verification and the Hardness of Approximation Problems	https://www.cs.umd.edu/~gasarch/TOPICS/pcp/ALMSS.pdf	PDF (PCP theorem; copy)
+dinur_2007_pcp	pcp	Irit Dinur	2007	The PCP Theorem by Gap Amplification	https://www.wisdom.weizmann.ac.il/~dinuri/mypapers/combpcp.pdf	PDF (Dinur's proof)
 nisan_wigderson_1994	hvr	Noam Nisan, Avi Wigderson	1994	Hardness vs. Randomness	https://www.math.ias.edu/~avi/PUBLICATIONS/MYPAPERS/NOAM/HARDNESS/final.pdf	PDF
 odonnell_course	course	Ryan O'Donnell	—	Complexity Theory (lecture notes)	https://www.cs.cmu.edu/~odonnell/complexity/	HTML
 odonnell_lecture14	course	Ryan O'Donnell	2009	Lecture 14: The Switching Lemma (15-855)	https://www.cs.cmu.edu/~odonnell/complexity/lecture14.pdf	PDF (switching lemma + PARITY ∉ AC0)
