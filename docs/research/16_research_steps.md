@@ -1845,6 +1845,9 @@ $\ge 2/3-1/10>1/2$, а при $x\notin L$ среднее $\le 1/3+1/10<1/2$.
   перестановки/скобки XOR (полиномиально много шагов), получаем
   $$P\leftrightarrow\bigoplus_{v\in V}\ \bigoplus_{e\ni v} x_e\ \leftrightarrow\ \bigoplus_{e\in E}(x_e\oplus x_e)\ \leftrightarrow\ 0,$$
   противоречие.
+- `Ссылка (EF ⊢ XOR/Gauss):` отмечено, что EF «легко симулирует Gaussian elimination»
+  (и потому полиномиально доказывает линейно‑алгебраические утверждения),
+  см. Bonet–Buss–Pitassi 2002, `../resources/downloads/bonet_buss_pitassi_2002_hard_examples_frege.pdf` (p. 7).
 - `PC‑заметка:` Если рассматривать Tseitin как линейную систему над $\mathbb F_2$,
   $$\sum_{e\ni v} x_e = \chi(v)\quad(\bmod 2),$$
   то в PC над $\mathbb F_2$ опровержение получается в степени 1: суммируем

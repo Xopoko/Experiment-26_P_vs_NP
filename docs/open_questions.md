@@ -5,13 +5,16 @@
 
 ## Активные
 
-- [ ] **Q13 (Frege/EF симулирует XOR/Gauss):** в §16.88 дан EF/Frege‑каркас опровержения Tseitin через XOR‑суммирование,
-  но он пока «фольклорный». Следующий шаг: найти точную ссылку (и минимально переписать §16.88),
-  что Frege/EF имеет полиномиальные опровержения для линейных систем над $\mathbb F_2$
-  (например, симуляция гауссова исключения / XOR‑рассуждений).
+- [ ] **Q14 (Frege‑depth для Tseitin):** известно, что depth‑$d$ Frege имеет сильные нижние оценки на Tseitin
+  для фиксированного $d$ (Razborov 2023, Thm. 4.6–4.7), но обычный Frege (без ограничения глубины)
+  должен иметь полиномиальные опровержения через XOR‑рассуждения. Следующий шаг: найти точную ссылку
+  на полиномиальный Frege‑вывод Tseitin (или зафиксировать минимальную глубину/размер, напр. через известные результаты о depth‑growth).
 
 ## Завершённые (архив)
 
+- [x] **Q13 (Frege/EF симулирует XOR/Gauss):** в `docs/research/16_research_steps.md` §16.88 добавлена точная ссылка,
+  что EF «легко симулирует Gaussian elimination» (Bonet–Buss–Pitassi 2002, `../resources/downloads/bonet_buss_pitassi_2002_hard_examples_frege.pdf`, p. 7),
+  что закрывает фольклорность EF‑каркаса XOR‑суммирования.
 - [x] **Q12 (TseitinCNF vs PC при $\mathrm{char}(F)\ne 2$):** в `docs/research/16_research_steps.md` §16.90
   показано: TseitinCNF (3‑CNF) и биномиальная Tseitin (Fourier/±1‑база) p‑эквивалентны по степени в PC при $\mathrm{char}(F)\ne 2$,
   поэтому degree/size‑LB (Razborov 2023, Thm. 6.8; Beame–Sabharwal 2000, Thm. 2.18) переносятся на TseitinCNF.

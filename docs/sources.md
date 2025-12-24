@@ -58,6 +58,8 @@
 - P. Beame, R. Impagliazzo, J. Krajíček, T. Pitassi, P. Pudlák, A. Woods (1992),
   *Exponential Lower Bounds for the Pigeonhole Principle* (PDF):
   ../resources/downloads/beame_et_al_1992_php_bounded_depth_frege.pdf
+- M. L. Bonet, S. Buss, T. Pitassi (2002), *Are there Hard Examples for Frege Systems?* (PDF):
+  ../resources/downloads/bonet_buss_pitassi_2002_hard_examples_frege.pdf
 - S. Buss, P. Clote (2002), *Cutting planes, connectivity, and threshold logic* (PDF): ../resources/downloads/buss_cutting_planes_notes.pdf
 - J. Pich, R. Santhanam (2023), *Towards P ≠ NP from Extended Frege lower bounds* (PDF):
   ../resources/downloads/pich_santhanam_2023_ef_lower_bounds.pdf
