@@ -361,7 +361,7 @@ $$\neg\mathrm{Truthbool}([r(\varphi)],p,g(p))\to\neg\mathrm{Truthbool}([\varphi]
 
 **Лемма 15.7.4c (учёт blow-up).** Пусть редукция $r$ удовлетворяет $|r(\varphi)|\le |\varphi|^c$ и алгоритм $\mathcal A$ строит ROABP размера $\le |\psi|^d$ для входа $\psi$. Тогда композиция даёт ROABP размера $\le |\varphi|^{cd}$ для исходной 3-CNF. Следовательно, любой полиномиальный blow-up редукции лишь меняет константу в степени и не влияет на вывод $\mathrm{P}=\mathrm{NP}$ в Лемме 15.7.4b.
 
-**Лемма 15.7.4d (конкретные NP-полные подклассы).** Планарный 3-SAT NP-полон (Lichtenstein 1982, `../resources/downloads/lichtenstein_1982_planar_formulae_and_their_uses.pdf`), а 3-SAT с ограничением «каждая переменная встречается не более 4 раз» NP-труден (Tovey 1984; см. обзор в Berman–Karpinski–Scott, `../resources/downloads/berman_karpinski_1998_restricted_3sat.pdf`). Поэтому для этих подклассов $\mathcal C$ выполняется предпосылка Леммы 15.7.4b (p-time редукция из 3-CNF с полиномиальным blow-up).
+**Лемма 15.7.4d (конкретные NP-полные подклассы).** Планарный 3-SAT NP-полон (Lichtenstein 1982, `../resources/downloads/lichtenstein_1982_planar_formulae.pdf`), а 3-SAT с ограничением «каждая переменная встречается не более 4 раз» NP-труден (Tovey 1984; см. обзор в Berman–Karpinski–Scott, `../resources/downloads/berman_karpinski_scott_restricted_3sat.pdf`). Поэтому для этих подклассов $\mathcal C$ выполняется предпосылка Леммы 15.7.4b (p-time редукция из 3-CNF с полиномиальным blow-up).
 
 **Контрпример (монотонные CNF).** Ограничение на монотонные клаузы слишком сильное: любая монотонная CNF без пустой клаузы удовлетворима (присваивание всех переменных 1), поэтому даже идеальная канонизация на этом классе не даёт NP-трудности.
 

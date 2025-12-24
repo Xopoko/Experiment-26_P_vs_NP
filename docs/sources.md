@@ -84,7 +84,7 @@
 - S. Grewal, V. M. Kumar (2024), *Improved Circuit Lower Bounds and Quantum-Classical Separations* (PDF):
   ../resources/downloads/grewal_kumar_2024_gc0.pdf
 - R. O’Donnell (курс/лекции; switching lemma и AC⁰‑нижние оценки): ../resources/downloads/odonnell_course.html
-- R. O’Donnell (2009), *Lecture 14: The Switching Lemma* (PDF): ../resources/downloads/odonnell_course.htmllecture14.pdf
+- R. O’Donnell (2009), *Lecture 14: The Switching Lemma* (PDF): ../resources/downloads/odonnell_lecture14.pdf
 
 **Алгебраические подходы (GCT)**
 - M. Bläser, C. Ikenmeyer (2025), *Introduction to Geometric Complexity Theory* (PDF):

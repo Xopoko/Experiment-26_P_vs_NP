@@ -66,7 +66,7 @@ def _iter_markdown_paths() -> list[Path]:
 def _verify_download_links(*, manifest_path: Path, downloads_dir: Path) -> None:
     manifest_ids = _load_manifest_ids(manifest_path)
     md_paths = _iter_markdown_paths()
-    rx = re.compile(r"resources/downloads/([A-Za-z0-9._-]+\\.(?:pdf|html))")
+    rx = re.compile(r"resources/downloads/([A-Za-z0-9._-]+\.(?:pdf|html))")
 
     missing_files: list[str] = []
     missing_manifest: list[str] = []
