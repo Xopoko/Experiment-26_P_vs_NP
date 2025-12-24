@@ -17,6 +17,7 @@
 - [6.6. INDEPENDENT SET и VERTEX COVER](docs/06_6_is_vc.md)
 - [7. Три барьера](docs/07_barriers.md)
 - [8. Линии атаки](docs/08_attack_lines.md)
+- [Открытые вопросы (очередь)](docs/open_questions.md)
 - [9. Схемная сложность](docs/09_circuit_complexity.md)
 - [10. PARITY (глубина 2)](docs/10_parity_depth2.md)
 - [11. Switching lemma → PARITY ∉ AC⁰](docs/11_switching_lemma_ac0.md)
