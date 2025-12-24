@@ -5,6 +5,7 @@ goldreich_np	textbook	Oded Goldreich	2008	P, NP, and NP-Completeness (notes)	htt
 arora_barak	textbook	Sanjeev Arora, Boaz Barak	2009	Computational Complexity: A Modern Approach (draft)	https://users.cs.duke.edu/~reif/courses/complectures/books/AB/ABbook.pdf	PDF (large)
 cook_1971	np-complete	Stephen Cook	1971	The Complexity of Theorem-Proving Procedures	https://www.cs.toronto.edu/~sacook/homepage/1971.pdf	PDF (Cook–Levin)
 karp_1972	np-complete	Richard M. Karp	1972	Reducibility Among Combinatorial Problems	https://www.cs.cornell.edu/courses/cs722/2000sp/karp.pdf	PDF (Karp 21 NP-complete problems)
+srba_np_completeness_2010	np-complete	Jiri Srba	2010	CNF-SAT ≤p 3SAT; NP-Completeness of CLIQUE (slides)	https://homes.cs.aau.dk/~srba/courses/slides-CC-10/l13-2x3.pdf	PDF (3SAT→CLIQUE reduction)
 karp_lipton_1980	nonuniform	Richard M. Karp, Richard J. Lipton	1980	Some connections between nonuniform and uniform complexity classes	https://doi.org/10.1145/800141.804678	DOI (часто недоступно из-за paywall/403); см. trevisan_lecture05_2008
 trevisan_lecture05_2008	nonuniform	Luca Trevisan	2008	Lecture 5: The Karp-Lipton-Sipser Theorem	http://theory.stanford.edu/~trevisan/cs278-08/lecture05.pdf	PDF (Karp–Lipton theorem notes)
 bgs_1975	barriers	Theodore Baker, John Gill, Robert Solovay	1975	Relativizations of the P = ? NP Question	https://doi.org/10.1137/0204037	DOI (часто недоступно из-за paywall/403); см. jkatz_relativization_2005 или uva_relativization_lecture5_2021
