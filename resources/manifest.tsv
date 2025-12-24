@@ -54,4 +54,5 @@ cook_nguyen_2010_logical_foundations	bounded_arithmetic	Stephen Cook, Phuong Ngu
 blaser_ikenmeyer_2025_gct_intro	gct	Markus Bläser, Christian Ikenmeyer	2025	Introduction to Geometric Complexity Theory	https://theoryofcomputing.org/articles/gs010/gs010.pdf	PDF (Theory of Computing survey)
 valiant_1979_completeness	gct	Leslie G. Valiant	1979	Completeness classes in algebra	https://doi.org/10.1145/800135.804419	DOI (ACM; paywall); see burgisser_2024_valiant_overview
 burgisser_2024_valiant_overview	gct	Peter Bürgisser	2024	Completeness classes in algebraic complexity theory	https://arxiv.org/pdf/2406.06217	PDF (arXiv overview of Valiant 1979)
+saptharishi_2016_arithmetic_circuit_survey	gct	Ramprasad Saptharishi	2016	A survey of lower bounds in arithmetic circuit complexity	https://pgadey.ca/seminar/Saptharishi-survey.pdf	PDF (arithmetic circuit lower bounds survey)
 allcock_nullstellensatz_2005	algebra	Daniel Allcock	2005	Hilbert's Nullstellensatz	https://web.ma.utexas.edu/users/allcock/expos/nullstellensatz3.pdf	PDF (short proof)
