@@ -63,6 +63,27 @@ def _iter_markdown_paths() -> list[Path]:
     return paths
 
 
+def _verify_agent_brief(*, path: Path, max_lines: int, max_bytes: int, max_experiments: int) -> None:
+    if not path.exists():
+        raise AssertionError(f"Missing required file: {path}")
+
+    raw = path.read_text(encoding="utf-8")
+    if len(raw.encode("utf-8")) > max_bytes:
+        raise AssertionError(f"{path} is too large: > {max_bytes} bytes (compress it, do not append)")
+
+    lines = raw.splitlines()
+    if len(lines) > max_lines:
+        raise AssertionError(f"{path} is too long: {len(lines)} lines > {max_lines} (compress it, do not append)")
+
+    experiments = [ln for ln in lines if ln.lstrip().startswith("- E")]
+    if len(experiments) > max_experiments:
+        raise AssertionError(
+            f"{path} has too many experiment entries: {len(experiments)} > {max_experiments} (compress/overwrite)"
+        )
+
+    print(f"OK: verified bounded agent brief: {path}")
+
+
 def _verify_download_links(*, manifest_path: Path, downloads_dir: Path) -> None:
     manifest_ids = _load_manifest_ids(manifest_path)
     md_paths = _iter_markdown_paths()
@@ -135,6 +156,12 @@ def main(argv: list[str]) -> int:
                 manifest_path=Path("resources/manifest.tsv"),
                 downloads_dir=Path("resources/downloads"),
             )
+            _verify_agent_brief(
+                path=Path("docs/agent_brief.md"),
+                max_lines=200,
+                max_bytes=16_000,
+                max_experiments=12,
+            )
         return 0
 
     if args.path.suffix != ".ipynb":
@@ -162,6 +189,12 @@ def main(argv: list[str]) -> int:
         _verify_download_links(
             manifest_path=Path("resources/manifest.tsv"),
             downloads_dir=Path("resources/downloads"),
+        )
+        _verify_agent_brief(
+            path=Path("docs/agent_brief.md"),
+            max_lines=200,
+            max_bytes=16_000,
+            max_experiments=12,
         )
     return 0
 
