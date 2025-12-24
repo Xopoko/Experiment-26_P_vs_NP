@@ -105,7 +105,16 @@ def _rename_overwrite(src: Path, dst: Path) -> None:
     src.rename(dst)
 
 
-def _print_table(resources: Iterable[Resource]) -> None:
+def _local_kind(out_dir: Path, resource: Resource) -> str:
+    base = out_dir / _safe_filename(resource.id)
+    if base.with_suffix(".pdf").exists():
+        return "pdf"
+    if base.with_suffix(".html").exists():
+        return "html"
+    return "—"
+
+
+def _print_table(resources: Iterable[Resource], *, out_dir: Path) -> None:
     rows = list(resources)
     if not rows:
         return
@@ -116,6 +125,7 @@ def _print_table(resources: Iterable[Resource]) -> None:
         ("year", max(len("year"), *(len(r.year) for r in rows))),
         ("title", max(len("title"), *(min(len(r.title), 60) for r in rows))),
         ("kind", len("kind")),
+        ("local", len("local")),
     ]
 
     def trunc(s: str, n: int) -> str:
@@ -131,6 +141,7 @@ def _print_table(resources: Iterable[Resource]) -> None:
             r.year,
             trunc(r.title, 60),
             ("pdf" if r.is_pdf else "link"),
+            _local_kind(out_dir, r),
         ]
         print("  ".join(v.ljust(width) for v, (_, width) in zip(values, cols, strict=True)))
 
@@ -195,7 +206,7 @@ def main(argv: list[str]) -> int:
 
     resources = _read_manifest(args.manifest)
     if args.list:
-        _print_table(resources)
+        _print_table(resources, out_dir=args.out)
         return 0
 
     selected = resources

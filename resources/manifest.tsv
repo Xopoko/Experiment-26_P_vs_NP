@@ -5,13 +5,13 @@ goldreich_np	textbook	Oded Goldreich	2008	P, NP, and NP-Completeness (notes)	htt
 arora_barak	textbook	Sanjeev Arora, Boaz Barak	2009	Computational Complexity: A Modern Approach (draft)	https://users.cs.duke.edu/~reif/courses/complectures/books/AB/ABbook.pdf	PDF (large)
 cook_1971	np-complete	Stephen Cook	1971	The Complexity of Theorem-Proving Procedures	https://www.cs.toronto.edu/~sacook/homepage/1971.pdf	PDF (Cook–Levin)
 karp_1972	np-complete	Richard M. Karp	1972	Reducibility Among Combinatorial Problems	https://www.cs.cornell.edu/courses/cs722/2000sp/karp.pdf	PDF (Karp 21 NP-complete problems)
-karp_lipton_1980	nonuniform	Richard M. Karp, Richard J. Lipton	1980	Some connections between nonuniform and uniform complexity classes	https://doi.org/10.1145/800141.804678	DOI (Karp–Lipton theorem)
+karp_lipton_1980	nonuniform	Richard M. Karp, Richard J. Lipton	1980	Some connections between nonuniform and uniform complexity classes	https://doi.org/10.1145/800141.804678	DOI (часто недоступно из-за paywall/403); см. trevisan_lecture05_2008
 trevisan_lecture05_2008	nonuniform	Luca Trevisan	2008	Lecture 5: The Karp-Lipton-Sipser Theorem	http://theory.stanford.edu/~trevisan/cs278-08/lecture05.pdf	PDF (Karp–Lipton theorem notes)
-bgs_1975	barriers	Theodore Baker, John Gill, Robert Solovay	1975	Relativizations of the P = ? NP Question	https://doi.org/10.1137/0204037	DOI (may be paywalled)
+bgs_1975	barriers	Theodore Baker, John Gill, Robert Solovay	1975	Relativizations of the P = ? NP Question	https://doi.org/10.1137/0204037	DOI (часто недоступно из-за paywall/403); см. jkatz_relativization_2005 или uva_relativization_lecture5_2021
 jkatz_relativization_2005	barriers	Jonathan Katz	2005	Relativizing the P vs. NP Question (lecture notes)	https://www.cs.umd.edu/~jkatz/complexity/f05/relativization.pdf	PDF (Baker–Gill–Solovay theorem notes)
 razborov_rudich_1997	barriers	Alexander Razborov, Steven Rudich	1997	Natural Proofs	https://mit6875.github.io/PAPERS/natural_proofs.pdf	PDF
 aaronson_wigderson_2008	barriers	Scott Aaronson, Avi Wigderson	2008	Algebrization: A New Barrier in Complexity Theory	https://www.scottaaronson.com/papers/alg.pdf	PDF
-haken_1985	proof_complexity	Armin Haken	1985	The Intractability of Resolution	https://doi.org/10.1016/0304-3975(85)90144-6	DOI (resolution lower bound for PHP; may be paywalled)
+haken_1985	proof_complexity	Armin Haken	1985	The Intractability of Resolution	https://doi.org/10.1016/0304-3975(85)90144-6	DOI (часто недоступно из-за paywall/403); см. tss_proof_complexity_notes или de_wolf_resolutionlowerbound
 cook_reckhow_1979	proof_complexity	Stephen Cook, Robert Reckhow	1979	The Relative Efficiency of Propositional Proof Systems	http://www.cs.utoronto.ca/~sacook/homepage/cook_reckhow.pdf	PDF (Cook–Reckhow proof systems)
 ben_sasson_wigderson_2001	proof_complexity	Eli Ben-Sasson, Avi Wigderson	2001	Short Proofs are Narrow—Resolution Made Simple	https://people.inf.ethz.ch/emo/SatSem05/Papers/BensassonWidgerson01.pdf	PDF (width–size tradeoff for Resolution)
 tss_proof_complexity_notes	proof_complexity	University of Toronto (TSS)	2021	Introduction to Proof Complexity (notes)	https://www.cs.toronto.edu/tss/files/papers/TSS_Proof_Complexity_Notes.pdf	PDF (lecture notes; overview + PHP/Resolution)
