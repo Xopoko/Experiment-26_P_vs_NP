@@ -43,8 +43,8 @@
   резолюционного опровержения удовлетворяет $W(\mathrm{Tseitin}(G,\chi)\vdash 0)\ge e(G)-1$
   (Itsykson–Oparin 2013, Cor. 1). Тогда по trade‑off “width ⇒ size”
   (Ben‑Sasson–Wigderson 2001; также сформулировано как Thm. 1 в Itsykson–Oparin 2013)
-  получаем для числа переменных $n:=|E|$:
-  $$S(\mathrm{Tseitin}(G,\chi))\ \ge\ \exp\!\left(\frac{(e(G)-k-1)^2}{n}\right),\qquad
+  получаем для числа переменных $n:=|E|$ (где $S$ — размер dag‑resolution, а $ST$ — размер tree‑like resolution):
+  $$S(\mathrm{Tseitin}(G,\chi))\ \ge\ \exp\!\left(\Omega\!\left(\frac{(e(G)-k-1)^2}{n}\right)\right),\qquad
     ST(\mathrm{Tseitin}(G,\chi))\ \ge\ 2^{\,e(G)-k-1}.$$
   В частности, для семейства графов степени $O(1)$ с $e(G)=\Omega(|V|)$ (экспандеры)
   имеем $n=\Theta(|V|)$ и потому $S\ge \exp(\Omega(|V|))$.
@@ -373,7 +373,7 @@
 - `Линза:` Трейд‑офф.
 - `Утверждение:` Пусть $G$ — граф на $n$ вершинах с carving width $W$ (Definition 58). Тогда соответствующая
   Tseitin‑таутология $\tau(G)$ имеет tree‑like resolution‑рефутацию ранга $\le W\log_{3/2} n$; в частности,
-  существует tree‑like resolution‑рефутация размера $\le n^{W(\log 3-1)}$ и clause space $\le W\log_{3/2} n+1$
+  существует tree‑like resolution‑рефутация размера $\le n^{O(W)}$ и clause space $\le W\log_{3/2} n+1$
   (Beame–Beck–Impagliazzo 2016, Lemma 61,
   `../../resources/downloads/beame_beck_impagliazzo_2016_time_space_tradeoffs_resolution.pdf`).
 - `Toy‑тест:` при $W=O(1)$ получаем polynomial‑size tree‑like resolution для $\tau(G)$ (и глубину дерева $O(\log n)$);
@@ -923,9 +923,11 @@
   1) (p. 3; PDF p. 5) “If we are allowed to reason with linear equations modulo two then the Tseitin contradiction has efficient refutations.”
   2) (p. 4; PDF p. 6) “We do not know how to syntactically translate a Gaussian elimination step to some proof steps in this representation and thus we do not actually get a proof, only a representation of the partial results.”
 - `Toy‑тест:` пусть максимальный размер строки $M=n^{O(1)}$, тогда $\\log M=\\Theta(\\log n)$.
-  Формула глубины $d$ размера $M$ может кодировать паритет на $m:=(\\log M)^{d-1}$ переменных.
+  Если (как в эвристике HR §1.2) временно считать, что глубина‑$d$ **представление** паритета допускает блок
+  $m\\approx(\\log M)^{d-1}$, то
   При $d=\\Theta(\\log n/\\log\\log n)$ имеем $m=\\exp(\\Theta(\\log n))=n^{\\Theta(1)}\\ge n$, т.е. представление паритета на $n$ переменных возможно при polynomial $M$;
   остаётся ровно «нехватающий» шаг: вывести из таких представлений следующее XOR‑уравнение внутри Frege.
+  (Для растущей глубины и **формул** нужно аккуратно учитывать разницу «схемы vs формулы», см. §16.147–§16.152.)
 - `Статус:` известный факт (точная ссылка; формализует, где именно ломается наивный upper‑подход).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` формализовать как лемму‑цель: «в bounded‑depth Frege можно (p‑)выводить представление $L_1\\oplus L_2=b_1\\oplus b_2$ из представлений $L_1=b_1$ и $L_2=b_2$ с контролем по глубине/размеру», либо найти источник, где это уже сделано.
@@ -933,7 +935,7 @@
 ### 16.123. Исследовательский шаг: исправление про «representation PARITY» — наивная DNF‑индукция даёт $M^{\\Theta(d)}$, а нужный факт явно заявлен в Håstad–Risse §1.2
 
 - `Линза:` Трейд‑офф.
-- `Утверждение:` Рассмотрим утверждение из §16.122: «формулы глубины $d$ размера $M$ могут представлять паритет на $m:=(\\log M)^{d-1}$ переменных».
+- `Утверждение:` Рассмотрим утверждение из §16.122: «формулы глубины $d$ размера $M$ могут представлять паритет на $m:=(\\log M)^{d-1}$ переменных» (для растущей $d$ см. caveat §16.147–§16.152).
   1) Наивная конструкция через DNF‑разложение $\\mathrm{PARITY}_{\\lceil\\log_2 M\\rceil}$ и подстановку по глубине действительно даёт depth $O(d)$, но лишь размер $M^{\\Theta(d)}$,
      поэтому **не** выводит polynomial‑size для $d=\\Theta(\\log n/\\log\\log n)$ при $M=\\mathrm{poly}(n)$ (получается quasi‑poly).
   2) Сам «representation»‑факт в нужной (для Q39) форме **известен** и прямо сформулирован в Håstad–Risse (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, §1.2):
