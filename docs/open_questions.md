@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S26-bound-diff-values-bits (см. `docs/research/16_tseitin.md` §16.193)
-  - `NextStepID:` Q43.S27-charge-centers-into-b
+  - `LastStepID:` Q43.S27-charge-centers-into-b (см. `docs/research/16_tseitin.md` §16.194)
+  - `NextStepID:` Q43.S28-centers-already-in-b
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193). `InfoGain:` 1.
+  Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) улучшено: “additional chosen centers” можно ограничить ≤ $5a$ (а не ≤ $2s$), т.е. грубо $b\\mapsto b+5a\\le 8a$ и $c_1$ падает до порядка 9 (§16.194). `InfoGain:` 2.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: попытаться зарядить “additional chosen centers” из HR’22 §7.3 в тот же $b\\log\\Delta$‑терм с коэффициентом $O(1)$ без роста лог‑показателя (т.е. удержать $c_1\\approx 4$), и тем самым снять грубость $c_1\\le 132$.
+  Следующий шаг: попытаться усилить (iv) до “$S_{\\lambda^j}$ уже входит в $b$ из Lemma 6.9” (т.е. (ii) вообще не увеличивает polylog‑показатель, и можно держать $c_1\\approx 4$), либо зафиксировать точную причину, почему это невозможно.
 
 ## Завершённые (архив)
 
