@@ -19,6 +19,7 @@ This runs:
 
 - Canonical 1-sentence prompt for the infinite agent runner: `scripts/agent_prompt.txt`
 - Convenience runner (infinite + logging to `agent/logs/`): `agent/run.sh`
+- Duo runner (worker + supervisor, infinite + logging to `agent/logs/`): `agent/run_duo.sh`
 
 ## Download resources
 
