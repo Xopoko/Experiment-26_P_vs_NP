@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20). Узкое место — bounded‑depth Frege симуляция одного XOR‑add (3‑вершинный Tseitin) при $d\\approx\\log n/\\log\\log n$ (§16.124–§16.126); GIRS’19 сертифицирует poly‑size только при $d=\\Omega(\\log n)$ (§16.128–§16.129), EF даёт глубину $O(\\log n)$ (§16.127). Block‑representation даёт «easy case» (§16.130), но фиксированный базис для grid‑границ требует $k=\\Omega(n)$ (§16.131), а «универсальный» base‑change через общее уточнение раздувает $k\\mapsto k^2$ (§16.132).
+Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20); missing step — poly‑size bounded‑depth Frege симуляция одного XOR‑add при $d\\approx\\log n/\\log\\log n$ (§16.124–§16.126). Известные upper‑методы дают poly‑size лишь при $d=\\Omega(\\log n)$ (GIRS’19, §16.128–§16.129) или $O(\\log n)$ (EF, §16.127). Block‑rep даёт easy XOR‑add (§16.130), но фиксированный базис ломается на grid (§16.131); наивный base‑change через уточнение может раздувать $k\\to k^2$ (§16.132), хотя для interval‑partition он лишь $k_1+k_2$ (§16.133).
 
 ## Что уже сделано (не повторять)
 
@@ -34,4 +34,4 @@ Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Трейд‑офф → Сжатие/канонизация → Эквивалентность → Коммуникация/ранг → Трейд‑офф
+Последние: Сжатие/канонизация → Эквивалентность → Коммуникация/ранг → Трейд‑офф → Инвариант
