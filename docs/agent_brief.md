@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S9-check-evaluation-properties-after-unfolding
-- `Do-not-repeat (next 2 runs):` Q43.S9-check-evaluation-properties-after-unfolding, Q43.S8-functional-equivalence-after-unfolding
+- `LastStepID:` Q43.S10-common-partial-tree-after-unfolding
+- `Do-not-repeat (next 2 runs):` Q43.S10-common-partial-tree-after-unfolding, Q43.S9-check-evaluation-properties-after-unfolding
 - `Last InfoGain:` 2
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: в Lemma 2.13 свойство “переменные→depth‑1” не нужно; дальше — проверить t-common partial decision tree/representation (Lemma 4.5) после unfolding.
+Q43: common partial tree/representation устойчивы к unfolding; дальше — как из poly‑size flat local‑EF(s) получить вход для Lemma 4.5.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: в Lemma 2.13 свойство “переменные→depth‑1” не 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Модельный стресс‑тест → Инвариант → Эквивалентность → Эквивалентность → Инвариант
+Последние: Инвариант → Эквивалентность → Эквивалентность → Инвариант → Эквивалентность

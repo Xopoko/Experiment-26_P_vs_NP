@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S9-check-evaluation-properties-after-unfolding (см. `docs/research/16_tseitin.md` §16.171)
-  - `NextStepID:` Q43.S10-common-partial-tree-after-unfolding
+  - `LastStepID:` Q43.S10-common-partial-tree-after-unfolding (см. `docs/research/16_tseitin.md` §16.172)
+  - `NextStepID:` Q43.S11-induce-trees-from-proof
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: проверено, что в HR’22 Lemma 2.13 Property 1 (переменные→depth‑1) не используется; достаточно, чтобы атомы отображались в locally consistent деревья глубины $\\le t$. Это снимает конфликт после unfolding, где $p_i$ естественно отображать в дерево глубины $O(s)$; см. `docs/research/16_tseitin.md` §16.171. `InfoGain:` 2.
+  Прогресс: доказано, что понятия “represents $\\bigvee_i T_i$” и “$\\ell$‑common partial decision tree” (HR’22 Def. 2.10) инвариантны при замене деревьев на functionally equivalent; поэтому после edge‑only locally consistent unfolding шаг HR’22 Lemma 4.5 (common partial tree + Property 4 для ∨) переносится дословно при замене $t\\mapsto t':=(2s+1)\\log M$; см. `docs/research/16_tseitin.md` §16.172. `InfoGain:` 2.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, что после unfolding шаг Lemma 4.5 всё ещё даёт $t$‑common partial decision tree и Property 4 (representation) для ∨‑формул при замене $t=\\log M\\mapsto (2s+1)\\log M$.
+  Следующий шаг: формализовать, как poly‑size flat local‑EF(s)‑доказательство индуцирует нужные family of edge‑only decision trees глубины $t'=\\mathrm{polylog}(n)$ (вход Lemma 4.5), или зафиксировать точную причину, почему такой индукции по строкам недостаточно без nesting/глобальной поддержки.
 
 ## Завершённые (архив)
 

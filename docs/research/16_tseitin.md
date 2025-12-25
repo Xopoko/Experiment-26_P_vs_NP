@@ -2150,3 +2150,37 @@
 - `Статус:` доказано (закрывает “проверку Property 1”: после unfolding не надо удерживать глубину 1 для extension‑переменных).
 - `Барьер‑чек:` r — применимо (аргумент целиком про local consistency/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` для Q43 проверить оставшуюся часть “evaluation properties” в шаге Lemma 4.5: что построенные edge‑only деревья действительно дают $t$‑common partial decision tree и удовлетворяют Property 4 (representation) для ∨‑формул после unfolding.
+
+### 16.172. Исследовательский шаг: unfolding не ломает common partial decision tree и Property 4 (representation) — инвариантность под functional equivalence
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S10-common-partial-tree-after-unfolding):`
+  Пусть $T_1,\\dots,T_m$ и $T'_1,\\dots,T'_m$ — locally consistent decision trees над edge‑переменными Tseitin($G_n$) глубины $\\le n/8$ такие, что для всех $i$ деревья $T_i$ и $T'_i$ functionally equivalent (HR’22 Def. 2.8).
+  Тогда:
+  1) (**representation стабилен**) если decision tree $R$ represents $\\bigvee_{i=1}^m T_i$ (HR’22, абзац перед Def. 2.10), то $R$ также represents $\\bigvee_{i=1}^m T'_i$;
+  2) (**common partial tree стабилен**) если partial decision tree $S$ — $\\ell$‑common partial decision tree для $T_1,\\dots,T_m$ (HR’22 Def. 2.10), то тот же $S$ является $\\ell$‑common partial decision tree для $T'_1,\\dots,T'_m$.
+
+  В частности, в Q43 после замены $P$‑запросов на edge‑only locally consistent unfolding из §16.169 (глубина $t\\mapsto t':=(2s+1)t$ и семантическая эквивалентность в смысле подстановки $p_i:=\\varphi_i(X)$) проверка в HR’22 Lemma 4.5, что $T_\\eta(\\nu)$ — $t'$‑common partial decision tree и что Property 4 (representation) выполняется для $\\vee$‑формул, переносится без изменений (проверка идёт «по ветвям» и использует только b‑tree факты для trimmed restriction).
+- `Доказательство:`
+  Ключевой факт: из HR’22 Lemma 2.9 следует, что для любых functionally equivalent $T,T'$ и любого locally consistent частичного присваивания $\\alpha$ (в режиме, где все trimmed restrictions определены) выполняется эквивалентность
+  $$T\\!\upharpoonright\\!\\alpha\\text{ — $b$‑tree}\\ \\Longleftrightarrow\\ T'\\!\\upharpoonright\\!\\alpha\\text{ — $b$‑tree}.$$
+
+  1) **Stability для representation.**
+     Пусть $R$ represents $\\bigvee_i T_i$.
+     Возьмём ветвь $\\tau$ дерева $R$, оканчивающуюся листом с меткой $b$.
+     - Если $b=0$, то по определению “represents” имеем $T_i\\!\\upharpoonright\\!\\tau=0$ для всех $i$, а значит по ключевому факту $T'_i\\!\\upharpoonright\\!\\tau=0$ для всех $i$.
+     - Если $b=1$, то по определению “represents” существует $i$ с $T_i\\!\\upharpoonright\\!\\tau=1$, а значит $T'_i\\!\\upharpoonright\\!\\tau=1$.
+     Это ровно означает, что $R$ represents $\\bigvee_i T'_i$.
+
+  2) **Stability для $\\ell$‑common partial decision tree.**
+     Пусть $S$ — $\\ell$‑common partial decision tree для $T_1,\\dots,T_m$.
+     Тогда по HR’22 Def. 2.10 для каждого $i$ и каждой ветви $\\tau\\in S$ существует decision tree $S^{(i,\\tau)}$ глубины $\\ell$, такой что если $\\widehat S_i$ получено из $S$ подстановкой $S^{(i,\\tau)}$ в лист $\\tau$, то для любой ветви $\\tau'\\in\\widehat S_i$, оканчивающейся листом $b$, выполнено $T_i\\!\\upharpoonright\\!\\tau'=b$.
+     Применяя ключевой факт к каждому такому $\\tau'$, получаем $T'_i\\!\\upharpoonright\\!\\tau'=b$.
+     Значит те же witness‑деревья $S^{(i,\\tau)}$ доказывают, что $S$ — $\\ell$‑common partial decision tree и для $T'_1,\\dots,T'_m$.
+
+  Применение к Q43: деревья, полученные локально согласованным unfolding (§16.169), вычисляют ту же функцию от $X$ (в семантике $p_i:=\\varphi_i(X)$), а потому по §16.170 автоматически functionally equivalent любому другому locally consistent edge‑only представлению той же функции.
+  Следовательно, любые trees/partial trees, построенные по HR’22 Lemma 4.4 внутри Lemma 4.5 для “наивного” edge‑only представления, остаются корректными и для locally consistent unfolding, и Property 4 + common partial tree переносятся (с единственной платой в параметре глубины $t\\mapsto t'$ из §16.166).
+- `Toy‑тест:` пусть $T_1$ — 1‑tree для $x_e$, а $T'_1$ — дерево глубины 2, которое сначала спрашивает $x_e$, затем (локально подразумеваемую) переменную и не ветвится; тогда $T_1$ и $T'_1$ functionally equivalent, и любое $R$, представляющее $T_1\\vee 0$, автоматически представляет $T'_1\\vee 0$ по пункту (1).
+- `Статус:` доказано (закрывает “common partial tree/representation” узел в Q43: после unfolding HR Lemma 4.5 можно применять дословно при замене $t\\mapsto t'$).
+- `Барьер‑чек:` r — применимо (аргумент чисто про decision trees/trimmed restriction и релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` для Q43 формализовать, как из poly‑size flat local‑EF(s)‑доказательства получить входные family of decision trees глубины $t'=\\mathrm{polylog}(n)$ для Lemma 4.5 (или зафиксировать, почему “индукция по строкам” не даёт таких trees без nesting/глобальной поддержки).
