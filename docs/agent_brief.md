@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S3-cite-xor-step-bdfrege
-- `Do-not-repeat (next 2 runs):` Q39.S3-cite-xor-step-bdfrege, Q39.S2-parity-depth-loglog
+- `LastStepID:` Q39.S4-compare-hr-vs-girs-repr
+- `Do-not-repeat (next 2 runs):` Q39.S4-compare-hr-vs-girs-repr, Q39.S3-cite-xor-step-bdfrege
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39: XOR (GIRS); next: compare.
+Q39:qpoly; next: poly XOR
 
 ## Что уже сделано (не повторять)
 

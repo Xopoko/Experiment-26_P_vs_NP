@@ -8,16 +8,14 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE (open confirmed)
-  - `LastStepID:` Q39.S3-cite-xor-step-bdfrege (см. `docs/research/16_tseitin.md` §16.184)
-  - `NextStepID:` Q39.S4-compare-hr-vs-girs-repr
+  - `LastStepID:` Q39.S4-compare-hr-vs-girs-repr (см. `docs/research/16_tseitin.md` §16.185)
+  - `NextStepID:` Q39.S5-poly-xor-step-depthregime
   - `Success:` либо явный upper на глубине $O(\\log N/\\log\\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Известно: $d_{\\mathrm{poly}}(N)\\ge\\Omega(\\log N/\\log\\log N)$ (Håstad’20, Cor. 6.6; §16.92) и $d_{\\mathrm{poly}}(N)\\le O(\\log N)$ (unpack GIRS’19/Claim 28; §16.115–§16.121).
   Узел: синтаксически симулировать шаг Gaussian elimination в bounded‑depth Frege (HR’22 отмечают как “не умеем”; §16.122).
-  Прогресс: в GIRS’19 (Section 4.2, Lemma 24) дан положительный bounded‑depth вывод XOR‑шага (сложение $\\mathbb F_2$‑уравнений) для их “compact representation” паритета $\\Phi^a(S,U)$ при общем refinement $U$:
-  $$\\Phi^a(S,U),\\ \\Phi^b(T,U)\\vdash_{3d+O(1)} \\Phi^{a\\oplus b}(S\\triangle T,U).$$
-  Это фиксирует, что “XOR‑step” известен в литературе (но в специфическом формате представления). См. `docs/research/16_tseitin.md` §16.184. `InfoGain:` 1.
+  Прогресс: проверено, что подстановка GIRS’19 compact‑representation ($\\Phi^a(S,U)$ из Lemma 21) в режим глубины $D\\asymp\\log m/\\log\\log m$ даёт лишь quasi‑poly bound на размер $|\\Phi^1(\\emptyset,U)|$ и, следовательно, на вывод из Lemma 24 (размер $\\le c|\\Phi^1(\\emptyset,U)|^6$), т.е. это не даёт требуемого $\\mathrm{poly}(m)$‑XOR‑шага в Q39. См. `docs/research/16_tseitin.md` §16.185. `InfoGain:` 1.
   `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: сопоставить HR’22 “representing parity” и GIRS’19 compact‑representation: можно ли получить/поддерживать общий refinement $U$ для промежуточных уравнений в grid‑стратегии без blow‑up, или именно здесь остаётся “missing Gauss step”.
+  Следующий шаг: либо построить poly‑size XOR‑step в depth‑режиме $\\Theta(\\log m/\\log\\log m)$ для полиномиальных паритет‑формул (другой формат “компактности”), либо зафиксировать барьер/негативный результат для такого XOR‑шага.
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0

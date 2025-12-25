@@ -2471,3 +2471,28 @@
 - `Статус:` exact citation (XOR‑сложение уравнений известно для compact‑representation).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо (локальный факт о bounded‑depth Frege‑выводе).
 - `Следующий шаг:` сопоставить HR’22 “representing parity” (формулы depth $d$, size $M$) с compact‑representation $\\Phi^a(S,U)$: можно ли в bounded‑depth Frege переводить/поддерживать единый refinement $U$ для нужных промежуточных уравнений без blow‑up, или именно здесь “missing Gauss step” у HR остаётся.
+
+### 16.185. Исследовательский шаг (toy computation): GIRS‑compact XOR‑step даёт лишь quasi‑poly размер в режиме глубины $\\Theta(\\log m/\\log\\log m)$
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q39.S4-compare-hr-vs-girs-repr):`
+  Если пытаться реализовать “XOR‑step” в bounded‑depth Frege через **GIRS’19 compact representation** $\\Phi^a(S,U)$ и их Lemma 24,
+  то при глубине строк $D=\\Theta(\\log m/\\log\\log m)$ (где $m$ — ширина линейного уравнения) получается лишь квазиполиномиальная
+  верхняя оценка на размер вывода, а не $\\mathrm{poly}(m)$.
+  Поэтому наличие Lemma 24 само по себе не закрывает Q39: остаётся разрыв между “XOR‑step существует для compact‑representation” и
+  “XOR‑step polynomial‑size в требуемом depth‑режиме для естественных паритет‑формул (HR §1.2)”.
+- `Toy‑вычисление (по GIRS’19 Lemma 20/21/24):`
+  В GIRS’19 (p. 10) Lemma 20: если $t_1\\cdots t_d\\ge m$, то существует $(t_1,\\dots,t_d)$‑refinement $U$ множества $[m]$.
+  По Lemma 21 (p. 10) соответствующая compact‑формула паритета имеет глубину $\\le 3d+1$ и размер
+  $$|\\Phi^1(\\emptyset,U)|\\ \\le\\ \\prod_{i=1}^d 2^{t_i+1}t_i\\ =\\ 2^{d+\\sum_i t_i}\\cdot\\prod_i t_i.$$
+  Если хотим уложиться в глубину $D$, то берём $d:=\\lfloor (D-1)/3\\rfloor$.
+  Чтобы минимизировать грубую оценку на размер, можно взять все $t_i$ одинаковыми: $t:=\\lceil m^{1/d}\\rceil$, тогда $t^d\\ge m$.
+  Из Lemma 21 получаем
+  $$|\\Phi^1(\\emptyset,U)|\\ \\le\\ (2^{t+1}t)^d\\ =\\ \\exp\\bigl(O(d\\,t)\\bigr).$$
+  В режиме $D\\asymp \\log m/\\log\\log m$ имеем $d\\asymp \\log m/\\log\\log m$ и
+  $$t=m^{1/d}=\\exp\\bigl(\\Theta(\\log m/d)\\bigr)=\\exp\\bigl(\\Theta(\\log\\log m)\\bigr)=\\log^{\\Theta(1)}m,$$
+  так что $d\\,t=\\log^{\\Theta(1)}m$ и потому $|\\Phi^1(\\emptyset,U)|=\\exp(\\log^{\\Theta(1)}m)$ (quasi‑poly bound).
+  Наконец, Lemma 24 (p. 11) даёт вывод XOR‑шага размера $\\le c\\cdot|\\Phi^1(\\emptyset,U)|^6$, то есть по этой оценке также quasi‑poly при таком $D$.
+- `Статус:` проверено (параметрический разрыв: GIRS‑compact не даёт $\\mathrm{poly}(m)$ при $D\\asymp\\log m/\\log\\log m$).
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` для Q39 нужно либо (a) другая “компактная” репрезентация паритета, совместимая с depth $\\Theta(\\log m/\\log\\log m)$ и $\\mathrm{poly}(m)$‑размером, для которой XOR‑step выводим, либо (b) барьер/негативный результат, что XOR‑step не может быть poly‑size в этом depth‑режиме.
