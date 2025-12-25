@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S30-log4-into-corollary
-- `Do-not-repeat (next 2 runs):` Q43.S30-log4-into-corollary, Q43.S29-propagate-c1-back-to-4
+- `LastStepID:` Q43.S31-critical-depth-kappa
+- `Do-not-repeat (next 2 runs):` Q43.S31-critical-depth-kappa, Q43.S30-log4-into-corollary
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: explicit corollary with $\\log^4 n$; next: critical-depth $\\kappa$ threshold
+Q43: critical-depth $\\kappa$ threshold computed; next: account for $M^{s/\\ell}$ with $\\ell=t'$
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: explicit corollary with $\\log^4 n$; next: critical-depth $\\kappa$ thresho
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Сж→Тр→Тр→Ин→Сж
+Последние:Тр→Сж→Тр→Тр→Ин

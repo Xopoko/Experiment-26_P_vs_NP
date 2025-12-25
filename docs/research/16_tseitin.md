@@ -2742,3 +2742,30 @@
 - `InfoGain:` 1.
 - `Барьер‑чек:` r — применимо (switching/DT‑аргументы релятивизируются), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` при $M=\\mathrm{poly}(n)$ и $s=(\\log n)^c$ пересчитать показатель при критической глубине $d=(\\kappa+o(1))\\log n/\\log\\log n$ с явной константой $4$ (Q43.S31-critical-depth-kappa).
+
+### 16.198. Исследовательский шаг (toy computation): критическая глубина $d=(\\kappa+o(1))\\log n/\\log\\log n$ при $s=(\\log n)^c$
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S31-critical-depth-kappa):`
+  Пусть $M=\\mathrm{poly}(n)$, $s=(\\log n)^c$ для фиксированного $c\\ge 0$, и
+  $$d=\\left(\\kappa+o(1)\\right)\\frac{\\log n}{\\log\\log n}.$$
+  Тогда corollary §16.197 даёт
+  $$N\\ge\\exp\\bigl(\\Omega(n^{1-\\kappa(5+c)-o(1)})\\bigr).$$
+  В частности, lower bound нетривиален ($N\\ge\\exp(n^{\\Omega(1)})$) тогда и только тогда, когда
+  $$\\kappa<\\frac{1}{5+c}.$$
+- `Toy‑вычисление:`
+  В §16.197 имеем
+  $$N\\ge \\exp\\!\\left(\\Omega\\left(\\frac{n}{\\bigl((\\log n)^4(2s+1)\\log M\\bigr)^d}\\right)\\right).$$
+  При $M=\\mathrm{poly}(n)$ получаем $\\log M=\\Theta(\\log n)$, а при $s=(\\log n)^c$ имеем $2s+1=\\Theta((\\log n)^c)$.
+  Тогда
+  $$\\bigl((\\log n)^4(2s+1)\\log M\\bigr)^d=\\bigl((\\log n)^{5+c}\\bigr)^d.$$
+  Подставляя $d=(\\kappa+o(1))\\log n/\\log\\log n$, получаем
+  $$\\bigl((\\log n)^{5+c}\\bigr)^d=\\exp\\bigl((\\kappa+o(1))(5+c)\\log n\\bigr)=n^{\\kappa(5+c)+o(1)},$$
+  и потому показатель экспоненты равен $n^{1-\\kappa(5+c)-o(1)}$.
+- `Toy‑тест:` при $c=0$, $M=n^2$, $\\kappa=1/6$ имеем
+  $$\\bigl((\\log n)^5\\bigr)^d=\\exp\\bigl((5/6+o(1))\\log n\\bigr)=n^{5/6+o(1)},$$
+  значит $N\\ge\\exp(\\Omega(n^{1/6}))$.
+- `Статус:` проверено (явный $\\kappa$‑порог при критической глубине с $c_1=4$).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо (параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` оценить вклад фактора $M^{s/\\ell}$ при естественном выборе $\\ell:=t'=(2s+1)\\log M$ и проверить, остаётся ли он $\\exp(\\Theta(1))$ (Q43.S32-m-factor-ell-constant).
