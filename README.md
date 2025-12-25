@@ -18,6 +18,7 @@ This runs:
 ## Agent prompt
 
 - Canonical 1-sentence prompt for the infinite agent runner: `scripts/agent_prompt.txt`
+- Convenience runner (infinite + logging): `agent/run.sh`
 
 ## Download resources
 
