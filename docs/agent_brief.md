@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S14-threshold-in-s
-- `Do-not-repeat (next 2 runs):` Q43.S14-threshold-in-s, Q43.S13-tightness-regime
+- `LastStepID:` Q43.S15-poly-s-depth-regime
+- `Do-not-repeat (next 2 runs):` Q43.S15-poly-s-depth-regime, Q43.S14-threshold-in-s
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: порог по $s$ свёлся к $d\\log(2s+1)=o(\\log n)$; дальше — режим $s=n^{\\varepsilon}$.
+Q43: $s=n^{\\varepsilon}$ ⇒ exponent $\\sim n^{1-\\varepsilon d}$; дальше — $s=\\exp((\\log n)^\\alpha)$.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: порог по $s$ свёлся к $d\\log(2s+1)=o(\\log n)$; дальше
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Эквивалентность → Инвариант → Трейд‑офф → Инвариант → Трейд‑офф
+Последние: Инвариант → Трейд‑офф → Инвариант → Трейд‑офф → Трейд‑офф

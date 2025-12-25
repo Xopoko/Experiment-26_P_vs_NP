@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S14-threshold-in-s (см. `docs/research/16_tseitin.md` §16.176)
-  - `NextStepID:` Q43.S15-poly-s-depth-regime
+  - `LastStepID:` Q43.S15-poly-s-depth-regime (см. `docs/research/16_tseitin.md` §16.177)
+  - `NextStepID:` Q43.S16-subexp-s-regime
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: в режиме $M=\\mathrm{poly}(n)$ и $d=o(\\log n/\\log\\log n)$ порог по $s$ сводится к $d\\cdot\\log(2s+1)=o(\\log n)$ (эквивалентно $\\log s=o(\\log n/d)$); см. `docs/research/16_tseitin.md` §16.176. `InfoGain:` 1.
+  Прогресс: при $s=n^{\\varepsilon}$ и $M=\\mathrm{poly}(n)$ показатель экспоненты становится $\\Omega(n^{1-\\varepsilon d}/\\log^{O(d)}n)$; отсюда “почти tightness” требует $d=o(1/\\varepsilon)$, а нетривиальность сохраняется при $\\varepsilon d<1$. См. `docs/research/16_tseitin.md` §16.177. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: подставить $s=n^{\\varepsilon}$ и выписать допустимые режимы $d$ (когда lower bound из §16.174 остаётся нетривиальным).
+  Следующий шаг: рассмотреть $s=\\exp((\\log n)^\\alpha)$ и сравнить с порогом $d=o(\\log n/\\log\\log n)$.
 
 ## Завершённые (архив)
 
