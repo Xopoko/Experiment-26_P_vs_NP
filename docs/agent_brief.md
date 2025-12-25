@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S17-max-s-critical-depth
-- `Do-not-repeat (next 2 runs):` Q43.S17-max-s-critical-depth, Q43.S16-subexp-s-regime
+- `LastStepID:` Q43.S18-polylog-s-critical-depth-exponent
+- `Do-not-repeat (next 2 runs):` Q43.S18-polylog-s-critical-depth-exponent, Q43.S17-max-s-critical-depth
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: d≈log n/log log n ⇒ s=(log n)^{o(1)}; дальше — s=(log n)^c.
+Q43: s=(log n)^c ⇒ exp n^{1-κ(C+1+c)}; C.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: d≈log n/log log n ⇒ s=(log n)^{o(1)}; дальше — s=(log n)^c.
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Инвариант → Трейд‑офф → Инвариант → Трейд‑офф → Трейд‑офф
+Последние: Трейд‑офф → Инвариант → Трейд‑офф → Трейд‑офф → Трейд‑офф
