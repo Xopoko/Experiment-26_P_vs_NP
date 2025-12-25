@@ -227,6 +227,24 @@ def _verify_agent_brief(*, path: Path, max_lines: int, max_bytes: int, max_exper
     print(f"OK: verified bounded agent brief: {path}")
 
 
+def _verify_prompt_files(*, paths: list[Path], max_bytes: int = 4096) -> None:
+    for path in paths:
+        if not path.exists():
+            raise AssertionError(f"Missing required file: {path}")
+
+        raw = path.read_text(encoding="utf-8")
+        if len(raw.encode("utf-8")) > max_bytes:
+            raise AssertionError(f"{path} is too large: > {max_bytes} bytes (keep prompts 1 sentence)")
+
+        lines = raw.splitlines()
+        if len(lines) != 1:
+            raise AssertionError(f"{path} must be exactly 1 line (one sentence prompt), got {len(lines)} lines")
+        if not lines[0].strip():
+            raise AssertionError(f"{path} is empty")
+
+    print(f"OK: verified single-line prompts: {', '.join(str(p) for p in paths)}")
+
+
 def _verify_download_links(*, manifest_path: Path, downloads_dir: Path) -> None:
     manifest_ids = _load_manifest_ids(manifest_path)
     md_paths = _iter_markdown_paths()
@@ -356,6 +374,13 @@ def main(argv: list[str]) -> int:
             )
             _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
             _verify_open_questions_structure(path=Path("docs/open_questions.md"))
+            _verify_prompt_files(
+                paths=[
+                    Path("scripts/agent_prompt.txt"),
+                    Path("scripts/skeptic_prompt.txt"),
+                    Path("scripts/supervisor_prompt.txt"),
+                ],
+            )
         return 0
 
     if args.path.suffix != ".ipynb":
@@ -396,6 +421,13 @@ def main(argv: list[str]) -> int:
         )
         _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
         _verify_open_questions_structure(path=Path("docs/open_questions.md"))
+        _verify_prompt_files(
+            paths=[
+                Path("scripts/agent_prompt.txt"),
+                Path("scripts/skeptic_prompt.txt"),
+                Path("scripts/supervisor_prompt.txt"),
+            ],
+        )
     return 0
 
 

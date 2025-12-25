@@ -22,6 +22,7 @@ This runs:
 - Convenience runner (infinite + logging to `agent/logs/`): `agent/run.sh`
 - Duo runner (worker + supervisor, infinite + logging to `agent/logs/`): `agent/run_duo.sh`
 - Trio runner (worker + skeptic + supervisor, infinite + logging to `agent/logs/`): `agent/run_trio.sh`
+- Log summary: `python3 agent/analyze_logs.py`
 - Runner docs: `agent/README.md`
 
 ## Download resources

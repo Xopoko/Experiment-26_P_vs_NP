@@ -65,3 +65,19 @@ Or delete logs older than 14 days (then enforce keep):
 ```bash
 ./agent/prune_logs.sh --days 14 --keep 200
 ```
+
+## Log analysis (quick triage)
+
+Summarize the latest run log (prefers trio → duo → single):
+
+```bash
+python3 agent/analyze_logs.py
+```
+
+Or pick a specific mode / file:
+
+```bash
+python3 agent/analyze_logs.py --mode trio
+python3 agent/analyze_logs.py --log agent/logs/latest_duo.log
+python3 agent/analyze_logs.py --log agent/logs/20251225T183643Z_pid1882214.duo.log
+```
