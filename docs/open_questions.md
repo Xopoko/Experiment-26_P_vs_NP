@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S23-bound-linear-centers (см. `docs/research/16_tseitin.md` §16.190)
-  - `NextStepID:` Q43.S24-derive-numeric-c2
+  - `LastStepID:` Q43.S24-derive-numeric-c2 (см. `docs/research/16_tseitin.md` §16.191)
+  - `NextStepID:` Q43.S25-tighten-c1-charge
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: из построения common partial decision tree (HR’22 §7.2–§7.3) извлечено явное уточнение “linear in $s$”: число additional chosen centers, которые нужно идентифицировать, можно взять $\\le 2s$, значит цена идентификации $\\le 2s\\log\\Delta$ бит. См. `docs/research/16_tseitin.md` §16.190. `InfoGain:` 1.
+  Прогресс: грубо сделаны явными константы в HR’22 Lemma 4.4: используя bound $|\\bigcup_j S_{\\lambda^j}|\\le 2s$ и “заряд” из Lemma 6.8–6.9, получаем, что можно взять $c_2=64$ (как в single‑switching) и, в худшем случае, $c_1\\le 132$; см. `docs/research/16_tseitin.md` §16.191. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: протащить bound $2s\\log\\Delta$ через энкодинг‑оценку в proof of Lemma 4.4 (§7.3) и выписать грубый численный $c_2$ (сравнив с single‑switching, где хвост $s/64$).
+  Следующий шаг: проверить, что “additional chosen centers” и “differences in values” из §7.3 реально заряжаются в тот же $b\\log\\Delta$‑терм с коэффициентом $O(1)$ (и тем самым удерживают $c_1$ близким к 4, а не 132).
 
 ## Завершённые (архив)
 

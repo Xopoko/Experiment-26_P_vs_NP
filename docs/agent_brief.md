@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S23-bound-linear-centers
-- `Do-not-repeat (next 2 runs):` Q43.S23-bound-linear-centers, Q43.S22-check-c1-vs-log4
+- `LastStepID:` Q43.S24-derive-numeric-c2
+- `Do-not-repeat (next 2 runs):` Q43.S24-derive-numeric-c2, Q43.S23-bound-linear-centers
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43:c2; next:c2
+Q43:consts; next:tighten-c1-charge
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43:c2; next:c2
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Ст→Тр→Эк→Тр→Ин
+Последние:Тр→Эк→Тр→Ин→Тр
