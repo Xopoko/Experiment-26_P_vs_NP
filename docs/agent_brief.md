@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S25-tighten-c1-charge
-- `Do-not-repeat (next 2 runs):` Q43.S25-tighten-c1-charge, Q43.S24-derive-numeric-c2
+- `LastStepID:` Q43.S26-bound-diff-values-bits
+- `Do-not-repeat (next 2 runs):` Q43.S26-bound-diff-values-bits, Q43.S25-tighten-c1-charge
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43:consts; next:bound-diff-values-bits
+Q43:consts; next:centers->b
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43:consts; next:bound-diff-values-bits
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эк→Тр→Ин→Тр→Тр
+Последние:Тр→Ин→Тр→Тр→Ин
