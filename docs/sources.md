@@ -51,8 +51,21 @@
 - P. Pudlák (1998), *The Lengths of Proofs* (PDF): ../resources/downloads/pudlak_1998_lengths_of_proofs.pdf
 - A. Urquhart (1996), *The Complexity of Propositional Proofs* (PDF):
   ../resources/downloads/urquhart_1996_complexity_of_propositional_proofs.pdf
+- A. Urquhart (1987), *Hard Examples for Resolution* (PDF): ../resources/downloads/urquhart_1987_hard_examples_resolution.pdf
+- J. Håstad (2020), *On small-depth Frege proofs for Tseitin for grids* (PDF): ../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf
+- N. Galesi, D. Itsykson, A. Riazanov, A. Sofronova (2019), *Bounded-depth Frege complexity of Tseitin formulas for all graphs*
+  (ECCC TR19-069, PDF): ../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf
+- M. Alekhnovich, A. A. Razborov (2011), *Satisfiability, branch-width and Tseitin tautologies* (PDF):
+  ../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf
+- N. Galesi, N. Talebanfard, J. Torán (2018), *Cops-Robber games and the resolution of Tseitin formulas*
+  (ECCC TR18-170, PDF): ../resources/downloads/galesi_talebanfard_toran_2018_cops_robber_tseitin.pdf
+- T. Pitassi, B. Rossman, R. A. Servedio, L.-Y. Tan (2016), *Poly-logarithmic Frege depth lower bounds via an expander switching lemma* (PDF):
+  ../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf
+- P. Beame, C. Beck, R. Impagliazzo (2016), *Time-Space Trade-offs in Resolution: Superpolynomial Lower Bounds for Superlinear Space* (PDF):
+  ../resources/downloads/beame_beck_impagliazzo_2016_time_space_tradeoffs_resolution.pdf
 - S. Buss (2002), *Some Remarks on Lengths of Propositional Proofs* (PDF): ../resources/downloads/buss_2002_proplengths.pdf
 - S. Buss (2011), *Towards NP–P via Proof Complexity and Search* (PDF): ../resources/downloads/buss_2011_np_p_proof_complexity.pdf
+- S. Buss (1997), *Propositional Proof Complexity: An Introduction* (PDF): ../resources/downloads/buss_1997_proof_complexity_intro.pdf
 - Haken (1985), *The Intractability of Resolution* (`../resources/downloads/tss_proof_complexity_notes.pdf`).
 - S. Buss (1987), *Polynomial Size Proofs of the Propositional Pigeonhole Principle* (PDF): ../resources/downloads/buss_1987_php_frege.pdf
 - P. Beame, R. Impagliazzo, J. Krajíček, T. Pitassi, P. Pudlák, A. Woods (1992),
@@ -60,6 +73,8 @@
   ../resources/downloads/beame_et_al_1992_php_bounded_depth_frege.pdf
 - M. L. Bonet, S. Buss, T. Pitassi (2002), *Are there Hard Examples for Frege Systems?* (PDF):
   ../resources/downloads/bonet_buss_pitassi_2002_hard_examples_frege.pdf
+- M. L. Bonet, S. Buss (2002), *Size-Depth Tradeoffs for Boolean Formulae* (PDF):
+  ../resources/downloads/bonet_buss_2002_size_depth_tradeoffs_boolean_formulae.pdf
 - S. Buss, P. Clote (2002), *Cutting planes, connectivity, and threshold logic* (PDF): ../resources/downloads/buss_cutting_planes_notes.pdf
 - J. Pich, R. Santhanam (2023), *Towards P ≠ NP from Extended Frege lower bounds* (PDF):
   ../resources/downloads/pich_santhanam_2023_ef_lower_bounds.pdf

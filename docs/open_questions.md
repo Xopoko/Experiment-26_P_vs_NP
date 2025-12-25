@@ -5,13 +5,39 @@
 
 ## Активные
 
-- [ ] **Q14 (Frege‑depth для Tseitin):** известно, что depth‑$d$ Frege имеет сильные нижние оценки на Tseitin
-  для фиксированного $d$ (Razborov 2023, Thm. 4.6–4.7), но обычный Frege (без ограничения глубины)
-  должен иметь полиномиальные опровержения через XOR‑рассуждения. Следующий шаг: найти точную ссылку
-  на полиномиальный Frege‑вывод Tseitin (или зафиксировать минимальную глубину/размер, напр. через известные результаты о depth‑growth).
+- [ ] **Q20 (согласовать использование $w(G)$ в Cor. 34 / §16.98):**
+  теперь, когда первоисточник для $w(G)=\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}-1$ зафиксирован (16.101),
+  привести в §16.98 явное определение $w(G)=W(T(G,\\varphi)\\vdash\\bot)-1$ и аккуратно вывести форму
+  $n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}$ через оценки на $\\mathrm{tw}(L(G))$ (Harvey–Wood 2018, как в GIRS’19 Cor. 33).
 
 ## Завершённые (архив)
 
+- [x] **Q19 (точная ссылка на $w(G)=\max\{\\Delta(G),\\mathrm{tw}(L(G))\\}-1$ для Tseitin‑width):**
+  закрыто: Galesi–Talebanfard–Torán (2018, ECCC TR18‑170) дают Cor. 8:
+  $W(T(G,\\varphi)\\vdash\\bot)=\\max\\{\\Delta(G),\\mathrm{ec}(G)-1\\}$ и Cor. 16:
+  $\\mathrm{ec}(G)=\\mathrm{tw}(L(G))+1$, откуда $W=\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}$ и $w(G)=W-1$.
+  См. `docs/research/16_research_steps.md` §16.101 и `../resources/downloads/galesi_talebanfard_toran_2018_cops_robber_tseitin.pdf`.
+- [x] **Q18 (связать carving width $W$ с $w(G)$ в Cor. 34):** закрыто: доказано $\mathrm{cw}(G)\le \mathrm{tw}(L(G))+1$;
+  вместе с формулой для Tseitin‑width $w(G)=\max\{\\Delta(G),\\mathrm{tw}(L(G))\\}-1$ (16.101) получаем
+  $\mathrm{cw}(G)\le w(G)+2$ и можно переписывать $n^{O(\\mathrm{cw}(G))}$ как $n^{O(w(G))}$; см. `docs/research/16_research_steps.md` §16.100.
+- [x] **Q17 (Cor. 34: зависимости и «где именно берётся» tree‑like Res ≤ n^{O(w)}):** закрыто:
+  точная ссылка для tree‑like upper bound — Beame–Beck–Impagliazzo (2016), Lemma 61 (через carving width),
+  см. `docs/research/16_research_steps.md` §16.99 и
+  `../resources/downloads/beame_beck_impagliazzo_2016_time_space_tradeoffs_resolution.pdf`.
+- [x] **Q16 (Tseitin: bounded‑depth Frege ↔ tree‑like Resolution):** закрыто: точная формулировка Cor. 34:
+  bounded‑depth Frege‑доказательство размера $S$ ⇒ tree‑like Resolution размера $\le 2^{\mathrm{poly}(\log S)}$
+  (Galesi–Itsykson–Riazanov–Sofronova 2019, Cor. 34), см. `docs/research/16_research_steps.md` §16.98 и
+  `../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`.
+- [x] **Q15 (сузить разрыв depth‑vs‑size для Tseitin):** закрыто: Galesi–Itsykson–Riazanov–Sofronova (2019, ECCC TR19‑069)
+  дают tight depth‑vs‑size через treewidth: для $d\le \Theta(\log n/\log\log n)$ размер depth‑$d$ Frege‑рефутаций
+  $\ge 2^{\mathrm{tw}(G)^{\Omega(1/d)}}$ (Thm. 18) и $\le 2^{\mathrm{tw}(G)^{O(1/d)}}\cdot\mathrm{poly}(|\mathrm{Tseitin}(G,f)|)$
+  (Thm. 19), см. `docs/research/16_research_steps.md` §16.97 и
+  `../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`.
+  В частности, для $\mathrm{tw}(G)=\Omega(n)$ (grid/экспандеры) polynomial‑size ⇔ depth $\Theta(\log n/\log\log n)$, что
+  усиливает PRST’16 (16.96) и согласуется с Håstad’20 (16.92).
+- [x] **Q14 (Frege‑depth для Tseitin):** закрыто: poly‑size Frege‑рефутация (Urquhart 1987; §16.91),
+  bounded‑depth lower bound на grid (Håstad 2020; §16.92), upper bound depth $O(\log n)$ для bounded‑degree
+  (Håstad 2020 remark + Buss 1997/Spira‑перевод; §16.93 и §16.95), и ссылка на формульную балансировку (Bonet–Buss 2002; §16.94).
 - [x] **Q13 (Frege/EF симулирует XOR/Gauss):** в `docs/research/16_research_steps.md` §16.88 добавлена точная ссылка,
   что EF «легко симулирует Gaussian elimination» (Bonet–Buss–Pitassi 2002, `../resources/downloads/bonet_buss_pitassi_2002_hard_examples_frege.pdf`, p. 7),
   что закрывает фольклорность EF‑каркаса XOR‑суммирования.
