@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S38-quote-centers-exposed
-- `Do-not-repeat (next 2 runs):` Q43.S38-quote-centers-exposed, Q43.S37-rounds-via-uj
+- `LastStepID:` Q43.S39-absorb-64-rescale-ell
+- `Do-not-repeat (next 2 runs):` Q43.S39-absorb-64-rescale-ell, Q43.S38-quote-centers-exposed
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: подтверждено, что в §7.2 “centers” = exposed centers $S(\\lambda^j,\\sigma)\\subseteq$ alive centers; далее сравнить $\\lceil 64a/\\ell\\rceil$ с фактором $M^{\\lceil s/\\ell\\rceil}$.
+Q43: 64 поглощается рескейлом $\\ell:=64t'$ (и $\\ell\\ge t'\\Rightarrow t'$‑common); дальше проверить, можно ли связать $a$ с $s$ для сравнения с $M^{\\lceil s/t'\\rceil}$.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: подтверждено, что в §7.2 “centers” = exposed centers $
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Инв→Эк→Тр→Эк
+Последние:Инв→Эк→Тр→Эк→Сж
