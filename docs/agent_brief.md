@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S6-construct-locally-consistent-unfolding
-- `Do-not-repeat (next 2 runs):` Q43.S6-construct-locally-consistent-unfolding, Q43.S5-check-local-consistency-after-unfolding
+- `LastStepID:` Q43.S7-plug-lc-unfolding-into-lemma45
+- `Do-not-repeat (next 2 runs):` Q43.S7-plug-lc-unfolding-into-lemma45, Q43.S6-construct-locally-consistent-unfolding
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: построен locally consistent unfolding для $\\varphi(X)$ через Lemma 2.3 + запрет locally implied запросов; дальше — встроить это в HR Lemma 4.5 и проверить функциональную эквивалентность.
+Q43: показано, как заменять $P$‑запросы на edge‑only locally consistent unfolding (путь к HR Lemma 4.5); дальше — проверить functional equivalence evaluations после тримминга.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: построен locally consistent unfolding для $\\varphi(X)$ чере
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Эквивалентность → Сжатие/канонизация → Трейд‑офф → Модельный стресс‑тест → Инвариант
+Последние: Сжатие/канонизация → Трейд‑офф → Модельный стресс‑тест → Инвариант → Эквивалентность
