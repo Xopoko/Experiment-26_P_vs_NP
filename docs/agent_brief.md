@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑форме с $k=O(\\log n)$ (§16.144–§16.146). Барьер representability: tree‑формулы ограничены Rossman’16 ($\\le(\\Theta((\\log M)/(d-1)))^{d-1}$, §16.149–§16.150); HR‑блок $(\\log M)^{d-1}$ возможен лишь со sharing ⇒ EF/circuit‑Frege (§16.152–§16.153), где есть $O(1)$‑depth poly‑refutation (§16.154). Локализация: Håstad‑техника uses $\\mathrm{supp}(\\alpha)\\subseteq V$ (variables=edges), extension vars ломают “depth ⇒ малая поддержка” (§16.155); а в local‑EF(s) глобальный XOR‑обход требует $s=\\Omega(|V|)$ (§16.156). Дальше: есть ли вообще poly‑refutation в local‑EF($\\mathrm{polylog}(n)$)?
+Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑форме с $k=O(\\log n)$ (§16.144–§16.146). Барьер representability: tree‑формулы ограничены Rossman’16 ($\\le(\\Theta((\\log M)/(d-1)))^{d-1}$, §16.149–§16.150); HR‑блок $(\\log M)^{d-1}$ возможен лишь со sharing ⇒ EF/circuit‑Frege (§16.152–§16.153), где есть $O(1)$‑depth poly‑refutation (§16.154). Для переноса LB на промежуточный класс введён local‑EF(s) (§16.156), и локальность восстанавливается с потерей $\\times s$: decision tree глубины $t$ затрагивает $O(s\\,t)$ вершин (§16.157). Дальше: проверить, что t‑evaluation/locally consistent леммы HR’22 переживают замену $t\\mapsto O(s\\,t)$.
 
 ## Что уже сделано (не повторять)
 
@@ -33,4 +33,4 @@ Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑фо
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Уточнение формулировки → Трейд‑офф → Модельный стресс‑тест → Модельный стресс‑тест → Инвариант
+Последние: Трейд‑офф → Модельный стресс‑тест → Модельный стресс‑тест → Инвариант → Инвариант
