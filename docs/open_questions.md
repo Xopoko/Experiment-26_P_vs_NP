@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S36-round-count-from-depth (см. `docs/research/16_tseitin.md` §16.202)
-  - `NextStepID:` Q43.S37-round-count-from-centers
+  - `LastStepID:` Q43.S37-rounds-via-uj (см. `docs/research/16_tseitin.md` §16.203)
+  - `NextStepID:` Q43.S38-check-centers-meaning
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -31,8 +31,9 @@
   (viii) точная цитата: Def. 2.10 и Lemma 4.4 не содержат ограничений на $\\ell$ кроме “depth $\\ell$”; значит $\\ell=t'$ допустимо на уровне формулировок (§16.200). `InfoGain:` 1.
   (ix) toy‑тест: в §7.2–7.3 “индекс $j$ на раунд” даёт множитель $M^{s/\\ell}$; при $s=2$, $\\ell=5$ остаётся 1 раунд, но $s/\\ell<1$, т.е. нужна явная оговорка $\\ell\\le s$ или $\\lceil s/\\ell\\rceil$ (§16.201). `InfoGain:` 1.
   (x) доказано: из §7.2 + определения дерева решений (различные переменные на ветви, запрет на локально имплицированные запросы) следует, что каждый раунд даёт ≥$\\ell$ новых запросов, поэтому префикс длины $s$ включает ≤$\\lceil s/\\ell\\rceil$ раундов и фактор $M^{\\lceil s/\\ell\\rceil}$ корректен (§16.202). `InfoGain:` 1.
+  (xi) контрпример: “$\\ge\\ell/4$ центров за раунд” в §7.2 относится ко всем exposed centers, поэтому bound $\\#\\text{rounds}\\le\\lceil 4a/\\ell\\rceil$ не следует; из Lemma 6.5–6.8 получается лишь $\\lceil 64a/\\ell\\rceil$ (§16.203). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить альтернативный bound на число раундов через число centers (Q43.S37-round-count-from-centers).
+  Следующий шаг: проверить, означает ли “centers” в §7.2 именно chosen centers; если нет — встроить коэффициент 64 в фактор $M^{s/\\ell}$ и сравнить с bound $\\lceil s/\\ell\\rceil$.
 
 ## Завершённые (архив)
 

@@ -2854,3 +2854,22 @@
 - `InfoGain:` 1.
 - `Барьер‑чек:` r — неприменимо (локальная оценка в доказательстве), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` проверить альтернативный bound по числу centers (Q43.S37-round-count-from-centers).
+
+### 16.203. Исследовательский шаг (counterexample): из “$\\ge\\ell/4$ центров за раунд” не следует $\\le\\lceil 4a/\\ell\\rceil$
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S37-rounds-via-uj):`
+  В §7.2 “$\\ge\\ell/4$ центров за раунд” относится к **всем** exposed centers в $S(\\lambda^j,\\sigma)$, а не к associated centers.
+  Поэтому утверждение “в каждом раунде добавляется $\\ge\\ell/4$ associated centers” (и, следовательно, bound $\\#\\text{rounds}\\le\\lceil 4a/\\ell\\rceil$) неверно без дополнительной структуры.
+  В общем виде из Lemma 6.5–6.8 следует лишь
+  $$\\#\\text{rounds}\\le\\Bigl\\lceil\\frac{64a}{\\ell}\\Bigr\\rceil.$$
+- `Контрпример (структурный разрыв):`
+  В §7.2 раунд заканчивается, когда “at least $\\ell/4$ centers have been added … to $S(\\lambda^j,\\sigma)$” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2718–2722`).
+  Но в одной стадии центры добавляются как $\\mathrm{supp}(J)\\cup S_J$, и Lemma 6.5 даёт верхний bound “at most $4|\\mathrm{supp}(J)|$ centers are added” (там же: `…:2013–2022`).
+  Далее Lemma 6.8 утверждает $|\\mathrm{supp}(J)|\\le 4a_j$ (там же: `…:2081–2086`), поэтому одна стадия может добавить до $16a_j$ центров.
+  Следовательно, раунд может достичь порога $\\ell/4$ при $a_j\\ge \\ell/64$, так что вывод $a_j\\ge\\ell/4$ (и bound $\\lceil 4a/\\ell\\rceil$) не проходит; корректный общий upper — $\\lceil 64a/\\ell\\rceil$.
+- `Toy‑тест:` локальная конфигурация, где каждый associated center даёт 3 соседних chosen centers в $\\mathrm{supp}(J)$, а каждый из них имеет ещё 3 новых соседних chosen centers в $S_J\\setminus\\mathrm{supp}(J)$, реализует фактор 16 между $a_j$ и числом новых центров.
+- `Статус:` контрпример (гипотеза “$\\ge\\ell/4$ associated centers за раунд” не следует из §7.2).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо (комбинаторный счёт релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` проверить в оригинальном PDF, что “centers” в §7.2 не означает “chosen centers”; если нет, встроить константу $64$ в фактор $M^{s/\\ell}$ и оценить, даёт ли это что‑то лучшее, чем bound через $\\lceil s/\\ell\\rceil$.

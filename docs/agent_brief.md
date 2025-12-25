@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S36-round-count-from-depth
-- `Do-not-repeat (next 2 runs):` Q43.S36-round-count-from-depth, Q43.S35-ell-vs-t-constraint
+- `LastStepID:` Q43.S37-rounds-via-uj
+- `Do-not-repeat (next 2 runs):` Q43.S37-rounds-via-uj, Q43.S36-round-count-from-depth
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: раунд добавляет ≥$\\ell$ свежих запросов ⇒ индексы ≤ $\\lceil s/\\ell\\rceil$; далее проверить bound через centers ($a$) и связь с $s$
+Q43: “$\\ell/4$ центров за раунд” в §7.2 относится ко всем exposed centers ⇒ общий bound по $a$ лишь $\\le\\lceil 64a/\\ell\\rceil$; проверить, не означает ли “centers” chosen centers.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: раунд добавляет ≥$\\ell$ свежих запросов ⇒ 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Инв→Эк→Тр→Тр
+Последние:Инв→Инв→Инв→Эк→Тр
