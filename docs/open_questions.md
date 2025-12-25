@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S24-derive-numeric-c2 (см. `docs/research/16_tseitin.md` §16.191)
-  - `NextStepID:` Q43.S25-tighten-c1-charge
+  - `LastStepID:` Q43.S25-tighten-c1-charge (см. `docs/research/16_tseitin.md` §16.192)
+  - `NextStepID:` Q43.S26-bound-diff-values-bits
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: грубо сделаны явными константы в HR’22 Lemma 4.4: используя bound $|\\bigcup_j S_{\\lambda^j}|\\le 2s$ и “заряд” из Lemma 6.8–6.9, получаем, что можно взять $c_2=64$ (как в single‑switching) и, в худшем случае, $c_1\\le 132$; см. `docs/research/16_tseitin.md` §16.191. `InfoGain:` 1.
+  Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (см. `docs/research/16_tseitin.md` §16.191); (ii) точная цитата из HR’22 §7.3: “additional chosen centers” и “differences in values” поглощаются константами $A,c_1,c_2$, а множитель $M^{s/\\ell}$ приходит **только** от индекса $j$ (см. `docs/research/16_tseitin.md` §16.192). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, что “additional chosen centers” и “differences in values” из §7.3 реально заряжаются в тот же $b\\log\\Delta$‑терм с коэффициентом $O(1)$ (и тем самым удерживают $c_1$ близким к 4, а не 132).
+  Следующий шаг: выписать явную оценку на число бит “differences in values” на раунд (в терминах $s$ или $a,b$ из Lemma 6.9), чтобы отделить вклад, который меняет только $A$, а не $c_1$.
 
 ## Завершённые (архив)
 

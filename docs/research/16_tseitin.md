@@ -2616,3 +2616,22 @@
 - `InfoGain:` 1.
 - `Барьер‑чек:` r — применимо (switching/encoding релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` уточнить, действительно ли “additional chosen centers” из §7.3 можно зарядить в тот же $b\\log\\Delta$‑терм с коэффициентом $O(1)$ (тогда $c_1$ может остаться $\\approx 4$), и отдельно проверить вклад “differences in values” (тоже заявлен как absorbed).
+
+### 16.192. Исследовательский шаг (exact citation): HR’22 §7.3 — “additional chosen centers” и “differences in values” поглощаются; только индекс $j$ даёт фактор $M^{s/\\ell}$
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S25-tighten-c1-charge):`
+  В доказательстве Multi-switching Lemma 4.4 (HR’22) в §7.3 явно перечислены дополнительные данные, читаемые на каждом раунде инверсии:
+  (i) индекс $j\\in[M]$ (log $M$ бит),
+  (ii) идентичность дополнительных chosen centers на расстоянии $\\le 1$ от новых exposed centers (log $\\Delta$ бит на центр),
+  (iii) “differences in values” между ответами в деревьях $T^j$ и $T$.
+  HR’22 прямо утверждают, что **только** (i) не поглощается константами $A,c_1,c_2$ и именно он порождает множитель $M^{s/\\ell}$ в оценке Lemma 4.4; пункты (ii)–(iii) поглощаются константами.
+- `Точная ссылка (HR’22, text cache):`
+  1) (ii) + “absorbed by $c_1,c_2$”: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2777`.
+  2) (iii) “differences in values”: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2778–2783`.
+  3) “only index $j$ cannot be absorbed” ⇒ фактор $M^{s/\\ell}$: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2787–2790`.
+- `Toy‑тест:` проверено по text cache, что формулировки (ii)–(iii) и вывод “only the index $j$” действительно записаны в §7.3.
+- `Статус:` точная ссылка (закрывает подпункт “differences in values absorbed”; остаётся распаковать “absorbed” в явные константы для $c_1$).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо (encoding‑аргумент релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` выписать явный верхний bound на число “differences in values” бит на раунд (в терминах $s$ или $a,b$ из Lemma 6.9) и тем самым отделить вклад, который меняет только $A$ (а не $c_1$).
