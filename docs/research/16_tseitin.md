@@ -919,9 +919,9 @@
   Авторы показывают, как **представлять** промежуточные паритетные уравнения в виде небольших depth‑$d$ формул,
   но подчёркивают, что **не знают**, как синтаксически переводить один шаг Gaussian elimination в ограниченное число шагов доказательства,
   т.е. получают «representation of partial results», а не proof.
-- `Доказательство/ссылка:` Håstad–Risse, §1.2 “Constructing small proofs”, особенно абзацы:
-  1) «If we are allowed to reason with linear equations modulo two … efficient refutations …» (идея сложить уравнения по колонкам, ширина $O(n)$);
-  2) «We do not know how to syntactically translate a Gaussian elimination step … thus we do not actually get a proof …» (прямая формулировка отсутствующего шага).
+- `Доказательство/ссылка:` Håstad–Risse, §1.2 “Constructing small proofs” (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`):
+  1) (p. 3; PDF p. 5) “If we are allowed to reason with linear equations modulo two then the Tseitin contradiction has efficient refutations.”
+  2) (p. 4; PDF p. 6) “We do not know how to syntactically translate a Gaussian elimination step to some proof steps in this representation and thus we do not actually get a proof, only a representation of the partial results.”
 - `Toy‑тест:` пусть максимальный размер строки $M=n^{O(1)}$, тогда $\\log M=\\Theta(\\log n)$.
   Формула глубины $d$ размера $M$ может кодировать паритет на $m:=(\\log M)^{d-1}$ переменных.
   При $d=\\Theta(\\log n/\\log\\log n)$ имеем $m=\\exp(\\Theta(\\log n))=n^{\\Theta(1)}\\ge n$, т.е. представление паритета на $n$ переменных возможно при polynomial $M$;
@@ -1831,3 +1831,171 @@
 - `Статус:` черновик (нужна аккуратная проверка: где именно в доказательствах HR’22 используется, что переменные *именно edges*, и что добавление запроса $p_i$ корректно “оплачивается” локальным witness на $\\mathrm{closure}(\\mathrm{supp}_s)$).
 - `Барьер‑чек:` r — применимо (вся схема support/closure/DT релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` для Q41: (a) выбрать точную модель local‑EF(s) (запрещаем $\\varphi_i(P)$ или считаем $\\mathrm{supp}(p_i)$ как поддержку полностью развёрнутой формулы), (b) формально доказать (или найти контрпример) пункт (4) как аналог Cor. 2.7, и только после этого пытаться переносить Lemma 2.13 (порог $t\\le n/16$ станет $t\\le \\Theta(n/s)$).
+
+### 16.160. Исследовательский шаг: контрпример — “nested extension” без полного разворачивания поддержки делает local‑EF(s) бессодержательной
+
+- `Линза:` Модельный стресс‑тест.
+- `Утверждение (контрпример к «naive nested‑locality»):`
+  Пусть разрешены extension‑аксиомы вида $p\\leftrightarrow\\varphi(X,P_{<p})$, и “наивная поддержка” шага измеряется только по *синтаксически встречающимся edge‑переменным* в $\\varphi$ (extension‑переменные считаются атомами и не разворачиваются в $X$).
+  Тогда существует цепочка extension‑шагов, где **каждый** шаг имеет поддержку $\\le 2$ (одна edge‑переменная), но итоговая переменная вычисляет XOR от $m$ edge‑переменных и потому имеет “истинную” поддержку $\\Theta(m)$.
+  Следовательно, без запрета nesting или без разворачивания поддержки определение local‑EF(s) перестаёт контролировать геометрию (и не может служить базой для $\\mathrm{supp}_s/\\mathrm{cost}_s$‑версии Cor. 2.7).
+- `Доказательство (явная конструкция):`
+  Возьмём попарно различные edge‑переменные $x_{e_1},\\dots,x_{e_m}$ и введём extension‑переменные $p_1,\\dots,p_m$:
+  $$p_1\\leftrightarrow x_{e_1},\\qquad p_i\\leftrightarrow (p_{i-1}\\oplus x_{e_i})\\ \\ (2\\le i\\le m).$$
+  (Операция $\\oplus$ выражается формулой константного размера в базисе $\\vee,\\wedge,\\neg$.)
+  Тогда по индукции $p_i\\equiv\\bigoplus_{j\\le i}x_{e_j}$.
+  При наивном подсчёте поддержки каждый $\\varphi_i$ содержит **ровно одну** edge‑переменную $x_{e_i}$, поэтому $|\\mathrm{supp}(\\varphi_i)|=2$ для всех $i$.
+  Но “развёрнутая” формула для $p_m$ содержит все $x_{e_1},\\dots,x_{e_m}$, так что
+  $$\\mathrm{supp}(p_m)=\\bigcup_{j\\le m}\\mathrm{supp}(x_{e_j}).$$
+  В частности, если выбрать рёбра $e_j$ попарно без общих концов, то $|\\mathrm{supp}(p_m)|=2m$.
+- `Toy‑тест:` на $n\\times n$ grid можно взять $m=\\lfloor n^2/2\\rfloor$ попарно непересекающихся рёбер (matching); тогда “naive” $s=2$, но $|\\mathrm{supp}(p_m)|=\\Theta(n^2)$.
+- `Статус:` контрпример (фиксирует выбор модели: либо flat $\\varphi_i(X)$, либо $\\mathrm{supp}(p_i)$ считается по полностью развёрнутой формуле в $X$).
+- `Барьер‑чек:` r — применимо (чисто синтаксический трюк), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` для Q41 принять “flat” (запрет $\\varphi_i(P)$) или “unfolded‑support” модель и уже в ней доказывать/опровергать аналог HR Cor. 2.7 для $\\mathrm{supp}_s/\\mathrm{cost}_s$.
+
+### 16.161. Исследовательский шаг: доказательство аналога HR Cor. 2.7 для **flat** local‑EF(s) через $\\mathrm{supp}_s/\\mathrm{cost}_s$
+
+- `Линза:` Инвариант.
+- `Утверждение (Q41.S3-proof-cor27-analogue-flat):`
+  Работаем в **flat**‑модели: extension‑аксиомы имеют вид
+  $$p_i\\leftrightarrow\\varphi_i(X),\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s,$$
+  где $X$ — edge‑переменные Tseitin($G_n$), а $\\varphi_i$ не содержит extension‑переменных.
+  Используем определения $\\mathrm{supp}_s(\\alpha)$, $s$‑local consistency и $\\mathrm{cost}_s(T)$ из §16.159.
+  Тогда выполняется прямой аналог HR’22 Cor. 2.7 (p. 8; PDF p. 10) с заменой $|\\mathrm{supp}(\\alpha)|+2\\,\\mathrm{depth}(T)$ на
+  $|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)$:
+  если $T$ — (обычный) decision tree над переменными $X\\cup P$ и $\\alpha$ $s$‑locally consistent, и
+  $$|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2,$$
+  то “trimmed restriction” $T\\lceil\\alpha$ (как у HR, но по pairwise $s$‑local consistency) корректен и является $s$‑locally consistent decision tree
+  (в частности, $T\\lceil\\alpha\\ne\\varnothing$).
+- `Доказательство:`
+  Достаточно показать, что существует хотя бы одна ветвь $\\tau$ дерева $T$, такая что $\\alpha\\cup\\tau$ $s$‑locally consistent.
+  Построим её жадно, спускаясь от корня к листу.
+  На шаге имеем частичное присваивание
+  $$\\gamma:=\\alpha\\cup\\tau_{\\le k}$$
+  (префикс ветви), которое $s$‑locally consistent, и положим $U:=\\mathrm{supp}_s(\\gamma)$.
+  Для любой вершины дерева $T$ любой префикс ветви имеет $\\mathrm{cost}_s(\\tau_{\\le k})\\le \\mathrm{cost}_s(T)$, поэтому по условию
+  $$|U|\\le |\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(\\tau_{\\le k})\\le |\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2.$$
+  Рассмотрим следующую переменную запроса в $T$ (в текущем узле) и выберем значение, сохраняющее $s$‑локальную согласованность.
+  1) **Edge‑запрос $x_e$.**
+     Из $s$‑local consistency для $\\gamma$ существует witness $\\beta$ на $X$, complete on $\\mathrm{closure}(U)$, удовлетворяющий parity‑constraints на $\\mathrm{closure}(U)$ и согласованный со всеми присвоенными $p_j$.
+     Обозначим через $E_P$ множество edge‑переменных, встречающихся в $\\varphi_j$ для всех $p_j\\in\\mathrm{dom}(\\gamma)$.
+     Расширим $\\gamma\\!\upharpoonright_X$ до частичного присваивания $\\delta$ на $X$, присвоив все переменные из $E_P$ так, как в $\\beta$.
+     Тогда $\\mathrm{supp}(\\delta)\\subseteq U$, и $\\delta$ локально согласовано в смысле HR Definition 2.2 (witness — та же $\\beta$).
+     По HR Lemma 2.3 (p. 6; PDF p. 8) существует локально согласованное $\\delta'\\supseteq\\delta$ с $x_e$ в домене.
+     Пусть $b:=\\delta'(x_e)$. Тогда $\\gamma':=\\gamma\\cup\\{x_e\\mapsto b\\}$ $s$‑locally consistent:
+     все ранее присвоенные $p_j$ остаются совместимыми, т.к. их формулы $\\varphi_j$ используют только переменные из $E_P$, уже зафиксированные в $\\delta$ и потому неизменные в $\\delta'$.
+  2) **Extension‑запрос $p_i$.**
+     Пусть $E_i:=\\mathrm{vars}(\\varphi_i)$ — множество edge‑переменных в $\\varphi_i$.
+     Начнём с той же $\\delta$ (фиксирует $E_P$ по witness $\\beta$) и последовательно применим HR Lemma 2.3, добавляя в домен $\\delta$ переменные из $E_i$.
+     По построению на каждом шаге поддержка остаётся в $U\\cup\\mathrm{supp}(\\varphi_i)$, а
+     $$|U\\cup\\mathrm{supp}(\\varphi_i)|\\le |\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(\\tau_{\\le k})+|\\mathrm{supp}(\\varphi_i)|\\le |\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(\\tau_{\\le k+1})\\le n/2,$$
+     так что лемма применима.
+     Получаем локально согласованное $\\delta'$ на $X$, которое присваивает все переменные из $E_P\\cup E_i$.
+     Положим $b:=\\varphi_i(\\delta')$ и $\\gamma':=\\gamma\\cup\\{p_i\\mapsto b\\}$.
+     Тогда $\\gamma'$ $s$‑locally consistent: witness задаётся completion’ом $\\delta'$ на $\\mathrm{closure}(U\\cup\\mathrm{supp}(\\varphi_i))$,
+     а равенство $p_i=\\varphi_i(X)$ выполнено по определению $b$.
+  В обоих случаях мы нашли значение для следующего запроса, сохранив $s$‑local consistency и инвариант $|\\mathrm{supp}_s(\\gamma')|\\le n/2$.
+  Продолжая до листа, получаем ветвь $\\tau$ с $\\alpha\\cup\\tau$ $s$‑locally consistent.
+  Значит множество ветвей, pairwise $s$‑locally consistent с $\\alpha$, непусто, и “trimmed restriction” $T\\lceil\\alpha$ определён и $s$‑locally consistent (по определению).
+- `Toy‑тест:` если $p\\leftrightarrow x_e$ (поддержка 2), то случай “extension‑запрос” буквально сводится к HR Lemma 2.3 для $x_e$.
+- `Статус:` доказано (в flat‑модели; снимает главный риск в §16.159: ограничение “ветка мала ⇒ closure‑witness существует” переносится на local‑EF(s) при замене $2\\,\\mathrm{depth}$ на $\\mathrm{cost}_s$).
+- `Барьер‑чек:` r — применимо (аргумент целиком про support/closure/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` используя этот аналог Cor. 2.7, переписать HR Definition 2.11 (t‑evaluation) для flat local‑EF(s) и проверить, где в Lemma 2.13 требуется точнее контролировать порог (ожидаемо $t\\le\\Theta(n/s)$).
+
+### 16.162. Исследовательский шаг: flat local‑EF(s) — “t‑evaluation” и перенос HR Lemma 2.13 с порогом $t\\le\\Theta(n/s)$
+
+- `Линза:` Эквивалентность.
+- `Определение (cost‑t evaluation, flat local‑EF(s)):` Зафиксируем $n\\times n$ grid $G_n$, edge‑переменные $X$ и extension‑переменные $P$ с аксиомами
+  $$p_i\\leftrightarrow\\varphi_i(X),\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s,$$
+  где $\\varphi_i$ не содержит переменных из $P$ (flat).
+  Скажем, что множество формул $\\Gamma$ имеет **cost‑$t$‑evaluation** $\\phi$, если $\\phi$ отображает каждую формулу $F\\in\\Gamma$ в $s$‑locally consistent decision tree $\\phi(F)$ с
+  $$\\mathrm{cost}_s(\\phi(F))\\le t,$$
+  и выполняются Properties 1–4 из HR’22 Definition 2.11 (PDF p. 11), но с “locally consistent” заменённым на “$s$‑locally consistent”.
+- `Утверждение (аналог HR Lemma 2.13):`
+  Пусть $t\\le n/16$ и существует Frege‑вывод формулы $A$ из Tseitin($G_n$) (и, при желании, flat extension‑аксиом) такой, что **каждая** строка имеет cost‑$t$‑evaluation, и все эти evaluations попарно функционально эквивалентны (как в HR’22 Definition 2.12).
+  Тогда каждая строка вывода отображается в 1‑tree; в частности, нельзя вывести $\\bot$.
+- `Доказательство (сведение к HR):`
+  Доказательство HR’22 Lemma 2.13 (Appendix A.1, paper p. 47–48; PDF p. 50–51) переносится дословно, потому что использует только:
+  (i) Properties 1–4 evaluation,
+  (ii) функциональную эквивалентность evaluations,
+  (iii) факт, что все ограничения вида $T\\lceil\\alpha$ и $T\\lceil(\\alpha\\cup\\tau)$ корректно определены и дают (s‑)locally consistent деревья.
+
+  В HR пункт (iii) обеспечивается Cor. 2.7 при $t\\le n/16$; в flat local‑EF(s) он обеспечивается §16.161, поскольку для любой ветви $\\tau$ дерева $T$ имеем
+  $$|\\mathrm{supp}_s(\\tau)|\\le \\mathrm{cost}_s(\\tau)\\le \\mathrm{cost}_s(T)\\le t,$$
+  и потому для любого другого дерева $T'$ с $\\mathrm{cost}_s(T')\\le t$:
+  $$|\\mathrm{supp}_s(\\tau)|+\\mathrm{cost}_s(T')\\le 2t\\le n/2.$$
+  Аналогично, если в Cut‑случае нужно ограничивать по $\\tau\\cup\\tau'$, то
+  $|\\mathrm{supp}_s(\\tau\\cup\\tau')|\\le |\\mathrm{supp}_s(\\tau)|+|\\mathrm{supp}_s(\\tau')|\\le 2t$ и
+  $|\\mathrm{supp}_s(\\tau\\cup\\tau')|+\\mathrm{cost}_s(T'')\\le 3t\\le 3n/16<n/2$,
+  так что §16.161 применим.
+  Значит все restricted trees, используемые в индукции HR, корректны, и вывод “нельзя получить 0‑ветвь на новой строке” сохраняется.
+- `Следствие (порог $t\\le\\Theta(n/s)$ в терминах глубины):`
+  В flat‑модели любой decision tree глубины $d$ удовлетворяет $\\mathrm{cost}_s(T)\\le (s+2)\\,d$ (см. §16.159),
+  поэтому “depth‑$d$ evaluation” имплицирует cost‑$t$ evaluation с $t:=(s+2)d$.
+  В частности, условие $t\\le n/16$ эквивалентно $d\\le n/(16(s+2))=\\Theta(n/s)$.
+- `Toy‑тест:` при $s=0$ (нет extension‑переменных) имеем $\\mathrm{cost}_0=2\\,\\mathrm{depth}$, так что условие $t\\le n/16$ соответствует $\\mathrm{depth}\\le n/32$ (константы не оптимизировались; важен масштаб $\\Theta(n)$).
+- `Статус:` доказано (flat‑модель; даёт явный “gatekeeper”: весь evaluation‑каркас переносится с заменой $t\\mapsto (s+2)t$).
+- `Барьер‑чек:` r — применимо (вся конструкция support/closure/DT релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` если пытаться использовать это для lower bounds, нужно показать: (a) почему poly‑size flat local‑EF(s) вывод *индуцирует* depth‑$d$ evaluations с $d=\\mathrm{polylog}(n)$, или (b) где именно multi‑switching/representation ломается в присутствии extension‑переменных даже в flat‑режиме.
+
+### 16.163. Исследовательский шаг: точная цитата — где HR’22 строят t‑evaluation индукцией по глубине (Proof of Thm. 4.1)
+
+- `Линза:` Инвариант.
+- `Утверждение:` В HR’22 явно выписано *индуктивное определение* t‑evaluation для всех подформул “короткого и мелкого” Frege‑доказательства (после применения последовательности full restrictions); единственное нетривиальное расширение домена происходит в случае дизъюнкции и делается через switching lemma.
+- `Доказательство/ссылка:` Håstad–Risse, `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`:
+  1) (paper p. 15; PDF p. 17) “For the total size lower bound we in fact do not create distinct t-evaluations per line but rather a single one, used on each line.”
+  2) (paper p. 16; PDF p. 18) в доказательстве Theorem 4.1 после формулы (4) дано определение $\\phi_{i+1}$ по случаям (цитата):
+     > “Consider any such formula $F\\in\\Gamma$. We define $\\phi_{i+1}$ as follows.
+     > 1. If $F$ is of depth at most $\\mathrm{depth}(F)\\le i$, then we let $\\phi_{i+1}(F\\!\upharpoonright\\!\\sigma_i^*)=\\phi_i(F\\!\upharpoonright\\!\\sigma_i^{*\\! -1})\\!\upharpoonright\\!\\sigma_i$. By Lemma 3.4 the restricted $t_i$-evaluation $\\phi_i\\!\upharpoonright\\!\\sigma_i$ is defined on such formulas.
+     > 2. If $F=\\neg F'$ is of depth $i+1$, then $\\phi_{i+1}(F\\!\upharpoonright\\!\\sigma_i^*)$ is defined in terms of $\\phi_{i+1}(F'\\!\\upharpoonright\\!\\sigma_i^*)$ by negating all the leaf labels.
+     > 3. If $F=\\bigvee_j F_j$ is of depth $i+1$ and each $F_j$ is of depth at most $\\mathrm{depth}(F_j)\\le i$, then we appeal to Lemma 4.2 to obtain a decision tree $T$ … representing $\\bigvee_j T_j$ for $T_j=\\phi_i(F_j\\!\\upharpoonright\\!\\sigma_i^{*\\! -1})$.”
+- `Toy‑тест:` извлечение текста `pdftotext -f 18 -l 18` показывает пункты 1–3 выше дословно (проверка “где именно строится evaluation”).
+- `Статус:` известный факт (точная ссылка на конструкцию evaluations).
+- `Барьер‑чек:` r — неприменимо (на этом шаге только локализация цитаты), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` для Q43 локализовать аналогичное “построчное” построение (functionally equivalent $t(\\eta)$‑evaluations) в доказательстве Theorem 4.3/Lemma 4.5 и отметить, где в этом месте появление extension‑переменных может ломать switching/representation.
+
+### 16.164. Исследовательский шаг: точная цитата — построчное построение functionally equivalent $t(\\eta)$‑evaluations (Theorem 4.3 / Lemma 4.5)
+
+- `Линза:` Эквивалентность.
+- `Утверждение:` В доказательстве HR’22 Theorem 4.3 явно поддерживаются (i) для каждой строки $\\nu$ доказательства — своё $t(\\eta)$‑evaluation $\\phi^\\eta_\\nu$ на множестве подформул $\\Gamma^\\eta_\\nu$, (ii) для каждой строки — “общий” partial decision tree $T_\\eta(\\nu)$, используемый для расширения evaluations на следующий уровень глубины. Индуктивный шаг зафиксирован как Lemma 4.5 и использует multi‑switching lemma (Lemma 4.4) на деревьях $\\phi^{\\eta-1}_\\nu(F)\\!\upharpoonright\\!\\tau$.
+- `Доказательство/ссылка:` Håstad–Risse, `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`:
+  1) (Theorem 4.3, PDF p. 19) “The main difference is that instead of creating a single t-evaluation for the entire proof we in fact independently create t-evaluations for each line. These t-evaluations turn out to be functionally equivalent…”.
+  2) (после (6), PDF p. 19) для каждого $\\eta$ вводится
+     $$\\Gamma^\\eta_\\nu:=\\{F\\!\upharpoonright\\!\\sigma^*_\\eta\\mid F\\in\\Gamma_\\nu\\ \\wedge\\ \\mathrm{depth}(F)\\le \\eta\\},\\tag{6}$$
+     и требуется функциональная эквивалентность всех $\\phi^\\eta_\\nu$.
+  3) (Lemma 4.5, PDF p. 20) индуктивный шаг (цитата из утверждения):
+     > “Suppose that for every line $\\nu\\in[N]$ we have functionally equivalent $t(\\eta-1)$-evaluations $\\phi^{\\eta-1}_\\nu$ … Suppose that $t(\\eta)\\le n_\\eta/16$. For $\\sigma_\\eta\\sim D_k\\Sigma(n_{\\eta-1},n_\\eta)$ with probability $1-N^{-1}$, for every line $\\nu$ … there are functionally equivalent $t(\\eta)$-evaluations $\\phi^\\eta_\\nu$ … and a $t$-common partial decision tree $T_\\eta(\\nu)$ …”.
+- `Toy‑тест:` `pdftotext -f 20 -l 20` показывает Lemma 4.5 и внутри доказательства явное определение $\\phi^\\eta_\\nu$ по случаям (depth<η / ¬ / ∨) с использованием построенного $T_\\eta(\\nu)$.
+- `Статус:` известный факт (точная ссылка на “linewise evaluations” каркас HR’22).
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` для Q43 выделить в доказательстве Lemma 4.5 место, где используется, что деревья $\\phi^{\\eta-1}_\\nu(F)$ запрашивают *только edge‑переменные* и что full restrictions/локальная согласованность закрыты относительно этих запросов; затем проверить, сохраняется ли этот шаг при добавлении flat extension‑переменных (или зафиксировать точку поломки).
+
+### 16.165. Исследовательский шаг: flat extensions — как убрать $P$‑запросы из decision trees (unfolding) ценой фактора $O(s)$ по глубине
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S3-check-lemma45-flat-ext-break):`
+  Пусть работаем на $n\\times n$ grid и разрешены **flat** extension‑переменные $P$ с аксиомами
+  $$p_i\\leftrightarrow\\varphi_i(X),\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s,$$
+  где $X$ — edge‑переменные.
+  Тогда любой decision tree $T$ над переменными $X\\cup P$ можно преобразовать в decision tree $U$ над **только** edge‑переменными $X$ так, что:
+  1) для любого присваивания $\\alpha:X\\to\\{0,1\\}$ значение $U(\\alpha)$ совпадает со значением $T(\\alpha, P=\\varphi(X))$;
+  2) для любой ветви $\\tau$ дерева $T$ соответствующая ветвь $\\hat\\tau$ дерева $U$ имеет глубину
+     $$\\mathrm{depth}(\\hat\\tau)\\le \\#(X\\text{‑запросов в }\\tau)+2s\\cdot\\#(P\\text{‑запросов в }\\tau)\\le (2s+1)\\,\\mathrm{depth}(\\tau).$$
+  В частности, если в HR Lemma 4.5/Lemma 4.4 требуется “decision trees querying edges of the $n\\times n$ grid” глубины $\\le t$, то для flat local‑EF(s) достаточно заменить параметр $t$ на $t':=(2s+1)t$ после такого unfolding.
+- `Доказательство:`
+  Для каждого $p_i$ обозначим через $E_i\\subseteq X$ множество edge‑переменных, встречающихся в $\\varphi_i$.
+  Так как grid имеет степень $\\le 4$, любой фиксированный набор вершин $S$ инцидентен не более чем $2|S|$ рёбрам, значит
+  $$|E_i|\\le 2\\,|\\mathrm{supp}(\\varphi_i)|\\le 2s.$$
+  Построим decision tree $D_i$ над $E_i$ глубины $|E_i|$ вычисляющее булеву функцию $\\varphi_i$ (например, запрашиваем все переменные из $E_i$ в фиксированном порядке и помечаем листья значением $\\varphi_i$ на соответствующем наборе).
+
+  Теперь определим $U$ из $T$ рекурсивной заменой каждого узла‑запроса $p_i$ на дерево $D_i$:
+  каждое листо $D_i$, помеченное $b\\in\\{0,1\\}$, перенаправляем в ребёнка исходного узла $p_i$ по ответу $b$.
+  Тогда по индукции по структуре $T$ для любого $\\alpha$ деревья $T$ и $U$ вычисляют одно и то же значение при интерпретации $p_i:=\\varphi_i(\\alpha)$.
+
+  По глубине: замена одного $p_i$‑запроса добавляет вдоль ветви не более $\\mathrm{depth}(D_i)=|E_i|\\le 2s$ edge‑запросов, а $X$‑запросы сохраняются.
+  Отсюда
+  $$\\mathrm{depth}(\\hat\\tau)\\le \\#X(\\tau)+\\sum_{p_i\\in\\mathrm{dom}_P(\\tau)}|E_i|\\le \\#X(\\tau)+2s\\cdot\\#P(\\tau).$$
+- `Toy‑тест:` если $p\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$, то $|\\mathrm{supp}(\\varphi)|\\le 6$ и $|E|=3$; unfolding одного запроса $p$ даёт дерево глубины 3 на $\\{x_{e_1},x_{e_2},x_{e_3}\\}$.
+- `Статус:` доказано (фиксирует, где именно в Lemma 4.5 “edge‑only” используется и как к нему вернуться ценой фактора $O(s)$ по глубине).
+- `Барьер‑чек:` r — применимо (чисто комбинаторный аргумент про decision trees/поддержку и релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` для Q43 проверить параметрический режим в HR Lemma 4.5: достаточно ли после замены $t\\mapsto (2s+1)t$ сохранить условия вида $t(\\eta)\\le n_\\eta/16$ и $t\\le s_\\eta\\le n' /32$; если нет — зафиксировать точную точку поломки как барьер.

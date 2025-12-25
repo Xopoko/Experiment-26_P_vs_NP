@@ -7,33 +7,36 @@
 
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
-  - `Status:` ACTIVE
-  - `NextStepID:` Q39.S1-status-via-Q40
-  - `Success:` либо точная цитата “open”, либо явный upper на глубине $O(\\log N/\\log\\log N)$
+  - `Status:` ACTIVE (open confirmed)
+  - `LastStepID:` Q39.S1-status-via-Q40 (см. `docs/research/16_tseitin.md` §16.122)
+  - `NextStepID:` Q39.S2-search-xor-step-bdfrege
+  - `Success:` либо явный upper на глубине $O(\\log N/\\log\\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Известно: $d_{\\mathrm{poly}}(N)\\ge\\Omega(\\log N/\\log\\log N)$ (Håstad’20, Cor. 6.6; §16.92) и $d_{\\mathrm{poly}}(N)\\le O(\\log N)$ (unpack GIRS’19/Claim 28; §16.115–§16.121).
   Узел: синтаксически симулировать шаг Gaussian elimination в bounded‑depth Frege (HR’22 отмечают как “не умеем”; §16.122).
-  Следующий шаг: либо найти upper на depth $O(\\log N/\\log\\log N)$, либо зафиксировать точной цитатой, что это open, и двигаться дальше.
+  Прогресс: HR’22 §1.2 явно фиксируют отсутствующий шаг (“We do not know how to syntactically translate a Gaussian elimination step … thus we do not actually get a proof …”), т.е. потенциальный upper через колонковое XOR‑суммирование остаётся открытым; см. `docs/research/16_tseitin.md` §16.122. `InfoGain:` 1.
+  `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо (чистый статус/цитата).
+  Следующий шаг: найти, известна ли poly‑size bounded‑depth Frege‑симуляция одного XOR‑сложения $L_1\\oplus L_2$ (или барьер, почему нет) в режиме глубины $\\Theta(\\log n/\\log\\log n)$.
 
-- [ ] **Q40 (литературный статус Q39):**
+- [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `NextStepID:` Q40.S1-quote-hr22-1.2
-  - `Success:` точная цитата + ссылка (секция/страница) из HR’22 §1.2
-  Считается ли gap $O(\\log N)$ vs $\\Omega(\\log N/\\log\\log N)$ открытым именно для Frege‑строк (tree‑формул)?
-  Следующий шаг: выписать точную цитату из HR’22 §1.2 про “We do not know how to syntactically translate a Gaussian elimination step …”.
-
-- [ ] **Q41 (если Q39 открыт: локальные расширения):**
-  - `Priority:` P0
-  - `Status:` ACTIVE
-  - `LastStepID:` Q41.S1-support-cost-draft (см. §16.159)
-  - `NextStepID:` Q41.S2-proof-cor27-analogue
-  - `Success:` доказать/опровергнуть аналог HR Cor. 2.7 при $\\mathrm{supp}_s/\\mathrm{cost}_s$ (и зафиксировать точную точку поломки)
-  Проверить, переносится ли HR’22 t‑evaluation/locally‑consistent метод на local‑EF(s) (см. §16.156–§16.158) как промежуточную модель “ограниченного sharing”.
-  Прогресс: набросок “support+cost”‑патча (Def. 2.2/Cor. 2.7 → $\\mathrm{supp}_s$ и $\\mathrm{cost}_s$) записан в §16.159.
-  Следующий шаг: выбрать точную модель local‑EF(s) (flat vs nested), затем доказать/опровергнуть аналог Cor. 2.7 при условии $|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2$ (и только после этого трогать Lemma 2.13).
+  - `LastStepID:` Q43.S3-check-lemma45-flat-ext-break (см. `docs/research/16_tseitin.md` §16.165)
+  - `NextStepID:` Q43.S4-parameter-check-after-unfolding
+  - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
+  Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
+  Прогресс: формализован “unfolding” flat extension‑запросов $P\\to X$ для decision trees: любой $T(X\\cup P)$ заменяется на edge‑only $U(X)$ с blow‑up по глубине $t\\mapsto(2s+1)t$; это локализует, как применить HR multi‑switching (Lemma 4.4) в присутствии flat extensions; см. `docs/research/16_tseitin.md` §16.165. `InfoGain:` 1.
+  `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
+  Следующий шаг: проверить, что после замены $t\\mapsto(2s+1)t$ условия параметров в HR Lemma 4.5 всё ещё выполняются (в частности, $t(\\eta)\\le n_\\eta/16$ и $t\\le s_\\eta\\le n' /32$), или зафиксировать точный барьер.
 
 ## Завершённые (архив)
 
+- [x] **Q42 (flat local‑EF(s): перенос HR t‑evaluation → Lemma 2.13):**
+  закрыто: введено cost‑$t$ evaluation для flat local‑EF(s) и показано, что HR Lemma 2.13 переносится с заменой параметра глубины на стоимость (порог $t\\le\\Theta(n/s)$); см. `docs/research/16_tseitin.md` §16.162. `StepID:` Q42.S1-define-evaluation-flat. `InfoGain:` 2.
+- [x] **Q41 (если Q39 открыт: локальные расширения):**
+  закрыто: (i) контрпример показывает, что “nested extension” без разворачивания поддержки делает local‑EF(s) тривиальной (§16.160);
+  (ii) в flat‑модели доказан аналог HR Cor. 2.7 при $\\mathrm{supp}_s/\\mathrm{cost}_s$ (§16.161). `StepID:` Q41.S3-proof-cor27-analogue-flat. `InfoGain:` 2.
+- [x] **Q40 (литературный статус Q39):**
+  закрыто: в Håstad–Risse’22 §1.2 зафиксирована точная цитата “We do not know how to syntactically translate a Gaussian elimination step …”, со страницей (p. 4; PDF p. 6); см. `docs/research/16_tseitin.md` §16.122. `StepID:` Q40.S1-quote-hr22-1.2. `InfoGain:` 1.
 - [x] **Q38 (константы в depth‑threshold для Tseitin(Grid): сравнить Håstad’20 и GIRS’19):**
   закрыто: после пересчёта (§16.117+§16.120) сравнение «59 vs верхняя константа» оказалось некорректной целью: известный polynomial‑size upper на grid имеет масштаб $O(\\log n)$, а не $\\Theta(\\log n/\\log\\log n)$.
 - [x] **Q37 (вынести в основной текст краткий итог по Tseitin(Grid) — текущие границы):**
