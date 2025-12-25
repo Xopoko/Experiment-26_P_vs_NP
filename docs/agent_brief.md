@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S37-rounds-via-uj
-- `Do-not-repeat (next 2 runs):` Q43.S37-rounds-via-uj, Q43.S36-round-count-from-depth
+- `LastStepID:` Q43.S38-quote-centers-exposed
+- `Do-not-repeat (next 2 runs):` Q43.S38-quote-centers-exposed, Q43.S37-rounds-via-uj
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: “$\\ell/4$ центров за раунд” в §7.2 относится ко всем exposed centers ⇒ общий bound по $a$ лишь $\\le\\lceil 64a/\\ell\\rceil$; проверить, не означает ли “centers” chosen centers.
+Q43: подтверждено, что в §7.2 “centers” = exposed centers $S(\\lambda^j,\\sigma)\\subseteq$ alive centers; далее сравнить $\\lceil 64a/\\ell\\rceil$ с фактором $M^{\\lceil s/\\ell\\rceil}$.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: “$\\ell/4$ центров за раунд” в §7.2 относится 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Инв→Инв→Эк→Тр
+Последние:Инв→Инв→Эк→Тр→Эк

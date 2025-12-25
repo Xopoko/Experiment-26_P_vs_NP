@@ -2873,3 +2873,17 @@
 - `InfoGain:` 1.
 - `Барьер‑чек:` r — применимо (комбинаторный счёт релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` проверить в оригинальном PDF, что “centers” в §7.2 не означает “chosen centers”; если нет, встроить константу $64$ в фактор $M^{s/\\ell}$ и оценить, даёт ли это что‑то лучшее, чем bound через $\\lceil s/\\ell\\rceil$.
+
+### 16.204. Исследовательский шаг (exact citation): “centers” в §7.2 — это exposed centers (подмножество alive centers)
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S38-quote-centers-exposed):`
+  В HR’22 “центры” в остановке раунда §7.2 — это именно exposed centers $S(\\lambda^j,\\sigma)$, а exposed centers определены как подмножество alive centers.
+- `Exact citation:`
+  Определение exposed centers: “1. a subset of the alive centers $S = S(\\tau,\\sigma)$ called the exposed centers” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1841`).
+  Остановка раунда: “We continue with the next stage until at least $\\ell/4$ centers have been added in this round to the set of exposed centers $S(\\lambda^j,\\sigma)$ …” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2718–2719`).
+- `Toy‑тест:` подстановка определений: слово “centers” в §7.2 прямо отсылает к “set of exposed centers”, без упоминания chosen centers.
+- `Статус:` подтверждено (точная цитата).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` сравнить верхнюю оценку числа раундов через $\\lceil 64a/\\ell\\rceil$ с фактором $M^{\\lceil s/\\ell\\rceil}$ и показать, что константа 64 не ухудшает итог (Q43.S39-compare-round-bounds).
