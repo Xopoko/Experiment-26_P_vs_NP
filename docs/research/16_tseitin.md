@@ -929,31 +929,25 @@
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` формализовать как лемму‑цель: «в bounded‑depth Frege можно (p‑)выводить представление $L_1\\oplus L_2=b_1\\oplus b_2$ из представлений $L_1=b_1$ и $L_2=b_2$ с контролем по глубине/размеру», либо найти источник, где это уже сделано.
 
-### 16.123. Исследовательский шаг: явная конструкция «PARITY на $(\\log M)^{d-1}$ переменных имеет depth $O(d)$ и размер $\\mathrm{poly}(M)$»
+### 16.123. Исследовательский шаг: исправление про «representation PARITY» — наивная DNF‑индукция даёт $M^{\\Theta(d)}$, а нужный факт явно заявлен в Håstad–Risse §1.2
 
 - `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $M\\ge 2$ и $d\\ge 2$, и положим $g:=\\lceil\\log_2 M\\rceil$ и $m:=g^{d-1}$.
-  Тогда существует булева формула $P_{d,M}$ над базисом $(\\vee,\\wedge,\\neg)$, вычисляющая $\\mathrm{PARITY}_m$,
-  такой что:
-  1) $\\mathrm{depth}(P_{d,M})\\le 2d$,
-  2) $|P_{d,M}|\\le M^{O(d)}$ (в частности, $|P_{d,M}|=\\mathrm{poly}(M)$ при фиксированном $d$).
-  Следовательно, если $M=n^{O(1)}$ и $d=\\Theta(\\log n/\\log\\log n)$, то $m\\ge n$ для больших $n$, то есть
-  $\\mathrm{PARITY}_n$ вычислима формулами depth $O(\\log n/\\log\\log n)$ полиномиального размера.
-- `Доказательство:` конструкция по индукции по $d$.
-  1) (**База $d=2$.**) Тогда $m=g$.
-     $\\mathrm{PARITY}_g$ вычисляется DNF глубины 2: дизъюнкция по всем присваиваниям нечётной чётности из $\\{0,1\\}^g$ конъюнкций литералов.
-     Размер этой DNF равен $2^{g-1}\\le 2^{\\log_2 M}=M$, а глубина равна 2.
-  2) (**Шаг $d\\to d+1$.**) Пусть построена формула $P_{d,M}$ для $m_d:=g^{d-1}$.
-     Рассмотрим $m_{d+1}:=g\\cdot m_d=g^d$ переменных и разобьём их на $g$ блоков по $m_d$ переменных.
-     Для блока $j\\in[g]$ обозначим через $Q_j$ формулу, равную $P_{d,M}$, где переменные переименованы в переменные $j$‑го блока.
-     Тогда
-     $$\\mathrm{PARITY}_{m_{d+1}}(x)=\\mathrm{PARITY}_g\\bigl(Q_1(x),\\dots,Q_g(x)\\bigr).$$
-     Возьмём DNF $D_g$ для $\\mathrm{PARITY}_g$ из пункта (1) и подставим $Q_j$ вместо соответствующих переменных (и $\\neg Q_j$ вместо отрицаний),
-     получая формулу $P_{d+1,M}:=D_g[Q_1,\\dots,Q_g]$.
-     Тогда $\\mathrm{depth}(P_{d+1,M})\\le \\mathrm{depth}(D_g)+\\max_j\\mathrm{depth}(Q_j)\\le 2+2d=2(d+1)$, и
-     $$|P_{d+1,M}|\\le |D_g|\\cdot \\max_j |Q_j|\\le M\\cdot M^{O(d)}=M^{O(d+1)}.$$
-     Корректность следует из тождества выше.
-- `Toy‑тест:` при $M=n^C$ и $d=\\lfloor\\log n/\\log\\log n\\rfloor$ имеем $g=\\Theta(\\log n)$ и $m=g^{d-1}=\\exp(\\Theta(\\log n))=n^{\\Theta(1)}$, так что можно покрыть паритет на $\\Theta(n)$ переменных.
-- `Статус:` доказано (формализует, что в §16.122 “representation of partial results” действительно доступна при polynomial line‑size и глубине $\\Theta(\\log n/\\log\\log n)$).
+- `Утверждение:` Рассмотрим утверждение из §16.122: «формулы глубины $d$ размера $M$ могут представлять паритет на $m:=(\\log M)^{d-1}$ переменных».
+  1) Наивная конструкция через DNF‑разложение $\\mathrm{PARITY}_{\\lceil\\log_2 M\\rceil}$ и подстановку по глубине действительно даёт depth $O(d)$, но лишь размер $M^{\\Theta(d)}$,
+     поэтому **не** выводит polynomial‑size для $d=\\Theta(\\log n/\\log\\log n)$ при $M=\\mathrm{poly}(n)$ (получается quasi‑poly).
+  2) Сам «representation»‑факт в нужной (для Q39) форме **известен** и прямо сформулирован в Håstad–Risse (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, §1.2):
+     они утверждают, что при группировке по блокам размера $(\\log M)^{d-1}$ можно «write down formulas of depth $d$ and size $M$ that represent the parity and the negation of the parity».
+- `Доказательство/ссылка:`
+  1) (Почему DNF‑индукция не годится при растущей $d$.) Пусть $g:=\\lceil\\log_2 M\\rceil$ и $m:=g^{d-1}$.
+     База $d=2$: DNF для $\\mathrm{PARITY}_g$ имеет $2^{g-1}$ термов, т.е. размер $\\Theta(2^g\\cdot g)=\\Theta(M\\log M)$.
+     Шаг $d\\to d+1$: подстановка формулы размера $S_d$ в каждое вхождение переменной в этой DNF даёт
+     $$S_{d+1}=\\Theta(2^g\\cdot g\\cdot S_d)=\\Theta(M\\log M\\cdot S_d),$$
+     откуда $S_d=(M\\log M)^{\\Theta(d)}=M^{\\Theta(d)}$ (лог‑факторы поглощаются в $M^{o(d)}$).
+     При $M=n^C$ и $d=\\Theta(\\log n/\\log\\log n)$ это даёт $S_d=n^{\\Theta(\\log n/\\log\\log n)}$ (quasi‑poly), а не $n^{O(1)}$.
+  2) (Корректный источник representation.) Håstad–Risse, §1.2, абзац начиная с “Let us consider proofs that contain formulas of depth d …”:
+     “… divide the variables in to groups of size $(\\log M)^{d−1}$ and write down formulas of depth $d$ and size $M$ that represent the parity and the negation of the parity …”.
+- `Toy‑тест:` возьмём $M=n^{10}$ и $d=\\lfloor\\log n/\\log\\log n\\rfloor$. Тогда $m=(\\Theta(\\log n))^{\\Theta(\\log n/\\log\\log n)}=n^{\\Theta(1)}$,
+  и representation из Håstad–Risse допускает формулы размера $M=\\mathrm{poly}(n)$; но DNF‑индукция выше дала бы только quasi‑poly размер.
+- `Статус:` контрпример к прежнему выводу «DNF‑индукция ⇒ poly‑size при $d=\\Theta(\\log n/\\log\\log n)$»; representation‑лемма закрыта точной ссылкой (Håstad–Risse §1.2).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` связать это с Q39: узкое место — не представление $\\mathrm{PARITY}_m$, а выводимость XOR‑суммы представлений (лемма‑цель из §16.122).
+- `Следующий шаг:` теперь, когда representation опирается на источник, вернуть фокус на missing step из §16.122: найти/доказать (или барьерно опровергнуть) синтаксическую симуляцию одного шага $L_1=b_1,\\ L_2=b_2\\Rightarrow L_1\\oplus L_2=b_1\\oplus b_2$ в bounded‑depth Frege без экспоненциального blow‑up.
