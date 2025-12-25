@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S11-induce-trees-from-proof
-- `Do-not-repeat (next 2 runs):` Q43.S11-induce-trees-from-proof, Q43.S10-common-partial-tree-after-unfolding
-- `Last InfoGain:` 1
+- `LastStepID:` Q43.S12-corollary-thm43-flat-local-ef
+- `Do-not-repeat (next 2 runs):` Q43.S12-corollary-thm43-flat-local-ef, Q43.S11-induce-trees-from-proof
+- `Last InfoGain:` 2
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: вход в Lemma 4.5 = unfolding уникальных частей; дальше — corollary HR Thm. 4.3 с $t'=(2s+1)\\log M$.
+Q43: corollary HR Thm. 4.3 для flat local‑EF(s) (t'=(2s+1)\\log M); дальше — режимы tightness vs $2^{O(n)}$.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: вход в Lemma 4.5 = unfolding уникальных частей; дал
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Эквивалентность → Эквивалентность → Инвариант → Эквивалентность → Инвариант
+Последние: Эквивалентность → Инвариант → Эквивалентность → Инвариант → Трейд‑офф
