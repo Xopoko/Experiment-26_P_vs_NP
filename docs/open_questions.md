@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S18-polylog-s-critical-depth-exponent (см. `docs/research/16_tseitin.md` §16.180)
-  - `NextStepID:` Q43.S19-pin-down-constant-C
+  - `LastStepID:` Q43.S19-pin-down-constant-C (см. `docs/research/16_tseitin.md` §16.181)
+  - `NextStepID:` Q43.S20-bound-c1
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: при критической глубине $d=(\\kappa+o(1))\\log n/\\log\\log n$ и $s=(\\log n)^c$ показатель экспоненты становится $\\Omega(n^{1-\\kappa(C+1+c)-o(1)})$ (где $C$ — константа в polylog‑факторе $(\\log n)^C$); см. `docs/research/16_tseitin.md` §16.180. `InfoGain:` 1.
+  Прогресс: в HR’22 Theorem 4.3 polylog‑фактор $(\\log n)^{O(1)}$ можно считать равным $\\log^{c_1}n$, где $c_1$ — константа из multi‑switching lemma (HR’22 Lemma 4.4); значит в §16.180 можно брать $C=c_1$; см. `docs/research/16_tseitin.md` §16.181. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: извлечь/зафиксировать явную константу $C$ (в $(\\log n)^C$) из Proof of HR’22 Thm. 4.3, чтобы сравнивать пороги $\\kappa<1/(C+1+c)$.
+  Следующий шаг: попробовать извлечь явную численную оценку на $c_1$ из Proof of HR’22 Lemma 4.4 (Section 7), либо зафиксировать, что текст оставляет $c_1$ неявной константой.
 
 ## Завершённые (архив)
 

@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S18-polylog-s-critical-depth-exponent
-- `Do-not-repeat (next 2 runs):` Q43.S18-polylog-s-critical-depth-exponent, Q43.S17-max-s-critical-depth
+- `LastStepID:` Q43.S19-pin-down-constant-C
+- `Do-not-repeat (next 2 runs):` Q43.S19-pin-down-constant-C, Q43.S18-polylog-s-critical-depth-exponent
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: s=(log n)^c ⇒ exp n^{1-κ(C+1+c)}; C.
+Q43: C=c1 (Lemma 4.4); next: bound c1.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: s=(log n)^c ⇒ exp n^{1-κ(C+1+c)}; C.
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Трейд‑офф → Инвариант → Трейд‑офф → Трейд‑офф → Трейд‑офф
+Последние: Инвариант → Трейд‑офф → Трейд‑офф → Трейд‑офф → Эквивалентность
