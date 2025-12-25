@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S35-ell-vs-t-constraint
-- `Do-not-repeat (next 2 runs):` Q43.S35-ell-vs-t-constraint, Q43.S33-ell-admissibility-check
+- `LastStepID:` Q43.S36-round-count-from-depth
+- `Do-not-repeat (next 2 runs):` Q43.S36-round-count-from-depth, Q43.S35-ell-vs-t-constraint
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: toy shows round-count uses $M^{s/\\ell}$; likely need $\\ell\\le s$ or explicit $\\lceil s/\\ell\\rceil$; next: verify rounding/truncation in proof
+Q43: раунд добавляет ≥$\\ell$ свежих запросов ⇒ индексы ≤ $\\lceil s/\\ell\\rceil$; далее проверить bound через centers ($a$) и связь с $s$
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: toy shows round-count uses $M^{s/\\ell}$; likely need $\\ell\\le s$ or expl
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Эк→Тр→Тр→Сж
+Последние:Инв→Инв→Эк→Тр→Тр
