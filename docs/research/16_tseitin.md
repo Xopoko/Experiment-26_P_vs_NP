@@ -1802,3 +1802,32 @@
 - `Статус:` доказано (модель запросов к $p$ “сворачивается” в модель запросов к $x$ с мультипликативной потерей $O(s)$ на bounded‑degree графах).
 - `Барьер‑чек:` r — применимо (чисто синтаксическая симуляция, релятивизируется), NP — неприменимо (не «natural property»), alg — неприменимо (нет арифметизации).
 - `Следующий шаг:` применить это как технический лемматизатор при попытке перенести HR’22: разрешить в определении $t$‑evaluation запросы $p_i$ (для local‑EF(s)), затем заменить их на edge‑запросы и отследить, что все пороги в леммах “locally consistent/closure” сохраняются при $t\\mapsto O(s\\,t)$.
+
+### 16.159. Исследовательский шаг: черновик “HR‑evaluation для local‑EF(s)” через расширенную поддержку и $s$‑стоимость запросов
+
+- `Линза:` Инвариант (геометрическая поддержка = “видимая область”).
+- `Утверждение (черновик‑патч к HR’22, §2.4–2.7):` Пусть $X=\\{x_e\\}$ — edge‑переменные $\\mathrm{Tseitin}(G_n)$ на grid, и в доказательстве разрешены extension‑переменные $P=\\{p_i\\}$ с аксиомами
+  $$p_i\\leftrightarrow\\varphi_i(X),\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s,$$
+  где $\\mathrm{supp}(\\varphi)$ — множество вершин, инцидентных рёбрам, чьи переменные встречаются в $\\varphi$ (как в HR’22: $\\mathrm{supp}(x_{\\{u,v\\}})=\\{u,v\\}$).
+  Тогда естественное обобщение HR’22 Definition 2.2 / Cor. 2.7 такое:
+
+  1) (**Расширенная поддержка присваивания.**) Для частичного присваивания $\\alpha$ на $X\\cup P$ положим
+     $$\\mathrm{supp}_s(\\alpha):=\\mathrm{supp}(\\alpha\\!\upharpoonright_X)\\ \\cup\\ \\bigcup_{p_i\\in\\mathrm{dom}(\\alpha)}\\mathrm{supp}(\\varphi_i).$$
+
+  2) (**$s$‑локальная согласованность.**) $\\alpha$ называется $s$‑locally consistent, если при $U=\\mathrm{supp}_s(\\alpha)$ существует $\\beta$ на $X$, *complete on* $\\mathrm{closure}(U)$ (в смысле HR: присваивает все edge‑переменные, инцидентные $\\mathrm{closure}(U)$), такая что:
+     (i) $\\beta$ расширяет $\\alpha\\!\upharpoonright_X$; (ii) удовлетворяет всем parity‑constraints на $\\mathrm{closure}(U)$; (iii) для всех присвоенных $p_i$ выполнено $\\alpha(p_i)=\\varphi_i(\\beta)$.
+
+  3) (**Стоимость ветви/дерева.**) Для ветви $\\tau$ decision tree (на переменных $X\\cup P$) положим
+     $$\\mathrm{cost}_s(\\tau):=2\\cdot\\#(x\\text{‑запросов в }\\tau)+\\sum_{p_i\\in\\mathrm{dom}(\\tau)}|\\mathrm{supp}(\\varphi_i)|,$$
+     и $\\mathrm{cost}_s(T):=\\max_{\\tau\\in T}\\mathrm{cost}_s(\\tau)$, так что грубо $\\mathrm{cost}_s(T)\\le (s+2)\\,\\mathrm{depth}(T)$.
+
+  4) (**Ожидаемый аналог HR Cor. 2.7.**) Если $\\alpha$ $s$‑locally consistent и
+     $$|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2,$$
+     то “trimmed restriction” $T\\lceil\\alpha$ (как у HR, но с pairwise $s$‑local consistency) корректен и снова $s$‑locally consistent.
+
+  В таком виде можно попытаться перенести HR’22 Definition 2.11 (t‑evaluation) на local‑EF(s), при замене всех порогов вида
+  $|\\mathrm{supp}(\\alpha)|+2\\,\\mathrm{depth}(T)\\le n/2$ на $|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2$ (или грубее $t\\mapsto O(s\\,t)$).
+- `Toy‑тест:` если $p\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$, то запрос $p$ “стоит” 3 ребра/6 концов; это согласовано с §16.158 (запрос $p$ разворачивается в 3 edge‑запроса).
+- `Статус:` черновик (нужна аккуратная проверка: где именно в доказательствах HR’22 используется, что переменные *именно edges*, и что добавление запроса $p_i$ корректно “оплачивается” локальным witness на $\\mathrm{closure}(\\mathrm{supp}_s)$).
+- `Барьер‑чек:` r — применимо (вся схема support/closure/DT релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` для Q41: (a) выбрать точную модель local‑EF(s) (запрещаем $\\varphi_i(P)$ или считаем $\\mathrm{supp}(p_i)$ как поддержку полностью развёрнутой формулы), (b) формально доказать (или найти контрпример) пункт (4) как аналог Cor. 2.7, и только после этого пытаться переносить Lemma 2.13 (порог $t\\le n/16$ станет $t\\le \\Theta(n/s)$).
