@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑форме с $k=O(\\log n)$ (§16.144–§16.146). Барьер representability: для tree‑формул блок $\\le(\\Theta((\\log M)/(d-1)))^{d-1}$ (Rossman’16 + мост HR‑depth→De Morgan, §16.149–§16.150); HR‑блок $(\\log M)^{d-1}$ возможен лишь со sharing (схемы, §16.152), а sharing = EF/circuit‑Frege (§16.153). Стресс‑тест: EF даёт poly‑size refutation уже при $O(1)$‑глубине (§16.154), значит LB Håstad’20 принципиально про fan‑out 1. Дальше: локализовать в Håstad’20, где техника ломается при extension variables.
+Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑форме с $k=O(\\log n)$ (§16.144–§16.146). Барьер representability: tree‑формулы ограничены Rossman’16 ($\\le(\\Theta((\\log M)/(d-1)))^{d-1}$, §16.149–§16.150); HR‑блок $(\\log M)^{d-1}$ требует sharing ⇒ EF/circuit‑Frege (§16.152–§16.153), где уже есть $O(1)$‑depth poly‑refutation (§16.154). Локализация: Håstad‑техника uses $\\mathrm{supp}(\\alpha)\\subseteq V$ (variables=edges), и extension vars ломают инвариант “depth ⇒ малая поддержка” (§16.155). Дальше: определить “local‑EF” (support $\\le\\mathrm{polylog}(n)$) и проверить, сохраняется ли обход.
 
 ## Что уже сделано (не повторять)
 
@@ -33,4 +33,4 @@ Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑фо
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Ссылка/барьер → Эквивалентность → Уточнение формулировки → Трейд‑офф → Модельный стресс‑тест
+Последние: Эквивалентность → Уточнение формулировки → Трейд‑офф → Модельный стресс‑тест → Модельный стресс‑тест
