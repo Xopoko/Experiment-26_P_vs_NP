@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S31-critical-depth-kappa
-- `Do-not-repeat (next 2 runs):` Q43.S31-critical-depth-kappa, Q43.S30-log4-into-corollary
+- `LastStepID:` Q43.S32-m-factor-ell-constant
+- `Do-not-repeat (next 2 runs):` Q43.S32-m-factor-ell-constant, Q43.S31-critical-depth-kappa
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: critical-depth $\\kappa$ threshold computed; next: account for $M^{s/\\ell}$ with $\\ell=t'$
+Q43: $M^{s/\\ell}$ constant for $\\ell=t'$; next: check admissibility of $\\ell=t'$ in Lemma 4.4 (“$\\ell$‑common” limits)
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: critical-depth $\\kappa$ threshold computed; next: account for $M^{s/\\ell}
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Тр→Сж→Тр→Тр→Ин
+Последние:Тр→Тр→Сж→Тр→Тр
