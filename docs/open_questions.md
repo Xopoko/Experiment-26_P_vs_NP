@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S16-subexp-s-regime (см. `docs/research/16_tseitin.md` §16.178)
-  - `NextStepID:` Q43.S17-max-s-critical-depth
+  - `LastStepID:` Q43.S17-max-s-critical-depth (см. `docs/research/16_tseitin.md` §16.179)
+  - `NextStepID:` Q43.S18-polylog-s-critical-depth-exponent
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: при $s=\\exp((\\log n)^\\alpha)$ и $M=\\mathrm{poly}(n)$ показатель экспоненты равен $\\Omega(n\\exp(-d(\\log n)^\\alpha)/\\log^{O(d)}n)$; для $0<\\alpha<1$ получается depth‑порог $d\\approx\\log^{1-\\alpha}n$, а при $\\alpha>1$ bound тривиализируется уже на глубине 1. См. `docs/research/16_tseitin.md` §16.178. `InfoGain:` 1.
+  Прогресс: при $d=\\Theta(\\log n/\\log\\log n)$ “почти tightness” $N\\ge\\exp(n^{1-o(1)})$ эквивалентно $\\log(2s+1)=o(\\log\\log n)$, то есть $s=(\\log n)^{o(1)}$; см. `docs/research/16_tseitin.md` §16.179. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: при $d=\\Theta(\\log n/\\log\\log n)$ выписать максимально допустимый рост $s(n)$ из условия $d\\log(2s+1)=o(\\log n)$ (граница нетривиальности corollary).
+  Следующий шаг: при $d=\\Theta(\\log n/\\log\\log n)$ и $s=(\\log n)^c$ оценить показатель экспоненты в §16.174 (какой $n^{1-\\Theta(1)}$ получается вместо $n^{1-o(1)}$).
 
 ## Завершённые (архив)
 
