@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap для polynomial‑size: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20), а GIRS’19 Claim 28 сертифицирует polynomial‑size лишь при $d=\\Omega(\\log N)$ (§16.121). Håstad–Risse §1.2: parity/XOR можно представлять depth‑$d$ формулами размера $M$ на блоках $(\\log M)^{d-1}$, но шаг Gaussian elimination в bounded‑depth Frege неизвестен (§16.122). §16.124: на пороговой глубине $d\\approx\\log n/\\log\\log n$ и при $M=\\mathrm{poly}(n)$ representation‑overhead становится $O(1)$, так что узкое место — синтаксическое правило XOR‑сложения $L_1,L_2\\Rightarrow L_1\\oplus L_2$ без blow‑up.
+Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap для polynomial‑size: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20), а GIRS’19 Claim 28 сертифицирует polynomial‑size лишь при $d=\\Omega(\\log N)$ (§16.121). Håstad–Risse §1.2 выделяют missing step: bounded‑depth Frege не умеет (известно) синтаксически симулировать Gaussian elimination; §16.124–§16.125 показывают, что при $d\\approx\\log n/\\log\\log n$ representation XOR‑уравнений ширины $O(n)$ становится $O(1)$, и Q39 сводится к poly‑size depth‑$d$ выводу шага $E(S_1,b_1),E(S_2,b_2)\\vdash E(S_1\\triangle S_2,b_1\\oplus b_2)$.
 
 ## Что уже сделано (не повторять)
 

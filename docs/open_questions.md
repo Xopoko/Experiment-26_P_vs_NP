@@ -18,6 +18,7 @@
   представляющие $\\mathrm{PARITY}$ и $\\neg\\mathrm{PARITY}$ на блоке размера $(\\log M)^{d-1}$; при этом §16.123 отмечает, что наивная DNF‑индукция дала бы лишь
   $M^{\\Theta(d)}$ (quasi‑poly при $d=\\Theta(\\log n/\\log\\log n)$) и поэтому не годится как обоснование в нужном режиме.
   §16.124 квантифицирует, что на пороговой глубине $d\\approx\\log n/\\log\\log n$ и при $M=\\mathrm{poly}(n)$ имеем $(\\log M)^{d-1}\\ge n$, так что XOR‑уравнения ширины $O(n)$ попадают в один блок и representation‑overhead становится константным; Q39 сводится к «одному шагу» XOR‑сложения в bounded‑depth Frege.
+  §16.125 формализует редукцию: если bounded‑depth Frege умеет poly‑size симулировать один шаг $E(S_1,b_1),E(S_2,b_2)\\vdash E(S_1\\triangle S_2,b_1\\oplus b_2)$ на уравнениях ширины $O(n)$, то из стратегии Håstad–Risse §1.2 получается polynomial‑size refutation Tseitin(Grid).
   Следующий шаг: найти/доказать/барьерно опровергнуть p‑выводимость правила $L_1=b_1,\\ L_2=b_2\\Rightarrow L_1\\oplus L_2=b_1\\oplus b_2$ в bounded‑depth Frege при $d=\\Theta(\\log n/\\log\\log n)$.
 
 ## Завершённые (архив)
