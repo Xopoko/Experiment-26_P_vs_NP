@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S29-propagate-c1-back-to-4
-- `Do-not-repeat (next 2 runs):` Q43.S29-propagate-c1-back-to-4, Q43.S28-centers-already-in-b
-- `Last InfoGain:` 2
+- `LastStepID:` Q43.S30-log4-into-corollary
+- `Do-not-repeat (next 2 runs):` Q43.S30-log4-into-corollary, Q43.S29-propagate-c1-back-to-4
+- `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43:c1=4; next: plug-into-corollary
+Q43: explicit corollary with $\\log^4 n$; next: critical-depth $\\kappa$ threshold
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43:c1=4; next: plug-into-corollary
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Тр→Тр→Ин→Сж→Сж
+Последние:Сж→Тр→Тр→Ин→Сж

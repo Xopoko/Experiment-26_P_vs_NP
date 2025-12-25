@@ -20,13 +20,14 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S29-propagate-c1-back-to-4 (см. `docs/research/16_tseitin.md` §16.196)
-  - `NextStepID:` Q43.S30-plug-c1-4-into-corollary
+  - `LastStepID:` Q43.S30-log4-into-corollary (см. `docs/research/16_tseitin.md` §16.197)
+  - `NextStepID:` Q43.S31-critical-depth-kappa
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
+  (v) явный corollary: с $c_1=4$ получаем $(\\log n)^4$ и зависимость от $M$ только через $t'=(2s+1)\\log M$ и $M^{s/\\ell}$ (§16.197). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: в corollary‑оценках для Q43 заменить “$(\\log n)^C$ из Thm. 4.3” на явное $\\log^4 n$, оставив $\\log M$ только в параметре $t$ (и факторе $M^{s/\\ell}$), и перепроверить порог нетривиальности при $d=\\Theta(\\log n/\\log\\log n)$.
+  Следующий шаг: при $M=\\mathrm{poly}(n)$ и $s=(\\log n)^c$ пересчитать показатель при критической глубине $d=(\\kappa+o(1))\\log n/\\log\\log n$ с явной константой $4$ (оценить порог $\\kappa$).
 
 ## Завершённые (архив)
 
