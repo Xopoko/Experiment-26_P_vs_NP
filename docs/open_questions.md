@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S21-cite-log4-and-Mfactor (см. `docs/research/16_tseitin.md` §16.188)
-  - `NextStepID:` Q43.S22-check-c1-vs-log4
+  - `LastStepID:` Q43.S22-check-c1-vs-log4 (см. `docs/research/16_tseitin.md` §16.189)
+  - `NextStepID:` Q43.S23-bound-linear-centers
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: зафиксировано, что в HR’22 single switching‑лемма (Lemma 4.2) уже имеет *явный* polylog‑показатель 4 и exponent $s/64$, а в proof multi‑switching (Lemma 4.4, §7.3) выделено, что единственный “не‑absorbed” вклад — индекс $j\\in[M]$, порождающий множитель $M^{s/\\ell}$; значит неизвестность по $c_1$ в Lemma 4.4 сидит только в местах “absorbed by $c_1,c_2$” (напр. идентификация доп. chosen centers). См. `docs/research/16_tseitin.md` §16.188. `InfoGain:` 1.
+  Прогресс: toy‑вычисление показывает, что доп. “identity of additional chosen centers” в proof HR’22 Lemma 4.4 даёт множитель $\\Delta^{O(s)}=(n/n')^{O(s)}$, то есть влияет только на константу $c_2$ в хвосте, но не порождает нового polylog‑показателя сверх $\\log^4$ из Lemma 4.2. См. `docs/research/16_tseitin.md` §16.189. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: в proof HR’22 Lemma 4.4 проверить, что “identity of additional chosen centers” реально укладывается в прежний $b\\log\\Delta$‑терм (как в Lemma 6.9) и не требует увеличивать показатель у $\\log n$ сверх 4; иначе выписать явный upper bound на $c_1$ (пусть и грубый).
+  Следующий шаг: оценить константу в “linear in $s$” (число дополнительных chosen centers, которые нужно идентифицировать) из конструкции common partial decision tree (HR’22 §7.2), чтобы получить численный $c_2$ (пусть грубый).
 
 ## Завершённые (архив)
 

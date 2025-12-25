@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S21-cite-log4-and-Mfactor
-- `Do-not-repeat (next 2 runs):` Q43.S21-cite-log4-and-Mfactor, Q39.S6-block-carcas-or-impossibility
+- `LastStepID:` Q43.S22-check-c1-vs-log4
+- `Do-not-repeat (next 2 runs):` Q43.S22-check-c1-vs-log4, Q43.S21-cite-log4-and-Mfactor
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43:c1; next:log4
+Q43:c2; next:centers
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43:c1; next:log4
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Тр→Эк→Ст→Тр→Эк
+Последние:Эк→Ст→Тр→Эк→Тр
