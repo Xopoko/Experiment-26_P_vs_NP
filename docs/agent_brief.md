@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39: Tseitin(Grid) depth‑gap. Для tree‑строк representability ограничена Rossman’16, а sharing переводит в EF/circuit‑Frege с $O(1)$‑depth poly‑refutation (§16.149–§16.154). Промежуточная модель: local‑EF(s) (§16.156); DT по $(x,p)$ сводится к edge‑DT глубины $O(s\\,t)$ и потому “видит” лишь $O(s\\,t)$ вершин (§16.157–§16.158). Дальше: проверить HR’22 t‑evaluation/locally‑consistent при замене $t\\mapsto O(s\\,t)$.
+Q40→Q41: сначала зафиксировать точной цитатой, что HR’22 действительно считают «Gauss‑step в bounded‑depth Frege» открытым (§16.122), затем (если да) тестировать перенос HR‑t‑evaluation на local‑EF(s) (§16.156–§16.158) как промежуточную модель.
 
 ## Что уже сделано (не повторять)
 
@@ -16,7 +16,8 @@ Q39: Tseitin(Grid) depth‑gap. Для tree‑строк representability огр
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (обновлять там же, но без раздувания).
+- Q40 из `docs/open_questions.md` (зафиксировать цитату/статус open и не зацикливаться).
+- Q41 из `docs/open_questions.md` (local‑EF(s): перенос t‑evaluation/closure при $t\\mapsto O(s\\,t)$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
