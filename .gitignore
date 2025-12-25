@@ -4,3 +4,4 @@ __pycache__/
 *.ipynb
 resources/text_cache/
 log.txt
+agent/logs/
