@@ -20,6 +20,7 @@
   §16.124 квантифицирует, что на пороговой глубине $d\\approx\\log n/\\log\\log n$ и при $M=\\mathrm{poly}(n)$ имеем $(\\log M)^{d-1}\\ge n$, так что XOR‑уравнения ширины $O(n)$ попадают в один блок и representation‑overhead становится константным; Q39 сводится к «одному шагу» XOR‑сложения в bounded‑depth Frege.
   §16.125 формализует редукцию: если bounded‑depth Frege умеет poly‑size симулировать один шаг $E(S_1,b_1),E(S_2,b_2)\\vdash E(S_1\\triangle S_2,b_1\\oplus b_2)$ на уравнениях ширины $O(n)$, то из стратегии Håstad–Risse §1.2 получается polynomial‑size refutation Tseitin(Grid).
   §16.126 показывает, что этот «один XOR‑шаг» эквивалентен refutation’у частного Tseitin‑противоречия на 3‑вершинном (мульти)графе.
+  §16.127 фиксирует «локальный барьер»: в EF XOR‑сложение тривиально (Gaussian elimination), но универсальная балансировка даёт для Frege лишь глубину $O(\\log n)$, не $O(\\log n/\\log\\log n)$.
   Следующий шаг: найти/доказать/барьерно опровергнуть polynomial‑size bounded‑depth Frege refutation для этой 3‑вершинной Tseitin‑семьи при глубине $d=\\Theta(\\log n/\\log\\log n)$ (т.е. синтаксическое сложение двух XOR‑уравнений ширины $\\Theta(n)$).
 
 ## Завершённые (архив)

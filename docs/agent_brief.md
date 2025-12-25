@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20), а GIRS’19 Claim 28 даёт poly‑size лишь при $d=\\Omega(\\log N)$ (§16.121). Håstad–Risse §1.2: representation XOR‑уравнений есть, но синтаксический Gaussian elimination шаг в bounded‑depth Frege неизвестен; §16.124–§16.126: при $d\\approx\\log n/\\log\\log n$ representation‑overhead $O(1)$, и узкое место эквивалентно poly‑size bounded‑depth refutation 3‑вершинного Tseitin (один XOR‑add шаг).
+Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20), а GIRS’19 Claim 28 даёт poly‑size лишь при $d=\\Omega(\\log N)$ (§16.121). §16.124–§16.126: при $d\\approx\\log n/\\log\\log n$ representation‑overhead $O(1)$, и узкое место эквивалентно poly‑size depth‑$d$ refutation 3‑вершинного Tseitin (один XOR‑add шаг); §16.127: в EF это тривиально (Gauss), но стандартная балансировка даёт для Frege лишь $O(\\log n)$ глубины.
 
 ## Что уже сделано (не повторять)
 
