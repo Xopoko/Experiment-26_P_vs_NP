@@ -5,6 +5,7 @@ import csv
 import json
 import runpy
 import re
+import subprocess
 import sys
 import traceback
 from pathlib import Path
@@ -120,6 +121,51 @@ def _verify_download_links(*, manifest_path: Path, downloads_dir: Path) -> None:
     print(f"OK: verified {len(md_paths)} markdown files resource links against {manifest_path}")
 
 
+def _verify_download_dir_hygiene(*, manifest_path: Path, downloads_dir: Path) -> None:
+    manifest_ids = _load_manifest_ids(manifest_path)
+
+    stray_files: list[str] = []
+    for p in sorted(downloads_dir.iterdir()):
+        if not p.is_file():
+            continue
+        if p.suffix.lower() not in {".pdf", ".html"}:
+            continue
+        if p.stem not in manifest_ids:
+            stray_files.append(str(p))
+
+    untracked: list[str] = []
+    try:
+        res = subprocess.run(
+            ["git", "ls-files", "--others", "--exclude-standard", "--", str(downloads_dir)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except FileNotFoundError:
+        res = None
+
+    if res and res.returncode == 0:
+        for raw in res.stdout.splitlines():
+            rel = raw.strip()
+            if not rel:
+                continue
+            path = Path(rel)
+            if path.suffix.lower() in {".pdf", ".html"}:
+                untracked.append(rel)
+
+    if stray_files or untracked:
+        msg = ["Download directory hygiene check failed:"]
+        if stray_files:
+            msg.append(f"Files in {downloads_dir} missing from {manifest_path}:")
+            msg.extend(f"- {x}" for x in stray_files)
+        if untracked:
+            msg.append(f"Untracked files in {downloads_dir} (add to git or remove):")
+            msg.extend(f"- {x}" for x in untracked)
+        raise AssertionError("\n".join(msg))
+
+    print(f"OK: verified downloads hygiene in {downloads_dir}")
+
+
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(
         description="Run project checks from a .py file or execute code cells from a legacy .ipynb (no Jupyter required)."
@@ -156,6 +202,10 @@ def main(argv: list[str]) -> int:
                 manifest_path=Path("resources/manifest.tsv"),
                 downloads_dir=Path("resources/downloads"),
             )
+            _verify_download_dir_hygiene(
+                manifest_path=Path("resources/manifest.tsv"),
+                downloads_dir=Path("resources/downloads"),
+            )
             _verify_agent_brief(
                 path=Path("docs/agent_brief.md"),
                 max_lines=200,
@@ -187,6 +237,10 @@ def main(argv: list[str]) -> int:
     print(f"OK: executed {len(code_cells)} code cells from {args.path}")
     if not args.skip_resource_checks:
         _verify_download_links(
+            manifest_path=Path("resources/manifest.tsv"),
+            downloads_dir=Path("resources/downloads"),
+        )
+        _verify_download_dir_hygiene(
             manifest_path=Path("resources/manifest.tsv"),
             downloads_dir=Path("resources/downloads"),
         )

@@ -15,6 +15,10 @@ This runs:
 - executable sanity checks in `code/verify_checks.py`
 - consistency checks for `docs/` resource links vs `resources/manifest.tsv` and `resources/downloads/`
 
+## Agent prompt
+
+- Canonical 1-sentence prompt for the infinite agent runner: `scripts/agent_prompt.txt`
+
 ## Download resources
 
 ```bash
