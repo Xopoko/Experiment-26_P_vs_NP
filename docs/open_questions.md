@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S19-pin-down-constant-C (см. `docs/research/16_tseitin.md` §16.181)
-  - `NextStepID:` Q43.S20-bound-c1
+  - `LastStepID:` Q43.S20-bound-c1 (см. `docs/research/16_tseitin.md` §16.182)
+  - `NextStepID:` Q43.S21-track-constants-lemma44
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: в HR’22 Theorem 4.3 polylog‑фактор $(\\log n)^{O(1)}$ можно считать равным $\\log^{c_1}n$, где $c_1$ — константа из multi‑switching lemma (HR’22 Lemma 4.4); значит в §16.180 можно брать $C=c_1$; см. `docs/research/16_tseitin.md` §16.181. `InfoGain:` 1.
+  Прогресс: проверено, что в HR’22 Lemma 4.4 показатель $c_1$ (в $\\log^{c_1}n$) не фиксируется явно: в proof (Section 7.3) дополнительные издержки “absorbed by the constants $c_1$ and $c_2$”, т.е. численного $c_1$ из текста не извлечь без трекинга констант; см. `docs/research/16_tseitin.md` §16.182. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: попробовать извлечь явную численную оценку на $c_1$ из Proof of HR’22 Lemma 4.4 (Section 7), либо зафиксировать, что текст оставляет $c_1$ неявной константой.
+  Следующий шаг: перепройти proof HR’22 Lemma 4.4 с трекингом констант и получить явный upper bound на $c_1$ (или вывести явное “$c_1=O(1)$ с конкретным значением” из другого источника).
 
 ## Завершённые (архив)
 

@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S19-pin-down-constant-C
-- `Do-not-repeat (next 2 runs):` Q43.S19-pin-down-constant-C, Q43.S18-polylog-s-critical-depth-exponent
+- `LastStepID:` Q43.S20-bound-c1
+- `Do-not-repeat (next 2 runs):` Q43.S20-bound-c1, Q43.S19-pin-down-constant-C
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: C=c1 (Lemma 4.4); next: bound c1.
+Q43: $c_1$ неявна; next: track.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: C=c1 (Lemma 4.4); next: bound c1.
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Инвариант → Трейд‑офф → Трейд‑офф → Трейд‑офф → Эквивалентность
+Последние: Трейд‑офф → Трейд‑офф → Трейд‑офф → Эквивалентность → Сжатие/канонизация
