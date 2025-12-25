@@ -2088,16 +2088,18 @@ $\ge 2/3-1/10>1/2$, а при $x\notin L$ среднее $\le 1/3+1/10<1/2$.
   размера $\le 2^{\mathrm{poly}(\log S)}$ (Galesi–Itsykson–Riazanov–Sofronova 2019, Cor. 34,
   `../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`).
 - `Доказательство (эскиз из §5 той же работы):` там используется (i) верхняя оценка на tree‑like Resolution через ширину:
-  $\mathrm{size}_{\mathrm{TL\text{-}Res}}(\mathrm{Tseitin}(G,f))\le n^{O(w(G))}=2^{O(\mathrm{tw}(G)\,\Delta(G)\,\log n)}$
-  (см. обсуждение перед Cor. 34); (ii) нижняя оценка из главной теоремы для bounded‑depth Frege: $S\ge 2^{\mathrm{tw}(G)^{\varepsilon}}$
+  по §16.99 (Beame–Beck–Impagliazzo 2016, Lemma 61) имеем $\mathrm{size}_{\mathrm{TL\text{-}Res}}\le n^{O(\mathrm{cw}(G))}$;
+  по §16.100–16.101 (и определению $w(G):=W(T(G,\\varphi)\\vdash\\bot)-1$) получаем $\mathrm{cw}(G)\le w(G)+2$, значит
+  $\mathrm{size}_{\mathrm{TL\text{-}Res}}(T(G,\\varphi))\le n^{O(w(G))}=2^{O(\mathrm{tw}(G)\,\Delta(G)\,\log n)}$
+  (Harvey–Wood 2014, (2); см. §16.102); (ii) нижняя оценка из главной теоремы для bounded‑depth Frege: $S\ge 2^{\mathrm{tw}(G)^{\varepsilon}}$
   для некоторой константы $\varepsilon>0$ (глубина фиксирована); (iii) тривиально $S\ge|\mathrm{Tseitin}(G,f)|\ge 2^{\Delta(G)-1}$ и $S\ge n$.
   Отсюда $\mathrm{tw}(G)\le (\log S)^{1/\varepsilon}$, $\Delta(G)\le O(\log S)$ и $\log n\le O(\log S)$, и подстановка в (i)
   даёт $2^{O((\log S)^{1/\varepsilon+2})}=2^{\mathrm{poly}(\log S)}$.
 - `Toy‑тест:` если $S=n^{O(1)}$, то получаем tree‑like Resolution размера $\le 2^{\mathrm{poly}(\log n)}=n^{\mathrm{polylog}\,n}$ (quasi‑poly).
 - `Статус:` известный факт (точная формулировка + минимальный вывод «откуда берётся» $2^{\mathrm{poly}(\log S)}$).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` внешний факт для tree‑like upper bound фиксирован в §16.99 (Beame–Beck–Impagliazzo 2016, Lemma 61);
-  осталось согласовать/зафиксировать параметры $w(G)$ в цепочке Cor. 34 (см. §16.100–16.101 и Q20).
+- `Следующий шаг:` при необходимости перенести цепочку §16.99–16.102 (определение $w(G)$ и $n^{O(w(G))}$) в основной текст
+  рядом с формулировкой Cor. 34, чтобы не ссылаться на «см. обсуждение».
 
 ### 16.99. Исследовательский шаг: tree‑like Resolution‑upper bound для Tseitin через carving width (Beame–Beck–Impagliazzo 2016)
 
@@ -2159,8 +2161,90 @@ $\ge 2/3-1/10>1/2$, а при $x\notin L$ среднее $\le 1/3+1/10<1/2$.
   Для цикла $C_n$: $\\Delta=2$ и $L(C_n)=C_n$ с $\\mathrm{tw}=2$, поэтому $W=2$ (и $w=1$).
 - `Статус:` известный факт (точная ссылка; закрывает Q19).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` использовать эту формулу, чтобы убрать «фольклорность» $n^{O(w(G))}$ в §16.98/Cor. 34 и при необходимости
-  привести $n^{O(w(G))}$ к $2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}$ через оценки на $\\mathrm{tw}(L(G))$ (Harvey–Wood 2018; см. GIRS’19 Cor. 33).
+- `Следующий шаг:` сопоставить эту treewidth‑формулу с альтернативной параметризацией Tseitin‑width через branch‑width
+  из Alekhnovich–Razborov (2011) (возможная замена $\\mathrm{tw}(L(G))$ на эквивалентную «ширину»).
+
+### 16.102. Исследовательский шаг: $n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}$ (через оценки на $\\mathrm{tw}(L(G))$)
+
+- `Линза:` Трейд‑офф.
+- `Утверждение:` Пусть $G$ — связный граф на $n$ вершинах и $\\varphi$ — нечётная разметка, так что Tseitin‑CNF $T(G,\\varphi)$ невыполнима.
+  Обозначим $w(G):=W(T(G,\\varphi)\\vdash\\bot)-1$. Тогда
+  $$n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}.$$
+- `Доказательство:` По §16.101 имеем $w(G)+1=\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}$.
+  По Harvey–Wood (2014), неравенство (2), $\\mathrm{tw}(L(G))\\le (\\mathrm{tw}(G)+1)\\Delta(G)-1$
+  (`../resources/downloads/harvey_wood_2014_treewidth_line_graphs.pdf`).
+  Следовательно $w(G)=O(\\mathrm{tw}(G)\\,\\Delta(G))$ и потому
+  $$n^{O(w(G))}=2^{O(w(G)\\log n)}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}.$$
+- `Toy‑тест:` для звезды $K_{1,n}$: $\\mathrm{tw}(G)=1$, $\\Delta(G)=n$, и формула даёт $2^{O(n\\log n)}$, что согласуется с $n^{O(w)}$ при $w=n-1$ (16.101).
+- `Статус:` доказано (вывод из известных фактов).
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` обновить формулировку в §16.98/Cor. 34, чтобы $2^{O(\\mathrm{tw}(G)\\Delta(G)\\log n)}$ появлялось с явной ссылкой (закрыть Q20).
+
+### 16.103. Исследовательский шаг: Tseitin‑width через branch‑width гиперграфа (Alekhnovich–Razborov 2011)
+
+- `Линза:` Эквивалентность.
+- `Утверждение:` Для любого связного графа $G$ и нечётной разметки $\sigma$ (так что Tseitin‑CNF $T(G,\sigma)$ невыполнима)
+  branch‑width $\\mathrm{wb}(T(G,\\sigma))$ её «подлежащего гиперграфа» $H_{T(G,\\sigma)}$ удовлетворяет
+  $$\\mathrm{wb}(T(G,\\sigma))=\\Theta\\bigl(W(T(G,\\sigma)\\vdash\\bot)\\bigr),$$
+  где $W(F\\vdash\\bot)$ — минимальная resolution‑width (Alekhnovich–Razborov 2011, Thm. 2.12,
+  `../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`).
+  При этом $H_{T(G,\\sigma)}$ совпадает с двойственным гиперграфом $G^*$ (с повторениями гиперрёбер), см. Remark 2.11 там же.
+  В частности, вместе с точной формулой §16.101 получаем сравнение
+  $$\\mathrm{wb}(T(G,\\sigma))=\\Theta\\bigl(\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}\\bigr).$$
+- `Toy‑тест:` для $K_{1,n}$ имеем $W=n$ (16.101) и $\\mathrm{wb}=\\Theta(n)$ по Thm. 2.12; для $C_n$ имеем $W=2$ и $\\mathrm{wb}=\\Theta(1)$.
+- `Статус:` известный факт (точная ссылка; закрывает Q21).
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` если нужно использовать без $\\Theta(\\cdot)$, извлечь из доказательства Thm. 2.12 явные константы в обе стороны (см. Q22).
+
+### 16.104. Исследовательский шаг: явные константы в $\\mathrm{wb}(T(G,\\sigma))=\\Theta(W(T(G,\\sigma)\\vdash\\bot))$
+
+- `Линза:` Эквивалентность.
+- `Утверждение:` Пусть $G$ — связный граф и $T(G,\\sigma)$ — соответствующая невыполнимая Tseitin‑CNF. Обозначим
+  $$W:=W(T(G,\\sigma)\\vdash\\bot),\\qquad B:=\\mathrm{wb}(T(G,\\sigma)),$$
+  где $W$ — минимальная resolution‑width, $B$ — branch‑width подлежащего гиперграфа (AR’11 Remark 2.11). Тогда выполнены явные неравенства
+  $$\\frac{1}{8}B\\ \\le\\ W\\ \\le\\ 2B.$$
+- `Доказательство (из AR’11, §4):`
+  1) (Gaussian width) Пусть $w_g(G,\\sigma)$ — минимальная ширина Gaussian‑рефутации (Def. 4.2). Тогда по Prop. 4.3
+     $$\\tfrac12 W\\le w_g(G,\\sigma)\\le W.$$
+  2) (Branch‑width vs Gaussian width) В доказательстве Lemma 4.4 показано, что $B\\ge w_g(G,\\sigma)$ (tree‑like restriction),
+     а «алгоритм Figure 3.1 + obstacle‑аргумент» даёт $B\\le 8\\,w_g(G,\\sigma)$ (повторяется оценка из доказательства Lemma 3.1).
+     Следовательно $w_g(G,\\sigma)\\le B\\le 8w_g(G,\\sigma)$.
+  3) Комбинируя 1)–2), получаем $W\\le 2w_g\\le 2B$ и $B\\le 8w_g\\le 8W$, т.е. $B/8\\le W\\le 2B$.
+  Ссылки: `../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`.
+- `Toy‑тест:` для $K_{1,n}$ (16.101) $W=n$ и $B\\ge r(H)=n$, поэтому $B/8\\le W\\le 2B$ выполняется; для $C_n$ имеем $W=2$ и $B=\\Theta(1)$.
+- `Статус:` доказано (из явных констант в AR’11).
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` если хочется убрать константу 8, проверить, можно ли в Lemma 4.4 получить $B\\le c\\,w_g$ с меньшим $c$ (или равенство) для $G^*$.
+
+### 16.105. Исследовательский шаг: $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$ (branch‑width двойственного гиперграфа = carving width)
+
+- `Линза:` Эквивалентность.
+- `Утверждение:` Пусть $G=(V,E)$ — связный граф, а $G^*$ — его двойственный гиперграф с множеством вершин $E$ и гиперрёбрами
+  $E(v)=\\{e\\in E: e\\text{ инцидентно }v\\}$ для $v\\in V$. Тогда
+  $$\\mathrm{wb}(G^*)=\\mathrm{cw}(G),$$
+  где $\\mathrm{wb}$ — branch‑width гиперграфа (AR’11, Def. 2.1), а $\\mathrm{cw}$ — carving width графа $G$ (как в §16.99–16.100).
+- `Доказательство:` В branch‑decomposition гиперграфа $G^*$ листья соответствуют гиперрёбрам $E(v)$, то есть вершинам $v\\in V$.
+  Пусть $(T,\\theta)$ — branch‑decomposition $G^*$. Определим разметку листьев $\\chi: \\mathrm{Leaves}(T)\\to V$ как $\\chi(\\theta(E(v)))=v$.
+  Рассмотрим любой ненулевой узел $t$ дерева (т.е. $t\\ne\\mathrm{root}$) и пусть $S_t\\subseteq V$ — множество вершин, чьи листья лежат в поддереве $t$.
+  Тогда по определению AR’11 (Def. 2.1) имеем
+  $$\\mathrm{Cut}(t)=\\Bigl(\\bigcup_{v\\in S_t}E(v)\\Bigr)\\cap\\Bigl(\\bigcup_{v\\notin S_t}E(v)\\Bigr)=\\delta_G(S_t),$$
+  то есть множество рёбер графа $G$, пересекающих разрез $S_t\\sqcup(V\\setminus S_t)$.
+  Поэтому порядок узла $t$ равен $|\\delta_G(S_t)|$.
+  Замечая, что каждому узлу $t\\ne\\mathrm{root}$ соответствует ребро $t\\text{--parent}(t)$, получаем carving‑декомпозицию $G$ на том же дереве $T$
+  (игнорируя ориентацию): ширина разреза на ребре $t\\text{--parent}(t)$ равна $|\\delta_G(S_t)|=|\\mathrm{Cut}(t)|$.
+  Отсюда $\\mathrm{cw}(G)\\le \\mathrm{wb}(G^*)$.
+
+  В обратную сторону: из любой carving‑декомпозиции $(T,\\chi)$ графа $G$ (листья помечены вершинами) строим branch‑decomposition $G^*$,
+  положив $\\theta(E(v)):=\\chi^{-1}(v)$. Для узла $t\\ne\\mathrm{root}$ множество $S_t$ листьев в поддереве снова задаёт разрез вершин,
+  и та же формула показывает $\\mathrm{Cut}(t)=\\delta_G(S_t)$. Значит ширины совпадают на каждом соответствующем разрезе, и
+  $\\mathrm{wb}(G^*)\\le \\mathrm{cw}(G)$.
+  Совместно: $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$.
+- `Toy‑тест:` для звезды $K_{1,n}$: $\\mathrm{cw}(K_{1,n})=n$ (любой разрез, отделяющий центр от листа, режет $n$ рёбер) и $G^*$ имеет гиперрёбра
+  размеров $n$ и $1$, так что $\\mathrm{wb}(G^*)=n$; для цикла $C_n$: $\\mathrm{cw}(C_n)=2$ и $\\mathrm{wb}(C_n^*)=2$.
+- `Статус:` доказано (закрывает Q23).
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` использовать $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$, чтобы переписать AR‑параметры для Tseitin (Remark 2.11) напрямую через carving width,
+  и сравнить с treewidth‑формулой §16.101.
 
 ### 16.60. Исследовательский шаг: степень $P_\varphi$ полиномиальна
 

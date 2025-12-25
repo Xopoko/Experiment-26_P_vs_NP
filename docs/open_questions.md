@@ -5,13 +5,30 @@
 
 ## Активные
 
-- [ ] **Q20 (согласовать использование $w(G)$ в Cor. 34 / §16.98):**
-  теперь, когда первоисточник для $w(G)=\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}-1$ зафиксирован (16.101),
-  привести в §16.98 явное определение $w(G)=W(T(G,\\varphi)\\vdash\\bot)-1$ и аккуратно вывести форму
-  $n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}$ через оценки на $\\mathrm{tw}(L(G))$ (Harvey–Wood 2018, как в GIRS’19 Cor. 33).
+- [ ] **Q24 (повторы гиперрёбер vs $\\mathrm{wb}$ в AR’11 Remark 2.11):**
+  AR’11 утверждают, что $H_{T(G,\\sigma)}$ — это $G^*$ с повторениями гиперрёбер (и что повторы «не меняют» $\\mathrm{wb}$).
+  Следующий шаг: проверить это на уровне их Def. 2.1 и либо дать короткое доказательство «повторы не меняют $\\mathrm{wb}$»,
+  либо уточнить, в каком смысле $\\mathrm{wb}$ берётся (set vs multiset) и поправить цепочку §16.103–16.104 при необходимости.
 
 ## Завершённые (архив)
 
+- [x] **Q23 (branch‑width $G^*$ vs carving width $\\mathrm{cw}(G)$):**
+  закрыто: для двойственного гиперграфа $G^*$ (гиперрёбра — звёзды $E(v)$) branch‑decomposition по гиперрёбрам эквивалентна carving‑декомпозиции $G$ по вершинам,
+  и $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$; см. `docs/research/16_research_steps.md` §16.105.
+- [x] **Q22 (константы в $\\Theta(\\cdot)$ из AR’11 Thm. 2.12):**
+  закрыто: из AR’11 Prop. 4.3 и доказательства Lemma 4.4 (через Figure 3.1 / Lemma 3.1) получаем явные оценки
+  $\\tfrac18\\,\\mathrm{wb}(T(G,\\sigma))\\le W(T(G,\\sigma)\\vdash\\bot)\\le 2\\,\\mathrm{wb}(T(G,\\sigma))$;
+  см. `docs/research/16_research_steps.md` §16.104 и
+  `../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`.
+- [x] **Q21 (Tseitin‑width через branch‑width):**
+  закрыто: Alekhnovich–Razborov (2011, Thm. 2.12) утверждают
+  $\\mathrm{wb}(T(G,\\sigma))=\\Theta(W(T(G,\\sigma)\\vdash\\bot))$, а Remark 2.11 уточняет, что подлежащий гиперграф — это $G^*$ (с повторениями);
+  см. `docs/research/16_research_steps.md` §16.103 и `../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`.
+- [x] **Q20 (согласовать использование $w(G)$ в Cor. 34 / §16.98):**
+  закрыто: в §16.98 добавлено явное определение $w(G):=W(T(G,\\varphi)\\vdash\\bot)-1$ и цепочка
+  $n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}$ через Harvey–Wood (2014, (2));
+  см. `docs/research/16_research_steps.md` §16.102 и
+  `../resources/downloads/harvey_wood_2014_treewidth_line_graphs.pdf`.
 - [x] **Q19 (точная ссылка на $w(G)=\max\{\\Delta(G),\\mathrm{tw}(L(G))\\}-1$ для Tseitin‑width):**
   закрыто: Galesi–Talebanfard–Torán (2018, ECCC TR18‑170) дают Cor. 8:
   $W(T(G,\\varphi)\\vdash\\bot)=\\max\\{\\Delta(G),\\mathrm{ec}(G)-1\\}$ и Cor. 16:

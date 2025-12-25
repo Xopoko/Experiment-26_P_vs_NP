@@ -59,6 +59,8 @@
   ../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf
 - N. Galesi, N. Talebanfard, J. Torán (2018), *Cops-Robber games and the resolution of Tseitin formulas*
   (ECCC TR18-170, PDF): ../resources/downloads/galesi_talebanfard_toran_2018_cops_robber_tseitin.pdf
+- D. J. Harvey, D. R. Wood (2014), *The Treewidth of Line Graphs* (PDF):
+  ../resources/downloads/harvey_wood_2014_treewidth_line_graphs.pdf
 - T. Pitassi, B. Rossman, R. A. Servedio, L.-Y. Tan (2016), *Poly-logarithmic Frege depth lower bounds via an expander switching lemma* (PDF):
   ../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf
 - P. Beame, C. Beck, R. Impagliazzo (2016), *Time-Space Trade-offs in Resolution: Superpolynomial Lower Bounds for Superlinear Space* (PDF):
