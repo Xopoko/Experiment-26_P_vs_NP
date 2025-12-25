@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑форме с $k=O(\\log n)$ (§16.144–§16.146). Барьер representability: tree‑формулы ограничены Rossman’16 ($\\le(\\Theta((\\log M)/(d-1)))^{d-1}$, §16.149–§16.150); HR‑блок $(\\log M)^{d-1}$ требует sharing ⇒ EF/circuit‑Frege (§16.152–§16.153), где уже есть $O(1)$‑depth poly‑refutation (§16.154). Локализация: Håstad‑техника uses $\\mathrm{supp}(\\alpha)\\subseteq V$ (variables=edges), и extension vars ломают инвариант “depth ⇒ малая поддержка” (§16.155). Дальше: определить “local‑EF” (support $\\le\\mathrm{polylog}(n)$) и проверить, сохраняется ли обход.
+Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑форме с $k=O(\\log n)$ (§16.144–§16.146). Барьер representability: tree‑формулы ограничены Rossman’16 ($\\le(\\Theta((\\log M)/(d-1)))^{d-1}$, §16.149–§16.150); HR‑блок $(\\log M)^{d-1}$ возможен лишь со sharing ⇒ EF/circuit‑Frege (§16.152–§16.153), где есть $O(1)$‑depth poly‑refutation (§16.154). Локализация: Håstad‑техника uses $\\mathrm{supp}(\\alpha)\\subseteq V$ (variables=edges), extension vars ломают “depth ⇒ малая поддержка” (§16.155); а в local‑EF(s) глобальный XOR‑обход требует $s=\\Omega(|V|)$ (§16.156). Дальше: есть ли вообще poly‑refutation в local‑EF($\\mathrm{polylog}(n)$)?
 
 ## Что уже сделано (не повторять)
 
@@ -33,4 +33,4 @@ Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑фо
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Эквивалентность → Уточнение формулировки → Трейд‑офф → Модельный стресс‑тест → Модельный стресс‑тест
+Последние: Уточнение формулировки → Трейд‑офф → Модельный стресс‑тест → Модельный стресс‑тест → Инвариант

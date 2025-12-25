@@ -15,7 +15,7 @@
 		  Доп.: Håstad–Risse (FOCS’22 full-length) §1.2 прямо формулируют «нехватающий» upper‑шаг: они умеют представлять промежуточные XOR‑уравнения
 		  небольшими depth‑$d$ формулами, но не знают, как синтаксически симулировать шаг Gaussian elimination в bounded‑depth Frege (см. §16.122).
 		  Representation‑часть: в HR §1.2 (см. §16.123) заявлено, что можно выписать depth‑$d$ формулы размера $M$, представляющие $\\mathrm{PARITY}$ и $\\neg\\mathrm{PARITY}$ на блоке размера $(\\log M)^{d-1}$.
-			  Но §16.147–§16.155 показывают, что для **формул** (tree‑size) это несовместимо с известным tight bound: Rossman’16 даёт $\\log\\mathrm{size}=\\Theta((d-1)\\,n^{1/(d-1)})$, т.е. при size $\\le M$ максимум
+			  Но §16.147–§16.156 показывают, что для **формул** (tree‑size) это несовместимо с известным tight bound: Rossman’16 даёт $\\log\\mathrm{size}=\\Theta((d-1)\\,n^{1/(d-1)})$, т.е. при size $\\le M$ максимум
 			  $$n\\le\\bigl(\\Theta((\\log M)/(d-1))\\bigr)^{d-1}.$$
 		  Поэтому при пороговой глубине $d\\approx\\log n/\\log\\log n$ и $M=\\mathrm{poly}(n)$ такие PARITY‑формулы покрывают лишь $n^{o(1)}$ переменных, и сведение Q39 к «одному XOR‑шагу» (как в §16.124–§16.126) требует пересмотра модели representability.
   §16.127 фиксирует «локальный барьер»: в EF XOR‑сложение тривиально (Gaussian elimination), но универсальная балансировка даёт для Frege лишь глубину $O(\\log n)$, не $O(\\log n/\\log\\log n)$.
@@ -47,7 +47,8 @@
 		    §16.153 фиксирует формально: sharing внутри строки = extension variables, т.е. “circuit‑Frege” p‑эквивалентно EF.
 		    §16.154 стресс‑тестирует это: в EF есть poly‑size refutation Tseitin(Grid) уже при $O(1)$‑глубине, значит LB Håstad’20 принципиально про fan‑out 1 и **не** может распространяться на EF/circuit‑Frege.
 		    §16.155 локализует точку: вся техника “restrictions + locally consistent evaluations” опирается на геометрию $\\mathrm{supp}(\\alpha)\\subseteq V$ (variables=edges), и extension variables рушат инвариант “малая глубина ⇒ малая поддержка”.
-		    Следующий шаг: определить промежуточную модель “local‑EF” (extension‑переменные с $|\\mathrm{supp}(p)|\\le \\mathrm{polylog}(n)$) и проверить, сохраняется ли EF‑обход глубины, или техника Håstad’20 начинает работать.
+		    §16.156 вводит модель local‑EF(s) и фиксирует, что стандартный EF‑обход через глобальный XOR неизбежно вводит extension‑переменную поддержки $\\Omega(|V|)$, т.е. не попадает в local‑EF($\\mathrm{polylog}(n)$).
+		    Следующий шаг: проверить, существует ли вообще poly‑size refutation Tseitin(Grid) в local‑EF($\\mathrm{polylog}(n)$) (без глобальных переменных), и если нет — попытаться адаптировать support‑ориентированную версию evaluation‑метода Håstad’20 к этому классу.
 
 ## Завершённые (архив)
 
