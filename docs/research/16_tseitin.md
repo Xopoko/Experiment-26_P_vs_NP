@@ -2574,3 +2574,28 @@
 - `Статус:` toy computation (локализует, что именно может “раздуть” только $c_2$, но не показатель у $\\log n$).
 - `Барьер‑чек:` r — применимо (вся энкодинг‑оценка релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` если нужен *численный* $c_2$, оценить константу в “linear in $s$” для числа таких centers из конструкции common partial decision tree (HR’22 §7.2) и подставить в энкодинг.
+
+### 16.190. Исследовательский шаг (toy computation): явная константа в “linear in $s$” для additional chosen centers в HR’22 Lemma 4.4 (≤ $2s$)
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S23-bound-linear-centers):`
+  В HR’22 (Lemma 4.4 / §7.2–§7.3) число chosen centers $v$, для которых в §7.3 нужно “recover the chosen centers $v$ at distance at most 1 from the newly exposed chosen centers”, можно взять не просто “$O(s)$”, а **явно** $\\le 2s$ для ветви глубины $s$ в common partial decision tree.
+  Следовательно, соответствующая цена идентификации ограничена сверху $\\le 2s\\log\\Delta$ бит.
+- `Доказательство (заряд по запросам):`
+  Возьмём фиксированную ветвь $\\tau$ common partial decision tree $T$ глубины $s$.
+  По построению (HR’22 §7.2) на каждом раунде для long branch $\\lambda^j$ вводится множество $S_{\\lambda^j}$ и $T$ расширяется запросами “all variables incident to $S_{\\lambda^j}$”.
+  Поэтому для каждого chosen center $v\\in\\bigcup_j S_{\\lambda^j}$ существует хотя бы один запрос переменной на ветви $\\tau$, инцидентной $v$.
+  Для каждого такого $v$ выберем **первый** (по порядку на $\\tau$) запрос переменной, инцидентной $v$.
+  Но каждая переменная $y_P$ соответствует chosen path $P$, соединяющему **две** chosen centers (HR’22 §3), т.е. один запрос может быть инцидентен не более чем двум chosen centers.
+  Значит, отображение $v\\mapsto$ “первый инцидентный запрос” является $\\le2$‑к‑$1$, и
+  $$\\Bigl|\\bigcup_j S_{\\lambda^j}\\Bigr|\\le 2\\cdot |\\text{queries on }\\tau|=2s.$$
+  Отсюда цена идентификации $\\le (2s)\\log\\Delta$ бит.
+- `Точная ссылка (HR’22, text cache):`
+  1) Определение $S_{\\lambda^j}$ и “querying all variables incident to $S_{\\lambda^j}$”: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2724–2729`.
+  2) Место, где говорится “linear in $s$”: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2777`.
+  3) “chosen path connects two chosen centers” и ввод $y_P$: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:733–735`.
+- `Toy‑тест:` при $s$ запросах можно достигать $2s$ distinct chosen centers (каждый запрос касается двух “новых” центров), так что константа 2 оптимальна для такого счёта.
+- `Статус:` toy computation (явная константа для hidden “linear in $s$”).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо (комбинаторный энкодинг‑аргумент релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` подставить $2s\\log\\Delta$ в оценку “absorbed by $c_2$” в proof of Lemma 4.4 (§7.3) и выписать грубый численный $c_2$ (с учётом базового $s/64$ из single‑switching).
