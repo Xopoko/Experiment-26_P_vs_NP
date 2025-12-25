@@ -1060,3 +1060,26 @@
 - `Статус:` доказано (локальный «барьер техники»: tree‑partition upper из GIRS’19 не достигает пороговой глубины даже для 3‑вершинного шага).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` искать приём, который использует специальную структуру grid/representation (Håstad–Risse) и обходится без параметра $X=\\Delta\\,\\mathrm{tpw}$ (или доказать, что для 3‑вершинного Tseitin при $d=\\Theta(\\log n/\\log\\log n)$ неизбежна quasi‑poly нижняя оценка).
+
+### 16.129. Исследовательский шаг: «компактное представление паритета» в GIRS’19 (Lemma 21) = DNF‑индукция и имеет размер $\\exp(\\Theta(d\\,n^{1/d}))$ ⇒ при $d\\approx\\log n/\\log\\log n$ это quasi‑poly
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение:` В GIRS’19, §4.1 (Lemma 20–21) «компактное представление» $\\mathrm{PARITY}$ строится через $(t_1,\\dots,t_d)$‑refinement и даёт формулу глубины $\\le 3d+1$ и размера
+  $$\\mathrm{size}=\\prod_{i=1}^d (2^{t_i+1}t_i).$$
+  При условии $\\prod_{i=1}^d t_i\\ge n$ (Lemma 20) лучшая возможная оценка для **этого** построения имеет вид
+  $$2^{\\Omega(d\\,n^{1/d})}\\ \\le\\ \\mathrm{size}\\ \\le\\ 2^{O(d\\,n^{1/d})}\\cdot\\mathrm{poly}(n).$$
+  В частности, при $d=\\Theta(\\log n/\\log\\log n)$ получаем $\\mathrm{size}=n^{\\Theta(\\log n/\\log\\log n)}$ (quasi‑poly), т.е. ровно тот же «лишний множитель $d$ в экспоненте», что и в §16.123.
+- `Доказательство/ссылка:`
+  1) (Размер/глубина формулы.) GIRS’19, Lemma 21 (в `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`): при $(t_1,\\dots,t_d)$‑refinement формула для $\\mathrm{PARITY}$ имеет глубину $\\le 3d+1$ и размер $\\prod_{i=1}^d (2^{t_i+1}t_i)$.
+  2) (Нижняя оценка для этого построения.) Так как $\\prod_{i=1}^d (2^{t_i+1}t_i)\\ge \\prod_i 2^{t_i}=2^{\\sum_i t_i}$, достаточно оценить сумму.
+     По AM–GM: если $t_i\\ge 1$ и $\\prod_i t_i\\ge n$, то $\\frac1d\\sum_i t_i\\ge (\\prod_i t_i)^{1/d}\\ge n^{1/d}$, значит $\\sum_i t_i\\ge d\\,n^{1/d}$ и
+     $$\\mathrm{size}\\ge 2^{\\sum_i t_i}\\ge 2^{d\\,n^{1/d}}.$$
+  3) (Верхняя оценка.) Возьмём $t_i:=\\lceil n^{1/d}\\rceil$. Тогда $\\prod_i t_i\\ge n$, и
+     $$\\mathrm{size}=\\prod_i (2^{t_i+1}t_i)=2^{O(d\\,n^{1/d})}\\cdot (n^{1/d}+1)^d=2^{O(d\\,n^{1/d})}\\cdot\\mathrm{poly}(n).$$
+  4) (Порог $d\\approx\\log n/\\log\\log n$.) Тогда $n^{1/d}=2^{(\\log_2 n)/d}=2^{\\Theta(\\log\\log n)}=\\mathrm{polylog}(n)$, и экспонента
+     $$d\\,n^{1/d}=\\Theta\\Bigl(\\frac{\\log n}{\\log\\log n}\\cdot\\log n\\Bigr)=\\Theta\\Bigl(\\frac{\\log^2 n}{\\log\\log n}\\Bigr),$$
+     т.е. $\\mathrm{size}=2^{\\Theta(\\log^2 n/\\log\\log n)}=n^{\\Theta(\\log n/\\log\\log n)}$ (quasi‑poly).
+- `Toy‑тест:` пусть $n=2^{256}$, $d=\\lfloor 256/8\\rfloor=32$. Тогда $n^{1/d}=2^8=256$ и нижняя оценка даёт $\\mathrm{size}\\ge 2^{32\\cdot 256}=2^{8192}$, тогда как любой $n^C$ имеет вид $2^{256C}$.
+- `Статус:` доказано (ограничение техники: GIRS’19 Lemma 21/Claim 28 используют parity‑представление размера $\\exp(\\Theta(d\\,n^{1/d}))$, что не достигает порога $d\\approx\\log n/\\log\\log n$ без новых идей).
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` выяснить, существует ли в литературе «доказуемое в bounded‑depth Frege» представление паритета без множителя $d$ в экспоненте (в духе Håstad–Risse §1.2), или есть известный lower bound/барьер, запрещающий синтаксическую симуляцию XOR‑сложения на глубине $\\Theta(\\log n/\\log\\log n)$.
