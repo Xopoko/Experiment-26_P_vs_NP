@@ -49,7 +49,8 @@
 		    §16.155 локализует точку: вся техника “restrictions + locally consistent evaluations” опирается на геометрию $\\mathrm{supp}(\\alpha)\\subseteq V$ (variables=edges), и extension variables рушат инвариант “малая глубина ⇒ малая поддержка”.
 		    §16.156 вводит модель local‑EF(s) и фиксирует, что стандартный EF‑обход через глобальный XOR неизбежно вводит extension‑переменную поддержки $\\Omega(|V|)$, т.е. не попадает в local‑EF($\\mathrm{polylog}(n)$).
 		    §16.157 даёт первый мост к evaluation‑методу: в local‑EF(s), если считать поддержку extension‑переменной равной поддержке её формулы, то decision tree глубины $t$ “видит” лишь $O(s\\,t)$ вершин.
-		    Следующий шаг: попытаться переписать t‑evaluation HR’22 для local‑EF(s) и проверить, сохраняются ли их ключевые “locally consistent” леммы с параметрами $t\\mapsto O(s\\,t)$.
+		    §16.158 устраняет запросы к extension‑переменным: любой decision tree по $(x,p)$ на согласованных присваиваниях ($p_i=\\varphi_i(x)$) симулируется edge‑only decision tree глубины $O(s\\,t)$ (на bounded‑degree), т.е. “модель запросов” тоже сводится к исходной ценой $\\times s$.
+		    Следующий шаг: переписать Definition 2.11 (t‑evaluation) HR’22 для local‑EF(s), явно используя §16.157–§16.158, и проверить, что их ключевые “locally consistent/closure” леммы переживают замену $t\\mapsto O(s\\,t)$.
 
 ## Завершённые (архив)
 
