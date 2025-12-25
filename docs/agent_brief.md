@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39: missing — depth‑$d\\approx\\log n/\\log\\log n$ Frege XOR‑add (§16.124–§16.126). Column‑summing: граница прямоугольника = $O(1)$ row‑interval сегментов (§16.134), фиксированный segment‑basis невозможен (ранг $n$; §16.135). Dyadic‑префикс обновляется за $O(\\log n)$ merge (§16.136); merge — «easy case», если блок‑паритеты можно использовать как атомы (§16.137), но в Schoenfield‑Frege отрицание синтаксично, и HR‑пара OR‑формул PARITY/$\\neg$PARITY не является парой литералов (§16.138) ⇒ нужен negation‑normalization/переиспользование.
+Q39: missing — depth‑$d\\approx\\log n/\\log\\log n$ Frege XOR‑add (§16.124–§16.126). Column‑summing: граница прямоугольника = $O(1)$ row‑interval сегментов (§16.134), фиксированный segment‑basis невозможен (ранг $n$; §16.135). Dyadic‑префикс обновляется за $O(\\log n)$ merge (§16.136); merge — «easy case» при атомарных блок‑паритетах (§16.137), но отрицание в Schoenfield‑Frege синтаксично (§16.138); §16.139 сводит узел к цене «consistency» $N\\leftrightarrow\\neg P$ для HR‑пар.
 
 ## Что уже сделано (не повторять)
 
