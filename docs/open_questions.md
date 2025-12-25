@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S5-check-local-consistency-after-unfolding (см. `docs/research/16_tseitin.md` §16.167)
-  - `NextStepID:` Q43.S6-construct-locally-consistent-unfolding
+  - `LastStepID:` Q43.S6-construct-locally-consistent-unfolding (см. `docs/research/16_tseitin.md` §16.168)
+  - `NextStepID:` Q43.S7-plug-lc-unfolding-into-lemma45
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: найден контрпример, что “наивный” edge‑only unfolding $P\\to X$ (полное вычисление $\\varphi(X)$) может породить decision tree с локально несогласованной ветвью (нарушение XOR‑ограничения в вершине), поэтому для переноса HR Lemma 4.5 требуется явное правило/trimming, сохраняющее local consistency; см. `docs/research/16_tseitin.md` §16.167. `InfoGain:` 1.
+  Прогресс: построен “locally consistent unfolding” для формул $\\varphi(X)$ малой поддержки: можно строить edge‑only decision tree, в котором все ветви locally consistent, если запрещать запросы локально подразумеваемых рёбер (HR’22, PDF p. 7 после Def. 2.5) и опираться на Lemma 2.3; см. `docs/research/16_tseitin.md` §16.168. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: построить (и оценить по глубине) процедуру “locally consistent unfolding” для формул $\\varphi(X)$ с $|\\mathrm{supp}(\\varphi)|\\le s$ (например, запрещать запросы локально подразумеваемых рёбер, как у HR’22 после Def. 2.5).
+  Следующий шаг: встроить $P$‑unfolding из §16.168 внутрь HR Lemma 4.5 и проверить, что (i) functional equivalence evaluations и (ii) применение multi‑switching сохраняются при этом (с заменой $t\\mapsto (2s+1)t$).
 
 ## Завершённые (архив)
 
