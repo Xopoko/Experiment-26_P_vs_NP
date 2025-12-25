@@ -18,8 +18,10 @@ This runs:
 ## Agent prompt
 
 - Canonical 1-sentence prompt for the infinite agent runner: `scripts/agent_prompt.txt`
+- Skeptic prompt (adversarial review of last step): `scripts/skeptic_prompt.txt`
 - Convenience runner (infinite + logging to `agent/logs/`): `agent/run.sh`
 - Duo runner (worker + supervisor, infinite + logging to `agent/logs/`): `agent/run_duo.sh`
+- Trio runner (worker + skeptic + supervisor, infinite + logging to `agent/logs/`): `agent/run_trio.sh`
 - Runner docs: `agent/README.md`
 
 ## Download resources

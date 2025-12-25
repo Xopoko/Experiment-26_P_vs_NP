@@ -30,6 +30,28 @@ Notes:
 - Prompts: `scripts/agent_prompt.txt` (worker) and `scripts/supervisor_prompt.txt` (supervisor).
 - Both runners take a lock (default: `agent/logs/.agent.lock`) to prevent concurrent runs; override via `LOCK_FILE=...`.
 
+## Trio (worker + skeptic + supervisor)
+
+Run forever: each round does WORKER (research step) → SKEPTIC (try to break/check novelty) → SUPERVISOR (policy/anti-loop fixes).
+Logs go to `agent/logs/latest_trio.log`.
+
+```bash
+./agent/run_trio.sh
+```
+
+Optional controls:
+
+```bash
+MAX_ROUNDS=3 ./agent/run_trio.sh
+PAUSE_SECONDS=2 ./agent/run_trio.sh
+REQUIRE_CLEAN=1 ./agent/run_trio.sh
+```
+
+Notes:
+- Don’t pass `--infinite` to `run_trio.sh` (it already loops).
+- Prompts: `scripts/agent_prompt.txt` (worker), `scripts/skeptic_prompt.txt` (skeptic), `scripts/supervisor_prompt.txt` (supervisor).
+- Uses the same lock mechanism as the other runners.
+
 ## Log maintenance
 
 Keep only the newest 50 log files:
