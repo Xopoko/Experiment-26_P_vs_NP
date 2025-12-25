@@ -4,6 +4,12 @@
 (лимит проверяется в `scripts/verify_notebook.py`). Обновляй его **заменой/сжатием**,
 а не дописыванием бесконечных списков.
 
+## Anti-loop (обновлять, не раздувать)
+
+- `LastStepID:` Q41.S1-support-cost-draft
+- `Do-not-repeat (next 2 runs):` Q41.S1-support-cost-draft
+- `Last InfoGain:` 1
+
 ## Текущее направление (держать 1–2 строки)
 
 Q40→Q41: сначала зафиксировать точной цитатой, что HR’22 действительно считают «Gauss‑step в bounded‑depth Frege» открытым (§16.122), затем (если да) тестировать перенос HR‑t‑evaluation на local‑EF(s) (§16.156–§16.159) как промежуточную модель (следующий мини‑шаг: проверить аналог Cor. 2.7 для $\\mathrm{supp}_s/\\mathrm{cost}_s$).

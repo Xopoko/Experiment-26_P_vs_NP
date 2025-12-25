@@ -1,1 +1,1 @@
-Сверься с docs/agent_brief.md, выбери ровно один пункт из docs/open_questions.md и сделай один проверяемый исследовательский шаг (доказательство/контрпример/точная ссылка) с барьер‑чеком, затем обнови этот пункт и перепиши docs/agent_brief.md так, чтобы он не рос.
+Сверься с docs/agent_brief.md (Do-not-repeat), выбери ровно один пункт из docs/open_questions.md и сделай один проверяемый шаг типа Proof/Counterexample/Exact citation/Toy computation с барьер‑чеком, указав StepID и InfoGain, затем обнови этот пункт (NextStepID/Status) и обнови docs/agent_brief.md без роста.

@@ -6,15 +6,28 @@
 ## Активные
 
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
+  - `Priority:` P1
+  - `Status:` ACTIVE
+  - `NextStepID:` Q39.S1-status-via-Q40
+  - `Success:` либо точная цитата “open”, либо явный upper на глубине $O(\\log N/\\log\\log N)$
   Известно: $d_{\\mathrm{poly}}(N)\\ge\\Omega(\\log N/\\log\\log N)$ (Håstad’20, Cor. 6.6; §16.92) и $d_{\\mathrm{poly}}(N)\\le O(\\log N)$ (unpack GIRS’19/Claim 28; §16.115–§16.121).
   Узел: синтаксически симулировать шаг Gaussian elimination в bounded‑depth Frege (HR’22 отмечают как “не умеем”; §16.122).
   Следующий шаг: либо найти upper на depth $O(\\log N/\\log\\log N)$, либо зафиксировать точной цитатой, что это open, и двигаться дальше.
 
 - [ ] **Q40 (литературный статус Q39):**
+  - `Priority:` P0
+  - `Status:` ACTIVE
+  - `NextStepID:` Q40.S1-quote-hr22-1.2
+  - `Success:` точная цитата + ссылка (секция/страница) из HR’22 §1.2
   Считается ли gap $O(\\log N)$ vs $\\Omega(\\log N/\\log\\log N)$ открытым именно для Frege‑строк (tree‑формул)?
   Следующий шаг: выписать точную цитату из HR’22 §1.2 про “We do not know how to syntactically translate a Gaussian elimination step …”.
 
 - [ ] **Q41 (если Q39 открыт: локальные расширения):**
+  - `Priority:` P0
+  - `Status:` ACTIVE
+  - `LastStepID:` Q41.S1-support-cost-draft (см. §16.159)
+  - `NextStepID:` Q41.S2-proof-cor27-analogue
+  - `Success:` доказать/опровергнуть аналог HR Cor. 2.7 при $\\mathrm{supp}_s/\\mathrm{cost}_s$ (и зафиксировать точную точку поломки)
   Проверить, переносится ли HR’22 t‑evaluation/locally‑consistent метод на local‑EF(s) (см. §16.156–§16.158) как промежуточную модель “ограниченного sharing”.
   Прогресс: набросок “support+cost”‑патча (Def. 2.2/Cor. 2.7 → $\\mathrm{supp}_s$ и $\\mathrm{cost}_s$) записан в §16.159.
   Следующий шаг: выбрать точную модель local‑EF(s) (flat vs nested), затем доказать/опровергнуть аналог Cor. 2.7 при условии $|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2$ (и только после этого трогать Lemma 2.13).
