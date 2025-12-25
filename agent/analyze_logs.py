@@ -13,6 +13,9 @@ from typing import Any
 _ROLE_HEADER_RE = re.compile(r"^====\s+(WORKER|SKEPTIC|SUPERVISOR)\s+round=(\d+)\s+")
 _COMMIT_RE = re.compile(r"^\[([^\]]+)\s+([0-9a-f]{7,})\]\s+(.*)$")
 _STEP_ID_RE = re.compile(r"^Q\d{1,4}\.S\d{1,4}(?:-[a-z0-9][a-z0-9-]*)?$")
+_SHELL_OK_RE = re.compile(r"^/bin/bash -lc (.*) in .* succeeded\b")
+_REPORTED_STEP_ID_RE = re.compile(r"\bStepID\b\s*[:=]\s*(Q\d{1,4}\.S\d{1,4}(?:-[a-z0-9][a-z0-9-]*)?)")
+_REPORTED_INFOGAIN_RE = re.compile(r"\bInfoGain\b\s*[:=]\s*([012])\b")
 
 
 @dataclass(frozen=True)
@@ -82,6 +85,19 @@ def _analyze_log(path: Path) -> dict[str, Any]:
     role_commits: dict[str, list[Commit]] = {"WORKER": [], "SKEPTIC": [], "SUPERVISOR": []}
     commits: list[Commit] = []
 
+    role_cmd_counts: dict[str, dict[str, int]] = {
+        "WORKER": {"total": 0, "rg": 0, "rg_text_cache": 0, "verify": 0, "git_commit": 0},
+        "SKEPTIC": {"total": 0, "rg": 0, "rg_text_cache": 0, "verify": 0, "git_commit": 0},
+        "SUPERVISOR": {"total": 0, "rg": 0, "rg_text_cache": 0, "verify": 0, "git_commit": 0},
+    }
+    role_cmd_last: dict[str, list[str]] = {"WORKER": [], "SKEPTIC": [], "SUPERVISOR": []}
+    role_mcp_counts: dict[str, int] = {"WORKER": 0, "SKEPTIC": 0, "SUPERVISOR": 0}
+    role_reported: dict[str, dict[str, Any]] = {
+        "WORKER": {"step_id": None, "step_id_line": None, "infogain": None, "infogain_line": None},
+        "SKEPTIC": {"step_id": None, "step_id_line": None, "infogain": None, "infogain_line": None},
+        "SUPERVISOR": {"step_id": None, "step_id_line": None, "infogain": None, "infogain_line": None},
+    }
+
     errors: list[dict[str, Any]] = []
     warnings: list[dict[str, Any]] = []
 
@@ -133,12 +149,55 @@ def _analyze_log(path: Path) -> dict[str, Any]:
                 role_commits[current_role].append(c)
             continue
 
+        m = _SHELL_OK_RE.match(line)
+        if m and current_role in role_cmd_counts:
+            cmd = m.group(1).strip()
+            role_cmd_counts[current_role]["total"] += 1
+
+            # Normalize quoted `-lc "..."` payloads for simple substring checks.
+            if (cmd.startswith('"') and cmd.endswith('"')) or (cmd.startswith("'") and cmd.endswith("'")):
+                cmd = cmd[1:-1]
+
+            if re.search(r"(^|\s)rg(\s|$)", cmd):
+                role_cmd_counts[current_role]["rg"] += 1
+                if "resources/text_cache/" in cmd:
+                    role_cmd_counts[current_role]["rg_text_cache"] += 1
+            if "python3 scripts/verify_notebook.py" in cmd:
+                role_cmd_counts[current_role]["verify"] += 1
+            if re.search(r"(^|\s)git(\s|$)", cmd) and " commit" in cmd:
+                role_cmd_counts[current_role]["git_commit"] += 1
+
+            last = role_cmd_last[current_role]
+            last.append(cmd)
+            if len(last) > 8:
+                del last[0 : len(last) - 8]
+            continue
+
+        if current_role in role_reported:
+            m = _REPORTED_STEP_ID_RE.search(line)
+            if m and _STEP_ID_RE.match(m.group(1)):
+                role_reported[current_role]["step_id"] = m.group(1)
+                role_reported[current_role]["step_id_line"] = idx
+            m = _REPORTED_INFOGAIN_RE.search(line)
+            if m:
+                role_reported[current_role]["infogain"] = int(m.group(1))
+                role_reported[current_role]["infogain_line"] = idx
+
+        if "mcp:" in line and "firecrawl" in line and current_role in role_mcp_counts:
+            role_mcp_counts[current_role] += 1
+
         lower = line.lower()
-        if "traceback (most recent call last)" in lower or "assertionerror" in lower:
+        if "rg: regex parse error" in lower:
+            warnings.append({"line": idx, "role": current_role, "round": current_round, "text": line.strip()})
+            continue
+        if "traceback (most recent call last)" in lower:
             errors.append({"line": idx, "role": current_role, "round": current_round, "text": line.strip()})
             continue
-        if lower.startswith("error:") or " error:" in lower:
+        if lower.startswith("failed:"):
             errors.append({"line": idx, "role": current_role, "round": current_round, "text": line.strip()})
+            continue
+        if lower.startswith("error:"):
+            warnings.append({"line": idx, "role": current_role, "round": current_round, "text": line.strip()})
             continue
         if "stopping:" in lower and "max_rounds" in lower:
             warnings.append({"line": idx, "role": current_role, "round": current_round, "text": line.strip()})
@@ -157,6 +216,10 @@ def _analyze_log(path: Path) -> dict[str, Any]:
         },
         "commits_total": len(commits),
         "commits_by_role": {k: len(v) for k, v in role_commits.items()},
+        "commands_by_role": role_cmd_counts,
+        "commands_last_by_role": role_cmd_last,
+        "mcp_firecrawl_by_role": role_mcp_counts,
+        "reported_by_role": role_reported,
         "step_ids": step_ids,
         "duplicate_step_ids": duplicates,
         "errors": errors,
@@ -212,8 +275,11 @@ def main(argv: list[str]) -> int:
     sections = summary.get("sections") or {}
     commits_total = summary.get("commits_total") or 0
     commits_by_role = summary.get("commits_by_role") or {}
+    commands_by_role = summary.get("commands_by_role") or {}
+    reported_by_role = summary.get("reported_by_role") or {}
     dup = summary.get("duplicate_step_ids") or []
     errs = summary.get("errors") or []
+    warns = summary.get("warnings") or []
 
     print(f"Log: {log_path}")
     print(f"run_id: {run_id}  mode: {mode}  started_at: {started}")
@@ -234,6 +300,22 @@ def main(argv: list[str]) -> int:
         f" SKEPTIC={commits_by_role.get('SKEPTIC', 0)}"
         f" SUPERVISOR={commits_by_role.get('SUPERVISOR', 0)}"
     )
+    w_cmd = commands_by_role.get("WORKER") or {}
+    s_cmd = commands_by_role.get("SKEPTIC") or {}
+    sup_cmd = commands_by_role.get("SUPERVISOR") or {}
+    print(
+        "cmds:"
+        f" WORKER=({w_cmd.get('total', 0)} total, {w_cmd.get('rg', 0)} rg, {w_cmd.get('rg_text_cache', 0)} rg_text_cache, {w_cmd.get('verify', 0)} verify)"
+        f" SKEPTIC=({s_cmd.get('total', 0)} total, {s_cmd.get('rg', 0)} rg, {s_cmd.get('rg_text_cache', 0)} rg_text_cache, {s_cmd.get('verify', 0)} verify)"
+        f" SUPERVISOR=({sup_cmd.get('total', 0)} total, {sup_cmd.get('verify', 0)} verify)"
+    )
+    w_rep = reported_by_role.get("WORKER") or {}
+    s_rep = reported_by_role.get("SKEPTIC") or {}
+    print(
+        "reported:"
+        f" WORKER=(StepID={w_rep.get('step_id') or '-'}, InfoGain={w_rep.get('infogain') if w_rep.get('infogain') is not None else '-'})"
+        f" SKEPTIC=(StepID={s_rep.get('step_id') or '-'}, InfoGain={s_rep.get('infogain') if s_rep.get('infogain') is not None else '-'})"
+    )
     if dup:
         print(f"duplicate StepID(s) in commits: {', '.join(dup)}")
 
@@ -246,6 +328,10 @@ def main(argv: list[str]) -> int:
         print(f"errors: {len(errs)} (first at line {errs[0].get('line')})")
     else:
         print("errors: 0")
+    if warns:
+        print(f"warnings: {len(warns)} (first at line {warns[0].get('line')})")
+    else:
+        print("warnings: 0")
 
     return 0
 
