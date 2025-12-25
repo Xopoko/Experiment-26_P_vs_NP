@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20); узкое место — poly‑size bounded‑depth симуляция одного XOR‑add при $d\\approx\\log n/\\log\\log n$ (§16.124–§16.126). Block‑rep даёт easy XOR‑add (§16.130), но фиксированный базис ломается на grid (§16.131); наивный base‑change даёт $k\\to k^2$ вне interval‑случая (§16.132–§16.133). Для самой column‑summing множества — границы прямоугольников (= $O(1)$ row‑interval сегментов; §16.134) ⇒ узел — синтаксический base‑change для растущих сегментов.
+Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20); узкое место — poly‑size bounded‑depth симуляция одного XOR‑add при $d\\approx\\log n/\\log\\log n$ (§16.124–§16.126). Хотя column‑summing даёт границы прямоугольников (= $O(1)$ row‑interval сегментов; §16.134), фиксированный «segment‑basis» не может покрыть все префиксы даже в 1D (ранг $n$; §16.135) ⇒ нужен синтаксический base‑change для растущих сегментов.
 
 ## Что уже сделано (не повторять)
 
@@ -34,4 +34,4 @@ Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Эквивалентность → Коммуникация/ранг → Трейд‑офф → Инвариант → Эквивалентность
+Последние: Коммуникация/ранг → Трейд‑офф → Инвариант → Эквивалентность → Коммуникация/ранг
