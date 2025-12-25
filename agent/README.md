@@ -22,8 +22,24 @@ Optional controls:
 ```bash
 MAX_ROUNDS=3 ./agent/run_duo.sh
 PAUSE_SECONDS=2 ./agent/run_duo.sh
+REQUIRE_CLEAN=1 ./agent/run_duo.sh
 ```
 
 Notes:
 - Don’t pass `--infinite` to `run_duo.sh` (it already loops).
 - Prompts: `scripts/agent_prompt.txt` (worker) and `scripts/supervisor_prompt.txt` (supervisor).
+- Both runners take a lock (default: `agent/logs/.agent.lock`) to prevent concurrent runs; override via `LOCK_FILE=...`.
+
+## Log maintenance
+
+Keep only the newest 50 log files:
+
+```bash
+./agent/prune_logs.sh --keep 50
+```
+
+Or delete logs older than 14 days (then enforce keep):
+
+```bash
+./agent/prune_logs.sh --days 14 --keep 200
+```
