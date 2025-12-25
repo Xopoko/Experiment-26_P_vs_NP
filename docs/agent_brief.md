@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S2-parity-depth-loglog
-- `Do-not-repeat (next 2 runs):` Q39.S2-parity-depth-loglog, Q43.S20-bound-c1
+- `LastStepID:` Q39.S3-cite-xor-step-bdfrege
+- `Do-not-repeat (next 2 runs):` Q39.S3-cite-xor-step-bdfrege, Q39.S2-parity-depth-loglog
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39: parity ok; next: XOR cite.
+Q39: XOR (GIRS); next: compare.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q39: parity ok; next: XOR cite.
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Трейд‑офф→Трейд‑офф→Эквивалентность→Сжатие/канонизация→Трейд‑офф
+Последние: Трейд→Экв→Сжатие→Трейд→Экв

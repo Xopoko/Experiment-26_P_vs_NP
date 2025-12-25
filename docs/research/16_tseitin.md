@@ -2450,3 +2450,24 @@
 - `Статус:` доказано (явная конструкция формулы).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` найти/зафиксировать, существует ли **полиномиальный bounded‑depth Frege‑вывод** одной XOR‑операции (сложения двух линейных форм над $\\mathbb F_2$) при глубине $\\Theta(\\log n/\\log\\log n)$, или известен барьер/эквивалентность с моделями типа $\\mathrm{AC}^0$‑Frege с MOD2.
+
+### 16.184. Исследовательский шаг (exact citation): GIRS’19 дают bounded‑depth вывод XOR‑шага (сложение $\\mathbb F_2$‑уравнений) для “compact representation” паритета
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q39.S3-cite-xor-step-bdfrege):`
+  В Galesi–Itsykson–Riazanov–Sofronova’19 вводится “compact representation” $\\Phi^a(S,U)$ для уравнения паритета
+  $$\\bigoplus_{i\\in S} x_i = a$$
+  относительно фиксированного refinement $U$ множества $[n]$.
+  В Section 4.2 (“Summation of linear equations”) они доказывают, что из двух таких представлений относительно **одного и того же** $U$
+  можно синтаксически вывести их сумму над $\\mathbb F_2$, т.е. XOR‑шаг
+  $$\\Phi^a(S,U),\\ \\Phi^b(T,U)\\ \\vdash\\ \\Phi^{a\\oplus b}(S\\triangle T, U)$$
+  в bounded‑depth Frege с глубиной $3d+O(1)$ и полиномиальным (по размеру представлений) overhead.
+  Это даёт положительный “XOR‑step”‑факт в литературе (но только в режиме compact‑representation+общий refinement).
+- `Точная ссылка:`
+  `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`, p. 11,
+  Section 4.2, **Lemma 24**: “Let $U$ be a $(t_1,\\dots,t_d)$‑refinement … there exist a constant $c$ and a derivation
+  $\\Phi^a(S,U),\\Phi^b(T,U)\\vdash_{3d+O(1)}\\Phi^{a\\oplus b}(S\\triangle T,U)$ of size at most $c\\cdot|\\Phi^1(\\emptyset,U)|^6$.”
+- `Toy‑тест:` при $S=\\{1,2\\}$, $T=\\{2,3\\}$ получаем $S\\triangle T=\\{1,3\\}$ и именно $x_1\\oplus x_3=(x_1\\oplus x_2)\\oplus(x_2\\oplus x_3)$.
+- `Статус:` exact citation (XOR‑сложение уравнений известно для compact‑representation).
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо (локальный факт о bounded‑depth Frege‑выводе).
+- `Следующий шаг:` сопоставить HR’22 “representing parity” (формулы depth $d$, size $M$) с compact‑representation $\\Phi^a(S,U)$: можно ли в bounded‑depth Frege переводить/поддерживать единый refinement $U$ для нужных промежуточных уравнений без blow‑up, или именно здесь “missing Gauss step” у HR остаётся.
