@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39: gap — depth≈$\\log n/\\log\\log n$ Frege sim XOR‑add (§16.124–§16.126). Column‑summing множества = $O(1)$ row‑interval’ов (§16.134), но фиксированный базис невозможен (rank $n$; §16.135). Dyadic‑префикс: $O(\\log n)$ merge (§16.136), merge easy given block‑parities (§16.137). Schoenfield: $\\neg$ синтаксичен (§16.138); можно использовать $\\neg P$ вместо отдельного $N$ (depth‑slack OK; §16.140–§16.141). Узел остаётся: синтаксический Gaussian/XOR‑add шаг.
+Q39: gap — depth≈$\\log n/\\log\\log n$ Frege sim XOR‑add (§16.124–§16.126). Column‑summing множества = $O(1)$ row‑interval’ов (§16.134), но фиксированный базис невозможен (rank $n$; §16.135). Dyadic‑префикс: $O(\\log n)$ merge (§16.136), merge easy given block‑parities (§16.137). Schoenfield: $\\neg$ синтаксичен (§16.138); можно использовать $\\neg P$ вместо $N$ (depth‑slack OK; §16.140–§16.141). Representation PARITY закреплён ссылкой HR’25 §1.2 + Håstad’86 Remark 6 (§16.142). Узел остаётся: синтаксический Gaussian/XOR‑add шаг.
 
 ## Что уже сделано (не повторять)
 
