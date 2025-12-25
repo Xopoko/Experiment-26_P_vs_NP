@@ -2107,3 +2107,24 @@
 - `Статус:` доказано (локальная “прошивка” §16.168 в механизм HR’22: теперь остаётся проверить functional equivalence evaluations после этой замены).
 - `Барьер‑чек:` r — применимо (аргумент на уровне local consistency/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` для Q43 проверить, что после такой замены сохраняется нужная функциональная эквивалентность evaluations (возможно, потребуется ослабить/переопределить её в flat local‑EF(s) контексте).
+
+### 16.170. Исследовательский шаг: functional equivalence следует из семантической эквивалентности для locally consistent decision trees
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S8-functional-equivalence-after-unfolding):`
+  Пусть $T_1,T_2$ — locally consistent decision trees (HR’22 Def. 2.5) над edge‑переменными Tseitin($G_n$) глубины $\\le n/8$.
+  Если они вычисляют одну и ту же булеву функцию $f:X\\to\\{0,1\\}$ на всех полных присваиваниях $X$, то $T_1$ и $T_2$ **functionally equivalent** (HR’22 Def. 2.8).
+  Следовательно, в Q43 после замены $P$‑запросов на edge‑only locally consistent unfolding (§16.169) функциональная эквивалентность evaluations сохраняется автоматически: изоморфные формулы задают одну и ту же функцию от $X$ (после подстановки $p_i:=\\varphi_i(X)$), а значит соответствующие деревья functionally equivalent.
+- `Доказательство:`
+  Возьмём ветвь $\\tau$ дерева $T_1$, заканчивающуюся листом с меткой $b$.
+  Тогда на любом полном присваивании $\\rho:X\\to\\{0,1\\}$, согласованном с $\\tau$, имеем $T_1(\\rho)=b$, а значит по предположению $T_2(\\rho)=b$.
+
+  Рассмотрим любую ветвь $\\tau'$ дерева $T_2$, которая pairwise locally consistent с $\\tau$ (HR’22 Def. 2.2).
+  Тогда объединение $\\tau\\cup\\tau'$ — locally consistent частичное присваивание, и потому оно продолжимо до полного присваивания $\\rho$ на $X$ (вне $\\mathrm{closure}(\\mathrm{supp}(\\tau\\cup\\tau'))$ присваиваем произвольно).
+  На этом $\\rho$ дерево $T_2$ проходит по ветви $\\tau'$, значит метка листа $\\tau'$ равна $T_2(\\rho)=b$.
+  Следовательно, **все** ветви $T_2$, pairwise locally consistent с $\\tau$, имеют метку $b$, т.е. “trimmed restriction” $T_2\\!\upharpoonright\\!\\tau$ — $b$‑tree.
+  Аналогично, для любой ветви $\\tau'$ дерева $T_2$ получаем, что $T_1\\!\upharpoonright\\!\\tau'$ — соответствующий $b$‑tree. Это и есть functional equivalence.
+- `Toy‑тест:` для изоморфных $\\vee$‑формул $((A\\vee B)\\vee C)$ и $(A\\vee(B\\vee C))$ любая пара locally consistent деревьев, вычисляющих одну и ту же функцию $A\\vee B\\vee C$, автоматически functionally equivalent по лемме.
+- `Статус:` доказано (functional equivalence в Q43 сводится к “вычисляют одну и ту же функцию” + local consistency).
+- `Барьер‑чек:` r — применимо (аргумент на уровне local consistency/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` для Q43: после снятия functional‑equivalence риска проверить, что полученные edge‑only trees по‑прежнему удовлетворяют Properties 1–4 определения evaluation (и t‑common partial decision tree) в шаге Lemma 4.5.

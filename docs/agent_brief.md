@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S7-plug-lc-unfolding-into-lemma45
-- `Do-not-repeat (next 2 runs):` Q43.S7-plug-lc-unfolding-into-lemma45, Q43.S6-construct-locally-consistent-unfolding
+- `LastStepID:` Q43.S8-functional-equivalence-after-unfolding
+- `Do-not-repeat (next 2 runs):` Q43.S8-functional-equivalence-after-unfolding, Q43.S7-plug-lc-unfolding-into-lemma45
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: показано, как заменять $P$‑запросы на edge‑only locally consistent unfolding (путь к HR Lemma 4.5); дальше — проверить functional equivalence evaluations после тримминга.
+Q43: functional equivalence после unfolding сведена к “одна и та же функция + local consistency”; дальше — проверить Properties 1–4 evaluation и t-common partial decision tree в шаге Lemma 4.5.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: показано, как заменять $P$‑запросы на edge‑
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Сжатие/канонизация → Трейд‑офф → Модельный стресс‑тест → Инвариант → Эквивалентность
+Последние: Трейд‑офф → Модельный стресс‑тест → Инвариант → Эквивалентность → Эквивалентность
