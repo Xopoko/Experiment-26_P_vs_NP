@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap для polynomial‑size: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20), а GIRS’19 Claim 28 сертифицирует polynomial‑size лишь при $d=\\Omega(\\log N)$ (§16.121). Håstad–Risse §1.2: parity/XOR можно представлять depth‑$d$ формулами размера $M$ на блоках $(\\log M)^{d-1}$, но шаг Gaussian elimination в bounded‑depth Frege неизвестен (§16.122); не повторять: наивная DNF‑индукция даёт лишь $M^{\\Theta(d)}$ (§16.123). Следующий шаг: источник/доказательство/барьер для синтаксического правила $L_1=b_1,\\ L_2=b_2\\Rightarrow L_1\\oplus L_2=b_1\\oplus b_2$ без blow‑up.
+Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap для polynomial‑size: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20), а GIRS’19 Claim 28 сертифицирует polynomial‑size лишь при $d=\\Omega(\\log N)$ (§16.121). Håstad–Risse §1.2: parity/XOR можно представлять depth‑$d$ формулами размера $M$ на блоках $(\\log M)^{d-1}$, но шаг Gaussian elimination в bounded‑depth Frege неизвестен (§16.122). §16.124: на пороговой глубине $d\\approx\\log n/\\log\\log n$ и при $M=\\mathrm{poly}(n)$ representation‑overhead становится $O(1)$, так что узкое место — синтаксическое правило XOR‑сложения $L_1,L_2\\Rightarrow L_1\\oplus L_2$ без blow‑up.
 
 ## Что уже сделано (не повторять)
 
