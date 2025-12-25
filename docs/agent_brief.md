@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S28-centers-already-in-b
-- `Do-not-repeat (next 2 runs):` Q43.S28-centers-already-in-b, Q43.S27-charge-centers-into-b
+- `LastStepID:` Q43.S29-propagate-c1-back-to-4
+- `Do-not-repeat (next 2 runs):` Q43.S29-propagate-c1-back-to-4, Q43.S28-centers-already-in-b
 - `Last InfoGain:` 2
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43:consts; next:c1≈4(+logM)
+Q43:c1=4; next: plug-into-corollary
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43:consts; next:c1≈4(+logM)
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Ин→Тр→Тр→Ин→Сж
+Последние:Тр→Тр→Ин→Сж→Сж

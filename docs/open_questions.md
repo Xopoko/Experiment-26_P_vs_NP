@@ -20,14 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S28-centers-already-in-b (см. `docs/research/16_tseitin.md` §16.195)
-  - `NextStepID:` Q43.S29-propagate-c1-back-to-4
+  - `LastStepID:` Q43.S29-propagate-c1-back-to-4 (см. `docs/research/16_tseitin.md` §16.196)
+  - `NextStepID:` Q43.S30-plug-c1-4-into-corollary
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) улучшено: “additional chosen centers” можно ограничить ≤ $5a$ (а не ≤ $2s$), т.е. грубо $b\\mapsto b+5a\\le 8a$ и $c_1$ падает до порядка 9 (§16.194). `InfoGain:` 2.
-  (v) доказано: пункт (ii) “identity of additional chosen centers” в §7.3 **не требует** нового $\\log\\Delta$‑бюджета сверх Lemma 6.9 (он уже покрывается $b\\log\\Delta$ через Case 1–3), т.е. polylog‑показатель можно вернуть к single‑switching уровню (§16.195). `InfoGain:` 2.
+  Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: переписать вывод в §16.191–§16.194 с учётом §16.195 (убрать “$+5a$” как обязательное для $c_1$), и зафиксировать явный $c_1\\approx 4$ + отдельный непоглощаемый вклад $\\log M$.
+  Следующий шаг: в corollary‑оценках для Q43 заменить “$(\\log n)^C$ из Thm. 4.3” на явное $\\log^4 n$, оставив $\\log M$ только в параметре $t$ (и факторе $M^{s/\\ell}$), и перепроверить порог нетривиальности при $d=\\Theta(\\log n/\\log\\log n)$.
 
 ## Завершённые (архив)
 
