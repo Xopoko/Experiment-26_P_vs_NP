@@ -11,6 +11,9 @@ import traceback
 from pathlib import Path
 
 
+_STEP_ID_RE = re.compile(r"^Q\d{1,4}\.S\d{1,4}(?:-[a-z0-9][a-z0-9-]*)?$")
+
+
 def _iter_code_cells(nb: dict) -> list[tuple[int, str]]:
     cells = nb.get("cells", [])
     out: list[tuple[int, str]] = []
@@ -62,6 +65,145 @@ def _iter_markdown_paths() -> list[Path]:
         elif root.is_dir():
             paths.extend(sorted(p for p in root.rglob("*.md") if p.is_file()))
     return paths
+
+
+def _find_markdown_section(lines: list[str], *, header: str) -> tuple[int, int]:
+    start = None
+    for i, line in enumerate(lines):
+        if line.strip() == header:
+            start = i + 1
+            break
+    if start is None:
+        raise AssertionError(f"Missing section header: {header!r}")
+
+    end = len(lines)
+    for j in range(start, len(lines)):
+        if lines[j].startswith("## ") and lines[j].strip() != header:
+            end = j
+            break
+    return start, end
+
+
+def _parse_step_id(value: str, *, context: str) -> str:
+    token = value.strip().split()[0] if value.strip() else ""
+    if not token:
+        raise AssertionError(f"{context}: missing StepID value")
+    if not _STEP_ID_RE.match(token):
+        raise AssertionError(f"{context}: invalid StepID {token!r} (expected Qxx.Sy.slug)")
+    return token
+
+
+def _parse_infogain(value: str, *, context: str) -> int:
+    raw = value.strip().split()[0] if value.strip() else ""
+    if raw not in {"0", "1", "2"}:
+        raise AssertionError(f"{context}: invalid InfoGain {raw!r} (expected 0/1/2)")
+    return int(raw)
+
+
+def _extract_backticked_meta(lines: list[str], *, key: str) -> str | None:
+    needle = f"`{key}:`"
+    for line in lines:
+        if needle not in line:
+            continue
+        return line.split(needle, 1)[1].strip()
+    return None
+
+
+def _verify_open_questions_structure(*, path: Path) -> None:
+    if not path.exists():
+        raise AssertionError(f"Missing required file: {path}")
+
+    raw = path.read_text(encoding="utf-8")
+    lines = raw.splitlines()
+    start, end = _find_markdown_section(lines, header="## Активные")
+    section = lines[start:end]
+
+    items: list[list[str]] = []
+    current: list[str] = []
+    for line in section:
+        if line.startswith("- [ ]"):
+            if current:
+                items.append(current)
+            current = [line]
+            continue
+        if current:
+            current.append(line)
+    if current:
+        items.append(current)
+
+    if not items:
+        raise AssertionError(f"{path}: no active items found under '## Активные'")
+
+    seen_ids: set[str] = set()
+    for item in items:
+        head = item[0]
+        m = re.search(r"\*\*(Q\d{1,4})\b", head)
+        qid = m.group(1) if m else head.strip()
+        if qid in seen_ids:
+            raise AssertionError(f"{path}: duplicate active id: {qid}")
+        seen_ids.add(qid)
+
+        priority = _extract_backticked_meta(item, key="Priority")
+        if priority is None:
+            raise AssertionError(f"{path}: {qid}: missing `Priority:`")
+        pr = priority.strip().split()[0]
+        if pr not in {"P0", "P1", "P2"}:
+            raise AssertionError(f"{path}: {qid}: invalid Priority {pr!r} (expected P0/P1/P2)")
+
+        status = _extract_backticked_meta(item, key="Status")
+        if status is None:
+            raise AssertionError(f"{path}: {qid}: missing `Status:`")
+        st = status.strip().split()[0].upper()
+        if st not in {"ACTIVE", "BLOCKED", "DONE"}:
+            raise AssertionError(f"{path}: {qid}: invalid Status {st!r} (expected ACTIVE/BLOCKED/DONE)")
+
+        next_step = _extract_backticked_meta(item, key="NextStepID")
+        if next_step is None:
+            raise AssertionError(f"{path}: {qid}: missing `NextStepID:`")
+        _parse_step_id(next_step, context=f"{path}: {qid}: NextStepID")
+
+        success = _extract_backticked_meta(item, key="Success")
+        if success is None:
+            raise AssertionError(f"{path}: {qid}: missing `Success:`")
+        if not success.strip():
+            raise AssertionError(f"{path}: {qid}: empty `Success:`")
+
+        last_step = _extract_backticked_meta(item, key="LastStepID")
+        if last_step is not None and last_step.strip():
+            _parse_step_id(last_step, context=f"{path}: {qid}: LastStepID")
+
+    print(f"OK: verified open questions structure in {path}")
+
+
+def _verify_agent_brief_structure(*, path: Path) -> None:
+    if not path.exists():
+        raise AssertionError(f"Missing required file: {path}")
+
+    raw = path.read_text(encoding="utf-8")
+    lines = raw.splitlines()
+    start, end = _find_markdown_section(lines, header="## Anti-loop (обновлять, не раздувать)")
+    section = lines[start:end]
+
+    last_step = _extract_backticked_meta(section, key="LastStepID")
+    if last_step is None:
+        raise AssertionError(f"{path}: missing `LastStepID:` in Anti-loop section")
+    _parse_step_id(last_step, context=f"{path}: Anti-loop: LastStepID")
+
+    dont_repeat = _extract_backticked_meta(section, key="Do-not-repeat (next 2 runs)")
+    if dont_repeat is None:
+        raise AssertionError(f"{path}: missing `Do-not-repeat (next 2 runs):` in Anti-loop section")
+    step_ids = [s.strip() for s in dont_repeat.split(",") if s.strip()]
+    if not step_ids:
+        raise AssertionError(f"{path}: Anti-loop: empty Do-not-repeat list")
+    for sid in step_ids:
+        _parse_step_id(sid, context=f"{path}: Anti-loop: Do-not-repeat")
+
+    last_infogain = _extract_backticked_meta(section, key="Last InfoGain")
+    if last_infogain is None:
+        raise AssertionError(f"{path}: missing `Last InfoGain:` in Anti-loop section")
+    _parse_infogain(last_infogain, context=f"{path}: Anti-loop: Last InfoGain")
+
+    print(f"OK: verified agent brief Anti-loop structure in {path}")
 
 
 def _verify_agent_brief(*, path: Path, max_lines: int, max_bytes: int, max_experiments: int) -> None:
@@ -212,6 +354,8 @@ def main(argv: list[str]) -> int:
                 max_bytes=16_000,
                 max_experiments=12,
             )
+            _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
+            _verify_open_questions_structure(path=Path("docs/open_questions.md"))
         return 0
 
     if args.path.suffix != ".ipynb":
@@ -250,6 +394,8 @@ def main(argv: list[str]) -> int:
             max_bytes=16_000,
             max_experiments=12,
         )
+        _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
+        _verify_open_questions_structure(path=Path("docs/open_questions.md"))
     return 0
 
 
