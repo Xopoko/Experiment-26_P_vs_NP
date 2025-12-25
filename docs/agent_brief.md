@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S4-parameter-check-after-unfolding
-- `Do-not-repeat (next 2 runs):` Q43.S4-parameter-check-after-unfolding, Q43.S3-check-lemma45-flat-ext-break
+- `LastStepID:` Q43.S5-check-local-consistency-after-unfolding
+- `Do-not-repeat (next 2 runs):` Q43.S5-check-local-consistency-after-unfolding, Q43.S4-parameter-check-after-unfolding
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: параметр‑чек HR Lemma 4.5 прошёл с заменой $\\log M\\mapsto(2s+1)\\log M$; дальше — проверить сохранение локальной согласованности trees для evaluation при flat extensions.
+Q43: контрпример: наивный unfolding $P\\to X$ даёт локально несогласованные ветви; дальше — построить “locally consistent unfolding” (не запрашивать локально подразумеваемые рёбра / aggressive trimming).
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: параметр‑чек HR Lemma 4.5 прошёл с заменой $\\lo
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Эквивалентность → Инвариант → Эквивалентность → Сжатие/канонизация → Трейд‑офф
+Последние: Инвариант → Эквивалентность → Сжатие/канонизация → Трейд‑офф → Модельный стресс‑тест

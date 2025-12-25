@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S4-parameter-check-after-unfolding (см. `docs/research/16_tseitin.md` §16.166)
-  - `NextStepID:` Q43.S5-check-local-consistency-after-unfolding
+  - `LastStepID:` Q43.S5-check-local-consistency-after-unfolding (см. `docs/research/16_tseitin.md` §16.167)
+  - `NextStepID:` Q43.S6-construct-locally-consistent-unfolding
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: проверено, что параметрический блок HR’22 Lemma 4.5 переносится после unfolding $t\\mapsto t':=(2s+1)\\log M$: “цена” flat extensions в этом месте — замена $\\log M\\mapsto (2s+1)\\log M$ (то есть фактор $(2s+1)^d$ в знаменателе экспоненты для length‑bound); см. `docs/research/16_tseitin.md` §16.166. `InfoGain:` 1.
+  Прогресс: найден контрпример, что “наивный” edge‑only unfolding $P\\to X$ (полное вычисление $\\varphi(X)$) может породить decision tree с локально несогласованной ветвью (нарушение XOR‑ограничения в вершине), поэтому для переноса HR Lemma 4.5 требуется явное правило/trimming, сохраняющее local consistency; см. `docs/research/16_tseitin.md` §16.167. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, что в HR Lemma 4.5/определении evaluation локальная согласованность нужных decision trees действительно сохраняется при наличии flat extension‑аксиом (или зафиксировать точную точку поломки).
+  Следующий шаг: построить (и оценить по глубине) процедуру “locally consistent unfolding” для формул $\\varphi(X)$ с $|\\mathrm{supp}(\\varphi)|\\le s$ (например, запрещать запросы локально подразумеваемых рёбер, как у HR’22 после Def. 2.5).
 
 ## Завершённые (архив)
 
