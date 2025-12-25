@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑форме с $k=O(\\log n)$ (§16.144–§16.146). Барьер representability: для tree‑формул блок $\\le(\\Theta((\\log M)/(d-1)))^{d-1}$ (Rossman’16 + мост HR‑depth→De Morgan, §16.149–§16.150); HR §1.2 “$(\\log M)^{d-1}$ при size $M$” соответствует **схемам** из‑за sharing (§16.152), не формулам. Дальше: формализовать “circuit‑Frege” и его связь с EF, и проверить применимость LB Håstad’20.
+Q39: Tseitin(Grid) depth‑gap. Block‑Gauss → XOR‑шаги в block‑форме с $k=O(\\log n)$ (§16.144–§16.146). Барьер representability: для tree‑формул блок $\\le(\\Theta((\\log M)/(d-1)))^{d-1}$ (Rossman’16 + мост HR‑depth→De Morgan, §16.149–§16.150); HR‑блок $(\\log M)^{d-1}$ требует sharing (схемы, §16.152), а sharing формально = extension variables (EF/circuit‑Frege, §16.153). Дальше: найти в Håstad’20/HR’22 точку, где LB опирается на fan‑out 1, и понять, что меняется для EF‑варианта.
 
 ## Что уже сделано (не повторять)
 
