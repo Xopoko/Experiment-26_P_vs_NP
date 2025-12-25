@@ -8,14 +8,14 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE (open confirmed)
-  - `LastStepID:` Q39.S1-status-via-Q40 (см. `docs/research/16_tseitin.md` §16.122)
-  - `NextStepID:` Q39.S2-search-xor-step-bdfrege
+  - `LastStepID:` Q39.S2-parity-depth-loglog (см. `docs/research/16_tseitin.md` §16.183)
+  - `NextStepID:` Q39.S3-cite-xor-step-bdfrege
   - `Success:` либо явный upper на глубине $O(\\log N/\\log\\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Известно: $d_{\\mathrm{poly}}(N)\\ge\\Omega(\\log N/\\log\\log N)$ (Håstad’20, Cor. 6.6; §16.92) и $d_{\\mathrm{poly}}(N)\\le O(\\log N)$ (unpack GIRS’19/Claim 28; §16.115–§16.121).
   Узел: синтаксически симулировать шаг Gaussian elimination в bounded‑depth Frege (HR’22 отмечают как “не умеем”; §16.122).
-  Прогресс: HR’22 §1.2 явно фиксируют отсутствующий шаг (“We do not know how to syntactically translate a Gaussian elimination step … thus we do not actually get a proof …”), т.е. потенциальный upper через колонковое XOR‑суммирование остаётся открытым; см. `docs/research/16_tseitin.md` §16.122. `InfoGain:` 1.
-  `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо (чистый статус/цитата).
-  Следующий шаг: найти, известна ли poly‑size bounded‑depth Frege‑симуляция одного XOR‑сложения $L_1\\oplus L_2$ (или барьер, почему нет) в режиме глубины $\\Theta(\\log n/\\log\\log n)$.
+  Прогресс: доказано, что $\\mathrm{PARITY}_m$ имеет $\\{\\wedge,\\vee,\\neg\\}$‑формулы глубины $O(\\log m/\\log\\log m)$ и размера $O(m^2)$, так что само *представление* “большой XOR‑строки” не упирается в необходимость глубины $\\Theta(\\log m)$; узел остаётся в **bounded‑depth Frege‑выводе** XOR‑шагa. См. `docs/research/16_tseitin.md` §16.183. `InfoGain:` 1.
+  `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+  Следующий шаг: найти точную ссылку (или барьер), отвечает ли литература на вопрос о полиномиальном bounded‑depth Frege‑выводе одной XOR‑операции (сложения линейных форм) при глубине $\\Theta(\\log n/\\log\\log n)$.
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
