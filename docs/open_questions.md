@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S3-check-lemma45-flat-ext-break (см. `docs/research/16_tseitin.md` §16.165)
-  - `NextStepID:` Q43.S4-parameter-check-after-unfolding
+  - `LastStepID:` Q43.S4-parameter-check-after-unfolding (см. `docs/research/16_tseitin.md` §16.166)
+  - `NextStepID:` Q43.S5-check-local-consistency-after-unfolding
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: формализован “unfolding” flat extension‑запросов $P\\to X$ для decision trees: любой $T(X\\cup P)$ заменяется на edge‑only $U(X)$ с blow‑up по глубине $t\\mapsto(2s+1)t$; это локализует, как применить HR multi‑switching (Lemma 4.4) в присутствии flat extensions; см. `docs/research/16_tseitin.md` §16.165. `InfoGain:` 1.
+  Прогресс: проверено, что параметрический блок HR’22 Lemma 4.5 переносится после unfolding $t\\mapsto t':=(2s+1)\\log M$: “цена” flat extensions в этом месте — замена $\\log M\\mapsto (2s+1)\\log M$ (то есть фактор $(2s+1)^d$ в знаменателе экспоненты для length‑bound); см. `docs/research/16_tseitin.md` §16.166. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, что после замены $t\\mapsto(2s+1)t$ условия параметров в HR Lemma 4.5 всё ещё выполняются (в частности, $t(\\eta)\\le n_\\eta/16$ и $t\\le s_\\eta\\le n' /32$), или зафиксировать точный барьер.
+  Следующий шаг: проверить, что в HR Lemma 4.5/определении evaluation локальная согласованность нужных decision trees действительно сохраняется при наличии flat extension‑аксиом (или зафиксировать точную точку поломки).
 
 ## Завершённые (архив)
 

@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S3-check-lemma45-flat-ext-break
-- `Do-not-repeat (next 2 runs):` Q43.S3-check-lemma45-flat-ext-break, Q43.S2-cite-linewise-evals-lemma45
+- `LastStepID:` Q43.S4-parameter-check-after-unfolding
+- `Do-not-repeat (next 2 runs):` Q43.S4-parameter-check-after-unfolding, Q43.S3-check-lemma45-flat-ext-break
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: показано, как “unfolding” убрать $P$‑запросы из decision trees ценой $t\\mapsto O(s\\,t)$; дальше — проверить, проходит ли параметрический режим HR Lemma 4.5 после такого усиления.
+Q43: параметр‑чек HR Lemma 4.5 прошёл с заменой $\\log M\\mapsto(2s+1)\\log M$; дальше — проверить сохранение локальной согласованности trees для evaluation при flat extensions.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: показано, как “unfolding” убрать $P$‑запросы 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Инвариант → Эквивалентность → Инвариант → Эквивалентность → Сжатие/канонизация
+Последние: Эквивалентность → Инвариант → Эквивалентность → Сжатие/канонизация → Трейд‑офф
