@@ -9,6 +9,7 @@ This repo is a compact, continuously-verified research log aimed at making real 
 - Agent working memory (bounded): `docs/agent_brief.md`
 - Run checks (no Jupyter needed): `python3 scripts/verify_notebook.py`
 - Run the agents (recommended): `./agent/run_trio.sh`
+- Light flow (question setter → worker): `./agent/run_flow.sh`
 - Summarize the last run log: `python3 agent/analyze_logs.py`
 
 ## Repository layout
@@ -48,6 +49,13 @@ Run it:
 
 ```bash
 ./agent/run_trio.sh
+```
+
+Light flow (QUESTION_SETTER → WORKER, optional SKEPTIC):
+
+```bash
+./agent/run_flow.sh
+SKEPTIC_EVERY=5 ./agent/run_flow.sh
 ```
 
 Common knobs:

@@ -52,6 +52,27 @@ Notes:
 - Prompts: `scripts/agent_prompt.txt` (worker), `scripts/skeptic_prompt.txt` (skeptic), `scripts/supervisor_prompt.txt` (supervisor).
 - Uses the same lock mechanism as the other runners.
 
+## Flow (question setter → worker; optional skeptic)
+
+This is a lighter loop close to “decompose → solve”:
+QUESTION_SETTER prepares a single “Question Set”, then WORKER executes exactly one micro-step.
+
+```bash
+./agent/run_flow.sh
+```
+
+Optional knobs:
+
+```bash
+SKEPTIC_EVERY=5 ./agent/run_flow.sh   # run skeptic every 5th round
+MAX_ROUNDS=1 ./agent/run_flow.sh
+REQUIRE_CLEAN=1 ./agent/run_flow.sh
+```
+
+Notes:
+- Logs go to `agent/logs/latest_flow.log`.
+- Prompts: `scripts/question_prompt.txt` and `scripts/worker_prompt.txt` (+ `scripts/skeptic_prompt.txt` if enabled).
+
 ## Log maintenance
 
 Keep only the newest 50 log files:

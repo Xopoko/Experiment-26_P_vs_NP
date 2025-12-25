@@ -377,6 +377,8 @@ def main(argv: list[str]) -> int:
             _verify_prompt_files(
                 paths=[
                     Path("scripts/agent_prompt.txt"),
+                    Path("scripts/question_prompt.txt"),
+                    Path("scripts/worker_prompt.txt"),
                     Path("scripts/skeptic_prompt.txt"),
                     Path("scripts/supervisor_prompt.txt"),
                 ],
@@ -424,6 +426,8 @@ def main(argv: list[str]) -> int:
         _verify_prompt_files(
             paths=[
                 Path("scripts/agent_prompt.txt"),
+                Path("scripts/question_prompt.txt"),
+                Path("scripts/worker_prompt.txt"),
                 Path("scripts/skeptic_prompt.txt"),
                 Path("scripts/supervisor_prompt.txt"),
             ],

@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 
-_ROLE_HEADER_RE = re.compile(r"^====\s+(WORKER|SKEPTIC|SUPERVISOR)\s+round=(\d+)\s+")
+_ROLE_HEADER_RE = re.compile(r"^====\s+(QUESTION_SETTER|WORKER|SKEPTIC|SUPERVISOR)\s+round=(\d+)\s+")
 _COMMIT_RE = re.compile(r"^\[([^\]]+)\s+([0-9a-f]{7,})\]\s+(.*)$")
 _STEP_ID_RE = re.compile(r"^Q\d{1,4}\.S\d{1,4}(?:-[a-z0-9][a-z0-9-]*)?$")
 _SHELL_OK_RE = re.compile(r"^/bin/bash -lc (.*) in .* succeeded\b")
@@ -81,18 +81,20 @@ def _analyze_log(path: Path) -> dict[str, Any]:
     current_round: int | None = None
     rounds_seen: set[int] = set()
 
-    role_sections: dict[str, int] = {"WORKER": 0, "SKEPTIC": 0, "SUPERVISOR": 0}
-    role_commits: dict[str, list[Commit]] = {"WORKER": [], "SKEPTIC": [], "SUPERVISOR": []}
+    role_sections: dict[str, int] = {"QUESTION_SETTER": 0, "WORKER": 0, "SKEPTIC": 0, "SUPERVISOR": 0}
+    role_commits: dict[str, list[Commit]] = {"QUESTION_SETTER": [], "WORKER": [], "SKEPTIC": [], "SUPERVISOR": []}
     commits: list[Commit] = []
 
     role_cmd_counts: dict[str, dict[str, int]] = {
+        "QUESTION_SETTER": {"total": 0, "rg": 0, "rg_text_cache": 0, "verify": 0, "git_commit": 0},
         "WORKER": {"total": 0, "rg": 0, "rg_text_cache": 0, "verify": 0, "git_commit": 0},
         "SKEPTIC": {"total": 0, "rg": 0, "rg_text_cache": 0, "verify": 0, "git_commit": 0},
         "SUPERVISOR": {"total": 0, "rg": 0, "rg_text_cache": 0, "verify": 0, "git_commit": 0},
     }
-    role_cmd_last: dict[str, list[str]] = {"WORKER": [], "SKEPTIC": [], "SUPERVISOR": []}
-    role_mcp_counts: dict[str, int] = {"WORKER": 0, "SKEPTIC": 0, "SUPERVISOR": 0}
+    role_cmd_last: dict[str, list[str]] = {"QUESTION_SETTER": [], "WORKER": [], "SKEPTIC": [], "SUPERVISOR": []}
+    role_mcp_counts: dict[str, int] = {"QUESTION_SETTER": 0, "WORKER": 0, "SKEPTIC": 0, "SUPERVISOR": 0}
     role_reported: dict[str, dict[str, Any]] = {
+        "QUESTION_SETTER": {"step_id": None, "step_id_line": None, "infogain": None, "infogain_line": None},
         "WORKER": {"step_id": None, "step_id_line": None, "infogain": None, "infogain_line": None},
         "SKEPTIC": {"step_id": None, "step_id_line": None, "infogain": None, "infogain_line": None},
         "SUPERVISOR": {"step_id": None, "step_id_line": None, "infogain": None, "infogain_line": None},
@@ -289,6 +291,7 @@ def main(argv: list[str]) -> int:
         print("rounds: 0")
     print(
         "sections:"
+        f" QUESTION_SETTER={sections.get('QUESTION_SETTER', 0)}"
         f" WORKER={sections.get('WORKER', 0)}"
         f" SKEPTIC={sections.get('SKEPTIC', 0)}"
         f" SUPERVISOR={sections.get('SUPERVISOR', 0)}"
@@ -296,15 +299,18 @@ def main(argv: list[str]) -> int:
     print(
         "commits:"
         f" total={commits_total}"
+        f" QUESTION_SETTER={commits_by_role.get('QUESTION_SETTER', 0)}"
         f" WORKER={commits_by_role.get('WORKER', 0)}"
         f" SKEPTIC={commits_by_role.get('SKEPTIC', 0)}"
         f" SUPERVISOR={commits_by_role.get('SUPERVISOR', 0)}"
     )
+    q_cmd = commands_by_role.get("QUESTION_SETTER") or {}
     w_cmd = commands_by_role.get("WORKER") or {}
     s_cmd = commands_by_role.get("SKEPTIC") or {}
     sup_cmd = commands_by_role.get("SUPERVISOR") or {}
     print(
         "cmds:"
+        f" QUESTION_SETTER=({q_cmd.get('total', 0)} total, {q_cmd.get('rg', 0)} rg, {q_cmd.get('rg_text_cache', 0)} rg_text_cache)"
         f" WORKER=({w_cmd.get('total', 0)} total, {w_cmd.get('rg', 0)} rg, {w_cmd.get('rg_text_cache', 0)} rg_text_cache, {w_cmd.get('verify', 0)} verify)"
         f" SKEPTIC=({s_cmd.get('total', 0)} total, {s_cmd.get('rg', 0)} rg, {s_cmd.get('rg_text_cache', 0)} rg_text_cache, {s_cmd.get('verify', 0)} verify)"
         f" SUPERVISOR=({sup_cmd.get('total', 0)} total, {sup_cmd.get('verify', 0)} verify)"
