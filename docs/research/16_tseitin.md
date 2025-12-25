@@ -2788,3 +2788,22 @@
 - `InfoGain:` 1.
 - `Барьер‑чек:` r — применимо (чистая арифметика в параметрах), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` проверить допустимость выбора $\\ell=t'$ в Lemma 4.4/Def. “$\\ell$‑common” (есть ли ограничение $\\ell\\le s$ или иное) — Q43.S33-ell-admissibility-check.
+
+### 16.200. Исследовательский шаг (exact citation): допустимость $\\ell=t'$ в Def. 2.10 / Lemma 4.4
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S33-ell-admissibility-check):`
+  В HR’22 Def. 2.10 и Lemma 4.4 параметр $\\ell$ не ограничен сверху (нет условий вида $\\ell\\le t$ или $\\ell\\le s$);
+  значит выбор $\\ell=t'$ допустим на уровне формулировок (при сохранении условий на $t,s$ из Lemma 4.4).
+- `Exact citation:`
+  Def. 2.10: “for every $T_i$ and branch $\\tau\\in T$ there are decision trees $T^{(i,\\tau)}$ of depth $\\ell$ …”
+  без дополнительных условий на $\\ell$ (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:574–582`).
+  Lemma 4.4: параметры $k,M,n',s,t\\in\\mathbb N^+$ с условиями $t\\le s\\le n'/32$ и $\\mathrm{depth}(T_i)\\le t$,
+  а $\\ell$ появляется только в требовании “represented by an $\\ell$‑common partial decision tree of depth $s$”
+  и в множителе $M^{s/\\ell}$ (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1073–1084`).
+- `Toy‑тест:` при дереве глубины $t$ и частичном дереве глубины $0$ Def. 2.10 допускает любой $\\ell$,
+  так что выбор $\\ell>t$ не вызывает противоречия в определении.
+- `Статус:` подтверждено (ограничения на $\\ell$ в формулировках отсутствуют).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — неприменимо (цитата/формулировка), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` проверить, не используется ли в доказательстве Lemma 4.4 скрытое условие $\\ell\\le t$ или $\\ell\\le s$ (Q43.S35-ell-vs-t-constraint).

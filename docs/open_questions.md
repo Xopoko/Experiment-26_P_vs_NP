@@ -20,16 +20,17 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S32-m-factor-ell-constant (см. `docs/research/16_tseitin.md` §16.199)
-  - `NextStepID:` Q43.S33-ell-admissibility-check
+  - `LastStepID:` Q43.S33-ell-admissibility-check (см. `docs/research/16_tseitin.md` §16.200)
+  - `NextStepID:` Q43.S35-ell-vs-t-constraint
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
   (v) явный corollary: с $c_1=4$ получаем $(\\log n)^4$ и зависимость от $M$ только через $t'=(2s+1)\\log M$ и $M^{s/\\ell}$ (§16.197). `InfoGain:` 1.
   (vi) при $M=\\mathrm{poly}(n)$, $s=(\\log n)^c$, $d=(\\kappa+o(1))\\log n/\\log\\log n$: показатель $n^{1-\\kappa(5+c)-o(1)}$, нетривиально iff $\\kappa<1/(5+c)$ (§16.198). `InfoGain:` 1.
   (vii) при $\\ell:=t'=(2s+1)\\log M$ фактор $M^{s/\\ell}=\\exp(s/(2s+1))\\le e^{1/2}$ — константа (§16.199). `InfoGain:` 1.
+  (viii) точная цитата: Def. 2.10 и Lemma 4.4 не содержат ограничений на $\\ell$ кроме “depth $\\ell$”; значит $\\ell=t'$ допустимо на уровне формулировок (§16.200). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить допустимость выбора $\\ell=t'$ в Lemma 4.4/определении “$\\ell$‑common” (есть ли ограничение $\\ell\\le s$ или иное).
+  Следующий шаг: проверить, не используется ли в доказательстве Lemma 4.4 скрытое условие $\\ell\\le t$ или $\\ell\\le s$ (Q43.S35-ell-vs-t-constraint).
 
 ## Завершённые (архив)
 

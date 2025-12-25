@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S32-m-factor-ell-constant
-- `Do-not-repeat (next 2 runs):` Q43.S32-m-factor-ell-constant, Q43.S31-critical-depth-kappa
+- `LastStepID:` Q43.S33-ell-admissibility-check
+- `Do-not-repeat (next 2 runs):` Q43.S33-ell-admissibility-check, Q43.S32-m-factor-ell-constant
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: $M^{s/\\ell}$ constant for $\\ell=t'$; next: check admissibility of $\\ell=t'$ in Lemma 4.4 (“$\\ell$‑common” limits)
+Q43: $\\ell=t'$ admissible in Def. 2.10/Lemma 4.4 statements; next: check proof for hidden $\\ell\\le t$ or $\\ell\\le s$
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: $M^{s/\\ell}$ constant for $\\ell=t'$; next: check admissibility of $\\ell=
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Тр→Тр→Сж→Тр→Тр
+Последние:Эк→Тр→Тр→Сж→Тр
