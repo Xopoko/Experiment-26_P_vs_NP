@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S13-tightness-regime (см. `docs/research/16_tseitin.md` §16.175)
-  - `NextStepID:` Q43.S14-threshold-in-s
+  - `LastStepID:` Q43.S14-threshold-in-s (см. `docs/research/16_tseitin.md` §16.176)
+  - `NextStepID:` Q43.S15-poly-s-depth-regime
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: проверен явный критерий, когда corollary из §16.174 даёт “почти tightness” $N\\ge\\exp(n^{1-o(1)})$, и разобраны типичные режимы (polylog‑$s$, subcritical depth); см. `docs/research/16_tseitin.md` §16.175. `InfoGain:` 1.
+  Прогресс: в режиме $M=\\mathrm{poly}(n)$ и $d=o(\\log n/\\log\\log n)$ порог по $s$ сводится к $d\\cdot\\log(2s+1)=o(\\log n)$ (эквивалентно $\\log s=o(\\log n/d)$); см. `docs/research/16_tseitin.md` §16.176. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: оценить “порог по $s$” из условия $(*)$ в §16.175 при $M=\\mathrm{poly}(n)$ и $d=o(\\log n/\\log\\log n)$.
+  Следующий шаг: подставить $s=n^{\\varepsilon}$ и выписать допустимые режимы $d$ (когда lower bound из §16.174 остаётся нетривиальным).
 
 ## Завершённые (архив)
 
