@@ -391,8 +391,8 @@ Feasible interpolation: короткие доказательства clique-col
 Для Tseitin на экспандерах известны экспоненциальные нижние оценки в резолюции через ширину/экспансию; Itsykson–Oparin 2013.
 Формально: при $\deg(G)\le k$ имеем $W\ge e(G)-1$ и $S\ge \exp((e(G)-k-1)^2/|E|)$, значит на bounded‑degree экспандерах $S=\exp(\Omega(|V|))$; см. §16.85–16.86.
 С явной expander‑семьёй это даёт явное bounded‑occ семейство 3‑CNF (см. §16.87).
-Для Tseitin(Grid$_{n,n}$) (где число переменных $N=\Theta(n^2)$) в bounded‑depth Frege порог по глубине tight:
-polynomial‑size $\Leftrightarrow$ depth $=\Theta(\log N/\log\log N)$; см. Håstad’20 + GIRS’19 и §16.92+§16.115–§16.116.
+Для Tseitin(Grid$_{n,n}$) (где число переменных $N=\Theta(n^2)$) в bounded‑depth Frege известны лишь разнесённые границы для polynomial‑size:
+depth $=\Omega(\log N/\log\log N)$ (Håstad’20, Cor. 6.6) и depth $=O(\log N)$ (upper из GIRS’19; см. §16.92+§16.115+§16.116+§16.120).
 Кратко: Tseitin — паритеты на графе (нечетная сумма зарядов ⇒ невыполнимость);
 нижние оценки через ограниченную степень и экспансию; Clique-Coloring —
 несовместимость клики и раскраски.
