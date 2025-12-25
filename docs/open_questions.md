@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S10-common-partial-tree-after-unfolding (см. `docs/research/16_tseitin.md` §16.172)
-  - `NextStepID:` Q43.S11-induce-trees-from-proof
+  - `LastStepID:` Q43.S11-induce-trees-from-proof (см. `docs/research/16_tseitin.md` §16.173)
+  - `NextStepID:` Q43.S12-corollary-thm43-flat-local-ef
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: доказано, что понятия “represents $\\bigvee_i T_i$” и “$\\ell$‑common partial decision tree” (HR’22 Def. 2.10) инвариантны при замене деревьев на functionally equivalent; поэтому после edge‑only locally consistent unfolding шаг HR’22 Lemma 4.5 (common partial tree + Property 4 для ∨) переносится дословно при замене $t\\mapsto t':=(2s+1)\\log M$; см. `docs/research/16_tseitin.md` §16.172. `InfoGain:` 2.
+  Прогресс: формализовано, *где именно* в HR’22 Lemma 4.5 возникают “входные” decision trees для multi‑switching: это restricted уникальные части $\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau$ глубины $\\le t=\\log M$; в flat local‑EF(s) их edge‑only версия получается locally consistent unfolding из §16.169 и имеет глубину $t'=(2s+1)\\log M$, так что Lemma 4.4 применима с $t'$ и индукция Lemma 4.5 проходит. См. `docs/research/16_tseitin.md` §16.173. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: формализовать, как poly‑size flat local‑EF(s)‑доказательство индуцирует нужные family of edge‑only decision trees глубины $t'=\\mathrm{polylog}(n)$ (вход Lemma 4.5), или зафиксировать точную причину, почему такой индукции по строкам недостаточно без nesting/глобальной поддержки.
+  Следующий шаг: сформулировать итоговый corollary уровня HR Theorem 4.3 для depth‑$d$ flat local‑EF(s): как меняется нижняя оценка на длину/размер при подстановке $t'=(2s+1)\\log M$.
 
 ## Завершённые (архив)
 
