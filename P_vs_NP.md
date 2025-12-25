@@ -27,7 +27,7 @@
 - [14. Полиномиальная иерархия](docs/14_ph.md)
 - [15. Proof complexity: резолюция и PHP](docs/15_proof_complexity.md)
 - [16. IP = PSPACE и PCP](docs/16_ip_pcp.md)
-- [Исследовательские шаги 16.3–16.36](docs/research/16_research_steps.md)
+- [Исследовательские шаги (16.x, индекс)](docs/research/index.md)
 - [17. Источники и опорные ссылки](docs/sources.md)
 
 ## Проверка
