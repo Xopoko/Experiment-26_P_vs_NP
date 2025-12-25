@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S8-functional-equivalence-after-unfolding
-- `Do-not-repeat (next 2 runs):` Q43.S8-functional-equivalence-after-unfolding, Q43.S7-plug-lc-unfolding-into-lemma45
-- `Last InfoGain:` 1
+- `LastStepID:` Q43.S9-check-evaluation-properties-after-unfolding
+- `Do-not-repeat (next 2 runs):` Q43.S9-check-evaluation-properties-after-unfolding, Q43.S8-functional-equivalence-after-unfolding
+- `Last InfoGain:` 2
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: functional equivalence после unfolding сведена к “одна и та же функция + local consistency”; дальше — проверить Properties 1–4 evaluation и t-common partial decision tree в шаге Lemma 4.5.
+Q43: в Lemma 2.13 свойство “переменные→depth‑1” не нужно; дальше — проверить t-common partial decision tree/representation (Lemma 4.5) после unfolding.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: functional equivalence после unfolding сведена к “одна �
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Трейд‑офф → Модельный стресс‑тест → Инвариант → Эквивалентность → Эквивалентность
+Последние: Модельный стресс‑тест → Инвариант → Эквивалентность → Эквивалентность → Инвариант

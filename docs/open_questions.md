@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S8-functional-equivalence-after-unfolding (см. `docs/research/16_tseitin.md` §16.170)
-  - `NextStepID:` Q43.S9-check-evaluation-properties-after-unfolding
+  - `LastStepID:` Q43.S9-check-evaluation-properties-after-unfolding (см. `docs/research/16_tseitin.md` §16.171)
+  - `NextStepID:` Q43.S10-common-partial-tree-after-unfolding
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: functional equivalence evaluations после unfolding сводится к “деревья вычисляют одну и ту же функцию” + local consistency, поэтому сохраняется автоматически для изоморфных формул; см. `docs/research/16_tseitin.md` §16.170. `InfoGain:` 1.
+  Прогресс: проверено, что в HR’22 Lemma 2.13 Property 1 (переменные→depth‑1) не используется; достаточно, чтобы атомы отображались в locally consistent деревья глубины $\\le t$. Это снимает конфликт после unfolding, где $p_i$ естественно отображать в дерево глубины $O(s)$; см. `docs/research/16_tseitin.md` §16.171. `InfoGain:` 2.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, что после unfolding edge‑only trees всё ещё удовлетворяют Properties 1–4 определения evaluation и “t‑common partial decision tree” в шаге Lemma 4.5.
+  Следующий шаг: проверить, что после unfolding шаг Lemma 4.5 всё ещё даёт $t$‑common partial decision tree и Property 4 (representation) для ∨‑формул при замене $t=\\log M\\mapsto (2s+1)\\log M$.
 
 ## Завершённые (архив)
 

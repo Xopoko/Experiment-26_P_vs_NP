@@ -2128,3 +2128,25 @@
 - `Статус:` доказано (functional equivalence в Q43 сводится к “вычисляют одну и ту же функцию” + local consistency).
 - `Барьер‑чек:` r — применимо (аргумент на уровне local consistency/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` для Q43: после снятия functional‑equivalence риска проверить, что полученные edge‑only trees по‑прежнему удовлетворяют Properties 1–4 определения evaluation (и t‑common partial decision tree) в шаге Lemma 4.5.
+
+### 16.171. Исследовательский шаг: “Property 1” в t‑evaluation не нужно для Lemma 2.13 (можно разрешить переменным деревья глубины $\\le t$)
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S9-check-evaluation-properties-after-unfolding):`
+  В доказательстве HR’22 Lemma 2.13 (Appendix A.1; PDF p. 50–51) не используется Property 1 из Definition 2.11 (т.е. что *переменные* обязаны отображаться в деревья глубины 1).
+  Достаточно, чтобы (a) все деревья были locally consistent и глубины $\\le t$, (b) аксиомы были 1‑trees (Property 2), и выполнялись Properties 3–4 (¬ и ∨) плюс functional equivalence между строками.
+  Следовательно, в Q43 можно после unfolding разрешить extension‑переменным $p_i$ отображаться в edge‑only деревья глубины $O(s)$ (например, $T_{\\varphi_i,\\alpha}$ из §16.168), не ломая “gatekeeper” Lemma 2.13.
+- `Доказательство:`
+  Просматриваем доказательство Lemma 2.13 у HR’22 (PDF p. 50–51): оно делает индукцию по строкам и во всех случаях использует только
+  - “axioms are mapped to 1‑trees” (Property 2),
+  - связь $T_{\\neg F}$ с $T_F$ (Property 3),
+  - что $T_{F\\vee G}$ **represents** $T_F\\vee T_G$ (Property 4),
+  - functional equivalence + Lemma 2.9,
+  - и Corollary 2.7 (чтобы $T\\!\upharpoonright\\!\\tau$ был определён при глубинах $\\le n/16$).
+
+  Нигде не требуется, чтобы дерево для атома $p$ было глубины 1: в “Excluded Middle” они обозначают $T_p:=\\phi_\\nu(p)$ и работают с ним только через Properties 3–4; в остальных правилах $p,q,r$ — произвольные формулы строк, а не обязательно атомы.
+  Поэтому если заменить Property 1 на более слабое требование “каждый атом отображается в locally consistent decision tree глубины $\\le t$”, то весь вывод Lemma 2.13 остаётся дословным.
+- `Toy‑тест:` если $p_i\\leftrightarrow\\varphi_i(X)$ и $|\\mathrm{supp}(\\varphi_i)|\\le s$, то после unfolding можно взять дерево для $p_i$ равным $T_{\\varphi_i,\\emptyset}$ глубины $\\le 2s$ (§16.168); при условии $2s\\le t\\le n/16$ лемма 2.13 применима без изменения.
+- `Статус:` доказано (закрывает “проверку Property 1”: после unfolding не надо удерживать глубину 1 для extension‑переменных).
+- `Барьер‑чек:` r — применимо (аргумент целиком про local consistency/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` для Q43 проверить оставшуюся часть “evaluation properties” в шаге Lemma 4.5: что построенные edge‑only деревья действительно дают $t$‑common partial decision tree и удовлетворяют Property 4 (representation) для ∨‑формул после unfolding.
