@@ -6,13 +6,13 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20). Узкое место — bounded‑depth Frege симуляция одного XOR‑add (3‑вершинный Tseitin) при $d\\approx\\log n/\\log\\log n$ (§16.124–§16.126); GIRS’19 parity‑refinement даёт лишь quasi‑poly и сертифицирует poly‑size только при $d=\\Omega(\\log n)$ (§16.128–§16.129), EF даёт глубину $O(\\log n)$ (§16.127); XOR‑add тривиализуется, если все уравнения держать в одном фиксированном block‑representation (§16.130).
+Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20). Узкое место — bounded‑depth Frege симуляция одного XOR‑add (3‑вершинный Tseitin) при $d\\approx\\log n/\\log\\log n$ (§16.124–§16.126); GIRS’19 parity‑refinement даёт лишь quasi‑poly и сертифицирует poly‑size только при $d=\\Omega(\\log n)$ (§16.128–§16.129), EF даёт глубину $O(\\log n)$ (§16.127); block‑representation даёт «easy case» XOR‑add (§16.130), но фиксированный базис для grid‑границ требует $k=\\Omega(n)$ (§16.131).
 
 ## Что уже сделано (не повторять)
 
 - ROABP‑канонизация multilinearization для CNF даёт $\mathrm{P}=\mathrm{NP}$ (барьер‑леммы 15.7.4* в `docs/15_proof_complexity.md`).
 - PIT‑аксиомы ⇒ EF p‑симулирует IPS; базовые кодирования (CNF→3‑CNF + $g$, Tseitin‑Eval, счётчики) уже в 16.x.
-- Tseitin: Frege poly (16.91); bounded‑depth Frege lower bounds (Håstad’20, 16.92) и all‑graphs extension (GIRS’19, 16.97). GIRS’19: «компактный паритет» (Lemma 21) даёт quasi‑poly на пороге и сертифицирует poly‑size только при $d=\\Omega(\\log X)$ (16.120–16.121, 16.129); Håstad–Risse (§1.2): нет известной синтаксической симуляции Gaussian elimination (16.122). Условное упрощение: XOR‑add лёгок при фиксированном block‑representation (§16.130). Cor. 34: bounded‑depth Frege ⇒ tree‑like Res quasi‑poly (16.98); EF poly (16.88); PC: $\\mathbb F_2$ easy (16.89), char$\\ne2$ hard (16.90).
+- Tseitin: Frege poly (16.91); bounded‑depth Frege lower bounds (Håstad’20, 16.92) и all‑graphs extension (GIRS’19, 16.97). GIRS’19: «компактный паритет» (Lemma 21) даёт quasi‑poly на пороге и сертифицирует poly‑size только при $d=\\Omega(\\log X)$ (16.120–16.121, 16.129); Håstad–Risse (§1.2): нет синтаксической симуляции Gaussian elimination (16.122). XOR‑add лёгок при фиксированном block‑representation (§16.130), но для grid‑границ фиксированный базис требует $k=\\Omega(n)$ (§16.131). Cor. 34: bounded‑depth Frege ⇒ tree‑like Res quasi‑poly (16.98); EF poly (16.88); PC: $\\mathbb F_2$ easy (16.89), char$\\ne2$ hard (16.90).
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
@@ -35,4 +35,4 @@ Proof complexity → Frege: Q39 — Tseitin(Grid) depth‑gap: lower $\\Omega(\\
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Трейд‑офф → Трейд‑офф → Трейд‑офф → Сжатие/канонизация → Эквивалентность
+Последние: Трейд‑офф → Трейд‑офф → Сжатие/канонизация → Эквивалентность → Коммуникация/ранг
