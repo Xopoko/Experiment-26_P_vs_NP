@@ -20,13 +20,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S20-bound-c1 (см. `docs/research/16_tseitin.md` §16.182)
-  - `NextStepID:` Q43.S21-track-constants-lemma44
+  - `LastStepID:` Q43.S21-cite-log4-and-Mfactor (см. `docs/research/16_tseitin.md` §16.188)
+  - `NextStepID:` Q43.S22-check-c1-vs-log4
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
-  Прогресс: проверено, что в HR’22 Lemma 4.4 показатель $c_1$ (в $\\log^{c_1}n$) не фиксируется явно: в proof (Section 7.3) дополнительные издержки “absorbed by the constants $c_1$ and $c_2$”, т.е. численного $c_1$ из текста не извлечь без трекинга констант; см. `docs/research/16_tseitin.md` §16.182. `InfoGain:` 1.
+  Прогресс: зафиксировано, что в HR’22 single switching‑лемма (Lemma 4.2) уже имеет *явный* polylog‑показатель 4 и exponent $s/64$, а в proof multi‑switching (Lemma 4.4, §7.3) выделено, что единственный “не‑absorbed” вклад — индекс $j\\in[M]$, порождающий множитель $M^{s/\\ell}$; значит неизвестность по $c_1$ в Lemma 4.4 сидит только в местах “absorbed by $c_1,c_2$” (напр. идентификация доп. chosen centers). См. `docs/research/16_tseitin.md` §16.188. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: перепройти proof HR’22 Lemma 4.4 с трекингом констант и получить явный upper bound на $c_1$ (или вывести явное “$c_1=O(1)$ с конкретным значением” из другого источника).
+  Следующий шаг: в proof HR’22 Lemma 4.4 проверить, что “identity of additional chosen centers” реально укладывается в прежний $b\\log\\Delta$‑терм (как в Lemma 6.9) и не требует увеличивать показатель у $\\log n$ сверх 4; иначе выписать явный upper bound на $c_1$ (пусть и грубый).
 
 ## Завершённые (архив)
 
