@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S4-compare-hr-vs-girs-repr
-- `Do-not-repeat (next 2 runs):` Q39.S4-compare-hr-vs-girs-repr, Q39.S3-cite-xor-step-bdfrege
+- `LastStepID:` Q39.S5-lb-xor-step-hastad20
+- `Do-not-repeat (next 2 runs):` Q39.S5-lb-xor-step-hastad20, Q39.S4-compare-hr-vs-girs-repr
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q39:qpoly; next: poly XOR
+Q39:LB⇒hard; next: blk
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q39:qpoly; next: poly XOR
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние: Трейд→Экв→Сжатие→Трейд→Экв
+Последние: Экв→Сжат→Трейд→Экв→Стр

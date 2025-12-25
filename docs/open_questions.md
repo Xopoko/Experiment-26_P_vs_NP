@@ -8,14 +8,14 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE (open confirmed)
-  - `LastStepID:` Q39.S4-compare-hr-vs-girs-repr (см. `docs/research/16_tseitin.md` §16.185)
-  - `NextStepID:` Q39.S5-poly-xor-step-depthregime
+  - `LastStepID:` Q39.S5-lb-xor-step-hastad20 (см. `docs/research/16_tseitin.md` §16.186)
+  - `NextStepID:` Q39.S6-block-carcas-or-impossibility
   - `Success:` либо явный upper на глубине $O(\\log N/\\log\\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Известно: $d_{\\mathrm{poly}}(N)\\ge\\Omega(\\log N/\\log\\log N)$ (Håstad’20, Cor. 6.6; §16.92) и $d_{\\mathrm{poly}}(N)\\le O(\\log N)$ (unpack GIRS’19/Claim 28; §16.115–§16.121).
   Узел: синтаксически симулировать шаг Gaussian elimination в bounded‑depth Frege (HR’22 отмечают как “не умеем”; §16.122).
-  Прогресс: проверено, что подстановка GIRS’19 compact‑representation ($\\Phi^a(S,U)$ из Lemma 21) в режим глубины $D\\asymp\\log m/\\log\\log m$ даёт лишь quasi‑poly bound на размер $|\\Phi^1(\\emptyset,U)|$ и, следовательно, на вывод из Lemma 24 (размер $\\le c|\\Phi^1(\\emptyset,U)|^6$), т.е. это не даёт требуемого $\\mathrm{poly}(m)$‑XOR‑шага в Q39. См. `docs/research/16_tseitin.md` §16.185. `InfoGain:` 1.
+  Прогресс: из Håstad’20 Thm. 6.5 следует барьер: “универсальный” poly‑size XOR‑step для всех шагов гауссова/column‑summing каркаса при $d=\\Theta(\\log n/\\log\\log n)$ невозможен, иначе получилась бы poly‑size depth‑$d$ рефутация Tseitin(Grid$_n$), что запрещено; значит хотя бы один XOR‑шаг в таком каркасе имеет quasi‑poly масштаб. См. `docs/research/16_tseitin.md` §16.186. `InfoGain:` 1.
   `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: либо построить poly‑size XOR‑step в depth‑режиме $\\Theta(\\log m/\\log\\log m)$ для полиномиальных паритет‑формул (другой формат “компактности”), либо зафиксировать барьер/негативный результат для такого XOR‑шага.
+  Следующий шаг: уточнить, можно ли держать *special* block‑представление (общий partition) так, чтобы все XOR‑шаги каркаса попадали в лёгкий режим §16.130, или доказать, что неизбежен base‑change, создающий “тяжёлый” шаг.
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
