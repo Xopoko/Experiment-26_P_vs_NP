@@ -2676,3 +2676,26 @@
 - `InfoGain:` 2.
 - `Барьер‑чек:` r — применимо (encoding‑аргументы релятивизируются), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` попытаться усилить $|U_j|\\le a_j$ до “$S_{\\lambda^j}$ уже входит в $b$ из Lemma 6.9” (т.е. показать, что (ii) вообще не увеличивает показатель polylog), или найти точную точку, где это невозможно.
+
+### 16.195. Исследовательский шаг (proof): (ii) “identity of additional chosen centers” в HR’22 §7.3 не увеличивает polylog‑показатель — она уже покрывается $b\\log\\Delta$ из Lemma 6.9
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S28-centers-already-in-b):`
+  В proof of HR’22 Lemma 4.4 (Multi-switching, §7.3) дополнительный пункт (ii) “identity of additional chosen centers” для множеств $S_{\\lambda^j}$ можно зарядить в тот же $b\\log\\Delta$‑терм, что и в single‑switching Lemma 6.9: центры $v\\in S_{\\lambda^j}$ уже восстанавливаются стандартной инверсией как “неэкспонированные соседи” новых exposed chosen centers, а случаи, где нужен $\\log\\Delta$, совпадают с “other disappearing centers”, считаемыми в $b$.
+
+- `Доказательство (по тексту HR’22):`
+  В раунде $j$ multi-switching задана длинная ветвь $\\lambda^j$ и
+  $$U:=(S(\\lambda^j,\\sigma)\\setminus S(\\tau,\\sigma))\\cap C_\\sigma$$
+  — множество “newly exposed chosen centers” (HR’22: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2724–2729`).
+  По определению $S_{\\lambda^j}$ каждый $v\\in S_{\\lambda^j}$ лежит в под‑квадрате, соседнем (в $n'\\times n'$‑решётке) некоторому $u\\in U$.
+  Так как при построении $T^j$ “maintain the same invariants as in Invariants 6.1” (HR’22: `…:2698–2699`), то для каждого exposed chosen center $u$ на ветви $\\lambda^j$ запрошены **все** инцидентные переменные $y_P$ (Invariant 6.1(5); `…:1858–1861`).
+  В частности, запрошена переменная выбранного пути между $u$ и соседним $v$, и в восстановимом information set присутствует information piece $\\{u,v\\}$.
+  Ровно такие ситуации (edge/non-edge между exposed chosen center $u$ и неэкспонированным chosen center $v$) разбираются в proof of Lemma 6.9: Case 1–3 при восстановлении $I_j$ (`…:2518–2534`).
+  В Case 1 $v$ восстанавливается позже, в Case 3 — бесплатно как alive chosen center, а в Case 2 $v$ идентифицируется за $\\log\\Delta$ бит и при этом **не** является associated center (по Property 2, Definition 6.2), то есть относится к “other disappearing centers”, оплачиваемым $b\\log\\Delta$ (`…:2531–2534`, `…:2547–2548`).
+  Следовательно, (ii) не требует добавлять новый $\\log\\Delta$‑бюджет поверх Lemma 6.9 и не увеличивает polylog‑показатель по сравнению с single‑switching (за исключением отдельного фактора по индексу $j\\in[M]$).
+
+- `Toy‑тест:` локально на решётке каждый новый exposed chosen center $u$ имеет ≤4 соседних chosen centers; по Invariant 6.1(5) они неизбежно появляются как вторые концы queried variables, а Lemma 6.9 Case 1–3 даёт готовую схему их восстановления без нового polylog.
+- `Статус:` доказано (на уровне схемы инверсии HR’22; пункт (ii) не увеличивает polylog‑показатель).
+- `InfoGain:` 2.
+- `Барьер‑чек:` r — применимо (энкодинг‑аргументы релятивизируются), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` обновить §16.191–§16.194: убрать добавку “$+5a$” как обязательную для $c_1$, зафиксировать $c_1\\approx 4$ (и отдельно вынести единственный непоглощаемый вклад $\\log M$), либо указать точное место, где “forgotten answers” ломают прямой перенос Case 1–3.
