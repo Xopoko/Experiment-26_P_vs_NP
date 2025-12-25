@@ -6,7 +6,7 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Proof complexity → Frege: Q39 — depth‑gap для polynomial‑size на Tseitin(Grid): lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20), а GIRS’19 Claim 28 сертифицирует polynomial‑size лишь при $d=\\Omega(\\log N)$ (оптимизация §16.121); Håstad–Risse (§1.2, §16.122) подчёркивают, что «Gaussian elimination»‑upper упирается в отсутствующий синтаксический шаг. Следующий шаг: искать upper при $O(\\log n/\\log\\log n)$ или барьер.
+Proof complexity → Frege: Q39 — depth‑gap для polynomial‑size на Tseitin(Grid): lower $\\Omega(\\log N/\\log\\log N)$ (Håstad’20), а GIRS’19 Claim 28 сертифицирует polynomial‑size лишь при $d=\\Omega(\\log N)$ (§16.121); representation паритета при depth $\\Theta(\\log n/\\log\\log n)$ уже явна (§16.123), bottleneck — синтаксический XOR‑шаг (Håstad–Risse, §16.122). Следующий шаг: искать upper/источник для XOR‑шага или барьер.
 
 ## Что уже сделано (не повторять)
 
