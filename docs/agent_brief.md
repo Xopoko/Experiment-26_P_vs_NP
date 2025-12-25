@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S33-ell-admissibility-check
-- `Do-not-repeat (next 2 runs):` Q43.S33-ell-admissibility-check, Q43.S32-m-factor-ell-constant
+- `LastStepID:` Q43.S35-ell-vs-t-constraint
+- `Do-not-repeat (next 2 runs):` Q43.S35-ell-vs-t-constraint, Q43.S33-ell-admissibility-check
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: $\\ell=t'$ admissible in Def. 2.10/Lemma 4.4 statements; next: check proof for hidden $\\ell\\le t$ or $\\ell\\le s$
+Q43: toy shows round-count uses $M^{s/\\ell}$; likely need $\\ell\\le s$ or explicit $\\lceil s/\\ell\\rceil$; next: verify rounding/truncation in proof
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: $\\ell=t'$ admissible in Def. 2.10/Lemma 4.4 statements; next: check proof 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эк→Тр→Тр→Сж→Тр
+Последние:Инв→Эк→Тр→Тр→Сж
