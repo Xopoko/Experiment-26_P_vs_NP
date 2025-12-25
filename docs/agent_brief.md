@@ -6,13 +6,13 @@
 
 ## Текущее направление (держать 1–2 строки)
 
-Proof complexity → Frege: для Tseitin(Grid) сделать верхнюю константу явной, переписав Claim 28/Theorem 27 → Thm. 19 без big‑O (в Lemma 24/25 уже $c=21$, §16.118) (Q39).
+Proof complexity → Frege: Q39 — верхняя константа теперь явна: $c=4$ в Thm. 19 через распаковку Claim 28→Thm. 27 (условие $X^{1/d}\\ge\\max(2d,6)$, $X=\\Delta\\,\\mathrm{tpw}$; §16.119). Следующий шаг: убрать/ослабить условие и сравнить с 59 (Håstad’20).
 
 ## Что уже сделано (не повторять)
 
 - ROABP‑канонизация multilinearization для CNF даёт $\mathrm{P}=\mathrm{NP}$ (барьер‑леммы 15.7.4* в `docs/15_proof_complexity.md`).
 - PIT‑аксиомы ⇒ EF p‑симулирует IPS; базовые кодирования (CNF→3‑CNF + $g$, Tseitin‑Eval, счётчики) уже в 16.x.
-- Tseitin: Frege poly (16.91); bounded‑depth Frege: tight size‑depth через treewidth (GIRS’19, 16.97) + Cor. 34: bounded‑depth Frege ⇒ tree‑like Res quasi‑poly (16.98) + tree‑like upper bound через carving width (BBI’16, 16.99) + $\mathrm{cw}(G)\le \mathrm{tw}(L(G))+1$ (16.100); EF poly (16.88); PC: $\mathbb F_2$ easy (16.89), char$\ne2$ hard (16.90).
+- Tseitin: Frege poly (16.91); bounded‑depth Frege: через treewidth (GIRS’19, 16.97) + явное $c=4$ в верхней оценке Thm. 19 (16.119) + Cor. 34: bounded‑depth Frege ⇒ tree‑like Res quasi‑poly (16.98) + tree‑like upper bound через carving width (BBI’16, 16.99) + $\mathrm{cw}(G)\le \mathrm{tw}(L(G))+1$ (16.100); EF poly (16.88); PC: $\mathbb F_2$ easy (16.89), char$\ne2$ hard (16.90).
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
