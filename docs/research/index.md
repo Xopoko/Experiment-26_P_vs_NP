@@ -4,6 +4,6 @@
 
 - [16_complexity.md](16_complexity.md): шаги 16.3–16.36
 - [16_encodings.md](16_encodings.md): шаги 16.37–16.84
-- [16_tseitin.md](16_tseitin.md): шаги 16.85–16.131
+- [16_tseitin.md](16_tseitin.md): шаги 16.85–16.132
 
 Главный файл: [P_vs_NP.md](../../P_vs_NP.md).
