@@ -9,12 +9,12 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S18-2k-staircase-geometry-obstruction (см. `formal/Notes/TseitinQ39.lean` §16.164)
-  - `NextStepID:` Q39.S19-2k-short-frontier-obstruction
+  - `LastStepID:` Q39.S19-2k-short-frontier-obstruction (см. `formal/Notes/TseitinQ39.lean` §16.165)
+  - `NextStepID:` Q39.S20-2k-single-frontier-obstruction
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
-  Update: даже при anchored‑staircase (префикс‑по‑строкам) геометрии внутренних узлов проекционный ранг остаётся 2 при $k=2$; нужна более сильная геометрия.
-  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.164) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
+  Update: даже при ограничении «короткий фронтир» (|$S_j\\cap\\delta(U)$|≤2) проекционный ранг остаётся 2 при $k=2$; нужна более сильная геометрия.
+  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.165) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
