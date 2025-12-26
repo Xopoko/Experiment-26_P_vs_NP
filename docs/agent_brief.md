@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S39-absorb-64-rescale-ell
-- `Do-not-repeat (next 2 runs):` Q43.S39-absorb-64-rescale-ell, Q43.S38-quote-centers-exposed
+- `LastStepID:` Q43.S40-inject-a-to-queries
+- `Do-not-repeat (next 2 runs):` Q43.S40-inject-a-to-queries, Q43.S39-absorb-64-rescale-ell
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: 64 поглощается рескейлом $\\ell:=64t'$ (и $\\ell\\ge t'\\Rightarrow t'$‑common); дальше проверить, можно ли связать $a$ с $s$ для сравнения с $M^{\\lceil s/t'\\rceil}$.
+Q43: инъекция $a\\to$ запросы ломается на non-chosen центрах; нужен split $a_{\\mathrm{ch}}/a_{\\mathrm{nch}}$ или обход через оптимизацию суммы без $a\\le s$.
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: 64 поглощается рескейлом $\\ell:=64t'$ (и $\\ell\\ge t
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Эк→Тр→Эк→Сж
+Последние:Эк→Тр→Эк→Сж→Инв

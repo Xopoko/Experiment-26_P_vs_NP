@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S39-absorb-64-rescale-ell (см. `docs/research/16_tseitin.md` §16.205)
-  - `NextStepID:` Q43.S40-bound-a-by-s
+  - `LastStepID:` Q43.S40-inject-a-to-queries (см. `docs/research/16_tseitin.md` §16.206)
+  - `NextStepID:` Q43.S41-optimise-a-sum
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -34,8 +34,11 @@
   (xi) контрпример: “$\\ge\\ell/4$ центров за раунд” в §7.2 относится ко всем exposed centers, поэтому bound $\\#\\text{rounds}\\le\\lceil 4a/\\ell\\rceil$ не следует; из Lemma 6.5–6.8 получается лишь $\\lceil 64a/\\ell\\rceil$ (§16.203). `InfoGain:` 1.
   (xii) точная цитата: в §7.2 “centers” — это exposed centers $S(\\lambda^j,\\sigma)$, а exposed centers определены как подмножество alive centers (§16.204). `InfoGain:` 1.
   (xiii) доказано: в Lemma 4.4 параметр $\\ell$ свободен и при $\\ell\\ge t'$ получаем $t'$‑common tree; выбор $\\ell:=64t'$ поглощает фактор 64 в $M^{\\lceil 64a/\\ell\\rceil}$ и не ухудшает $M^{s/\\ell}$ (§16.205). `InfoGain:` 1.
+  (xiv) контрпример: non-chosen associated centers могут входить в $a_j$, но не дают запросов на $\\tau$,
+  поэтому инъекция “$a$ → queries” не работает (§16.206). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, можно ли ограничить $a$ через $s$ (идеально $a\\le s$) и тем самым заменить $M^{\\lceil a/t'\\rceil}$ на $M^{\\lceil s/t'\\rceil}$ (Q43.S40-bound-a-by-s).
+  Следующий шаг: оптимизировать сумму по $a$ без $a\\le s$ или выделить chosen/non-chosen вклад
+  (Q43.S41-optimise-a-sum).
 
 ## Завершённые (архив)
 
