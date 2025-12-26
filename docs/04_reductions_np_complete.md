@@ -5,6 +5,8 @@
 $f$ такая, что для всех $x$:
 $$x\in A \iff f(x)\in B.$$
 
+**Lean‑скелет:** определения many‑one редукции и NP‑полноты заведены в `formal/PvNP/Reductions.lean`.
+
 **Определение (NP‑полный).** Язык $B$ NP‑полон, если (i) $B\in\mathrm{NP}$ и (ii) для любого $A\in\mathrm{NP}$ верно $A\le_m^p B$.
 
 **Лемма 4.1.** $\mathrm{SAT}\in\mathrm{NP}$.
