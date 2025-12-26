@@ -27,8 +27,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S94-orbit8-canonical-fragment (см. `docs/research/16_tseitin_local_ef.md` §16.244)
-  - `NextStepID:` Q43.S95-orbit8-mod2-global
+  - `LastStepID:` Q43.S95-orbit8-mod2-global (см. `docs/research/16_tseitin_local_ef.md` §16.245)
+  - `NextStepID:` Q43.S96-orbit8-mixed-chosen
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -154,9 +154,12 @@
   chosen–non‑chosen; значит локальной обструкции нет. См. §16.243. `InfoGain:` 1.
   (lii) toy‑тест: 2‑стадийный фрагмент с orbit‑8 и $J_j$ из §16.243 совместим с Def. 6.2(3)
   и Def. 6.13(2) (конфликт не возникает); см. §16.244. `InfoGain:` 1.
+  (liii) toy‑подсчёт: для all‑non‑chosen и pairing $\\pi=E$ глобальный mod‑2 чек
+  сводится к $A x=\\mathbf 1$ по 4 рёбрам $E$, и система совместна с единственным
+  решением $x_e=1$; конфликт Definition 6.13(2) не возникает. См. §16.245. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: выписать глобальную mod‑2 систему для orbit‑8 с разбиением
-  chosen/non‑chosen и pairing $\\pi$ (Q43.S95).
+  Следующий шаг: проверить mixed chosen/non‑chosen (например, 2 chosen + 6 non‑chosen),
+  выписать mod‑2 систему и проверить конфликт Definition 6.13(2) (Q43.S96).
 
 ## Завершённые (архив)
 
