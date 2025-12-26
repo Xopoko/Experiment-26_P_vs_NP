@@ -1,3 +1,4 @@
+import Paperproof
 import PvNP.SAT
 import PvNP.Graph
 

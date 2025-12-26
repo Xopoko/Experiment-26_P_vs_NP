@@ -1,3 +1,4 @@
+import Paperproof
 namespace PvNP.External
 
 -- ASSUMPTION: Baker-Gill-Solovay (1975), "Relativizations of the P = ? NP Question".

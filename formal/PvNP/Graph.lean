@@ -1,3 +1,4 @@
+import Paperproof
 import Std
 
 namespace PvNP

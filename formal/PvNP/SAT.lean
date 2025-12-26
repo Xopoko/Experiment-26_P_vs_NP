@@ -1,3 +1,4 @@
+import Paperproof
 import PvNP.Defs
 
 namespace PvNP
