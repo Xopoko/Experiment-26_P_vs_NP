@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S69-encode-cycle-basis-bits (см. `docs/research/16_tseitin_local_ef.md` §16.228)
-  - `NextStepID:` Q43.S70-integrate-chord-bits-signature
+  - `LastStepID:` Q43.S70-integrate-chord-bits-signature (см. `docs/research/16_tseitin_local_ef.md` §16.229)
+  - `NextStepID:` Q43.S72-identity-leak-check-chord-bits
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -97,9 +97,12 @@
   (xxxvi) доказано: для графа возможных рёбер $G$ можно канонически выбрать остов $F(G)$
   и базовый odd‑подграф $E_0\\subseteq F(G)$, так что $E(I)=E_0\\oplus\\bigoplus b_e C_e$, а биты
   хорд хранятся по направлениям с ≤4 битами на центр (§16.228). `InfoGain:` 1.
+  (xxxvii) доказано: подпись можно расширить на ≤4 chord‑бита на центр, конфликт‑чек использует
+  9‑битный префикс, а восстановление $I_j$ читает новые биты; логика Algorithms 2–4 не меняется
+  (§16.229). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, что добавление 4 бит на центр согласуется с Definition 6.11/6.13
-  и не ломает детектор конфликта в Algorithms 2–4 (Q43.S70-integrate-chord-bits-signature).
+  Следующий шаг: проверить, не нарушает ли правило назначения chord‑битов требование
+  “signature does not include identity” (Q43.S72-identity-leak-check-chord-bits).
 
 ## Завершённые (архив)
 
