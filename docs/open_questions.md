@@ -31,7 +31,7 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S111-size4-pi-obstruction (см. `docs/research/16_tseitin_local_ef.md` §16.259)
+  - `LastStepID:` Q43.S113-beta0-counterexample (см. `docs/research/16_tseitin_local_ef.md` §16.260)
   - `NextStepID:` Q43.S112-size4-pi-compatibility
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
@@ -206,6 +206,9 @@
   (lxvi) toy‑тест: 2×2 chosen‑цикл + две disjoint π‑звезды размера 4 при запрете chosen–non‑chosen
   edges дают совместную $A x=\\mathbf 1$; non‑chosen часть фиксирована, число closed $I$ остаётся
   $2^{\\beta(G_{\\mathrm{ch}})}=2$, обструкция не возникает (§16.259). `InfoGain:` 1.
+  (lxvii) toy‑поиск: для двух disjoint π‑звёзд размера 4 без chosen–non‑chosen рёбер
+  $\\beta(G/\\pi)=0$, и во всех размещениях на 4×4/5×5 система $A x=\\mathbf 1$ совместна
+  (0 контрпримеров из 68 и 564 пар); см. §16.260. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
   Следующий шаг: попытаться обобщить совместимость для двух π‑звёзд размера 4 или вывести
   паритетный критерий через $G/\\pi$ (Q43.S112-size4-pi-compatibility).
