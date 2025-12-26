@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S62-assemble-a1-sum (см. `docs/research/16_tseitin_local_ef.md` §16.224)
-  - `NextStepID:` Q43.S63-bound-a2-graph-structure
+  - `LastStepID:` Q43.S63-bound-a2-graph-structure (см. `docs/research/16_tseitin_local_ef.md` §16.225)
+  - `NextStepID:` Q43.S64-absorb-a2-into-signature
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -86,9 +86,11 @@
   (xxxii) доказано: суммирование вкладов Algorithms 2–4 и подписей даёт явный bound
   $24|S^{*}_g|$; если подписи $9|S^{*}_g|$ учитывать отдельно, то $A_1\\le 15$ (§16.224).
   `InfoGain:` 1.
+  (xxxiii) доказано: структура $J_j$ и $I^{*}_{-}$ кодируется ≤2 битами на направление,
+  поэтому можно взять $A_2\\le 16$ (§16.225). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: оценить явный $A_2$ для структуры $J_j$ и $I^{*}_{-}$ и получить полностью
-  численные константы Lemma 6.9 (Q43.S63-bound-a2-graph-structure).
+  Следующий шаг: проверить, можно ли поглотить $A_2$ в подписи/структуру $J_j$ (фактически $A_2=0$)
+  или показать необходимость отдельного терма (Q43.S64-absorb-a2-into-signature).
 
 ## Завершённые (архив)
 
