@@ -2,7 +2,7 @@
 
 ## Worker (single agent)
 
-Run forever, reuse the canonical prompt, write logs to `agent/logs/`:
+Run forever with the standalone WORKER prompt (self-selects a micro-step), write logs to `agent/logs/`:
 
 ```bash
 ./agent/run.sh
@@ -27,7 +27,7 @@ REQUIRE_CLEAN=1 ./agent/run_duo.sh
 
 Notes:
 - Don’t pass `--infinite` to `run_duo.sh` (it already loops).
-- Prompts: `scripts/agent_prompt.txt` (worker) and `scripts/supervisor_prompt.txt` (supervisor).
+- Prompts: `scripts/agent_prompt.txt` (worker, self-select) and `scripts/supervisor_prompt.txt` (supervisor).
 - Both runners take a lock (default: `agent/logs/.agent.lock`) to prevent concurrent runs; override via `LOCK_FILE=...`.
 
 ## Trio (worker + skeptic + supervisor)
@@ -49,7 +49,7 @@ REQUIRE_CLEAN=1 ./agent/run_trio.sh
 
 Notes:
 - Don’t pass `--infinite` to `run_trio.sh` (it already loops).
-- Prompts: `scripts/agent_prompt.txt` (worker), `scripts/skeptic_prompt.txt` (skeptic), `scripts/supervisor_prompt.txt` (supervisor).
+- Prompts: `scripts/agent_prompt.txt` (worker, self-select), `scripts/skeptic_prompt.txt` (skeptic), `scripts/supervisor_prompt.txt` (supervisor).
 - Uses the same lock mechanism as the other runners.
 
 ## Flow (question setter → worker; optional skeptic)
@@ -71,7 +71,7 @@ REQUIRE_CLEAN=1 ./agent/run_flow.sh
 
 Notes:
 - Logs go to `agent/logs/latest_flow.log`.
-- Prompts: `scripts/question_prompt.txt` and `scripts/worker_prompt.txt` (+ `scripts/skeptic_prompt.txt` if enabled).
+- Prompts: `scripts/question_prompt.txt` (question setter) and `scripts/worker_prompt.txt` (worker expecting the Question Set) (+ `scripts/skeptic_prompt.txt` if enabled).
 
 ## Log maintenance
 

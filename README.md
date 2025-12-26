@@ -75,7 +75,9 @@ Logs:
 - Summary: `python3 agent/analyze_logs.py`
 
 Prompts (all are **1 line** by design):
-- WORKER: `scripts/agent_prompt.txt` (includes a “ToT-lite” pre-pass: propose 2–3 micro-steps, kill 1–2 quickly, then do exactly one).
+- WORKER (self-selects a micro-step): `scripts/agent_prompt.txt`
+- QUESTION_SETTER: `scripts/question_prompt.txt`
+- WORKER (expects Question Set): `scripts/worker_prompt.txt`
 - SKEPTIC: `scripts/skeptic_prompt.txt`
 - SUPERVISOR: `scripts/supervisor_prompt.txt`
 
