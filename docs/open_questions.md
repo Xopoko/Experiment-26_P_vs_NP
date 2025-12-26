@@ -44,8 +44,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S129-bound-a1-constant (см. `docs/research/16_tseitin_local_ef.md` §16.272)
-  - `NextStepID:` Q43.S130-explicit-a-constant
+  - `LastStepID:` Q43.S130-explicit-a-constant (см. `docs/research/16_tseitin_local_ef.md` §16.273)
+  - `NextStepID:` Q43.S131-compare-n0-a
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -263,9 +263,11 @@
   (lxxviii) exact citation: явный $A_1$ уже получен в §16.224 (сумма вкладов Algorithms 2–4),
   поэтому $A_1^{\\mathrm{tot}}=24$, а при отдельном учёте подписей $A_1\\le 15$; см. §16.272.
   `InfoGain:` 1.
+  (lxxix) доказано: при $A_1^{\\mathrm{tot}}=24$, $A_2\\le 16$, $A_3\\le 69/4$ и
+  $A_4\\le 65/4$ можно взять $A\\le 668$ в Lemma 6.9/4.2; см. §16.273. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: собрать явные константы в Lemma 6.9/4.2 из $A_1,A_2,A_3,A_4$ и проверить,
-  что итоговый параметр $A$ даёт корректный режим рекурсии (Q43.S130-explicit-a-constant).
+  Следующий шаг: сравнить условия $n\\ge n_0(A)$ и $n\\ge 20 C n'\\log n'$ при $A=668$
+  и зафиксировать доминирующее ограничение (Q43.S131-compare-n0-a).
 
 ## Завершённые (архив)
 
