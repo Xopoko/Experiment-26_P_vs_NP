@@ -44,8 +44,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S125-quotient-cycle-test (см. `docs/research/16_tseitin_local_ef.md` §16.269)
-  - `NextStepID:` Q43.S126-quotient-cycle-nonchosen
+  - `LastStepID:` Q43.S127-cycle-rank-counterexample (см. `docs/research/16_tseitin_local_ef.md` §16.270)
+  - `NextStepID:` Q43.S128-cycle-realizability-grid
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -254,10 +254,13 @@
   даёт $A x=\\mathbf 1$ несовместной уже на квотиентном уровне: из вершинных
   уравнений следует $m_P=m_Q=e$, а $m_P+m_Q=1$ противоречит; то же даёт
   $B_{G/\\pi}x=b_{\\mathrm{mix}}$. См. §16.269. `InfoGain:` 1.
+  (lxxvi) контрпример (toy): 4‑цикл в $G/\\pi$ из non‑chosen π‑компонент размера 2
+  допускает ненулевое присваивание nn‑рёбер $e_i$ (уравнения дают $e_{i-1}=e_i$),
+  значит решение с $e_i=1$ существует; см. §16.270. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить цикл в $G/\\pi$, составленный только из non‑chosen
-  π‑компонент (например, 3‑цикл из extra nn‑рёбер), и посмотреть, допускает ли
-  $A x=\\mathbf 1$ ненулевые nn‑рёбра при $B_{G/\\pi}x=0$ (Q43.S126-quotient-cycle-nonchosen).
+  Следующий шаг: проверить реализуемость такого цикла на решётке с Def. 6.2(1–4)
+  (например, 3‑ или 4‑цикл из π‑звёзд на 6×6) и отсутствие конфликта по направлениям
+  (Q43.S128-cycle-realizability-grid).
 
 ## Завершённые (архив)
 
