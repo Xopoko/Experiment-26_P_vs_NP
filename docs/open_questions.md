@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S50-bound-rch-constant (см. `docs/research/16_tseitin.md` §16.212)
-  - `NextStepID:` Q43.S49-finalize-geo-constant
+  - `LastStepID:` Q43.S51-geo-constant-explicit (см. `docs/research/16_tseitin.md` §16.213)
+  - `NextStepID:` Q43.S52-explicit-n0
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -54,9 +54,12 @@
   (xx) доказано: из условий Lemma 4.2 $n/n'\\ge A t'\\log^4 n$ и $\\Delta\\ge n/(6n')$ вместе с
   $M^{1/t'}\\le e^{1/2}$ получаем $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)<1$ при $n\\ge n_0(A)$ (§16.212).
   `InfoGain:` 1.
+  (xxi) доказано: геометрические ряды дают сумму $\\le A_2^s/((1-r_{\\mathrm{ch}})(1-r_{\\mathrm{nch}}))$;
+  при $r_{\\mathrm{ch}}\\le 1/2$ и $r_{\\mathrm{nch}}\\le 2/3$ получаем явную константу $6\\,A_2^s$ (§16.213).
+  `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: подставить $r_{\\mathrm{ch}}<1$ и $r_{\\mathrm{nch}}<1$ в итоговый bound Eq. (18) и
-  зафиксировать константу в основном резюме Q43 (Q43.S49-finalize-geo-constant).
+  Следующий шаг: вывести явное $n_0(A)$ для условия $r_{\\mathrm{ch}}\\le 1/2$
+  и сопоставить с $n\\ge 20Cn'\\log n'$ (Q43.S52-explicit-n0).
 
 ## Завершённые (архив)
 
