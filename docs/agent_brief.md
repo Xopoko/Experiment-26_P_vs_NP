@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S9-even-batching-construct
-- `Do-not-repeat (next 2 runs):` Q43.S91-orbit8-jj-local-obstruction, Q39.S9-even-batching-construct
+- `LastStepID:` Q43.S94-orbit8-canonical-fragment
+- `Do-not-repeat (next 2 runs):` Q43.S94-orbit8-canonical-fragment, Q43.S91-orbit8-jj-local-obstruction
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: локальная обструкция для orbit‑8 не нашлась — есть локально согласованный $J_j$,
-следующий шаг — проверить глобальные ограничения на $S/I/\\pi$ или линейризовать условия.
+Q43: toy‑проверка 2‑стадийного канонического фрагмента с orbit‑8 не дала конфликта
+(Def. 6.2(3)/Def. 6.13(2)); следующий шаг — выписать глобальную mod‑2 систему.
 Q39: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение (нужна несовместимая вершина);
 следующий шаг — формализовать инвариант obstructions для batching.
 
@@ -43,4 +43,4 @@ Q39: even‑batching $t\\to t+2$ не спасает фиксированное 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Экв→Инв→Сж→Мод→Инв
+Последние:Инв→Сж→Мод→Инв→Мод

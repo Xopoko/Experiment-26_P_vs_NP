@@ -27,8 +27,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S91-orbit8-jj-local-obstruction (см. `docs/research/16_tseitin_local_ef.md` §16.243)
-  - `NextStepID:` Q43.S90-orbit8-jj-consistency
+  - `LastStepID:` Q43.S94-orbit8-canonical-fragment (см. `docs/research/16_tseitin_local_ef.md` §16.244)
+  - `NextStepID:` Q43.S95-orbit8-mod2-global
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -152,9 +152,11 @@
   (li) контрпример: на orbit‑8 support существует локально согласованный $J_j$
   (4 непересекающихся ребра + non‑edges), удовлетворяющий Def. 6.2(1,4) и запрету
   chosen–non‑chosen; значит локальной обструкции нет. См. §16.243. `InfoGain:` 1.
+  (lii) toy‑тест: 2‑стадийный фрагмент с orbit‑8 и $J_j$ из §16.243 совместим с Def. 6.2(3)
+  и Def. 6.13(2) (конфликт не возникает); см. §16.244. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить совместимость такого orbit‑8 $J_j$ с реальными ограничениями
-  на $S/I/\\pi$ в каноническом дереве (Q43.S90), либо линейризовать условия в mod‑2 системе.
+  Следующий шаг: выписать глобальную mod‑2 систему для orbit‑8 с разбиением
+  chosen/non‑chosen и pairing $\\pi$ (Q43.S95).
 
 ## Завершённые (архив)
 
