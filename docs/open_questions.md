@@ -44,8 +44,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S128-cycle-realizability-grid (см. `docs/research/16_tseitin_local_ef.md` §16.271)
-  - `NextStepID:` Q43.S129-bound-a1-constant
+  - `LastStepID:` Q43.S129-bound-a1-constant (см. `docs/research/16_tseitin_local_ef.md` §16.272)
+  - `NextStepID:` Q43.S130-explicit-a-constant
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -260,9 +260,12 @@
   (lxxvii) доказано: в каноническом режиме nn‑рёбра между разными π‑компонентами запрещены
   (Invariant 6.1(4) + Def. 6.2(4)), поэтому цикл из non‑chosen компонент не реализуется на grid;
   см. §16.271. `InfoGain:` 1.
+  (lxxviii) exact citation: явный $A_1$ уже получен в §16.224 (сумма вкладов Algorithms 2–4),
+  поэтому $A_1^{\\mathrm{tot}}=24$, а при отдельном учёте подписей $A_1\\le 15$; см. §16.272.
+  `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: вернуться к оценке $A_1$ (полный per‑center подсчёт битов в Algorithms 2–4)
-  и вывести явный $A_1$ (Q43.S129-bound-a1-constant).
+  Следующий шаг: собрать явные константы в Lemma 6.9/4.2 из $A_1,A_2,A_3,A_4$ и проверить,
+  что итоговый параметр $A$ даёт корректный режим рекурсии (Q43.S130-explicit-a-constant).
 
 ## Завершённые (архив)
 

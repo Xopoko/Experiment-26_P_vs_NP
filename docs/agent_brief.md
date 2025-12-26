@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S128-cycle-realizability-grid
-- `Do-not-repeat (next 2 runs):` Q43.S127-cycle-rank-counterexample, Q43.S128-cycle-realizability-grid
+- `LastStepID:` Q43.S129-bound-a1-constant
+- `Do-not-repeat (next 2 runs):` Q43.S128-cycle-realizability-grid, Q43.S129-bound-a1-constant
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: nn‑цикл из non‑chosen компонент не реализуется (Def. 6.2(4));
-следующий шаг — вернуться к per‑center подсчёту константных битов (явный $A_1$).
+Q43: явный $A_1$ уже подтверждён (см. §16.224/§16.272);
+следующий шаг — собрать явную константу $A$ в Lemma 6.9/4.2.
 Q39: контрпример: при $k=2$ все *внутренние* узлы XOR‑дерева могут быть $\\pi$‑совместимы;
 следующий шаг — искать более сильную обструкцию (проекция/ранг или геометрия подмножеств).
 
