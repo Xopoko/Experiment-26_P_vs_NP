@@ -4,7 +4,6 @@ import Paperproof
 
 # P vs NP — исследовательские шаги 16.122–16.152 (Tseitin/Grid: Q39 — bounded‑depth Frege gap)
 
-См. `formal/Notes/Index.lean` (индекс заметок).
 Главный индекс: `P_vs_NP.md`.
 
 ### 16.122. Исследовательский шаг: «Gaussian elimination» как (пока) отсутствующий upper‑шаг для bounded‑depth Frege на grid

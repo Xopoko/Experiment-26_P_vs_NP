@@ -4,7 +4,6 @@ import Paperproof
 
 # P vs NP — исследовательские шаги 16.153–16.273 (flat local‑EF(s): Q41–Q43)
 
-См. `formal/Notes/Index.lean` (индекс заметок).
 Главный индекс: `P_vs_NP.md`.
 
 ### 16.153. Исследовательский шаг: «строки‑схемы» = extension variables ⇒ circuit‑Frege p‑симулируется EF (и наоборот), так что спасение representability через sharing фактически переводит Q39 в EF‑режим

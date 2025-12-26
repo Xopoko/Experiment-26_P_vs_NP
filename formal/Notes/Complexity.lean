@@ -4,7 +4,6 @@ import Paperproof
 
 # P vs NP — исследовательские шаги 16.3–16.36
 
-См. `formal/Notes/Index.lean` (индекс заметок).
 Главный индекс: `P_vs_NP.md`.
 
 ### 16.3. Исследовательский шаг: decision vs search для SAT
