@@ -2025,3 +2025,29 @@
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` если ориентация не считается частью структуры (допускаются повороты/отражения),
   построить канонический якорь/ориентацию из одной подписи (Q43.S76-anchor-canonicalization).
+
+### 16.233. Исследовательский шаг (exact citation): в HR’22 ориентация grid фиксирована координатами и направлениями
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S78-orientation-explicit-quote):`
+  В HR’22 grid задаётся как ориентированная структура с фиксированными координатами (i, j) ∈ [n] и
+  явно используемыми направлениями left/right/up/down и нумерацией строк; значит повороты/отражения
+  не являются допустимыми симметриями модели по умолчанию.
+- `Точная ссылка (HR’22, text cache):`
+  1) определение grid через координаты: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:395–399`
+     (“Throughout the paper we work over graphs Gn = (V, E) with n2 nodes which we call the grid.
+      However, in order to avoid problems at the boundary, we in fact work over the 2-dimensional
+      torus: each node (i, j) ∈ V is indexed by two integers i, j ∈ [n] and an edge {u, v} is in E if and
+      only if it connects two adjacent nodes, that is, if one of the coordinates of u and v are identical
+      and the other differs by 1 modulo n.”)
+  2) направления left/right/up/down заданы в терминах относительного положения: `…:1382–1384`
+     (“Given a fixed center v we say that a path P connecting v to some other center u goes to the δ,
+      where δ is one of the directions left, right, up or down, if v lies in the sub-square to the δ of u.”)
+  3) используется нумерация строк: `…:1403–1405`
+     (“… fixing the alive centers with the lowest numbered row in each sub-square to be the chosen
+      centers Cσ of σ.”)
+- `Toy‑тест:` не требуется (цитата фиксирует структуру модели).
+- `Статус:` exact citation.
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` если рассматривается ориентационно‑свободная модель (с поворотами/отражениями),
+  нужна канонизация якоря (Q43.S76); иначе вернуться к основному треку Q43.
