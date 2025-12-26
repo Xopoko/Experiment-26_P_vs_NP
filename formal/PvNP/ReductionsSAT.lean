@@ -42,36 +42,34 @@ def cnfTo3SatAux (f : CNF) (nextVar : Nat) : (CNF × Nat) :=
       (c3 ++ rest3, nextVar'')
 
 def satTo3Sat (f : CNF) : CNF :=
-  let start := maxVarCNF f + 1
-  (cnfTo3SatAux f start).1
+  (cnfTo3SatAux f (maxVarCNF f + 1)).1
 
-lemma is3clause_list (l1 l2 l3 : Literal) : Is3Clause [l1, l2, l3] := by
+theorem is3clause_list (l1 l2 l3 : Literal) : Is3Clause [l1, l2, l3] := by
   simp [Is3Clause]
 
-lemma is3cnf_nil : Is3CNF ([] : CNF) := by
+theorem is3cnf_nil : Is3CNF ([] : CNF) := by
   intro c hc
   cases hc
 
-lemma is3cnf_single (c : Clause) (hc : Is3Clause c) : Is3CNF [c] := by
+theorem is3cnf_single (c : Clause) (hc : Is3Clause c) : Is3CNF [c] := by
   intro c' hc'
-  cases hc' with
-  | head => exact hc
-  | tail h => cases h
+  rcases List.mem_singleton.mp hc' with rfl
+  exact hc
 
-lemma is3cnf_cons (c : Clause) (f : CNF) (hc : Is3Clause c) (hf : Is3CNF f) : Is3CNF (c :: f) := by
+theorem is3cnf_cons (c : Clause) (f : CNF) (hc : Is3Clause c) (hf : Is3CNF f) : Is3CNF (c :: f) := by
   intro c' hc'
-  cases hc' with
-  | head => exact hc
-  | tail h => exact hf _ h
+  rcases (List.mem_cons).1 hc' with h | h
+  · simpa [h] using hc
+  · exact hf _ h
 
-lemma is3cnf_append (f g : CNF) (hf : Is3CNF f) (hg : Is3CNF g) : Is3CNF (f ++ g) := by
+theorem is3cnf_append (f g : CNF) (hf : Is3CNF f) (hg : Is3CNF g) : Is3CNF (f ++ g) := by
   intro c hc
   have h := List.mem_append.mp hc
   cases h with
   | inl h1 => exact hf _ h1
   | inr h2 => exact hg _ h2
 
-lemma build3Clauses_is3cnf (ls : List Literal) :
+theorem build3Clauses_is3cnf (ls : List Literal) :
     ∀ l1 l2 nextVar, Is3CNF (build3Clauses l1 l2 ls nextVar).1 := by
   induction ls with
   | nil =>
@@ -93,7 +91,7 @@ lemma build3Clauses_is3cnf (ls : List Literal) :
               (build3Clauses (litNeg nextVar) l3 (l4 :: rest2) (nextVar + 1)).1
               hfirst tail_is3)
 
-lemma clauseTo3Sat_is3cnf (c : Clause) (nextVar : Nat) :
+theorem clauseTo3Sat_is3cnf (c : Clause) (nextVar : Nat) :
     Is3CNF (clauseTo3Sat c nextVar).1 := by
   cases c with
   | nil =>
@@ -109,9 +107,15 @@ lemma clauseTo3Sat_is3cnf (c : Clause) (nextVar : Nat) :
             simp [Is3Clause]
           exact is3cnf_single _ h
       | cons l2 rest2 =>
-          exact build3Clauses_is3cnf rest2 l1 l2 nextVar
+          cases rest2 with
+          | nil =>
+              have h : Is3Clause [l1, l2, l2] := by
+                simp [Is3Clause]
+              exact is3cnf_single _ h
+          | cons l3 rest3 =>
+              exact build3Clauses_is3cnf (l3 :: rest3) l1 l2 nextVar
 
-lemma cnfTo3SatAux_is3cnf (f : CNF) :
+theorem cnfTo3SatAux_is3cnf (f : CNF) :
     ∀ nextVar, Is3CNF (cnfTo3SatAux f nextVar).1 := by
   induction f with
   | nil =>
@@ -132,10 +136,16 @@ theorem satTo3Sat_is3cnf (f : CNF) : Is3CNF (satTo3Sat f) := by
 def complementary (l1 l2 : Literal) : Bool :=
   (l1.var == l2.var) && (l1.neg != l2.neg)
 
+def listGet? (xs : List α) (i : Nat) : Option α :=
+  match xs, i with
+  | [], _ => none
+  | x :: _, 0 => some x
+  | _ :: rest, Nat.succ n => listGet? rest n
+
 def litAt (f : CNF) (i j : Nat) : Option Literal :=
-  match f.get? i with
+  match listGet? f i with
   | none => none
-  | some c => c.get? j
+  | some c => listGet? c j
 
 def clauseIndex (u : Nat) : Nat := u / 3
 def litIndex (u : Nat) : Nat := u % 3

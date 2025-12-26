@@ -6,7 +6,7 @@ universe u
 
 abbrev Set (α : Type u) : Type u := α → Prop
 
-instance : Membership α (Set α) := ⟨fun x s => s x⟩
+instance (α : Type u) : Membership α (Set α) := ⟨fun s x => s x⟩
 
 abbrev Language := Set (List Bool)
 
