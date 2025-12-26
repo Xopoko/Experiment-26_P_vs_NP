@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S99-adjacent-chosen-allowed
-- `Do-not-repeat (next 2 runs):` Q43.S99-adjacent-chosen-allowed, Q43.S98-adjacent-chosen-mod2-conflict
+- `LastStepID:` Q43.S101-two-chosen-example
+- `Do-not-repeat (next 2 runs):` Q43.S101-two-chosen-example, Q43.S99-adjacent-chosen-allowed
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: Def. 5.6/6.2/6.11 + Lemma 6.5 не запрещают adjacency chosen; конфигурация §16.248 допустима;
-следующий шаг — проверить, требует ли возможная forcing‑information ≥3 chosen центров.
+Q43: toy‑пример показывает, что возможен $J$ с ровно 2 adjacent chosen (Def. 6.2 + минимальность);
+следующий шаг — проверить инвариант min‑degree≥2/линейную неоднозначность для канонического $S/I/\\pi$.
 Q39: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение (нужна несовместимая вершина);
 следующий шаг — формализовать инвариант obstructions для batching.
 
@@ -43,4 +43,4 @@ Q39: even‑batching $t\\to t+2$ не спасает фиксированное 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Экв→Мод→Инв→Мод→Инв
+Последние:Мод→Экв→Мод→Инв→Мод

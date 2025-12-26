@@ -27,8 +27,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S99-adjacent-chosen-allowed (см. `docs/research/16_tseitin_local_ef.md` §16.249)
-  - `NextStepID:` Q43.S101-adjacent-chosen-needs-third
+  - `LastStepID:` Q43.S101-two-chosen-example (см. `docs/research/16_tseitin_local_ef.md` §16.250)
+  - `NextStepID:` Q43.S102-degree2-invariant
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -171,9 +171,12 @@
   chosen–non‑chosen; Lemma 6.5 требует adjacency между chosen в $\\mathrm{supp}(J)$, а Def. 6.11
   не накладывает ограничений на adjacency. Следовательно, конфигурация §16.248 допустима
   на уровне определений. См. §16.249. `InfoGain:` 1.
+  (lviii) toy‑пример: на 4×4 support из двух adjacent chosen центров можно выбрать
+  $(\\rho,I,S,\\pi,\\psi)$ так, что $J$ закрыт на этих центрах, удовлетворяет Def. 6.2(1–4),
+  минимален по Def. 5.9 и не содержит chosen–non‑chosen edges. См. §16.250. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, требует ли Def. 6.2(3) / минимальность $J$ ≥3 chosen центров
-  (или ещё одну adjacent‑пару) для реального forcing‑information (Q43.S101).
+  Следующий шаг: проверить, накладывают ли глобальные ограничения на $S/I/\\pi$ инвариант
+  min‑degree≥2 (или линейная неоднозначность), исключающие поддержку из 2 chosen (Q43.S102).
 
 ## Завершённые (архив)
 
