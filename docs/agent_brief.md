@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S102-degree2-invariant
-- `Do-not-repeat (next 2 runs):` Q43.S102-degree2-invariant, Q43.S101-two-chosen-example
+- `LastStepID:` Q43.S103-ambiguity-construct
+- `Do-not-repeat (next 2 runs):` Q43.S103-ambiguity-construct, Q43.S102-degree2-invariant
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: инвариант min‑degree≥2 не следует даже с глобальными $S/I/\\pi$ (контрпример на §16.250);
-следующий шаг — проверить линейную неоднозначность $I/\\pi$ при двух adjacent chosen.
+Q43: на support из двух adjacent chosen линейной неоднозначности $I/\\pi$ нет (единственное решение);
+следующий шаг — проверить критерий cycle‑space для support с циклом.
 Q39: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение (нужна несовместимая вершина);
 следующий шаг — формализовать инвариант obstructions для batching.
 
@@ -43,4 +43,4 @@ Q39: even‑batching $t\\to t+2$ не спасает фиксированное 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Экв→Мод→Инв→Мод→Инв
+Последние:Мод→Инв→Мод→Инв→Инв
