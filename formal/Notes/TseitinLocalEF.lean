@@ -3270,4 +3270,31 @@ import Paperproof
   используется как **равенство**, а не как нижняя граница, или подтвердить отсутствие
   такого места (Q43.S135-s1-use-audit).
 
+### 16.278. Исследовательский шаг (exact citation): где именно используется $s_1=\\log N$ в Proof of Thm. 4.3
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S135-s1-use-audit):`
+  В Proof of Thm. 4.3 (HR’22) параметр $s_1=\\log N$ входит **только** через определение
+  $s_\\eta=2^{\\eta-1}\\log N$ и последующее $t(\\eta)=\\sum_{i\\le\\eta}s_i+\\log M$,
+  а в формулировке Lemma 4.5 используются лишь суммы $\\sum_{i\\le\\eta}s_i$ и условие
+  $t(\\eta)\\le n_\\eta/16$. Поэтому замена $s_1\\to\\max\\{\\log N,t'\\}$ затрагивает только
+  величины $s_\\eta$ и $t(\\eta)$, без иных скрытых зависимостей от $\\log N$.
+- `Exact citation:`
+  В Proof of Thm. 4.3 параметры фиксируются как
+  “The parameter s depends on η and is fixed to s = sη = 2η−1 log N. With these parameters in place we can
+  finally also fix t(η) = ∑i≤η si + log M …” и далее Lemma 4.5 использует глубину
+  $\\sum_{i<\\eta}s_i$ и условие $t(\\eta)\\le n_\\eta/16$
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1099–1109`).
+- `Toy‑тест:` при замене $\\log N$ на $\\max\\{\\log N,t'\\}$ все упоминания $s_\\eta$ и $t(\\eta)$
+  монотонно растут, а других прямых появлений $\\log N$ в Lemma 4.5 нет.
+- `Статус:` exact citation (аудит использования $s_1=\\log N$).
+- `StepID:` Q43.S135-s1-use-audit.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (проверка по тексту, оракул не участвует).
+  B) Natural proofs check: неприменимо (нет свойства функций/нижних оценок схем).
+  C) Algebrization check: неприменимо (нет арифметизации/extension oracle).
+- `Следующий шаг:` просканировать оставшиеся места Proof of Thm. 4.3 и Lemma 4.5 на
+  прямые появления $\\log N$ вне $s_\\eta$/$t(\\eta)$ (Q43.S136-logn-occurrence-scan).
+
 -/
