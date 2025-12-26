@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S59-alg3-per-center-constant (см. `docs/research/16_tseitin_local_ef.md` §16.221)
-  - `NextStepID:` Q43.S58-alg2-discover-budget
+  - `LastStepID:` Q43.S60-bound-g-by-centers (см. `docs/research/16_tseitin_local_ef.md` §16.222)
+  - `NextStepID:` Q43.S61-alg4-constant
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -79,9 +79,11 @@
   т.к. у chosen‑центра есть соседний chosen‑центр (Lemma 6.5) и в `RecoverExposed/RecoverNonExposed`
   остаётся ≤3 направления, а Lemma 6.7 + монотонность $S$ дают отсутствие повторов (§16.221).
   `InfoGain:` 1.
+  (xxx) доказано: в Algorithm 2 ровно один бит `discover=0` на стадию, а число стадий $g\\le |S^{*}_g|$,
+  поэтому вклад `discover=0` ≤ $|S^{*}_g|$ (§16.222). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: учесть `discover=0` (≤1 на стадию) в Algorithm 2 и собрать явный $A_1$
-  из вкладов Algorithms 2–4 (Q43.S58-alg2-discover-budget).
+  Следующий шаг: оценить константные биты в Algorithm 4 и собрать явный $A_1$
+  из вкладов Algorithms 2–4 (Q43.S61-alg4-constant).
 
 ## Завершённые (архив)
 
