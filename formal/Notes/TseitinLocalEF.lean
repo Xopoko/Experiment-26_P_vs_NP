@@ -3297,4 +3297,31 @@ import Paperproof
 - `Следующий шаг:` просканировать оставшиеся места Proof of Thm. 4.3 и Lemma 4.5 на
   прямые появления $\\log N$ вне $s_\\eta$/$t(\\eta)$ (Q43.S136-logn-occurrence-scan).
 
+### 16.279. Исследовательский шаг (exact citation): скан $\\log N$ в Proof of Thm. 4.3/Lemma 4.5
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S136-logn-occurrence-scan):`
+  В Proof of Thm. 4.3 и Lemma 4.5 прямые появления $\\log N$ встречаются только
+  в определении $s_\\eta=2^{\\eta-1}\\log N$ и в оценках для $t(\\eta)$/ $t(d)$; других
+  ссылок на $\\log N$ в этих местах нет.
+- `Exact citation:`
+  В Proof of Thm. 4.3 фиксируется $s_\\eta=2^{\\eta-1}\\log N$ и
+  $t(\\eta)=\\sum_{i\\le\\eta}s_i+\\log M\\le 2^\\eta\\log N+\\log M$,
+  а в Lemma 4.5 используется глубина $\\sum_{i<\\eta}s_i$ и условие
+  $t(\\eta)\\le n_\\eta/16$ (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1099–1109`).
+  В конце Proof of Thm. 4.3 снова используется $t(d)\\le 2^d\\log N+\\log M$
+  (`…:1232`).
+- `Toy‑тест:` `rg -n "log N" ...` в указанных фрагментах даёт только эти появления;
+  остальные вхождения (например `…:980`) относятся к более ранним доказательствам и не
+  участвуют в Proof of Thm. 4.3/Lemma 4.5.
+- `Статус:` exact citation (аудит прямых вхождений $\\log N$).
+- `StepID:` Q43.S136-logn-occurrence-scan.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (проверка по тексту).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` просканировать оставшиеся места в §4 (вне Proof of Thm. 4.3/Lemma 4.5)
+  на прямые появления $\\log N$ и уточнить, относятся ли они к Q43 (Q43.S137-logn-remaining-scan).
+
 -/

@@ -20,17 +20,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S135-s1-use-audit (см. `formal/Notes/TseitinLocalEF.lean` §16.278)
-  - `NextStepID:` Q43.S136-logn-occurrence-scan
+  - `LastStepID:` Q43.S136-logn-occurrence-scan (см. `formal/Notes/TseitinLocalEF.lean` §16.279)
+  - `NextStepID:` Q43.S137-logn-remaining-scan
   - `LeanTarget:` formal/PvNP/Work.lean
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: evaluation‑каркас перенесён, явный параметр $A$ извлечён; показано, что при $A=668$
   $n_0(A)=2$, поэтому в HR‑режиме единственным ограничением по $n$ остаётся
   $n\ge 20 C n'\,\log n'$. Проверены совместимость остальных предпосылок HR,
-  допустимость замены $s_1=\log N$ и аудит использования $s_1$ в Proof of Thm. 4.3.
-  Далее нужно просканировать оставшиеся места Proof of Thm. 4.3/Lemma 4.5 на
-  прямые появления $\\log N$ вне $s_\\eta/t(\\eta)$.
-  Детали: `formal/Notes/TseitinLocalEF.lean` §16.191–§16.278.
+  допустимость замены $s_1=\log N$ и аудит прямых вхождений $\\log N$
+  в Proof of Thm. 4.3/Lemma 4.5 (только через $s_\\eta/t(\\eta)$).
+  Далее нужно просканировать оставшиеся места §4 на прямые появления $\\log N$
+  вне Proof of Thm. 4.3/Lemma 4.5.
+  Детали: `formal/Notes/TseitinLocalEF.lean` §16.191–§16.279.
 
 ## Завершённые (архив)
 
