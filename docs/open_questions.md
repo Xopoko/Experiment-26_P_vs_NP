@@ -8,8 +8,8 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE (open confirmed)
-  - `LastStepID:` Q39.S9-even-batching-construct (см. `docs/research/16_tseitin_q39.md` §16.155)
-  - `NextStepID:` Q39.S10-even-batching-obstruction
+  - `LastStepID:` Q39.S10-block-parity-invariant (см. `docs/research/16_tseitin_q39.md` §16.156)
+  - `NextStepID:` Q39.S11-generalize-block-parity-invariant
   - `Success:` либо явный upper на глубине $O(\\log N/\\log\\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Известно: $d_{\\mathrm{poly}}(N)\\ge\\Omega(\\log N/\\log\\log N)$ (Håstad’20, Cor. 6.6; §16.92) и $d_{\\mathrm{poly}}(N)\\le O(\\log N)$ (unpack GIRS’19/Claim 28; §16.115–§16.121).
   Узел: синтаксически симулировать шаг Gaussian elimination в bounded‑depth Frege (HR’22 отмечают как “не умеем”; §16.122).
@@ -21,8 +21,12 @@
   Контрпример: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение —
   вывод $E(\\delta(B_{1,2}))$ из двух вершинных уравнений требует несовместимой промежуточной строки.
   См. `docs/research/16_tseitin_q39.md` §16.155. `InfoGain:` 1.
+  Toy‑тест: XOR‑дерево вывода $\\delta(B_{1,2})$ на 4×4 неизбежно содержит вершину с
+  $|S_2\\cap\\mathrm{supp}|=1$ (проекция на $B_{\\mathrm{top}}$ в $\\mathbb F_2^2$),
+  значит несовместимая строка неизбежна. См. `docs/research/16_tseitin_q39.md` §16.156. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: обобщить обструкцию even‑batching как инвариант для фиксированного 2‑строчного разбиения (Q39.S10).
+  Следующий шаг: обобщить XOR‑дерево‑аргумент для всех $t,j$ как формальный инвариант
+  для fixed 2‑строчного разбиения (Q39.S11).
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
