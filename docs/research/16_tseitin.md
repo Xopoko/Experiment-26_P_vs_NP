@@ -2943,3 +2943,42 @@
 - `Следующий шаг:` разделить $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$ и проверить,
   можно ли bound’ить $a_{\\mathrm{ch}}$ через $s$, а вклад $a_{\\mathrm{nch}}$ переформулировать в параметрах,
   не требующих $a\\le s$ (или перейти к оптимизации суммы по $a$ без этого шага).
+
+### 16.207. Исследовательский шаг (proof): $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$, раунд‑фактор зависит только от $a_{\\mathrm{ch}}$
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S41-split-a-ch-nch):`
+  Пусть $a_{j,\\mathrm{ch}}$ — число **chosen** associated centers среди переменных на $\\psi_j$,
+  лежащих в $\\mathrm{supp}(J_j)\\setminus S^*_{j-1}$, и $a_{\\mathrm{ch}}:=\\sum_j a_{j,\\mathrm{ch}}$.
+  Тогда $s\\le 64a_{\\mathrm{ch}}$, а значит фактор по раундам можно оценивать как
+  $$M^{\\lceil s/\\ell\\rceil}\\le M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}.$$
+  Вклад $a_{\\mathrm{nch}}$ кодируется через $\\pi$ и не порождает новых запросов.
+- `Доказательство:`
+  1) Non‑chosen информация определяется pairing $\\pi$ и не требует запросов в $T$
+     (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1854–1866`), при этом
+     $I$ не содержит путей между chosen и non‑chosen центрами
+     (`…:1869–1870`). Следовательно, только exposed **chosen** centers создают запросы.
+  2) Пусть $S_{\\mathrm{ch}}(\\tau,\\sigma):=S(\\tau,\\sigma)\\cap C_\\sigma$.
+     Из §6.4: “only variables incident to exposed chosen centers are queried and each exposed center causes at most 4 queries”
+     (`…:2049–2051`), значит существует стадия $g$ с $|S^*_g\\cap C_\\sigma|\\ge s/4$.
+  3) В стадии $j$ множество новых chosen центров лежит в $\\mathrm{supp}(J_j)\\cap C_\\sigma$ и $S_J$.
+     По аргументу Lemma 6.5 (ограниченному на chosen‑центры) каждый chosen центр в $\\mathrm{supp}(J_j)$
+     имеет chosen‑соседа в $\\mathrm{supp}(J_j)$, поэтому
+     $$|\\mathrm{supp}(J_j)\\cap C_\\sigma\\cup S_J|\\le 4|\\mathrm{supp}(J_j)\\cap C_\\sigma|.$$
+     Кроме того, из минимальности $J_j$ и запрета chosen–non‑chosen путей следует, что каждый chosen центр
+     в $\\mathrm{supp}(J_j)$ либо сам является associated center переменной на $\\psi_j$,
+     либо соседствует с таким chosen associated center; значит
+     $$|\\mathrm{supp}(J_j)\\cap C_\\sigma|\\le 4a_{j,\\mathrm{ch}}.$$
+     Следовательно, на стадии $j$ добавляется не более $16a_{j,\\mathrm{ch}}$ chosen‑центров, и
+     $|S^*_g\\cap C_\\sigma|\\le 16a_{\\mathrm{ch}}$.
+  4) Совмещая с п.2, получаем $s\\le 4|S^*_g\\cap C_\\sigma|\\le 64a_{\\mathrm{ch}}$ и требуемый bound на
+     $M^{\\lceil s/\\ell\\rceil}$.
+- `Toy‑тест:` $s=1$, $\\psi$ содержит переменную с non‑chosen associated center $u$.
+  По Def. 6.2(2) $J$ закрыт на $u$, а Invariant 6.1(4) + ремарка про $\\pi$ дают,
+  что нужная информация уже в $\\pi$ и не требует запросов (`…:1854–1866`);
+  при $\\mathrm{supp}(J)\\cap C_\\sigma=\\varnothing$ имеем $S_J=\\varnothing$, поэтому
+  depth ветви не увеличивается и раунд‑счёт не растёт.
+- `Статус:` доказано (для раунд‑фактора; $a\\log t$ в Lemma 6.9 по‑прежнему зависит от $a$).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо (encoding/center‑счёт), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` оптимизировать суммирование по $a$ без предположения $a\\le s$ (Q43.S42-optimise-a-sum).
