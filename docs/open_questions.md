@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S52-explicit-n0-closedform (см. `docs/research/16_tseitin.md` §16.214)
-  - `NextStepID:` Q43.S53-compare-20cnlogn
+  - `LastStepID:` Q43.S53-extract-a-bound (см. `docs/research/16_tseitin.md` §16.215)
+  - `NextStepID:` Q43.S54-bound-a1a2-bits
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -60,9 +60,12 @@
   (xxii) доказано: из $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)$ следует
   $n_0(A)=\\lceil\\exp((48e^{1/2}/A)^{1/3})\\rceil$, при котором $r_{\\mathrm{ch}}\\le 1/2$ для всех $n\\ge n_0(A)$ (§16.214).
   `InfoGain:` 1.
+  (xxiii) точная цитата: в HR'22 константа $A$ в Lemma 6.9/4.2 задается как "some constant",
+  а в доказательстве появляются $A_1,A_2,A_3,A_4$ без численных оценок; поэтому явный $A_{\\min}$
+  в тексте не извлекается (§16.215). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: сопоставить $n\\ge 20Cn'\\log n'$ с $n\\ge n_0(A)$ или найти контрпример
-  (Q43.S53-compare-20cnlogn).
+  Следующий шаг: пройти Appendix B / Algorithms 2–7 и выписать явный верхний bound на $A_1,A_2$,
+  затем получить явный $A$ и сравнить $n_0(A)$ с $20Cn'\\log n'$ (Q43.S54-bound-a1a2-bits).
 
 ## Завершённые (архив)
 

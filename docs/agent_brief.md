@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S52-explicit-n0-closedform
-- `Do-not-repeat (next 2 runs):` Q43.S52-explicit-n0-closedform, Q43.S51-geo-constant-explicit
+- `LastStepID:` Q43.S53-extract-a-bound
+- `Do-not-repeat (next 2 runs):` Q43.S53-extract-a-bound, Q43.S52-explicit-n0-closedform
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: получен явный $n_0(A)$ для условия $r_{\\mathrm{ch}}\\le 1/2$.
-Дальше — сравнить это условие с $n\\ge 20Cn'\\log n'$ (или дать контрпример).
+Q43: $A$ в Lemma 6.9/4.2 остаётся неявной константой; нужен явный подсчёт $A_1,A_2$,
+чтобы сравнить $n\\ge 20Cn'\\log n'$ с $n\\ge n_0(A)$.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q43: получен явный $n_0(A)$ для условия $r_{\\mathrm{ch}}\
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Тр→Сж→Инв→Инв→Тр
+Последние:Сж→Инв→Инв→Тр→Тр
