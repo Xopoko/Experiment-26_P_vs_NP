@@ -8,8 +8,8 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE (open confirmed)
-  - `LastStepID:` Q39.S8-generalize-block-invariant (см. `docs/research/16_tseitin_q39.md` §16.154)
-  - `NextStepID:` Q39.S9-even-batching-check
+  - `LastStepID:` Q39.S9-even-batching-construct (см. `docs/research/16_tseitin_q39.md` §16.155)
+  - `NextStepID:` Q39.S10-even-batching-obstruction
   - `Success:` либо явный upper на глубине $O(\\log N/\\log\\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Известно: $d_{\\mathrm{poly}}(N)\\ge\\Omega(\\log N/\\log\\log N)$ (Håstad’20, Cor. 6.6; §16.92) и $d_{\\mathrm{poly}}(N)\\le O(\\log N)$ (unpack GIRS’19/Claim 28; §16.115–§16.121).
   Узел: синтаксически симулировать шаг Gaussian elimination в bounded‑depth Frege (HR’22 отмечают как “не умеем”; §16.122).
@@ -18,8 +18,11 @@
   Доказано: для любого $n$ и фиксированного 2‑строчного разбиения $S_j$ нечётный префикс $R_{j,t}$ даёт
   $|S_j\\cap\\delta(R_{j,t})|=t$ нечётно, значит уравнение несовместимо с разбиением и нужен base‑change.
   См. `docs/research/16_tseitin_q39.md` §16.154. `InfoGain:` 1.
+  Контрпример: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение —
+  вывод $E(\\delta(B_{1,2}))$ из двух вершинных уравнений требует несовместимой промежуточной строки.
+  См. `docs/research/16_tseitin_q39.md` §16.155. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, может ли батчинг по чётным $t$ обойти обструкцию без смены разбиений (Q39.S9).
+  Следующий шаг: обобщить обструкцию even‑batching как инвариант для фиксированного 2‑строчного разбиения (Q39.S10).
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
