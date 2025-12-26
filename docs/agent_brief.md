@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S13-2k-block-cut-invariant
-- `Do-not-repeat (next 2 runs):` Q39.S13-2k-block-cut-invariant, Q43.S116-overlapping-stars-counterexample
+- `LastStepID:` Q43.S117-chosen-nonchosen-edge-counterexample
+- `Do-not-repeat (next 2 runs):` Q43.S116-overlapping-stars-counterexample, Q43.S117-chosen-nonchosen-edge-counterexample
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: найден контрпример вне канонического режима (overlapping π‑звёзды ломают декуплинг);
-следующий шаг — стресс‑тест для chosen–non‑chosen edges.
+Q43: контрпример — один chosen–non‑chosen edge на π‑звезде ломает критерий по $G/\\pi$;
+следующий шаг — поправка критерия для mixed‑edges.
 Q39: контрпример: при $k=2$ все *внутренние* узлы XOR‑дерева могут быть $\\pi$‑совместимы;
 следующий шаг — искать более сильную обструкцию (проекция/ранг или геометрия подмножеств).
 
@@ -43,4 +43,4 @@ Q39: контрпример: при $k=2$ все *внутренние* узлы
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→МодСтресс→Инв→Комм/Ранг→Эквивалентность
+Последние:МодСтресс→Инв→Комм/Ранг→Эквивалентность→МодСтресс
