@@ -18,11 +18,13 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S130-explicit-a-constant (см. `docs/research/16_tseitin_local_ef.md` §16.273)
-  - `NextStepID:` Q43.S131-compare-n0-a
+  - `LastStepID:` Q43.S131-compare-n0-a (см. `docs/research/16_tseitin_local_ef.md` §16.274)
+  - `NextStepID:` Q43.S132-update-summary-dominant-bound
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  Контекст: evaluation‑каркас перенесён, явный параметр $A$ извлечён (см. §16.273); далее нужно сравнить $n\ge n_0(A)$ vs $n\ge 20 C n'\,\log n'\,$ и зафиксировать доминирующее ограничение.
-  Детали: `docs/research/16_tseitin_local_ef.md` §16.191–§16.273.
+  Контекст: evaluation‑каркас перенесён, явный параметр $A$ извлечён; показано, что при $A=668$
+  $n_0(A)=2$, и условие $n\ge n_0(A)$ избыточно при $n\ge 20 C n'\,\log n'$. Далее нужно
+  обновить сводку ограничений в HR‑режиме.
+  Детали: `docs/research/16_tseitin_local_ef.md` §16.191–§16.274.
 
 ## Завершённые (архив)
 
