@@ -2,7 +2,7 @@
 
 **Задача CLIQUE (decision).** Вход: неориентированный граф $G=(V,E)$ и число $k$. Вопрос: существует ли клика размера $\ge k$?
 
-**Lean‑скелет:** CNF/3CNF/SAT в `formal/PvNP/SAT.lean`, базовый граф и клика — `formal/PvNP/Graph.lean`, интерфейс 3SAT→CLIQUE — `formal/PvNP/ReductionsSAT.lean` (пока без доказательства корректности).
+**Lean‑скелет:** CNF/3CNF/SAT в `formal/PvNP/SAT.lean`, базовый граф и клика — `formal/PvNP/Graph.lean`, определение 3SAT→CLIQUE — `formal/PvNP/ReductionsSAT.lean` (доказательство корректности пока не формализовано).
 
 **Теорема 6.1.** 3SAT $\le_m^p$ CLIQUE.
 

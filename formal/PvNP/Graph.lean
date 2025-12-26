@@ -4,8 +4,12 @@ namespace PvNP
 
 structure Graph where
   adj : Nat -> Nat -> Bool
-  symm : ∀ u v, adj u v = adj v u
-  loop_free : ∀ u, adj u u = false
+
+def Symmetric (G : Graph) : Prop :=
+  ∀ u v, G.adj u v = G.adj v u
+
+def LoopFree (G : Graph) : Prop :=
+  ∀ u, G.adj u u = false
 
 abbrev Clique (G : Graph) (k : Nat) (S : List Nat) : Prop :=
   S.length = k ∧
