@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S51-geo-constant-explicit
-- `Do-not-repeat (next 2 runs):` Q43.S51-geo-constant-explicit, Q43.S50-bound-rch-constant
+- `LastStepID:` Q43.S52-explicit-n0-closedform
+- `Do-not-repeat (next 2 runs):` Q43.S52-explicit-n0-closedform, Q43.S51-geo-constant-explicit
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: явная константа $6\\,A_2^s$ в Eq. (18) получена при $r_{\\mathrm{ch}}\\le 1/2$, $r_{\\mathrm{nch}}\\le 2/3$.
-Дальше — явный $n_0(A)$ для условия $r_{\\mathrm{ch}}\\le 1/2$ и сравнение с $n\\ge 20Cn'\\log n'$.
+Q43: получен явный $n_0(A)$ для условия $r_{\\mathrm{ch}}\\le 1/2$.
+Дальше — сравнить это условие с $n\\ge 20Cn'\\log n'$ (или дать контрпример).
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q43: явная константа $6\\,A_2^s$ в Eq. (18) получена пр
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Сж→Инв→Инв→Тр→Инв
+Последние:Тр→Сж→Инв→Инв→Тр
