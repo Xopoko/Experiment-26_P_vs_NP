@@ -27,8 +27,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S103-ambiguity-construct (см. `docs/research/16_tseitin_local_ef.md` §16.252)
-  - `NextStepID:` Q43.S105-cycle-space-criterion
+  - `LastStepID:` Q43.S105-cycle-space-criterion (см. `docs/research/16_tseitin_local_ef.md` §16.253)
+  - `NextStepID:` Q43.S106-pi-quotient-rank
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -180,9 +180,12 @@
   (lx) toy‑проверка: для support из двух adjacent chosen (§16.250) mod‑2 система на единственном
   ребре $e$ даёт $x_e=1$, поэтому closed information set единственен и линейной неоднозначности
   $I/\\pi$ нет. См. §16.252. `InfoGain:` 1.
+  (lxi) toy‑проверка: 2×2 chosen‑цикл на 4×4 допускает possible forcing info $J$ (Def. 6.2),
+  а closed information sets на этом support ровно два (H/V matching), и оба проходят
+  Def. 6.13(2); остаётся 1‑бит неоднозначности. См. §16.253. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить критерий “cycle‑space ⇔ неоднозначность” на support с циклом
-  (напр., 2×2 chosen блок или mixed chosen/non‑chosen), сопоставить с §16.227 (Q43.S105).
+  Следующий шаг: обобщить критерий через $\\mathbb F_2$‑ранг/quotient‑граф при фиксированном
+  pairing $\\pi$ (Q43.S106).
 
 ## Завершённые (архив)
 

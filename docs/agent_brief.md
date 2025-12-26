@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S103-ambiguity-construct
-- `Do-not-repeat (next 2 runs):` Q43.S103-ambiguity-construct, Q43.S102-degree2-invariant
+- `LastStepID:` Q43.S105-cycle-space-criterion
+- `Do-not-repeat (next 2 runs):` Q43.S105-cycle-space-criterion, Q43.S103-ambiguity-construct
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: на support из двух adjacent chosen линейной неоднозначности $I/\\pi$ нет (единственное решение);
-следующий шаг — проверить критерий cycle‑space для support с циклом.
+Q43: 2×2 chosen‑цикл допускает possible forcing $J$ и даёт ровно 1 бит неоднозначности
+closed $I$; следующий шаг — обобщить критерий через $\\mathbb F_2$‑ранг/quotient‑граф.
 Q39: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение (нужна несовместимая вершина);
 следующий шаг — формализовать инвариант obstructions для batching.
 
@@ -43,4 +43,4 @@ Q39: even‑batching $t\\to t+2$ не спасает фиксированное 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Мод→Инв→Мод→Инв→Инв
+Последние:Инв→Мод→Инв→Мод→Инв
