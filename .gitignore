@@ -5,3 +5,4 @@ __pycache__/
 resources/text_cache/
 log.txt
 agent/logs/
+resources/downloads/arxiv-metadata-oai-snapshot.json
