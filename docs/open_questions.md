@@ -44,8 +44,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S124-extra-nn-edge-constraint (см. `docs/research/16_tseitin_local_ef.md` §16.268)
-  - `NextStepID:` Q43.S125-quotient-cycle-test
+  - `LastStepID:` Q43.S125-quotient-cycle-test (см. `docs/research/16_tseitin_local_ef.md` §16.269)
+  - `NextStepID:` Q43.S126-quotient-cycle-nonchosen
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -250,10 +250,14 @@
   между компонентами дают $A x=\\mathbf 1$ только при $e=0$; ровно то же условие
   даёт $B_{G/\\pi}x=b_{\\mathrm{mix}}$ (b=0 на обеих компонентах). См. §16.268.
   `InfoGain:` 1.
+  (lxxv) toy‑тест: треугольник в $G/\\pi$ (two π‑звезды + chosen‑центр + extra nn‑ребро)
+  даёт $A x=\\mathbf 1$ несовместной уже на квотиентном уровне: из вершинных
+  уравнений следует $m_P=m_Q=e$, а $m_P+m_Q=1$ противоречит; то же даёт
+  $B_{G/\\pi}x=b_{\\mathrm{mix}}$. См. §16.269. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: добавить связь, образующую цикл в $G/\\pi$ (например, chosen‑вершину
-  с двумя mixed‑рёбрами между двумя π‑компонентами), и проверить, появляется ли
-  линейное ограничение сверх $B_{G/\\pi}x=b_{\\mathrm{mix}}$ (Q43.S125-quotient-cycle-test).
+  Следующий шаг: проверить цикл в $G/\\pi$, составленный только из non‑chosen
+  π‑компонент (например, 3‑цикл из extra nn‑рёбер), и посмотреть, допускает ли
+  $A x=\\mathbf 1$ ненулевые nn‑рёбра при $B_{G/\\pi}x=0$ (Q43.S126-quotient-cycle-nonchosen).
 
 ## Завершённые (архив)
 
