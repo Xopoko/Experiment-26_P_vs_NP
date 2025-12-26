@@ -44,8 +44,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S118-mixed-edge-parity-invariant (см. `docs/research/16_tseitin_local_ef.md` §16.264)
-  - `NextStepID:` Q43.S119-mixed-edge-canonical-swap
+  - `LastStepID:` Q43.S120-even-mixed-edge-counterexample (см. `docs/research/16_tseitin_local_ef.md` §16.265)
+  - `NextStepID:` Q43.S121-mixed-edge-quotient-linear-criterion
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -235,9 +235,13 @@
   (lxx) контрпример: одна non‑chosen π‑звезда размера 4 и ровно один chosen–non‑chosen edge
   на 4×4 дают несовместность $A x=\\mathbf 1$, хотя $G/\\pi$ имеет чётную компоненту;
   см. §16.263. `InfoGain:` 1.
+  (lxxi) контрпример: π‑звезда размера 4 с двумя mixed‑edges к одному chosen‑центру даёт
+  несовместность $A x=\\mathbf 1$, хотя $\\delta_{\\mathrm{mix}}(P)$ чётно; см. §16.265.
+  `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: восстановить критерий при mixed‑edges (исправить условие чётности или
-  вывести общий конфликт для mixed‑edge + π‑звезда) (Q43.S118).
+  Следующий шаг: проверить критерий на квотиенте с сохранением chosen‑вершин
+  (формально: $b_{\\mathrm{mix}}\\perp\\ker B_{G/\\pi}^T$) и сверить с toy‑случаями
+  §16.263–§16.265 (Q43.S121).
 
 ## Завершённые (архив)
 
