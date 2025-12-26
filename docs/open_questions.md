@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S57-one-discovery-proof (см. `docs/research/16_tseitin_local_ef.md` §16.220)
-  - `NextStepID:` Q43.S58-bound-a1-constant
+  - `LastStepID:` Q43.S59-alg3-per-center-constant (см. `docs/research/16_tseitin_local_ef.md` §16.221)
+  - `NextStepID:` Q43.S58-alg2-discover-budget
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -75,9 +75,13 @@
   (xxviii) доказано: associated center, попавший в $\\mathrm{supp}(J_j)\\setminus S^{*}_{j-1}$, становится
   disappearing center ровно один раз (Lemma 6.7 + Def. 6.2), поэтому `discover=1` читается ≤1 раз на центр,
   а число таких битов ≤ $|S^{*}_g|$ (§16.220). `InfoGain:` 1.
+  (xxix) доказано: в Algorithm 3 число константных бит (known/recover/cc) ≤ $13|S^{*}_g|$,
+  т.к. у chosen‑центра есть соседний chosen‑центр (Lemma 6.5) и в `RecoverExposed/RecoverNonExposed`
+  остаётся ≤3 направления, а Lemma 6.7 + монотонность $S$ дают отсутствие повторов (§16.221).
+  `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: использовать one‑discovery для полного per‑center подсчёта константных бит в Algorithms 2–4
-  и вывести явный $A_1$ (Q43.S58-bound-a1-constant).
+  Следующий шаг: учесть `discover=0` (≤1 на стадию) в Algorithm 2 и собрать явный $A_1$
+  из вкладов Algorithms 2–4 (Q43.S58-alg2-discover-budget).
 
 ## Завершённые (архив)
 

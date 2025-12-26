@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S57-one-discovery-proof
-- `Do-not-repeat (next 2 runs):` Q43.S57-one-discovery-proof, Q43.S56-generalize-a1-per-center
+- `LastStepID:` Q43.S59-alg3-per-center-constant
+- `Do-not-repeat (next 2 runs):` Q43.S59-alg3-per-center-constant, Q43.S57-one-discovery-proof
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: one‑discovery для associated centers доказан; нужно завершить per‑center подсчёт
-константных битов в Algorithms 2–4 и получить явный $A_1$.
+Q43: получен per‑center bound для Algorithm 3 (≤13|S*_g|); осталось учесть `discover=0`
+в Algorithm 2 и собрать явный $A_1$.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q43: one‑discovery для associated centers доказан; нужно зав
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Тр→Сж→Инв→Сж→Инв
+Последние:Сж→Инв→Сж→Инв→Сж
