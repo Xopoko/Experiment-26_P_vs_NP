@@ -15,3 +15,5 @@ end PvNP.External
 ```
 
 Policy: the final theorem must not depend on any ASSUMPTION.
+
+Assumption registry: `docs/assumptions.md`.

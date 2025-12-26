@@ -20,6 +20,7 @@
 - [Roadmap](docs/roadmap.md)
 - [Agent brief (не разрастаться)](docs/agent_brief.md)
 - [Открытые вопросы (очередь)](docs/open_questions.md)
+- [Assumptions registry](docs/assumptions.md)
 - [9. Схемная сложность](docs/09_circuit_complexity.md)
 - [10. PARITY (глубина 2)](docs/10_parity_depth2.md)
 - [11. Switching lemma → PARITY ∉ AC⁰](docs/11_switching_lemma_ac0.md)

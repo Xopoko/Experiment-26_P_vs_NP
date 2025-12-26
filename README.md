@@ -18,6 +18,7 @@ This repo is a compact, continuously-verified research log aimed at making real 
 - `docs/` — main text (kept short; history lives in git).
   - `docs/open_questions.md` — the active research queue; **one run picks exactly one item**.
   - `docs/agent_brief.md` — bounded “working memory” to prevent loops (Do-not-repeat).
+  - `docs/assumptions.md` — registry of formal External stubs (ASSUMPTIONs).
   - `docs/research/` — longer technical scratchpads grouped by topic (`16_*.md`).
 - `formal/` — Lean 4 formalization layer (currently a skeleton).
 - `resources/manifest.tsv` + `resources/downloads/` — bibliography + pinned PDFs/HTML (hygiene is checked).

@@ -245,6 +245,16 @@ def _verify_prompt_files(*, paths: list[Path], max_bytes: int = 4096) -> None:
     print(f"OK: verified single-line prompts: {', '.join(str(p) for p in paths)}")
 
 
+def _verify_assumptions_registry(*, path: Path) -> None:
+    if not path.exists():
+        raise AssertionError(f"{path} missing (required by AGENTS.md)")
+    text = path.read_text(encoding="utf-8")
+    if "Assumption registry" not in text:
+        raise AssertionError(f"{path} missing header 'Assumption registry'")
+    if "Total stubs" not in text:
+        raise AssertionError(f"{path} missing 'Total stubs' summary")
+
+
 def _verify_download_links(*, manifest_path: Path, downloads_dir: Path) -> None:
     manifest_ids = _load_manifest_ids(manifest_path)
     md_paths = _iter_markdown_paths()
@@ -374,6 +384,7 @@ def main(argv: list[str]) -> int:
             )
             _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
             _verify_open_questions_structure(path=Path("docs/open_questions.md"))
+            _verify_assumptions_registry(path=Path("docs/assumptions.md"))
             _verify_prompt_files(
                 paths=[
                     Path("scripts/agent_prompt.txt"),
@@ -423,6 +434,7 @@ def main(argv: list[str]) -> int:
         )
         _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
         _verify_open_questions_structure(path=Path("docs/open_questions.md"))
+        _verify_assumptions_registry(path=Path("docs/assumptions.md"))
         _verify_prompt_files(
             paths=[
                 Path("scripts/agent_prompt.txt"),

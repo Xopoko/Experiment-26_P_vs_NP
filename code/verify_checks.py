@@ -1,7 +1,7 @@
 """Project sanity checks.
 
 Run:
-  python3 scripts/verify_notebook.py
+  scripts/verify_all.sh
 
 This file contains the executable checks that used to live in code cells of the
 legacy notebook format.
@@ -555,4 +555,3 @@ def php_inequalities_satisfiable(num_holes: int) -> bool:
 for n in range(1, 4):
     assert php_inequalities_satisfiable(n) is False
 print("OK: inequality encoding of PHP is unsatisfiable for n=1..3 (brute force)")
-
