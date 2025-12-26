@@ -6,14 +6,15 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S105-cycle-space-criterion
-- `Do-not-repeat (next 2 runs):` Q43.S105-cycle-space-criterion, Q43.S103-ambiguity-construct
+- `LastStepID:` Q43.S106-pi-quotient-rank-lemma
+- `Do-not-repeat (next 2 runs):` Q43.S106-pi-quotient-rank-lemma, Q43.S105-cycle-space-criterion
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: 2×2 chosen‑цикл допускает possible forcing $J$ и даёт ровно 1 бит неоднозначности
-closed $I$; следующий шаг — обобщить критерий через $\\mathbb F_2$‑ранг/quotient‑граф.
+Q43: в каноническом режиме $\\pi$ фиксирует non‑chosen часть, а неоднозначность закрытых $I$
+равна cycle‑space chosen‑графа; следующий шаг — искать контрпример к ранговому критерию
+через Def. 6.2(4).
 Q39: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение (нужна несовместимая вершина);
 следующий шаг — формализовать инвариант obstructions для batching.
 
@@ -43,4 +44,4 @@ Q39: even‑batching $t\\to t+2$ не спасает фиксированное 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Мод→Инв→Мод→Инв
+Последние:Мод→Инв→Мод→Инв→Комм/Ранг
