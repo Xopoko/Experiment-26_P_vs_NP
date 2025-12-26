@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S45-audit-eq18-anonch-free
-- `Do-not-repeat (next 2 runs):` Q43.S45-audit-eq18-anonch-free, Q43.S43-sum-split-geometric
+- `LastStepID:` Q43.S48-delta-constant-bridge
+- `Do-not-repeat (next 2 runs):` Q43.S48-delta-constant-bridge, Q43.S45-audit-eq18-anonch-free
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: после $t^a\\to t^{a_{\\mathrm{ch}}}$ зависимость от $a_{\\mathrm{nch}}$ только в $(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}$. Дальше — проверить $4\\log n'/\\Delta<1$ в HR‑параметрах.
+Q43: из HR‑оценки $\\Delta\\ge 2C\\log n'$ получено $r_{\\mathrm{nch}}\\le 2/C<1$. Дальше — зафиксировать константу в итоговом bound Eq. (18).
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: после $t^a\\to t^{a_{\\mathrm{ch}}}$ зависимость от $a_{\
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эк→Сж→Инв→Инв→Сж
+Последние:Эк→Эк→Сж→Инв→Инв

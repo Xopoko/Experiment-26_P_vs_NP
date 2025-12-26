@@ -3078,3 +3078,27 @@
 - `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` проверить, что в HR‑параметрах гарантированно $4\\log n'/\\Delta<1$
   (после подстановки $\\Delta=\\Theta(n/n')$) и зафиксировать это в основном bound (Q43.S46-check-rnch-params).
+
+### 16.211. Исследовательский шаг (proof): $r_{\\mathrm{nch}}<1$ из HR‑оценок на $\\Delta$
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S48-delta-constant-bridge):`
+  В HR‑параметрах при условии $n\\ge 20 C n'\\log n'$ имеем $\\Delta\\ge 2C\\log n'$,
+  а также $\\Delta\\ge n/(6n')$. Тогда
+  $$
+  r_{\\mathrm{nch}}=\\frac{4\\log n'}{\\Delta}\\le \\frac{2}{C}<1 \\quad (C\\ge 3),
+  $$
+  так что сумма по $a_{\\mathrm{nch}}$ в §16.210 ограничена константой.
+- `Доказательство:`
+  В HR после (14) явно сказано: из предположения $n\\ge 20 n' C\\log n'$ следует
+  $\\Delta\\ge 2C\\log n'$, и далее «claimed bound follows from the fact $\\Delta\\ge n/6 n'$»
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1567-1568`).
+  По §16.209–§16.210 $r_{\\mathrm{nch}}=4\\log n'/\\Delta$, поэтому
+  $r_{\\mathrm{nch}}\\le 4\\log n'/(2C\\log n')=2/C<1$ для $C\\ge 3$.
+- `Toy‑тест:` минимальный случай $n=20 C n'\\log n'$ даёт $\\Delta\\ge 2C\\log n'$ и
+  $r_{\\mathrm{nch}}\\le 2/C$; при $C=4$ получаем $r_{\\mathrm{nch}}\\le 1/2$.
+- `Статус:` доказано (константное $r_{\\mathrm{nch}}$ из HR‑оценок на $\\Delta$).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо (оценка параметров), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` подставить $r_{\\mathrm{nch}}<1$ в итоговый bound Eq. (18)
+  и зафиксировать константу в основном резюме Q43 (Q43.S49-finalize-geo-constant).
