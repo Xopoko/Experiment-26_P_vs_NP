@@ -9,8 +9,8 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S13-2k-block-cut-invariant (см. `docs/research/16_tseitin_q39.md` §16.159)
-  - `NextStepID:` Q39.S14-2k-projection-rank-obstruction
+  - `LastStepID:` Q39.S14-2k-projection-rank-obstruction (см. `docs/research/16_tseitin_q39.md` §16.160)
+  - `NextStepID:` Q39.S15-2k-interval-rank-obstruction
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Детали: `docs/research/16_tseitin_q39.md` (§16.153–§16.159) и краткая сводка в `docs/research/16_tseitin_local_ef.md` §16.187.
