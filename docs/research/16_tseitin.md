@@ -3214,3 +3214,32 @@
 - `Следующий шаг:` пройти Appendix B / Algorithms 2–7 и выписать явный верхний bound
   на $A_1,A_2$ (сколько бит на центр/ребро), затем получить явный $A$ и сравнить $n_0(A)$
   с $20Cn'\\log n'$ (Q43.S54-bound-a1a2-bits).
+
+### 16.216. Исследовательский шаг (toy computation): toy‑bound для $A_1$ из Algorithms 2–4
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S54-bound-a1-from-alg2-4):`
+  В toy‑случае $|S^{*}_g|=1$, $s=2$, $\\ell=5$ (одна стадия) псевдокод Algorithms 2–4
+  читает не более 18 константных бит из $X$ сверх терминов $a\\log t$, $b\\log\\Delta$
+  и $9|S^{*}_g|$. Следовательно, для этого случая можно взять $A_1\\le 18$.
+- `Toy‑тест:` при $|S^{*}_g|=1$ имеем $g=1$ (так как $|S^{*}_g|\\ge s/4$). В Algorithm 2
+  внутренний цикл читает ровно один бит `discover=1` для единственного ассоц. центра
+  и один бит `discover=0` для завершения стадии (2 бита;
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3119-3127`).
+  Рассматривая худший по константным битам вариант (центр выбранный),
+  Algorithm 3 вызывает `GetPossiblyDeadCenter` не более 4 раз по направлениям
+  подписи (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3166-3173`),
+  давая 4 бита `known` (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3304`).
+  Далее `RecoverExposed` даёт ещё ≤4 вызова (4 бита `known`;
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3259-3264`)
+  и `RecoverNonExposed` даёт ≤4 бита `recover` плюс ≤4 бита `known`
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3283-3286,3304`).
+  Итого $2+4+4+8=18$ константных бит. В альтернативе (центр не выбранный)
+  читаются $\\log 20\\le 5$ бит `cc` и ≤8 бит `known`
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3182-3193,3304`),
+  что даёт ≤15, поэтому 18 остаётся верхней оценкой.
+- `Статус:` частично (toy‑случай; общий bound на $A_1$ ещё не выведен).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо (подсчёт констант), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` обобщить подсчёт константных бит на произвольный $|S^{*}_g|$
+  и выписать явный $A_1$ (с отделением вкладов $\\log t$, $\\log\\Delta$ и 9‑битных подписей).
