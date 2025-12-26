@@ -20,14 +20,15 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S131-compare-n0-a (см. `formal/Notes/TseitinLocalEF.lean` §16.274)
-  - `NextStepID:` Q43.S132-update-summary-dominant-bound
+  - `LastStepID:` Q43.S132-update-summary-dominant-bound (см. `formal/Notes/TseitinLocalEF.lean` §16.275)
+  - `NextStepID:` Q43.S133-hr-compatibility-check
   - `LeanTarget:` formal/PvNP/Work.lean
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: evaluation‑каркас перенесён, явный параметр $A$ извлечён; показано, что при $A=668$
-  $n_0(A)=2$, и условие $n\ge n_0(A)$ избыточно при $n\ge 20 C n'\,\log n'$. Далее нужно
-  обновить сводку ограничений в HR‑режиме.
-  Детали: `formal/Notes/TseitinLocalEF.lean` §16.191–§16.274.
+  $n_0(A)=2$, поэтому в HR‑режиме единственным ограничением по $n$ остаётся
+  $n\ge 20 C n'\,\log n'$. Далее нужно проверить совместимость остальных предпосылок HR
+  после замены $t\mapsto(2s+1)t$.
+  Детали: `formal/Notes/TseitinLocalEF.lean` §16.191–§16.275.
 
 ## Завершённые (архив)
 

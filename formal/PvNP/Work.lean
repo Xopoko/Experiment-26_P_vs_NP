@@ -33,7 +33,7 @@ theorem boundary_full (G : Graph) : ∀ e, ¬ boundary G FullSet e := by
 theorem Q39_placeholder : True := by
   trivial
 
--- TODO(Q43): replace `True` with the formal flat local-EF(s) evaluation statement.
+-- TODO(Q43.S132-update-summary-dominant-bound): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
 
