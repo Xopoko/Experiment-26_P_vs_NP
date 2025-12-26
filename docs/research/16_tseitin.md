@@ -3102,3 +3102,36 @@
 - `Барьер‑чек:` r — применимо (оценка параметров), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` подставить $r_{\\mathrm{nch}}<1$ в итоговый bound Eq. (18)
   и зафиксировать константу в основном резюме Q43 (Q43.S49-finalize-geo-constant).
+
+### 16.212. Исследовательский шаг (proof): $r_{\\mathrm{ch}}<1$ из HR‑параметров
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S50-bound-rch-constant):`
+  В режиме HR при $t':=(2s+1)\\log M$ и $s\\ge 1$ имеем
+  $$r_{\\mathrm{ch}}=\\Bigl(\\frac{4t'\\log n'}{\\Delta}\\Bigr)\\cdot M^{1/t'}\\le \\kappa<1$$
+  для всех достаточно больших $n$. Более точно, из условий
+  $n/n'\\ge A t'\\log^4 n$ (Lemma 4.2) и $\\Delta\\ge n/(6n')$ следует
+  $$r_{\\mathrm{ch}}\\le \\frac{24e^{1/2}}{A\\,\\log^3 n},$$
+  так что при $\\log^3 n\\ge 48e^{1/2}/A$ можно взять $\\kappa=1/2$.
+- `Доказательство:`
+  Из $t'=(2s+1)\\log M$ получаем
+  $$M^{1/t'}=\\exp\\!\\left(\\frac{1}{2s+1}\\right)\\le e^{1/2}$$
+  при $s\\ge 1$. По HR Lemma 4.2 выполняется $n/n'\\ge A t'\\log^4 n$
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:950-952`),
+  а после (14) имеем $\\Delta\\ge n/(6n')$
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1567-1568`).
+  Тогда
+  $$r_{\\mathrm{ch}}\\le \\frac{4t'\\log n'}{\\Delta}\\,e^{1/2}
+  \\le \\frac{24t'\\log n'}{n/n'}\\,e^{1/2}
+  \\le \\frac{24e^{1/2}}{A}\\cdot\\frac{\\log n'}{\\log^4 n}.$$
+  Используя $\\log n'\\le\\log n$, получаем указанную оценку
+  $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)$ и, следовательно, $r_{\\mathrm{ch}}<1$
+  при $n\\ge n_0(A)$.
+- `Toy‑тест:` $s=2$, $M=2$ дают $t'=5$ и $M^{1/t'}=2^{1/5}\\approx 1.15$.
+  Если $A=1$ и $\\log n=32$, то
+  $$r_{\\mathrm{ch}}\\le \\frac{24e^{1/2}}{32^3}\\approx 1.2\\cdot 10^{-3}<1.$$
+- `Статус:` доказано (явная константа для $r_{\\mathrm{ch}}$ при HR‑параметрах).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо (оценка параметров), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` подставить $r_{\\mathrm{ch}}<1$ и $r_{\\mathrm{nch}}<1$ в Eq. (18)
+  и зафиксировать константу в основном резюме Q43 (Q43.S49-finalize-geo-constant).

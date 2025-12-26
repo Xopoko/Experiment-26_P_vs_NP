@@ -20,7 +20,7 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S48-delta-constant-bridge (см. `docs/research/16_tseitin.md` §16.211)
+  - `LastStepID:` Q43.S50-bound-rch-constant (см. `docs/research/16_tseitin.md` §16.212)
   - `NextStepID:` Q43.S49-finalize-geo-constant
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
@@ -51,9 +51,12 @@
   (xix) доказано: из HR‑оценки $\\Delta\\ge 2C\\log n'$ (при $n\\ge 20Cn'\\log n'$) следует
   $r_{\\mathrm{nch}}=4\\log n'/\\Delta\\le 2/C<1$ (для $C\\ge 3$); сумма по $a_{\\mathrm{nch}}$ — константа (§16.211).
   `InfoGain:` 1.
+  (xx) доказано: из условий Lemma 4.2 $n/n'\\ge A t'\\log^4 n$ и $\\Delta\\ge n/(6n')$ вместе с
+  $M^{1/t'}\\le e^{1/2}$ получаем $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)<1$ при $n\\ge n_0(A)$ (§16.212).
+  `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: подставить $r_{\\mathrm{nch}}<1$ в итоговый bound Eq. (18) и зафиксировать
-  константу в основном резюме Q43 (Q43.S49-finalize-geo-constant).
+  Следующий шаг: подставить $r_{\\mathrm{ch}}<1$ и $r_{\\mathrm{nch}}<1$ в итоговый bound Eq. (18) и
+  зафиксировать константу в основном резюме Q43 (Q43.S49-finalize-geo-constant).
 
 ## Завершённые (архив)
 
