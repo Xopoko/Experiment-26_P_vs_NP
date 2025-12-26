@@ -5,3 +5,5 @@ package PvNP where
 
 lean_lib PvNP
 lean_lib External
+
+require Paperproof from git "https://github.com/Paper-Proof/paperproof.git"@"main"/"lean"

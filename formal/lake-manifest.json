@@ -1,5 +1,15 @@
 {"version": "1.1.0",
  "packagesDir": ".lake/packages",
- "packages": [],
+ "packages":
+ [{"url": "https://github.com/Paper-Proof/paperproof.git",
+   "type": "git",
+   "subDir": "lean",
+   "scope": "",
+   "rev": "fea2a7cf6cc9e442299c5b3b4585fefb66fd6c2c",
+   "name": "Paperproof",
+   "manifestFile": "lake-manifest.json",
+   "inputRev": "main",
+   "inherited": false,
+   "configFile": "lakefile.lean"}],
  "name": "PvNP",
  "lakeDir": ".lake"}
