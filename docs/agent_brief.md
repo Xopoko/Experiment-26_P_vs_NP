@@ -6,15 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S127-cycle-rank-counterexample
-- `Do-not-repeat (next 2 runs):` Q43.S125-quotient-cycle-test, Q43.S127-cycle-rank-counterexample
+- `LastStepID:` Q43.S128-cycle-realizability-grid
+- `Do-not-repeat (next 2 runs):` Q43.S127-cycle-rank-counterexample, Q43.S128-cycle-realizability-grid
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: чистый non‑chosen цикл в $G/\\pi$ (π‑компоненты размера 2) даёт 1‑мерное
-решение по nn‑рёбрам; следующий шаг — проверить реализуемость такого цикла
-на решётке/Def. 6.2(1–4).
+Q43: nn‑цикл из non‑chosen компонент не реализуется (Def. 6.2(4));
+следующий шаг — вернуться к per‑center подсчёту константных битов (явный $A_1$).
 Q39: контрпример: при $k=2$ все *внутренние* узлы XOR‑дерева могут быть $\\pi$‑совместимы;
 следующий шаг — искать более сильную обструкцию (проекция/ранг или геометрия подмножеств).
 
