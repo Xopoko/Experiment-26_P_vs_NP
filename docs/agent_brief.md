@@ -6,14 +6,15 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S54-bound-a1-from-alg2-4
-- `Do-not-repeat (next 2 runs):` Q43.S54-bound-a1-from-alg2-4, Q43.S53-extract-a-bound
+- `LastStepID:` Q43.S55-count-a1-per-center
+- `Do-not-repeat (next 2 runs):` Q43.S55-count-a1-per-center, Q43.S54-bound-a1-from-alg2-4
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: toy‑подсчёт для $A_1$ (|S*_g|=1) даёт ≤18 конст. бит в Algorithms 2–4; нужен общий
-$A_1/A_2$, чтобы сравнить $n\\ge 20Cn'\\log n'$ с $n\\ge n_0(A)$.
+Q43: toy‑подсчёт $A_1$ для $|S^{*}_g|=2$ (chosen+non‑chosen) даёт ≤32 конст. бита и
+поддерживает линейность; нужен общий $A_1$ по $|S^{*}_g|$ для сравнения $n\\ge 20Cn'\\log n'$
+с $n\\ge n_0(A)$.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +42,4 @@ $A_1/A_2$, чтобы сравнить $n\\ge 20Cn'\\log n'$ с $n\\ge n_0(A)$.
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Инв→Тр→Тр→Сж
+Последние:Инв→Тр→Тр→Сж→Инв
