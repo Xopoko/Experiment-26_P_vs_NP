@@ -399,6 +399,12 @@ depth $=\Omega(\log N/\log\log N)$ (Håstad’20, Cor. 6.6) и depth $=O(\log N)
 (при $C\ge 3$ и $t\le s\le n'/32$). Итоговая сводка оставляет
 единственный $n$‑барьер $n \ge 20 C n' \log n'$ и прочие предпосылки без изменений.
 См. `formal/Notes/TseitinLocalEF.lean` §16.275 (Q43.S132-update-summary-dominant-bound).
+**Q43 (compatibility после $t\mapsto(2s+1)t$).**
+Для $M=\mathrm{poly}(n)$ и $s=\mathrm{polylog}(n)$ имеем $t'=(2s+1)\log M=\log^{O(1)}n$,
+а рекурсия HR даёт $n_\eta \ge n/\mathrm{polylog}(n)^\eta$ при $\eta\le d=O(\log n/\log\log n)$.
+Это обеспечивает совместимость условий $t'(d)\le n_d/16$ и $t'\le s_\eta\le n'/32$
+при достаточно большом $n$; возможна замена $s_1=\log N$ на $s_1=\max\{\log N,t'\}$ без изменения
+asymptotics (см. §16.276, Q43.S133-hr-compatibility-check).
 Кратко: Tseitin — паритеты на графе (нечетная сумма зарядов ⇒ невыполнимость);
 нижние оценки через ограниченную степень и экспансию; Clique-Coloring —
 несовместимость клики и раскраски.
