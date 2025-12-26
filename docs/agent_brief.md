@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S101-two-chosen-example
-- `Do-not-repeat (next 2 runs):` Q43.S101-two-chosen-example, Q43.S99-adjacent-chosen-allowed
+- `LastStepID:` Q43.S102-degree2-invariant
+- `Do-not-repeat (next 2 runs):` Q43.S102-degree2-invariant, Q43.S101-two-chosen-example
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: toy‑пример показывает, что возможен $J$ с ровно 2 adjacent chosen (Def. 6.2 + минимальность);
-следующий шаг — проверить инвариант min‑degree≥2/линейную неоднозначность для канонического $S/I/\\pi$.
+Q43: инвариант min‑degree≥2 не следует даже с глобальными $S/I/\\pi$ (контрпример на §16.250);
+следующий шаг — проверить линейную неоднозначность $I/\\pi$ при двух adjacent chosen.
 Q39: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение (нужна несовместимая вершина);
 следующий шаг — формализовать инвариант obstructions для batching.
 
@@ -43,4 +43,4 @@ Q39: even‑batching $t\\to t+2$ не спасает фиксированное 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Мод→Экв→Мод→Инв→Мод
+Последние:Экв→Мод→Инв→Мод→Инв
