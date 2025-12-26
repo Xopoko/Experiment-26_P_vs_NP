@@ -29,7 +29,7 @@ The formal layer lives in `formal/` (Lean 4). Initial milestones:
 
 - **F0 (started):** definitions of languages, P, NP in `formal/PvNP/Defs.lean` (mirror `docs/01`).
 - **F1 (started):** many‑one reductions and NP‑complete predicate in `formal/PvNP/Reductions.lean` (mirror `docs/04`).
-- **F2 (in progress):** CNF/3CNF syntax and SAT in `formal/PvNP/SAT.lean`; graph/clique skeleton in `formal/PvNP/Graph.lean`; definitions of SAT→3SAT and 3SAT→CLIQUE in `formal/PvNP/ReductionsSAT.lean` (proofs pending).
+- **F2 (in progress):** CNF/3CNF syntax and SAT in `formal/PvNP/SAT.lean`; graph/clique skeleton in `formal/PvNP/Graph.lean`; definitions of SAT→3SAT and 3SAT→CLIQUE in `formal/PvNP/ReductionsSAT.lean`; correctness is temporarily stubbed in `formal/External/NPCompleteness.lean`.
 - **F3:** Switching lemma skeleton and AC⁰ lower bound scaffolding (mirror `docs/10`–`docs/11`).
 - **F4:** Minimal proof‑complexity utilities needed for Q39/Q43 (names to be fixed once we pick the first lemma).
 

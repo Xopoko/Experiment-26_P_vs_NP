@@ -6,7 +6,7 @@
 
 **Постановка и базовые учебники**
 - Clay Mathematics Institute (формулировка P vs NP): ../resources/downloads/clay_p_vs_np.pdf
-- M. Sipser, *Introduction to the Theory of Computation*: ../resources/downloads/sipser_book.html
+- M. Sipser, *Introduction to the Theory of Computation*: ../resources/downloads/sipser_book.html. External-stub: `formal/External/NPCompleteness.lean` (sat_to_3sat_correct).
 - O. Goldreich, *P, NP, and NP‑Completeness* (конспект): ../resources/downloads/goldreich_np.pdf
 - S. Arora, B. Barak, *Computational Complexity: A Modern Approach* (draft PDF): ../resources/downloads/arora_barak.pdf
 - A. Rao (2022), *Lecture 5: Hierarchy Theorems (CSEP 531)* (PDF):
@@ -21,8 +21,8 @@
 
 **NP‑полнота**
 - S. Cook (1971), *The Complexity of Theorem‑Proving Procedures* (Cook–Levin): ../resources/downloads/cook_1971.pdf
-- R. Karp (1972), *Reducibility Among Combinatorial Problems* (PDF): ../resources/downloads/karp_1972.pdf
-- J. Srba (2010), *CNF-SAT ≤p 3SAT; NP-Completeness of CLIQUE* (PDF): ../resources/downloads/srba_np_completeness_2010.pdf
+- R. Karp (1972), *Reducibility Among Combinatorial Problems* (PDF): ../resources/downloads/karp_1972.pdf. External-stub: `formal/External/NPCompleteness.lean` (three_sat_to_clique_correct).
+- J. Srba (2010), *CNF-SAT ≤p 3SAT; NP-Completeness of CLIQUE* (PDF): ../resources/downloads/srba_np_completeness_2010.pdf. External-stub: `formal/External/NPCompleteness.lean` (sat_to_3sat_correct, three_sat_to_clique_correct).
 
 **Барьеры**
 - Baker–Gill–Solovay (1975), *Relativizations of the P = ? NP Question* (`../resources/downloads/jkatz_relativization_2005.pdf`). External-stub: `formal/External/Barriers.lean` (bgs_relativization).
