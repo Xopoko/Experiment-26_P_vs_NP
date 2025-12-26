@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S70-integrate-chord-bits-signature
-- `Do-not-repeat (next 2 runs):` Q43.S70-integrate-chord-bits-signature, Q43.S69-encode-cycle-basis-bits
+- `LastStepID:` Q43.S72-identity-leak-check-chord-bits
+- `Do-not-repeat (next 2 runs):` Q43.S72-identity-leak-check-chord-bits, Q43.S70-integrate-chord-bits-signature
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: 4 бита хорд на центр встроены в подписи без изменения логики конфликта;
-дальше проверить, не появляется ли утечка identity при назначении chord‑битов.
+Q43: найдён identity‑leak из-за глобальной нумерации при назначении chord‑битов;
+дальше нужна локально‑каноническая перенумерация/перекодирование.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q43: 4 бита хорд на центр встроены в подписи бе
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Сж→Инв→Сж→Сж→Сж
+Последние:Инв→Сж→Инв→Сж→Сж

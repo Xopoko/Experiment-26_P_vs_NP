@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S70-integrate-chord-bits-signature (см. `docs/research/16_tseitin_local_ef.md` §16.229)
-  - `NextStepID:` Q43.S72-identity-leak-check-chord-bits
+  - `LastStepID:` Q43.S72-identity-leak-check-chord-bits (см. `docs/research/16_tseitin_local_ef.md` §16.230)
+  - `NextStepID:` Q43.S74-local-reencode-chord-bits
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -100,9 +100,13 @@
   (xxxvii) доказано: подпись можно расширить на ≤4 chord‑бита на центр, конфликт‑чек использует
   9‑битный префикс, а восстановление $I_j$ читает новые биты; логика Algorithms 2–4 не меняется
   (§16.229). `InfoGain:` 1.
+  (xxxviii) контрпример: правило назначения chord‑битов через лексикографический BFS‑остов
+  зависит от глобальной нумерации; на 2×2 блоке два симметричных центра получают разные
+  chord‑биты при одинаковой локальной структуре (с точностью до симметрии), так что
+  расширенная подпись не инвариантна (§16.230). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить, не нарушает ли правило назначения chord‑битов требование
-  “signature does not include identity” (Q43.S72-identity-leak-check-chord-bits).
+  Следующий шаг: переопределить назначение chord‑битов локально‑канонически или явно
+  зафиксировать допустимую ориентацию grid (Q43.S74-local-reencode-chord-bits).
 
 ## Завершённые (архив)
 
