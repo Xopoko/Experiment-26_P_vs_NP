@@ -1,5 +1,9 @@
 ## 17. Источники и опорные ссылки
 
+Пометка:
+- `External-stub:` источник используется как временная аксиома в `formal/External/`.
+Пока таких стабов нет; при добавлении — указывать точный номер теоремы/страницу.
+
 **Постановка и базовые учебники**
 - Clay Mathematics Institute (формулировка P vs NP): ../resources/downloads/clay_p_vs_np.pdf
 - M. Sipser, *Introduction to the Theory of Computation*: ../resources/downloads/sipser_book.html

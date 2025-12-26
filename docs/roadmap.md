@@ -25,6 +25,13 @@ The formal layer lives in `formal/` (Lean 4). Initial milestones:
 2) Formalize core combinatorial lemmas used in proof complexity sections.
 3) Keep external stubs in `formal/External/` with explicit citations until replaced.
 
+### Formalization backlog (short list)
+
+- **F0:** Definitions: languages, P, NP, reductions (mirror `docs/01`–`docs/04`).
+- **F1:** SAT ≤p 3SAT and 3SAT ≤p CLIQUE (mirror `docs/05`–`docs/06`).
+- **F2:** Switching lemma skeleton and AC⁰ lower bound scaffolding (mirror `docs/10`–`docs/11`).
+- **F3:** Minimal proof‑complexity utilities needed for Q39/Q43 (names to be fixed once we pick the first lemma).
+
 ## Near-term milestones (2-4 steps)
 
 1) Q43: compare n0(A) vs 20 C n' log n' with explicit A.
