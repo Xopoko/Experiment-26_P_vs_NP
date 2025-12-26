@@ -24,8 +24,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S88-quotient-parity (см. `docs/research/16_tseitin_local_ef.md` §16.241)
-  - `NextStepID:` Q43.S89-orbit8-construction
+  - `LastStepID:` Q43.S89-orbit8-construction (см. `docs/research/16_tseitin_local_ef.md` §16.242)
+  - `NextStepID:` Q43.S90-orbit8-jj-consistency
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -143,9 +143,12 @@
   на 4×4 support=центральный 2×2 блок допускает odd‑degree matching, но в D4‑квотиенте
   единственная орбита рёбер даёт чётные степени и система $\\deg\\equiv 1$ несовместна (§16.241).
   `InfoGain:` 1.
+  (l) toy‑конструкция: на 6×6 орбита $D_4$ точки $(2,3)$ (8 центров вне диагоналей)
+  поддерживает odd‑degree matching (4 ребра), поэтому существует closed information set
+  на orbit‑8‑only support; см. §16.242. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: попытаться построить D4‑симметричный closed‑support только из орбит
-  размера 8 (без осевых/диагональных), либо найти локальную обструкцию (Q43.S89).
+  Следующий шаг: проверить совместимость orbit‑8 support с Definition 6.2 (possible forcing
+  information $J_j$) или найти локальную обструкцию на уровне $J_j$ (Q43.S90).
 
 ## Завершённые (архив)
 
