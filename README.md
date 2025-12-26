@@ -34,11 +34,16 @@ scripts/verify_all.sh
 ```
 
 What it does:
-- Executes `code/verify_checks.py` (toy sanity checks).
 - Verifies `docs/` references to `resources/downloads/` against `resources/manifest.tsv`.
 - Verifies `docs/open_questions.md` structure and `docs/agent_brief.md` boundedness/anti-loop fields.
 - Verifies prompt stays **single-line**: `scripts/agent_prompt.txt`.
 - If Lean is installed, runs `lake build PvNP Notes` in `formal/` (skipped otherwise).
+
+Optional toy checks:
+
+```bash
+python3 scripts/verify_notebook.py --checks path/to/toy_checks.py
+```
 
 ## Agent automation (single WORKER loop)
 

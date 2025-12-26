@@ -35,6 +35,9 @@
 
 ## Завершённые (архив)
 
+- [x] **Q44 (repo hygiene: remove legacy notebook checks):**
+  закрыто: удалён `code/verify_checks.py`, `scripts/verify_notebook.py` теперь выполняет только структурные проверки,
+  опциональные toy‑чеки запускаются через `--checks`. `StepID:` Q44.S1-drop-legacy-checks. `InfoGain:` 1.
 - [x] **Q42 (flat local‑EF(s): перенос HR t‑evaluation → Lemma 2.13):**
   закрыто: введено cost‑$t$ evaluation для flat local‑EF(s) и показано, что HR Lemma 2.13 переносится с заменой параметра глубины на стоимость (порог $t\\le\\Theta(n/s)$); см. `formal/Notes/TseitinLocalEF.lean` §16.162. `StepID:` Q42.S1-define-evaluation-flat. `InfoGain:` 2.
 - [x] **Q41 (если Q39 открыт: локальные расширения):**

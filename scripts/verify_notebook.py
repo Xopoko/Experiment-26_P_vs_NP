@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import json
 import runpy
 import re
 import subprocess
@@ -12,30 +11,6 @@ from pathlib import Path
 
 
 _STEP_ID_RE = re.compile(r"^Q\d{1,4}\.S\d{1,4}(?:-[a-z0-9][a-z0-9-]*)?$")
-
-
-def _iter_code_cells(nb: dict) -> list[tuple[int, str]]:
-    cells = nb.get("cells", [])
-    out: list[tuple[int, str]] = []
-    for i, cell in enumerate(cells):
-        if cell.get("cell_type") != "code":
-            continue
-        source = cell.get("source", "")
-        if isinstance(source, list):
-            source = "".join(source)
-        if not isinstance(source, str):
-            raise TypeError(f"Unexpected cell[{i}].source type: {type(source).__name__}")
-        out.append((i, source))
-    return out
-
-
-def _assert_no_magics(cell_index: int, source: str) -> None:
-    for raw_line in source.splitlines():
-        line = raw_line.lstrip()
-        if not line:
-            continue
-        if line.startswith("!") or line.startswith("%"):
-            raise AssertionError(f"cell {cell_index}: contains notebook magic/shell line: {raw_line!r}")
 
 
 def _load_manifest_ids(path: Path) -> set[str]:
@@ -336,19 +311,12 @@ def _verify_download_dir_hygiene(*, manifest_path: Path, downloads_dir: Path) ->
 
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(
-        description="Run project checks from a .py file or execute code cells from a legacy .ipynb (no Jupyter required)."
+        description="Run project checks (docs/resources + optional toy checks)."
     )
     parser.add_argument(
-        "path",
-        nargs="?",
+        "--checks",
         type=Path,
-        default=Path("code/verify_checks.py"),
-        help="Path to a .py checks file or a legacy .ipynb (default: code/verify_checks.py)",
-    )
-    parser.add_argument(
-        "--allow-magics",
-        action="store_true",
-        help="Do not fail on lines starting with ! or % (not recommended).",
+        help="Optional path to a .py checks file to execute before structural checks.",
     )
     parser.add_argument(
         "--skip-resource-checks",
@@ -357,55 +325,21 @@ def main(argv: list[str]) -> int:
     )
     args = parser.parse_args(argv)
 
-    if args.path.suffix == ".py":
+    if args.checks is not None:
+        if not args.checks.exists():
+            print(f"FAILED: {args.checks}: file not found", file=sys.stderr)
+            return 2
+        if args.checks.suffix != ".py":
+            print(f"FAILED: {args.checks}: expected .py file", file=sys.stderr)
+            return 2
         try:
-            runpy.run_path(str(args.path), run_name="__main__")
+            runpy.run_path(str(args.checks), run_name="__main__")
         except Exception as exc:  # noqa: BLE001 - show full context
-            print(f"FAILED: {args.path}: {exc}", file=sys.stderr)
+            print(f"FAILED: {args.checks}: {exc}", file=sys.stderr)
             traceback.print_exc()
             return 1
-        print(f"OK: executed {args.path}")
-        if not args.skip_resource_checks:
-            _verify_download_links(
-                manifest_path=Path("resources/manifest.tsv"),
-                downloads_dir=Path("resources/downloads"),
-            )
-            _verify_download_dir_hygiene(
-                manifest_path=Path("resources/manifest.tsv"),
-                downloads_dir=Path("resources/downloads"),
-            )
-            _verify_agent_brief(
-                path=Path("docs/agent_brief.md"),
-                max_lines=200,
-                max_bytes=16_000,
-                max_experiments=12,
-            )
-            _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
-            _verify_open_questions_structure(path=Path("docs/open_questions.md"))
-            _verify_prompt_files(paths=[Path("scripts/agent_prompt.txt")])
-        return 0
+        print(f"OK: executed {args.checks}")
 
-    if args.path.suffix != ".ipynb":
-        print(f"FAILED: {args.path}: expected .py or .ipynb", file=sys.stderr)
-        return 2
-
-    nb = json.loads(args.path.read_text(encoding="utf-8"))
-    code_cells = _iter_code_cells(nb)
-
-    env: dict[str, object] = {"__name__": "__main__"}
-    for cell_index, source in code_cells:
-        if not args.allow_magics:
-            _assert_no_magics(cell_index, source)
-        filename = f"{args.path}#cell_{cell_index}"
-        try:
-            code = compile(source, filename, "exec", dont_inherit=True)
-            exec(code, env)  # noqa: S102 - deliberate: verification harness
-        except Exception as exc:  # noqa: BLE001 - show full context
-            print(f"FAILED: {filename}: {exc}", file=sys.stderr)
-            traceback.print_exc()
-            return 1
-
-    print(f"OK: executed {len(code_cells)} code cells from {args.path}")
     if not args.skip_resource_checks:
         _verify_download_links(
             manifest_path=Path("resources/manifest.tsv"),
