@@ -27,8 +27,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S97-orbit8-force-e1e4-zero (см. `docs/research/16_tseitin_local_ef.md` §16.247)
-  - `NextStepID:` Q43.S98-orbit8-adjacent-chosen
+  - `LastStepID:` Q43.S98-adjacent-chosen-mod2-conflict (см. `docs/research/16_tseitin_local_ef.md` §16.248)
+  - `NextStepID:` Q43.S99-adjacent-chosen-allowed
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -164,9 +164,11 @@
   (lv) toy‑проверка: при chosen центрах $(2,3),(5,4)$ запрет chosen–non‑chosen edges означает
   $x_{e_1}=x_{e_4}=0$, что противоречит $A x=\\mathbf 1$ из §16.245 (требует $x_{e_1}=x_{e_4}=1$);
   значит mod‑2 конфликт возникает. См. §16.247. `InfoGain:` 1.
+  (lvi) toy‑проверка: при adjacent chosen центрах $(2,3),(2,4)$ и $J$ с рёбрами $E$ из §16.242
+  (без chosen–non‑chosen рёбер) mod‑2 система $A x=\\mathbf 1$ даёт $x_1=x_2=x_3=x_4=1$ и
+  совместна; конфликт Def. 6.13(2) не возникает. См. §16.248. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить альтернативную конфигурацию без mixed‑edges, например adjacent chosen
-  центры и новый $J$ без рёбер chosen–non‑chosen (Q43.S98).
+  Следующий шаг: проверить по Def. 6.2/6.5/6.11, допускается ли adjacency chosen центров (Q43.S99).
 
 ## Завершённые (архив)
 
