@@ -6,15 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S106-pi-quotient-rank-lemma
-- `Do-not-repeat (next 2 runs):` Q43.S106-pi-quotient-rank-lemma, Q43.S105-cycle-space-criterion
+- `LastStepID:` Q43.S107-pi-quotient-counterexample-def6-2-4
+- `Do-not-repeat (next 2 runs):` Q43.S107-pi-quotient-counterexample-def6-2-4, Q43.S106-pi-quotient-rank-lemma
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: в каноническом режиме $\\pi$ фиксирует non‑chosen часть, а неоднозначность закрытых $I$
-равна cycle‑space chosen‑графа; следующий шаг — искать контрпример к ранговому критерию
-через Def. 6.2(4).
+Q43: toy‑тест (2×2 chosen‑цикл + non‑chosen π‑ребро) не даёт конфликта; следующий шаг —
+искать обструкцию через нечётные π‑компоненты или формализовать общую лемму о декуплинге.
 Q39: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение (нужна несовместимая вершина);
 следующий шаг — формализовать инвариант obstructions для batching.
 
@@ -44,4 +43,4 @@ Q39: even‑batching $t\\to t+2$ не спасает фиксированное 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Мод→Инв→Мод→Инв→Комм/Ранг
+Последние:Инв→Мод→Инв→Комм/Ранг→Инв
