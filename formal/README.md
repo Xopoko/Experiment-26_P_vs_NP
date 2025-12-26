@@ -1,6 +1,7 @@
 # Formal layer (Lean 4)
 
 This directory holds the formal development. The chosen proof assistant is Lean 4.
+Markdown proofs in `docs/` are **not** formal proofs; they are candidates to be ported here.
 
 Layout:
 - `PvNP/`   Core definitions and lemmas.
