@@ -6,12 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S7-block-compatibility-invariant
-- `Do-not-repeat (next 2 runs):` Q39.S7-block-compatibility-invariant, Q43.S78-orientation-explicit-quote
+- `LastStepID:` Q43.S79-symmetry-counterexample
+- `Do-not-repeat (next 2 runs):` Q43.S79-symmetry-counterexample, Q43.S78-orientation-explicit-quote
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
+Q43: односигнатурная канонизация ориентации ломается на симметричном «кресте»; следующий шаг —
+проверить chirality‑бит как минимальный симметри‑ломающий маркер.
 Q39: toy‑инвариант показал, что фиксированное 2×2 row‑разбиение уже на 4×4 ломается при шаге
 t→t+1 (нечётный префикс), значит нужен base‑change/обобщение и проверка, спасает ли batching.
 
@@ -41,4 +43,4 @@ t→t+1 (нечётный префикс), значит нужен base‑change
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Сж→Инв→Сж→Мод
+Последние:Сж→Инв→Сж→Мод→Мод
