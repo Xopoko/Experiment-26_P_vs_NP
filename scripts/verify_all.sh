@@ -9,7 +9,7 @@ if [ -d formal ] && [ -f formal/lakefile.lean ]; then
     exit 0
   fi
   if command -v lake >/dev/null 2>&1; then
-    (cd formal && lake build PvNP Notes)
+    (cd formal && lake build -R PvNP Notes)
   else
     echo "SKIP: Lean build (lake not installed)"
   fi
