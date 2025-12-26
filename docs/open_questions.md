@@ -27,8 +27,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S110-decouple-even-pi (см. `docs/research/16_tseitin_local_ef.md` §16.258)
-  - `NextStepID:` Q43.S111-size4-pi-obstruction
+  - `LastStepID:` Q43.S111-size4-pi-obstruction (см. `docs/research/16_tseitin_local_ef.md` §16.259)
+  - `NextStepID:` Q43.S112-size4-pi-compatibility
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -199,9 +199,12 @@
   (lxv) toy‑тест: 2×2 chosen‑цикл + π‑компонента‑ребро (|P|=2) + π‑компонента‑звезда (|P|=4)
   при запрете chosen–non‑chosen edges даёт совместную $A x=\\mathbf 1$; non‑chosen часть фиксирована,
   число closed $I$ равно $2^{\\beta(G_{\\mathrm{ch}})}=2$ (§16.258). `InfoGain:` 1.
+  (lxvi) toy‑тест: 2×2 chosen‑цикл + две disjoint π‑звезды размера 4 при запрете chosen–non‑chosen
+  edges дают совместную $A x=\\mathbf 1$; non‑chosen часть фиксирована, число closed $I$ остаётся
+  $2^{\\beta(G_{\\mathrm{ch}})}=2$, обструкция не возникает (§16.259). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить конфигурацию с двумя π‑компонентами размера 4 (звёзды) при отсутствии
-  chosen–non‑chosen edges и совместимость $A x=\\mathbf 1$ (Q43.S111-size4-pi-obstruction).
+  Следующий шаг: попытаться обобщить совместимость для двух π‑звёзд размера 4 или вывести
+  паритетный критерий через $G/\\pi$ (Q43.S112-size4-pi-compatibility).
 
 ## Завершённые (архив)
 
