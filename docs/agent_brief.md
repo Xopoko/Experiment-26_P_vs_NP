@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S115-quotient-parity-criterion
-- `Do-not-repeat (next 2 runs):` Q43.S115-quotient-parity-criterion, Q39.S12-evenbatch-2k-counterexample
+- `LastStepID:` Q43.S116-overlapping-stars-counterexample
+- `Do-not-repeat (next 2 runs):` Q43.S116-overlapping-stars-counterexample, Q43.S115-quotient-parity-criterion
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: получен паритетный критерий через $G/\\pi$ в каноническом режиме; следующий шаг —
-стресс‑тест с overlapping π‑звёздами или chosen–non‑chosen ребром.
+Q43: найден контрпример вне канонического режима (overlapping π‑звёзды ломают декуплинг);
+следующий шаг — стресс‑тест для chosen–non‑chosen edges.
 Q39: even‑batching по $2k$ (toy $k=2$) всё ещё требует несовместимых строк из‑за вершинных аксиом;
 следующий шаг — проверить, можно ли держать $\\pi$‑совместимыми все внутренние узлы (ранг/проекция).
 
@@ -43,4 +43,4 @@ Q39: even‑batching по $2k$ (toy $k=2$) всё ещё требует несо
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→МодСтресс→Инв→Комм/Ранг→Эквивалентность
+Последние:МодСтресс→Инв→Комм/Ранг→Эквивалентность→МодСтресс
