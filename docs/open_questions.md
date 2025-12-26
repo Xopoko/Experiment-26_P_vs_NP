@@ -21,8 +21,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S81-chirality-advice-check (см. `docs/research/16_tseitin_local_ef.md` §16.236)
-  - `NextStepID:` Q43.S83-min-orientation-bits
+  - `LastStepID:` Q43.S83-d4-lower-bound (см. `docs/research/16_tseitin_local_ef.md` §16.237)
+  - `NextStepID:` Q43.S84-3bit-upper
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -124,10 +124,12 @@
   (xliv) доказано: внешний non‑invariant advice‑бит ориентации $\\chi$ совместим с Remark 6.12,
   используется Algorithms 2–4 как глобальный параметр с добавкой $O(1)$ бит, и signature+$\\chi$
   фиксирует ориентацию (toy: крест/2×2) (§16.236). `InfoGain:` 1.
+  (xlv) доказано: D4‑симметричный support (крест) даёт мультимножество подписей, инвариантное
+  под всеми 8 симметриями, поэтому identity‑free канонизация требует ≥3 глобальных бит
+  (информационный lower bound; §16.237). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: оценить минимальное число глобальных бит для канонизации ориентации
-  (например, различить все 8 симметрий $D_4$) и понять, достаточен ли $|\\chi|=1$
-  (Q43.S83-min-orientation-bits).
+  Следующий шаг: построить явную 3‑битную схему канонизации ориентации и проверить,
+  совместима ли она с Algorithms 2–4 (Q43.S84-3bit-upper).
 
 ## Завершённые (архив)
 
