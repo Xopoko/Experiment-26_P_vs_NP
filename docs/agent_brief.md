@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S95-orbit8-mod2-global
-- `Do-not-repeat (next 2 runs):` Q43.S95-orbit8-mod2-global, Q43.S94-orbit8-canonical-fragment
+- `LastStepID:` Q43.S96-orbit8-mixed-chosen-conflict
+- `Do-not-repeat (next 2 runs):` Q43.S96-orbit8-mixed-chosen-conflict, Q43.S95-orbit8-mod2-global
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: mod‑2 система для orbit‑8 (all‑non‑chosen, $\\pi=E$) совместна; следующий шаг —
-mixed chosen/non‑chosen и конфликт Def. 6.13(2).
+Q43: mixed chosen пример $(2,3),(5,4)$ с рёбрами $E$ даёт совместный mod‑2 чек, но
+нарушает запрет chosen–non‑chosen; следующий шаг — проверить mod‑2 с этим запретом.
 Q39: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение (нужна несовместимая вершина);
 следующий шаг — формализовать инвариант obstructions для batching.
 
@@ -43,4 +43,4 @@ Q39: even‑batching $t\\to t+2$ не спасает фиксированное 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Сж→Мод→Инв→Мод→Инв
+Последние:Мод→Инв→Мод→Инв→Инв
