@@ -164,7 +164,9 @@ def _analyze_log(path: Path) -> dict[str, Any]:
                 role_cmd_counts[current_role]["rg"] += 1
                 if "resources/text_cache/" in cmd:
                     role_cmd_counts[current_role]["rg_text_cache"] += 1
-            if "python3 scripts/verify_notebook.py" in cmd:
+            if "scripts/verify_all.sh" in cmd or re.search(r"\\bverify_all\\.sh\\b", cmd):
+                role_cmd_counts[current_role]["verify"] += 1
+            elif "python3 scripts/verify_notebook.py" in cmd:
                 role_cmd_counts[current_role]["verify"] += 1
             if re.search(r"(^|\s)git(\s|$)", cmd) and " commit" in cmd:
                 role_cmd_counts[current_role]["git_commit"] += 1

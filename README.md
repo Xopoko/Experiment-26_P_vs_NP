@@ -7,7 +7,7 @@ This repo is a compact, continuously-verified research log aimed at making real 
 - Index: `P_vs_NP.md`
 - Current work queue: `docs/open_questions.md`
 - Agent working memory (bounded): `docs/agent_brief.md`
-- Run checks (no Jupyter needed): `python3 scripts/verify_notebook.py`
+- Run checks (markdown + formal, no Jupyter needed): `scripts/verify_all.sh`
 - Run the agents (recommended): `./agent/run_trio.sh`
 - Light flow (question setter → worker): `./agent/run_flow.sh`
 - Summarize the last run log: `python3 agent/analyze_logs.py`
@@ -19,17 +19,19 @@ This repo is a compact, continuously-verified research log aimed at making real 
   - `docs/open_questions.md` — the active research queue; **one run picks exactly one item**.
   - `docs/agent_brief.md` — bounded “working memory” to prevent loops (Do-not-repeat).
   - `docs/research/` — longer technical scratchpads grouped by topic (`16_*.md`).
+- `formal/` — Lean 4 formalization layer (currently a skeleton).
 - `resources/manifest.tsv` + `resources/downloads/` — bibliography + pinned PDFs/HTML (hygiene is checked).
 - `resources/text_cache/` — optional extracted text cache for fast `rg` over PDFs (gitignored).
 - `agent/` — runnable wrappers around Codex CLI, with per-run logs under `agent/logs/` (gitignored).
-- `scripts/verify_notebook.py` — project verifier (docs + toy checks).
+- `scripts/verify_all.sh` — project verifier (docs + toy checks + optional formal build).
+- `scripts/verify_notebook.py` — markdown/toy checks only (used by `verify_all.sh`).
 
 ## Verification
 
 Run:
 
 ```bash
-python3 scripts/verify_notebook.py
+scripts/verify_all.sh
 ```
 
 What it does:
@@ -37,11 +39,12 @@ What it does:
 - Verifies `docs/` references to `resources/downloads/` against `resources/manifest.tsv`.
 - Verifies `docs/open_questions.md` structure and `docs/agent_brief.md` boundedness/anti-loop fields.
 - Verifies prompts stay **single-line**: `scripts/agent_prompt.txt`, `scripts/skeptic_prompt.txt`, `scripts/supervisor_prompt.txt`.
+- If Lean is installed, runs `lake build` in `formal/` (skipped otherwise).
 
 ## Agent automation (WORKER → SKEPTIC → SUPERVISOR)
 
 The default control loop is:
-- **WORKER**: do 1 research step (exactly one artifact: Proof / Counterexample / Exact citation / Toy).
+- **WORKER**: do 1 research step (exactly one artifact: Proof / Counterexample / Exact citation / Toy / Reduction / Barrier).
 - **SKEPTIC**: try to break/verify the WORKER step (find missing assumptions / errors / “already known” with a precise citation).
 - **SUPERVISOR**: enforce protocol + anti-loop; fix prompts/runner only if there is a systemic loop.
 

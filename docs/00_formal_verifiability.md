@@ -11,4 +11,7 @@
    и **проверка на барьеры** (релятивизация, natural proofs, algebrization).
 6. Для пометок *«цитируется»*: точная ссылка должна быть в Разделе «Источники»
    и в `../resources/manifest.tsv` (по возможности — скачанный PDF в `../resources/downloads/`).
-7. Для проверочного кода: воспроизводимый прогон без Jupyter: `python3 scripts/verify_notebook.py`.
+7. Для проверочного кода: воспроизводимый прогон без Jupyter: `scripts/verify_all.sh`
+   (включает `verify_notebook.py` и, при наличии Lean, формальный build).
+8. Формальный слой живёт в `formal/` (Lean 4); финальная теорема не должна зависеть от
+   внешних стабов (`ASSUMPTION`).

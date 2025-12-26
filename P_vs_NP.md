@@ -17,6 +17,7 @@
 - [6.6. INDEPENDENT SET и VERTEX COVER](docs/06_6_is_vc.md)
 - [7. Три барьера](docs/07_barriers.md)
 - [8. Линии атаки](docs/08_attack_lines.md)
+- [Roadmap](docs/roadmap.md)
 - [Agent brief (не разрастаться)](docs/agent_brief.md)
 - [Открытые вопросы (очередь)](docs/open_questions.md)
 - [9. Схемная сложность](docs/09_circuit_complexity.md)
@@ -29,6 +30,7 @@
 - [16. IP = PSPACE и PCP](docs/16_ip_pcp.md)
 - [Исследовательские шаги (16.x, индекс)](docs/research/index.md)
 - [17. Источники и опорные ссылки](docs/sources.md)
+- [Формальный слой (Lean 4)](formal/README.md)
 
 ## Проверка
-- Запуск проверочных программ (без Jupyter): `python3 scripts/verify_notebook.py`
+- Запуск проверок (markdown + формализация): `scripts/verify_all.sh`

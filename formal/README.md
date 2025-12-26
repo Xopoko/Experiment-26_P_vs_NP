@@ -1,0 +1,18 @@
+# Formal layer (Lean 4)
+
+This directory holds the formal development. The chosen proof assistant is Lean 4.
+
+Layout:
+- `PvNP/`   Core definitions and lemmas.
+- `External/`  Temporary external stubs (ASSUMPTION) with exact citations.
+
+Build (if Lean is installed):
+
+```bash
+cd formal
+lake build
+```
+
+Policy:
+- The final theorem (P != NP or P = NP) must not depend on any ASSUMPTION.
+- External stubs must be replaced by formal proofs before claiming completion.
