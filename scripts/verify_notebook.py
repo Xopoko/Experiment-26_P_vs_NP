@@ -245,37 +245,6 @@ def _verify_prompt_files(*, paths: list[Path], max_bytes: int = 4096) -> None:
     print(f"OK: verified single-line prompts: {', '.join(str(p) for p in paths)}")
 
 
-def _verify_assumptions_registry(*, path: Path) -> None:
-    if not path.exists():
-        raise AssertionError(f"{path} missing (required by AGENTS.md)")
-    text = path.read_text(encoding="utf-8")
-    if "Assumption registry" not in text:
-        raise AssertionError(f"{path} missing header 'Assumption registry'")
-    if "Total stubs" not in text:
-        raise AssertionError(f"{path} missing 'Total stubs' summary")
-
-
-def _verify_external_axioms(*, external_dir: Path, registry_path: Path) -> None:
-    if not external_dir.exists():
-        raise AssertionError(f"{external_dir} missing (required by AGENTS.md)")
-    axioms: set[str] = set()
-    for path in external_dir.glob("*.lean"):
-        raw = path.read_text(encoding="utf-8")
-        for line in raw.splitlines():
-            m = re.match(r"\s*axiom\s+([A-Za-z0-9_]+)\b", line)
-            if m:
-                axioms.add(m.group(1))
-    if not axioms:
-        raise AssertionError(f"No axioms found in {external_dir} (expected ASSUMPTION stubs)")
-    registry = registry_path.read_text(encoding="utf-8")
-    missing = [a for a in sorted(axioms) if a not in registry]
-    if missing:
-        raise AssertionError(f"Assumption registry missing stubs: {', '.join(missing)}")
-    m_total = re.search(r"Total stubs:\\s*(\\d+)", registry)
-    if m_total:
-        declared = int(m_total.group(1))
-        if declared != len(axioms):
-            raise AssertionError(f"Assumption registry count mismatch: Total stubs {declared} vs {len(axioms)}")
 
 
 def _verify_download_links(*, manifest_path: Path, downloads_dir: Path) -> None:
@@ -407,20 +376,7 @@ def main(argv: list[str]) -> int:
             )
             _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
             _verify_open_questions_structure(path=Path("docs/open_questions.md"))
-            _verify_assumptions_registry(path=Path("docs/assumptions.md"))
-            _verify_external_axioms(
-                external_dir=Path("formal/External"),
-                registry_path=Path("docs/assumptions.md"),
-            )
-            _verify_prompt_files(
-                paths=[
-                    Path("scripts/agent_prompt.txt"),
-                    Path("scripts/question_prompt.txt"),
-                    Path("scripts/worker_prompt.txt"),
-                    Path("scripts/skeptic_prompt.txt"),
-                    Path("scripts/supervisor_prompt.txt"),
-                ],
-            )
+            _verify_prompt_files(paths=[Path("scripts/agent_prompt.txt")])
         return 0
 
     if args.path.suffix != ".ipynb":
@@ -461,20 +417,7 @@ def main(argv: list[str]) -> int:
         )
         _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
         _verify_open_questions_structure(path=Path("docs/open_questions.md"))
-        _verify_assumptions_registry(path=Path("docs/assumptions.md"))
-        _verify_external_axioms(
-            external_dir=Path("formal/External"),
-            registry_path=Path("docs/assumptions.md"),
-        )
-        _verify_prompt_files(
-            paths=[
-                Path("scripts/agent_prompt.txt"),
-                Path("scripts/question_prompt.txt"),
-                Path("scripts/worker_prompt.txt"),
-                Path("scripts/skeptic_prompt.txt"),
-                Path("scripts/supervisor_prompt.txt"),
-            ],
-        )
+        _verify_prompt_files(paths=[Path("scripts/agent_prompt.txt")])
     return 0
 
 

@@ -6,7 +6,6 @@ Markdown proofs in `docs/` are **not** formal proofs; they are candidates to be 
 Layout:
 - `PvNP/`   Core definitions and lemmas.
 - `Notes/`  Long research notes kept as Lean doc-comments.
-- `External/`  Temporary external stubs (ASSUMPTION) with exact citations.
 
 Build (if Lean is installed):
 
@@ -16,10 +15,4 @@ lake build
 ```
 
 Policy:
-- The final theorem (P != NP or P = NP) must not depend on any ASSUMPTION.
-- External stubs must be replaced by formal proofs before claiming completion.
-- The `External` library is compiled by `lake build` but should remain dependency-free.
-
-Current stubs:
-- `External/Barriers.lean`
-- `External/NPCompleteness.lean`
+- The final theorem (P != NP or P = NP) must be fully formalized in Lean.
