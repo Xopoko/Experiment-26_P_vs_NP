@@ -1,2 +1,2 @@
 import Paperproof
-import PvNP.Basic
+import PvNP.Main

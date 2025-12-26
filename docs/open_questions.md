@@ -11,6 +11,7 @@
   - `Status:` ACTIVE
   - `LastStepID:` Q39.S20-2k-single-frontier-obstruction (см. `formal/Notes/TseitinQ39.lean` §16.166)
   - `NextStepID:` Q39.S21-2k-two-strip-frontier-obstruction
+  - `LeanTarget:` formal/PvNP/Work.lean
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Update: «единичный фронтир» невозможен уже для целей с $|S_j\\cap\\delta(U_{\\mathrm{root}})|\\ge 3$ (требуется узел с пересечением ≥2).
@@ -21,6 +22,7 @@
   - `Status:` ACTIVE
   - `LastStepID:` Q43.S131-compare-n0-a (см. `formal/Notes/TseitinLocalEF.lean` §16.274)
   - `NextStepID:` Q43.S132-update-summary-dominant-bound
+  - `LeanTarget:` formal/PvNP/Work.lean
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: evaluation‑каркас перенесён, явный параметр $A$ извлечён; показано, что при $A=668$
   $n_0(A)=2$, и условие $n\ge n_0(A)$ избыточно при $n\ge 20 C n'\,\log n'$. Далее нужно

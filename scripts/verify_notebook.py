@@ -162,15 +162,21 @@ def _verify_open_questions_structure(*, path: Path) -> None:
             raise AssertionError(f"{path}: {qid}: missing `NextStepID:`")
         _parse_step_id(next_step, context=f"{path}: {qid}: NextStepID")
 
-        success = _extract_backticked_meta(item, key="Success")
-        if success is None:
-            raise AssertionError(f"{path}: {qid}: missing `Success:`")
-        if not success.strip():
-            raise AssertionError(f"{path}: {qid}: empty `Success:`")
+    success = _extract_backticked_meta(item, key="Success")
+    if success is None:
+        raise AssertionError(f"{path}: {qid}: missing `Success:`")
+    if not success.strip():
+        raise AssertionError(f"{path}: {qid}: empty `Success:`")
 
-        last_step = _extract_backticked_meta(item, key="LastStepID")
-        if last_step is not None and last_step.strip():
-            _parse_step_id(last_step, context=f"{path}: {qid}: LastStepID")
+    lean_target = _extract_backticked_meta(item, key="LeanTarget")
+    if lean_target is None:
+        raise AssertionError(f"{path}: {qid}: missing `LeanTarget:`")
+    if not lean_target.strip():
+        raise AssertionError(f"{path}: {qid}: empty `LeanTarget:`")
+
+    last_step = _extract_backticked_meta(item, key="LastStepID")
+    if last_step is not None and last_step.strip():
+        _parse_step_id(last_step, context=f"{path}: {qid}: LastStepID")
 
     print(f"OK: verified open questions structure in {path}")
 
