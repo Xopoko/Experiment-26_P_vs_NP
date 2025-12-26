@@ -2443,4 +2443,40 @@
 - `Статус:` контрпример (adjacent chosen не влечёт mod‑2 конфликт в этой конфигурации).
 - `InfoGain:` 1.
 - `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить по Def. 6.2/6.5/6.11, допускается ли adjacency chosen центров (Q43.S99).
+
+### 16.249. Исследовательский шаг (exact citation): adjacent chosen допустимы по Def. 5.6/6.2/6.11
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S99-adjacent-chosen-allowed):`
+  В HR’22 определения не запрещают минимальный $J$ с ровно двумя adjacent chosen центрами и без
+  chosen–non‑chosen рёбер; конфигурация §16.248 допустима по Def. 5.6/6.2/6.11, а Lemma 6.5
+  требует наличие adjacency между chosen центрами в $\\mathrm{supp}(J)$.
+- `Exact citation:`
+  “Edges between chosen centers are new grid edges and we say that two chosen centers are neighbors
+  if they lie in adjacent sub-squares” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1571-1574`).
+  Definition 5.6: информация — это либо edge между центрами в соседних sub‑squares,
+  либо non‑edge $(v,\\delta,\\bot)$ (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1586-1594`).
+  Definition 6.2: возможный $J$ — минимальный набор с условиями (1)–(4) и явной ремаркой
+  “a possible forcing information $J$ never contains an edge between a chosen center and a non-chosen center”
+  (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1882-1893`).
+  Lemma 6.5 использует минимальность $J$ и локальную согласованность, чтобы показать:
+  “every chosen center in $\\mathrm{supp}(J)$ is adjacent to at least one other chosen center in $\\mathrm{supp}(J)$”
+  (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2016-2023`).
+  Definition 6.11 задаёт 9‑битную подпись центра (chosen‑бит, направления информации, направления рёбер),
+  без ограничений на adjacency (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`).
+- `Toy‑тест:`
+  1) В конфигурации §16.248 берём chosen центры $c_1=(2,3)$ и $c_2=(2,4)$ (adjacent),
+     $J$ содержит ребро $e_1=c_1c_2$ и рёбра $e_2,e_3,e_4$ между non‑chosen центрами, а
+     остальные направления закрыты non‑edges.
+  2) Def. 5.6 допускает такие информационные куски (edge между adjacent центрами и non‑edge‑записи).
+  3) Нарушения “no chosen–non‑chosen edges” нет: $e_1$ соединяет chosen–chosen, $e_2,e_3,e_4$ —
+     non‑chosen–non‑chosen, что согласуется с Def. 6.2(4) и явной ремаркой после Def. 6.2.
+  4) Локальная согласованность выполнена (ровно один piece на направление и нечётная степень),
+     поэтому при локально согласованном $I$ (например, $I=\\varnothing$) выполняется Def. 6.2(1).
+  5) Подписи Def. 6.11 корректно определены: у выбранных центров bit chosen = 1, отмечены все направления
+     и ровно одно направление с ребром, поэтому adjacency не создаёт запрета.
+- `Статус:` подтверждено (adjacent chosen разрешены на уровне определений; запрета нет).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — неприменимо (цитата/формулировка), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` проверить, может ли minimal $J$ с ровно двумя adjacent chosen центрами
+  реально возникать как possible forcing information (Def. 6.2(3)), или требуется ≥3 chosen (Q43.S101).

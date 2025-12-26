@@ -27,8 +27,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S98-adjacent-chosen-mod2-conflict (см. `docs/research/16_tseitin_local_ef.md` §16.248)
-  - `NextStepID:` Q43.S99-adjacent-chosen-allowed
+  - `LastStepID:` Q43.S99-adjacent-chosen-allowed (см. `docs/research/16_tseitin_local_ef.md` §16.249)
+  - `NextStepID:` Q43.S101-adjacent-chosen-needs-third
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -167,8 +167,13 @@
   (lvi) toy‑проверка: при adjacent chosen центрах $(2,3),(2,4)$ и $J$ с рёбрами $E$ из §16.242
   (без chosen–non‑chosen рёбер) mod‑2 система $A x=\\mathbf 1$ даёт $x_1=x_2=x_3=x_4=1$ и
   совместна; конфликт Def. 6.13(2) не возникает. См. §16.248. `InfoGain:` 1.
+  (lvii) точная цитата: Def. 5.6/6.2 допускают edges между adjacent chosen и запрещают только
+  chosen–non‑chosen; Lemma 6.5 требует adjacency между chosen в $\\mathrm{supp}(J)$, а Def. 6.11
+  не накладывает ограничений на adjacency. Следовательно, конфигурация §16.248 допустима
+  на уровне определений. См. §16.249. `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить по Def. 6.2/6.5/6.11, допускается ли adjacency chosen центров (Q43.S99).
+  Следующий шаг: проверить, требует ли Def. 6.2(3) / минимальность $J$ ≥3 chosen центров
+  (или ещё одну adjacent‑пару) для реального forcing‑information (Q43.S101).
 
 ## Завершённые (архив)
 

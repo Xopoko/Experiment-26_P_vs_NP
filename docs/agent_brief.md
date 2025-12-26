@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S98-adjacent-chosen-mod2-conflict
-- `Do-not-repeat (next 2 runs):` Q43.S98-adjacent-chosen-mod2-conflict, Q43.S97-orbit8-force-e1e4-zero
+- `LastStepID:` Q43.S99-adjacent-chosen-allowed
+- `Do-not-repeat (next 2 runs):` Q43.S99-adjacent-chosen-allowed, Q43.S98-adjacent-chosen-mod2-conflict
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: adjacent chosen $(2,3),(2,4)$ без mixed‑edges не даёт mod‑2 конфликта (Ax=1 совместна);
-следующий шаг — проверить по Def. 6.2/6.5/6.11 допустимость adjacency chosen.
+Q43: Def. 5.6/6.2/6.11 + Lemma 6.5 не запрещают adjacency chosen; конфигурация §16.248 допустима;
+следующий шаг — проверить, требует ли возможная forcing‑information ≥3 chosen центров.
 Q39: even‑batching $t\\to t+2$ не спасает фиксированное 2‑строчное разбиение (нужна несовместимая вершина);
 следующий шаг — формализовать инвариант obstructions для batching.
 
@@ -43,4 +43,4 @@ Q39: even‑batching $t\\to t+2$ не спасает фиксированное 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Мод→Инв→Мод→Инв→Инв
+Последние:Экв→Мод→Инв→Мод→Инв
