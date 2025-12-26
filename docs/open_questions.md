@@ -21,8 +21,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S80-chirality-bit (см. `docs/research/16_tseitin_local_ef.md` §16.235)
-  - `NextStepID:` Q43.S81-chirality-advice-check
+  - `LastStepID:` Q43.S81-chirality-advice-check (см. `docs/research/16_tseitin_local_ef.md` §16.236)
+  - `NextStepID:` Q43.S83-min-orientation-bits
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -121,10 +121,13 @@
   (xliii) контрпример: если глобальный chirality‑бит $\\chi$ инвариантен относительно автоморфизмов
   (identity‑free), то на «кресте» и 2×2 блоке поворот 180° сохраняет подписи и $\\chi$,
   значит одного бита недостаточно (§16.235). `InfoGain:` 1.
+  (xliv) доказано: внешний non‑invariant advice‑бит ориентации $\\chi$ совместим с Remark 6.12,
+  используется Algorithms 2–4 как глобальный параметр с добавкой $O(1)$ бит, и signature+$\\chi$
+  фиксирует ориентацию (toy: крест/2×2) (§16.236). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: если разрешить внешнее «ориентационное» значение $\\chi$ как advice‑бит, проверить,
-  что оно не нарушает Remark 6.12 и добавляет лишь $O(1)$ бит в Algorithms 2–4
-  (Q43.S81-chirality-advice-check); иначе вернуться к основному треку Q43.
+  Следующий шаг: оценить минимальное число глобальных бит для канонизации ориентации
+  (например, различить все 8 симметрий $D_4$) и понять, достаточен ли $|\\chi|=1$
+  (Q43.S83-min-orientation-bits).
 
 ## Завершённые (архив)
 
