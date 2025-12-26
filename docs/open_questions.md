@@ -20,8 +20,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S43-sum-split-geometric (см. `docs/research/16_tseitin.md` §16.209)
-  - `NextStepID:` Q43.S44-bound-anonch
+  - `LastStepID:` Q43.S45-audit-eq18-anonch-free (см. `docs/research/16_tseitin.md` §16.210)
+  - `NextStepID:` Q43.S46-check-rnch-params
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -45,9 +45,12 @@
   (xvii) доказано: после замены $t^a\\rightsquigarrow t^{a_{\\mathrm{ch}}}$ сумма Eq. (18) факторизуется
   в два геометрических ряда с отношениями $r_{\\mathrm{ch}}=(4t'\\log n'/\\Delta)\\cdot M^{1/t'}$ и
   $r_{\\mathrm{nch}}=4\\log n'/\\Delta$; при HR‑параметрах оба $<1$ (§16.209). `InfoGain:` 1.
+  (xviii) доказано: после $t^a\\to t^{a_{\\mathrm{ch}}}$ зависимость от $a_{\\mathrm{nch}}$ остаётся
+  только в $(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}$; $A_2^s$ и $M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}$
+  от $a_{\\mathrm{nch}}$ не зависят (§16.210). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: оценить связь $a_{\\mathrm{nch}}$ с $a_{\\mathrm{ch}}$ или $s$
-  (например через pairing $\\pi$) и убрать зависимость от $a_{\\mathrm{nch}}$ (Q43.S44-bound-anonch).
+  Следующий шаг: проверить, что в HR‑параметрах $4\\log n'/\\Delta<1$ после подстановки
+  $\\Delta=\\Theta(n/n')$, и зафиксировать это в финальном bound (Q43.S46-check-rnch-params).
 
 ## Завершённые (архив)
 
