@@ -1,4 +1,4 @@
-# P vs NP — research log (Codex-driven)
+# P vs NP — verified-first (Lean-first) research log
 
 This repo is a compact, continuously-verified research log aimed at making real progress on **P vs NP** via small, checkable steps (lemmas, counterexamples, exact citations, toy experiments).
 
@@ -19,8 +19,11 @@ This repo is a compact, continuously-verified research log aimed at making real 
   - `docs/open_questions.md` — the active research queue; **one run picks exactly one item**.
   - `docs/agent_brief.md` — bounded “working memory” to prevent loops (Do-not-repeat).
   - `docs/assumptions.md` — registry of formal External stubs (ASSUMPTIONs).
-  - `docs/research/` — longer technical scratchpads grouped by topic (`16_*.md`).
-- `formal/` — Lean 4 formalization layer (currently a skeleton).
+  - `docs/research/` — short redirect stubs (backwards‑compat; do not write long content here).
+- `formal/` — Lean 4 formalization layer.
+  - `formal/PvNP/` — core definitions/lemmas.
+  - `formal/Notes/` — long research notes as Lean doc‑comments (Lean-first).
+  - `formal/External/` — explicit external stubs (ASSUMPTIONs; tracked in `docs/assumptions.md`).
 - `resources/manifest.tsv` + `resources/downloads/` — bibliography + pinned PDFs/HTML (hygiene is checked).
 - `resources/text_cache/` — optional extracted text cache for fast `rg` over PDFs (gitignored).
 - `agent/` — runnable wrappers around Codex CLI, with per-run logs under `agent/logs/` (gitignored).
@@ -40,7 +43,7 @@ What it does:
 - Verifies `docs/` references to `resources/downloads/` against `resources/manifest.tsv`.
 - Verifies `docs/open_questions.md` structure and `docs/agent_brief.md` boundedness/anti-loop fields.
 - Verifies prompts stay **single-line**: `scripts/agent_prompt.txt`, `scripts/skeptic_prompt.txt`, `scripts/supervisor_prompt.txt`.
-- If Lean is installed, runs `lake build` in `formal/` (skipped otherwise).
+- If Lean is installed, runs `lake build PvNP External Notes` in `formal/` (skipped otherwise).
 
 ## Agent automation (WORKER → SKEPTIC → SUPERVISOR)
 

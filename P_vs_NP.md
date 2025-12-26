@@ -29,7 +29,7 @@
 - [14. Полиномиальная иерархия](docs/14_ph.md)
 - [15. Proof complexity: резолюция и PHP](docs/15_proof_complexity.md)
 - [16. IP = PSPACE и PCP](docs/16_ip_pcp.md)
-- [Исследовательские шаги (16.x, индекс)](docs/research/index.md)
+- [Исследовательские шаги (16.x, индекс; Lean notes)](formal/Notes/Index.lean)
 - [17. Источники и опорные ссылки](docs/sources.md)
 - [Формальный слой (Lean 4)](formal/README.md)
 

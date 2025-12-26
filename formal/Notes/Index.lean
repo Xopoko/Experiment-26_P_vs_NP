@@ -1,3 +1,9 @@
+import Paperproof
+
+/-!
+NOTE: This file is the Lean-first mirror of `docs/research/index.md` (migrated from docs).
+It is treated as research notes (not necessarily compiled as part of the core library).
+
 # Индекс: исследовательские заметки (Lean-first)
 
 Каноническая версия длинных исследовательских заметок хранится в Lean как doc‑comments:
@@ -10,8 +16,9 @@
 - `formal/Notes/TseitinLocalEF.lean` (было: `docs/research/16_tseitin_local_ef.md`) — шаги 16.153–16.273
 - `formal/Notes/ResearchSteps.lean` (было: `docs/research/16_research_steps.md`)
 - `formal/Notes/ChatExportIdeas.lean` (было: `docs/research/16_chat_export_ideas.md`)
-- `formal/Notes/Index.lean` (зеркало этого индекса)
 
 Файлы в `docs/research/` оставлены как короткие редиректы (backwards‑compat).
 
 Главный индекс: `P_vs_NP.md`.
+
+-/

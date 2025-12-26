@@ -1,8 +1,7 @@
-# P vs NP — исследовательские шаги 16.85–16.273 (Tseitin / proof complexity)
+# Redirect (Lean-first)
 
-Файл разбит на несколько тематических частей, чтобы агент не тащил большой контекст целиком.
+Полная версия заметок перенесена в Lean:
 
-См. [index](index.md):
-- [16_tseitin_core.md](16_tseitin_core.md) (16.85–16.121)
-- [16_tseitin_q39.md](16_tseitin_q39.md) (16.122–16.152)
-- [16_tseitin_local_ef.md](16_tseitin_local_ef.md) (16.153–16.273)
+- `formal/Notes/Tseitin.lean`
+
+Этот `.md` оставлен как короткий редирект для обратной совместимости со старыми ссылками.
