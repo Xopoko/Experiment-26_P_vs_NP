@@ -24,8 +24,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S87-fixed-center-parity (см. `docs/research/16_tseitin_local_ef.md` §16.240)
-  - `NextStepID:` Q43.S88-no-fixed-center-search
+  - `LastStepID:` Q43.S88-quotient-parity (см. `docs/research/16_tseitin_local_ef.md` §16.241)
+  - `NextStepID:` Q43.S89-orbit8-construction
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -139,9 +139,13 @@
   (xlviii) доказано: closed‑support с D4‑симметрией и фикс‑центром невозможен, т.к. odd‑degree
   $\\Rightarrow |\\mathrm{supp}|$ чётно, а D4 с фикс‑центром даёт $|\\mathrm{supp}|$ нечётно (§16.240).
   `InfoGain:` 1.
+  (xlix) контрпример: D4‑квотиент с орбитными переменными описывает только D4‑инвариантные $I$;
+  на 4×4 support=центральный 2×2 блок допускает odd‑degree matching, но в D4‑квотиенте
+  единственная орбита рёбер даёт чётные степени и система $\\deg\\equiv 1$ несовместна (§16.241).
+  `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: проверить D4‑симметричные closed‑supports без фикс‑центра (орбиты 4/8),
-  либо построить контрпример/несогласованность mod 2 (Q43.S88).
+  Следующий шаг: попытаться построить D4‑симметричный closed‑support только из орбит
+  размера 8 (без осевых/диагональных), либо найти локальную обструкцию (Q43.S89).
 
 ## Завершённые (архив)
 
