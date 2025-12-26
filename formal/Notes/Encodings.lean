@@ -1,8 +1,6 @@
 import Paperproof
 
 /-!
-NOTE: This file is the Lean-first mirror of `docs/research/16_encodings.md` (migrated from docs).
-It is treated as research notes (not necessarily compiled as part of the core library).
 
 # P vs NP — исследовательские шаги 16.37–16.84
 

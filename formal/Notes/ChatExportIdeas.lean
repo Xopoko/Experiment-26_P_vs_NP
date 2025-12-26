@@ -1,8 +1,6 @@
 import Paperproof
 
 /-!
-NOTE: This file is the Lean-first mirror of `docs/research/16_chat_export_ideas.md` (migrated from docs).
-It is treated as research notes (not necessarily compiled as part of the core library).
 
 # Идеи из chat_export.jsonl (черновик)
 

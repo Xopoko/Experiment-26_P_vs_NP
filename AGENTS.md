@@ -27,7 +27,6 @@ Markdown‑текст (`docs/`) — это **читаемая навигация
   - `open_questions.md` — активный backlog микро‑вопросов (с NextStepID).
   - `agent_brief.md` — оперативная память проекта (с Do-not-repeat).
   - `sources.md` — ровно те источники, на которые реально опираемся.
-  - `research/` — короткие редиректы (backwards‑compat) к `formal/Notes/` (не держим длинный текст в md).
 - `formal/`
   - `PvNP/` — определения и доказательства.
   - `Notes/` — длинные исследовательские заметки в Lean (doc‑comments, Lean-first).
@@ -234,7 +233,7 @@ Markdown‑текст (`docs/`) — это **читаемая навигация
 
 - `P_vs_NP.md` — очень короткий, только статус и ссылки на ключевые файлы.
 - В `docs/` пишем только новое математическое содержание.
-- Длинные рассуждения — в `formal/Notes/<Topic>.lean` (doc‑comments); `docs/research/<topic>.md` — только редиректы.
+- Длинные рассуждения — в `formal/Notes/<Topic>.lean` (doc‑comments).
 - Если файл > 4000 строк или > 300KB — дробим по темам.
 
 ---

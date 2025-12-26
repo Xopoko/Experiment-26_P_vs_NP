@@ -5,7 +5,7 @@ Markdown proofs in `docs/` are **not** formal proofs; they are candidates to be 
 
 Layout:
 - `PvNP/`   Core definitions and lemmas.
-- `Notes/`  Long research notes kept as Lean doc-comments (Lean-first mirror of former `docs/research/`).
+- `Notes/`  Long research notes kept as Lean doc-comments.
 - `External/`  Temporary external stubs (ASSUMPTION) with exact citations.
 
 Build (if Lean is installed):

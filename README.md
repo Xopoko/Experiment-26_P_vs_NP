@@ -19,7 +19,6 @@ This repo is a compact, continuously-verified research log aimed at making real 
   - `docs/open_questions.md` — the active research queue; **one run picks exactly one item**.
   - `docs/agent_brief.md` — bounded “working memory” to prevent loops (Do-not-repeat).
   - `docs/assumptions.md` — registry of formal External stubs (ASSUMPTIONs).
-  - `docs/research/` — short redirect stubs (backwards‑compat; do not write long content here).
 - `formal/` — Lean 4 formalization layer.
   - `formal/PvNP/` — core definitions/lemmas.
   - `formal/Notes/` — long research notes as Lean doc‑comments (Lean-first).
