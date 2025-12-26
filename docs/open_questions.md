@@ -24,8 +24,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S83-d4-lower-bound (см. `docs/research/16_tseitin_local_ef.md` §16.237)
-  - `NextStepID:` Q43.S84-3bit-upper
+  - `LastStepID:` Q43.S84-3bit-upper (см. `docs/research/16_tseitin_local_ef.md` §16.238)
+  - `NextStepID:` Q43.S85-anchor-3bit
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -130,9 +130,12 @@
   (xlv) доказано: D4‑симметричный support (крест) даёт мультимножество подписей, инвариантное
   под всеми 8 симметриями, поэтому identity‑free канонизация требует ≥3 глобальных бит
   (информационный lower bound; §16.237). `InfoGain:` 1.
+  (xlvi) доказано: 3‑битный global advice‑код $\\omega\\in\\{0,1\\}^3$ кодирует элемент $D_4$ и
+  задаёт ориентацию; Algorithms 2–4 читают $\\omega$ один раз, подписи остаются 9‑битными,
+  конфликт‑чек Definition 6.13 не меняется; toy: крест/2×2/2×3 (§16.238). `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: построить явную 3‑битную схему канонизации ориентации и проверить,
-  совместима ли она с Algorithms 2–4 (Q43.S84-3bit-upper).
+  Следующий шаг: попытаться канонически извлечь эти 3 бита из support+подписей без внешнего
+  advice (anchor‑канонизация) либо доказать локальный impossibility (Q43.S85/Q43.S86).
 
 ## Завершённые (архив)
 
