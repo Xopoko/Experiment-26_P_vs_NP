@@ -2,6 +2,12 @@ import Std
 
 namespace PvNP
 
+universe u
+
+abbrev Set (α : Type u) : Type u := α → Prop
+
+instance : Membership α (Set α) := ⟨fun x s => s x⟩
+
 abbrev Language := Set (List Bool)
 
 def IsPoly (t : Nat -> Nat) : Prop :=

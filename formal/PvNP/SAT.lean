@@ -1,4 +1,4 @@
-import Std
+import PvNP.Defs
 
 namespace PvNP
 
