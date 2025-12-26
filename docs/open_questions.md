@@ -44,8 +44,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S122-quotient-sufficiency-proof (см. `docs/research/16_tseitin_local_ef.md` §16.267)
-  - `NextStepID:` Q43.S123-quotient-criterion-cex
+  - `LastStepID:` Q43.S124-extra-nn-edge-constraint (см. `docs/research/16_tseitin_local_ef.md` §16.268)
+  - `NextStepID:` Q43.S125-quotient-cycle-test
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -246,10 +246,14 @@
   существованию решения $B_{G/\\pi}x=b_{\\mathrm{mix}}$, а любое квотиент‑решение
   расширяется на внутренние рёбра π‑компонент (суммирование даёт единственное условие
   $\\delta_{\\mathrm{mix}}(P)\\equiv|P|\\pmod 2$); см. §16.267. `InfoGain:` 1.
+  (lxxiv) toy‑тест: две disjoint π‑звезды размера 4 и один extra non‑chosen edge
+  между компонентами дают $A x=\\mathbf 1$ только при $e=0$; ровно то же условие
+  даёт $B_{G/\\pi}x=b_{\\mathrm{mix}}$ (b=0 на обеих компонентах). См. §16.268.
+  `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: попытаться найти контрпример к квотиентному критерию вне канонического режима
-  (перекрытие π‑компонент или дополнительные non‑chosen–non‑chosen рёбра) либо уточнить,
-  какие доп. линейные условия нужны (Q43.S123).
+  Следующий шаг: добавить связь, образующую цикл в $G/\\pi$ (например, chosen‑вершину
+  с двумя mixed‑рёбрами между двумя π‑компонентами), и проверить, появляется ли
+  линейное ограничение сверх $B_{G/\\pi}x=b_{\\mathrm{mix}}$ (Q43.S125-quotient-cycle-test).
 
 ## Завершённые (архив)
 
