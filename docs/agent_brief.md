@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S60-bound-g-by-centers
-- `Do-not-repeat (next 2 runs):` Q43.S60-bound-g-by-centers, Q43.S59-alg3-per-center-constant
+- `LastStepID:` Q43.S61-alg4-constant
+- `Do-not-repeat (next 2 runs):` Q43.S61-alg4-constant, Q43.S60-bound-g-by-centers
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: `discover=0` ограничен $|S^{*}_g|$ (через $g$); осталось оценить константные биты в
-Algorithm 4 и собрать явный $A_1$.
+Q43: Algorithm 4 не читает $X$ (вклад 0); осталось собрать явный $A_1$ из вкладов
+Algorithms 2–4.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Algorithm 4 и собрать явный $A_1$.
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Сж→Инв→Сж→Инв
+Последние:Инв→Инв→Сж→Инв→Сж
