@@ -3270,3 +3270,20 @@
 - `Барьер‑чек:` r — применимо (подсчёт констант), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` перейти к общему $|S^{*}_g|$: вывести per‑center bound, аккуратно учесть
   единственный `discover=0` на стадию и получить явный $A_1$.
+
+### 16.218. Исследовательский шаг (toy scan): локальный arXiv‑срез не даёт прямой ссылки на “common partial decision tree” / “multi‑switching”
+
+- `Линза:` Эксперимент.
+- `Утверждение (Q43.S56a-arxiv-scan):`
+  В локальном arXiv‑срезе `resources/arxiv/pvnp_slice.tsv` нет прямых совпадений по фразам
+  “common partial decision tree” или “multi‑switching”; совпадения по “Tseitin” указывают на HR’22,
+  а по “switching lemma” — лишь на общий обзор/проект. Готовой ссылки на “a‑sum trick” в метаданных
+  не видно.
+- `Toy‑тест:`
+  1) `rg -ni "common partial decision tree|multi-switching" resources/arxiv/pvnp_slice.tsv` → нет совпадений.
+  2) `rg -ni "tseitin" resources/arxiv/pvnp_slice.tsv | head -20` → есть HR’22 (`…:13`).
+  3) `rg -ni "switching lemma" resources/arxiv/pvnp_slice.tsv | head -20` → есть общий обзор (`…:149`).
+- `Статус:` прямых ссылок не найдено (локальный срез).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` продолжить Q43.S56-generalize-a1-per-center.
