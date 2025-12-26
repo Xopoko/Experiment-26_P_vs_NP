@@ -3313,3 +3313,32 @@
 - `Следующий шаг:` попытаться вывести общий per‑center инвариант
   “каждый associated‑center обнаруживается максимум один раз” и тем самым получить
   глобальный $A_1$ (Q43.S57-invariant-one-discovery).
+
+### 16.220. Исследовательский шаг (proof): one‑discovery для associated centers
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S57-one-discovery-proof):`
+  Если associated center $u$ переменной на forceable branch $\\psi_j$ не лежит в $S^{*}_{j-1}$,
+  то $u$ становится disappearing center ровно в этой стадии; следовательно, в Algorithm 2 бит
+  `discover=1` читается не более одного раза на центр, и число таких битов $\\le |\\mathrm{supp}(K^{*})|\\le |S^{*}_g|$.
+- `Доказательство:`
+  1) По Def. 6.2(2), если associated center $u$ переменной на $\\psi_j$ не в $S^{*}_{j-1}$, то $J_j$ закрыт в $u$
+     (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1886-1888`), и такие $u$ — disappearing centers
+     (`…:2255-2257`). Поэтому $u\\in\\mathrm{supp}(J_j)=\\mathrm{supp}(K_j)$.
+  2) По Lemma 6.7 supports $J_j$ и $J_{j'}$ дискретны при $j\\ne j'$ (`…:2028-2041`), значит любой disappearing center
+     принадлежит единственной стадии.
+  3) Обновление $S(\\tau',\\sigma)=S(\\tau,\\sigma)\\cup S_J\\cup\\mathrm{supp}(J)$ (`…:1949-1952`)
+     и Invariant 6.1(1) (“S только растёт”, `…:1838-1842`) дают: после стадии $j$ тот же $u$ уже в $S^{*}_{j}$,
+     поэтому в последующих стадиях он не может снова входить в $\\mathrm{supp}(J_{j'})\\setminus S^{*}_{j'-1}$.
+  4) В Algorithm 2 бит `discover=1` читается лишь для disappearing center, который является associated center
+     переменной на $\\psi$ (`…:3119-3124`), значит каждое такое $u$ даёт ≤1 чтение. Так как
+     $\\bigcup_{j\\le g}\\mathrm{supp}(J_j)\\subseteq S^{*}_g$, число этих битов $\\le |S^{*}_g|$.
+- `Toy‑тест:` двухстадийный сценарий: пусть один и тот же центр $u$ пытается быть associated center на $\\psi_j$
+  и $\\psi_{j+1}$ при $u\\notin S^{*}_{j-1}$. Тогда $u\\in\\mathrm{supp}(J_j)$ по Def. 6.2(2), но Lemma 6.7
+  запрещает $u\\in\\mathrm{supp}(J_{j+1})$ — противоречие. Если же $u\\in S^{*}_j$, то он не участвует в $a_{j+1}$
+  и не требует `discover=1`.
+- `Статус:` доказано.
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` использовать one‑discovery для полного per‑center подсчёта константных бит в Algorithms 2–4
+  и вывести явный $A_1$ (Q43.S58-bound-a1-constant).
