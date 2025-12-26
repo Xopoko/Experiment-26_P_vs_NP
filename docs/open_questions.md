@@ -8,8 +8,8 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE (open confirmed)
-  - `LastStepID:` Q39.S12-evenbatch-2k-counterexample (см. `docs/research/16_tseitin_q39.md` §16.158)
-  - `NextStepID:` Q39.S13-2k-projection-rank
+  - `LastStepID:` Q39.S13-2k-block-cut-invariant (см. `docs/research/16_tseitin_q39.md` §16.159)
+  - `NextStepID:` Q39.S14-2k-projection-rank-obstruction
   - `Success:` либо явный upper на глубине $O(\\log N/\\log\\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Известно: $d_{\\mathrm{poly}}(N)\\ge\\Omega(\\log N/\\log\\log N)$ (Håstad’20, Cor. 6.6; §16.92) и $d_{\\mathrm{poly}}(N)\\le O(\\log N)$ (unpack GIRS’19/Claim 28; §16.115–§16.121).
   Узел: синтаксически симулировать шаг Gaussian elimination в bounded‑depth Frege (HR’22 отмечают как “не умеем”; §16.122).
@@ -32,6 +32,10 @@
   строка $E(\\delta(B_{3..6}),\\bigoplus_{i=3}^6\\chi(i,j))$ совместима, но любое XOR‑дерево из
   вершинных уравнений содержит несовместимые листья (каждый $e_i$ требует вершину $(i,j)$).
   См. `docs/research/16_tseitin_q39.md` §16.158. `InfoGain:` 1.
+  Контрпример (toy, $k=2$): существует XOR‑дерево, где все *внутренние* узлы $\\pi$‑совместимы
+  (группировка листьев внутри блоков $\\{e_3,e_4\\}$ и $\\{e_5,e_6\\}$), поэтому
+  блок‑cut‑инвариант для внутренних узлов неверен. См. `docs/research/16_tseitin_q39.md` §16.159.
+  `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
   Следующий шаг: проверить ранговую/проекционную обструкцию для even‑batching по $2k$ строкам:
   может ли существовать XOR‑дерево, где все внутренние узлы $\\pi$‑совместимы при фиксированном
