@@ -21,18 +21,18 @@
 
 **NP‑полнота**
 - S. Cook (1971), *The Complexity of Theorem‑Proving Procedures* (Cook–Levin): ../resources/downloads/cook_1971.pdf
-- R. Karp (1972), *Reducibility Among Combinatorial Problems* (PDF): ../resources/downloads/karp_1972.pdf. External-stub: `formal/External/NPCompleteness.lean` (three_sat_to_clique_correct).
-- J. Srba (2010), *CNF-SAT ≤p 3SAT; NP-Completeness of CLIQUE* (PDF): ../resources/downloads/srba_np_completeness_2010.pdf. External-stub: `formal/External/NPCompleteness.lean` (sat_to_3sat_correct, three_sat_to_clique_correct).
+- R. Karp (1972), *Reducibility Among Combinatorial Problems* (PDF): ../resources/downloads/karp_1972.pdf, p.9 “3SAT ≤P Clique”. External-stub: `formal/External/NPCompleteness.lean` (three_sat_to_clique_correct).
+- J. Srba (2010), *CNF-SAT ≤p 3SAT; NP-Completeness of CLIQUE* (PDF): ../resources/downloads/srba_np_completeness_2010.pdf, Theorem “CNF-SAT ≤P 3SAT” p.3/13. External-stub: `formal/External/NPCompleteness.lean` (sat_to_3sat_correct).
 
 **Барьеры**
-- Baker–Gill–Solovay (1975), *Relativizations of the P = ? NP Question* (`../resources/downloads/jkatz_relativization_2005.pdf`). External-stub: `formal/External/Barriers.lean` (bgs_relativization).
+- Baker–Gill–Solovay (1975), *Relativizations of the P = ? NP Question* (`../resources/downloads/jkatz_relativization_2005.pdf`, Katz lecture p.1, main result). External-stub: `formal/External/Barriers.lean` (bgs_relativization).
 - S. Arora, R. Impagliazzo, U. Vazirani (1992), *Relativizing versus Nonrelativizing Techniques:
   The Role of Local Checkability* (PDF): ../resources/downloads/arora_impagliazzo_vazirani_1992.pdf
 - J. Katz (2005), *Relativizing the P vs. NP Question* (lecture notes, PDF): ../resources/downloads/jkatz_relativization_2005.pdf
 - R. de Haan (2021), *Lecture 5:
   Relativization and the Baker-Gill-Solovay Theorem* (PDF): ../resources/downloads/uva_relativization_lecture5_2021.pdf
-- Razborov–Rudich (1997), *Natural Proofs* (PDF): ../resources/downloads/razborov_rudich_1997.pdf. External-stub: `formal/External/Barriers.lean` (razborov_rudich_natural_proofs).
-- Aaronson–Wigderson (2008), *Algebrization: A New Barrier in Complexity Theory* (PDF): ../resources/downloads/aaronson_wigderson_2008.pdf. External-stub: `formal/External/Barriers.lean` (aaronson_wigderson_algebrization).
+- Razborov–Rudich (1997), *Natural Proofs* (PDF): ../resources/downloads/razborov_rudich_1997.pdf, Thm. 4.1 p.3. External-stub: `formal/External/Barriers.lean` (razborov_rudich_natural_proofs).
+- Aaronson–Wigderson (2008), *Algebrization: A New Barrier in Complexity Theory* (PDF): ../resources/downloads/aaronson_wigderson_2008.pdf, Thm. 5.3 p.23. External-stub: `formal/External/Barriers.lean` (aaronson_wigderson_algebrization).
 - L. Chen, Y. Hu, H. Ren (2025), *New Algebrization Barriers to Circuit Lower Bounds via Communication Complexity of Missing-String* (PDF):
   ../resources/downloads/chen_hu_ren_2025_algebrization_barriers.pdf
 - A. Razborov (2023), *Propositional proof complexity* (ECM survey, PDF): ../resources/downloads/razborov_2023_proof_complexity_ecm.pdf
