@@ -24,8 +24,8 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S86-admissible-d4-support (см. `docs/research/16_tseitin_local_ef.md` §16.239)
-  - `NextStepID:` Q43.S87-odd-degree-symmetry
+  - `LastStepID:` Q43.S87-fixed-center-parity (см. `docs/research/16_tseitin_local_ef.md` §16.240)
+  - `NextStepID:` Q43.S88-no-fixed-center-search
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: каркас переноса evaluation уже есть (аналог Cor. 2.7 — §16.161; cost‑evaluation + перенос Lemma 2.13 — §16.162). Осталось показать, что “малое” доказательство **индуцирует** такие evaluations.
   Прогресс: (i) грубо: $c_2=64$, $c_1\\le 132$ (§16.191); (ii) точная цитата: в HR’22 §7.3 только индекс $j$ даёт фактор $M^{s/\\ell}$ (§16.192); (iii) toy‑bound: “differences in values” стоят ≤ $s$ бит на ветвь глубины $s$, т.е. меняют только $A$, а не $c_1,c_2$ (§16.193); (iv) доказано: (ii) “identity of additional chosen centers” покрывается тем же $b\\log\\Delta$ из Lemma 6.9, значит $c_1$ можно взять равным $4$ (single‑switching уровень), а единственный непоглощаемый вклад — $\\log M$ через фактор $M^{s/\\ell}$ (§16.195–§16.196). `InfoGain:` 2.
@@ -136,9 +136,12 @@
   (xlvii) toy‑проверка: «крест» из §16.237 с подписью $(1;1111;1111)$ не локально согласован,
   т.к. при info=1111 число рёбер должно быть нечётным; значит эта D4‑симметричная конструкция
   не является допустимым $J_j$ (Def. 6.2) (§16.239). `InfoGain:` 1.
+  (xlviii) доказано: closed‑support с D4‑симметрией и фикс‑центром невозможен, т.к. odd‑degree
+  $\\Rightarrow |\\mathrm{supp}|$ чётно, а D4 с фикс‑центром даёт $|\\mathrm{supp}|$ нечётно (§16.240).
+  `InfoGain:` 1.
   `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-  Следующий шаг: найти D4‑симметричный support, удовлетворяющий локальной согласованности
-  (odd‑degree), либо доказать, что такие support невозможны в модели (Q43.S87).
+  Следующий шаг: проверить D4‑симметричные closed‑supports без фикс‑центра (орбиты 4/8),
+  либо построить контрпример/несогласованность mod 2 (Q43.S88).
 
 ## Завершённые (архив)
 
