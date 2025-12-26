@@ -5,4 +5,5 @@
 См. [index](index.md):
 - [16_complexity.md](16_complexity.md) (16.3–16.36)
 - [16_encodings.md](16_encodings.md) (16.37–16.84)
-- [16_tseitin.md](16_tseitin.md) (16.85–16.105)
+- [16_tseitin.md](16_tseitin.md) (16.85–16.218)
+- [16_chat_export_ideas.md](16_chat_export_ideas.md) (черновые идеи из `resources/chat_export.jsonl`)
