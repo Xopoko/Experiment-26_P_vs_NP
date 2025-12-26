@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S61-alg4-constant
-- `Do-not-repeat (next 2 runs):` Q43.S61-alg4-constant, Q43.S60-bound-g-by-centers
+- `LastStepID:` Q43.S62-assemble-a1-sum
+- `Do-not-repeat (next 2 runs):` Q43.S62-assemble-a1-sum, Q43.S61-alg4-constant
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: Algorithm 4 не читает $X$ (вклад 0); осталось собрать явный $A_1$ из вкладов
-Algorithms 2–4.
+Q43: явный $A_1^{\\mathrm{tot}}=24$ собран; осталось оценить $A_2$ для структуры
+$J_j$ и $I^{*}_{-}$, чтобы зафиксировать численные константы Lemma 6.9.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Algorithms 2–4.
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инв→Инв→Сж→Инв→Сж
+Последние:Инв→Сж→Инв→Сж→Инв
