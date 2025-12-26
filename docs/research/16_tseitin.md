@@ -3009,3 +3009,42 @@
 - `InfoGain:` 1.
 - `Барьер‑чек:` r — применимо (encoding), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` переписать сумму по $a_{\\mathrm{ch}},a_{\\mathrm{nch}}$ в Eq. (18) и проверить геометрию (Q43.S42-sum-split-geometric).
+
+### 16.209. Исследовательский шаг (proof): геометрия суммы после разбиения $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S43-sum-split-geometric):`
+  В Eq. (18) HR’22 (сумма $\\sum_a A_2^s(4t\\log n'/\\Delta)^a$) после замены $t^a\\rightsquigarrow t^{a_{\\mathrm{ch}}}$
+  и разбиения $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$ получается факторизация в два геометрических ряда.
+  При $\\ell\\ge 64t'$ раунд‑фактор удовлетворяет $M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}\\le M^{a_{\\mathrm{ch}}/t'}$,
+  поэтому
+  $$
+  \\sum_{a_{\\mathrm{ch}},a_{\\mathrm{nch}}\\ge 0}
+  A_2^s\\Bigl(\\frac{4t'\\log n'}{\\Delta}\\Bigr)^{a_{\\mathrm{ch}}}
+  \\Bigl(\\frac{4\\log n'}{\\Delta}\\Bigr)^{a_{\\mathrm{nch}}}
+  M^{a_{\\mathrm{ch}}/t'}
+  =
+  A_2^s\\Bigl(\\sum_{a_{\\mathrm{ch}}\\ge 0} r_{\\mathrm{ch}}^{a_{\\mathrm{ch}}}\\Bigr)
+  \\Bigl(\\sum_{a_{\\mathrm{nch}}\\ge 0} r_{\\mathrm{nch}}^{a_{\\mathrm{nch}}}\\Bigr),
+  $$
+  где $r_{\\mathrm{ch}}:=(4t'\\log n'/\\Delta)\\cdot M^{1/t'}$ и $r_{\\mathrm{nch}}:=4\\log n'/\\Delta$.
+  В режиме HR (выбор $n_\\eta$ даёт $t'\\log n'/\\Delta\\le c<1$) оба отношения $<1$, значит сумма ограничена константой.
+- `Доказательство:`
+  Из Eq. (18) HR’22 имеем сумму $\\sum_a A_2^s(4t\\log n'/\\Delta)^a$ (см. PDF, Eq. (18)). По §16.208
+  можно заменить $t^a$ на $t^{a_{\\mathrm{ch}}}$, то есть
+  $$(4t\\log n'/\\Delta)^a=(4t\\log n'/\\Delta)^{a_{\\mathrm{ch}}}(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}.$$
+  После переноса на $t'= (2s+1)\\log M$ и учёта раунд‑множителя (из §16.207) получаем указанную двойную сумму.
+  При $\\ell\\ge 64t'$ имеем $M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}\\le M^{a_{\\mathrm{ch}}/t'}$, поэтому
+  ряд по $a_{\\mathrm{ch}}$ имеет отношение $r_{\\mathrm{ch}}$, а по $a_{\\mathrm{nch}}$ — $r_{\\mathrm{nch}}$.
+  В HR‑параметрах $\\Delta=\\Theta(n/n')$ и рекурсия $n_\\eta$ обеспечивает $t'\\log n'/\\Delta<1$,
+  значит оба ряда геометрические и сходятся к константе.
+- `Toy‑тест:` $s=2$, $\\ell=5$, $t'=5$; возьмём $n'=2$ (так что $\\log n'=1$), $M=2$ (тогда $t'=(2s+1)\\log M=5$)
+  и $\\Delta=32$.
+  Тогда $r_{\\mathrm{ch}}=(4\\cdot5/32)\\cdot 2^{1/5}\\approx 0.72$ и $r_{\\mathrm{nch}}=4/32=0.125$.
+  Сумма начинается как $1+r_{\\mathrm{ch}}+r_{\\mathrm{nch}}+\\cdots$ и равна
+  $1/\\bigl((1-r_{\\mathrm{ch}})(1-r_{\\mathrm{nch}})\\bigr)=O(1)$.
+- `Статус:` доказано (факторизация и геометричность после разбиения $a$).
+- `InfoGain:` 1.
+- `Барьер‑чек:` r — применимо (оценка вероятности/счёт), NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` оценить связь $a_{\\mathrm{nch}}$ с $a_{\\mathrm{ch}}$ или $s$ (например через pairing $\\pi$),
+  чтобы убрать зависимость от $a_{\\mathrm{nch}}$ в основной сумме (Q43.S44-bound-anonch).

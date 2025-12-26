@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S42-encode-nch-no-logt
-- `Do-not-repeat (next 2 runs):` Q43.S42-encode-nch-no-logt, Q43.S41-split-a-ch-nch
+- `LastStepID:` Q43.S43-sum-split-geometric
+- `Do-not-repeat (next 2 runs):` Q43.S43-sum-split-geometric, Q43.S42-encode-nch-no-logt
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: log t в Lemma 6.9 только для chosen; $a_{\\mathrm{nch}}$ уходит в $\\Delta$‑часть. Дальше — переписать сумму по $a_{\\mathrm{ch}},a_{\\mathrm{nch}}$ (Eq. 18).
+Q43: сумма Eq. (18) после разбиения $a$ факторизуется (геометрия). Дальше — bound $a_{\\mathrm{nch}}$ через $a_{\\mathrm{ch}}$/$s$ (через $\\pi$).
 
 ## Что уже сделано (не повторять)
 
@@ -40,4 +40,4 @@ Q43: log t в Lemma 6.9 только для chosen; $a_{\\mathrm{nch}}$ уход
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эк→Сж→Инв→Инв→Сж
+Последние:Сж→Инв→Инв→Сж→Эк
