@@ -3324,4 +3324,28 @@ import Paperproof
 - `Следующий шаг:` просканировать оставшиеся места в §4 (вне Proof of Thm. 4.3/Lemma 4.5)
   на прямые появления $\\log N$ и уточнить, относятся ли они к Q43 (Q43.S137-logn-remaining-scan).
 
+### 16.280. Исследовательский шаг (exact citation): оставшиеся $\\log N$ в §4 — это Proof of Thm. 4.1
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S137-logn-remaining-scan):`
+  Оставшиеся прямые вхождения $\\log N$ в §4 (вне Proof of Thm. 4.3/Lemma 4.5)
+  относятся к Proof of Thm. 4.1 (single‑switching): там фиксируется $s=152\\log N$,
+  а также используется $t_d=152\\log N$ и неравенство $\\log N\\le n^{1/d}/(c_1\\log^4 n)$.
+  Эти места не участвуют в Q43‑переносе Lemma 4.5.
+- `Exact citation:`
+  Proof of Thm. 4.1: “set $s=152\\log N$ … let $t_i=s$ … $t_d=152\\log N$ … if $\\log N\\le n^{1/d}/(c_1\\log^4 n)$”
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:980–1028`).
+- `Toy‑тест:` поиск `log N` вне Proof of Thm. 4.3/Lemma 4.5 даёт только блок 980–1028,
+  и он заканчивается фразой “The claimed lower bound follows. We turn our attention to the main result”
+  перед Theorem 4.3.
+- `Статус:` exact citation (остаточные вхождения $\\log N$ локализованы в Thm. 4.1).
+- `StepID:` Q43.S137-logn-remaining-scan.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (проверка по тексту).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` проверить, не используется ли Proof of Thm. 4.1 как под‑шаг в Proof of Thm. 4.3
+  (или зафиксировать, что они независимы) — Q43.S138-logn-nonimpact-check.
+
 -/
