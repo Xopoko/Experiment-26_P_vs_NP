@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold
-- `Do-not-repeat (next 2 runs):` Q43.S230-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m-link, Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold
+- `LastStepID:` Q39.S95-globalfixedpair-fixedorientation-contiguous-shift-alt8
+- `Do-not-repeat (next 2 runs):` Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold, Q39.S95-globalfixedpair-fixedorientation-contiguous-shift-alt8
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: упакован критерий режима $d$ вместе с poly‑bounds для $N,M$; следующий шаг — сравнить $\\log_2(|F|^C)$ с $|F|/(c_1\\log_2^4|F|)$ и зафиксировать $|F|\\ge n_0(C)$.
-Q39: alt7‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt8‑shift.
+Q39: alt8‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt9‑shift.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: alt7‑shift для contiguous blocks при fixed‑orientation всё е�
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
