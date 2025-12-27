@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S50-2k-two-strip-chain-strip-support-rowcol-contiguous
-- `Do-not-repeat (next 2 runs):` Q39.S49-2k-two-strip-chain-strip-support-rowcol-lockstep, Q39.S50-2k-two-strip-chain-strip-support-rowcol-contiguous
+- `LastStepID:` Q39.S51-2k-two-strip-chain-strip-support-rowcol-nested
+- `Do-not-repeat (next 2 runs):` Q39.S50-2k-two-strip-chain-strip-support-rowcol-contiguous, Q39.S51-2k-two-strip-chain-strip-support-rowcol-nested
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: pivot на размер развёрнутых формул; следующий шаг — ограничить |φ_i| или обойти развёртывание.
-Q39: row/column contiguous прямоугольник всё равно даёт ранг 2; следующий шаг — вложенная цепочка прямоугольников.
+Q39: вложенная цепочка прямоугольников всё равно даёт ранг 2; следующий шаг — 2D‑prefix цепочка.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: row/column contiguous прямоугольник всё равно даёт
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (проверить вложенную цепочку прямоугольников для XOR‑шага).
+- Q39 из `docs/open_questions.md` (проверить 2D‑prefix цепочку для XOR‑шага).
 - Q43 из `docs/open_questions.md` (ограничить размер аксиом |φ_i| или обойти развёртывание).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: row/column contiguous прямоугольник всё равно даёт
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Трейд‑офф→Инвариант→Коммуникация/ранг→Инвариант
+Последние:Трейд‑офф→Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг

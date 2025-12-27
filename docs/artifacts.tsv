@@ -26,6 +26,7 @@ Q39.S47-2k-two-strip-chain-strip-support-global-schedule	Counterexample	formal/W
 Q39.S48-2k-two-strip-chain-strip-support-global-synchronous	Counterexample	formal/WIP/Work.lean	PENDING	global synchronous step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.189)
 Q39.S49-2k-two-strip-chain-strip-support-rowcol-lockstep	Counterexample	formal/WIP/Work.lean	PENDING	row/column lock-step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.190)
 Q39.S50-2k-two-strip-chain-strip-support-rowcol-contiguous	Counterexample	formal/WIP/Work.lean	PENDING	row/column contiguous rectangle still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.191)
+Q39.S51-2k-two-strip-chain-strip-support-rowcol-nested	Counterexample	formal/WIP/Work.lean	PENDING	row/column nested rectangles still give rank 2 (see formal/Notes/TseitinQ39.lean §16.192)
 Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
 Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
 Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold

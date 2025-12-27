@@ -11,25 +11,25 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S50-2k-two-strip-chain-strip-support-rowcol-contiguous (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S51-2k-two-strip-chain-strip-support-rowcol-nested
+  - `LastStepID:` Q39.S51-2k-two-strip-chain-strip-support-rowcol-nested (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S52-2k-two-strip-chain-strip-support-rowcol-2d-prefix
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Инвариант (row/column contiguous).
-  - `Artifact:` Counterexample (row/column contiguous rectangle).
-  - `Update:` toy‑контрпример при $k=2$: два прямоугольника
-    $U_1=\\{1,2\\}\\times\\{2,3\\}$ и $U_2=\\{3,4\\}\\times\\{2,3\\}$
-    дают $p(\\delta(U_1))=(1111,0000)$ и $p(\\delta(U_2))=(0000,1111)$ ⇒ ранг 2.
-    См. `formal/Notes/TseitinQ39.lean` §16.191.
-  - `Use:` row/column contiguous прямоугольники не снижают ранг; нужно требовать
-    вложенную (монотонную) цепочку прямоугольников или более сильную структуру.
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.191). `InfoGain:` 1.
+  - `Lens:` Коммуникация/ранг (row/column nested).
+  - `Artifact:` Counterexample (row/column nested rectangles).
+  - `Update:` toy‑контрпример при $k=2$: вложенные прямоугольники
+    $U_1=\\{1,2\\}\\times\\{2,3\\}\\subset U_2=\\{1,2,3,4\\}\\times\\{2,3\\}$
+    дают $p(\\delta(U_1))=(1111,0000)$ и $p(\\delta(U_2))=(1111,1111)$ ⇒ ранг 2.
+    См. `formal/Notes/TseitinQ39.lean` §16.192.
+  - `Use:` вложенность прямоугольников не снижает ранг; нужен 2D‑prefix режим
+    (по‑шаговое расширение по строкам и колонкам) или более сильная структура.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.192). `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (комбинаторика полос/прямоугольников).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.191
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.192
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
