@@ -263,6 +263,23 @@ def Q43_tParam (M : Nat) : Nat :=
 theorem Q43_tParam_le (M : Nat) : Q43_tParam M <= M := by
   simpa [Q43_tParam] using (Nat.log2_le_self M)
 
+-- Q43.S198-flat-eval-tparam-usage: connect t=log2 M to proof size.
+theorem Q43_lineMax_le_proofSize {α : Type} (proof : List (List α)) :
+    Q43_lineMax proof <= Q43_proofSize proof := by
+  induction proof with
+  | nil =>
+      simp [Q43_lineMax, Q43_proofSize]
+  | cons hd tl ih =>
+      have h1 : Q43_lineSize hd <= Q43_lineSize hd + Q43_proofSize tl :=
+        Nat.le_add_right _ _
+      have h2 : Q43_lineMax tl <= Q43_lineSize hd + Q43_proofSize tl :=
+        Nat.le_trans ih (Nat.le_add_left _ _)
+      exact (max_le_iff).2 ⟨h1, h2⟩
+
+theorem Q43_tParam_le_proofSize {α : Type} (proof : List (List α)) :
+    Q43_tParam (Q43_lineMax proof) <= Q43_proofSize proof := by
+  exact Nat.le_trans (Q43_tParam_le (Q43_lineMax proof)) (Q43_lineMax_le_proofSize proof)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

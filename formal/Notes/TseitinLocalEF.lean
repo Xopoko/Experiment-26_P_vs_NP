@@ -4856,6 +4856,28 @@ import Paperproof
 -/
 
 /-!
+### 16.338. Исследовательский шаг (proof): t=log_2 M <= proofSize
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S198-flat-eval-tparam-usage):`
+  В `formal/WIP/Work.lean` доказано, что $\\mathrm{lineMax}(\\pi)\\le\\mathrm{proofSize}(\\pi)$,
+  а значит $t=\\log_2(\\mathrm{lineMax}(\\pi))\\le\\mathrm{proofSize}(\\pi)$.
+  Это связывает параметр $t$ с суммарным размером доказательства.
+- `Доказательство (Lean):`
+  леммы `Q43_lineMax_le_proofSize` и `Q43_tParam_le_proofSize` (см. `formal/WIP/Work.lean`).
+- `Статус:` proof (Lean-код компилируется).
+- `StepID:` Q43.S198-flat-eval-tparam-usage.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: неприменимо (арифметика натуральных).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` использовать эту связь в формальных оценках $t$ для Q43
+  (например, $t=O(\\log_2 S)$ при $S=\\mathrm{proofSize}$).
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

@@ -36,18 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S197-flat-eval-size-metric-tparam
-  - `NextStepID:` Q43.S198-flat-eval-tparam-usage
+  - `LastStepID:` Q43.S198-flat-eval-tparam-usage
+  - `NextStepID:` Q43.S199-flat-eval-tparam-ologs
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.337
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.338
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (t = log_2 M).
+  - `Lens:` Эквивалентность (t vs proofSize).
   - `Artifact:` Proof.
-  - `Update:` введен параметр $t=\\log_2 M$ как `Nat.log2 M` и доказана оценка
-    $t\\le M$ (лемма `Q43_tParam_le`) в `formal/WIP/Work.lean`.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.337.
-  - `Use:` можно использовать $t$ в последующих формулировках Q43 и связывать его с $M$.
+  - `Update:` доказано, что `lineMax <= proofSize` и потому
+    $t=\\log_2(\\mathrm{lineMax})\\le\\mathrm{proofSize}$ (лемма `Q43_tParam_le_proofSize`).
+    См. `formal/Notes/TseitinLocalEF.lean` §16.338.
+  - `Use:` теперь можно привязывать $t$ к суммарному размеру доказательства.
   - `BarrierCheck:` A) Relativization: да (арифметика на Nat). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

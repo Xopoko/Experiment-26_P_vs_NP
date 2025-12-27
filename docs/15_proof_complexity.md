@@ -439,6 +439,12 @@ $|\mathrm{supp}(\varphi_i)|\le s$, и тогда $t$ становится суп
 доказана оценка $t\\le M$ (лемма `Q43_tParam_le`). Это фиксирует базовую
 связь между line-size $M$ и глубиной evaluations в Q43.
 См. `formal/WIP/Work.lean` (Q43_tParam/Q43_tParam_le).
+**Q43 (t bounded by proof size).**
+В `formal/WIP/Work.lean` доказано, что `lineMax` не превосходит суммарного
+размера proof (`Q43_lineMax_le_proofSize`), а значит
+$t=\\log_2(\\mathrm{lineMax})\\le\\mathrm{proofSize}$ через `Q43_tParam_le_proofSize`.
+Это дает формальную связь между $t$ и общей метрикой размера.
+См. `formal/WIP/Work.lean` (Q43_lineMax_le_proofSize/Q43_tParam_le_proofSize).
 **Q43 (swap $s_1$).**
 Замена стартового $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ не ломает HR‑проверки:
 $s_\eta$ и $t(\eta)=\sum s_i+\log_2 M$ монотонно увеличиваются, а в режиме
