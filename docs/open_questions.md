@@ -9,9 +9,19 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S20-2k-single-frontier-obstruction (см. `formal/Notes/TseitinQ39.lean` §16.166)
-  - `NextStepID:` Q39.S21-2k-two-strip-frontier-obstruction
+  - `LastStepID:` Q39.S21-boundary-complement-duality (см. `formal/PvNP/Work.lean`)
+  - `NextStepID:` Q39.S22-2k-two-strip-frontier-obstruction
   - `LeanTarget:` formal/PvNP/Work.lean
+  - `Lens:` Двойственность (комплемент множества / разворот ребра).
+  - `Artifact:` Proof (формальная лемма о дуальности границы).
+  - `Update:` формально: при Symmetric G, boundary G (¬S) e ↔ boundary G S (edgeSwap e).
+  - `Toy-check:` для EmptySet/FullSet граница пуста; дуальность сохраняется тривиально.
+  - `Use:` симметризует анализ фронтира по S и его дополнению в двухполосном шаге.
+  - `File:` `formal/PvNP/Work.lean` (theorem `Q39_boundary_compl_swap`). `InfoGain:` 1.
+  - `BarrierCheck:`
+    - `A) Relativization check:` Relativizes? да (чисто комбинаторная лемма, оракул не влияет).
+    - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
+    - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Update: «единичный фронтир» невозможен уже для целей с $|S_j\\cap\\delta(U_{\\mathrm{root}})|\\ge 3$ (требуется узел с пересечением ≥2).

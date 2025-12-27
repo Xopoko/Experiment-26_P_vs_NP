@@ -9,6 +9,8 @@ namespace PvNP
 abbrev Vertex := Nat
 abbrev Edge := Vertex × Vertex
 
+def edgeSwap (e : Edge) : Edge := (e.2, e.1)
+
 def EmptySet : Set Vertex := fun _ => False
 def FullSet : Set Vertex := fun _ => True
 
@@ -29,9 +31,36 @@ theorem boundary_full (G : Graph) : ∀ e, ¬ boundary G FullSet e := by
   | mk u v =>
     simp [boundary, FullSet]
 
--- TODO(Q39): replace `True` with the formal XOR-step obstruction statement.
-theorem Q39_placeholder : True := by
-  trivial
+-- Q39.S21-boundary-complement-duality: complement flips boundary orientation in symmetric graphs.
+theorem Q39_boundary_compl_swap (G : Graph) (hG : Symmetric G) (S : Set Vertex) :
+    ∀ e, boundary G (fun x => ¬ S x) e ↔ boundary G S (edgeSwap e) := by
+  intro e
+  cases e with
+  | mk u v =>
+    constructor
+    · intro h
+      have h' : G.adj u v = true ∧ ¬ S u ∧ S v := by
+        simpa [boundary] using h
+      have h1 : G.adj v u = true := by
+        calc
+          G.adj v u = G.adj u v := by
+            symm
+            exact hG u v
+          _ = true := h'.1
+      -- Expand boundary on the swapped edge.
+      simp [boundary]
+      exact And.intro h1 (And.intro h'.2.2 h'.2.1)
+    · intro h
+      have h' : G.adj v u = true ∧ S v ∧ ¬ S u := by
+        simpa [boundary] using h
+      have h1 : G.adj u v = true := by
+        calc
+          G.adj u v = G.adj v u := by
+            exact hG u v
+          _ = true := h'.1
+      -- Expand boundary on the original edge.
+      simp [boundary]
+      exact And.intro h1 (And.intro h'.2.2 h'.2.1)
 
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
