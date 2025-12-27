@@ -3689,3 +3689,31 @@ import Paperproof
   извлечения $A$ из Lemma 4.2).
 
 -/
+
+/-!
+### 16.293. Исследовательский шаг (barrier certificate): неявные $A_0,A_1,A_2$ в Proof of Lemma 4.2 блокируют явный $\\kappa$
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S153-kappa-constant-derivation):`
+  Попытка вывести явный коэффициент $\\kappa$ для режима
+  $d=\\kappa\\log n/\\log\\log n$ упирается в неявные константы в Proof of Lemma 4.2.
+  Там вероятность ограничивается через “absolute constant $A$” (из Lemma 6.9) и
+  “appropriate constants $A_0,A_1,A_2$”, без числовых значений. Эти константы входят
+  в экспоненциальные множители вида $A_1^s, A_2^s$ и потому напрямую влияют на
+  допустимый коэффициент в $O(\\log n/\\log\\log n)$. Следовательно, без явного
+  извлечения $A_0,A_1,A_2$ нельзя строго подтвердить режим $\\kappa<1/5$
+  (даже при $\\exp=e^x$; замена на $2^x$ лишь уменьшает пороги).
+- `Exact citation:`
+  Proof of Lemma 4.2: “for some absolute constant $A$ …” and “for appropriate constants
+  $A_0,A_1,A_2$” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1972–1974, 1996`).
+- `Статус:` barrier certificate (неявные константы блокируют явный $\\kappa$).
+- `StepID:` Q43.S153-kappa-constant-derivation.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (мета‑константы).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` попытаться вычислить численные значения $A_0,A_1,A_2$
+  из Proof of Lemma 6.9/6.8 или зафиксировать невозможность без пересчёта всей оценки.
+
+-/
