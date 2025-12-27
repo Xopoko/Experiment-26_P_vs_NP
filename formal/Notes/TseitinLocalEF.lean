@@ -4613,6 +4613,33 @@ import Paperproof
 -/
 
 /-!
+### 16.329. Исследовательский шаг (reduction): postaudit summary‑логарифмов
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S189-exp2-quote-scan-logbases-summary-postaudit):`
+  В summary‑файлах `docs/03_basic_inclusions.md`, `docs/09_circuit_complexity.md`,
+  `docs/11_switching_lemma_ac0.md`, `docs/12_time_hierarchy.md`,
+  `docs/13_savitch.md`, `docs/15_proof_complexity.md`, `docs/16_ip_pcp.md`
+  все оставшиеся логарифмы либо имеют явную базу $\\log_2$, либо стоят в формах
+  $O(\\log n)$/$O(N\\log N)$, где смена базы меняет только константу.
+- `Reduction:` база $\\log$ влияет лишь на мультипликативную константу, поэтому
+  в асимптотиках типа $O(\\log n)$ и $O(N\\log N)$ лог‑база несущественна.
+- `Exact citation:`
+  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Статус:` reduction (postaudit: remaining logs are base‑agnostic).
+- `StepID:` Q43.S189-exp2-quote-scan-logbases-summary-postaudit.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` при необходимости закрыть Q43‑аудит лог‑баз
+  или отметить единичные исключения.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

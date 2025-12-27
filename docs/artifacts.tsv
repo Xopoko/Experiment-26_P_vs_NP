@@ -72,3 +72,4 @@ Q43.S185-exp2-quote-scan-logbases-summary-final	Reduction	formal/WIP/Work.lean	P
 Q43.S186-exp2-quote-scan-logbases-summary-tail	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in time-hierarchy summary (see formal/Notes/TseitinLocalEF.lean §16.326)
 Q43.S187-exp2-quote-scan-logbases-summary-audit	Reduction	formal/WIP/Work.lean	PENDING	ln/log aligned in circuit-complexity summary (see formal/Notes/TseitinLocalEF.lean §16.327)
 Q43.S188-exp2-quote-scan-logbases-summary-closeout	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in basic inclusions summary (see formal/Notes/TseitinLocalEF.lean §16.328)
+Q43.S189-exp2-quote-scan-logbases-summary-postaudit	Reduction	formal/WIP/Work.lean	PENDING	postaudit: remaining summary logs are base-agnostic (see formal/Notes/TseitinLocalEF.lean §16.329)
