@@ -4,32 +4,34 @@
 `Proof` / `Counterexample` / `Exact citation` / `Toy` / `Reduction` / `Barrier` + барьер‑чек.
 Затем обновляет пункт.
 Каждый активный пункт содержит `Success`, `PublicSurface` и `LeanTarget`.
+Если `BarrierCheckRequired: yes`, то блок `BarrierCheck` обязателен.
 
 ## Активные
 
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S26-2k-two-strip-frontier-adj (см. `formal/WIP/Work.lean`)
-  - `NextStepID:` Q39.S27-2k-two-strip-interval-rank-bound
+  - `LastStepID:` Q39.S27-2k-two-strip-interval-rank-bound (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S28-2k-two-strip-linked-intervals
   - `LeanTarget:` formal/WIP/Work.lean
-  - `Lens:` Коммуникация/ранг (две полосы).
-  - `Artifact:` Proof (frontier adjacency in symmetric graphs).
-  - `Update:` proved that in symmetric graphs any `frontier` edge is a genuine edge:
-    `frontier G S e → G.adj e.1 e.2 = true`. This removes the orientation nuisance
-    when treating frontiers as undirected cuts.
-    Lean: `formal/WIP/Work.lean`, lemma `Q39_frontier_adj`.
-  - `Use:` позволяет работать с фронтиром как с неориентированным множеством рёбер.
-  - `File:` `formal/WIP/Work.lean` (lemma `Q39_frontier_adj`). `InfoGain:` 1.
+  - `BarrierCheckRequired:` yes
+  - `Lens:` Коммуникация/ранг (две полосы, row-interval).
+  - `Artifact:` Counterexample (two-strip row-interval rank).
+  - `Update:` toy-контрпример при $k=2$: даже если для каждого внутреннего узла
+    $S_j\\cap\\delta(U)$ и $S_{j+1}\\cap\\delta(U)$ — row-interval'ы,
+    проекционный ранг на $B_1\\sqcup B_2$ остаётся равным 2 (n=4, j=1, два внутренних узла).
+    См. `formal/Notes/TseitinQ39.lean` §16.168.
+  - `Use:` двухполосная интервальность по отдельности не ограничивает ранг; нужен связанный критерий.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.168). `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? да (дефиниционное свойство, оракул не влияет).
+    - `A) Relativization check:` Relativizes? да (комбинаторная геометрия разбиений, оракул не влияет).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` Q39_frontier_adj (Lean lemma в WIP)
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.168
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
-  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.166) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
+  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.168) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
@@ -37,6 +39,7 @@
   - `LastStepID:` Q43.S138-logn-nonimpact-check (HR'22, Proof of Thm. 4.3)
   - `NextStepID:` Q43.S139-polym-avoids-thm41-branch
   - `LeanTarget:` formal/WIP/Work.lean
+  - `BarrierCheckRequired:` no
   - `PublicSurface:` Q43_logn_nonimpact_check (Lean lemma или точка поломки в WIP)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Трейд‑офф (режимы по $M$ в HR Thm. 4.3).
