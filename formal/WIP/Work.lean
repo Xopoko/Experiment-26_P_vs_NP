@@ -840,6 +840,19 @@ theorem Q43_thm41_log2_threshold_c1_explicit (n : Nat) :
       ↔ Nat.log2 n <= n / (27680440320000 * (Nat.log2 n) ^ 4) := by
   simp [Q43_thm41_log2_threshold_c1, Q43_thm41_c1_chernoff_ln_eval]
 
+-- Q43.S218-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime:
+-- translate log2 bounds to |F| for grid size |F| = n^2.
+def Q43_grid_size (n : Nat) : Nat := n * n
+
+theorem Q43_log2_le_log2_grid_size {n : Nat} (hn : 1 <= n) :
+    Nat.log2 n <= Nat.log2 (Q43_grid_size n) := by
+  have hmul : n <= Q43_grid_size n := by
+    calc
+      n = n * 1 := by simp
+      _ <= n * n := by
+        exact Nat.mul_le_mul_left n hn
+  exact Q43_log2_mono hmul
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

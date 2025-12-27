@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S82-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair
-- `Do-not-repeat (next 2 runs):` Q39.S82-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair, Q39.S81-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap
+- `LastStepID:` Q43.S218-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime
+- `Do-not-repeat (next 2 runs):` Q43.S218-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime, Q39.S82-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: log2‑порог Thm. 4.1 записан с явным $c_1$; следующий шаг — проверить режим $d$ и перевод в $|F|$.
+Q43: log2‑порог переведён к $|F|$ через $|F|=n^2$; следующий шаг — проверить режим $d$ после замены.
 Q39: fixed‑pair row/column swap не снижает ранг; следующий шаг — fixed‑pair + same‑order.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: fixed‑pair row/column swap не снижает ранг; следующи
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (fixed‑pair + same‑order).
-- Q43 из `docs/open_questions.md` (проверить log2‑порог в режиме $d$).
+- Q43 из `docs/open_questions.md` (проверить log2‑порог в режиме $d$ после замены $n\\mapsto|F|$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: fixed‑pair row/column swap не снижает ранг; следующи
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Эквивалентность→Коммуникация/ранг→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
