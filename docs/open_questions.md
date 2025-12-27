@@ -11,27 +11,28 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S28-2k-two-strip-linked-intervals (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S29-2k-two-strip-rectangular-geometry
+  - `LastStepID:` Q39.S29-2k-two-strip-rectangular-geometry (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S30-2k-two-strip-anchored-rectangles
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Инвариант (linked intervals).
-  - `Artifact:` Counterexample (two-strip linked intervals).
-  - `Update:` toy-контрпример при $k=2$: даже если для каждого внутреннего узла
-    пересечения $S_j\\cap\\delta(U)$ и $S_{j+1}\\cap\\delta(U)$ — row-interval'ы **и**
-    соответствуют одним и тем же строкам, проекционный ранг на $B_1\\sqcup B_2$ остаётся 2
-    (n=4, j=1, два внутренних узла). См. `formal/Notes/TseitinQ39.lean` §16.169.
-  - `Use:` даже linked-интервалы по двум полосам не дают ранговой обструкции; нужен более жёсткий геом.-критерий.
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.169). `InfoGain:` 1.
+  - `Lens:` Коммуникация/ранг (двухколоночная полоса).
+  - `Artifact:` Counterexample (two-strip rectangular geometry).
+  - `Update:` toy-контрпример при $k=2$: даже если внутренние узлы — прямоугольники
+    в двухколоночной полосе (две соседние колонки, один row-interval по строкам),
+    проекционный ранг на двух внешних полосах остаётся 2 (n=4, j=2, два прямоугольника).
+    См. `formal/Notes/TseitinQ39.lean` §16.170.
+  - `Use:` прямоугольная геометрия в двухколоночной полосе не даёт ранговой обструкции;
+    нужен anchored/laminar критерий.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.170). `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (комбинаторная геометрия полос, оракул не влияет).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.169
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.170
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
-  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.169) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
+  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.170) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
