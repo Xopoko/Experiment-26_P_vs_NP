@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S78-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored
-- `Do-not-repeat (next 2 runs):` Q39.S78-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored, Q39.S77-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved
+- `LastStepID:` Q39.S79-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted
+- `Do-not-repeat (next 2 runs):` Q39.S79-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted, Q39.S78-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: явный $A_0$ протолкнут в лог‑фактор; следующий шаг — явные $c_1,c_2$ в Thm. 4.1.
-Q39: якорные блоки не снижают ранг; следующий шаг — сдвинутые якорные блоки.
+Q39: сдвинутые якорные блоки не снижают ранг; следующий шаг — сбалансированные якорные блоки.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: якорные блоки не снижают ранг; следующий 
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (сдвинутые якорные блоки).
+- Q39 из `docs/open_questions.md` (сбалансированные якорные блоки).
 - Q43 из `docs/open_questions.md` (выписать явные $c_1,c_2$ через численный $A_0$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: якорные блоки не снижают ранг; следующий 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
