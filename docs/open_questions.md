@@ -36,19 +36,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S180-exp2-quote-scan-logbases
-  - `NextStepID:` Q43.S181-exp2-quote-scan-logbases-remaining
+  - `LastStepID:` Q43.S181-exp2-quote-scan-logbases-remaining
+  - `NextStepID:` Q43.S182-exp2-quote-scan-logbases-core-sweep
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.320
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.321
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (exp‑цитаты).
+  - `Lens:` Сжатие/канонизация (log‑base нормализация).
   - `Artifact:` Exact citation.
-  - `Update:` в аналитических местах GIRS‑upper (core §16.119–§16.121) база логов сделана явной:
-    `\\log_2` в переходах $2^{\\log X}$ и $\\ln$ в оптимизации через $L:=\\ln X$.
-    Exact citation для конвенции $\\log_2$: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-    См. `formal/Notes/TseitinCore.lean` и сводку `formal/Notes/TseitinLocalEF.lean` §16.320.
-  - `Use:` довести оставшиеся $\\log$ в core до $\\log_2$/$\\ln$ и явно отметить, где база неважна.
+  - `Update:` в §16.96 (PRST'16 Thm. 1) база логов явно зафиксирована как $\\log_2$
+    в оценках $n^{\\Omega((\\log_2 n)/d^2)}$ и $2^{\\Omega((\\log_2 n)^2)}$.
+    Exact citation: PRST'16 Lemma 2.7 использует $\\log_2 n$ в явном виде
+    (`../../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf`).
+    См. `formal/Notes/TseitinCore.lean` и сводку `formal/Notes/TseitinLocalEF.lean` §16.321.
+  - `Use:` просканировать оставшиеся места в core/summary с $2^{(\\cdot)}$ и привести $\\log$ к $\\log_2$/$\\ln$.
   - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

@@ -4419,6 +4419,29 @@ import Paperproof
 -/
 
 /-!
+### 16.321. Исследовательский шаг (exact citation): log_2 в PRST'16 depth-vs-size toy-test
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S181-exp2-quote-scan-logbases-remaining):`
+  В §16.96 (PRST'16 Thm. 1) для выражений вида $2^{(\\log n)^2}$ и $n^{\\Omega((\\log n)/d^2)}$
+  явно зафиксирована база $\\log_2$; это согласуется с явным использованием $\\log_2 n$
+  в PRST'16 (Lemma 2.7), и устраняет неоднозначность в интерпретации $2^{(\\log n)^2}$.
+- `Exact citation:`
+  Pitassi-Rossman-Servedio-Tan 2016, Lemma 2.7 uses $\\log_2 n$,
+  `../../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf`.
+- `Toy‑тест:` $2^{(\\log_2 n)^k}$ суперполиномиально при $k>1$; например $2^{(\\log_2 n)^2}=n^{\\log_2 n}$.
+- `Статус:` exact citation (база логов отмечена в toy‑оценке).
+- `StepID:` Q43.S181-exp2-quote-scan-logbases-remaining.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` пройти оставшиеся $\\log$ в core/summary с $2^{(\\cdot)}$ и привести к $\\log_2$/$\\ln$ при необходимости.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

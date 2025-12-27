@@ -319,11 +319,11 @@ import Paperproof
 - `Линза:` Трейд‑офф.
 - `Утверждение:` Существует линейного размера 3‑CNF‑противоречие $\mathrm{Tseitin}(G_n[\alpha])$
   на 3‑регулярном $n$‑вершинном экспандере, такое что для любого $d$ любая depth‑$d$ Frege‑рефутация
-  имеет размер $n^{\Omega((\log n)/d^2)}$ (Pitassi–Rossman–Servedio–Tan 2016, Thm. 1,
+  имеет размер $n^{\Omega((\log_2 n)/d^2)}$ (Pitassi–Rossman–Servedio–Tan 2016, Thm. 1,
   `../../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf`).
-  Следовательно, любая polynomial‑size Frege‑рефутация требует глубины $d=\Omega(\sqrt{\log n})$.
-- `Toy‑тест:` если $d=O(1)$, то нижняя оценка даёт размер $2^{\Omega((\log n)^2)}=n^{\Omega(\log n)}$ (quasi‑poly),
-  а если $d=\Theta(\sqrt{\log n})$, то показатель $(\log n)/d^2=\Theta(1)$ и оценка перестаёт быть superpolynomial.
+  Следовательно, любая polynomial‑size Frege‑рефутация требует глубины $d=\Omega(\sqrt{\log_2 n})$.
+- `Toy‑тест:` если $d=O(1)$, то нижняя оценка даёт размер $2^{\Omega((\log_2 n)^2)}=n^{\Omega(\log_2 n)}$ (quasi‑poly),
+  а если $d=\Theta(\sqrt{\log_2 n})$, то показатель $(\log_2 n)/d^2=\Theta(1)$ и оценка перестаёт быть superpolynomial.
 - `Статус:` известный факт (точная ссылка).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` сопоставить 16.96 (экспандер: $\sqrt{\log n}$) с 16.92 (grid: $\log n/\log\log n$)
