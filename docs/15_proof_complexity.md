@@ -580,6 +580,12 @@ It packages the log2^5 regime-d criterion (via `Q43_thm41_regime_d_ok_of_pow5`)
 with the poly N/M log2 bounds from `Q43_polyNM_log2_bounds`.
 This separates the regime-d hypothesis from the polynomial-size assumptions,
 so the next step is to compare `log2 ((|F|)^C)` with `|F|/(c1 log2^4 |F|)`.
+**Q43 (log2(|F|^C) bound).**
+In `formal/WIP/Work.lean` the lemma `Q43_log2_grid_pow_le_mul_succ` shows
+`log2(|F|^C) <= (log2|F| + 1) * C` for `|F| = Q43_grid_size n`.
+This uses only base‑2 `log2` and no `exp`, so the comparison reduces to a
+polynomial factor in `log2|F|` before applying the log2^5 regime criterion.
+Next step: use `log2|F| >= 1` (for `n >= 2`) to replace `log2|F| + 1` by `2 log2|F|`.
 Кратко: Tseitin — паритеты на графе (нечетная сумма зарядов ⇒ невыполнимость);
 нижние оценки через ограниченную степень и экспансию; Clique-Coloring —
 несовместимость клики и раскраски.

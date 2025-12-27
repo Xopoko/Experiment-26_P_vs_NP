@@ -37,20 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold
-  - `NextStepID:` Q43.S232-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare
+  - `LastStepID:` Q43.S232-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare
+  - `NextStepID:` Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_regime_d_ok_polyNM_bounds)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_log2_grid_pow_le_mul_succ)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` упакован критерий режима $d$ (log2^5) вместе с poly‑bounds для $N,M$,
-    получена лемма `Q43_regime_d_ok_polyNM_bounds`.
-    Toy‑check: шаг — чистая упаковка предпосылок, не даёт контрпримеров без нарушения условий.
-    См. `formal/WIP/Work.lean` (Q43_regime_d_ok_polyNM_bounds).
-  - `Use:` следующий шаг — сравнить $\\log_2(|F|^C)$ с $|F|/(c_1\\log_2^4 |F|)$
-    и зафиксировать явный порог $|F|\\ge n_0(C)$.
+  - `Update:` доказано неравенство $\\log_2(|F|^C)\\le (\\log_2|F|+1)C$
+    для $|F|=Q43\\_grid\\_size(n)$ (база $\\log_2$, без `exp`).
+    Toy‑check: использована монотонность `log2` и оценка $a\\le 2^{\\log_2 a+1}$, контрпримеров нет.
+    См. `formal/WIP/Work.lean` (Q43_log2_grid_pow_le_mul_succ).
+  - `Use:` следующий шаг — при $n\\ge 2$ заменить $\\log_2|F|+1\\le 2\\log_2|F|$
+    и сравнить $2C\\,c_1\\log_2^5|F|$ с $|F|$ для явного порога $|F|\\ge n_0(C)$.
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

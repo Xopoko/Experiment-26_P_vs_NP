@@ -1205,6 +1205,37 @@ theorem Q43_regime_d_ok_polyNM_bounds {n N C M K : Nat} (hn : 2 <= n)
     Q43_polyNM_log2_bounds (n:=n) (N:=N) (C:=C) (M:=M) (K:=K) hpoly
   exact ⟨hreg, hbounds⟩
 
+theorem Q43_pow_le_pow_of_le {a b n : Nat} (h : a <= b) : a ^ n <= b ^ n := by
+  induction n with
+  | zero =>
+      simp
+  | succ n ih =>
+      simpa [Nat.pow_succ] using (Nat.mul_le_mul ih h)
+
+theorem Q43_log2_pow_le_mul_succ (a C : Nat) :
+    Nat.log2 (a ^ C) <= (Nat.log2 a + 1) * C := by
+  by_cases ha : a = 0
+  · simp [ha]
+  · have hlt : a < 2 ^ (Nat.log2 a + 1) :=
+      (Nat.log2_lt ha).1 (Nat.lt_succ_self _)
+    have hle : a <= 2 ^ (Nat.log2 a + 1) := Nat.le_of_lt hlt
+    have hpow : a ^ C <= (2 ^ (Nat.log2 a + 1)) ^ C :=
+      Q43_pow_le_pow_of_le hle
+    have hpow' : a ^ C <= 2 ^ ((Nat.log2 a + 1) * C) := by
+      calc
+        a ^ C <= (2 ^ (Nat.log2 a + 1)) ^ C := hpow
+        _ = 2 ^ ((Nat.log2 a + 1) * C) := by
+          simpa using (Nat.pow_mul 2 (Nat.log2 a + 1) C).symm
+    have hlog : Nat.log2 (a ^ C) <= Nat.log2 (2 ^ ((Nat.log2 a + 1) * C)) :=
+      Q43_log2_mono hpow'
+    simpa [Nat.log2_two_pow] using hlog
+
+-- Q43.S232-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare:
+-- bound log2(|F|^C) by (log2|F| + 1) * C.
+theorem Q43_log2_grid_pow_le_mul_succ (n C : Nat) :
+    Nat.log2 ((Q43_grid_size n) ^ C) <= (Nat.log2 (Q43_grid_size n) + 1) * C := by
+  simpa using (Q43_log2_pow_le_mul_succ (a:=Q43_grid_size n) (C:=C))
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
