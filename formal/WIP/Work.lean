@@ -145,7 +145,6 @@ theorem Q39_frontier_adj (G : Graph) (hG : Symmetric G) (S : Set Vertex) (e : Ed
         have huv : G.adj v u = true := h2.1
         calc
           G.adj u v = G.adj v u := by
-            symm
             exact hG u v
           _ = true := huv
 
