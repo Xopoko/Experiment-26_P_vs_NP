@@ -1120,6 +1120,15 @@ theorem Q43_thm41_regime_d_ok_param_of_le {n N : Nat}
   refine ⟨?_, hbound⟩
   exact Q43_thm41_log2_threshold_c1_grid_param_of_le (n:=n) (N:=N) hN hth
 
+-- Q43.S228-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly:
+-- polynomial regime for N in terms of |F| and log2 monotonicity.
+def Q43_polyN (n N C : Nat) : Prop :=
+  N <= (Q43_grid_size n) ^ C
+
+theorem Q43_log2_le_log2_grid_pow {n N C : Nat} (hN : Q43_polyN n N C) :
+    Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) := by
+  exact Q43_log2_mono hN
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
