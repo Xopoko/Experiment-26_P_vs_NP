@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S41-2k-two-strip-chain-lockstep-dyadic-blocks
-- `Do-not-repeat (next 2 runs):` Q43.S169-propagate-explicit-a0, Q39.S41-2k-two-strip-chain-lockstep-dyadic-blocks
+- `LastStepID:` Q39.S42-2k-two-strip-chain-dyadic-prefix-stepwise
+- `Do-not-repeat (next 2 runs):` Q39.S41-2k-two-strip-chain-lockstep-dyadic-blocks, Q39.S42-2k-two-strip-chain-dyadic-prefix-stepwise
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: явный $A_0$ получен; следующий шаг — выписать явные $c_1,c_2$ в Thm. 4.1.
-Q39: dyadic lock-step цепочка всё равно даёт ранг 2; следующий шаг — проверить по-шаговые обновления $t\\to t+1$.
+Q39: dyadic-prefix цепочка $t\\to t+1$ всё равно даёт ранг 2; следующий шаг — учесть все dyadic-merge микрошаги.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: dyadic lock-step цепочка всё равно даёт ранг 2; сл
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Трейд‑офф→Эквивалентность→Инвариант
+Последние:Эквивалентность→Трейд‑офф→Эквивалентность→Инвариант→Коммуникация/ранг

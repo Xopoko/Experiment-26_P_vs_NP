@@ -11,24 +11,24 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S41-2k-two-strip-chain-lockstep-dyadic-blocks (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S42-2k-two-strip-chain-dyadic-prefix-stepwise
+  - `LastStepID:` Q39.S42-2k-two-strip-chain-dyadic-prefix-stepwise (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S43-2k-two-strip-chain-dyadic-carry-microsteps
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Инвариант (lock-step dyadic).
-  - `Artifact:` Counterexample (lock-step dyadic order).
-  - `Update:` toy‑контрпример при $k=2$: dyadic lock-step цепочка в фиксированном порядке
-    (B1->B2, без возвратов) всё равно даёт ранг 2 (n=4, независимые проекции у $U_1$ и $U_2$).
-    См. `formal/Notes/TseitinQ39.lean` §16.182.
-  - `Use:` даже dyadic/ламинарный lock-step порядок не снижает ранг; нужно требовать
-    по-шаговых обновлений префикса $t\\to t+1$ (dyadic-carry без прыжков).
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.182). `InfoGain:` 1.
+  - `Lens:` Коммуникация/ранг (dyadic prefix stepwise).
+  - `Artifact:` Counterexample (dyadic prefix stepwise).
+  - `Update:` toy‑контрпример при $k=2$: по-шаговая dyadic-prefix цепочка $U_1\\subset U_2\\subset U_3\\subset U_4$
+    (обновления $t\\to t+1$, dyadic-carry без прыжков) всё равно даёт ранг 2
+    (n=4, независимые проекции у $U_2$ и $U_4$). См. `formal/Notes/TseitinQ39.lean` §16.183.
+  - `Use:` даже по-шаговые dyadic-prefix обновления не снижают ранг; нужно требовать
+    учёта всех промежуточных dyadic-merge состояний (после добавления строки и каждого переноса).
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.183). `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (комбинаторная геометрия полос, оракул не влияет).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.182
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.183
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
