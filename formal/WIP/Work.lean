@@ -1545,6 +1545,12 @@ theorem Q43_log2_grid_size_mono {n m : Nat} (h : n <= m) :
     Nat.log2 (Q43_grid_size n) <= Nat.log2 (Q43_grid_size m) := by
   exact Q43_log2_mono (Q43_grid_size_mono h)
 
+-- Q43.S240-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-log2-lift:
+-- log2 |F|^5 is monotone in n for |F|=n^2.
+theorem Q43_log2_grid_size_pow5_mono {n m : Nat} (h : n <= m) :
+    (Nat.log2 (Q43_grid_size n)) ^ 5 <= (Nat.log2 (Q43_grid_size m)) ^ 5 := by
+  exact Q43_pow_le_pow_of_le (Q43_log2_grid_size_mono h)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
