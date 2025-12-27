@@ -37,22 +37,23 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S156-lemma69-recount-needed
-  - `NextStepID:` Q43.S157-pivot-hastad20-kappa
+  - `LastStepID:` Q43.S157-pivot-hastad20-kappa
+  - `NextStepID:` Q43.S158-largem-branch-polym-check
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.296
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.297
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (неявные константы Proof of Lemma 6.9).
-  - `Artifact:` Barrier.
-  - `Update:` получение численного $A$ из Lemma 6.9 требует полного пересчёта:
-    оценка использует “constant number/amount of bits per potential edge” и множитель
-    $A|S^*_g|$ без параметризации, так что явный $A$ не извлекается напрямую.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.296 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2066–2069, 2111–2114`.
-  - `Use:` барьер закреплён; следующий шаг — перейти к явным константам Håstad’20 Thm. 6.5
-    или планировать отдельный полный пересчёт Lemma 6.9.
-  - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Lens:` Трейд‑офф (depth–size).
+  - `Artifact:` Exact citation.
+  - `Update:` зафиксирован явный режим глубины из Håstad’20 Thm. 6.5:
+    $d\\le 59\\,\\log n/\\log\\log n$ и lower bound
+    $\\mathrm{size}\\ge\\exp(\\Omega(n^{1/(58(d+1))}))$ с $\\exp=e^x$
+    (числитель $\\log n$ вынесен строкой выше в pdf‑to‑text).
+    См. `formal/Notes/TseitinLocalEF.lean` §16.297 и
+    `resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`.
+  - `Use:` теперь можно проверить, что при $\\kappa=59$ порог large‑$M$ в Thm. 4.3 субполиномиален,
+    и для $M=\\mathrm{poly}(|F|)$ выбирается ветка Thm. 4.1 (учитывая $\\exp=e^x$).
+  - `BarrierCheck:` A) Relativization: да (цитата по тексту). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 

@@ -3796,3 +3796,33 @@ import Paperproof
   из Håstad’20 (Thm. 6.5), либо планировать отдельный полный пересчёт Lemma 6.9.
 
 -/
+
+/-!
+### 16.297. Исследовательский шаг (exact citation): pivot to Håstad’20 Thm. 6.5 с явным $\\kappa$ и базой $\\exp$
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S157-pivot-hastad20-kappa):`
+  В Håstad (2020), Thm. 6.5, глубина ограничена как
+  $$d\\le 59\\,\\frac{\\log n}{\\log\\log n},$$
+  где $n$ — сторона $n\\times n$ grid, и одновременно утверждается
+  $$\\mathrm{size}\\ge \\exp\\bigl(\\Omega(n^{1/(58(d+1))})\\bigr).$$
+  Здесь $\\exp$ понимается как $e^x$ (база не влияет на извлечение $\\kappa$,
+  но влияет на пороги: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$).
+  Это фиксирует явную константу $\\kappa=59$ для режима $d=\\kappa\\log n/\\log\\log n$,
+  что позволяет перейти от неявных констант HR’22 к явному depth‑порогу.
+- `Exact citation:`
+  строка с числителем `log n` непосредственно перед Theorem 6.5 и строки
+  `Theorem 6.5. Suppose that d ≤ 59 log log n` и
+  `requires size exp(Ω(n 1/58(d +1) ))`
+  (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`).
+- `Статус:` exact citation (явная $\\kappa=59$ и форма exp‑LB).
+- `StepID:` Q43.S157-pivot-hastad20-kappa.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (цитата по тексту).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` применить $\\kappa=59$ к порогу large‑$M$ в Thm. 4.3
+  и проверить режим для $M=\\mathrm{poly}(|F|)$ (с учётом $\\exp=e^x$).
+
+-/

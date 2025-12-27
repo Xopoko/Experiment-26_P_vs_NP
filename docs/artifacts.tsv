@@ -33,3 +33,4 @@ Q43.S153-kappa-constant-derivation	Barrier	formal/WIP/Work.lean	PENDING	implicit
 Q43.S154-lemma42-constants-extract	Exact citation	formal/WIP/Work.lean	PENDING	Lemma 6.8 gives s/64<=a; Lemma 6.9 only existential A
 Q43.S155-lemma69-constant-extract	Barrier	formal/WIP/Work.lean	PENDING	Proof Lemma 6.9 uses "constant number of bits" and leaves A implicit
 Q43.S156-lemma69-recount-needed	Barrier	formal/WIP/Work.lean	PENDING	full recount of Lemma 6.9 needed to extract A
+Q43.S157-pivot-hastad20-kappa	Exact citation	formal/WIP/Work.lean	PENDING	Hastad'20 Thm 6.5 depth regime + exp-LB (exp=e^x, kappa=59)
