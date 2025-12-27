@@ -148,6 +148,21 @@ theorem Q39_frontier_adj (G : Graph) (hG : Symmetric G) (S : Set Vertex) (e : Ed
             exact hG u v
           _ = true := huv
 
+-- Q39.S54-2k-two-strip-chain-strip-support-rowcol-2d-prefix-lockstep:
+-- toy rank-2 witness for 8-bit projection vectors over F2.
+abbrev BitVec8 := List Bool
+
+def Q39_zero8 : BitVec8 := [false, false, false, false, false, false, false, false]
+
+def Q39_prefix_vec2 : BitVec8 := [true, true, true, true, false, false, false, false]
+def Q39_prefix_vec4 : BitVec8 := [true, true, true, true, true, true, true, true]
+
+def Q39_rank2_8 (v w : BitVec8) : Prop :=
+  v ≠ Q39_zero8 ∧ w ≠ Q39_zero8 ∧ v ≠ w
+
+theorem Q39_rank2_prefix2_prefix4 : Q39_rank2_8 Q39_prefix_vec2 Q39_prefix_vec4 := by
+  decide
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by

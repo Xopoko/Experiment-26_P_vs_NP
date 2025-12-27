@@ -11,24 +11,25 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S53-2k-two-strip-chain-strip-support-rowcol-2d-prefix-microsteps (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S54-2k-two-strip-chain-strip-support-rowcol-2d-prefix-lockstep
+  - `LastStepID:` Q39.S54-2k-two-strip-chain-strip-support-rowcol-2d-prefix-lockstep (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S55-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Инвариант (2D‑prefix microsteps).
-  - `Artifact:` Counterexample (2D‑prefix microsteps).
-  - `Update:` toy‑контрпример при $k=2$: полная 2D‑prefix цепочка $U_t=[1..t]\\times[1..t]$
-    даёт $p(\\delta(U_2))=(1111,0000)$ и $p(\\delta(U_4))=(1111,1111)$ ⇒ ранг 2.
-    См. `formal/Notes/TseitinQ39.lean` §16.194.
-  - `Use:` 2D‑prefix микрошаги не снижают ранг; нужно усилить синхронизацию
-    или искать точку глобального base‑change.
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.194). `InfoGain:` 1.
+  - `Lens:` Инвариант (global 2D‑prefix lock‑step).
+  - `Artifact:` Counterexample (global 2D‑prefix lock‑step).
+  - `Update:` toy‑контрпример при $k=2$: глобальная 2D‑prefix lock‑step цепочка
+    $U_t=[1..t]\\times[1..t]$ (во всём grid) даёт
+    $p(\\delta(U_2))=(1111,0000)$ и $p(\\delta(U_4))=(1111,1111)$ ⇒ ранг 2.
+    См. `formal/Notes/TseitinQ39.lean` §16.195 и toy‑ранг в `formal/WIP/Work.lean`.
+  - `Use:` даже глобальная row/column синхронизация не снижает ранг; нужен
+    более жёсткий глобальный порядок блоков или иной инвариант/base‑change.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.195). `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? да (комбинаторика полос/прямоугольников).
+    - `A) Relativization check:` Relativizes? да (глобальные префиксы и проекции полос).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.194
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.195
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
