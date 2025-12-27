@@ -36,19 +36,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S172-exp2-consistency
-  - `NextStepID:` Q43.S173-exp2-c1c2-rescale
+  - `LastStepID:` Q43.S173-exp2-c1c2-rescale
+  - `NextStepID:` Q43.S174-exp2-threshold-sweep
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.312
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.313
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (exp base 2).
+  - `Lens:` Эквивалентность (c1,c2 rescale).
   - `Artifact:` Reduction.
-  - `Update:` унифицировано: в Q43 принимаем $\\exp(x)=2^x$ (база согласована с $\\log_2$),
-    а переход к $e^x$ даёт лишь множитель $\\ln 2$ в показателе; сравнения poly vs exp
-    не меняются. См. `formal/Notes/TseitinLocalEF.lean` §16.312.
-  - `Use:` пересчитать явные $c_1,c_2$ и все пороги $M>\\exp(n^\\alpha)$ в базе $2$
-    (с учётом множителей $\\ln 2$).
+  - `Update:` $c_1,c_2$ из §16.310 согласованы с $\\exp_2$ (битовое кодирование и $\\log_2$);
+    при переходе к $e^x$ требуется явный множитель $\\ln 2$ в показателе и
+    $c_1^{(e)}=c_1/(\\ln2)^5$, $c_2^{(e)}=c_2/(\\ln2)^4$ (с поглощением $(\\ln2)^{-(d-1)}$).
+    См. `formal/Notes/TseitinLocalEF.lean` §16.313.
+  - `Use:` пройти весь Q43 и заменить $\\exp(\\cdot)$ на $2^{(\\cdot)}$ в единой базе.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

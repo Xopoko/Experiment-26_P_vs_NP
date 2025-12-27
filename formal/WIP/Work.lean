@@ -177,6 +177,17 @@ def Q43_exp_base (b x : Nat) : Nat := b ^ x
 theorem Q43_exp2_eq_base (x : Nat) : Q43_exp2 x = Q43_exp_base 2 x := by
   rfl
 
+-- Q43.S173-exp2-c1c2-rescale: constants already in base-2 conventions.
+def Q43_thm41_c2_exp2 (A : Nat) : Nat := Q43_thm41_c2 A
+
+def Q43_thm41_c1_exp2 (A : Nat) : Nat := Q43_thm41_c1 A
+
+theorem Q43_thm41_c1_exp2_eq (A : Nat) : Q43_thm41_c1_exp2 A = Q43_thm41_c1 A := by
+  rfl
+
+theorem Q43_thm41_c2_exp2_eq (A : Nat) : Q43_thm41_c2_exp2 A = Q43_thm41_c2 A := by
+  rfl
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
