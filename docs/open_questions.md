@@ -36,18 +36,17 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S174-exp2-threshold-sweep
-  - `NextStepID:` Q43.S175-exp2-quote-annotation
+  - `LastStepID:` Q43.S175-exp2-quote-annotation
+  - `NextStepID:` Q43.S176-exp2-quote-sweep
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.314
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.315
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Сжатие/канонизация (exp→$2^{(\\cdot)}$).
+  - `Lens:` Эквивалентность (exp‑цитаты).
   - `Artifact:` Reduction.
-  - `Update:` в Q43 все асимптотические $\\exp(\\cdot)$ заменены на $2^{(\\cdot)}$,
-    а натуральные экспоненты (Чернов) записаны как $e^{(\\cdot)}$; оставшиеся `exp(…)`
-    — только прямые цитаты источников. См. `formal/Notes/TseitinLocalEF.lean` §16.314.
-  - `Use:` пройти цитаты Q43 и добавить пометы “exp in source = $2^x$” там, где это влияет на пороги.
+  - `Update:` в цитатах HR’22/Håstad’20 с `exp(…)` добавлены пометы, что интерпретация
+    идёт как $2^x$ (согласовано с $\\log_2$). См. `formal/Notes/TseitinLocalEF.lean` §16.315.
+  - `Use:` согласовать такие пометы в остальных разделах, где сохраняются прямые цитаты с `exp`.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

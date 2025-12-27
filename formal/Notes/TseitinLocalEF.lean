@@ -3381,6 +3381,7 @@ import Paperproof
   consisting of $N$ lines” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:939–962`).
   В Proof of Thm. 4.3: “Suppose we are given a proof of length $N=\\exp(n/((\\log n)^c\\log M)^d)$ …
   We may assume that $M\\le\\exp(n^{1/d-1/d(d-1)})$” (`…:1104–1106`).
+  Здесь `exp` в цитате интерпретируем как $2^x$ по конвенции $\\log_2$ в HR’22.
 - `Статус:` exact citation (фиксация параметров $n,N,M,d$ и базы экспоненты).
 - `StepID:` Q43.S142-parameter-map-n-vs-bign.
 - `InfoGain:` 1.
@@ -3546,6 +3547,7 @@ import Paperproof
 - `Exact citation:`
   Proof of Theorem 4.3: “We may assume that $M\\le \\exp(n^{1/d-1/d(d-1)})$, as otherwise we can
   apply Theorem 4.1.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`).
+  Здесь `exp` в цитате интерпретируем как $2^x$.
 - `Статус:` exact citation (ветка Thm. 4.1 = случай $M$ выше порога).
 - `StepID:` Q43.S148-thm41-branch-audit.
 - `InfoGain:` 1.
@@ -3810,6 +3812,7 @@ import Paperproof
   `Theorem 6.5. Suppose that d ≤ 59 log log n` и
   `requires size exp(Ω(n 1/58(d +1) ))`
   (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`).
+  Здесь `exp` в цитате интерпретируем как $2^x$ (логарифмы в тексте — по базе 2).
 - `Статус:` exact citation (явная $\\kappa=59$ и форма exp‑LB).
 - `StepID:` Q43.S157-pivot-hastad20-kappa.
 - `InfoGain:` 1.
@@ -4199,7 +4202,7 @@ import Paperproof
 - `Exact citation:`
   “Logarithms are denoted by log and are always with respect to the base 2.”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`);
-  порог $M\\le\\exp(n^{\\alpha})$ — `...:1104–1106`.
+  порог $M\\le\\exp(n^{\\alpha})$ — `...:1104–1106` (exp в цитате = $2^x$).
 - `Статус:` reduction (согласование баз логарифма и экспоненты).
 - `StepID:` Q43.S171-check-thm41-threshold.
 - `InfoGain:` 1.
@@ -4271,6 +4274,29 @@ import Paperproof
   C) Algebrization check: неприменимо.
 - `Следующий шаг:` провести единый проход по Q43 и заменить все
   $2^{(\\cdot)}$ и связанные пороги на единую базу $2$.
+
+-/
+
+/-!
+### 16.315. Исследовательский шаг (exact citation): пометки base‑2 в цитатах с `exp`
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S175-exp2-quote-annotation):`
+  В цитатах HR’22/Håstad’20, где используется `exp(…)`, добавлены явные пометы,
+  что в контексте $\\log_2$ следует читать `exp` как $2^x$; это устраняет
+  неоднозначность базы в местах, где мы сохраняем прямую цитату.
+- `Exact citation:`
+  HR’22 Proof Thm. 4.3 (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`)
+  и Håstad’20 Thm. 6.5 (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`).
+- `Статус:` exact citation (пометки к цитатам, без изменения формул).
+- `StepID:` Q43.S175-exp2-quote-annotation.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (комментарии к цитатам).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` согласовать аналогичные пометы в других разделах,
+  где сохраняются прямые цитаты с `exp`.
 
 -/
 

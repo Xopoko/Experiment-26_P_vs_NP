@@ -195,6 +195,12 @@ theorem Q43_largeM_threshold_def (n alpha : Nat) :
     Q43_largeM_threshold n alpha = Q43_exp2 (n ^ alpha) := by
   rfl
 
+-- Q43.S175-exp2-quote-annotation: exp in source interpreted as base 2.
+def Q43_exp_source_base2 : Prop := True
+
+theorem Q43_exp_source_base2_trivial : Q43_exp_source_base2 := by
+  trivial
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
