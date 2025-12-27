@@ -392,7 +392,7 @@ Feasible interpolation: короткие доказательства clique-col
 Формально: при $\deg(G)\le k$ имеем $W\ge e(G)-1$ и $S\ge 2^{(e(G)-k-1)^2/|E|}$, значит на bounded‑degree экспандерах $S=2^{\Omega(|V|)}$; см. §16.85–16.86.
 С явной expander‑семьёй это даёт явное bounded‑occ семейство 3‑CNF (см. §16.87).
 Для Tseitin(Grid$_{n,n}$) (где число переменных $N=\Theta(n^2)$) в bounded‑depth Frege известны лишь разнесённые границы для polynomial‑size:
-depth $=\Omega(\log N/\log\log N)$ (Håstad’20, Cor. 6.6) и depth $=O(\log N)$ (upper из GIRS’19; см. §16.92+§16.115+§16.116+§16.120).
+depth $=\Omega(\log_2 N/\log_2\log_2 N)$ (Håstad’20, Cor. 6.6) и depth $=O(\log_2 N)$ (upper из GIRS’19; см. §16.92+§16.115+§16.116+§16.120).
 **Q39 (frontier как неориентированный срез).**
 В `formal/WIP/Work.lean` введён `frontier` как объединение ориентированных границ.
 Для симметрических графов доказана инвариантность `frontier` при замене $S$ на $\\neg S$.
@@ -411,40 +411,40 @@ $|S_j\\cap\\delta(U)|\\le 2$ и $|S_{j+1}\\cap\\delta(U)|\\le 2$, проекци
 См. `formal/Notes/TseitinQ39.lean` §16.167 (Q39.S23-2k-two-strip-rank-toy).
 **Q43 (flat local‑EF(s), параметр‑сводка).**
 При явном $A\le 668$ из HR’22 получаем $n_0(A)=2$, поэтому в HR‑режиме
-условие $n\ge n_0(A)$ избыточно по сравнению с $n\ge 20 C n' \log n'$
+условие $n\ge n_0(A)$ избыточно по сравнению с $n\ge 20 C n' \log_2 n'$
 (при $C\ge 3$ и $t\le s\le n'/32$). Итоговая сводка оставляет
-единственный $n$‑барьер $n \ge 20 C n' \log n'$ и прочие предпосылки без изменений.
+единственный $n$‑барьер $n \ge 20 C n' \log_2 n'$ и прочие предпосылки без изменений.
 См. `formal/Notes/TseitinLocalEF.lean` §16.275 (Q43.S132-update-summary-dominant-bound).
 **Q43 (compatibility после $t\mapsto(2s+1)t$).**
-Для $M=\mathrm{poly}(n)$ и $s=\mathrm{polylog}(n)$ имеем $t'=(2s+1)\log M=\log^{O(1)}n$,
-а рекурсия HR даёт $n_\eta \ge n/\mathrm{polylog}(n)^\eta$ при $\eta\le d=O(\log n/\log\log n)$.
+Для $M=\mathrm{poly}(n)$ и $s=\mathrm{polylog}(n)$ имеем $t'=(2s+1)\log_2 M=(\log_2 n)^{O(1)}$,
+а рекурсия HR даёт $n_\eta \ge n/\mathrm{polylog}(n)^\eta$ при $\eta\le d=O(\log_2 n/\log_2\log_2 n)$.
 Это обеспечивает совместимость условий $t'(d)\le n_d/16$ и $t'\le s_\eta\le n'/32$
-при достаточно большом $n$; возможна замена $s_1=\log N$ на $s_1=\max\{\log N,t'\}$ без изменения
+при достаточно большом $n$; возможна замена $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ без изменения
 asymptotics (см. §16.276, Q43.S133-hr-compatibility-check).
 **Q43 (swap $s_1$).**
-Замена стартового $s_1=\log N$ на $s_1=\max\{\log N,t'\}$ не ломает HR‑проверки:
-$s_\eta$ и $t(\eta)=\sum s_i+\log M$ монотонно увеличиваются, а в режиме
+Замена стартового $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ не ломает HR‑проверки:
+$s_\eta$ и $t(\eta)=\sum s_i+\log_2 M$ монотонно увеличиваются, а в режиме
 $M=\mathrm{poly}(n)$, $s=\mathrm{polylog}(n)$ остаётся $t(\eta)\ll n_\eta$.
 Это снимает формальный риск несогласованности условия $t'\le s_\eta$ и сохраняет
 $s_\eta\le n'/32$ при больших $n$ (см. §16.277, Q43.S134-s1-swap-compatibility).
 **Q43 (audit $s_1$).**
-В Proof of Thm. 4.3 HR’22 $s_1=\log N$ появляется только через
-$s_\eta=2^{\eta-1}\log N$ и $t(\eta)=\sum_{i\le\eta}s_i+\log M$; в Lemma 4.5
+В Proof of Thm. 4.3 HR’22 $s_1=\log_2 N$ появляется только через
+$s_\eta=2^{\eta-1}\log_2 N$ и $t(\eta)=\sum_{i\le\eta}s_i+\log_2 M$; в Lemma 4.5
 используются лишь суммы $\sum s_i$ и условие $t(\eta)\le n_\eta/16$.
-Прямые вхождения $\log N$ в Proof of Thm. 4.3/Lemma 4.5 идут только через
-$s_\eta/t(\eta)$ и bound $t(d)\le 2^d\log N+\log M$, так что замена $s_1$
+Прямые вхождения $\log_2 N$ в Proof of Thm. 4.3/Lemma 4.5 идут только через
+$s_\eta/t(\eta)$ и bound $t(d)\le 2^d\log_2 N+\log_2 M$, так что замена $s_1$
 влияет лишь через $s_\eta/t(\eta)$ (см. §16.278–§16.279, Q43.S135–S136).
-Оставшиеся $\log N$ в §4 относятся к Proof of Thm. 4.1 (single‑switching):
-там фиксируется $s=152\log N$ и используется $t_d=152\log N$, но это не входит
+Оставшиеся $\log_2 N$ в §4 относятся к Proof of Thm. 4.1 (single‑switching):
+там фиксируется $s=152\log_2 N$ и используется $t_d=152\log_2 N$, но это не входит
 в Proof of Thm. 4.3/Lemma 4.5 (см. §16.280, Q43.S137-logn-remaining-scan).
 **Q43 (явные $c_1,c_2$ в Thm. 4.1).**
 Из §16.302–§16.303 и §16.215 берём $A_{\\mathrm{bits}}=76$, значит $A=2^{76}$
-(для двоичного счёта; при $\\log=\\ln$ заменить на $e^{76\\ln 2}$).
+(для двоичного счёта; при переходе к $\\ln$ заменить на $e^{76\\ln 2}$).
 Определяем $c_2:=8\\cdot 152\\cdot A$ и $c_1:=16\\cdot 152\\cdot c_2$ — этим
 устраняются фразы “large/some constant” в Proof Thm. 4.1.
-Рекурсия $n_i=\\lfloor n_{i-1}/(4A t\\log^4 n_{i-1})\\rfloor$ даёт
-$n_d\\ge n/(\\log^{d-1} N\\cdot(c_2\\log^4 n)^d)$ при $t=152\\log N$.
-Условие $\\log N\\le n^{1/d}/(c_1\\log^4 n)$ обеспечивает $t_d\\le n_d/16$,
+Рекурсия $n_i=\\lfloor n_{i-1}/(4A t\\log_2^4 n_{i-1})\\rfloor$ даёт
+$n_d\\ge n/(\\log_2^{d-1} N\\cdot(c_2\\log_2^4 n)^d)$ при $t=152\\log_2 N$.
+Условие $\\log_2 N\\le n^{1/d}/(c_1\\log_2^4 n)$ обеспечивает $t_d\\le n_d/16$,
 и Proof Thm. 4.1 завершает переход к Lemma 2.13; см. §16.310 и
 `formal/WIP/Work.lean`.
 Кратко: Tseitin — паритеты на графе (нечетная сумма зарядов ⇒ невыполнимость);

@@ -66,3 +66,4 @@ Q43.S179-exp2-quote-scan-analytic	Exact citation	formal/WIP/Work.lean	PENDING	ma
 Q43.S180-exp2-quote-scan-logbases	Exact citation	formal/WIP/Work.lean	PENDING	log_2 vs ln made explicit in GIRS-analytic steps (see formal/Notes/TseitinLocalEF.lean §16.320)
 Q43.S181-exp2-quote-scan-logbases-remaining	Exact citation	formal/WIP/Work.lean	PENDING	log_2 fixed in PRST'16 toy-test bounds (see formal/Notes/TseitinLocalEF.lean §16.321)
 Q43.S182-exp2-quote-scan-logbases-core-sweep	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in core/summary 2^{poly(log)} bounds (see formal/Notes/TseitinLocalEF.lean §16.322)
+Q43.S183-exp2-quote-scan-logbases-summary-sweep	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in docs/15_proof_complexity summary (see formal/Notes/TseitinLocalEF.lean §16.323)

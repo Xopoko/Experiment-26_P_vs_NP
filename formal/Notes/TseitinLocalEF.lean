@@ -4466,6 +4466,31 @@ import Paperproof
 -/
 
 /-!
+### 16.323. Исследовательский шаг (reduction): log_2 в summary‑сводке `docs/15_proof_complexity.md`
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S183-exp2-quote-scan-logbases-summary-sweep):`
+  В summary‑блоках `docs/15_proof_complexity.md` все упоминания $\\log$,
+  входящие в глубинные пороги и HR‑проверки, приведены к $\\log_2$;
+  это синхронизирует summary с $\\exp_2$‑конвенцией и с базой $\\log_2$ в HR’22.
+- `Reduction:` по формуле смены базы $\\log_a n=\\log_2 n/\\log_2 a$ замена $\\log\\to\\log_2$
+  сохраняет асимптотику в режимах $O(\\log n/\\log\\log n)$ и $2^{\\mathrm{poly}(\\log n)}$.
+- `Exact citation:`
+  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Статус:` reduction (нормализация базы в summary).
+- `StepID:` Q43.S183-exp2-quote-scan-logbases-summary-sweep.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` просканировать remaining summary‑участки вне §15 и при необходимости
+  привести $\\log$ к $\\log_2$/$\\ln$.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
