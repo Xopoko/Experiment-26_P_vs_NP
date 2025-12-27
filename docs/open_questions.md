@@ -36,19 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S185-exp2-quote-scan-logbases-summary-final
-  - `NextStepID:` Q43.S186-exp2-quote-scan-logbases-summary-tail
+  - `LastStepID:` Q43.S186-exp2-quote-scan-logbases-summary-tail
+  - `NextStepID:` Q43.S187-exp2-quote-scan-logbases-summary-audit
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.325
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.326
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Сжатие/канонизация (log‑base нормализация).
+  - `Lens:` Эквивалентность (log‑base нормализация).
   - `Artifact:` Reduction.
-  - `Update:` в summary‑разделах `docs/16_ip_pcp.md` и `docs/13_savitch.md` лог‑база
-    приведена к $\\log_2$ в местах с двоичным счётом и экспонентой.
-    См. сводку `formal/Notes/TseitinLocalEF.lean` §16.325.
-  - `Use:` подтвердить отсутствие оставшихся ambiguity по $\\log$ в summary‑файлах,
-    либо зафиксировать место, где база несущественна.
+  - `Update:` в summary‑разделе `docs/12_time_hierarchy.md` лог‑база приведена к $\\log_2$
+    в оценках универсальной симуляции и теоремы иерархии.
+    См. сводку `formal/Notes/TseitinLocalEF.lean` §16.326.
+  - `Use:` пройти остаточные summary‑файлы на ambiguity по $\\log$ и закрыть sweep.
   - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

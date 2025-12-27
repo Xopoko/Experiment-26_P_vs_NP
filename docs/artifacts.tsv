@@ -69,3 +69,4 @@ Q43.S182-exp2-quote-scan-logbases-core-sweep	Reduction	formal/WIP/Work.lean	PEND
 Q43.S183-exp2-quote-scan-logbases-summary-sweep	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in docs/15_proof_complexity summary (see formal/Notes/TseitinLocalEF.lean §16.323)
 Q43.S184-exp2-quote-scan-logbases-summary-remaining	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in docs/11_switching_lemma_ac0 summary (see formal/Notes/TseitinLocalEF.lean §16.324)
 Q43.S185-exp2-quote-scan-logbases-summary-final	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in PCP/Savitch summaries (see formal/Notes/TseitinLocalEF.lean §16.325)
+Q43.S186-exp2-quote-scan-logbases-summary-tail	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in time-hierarchy summary (see formal/Notes/TseitinLocalEF.lean §16.326)
