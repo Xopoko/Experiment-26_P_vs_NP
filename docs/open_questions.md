@@ -11,18 +11,18 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S36-2k-two-strip-equal-rows-single-change (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S37-2k-two-strip-equal-rows-single-change-chain
+  - `LastStepID:` Q39.S37-2k-two-strip-equal-rows-single-change-chain (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S38-2k-two-strip-chain-block-alignment
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Инвариант (равные строки + один шаг).
-  - `Artifact:` Counterexample (equal rows + single-row change).
-  - `Update:` toy-контрпример при $k=2$: даже если у каждого внутреннего узла
-    строки пересечений на двух полосах совпадают и каждый XOR‑шаг меняет не более одной строки,
-    проекционный ранг остаётся 2 (n=4, $U_1$ и $U_2$ дают независимые проекции).
-    См. `formal/Notes/TseitinQ39.lean` §16.177.
-  - `Use:` равные строки + одно‑строчное изменение не снижают ранг; нужен цепочечный режим по строкам.
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.177). `InfoGain:` 1.
+  - `Lens:` Инвариант (цепочка по строкам).
+  - `Artifact:` Counterexample (equal rows + single-row change chain).
+  - `Update:` toy‑контрпример при $k=2$: существует XOR‑цепочка,
+    где строки на двух полосах совпадают, каждый шаг добавляет одну строку,
+    а проекционный ранг остаётся 2 (n=4, независимые проекции у $U_2$ и $U_4$).
+    См. `formal/Notes/TseitinQ39.lean` §16.178.
+  - `Use:` цепочка по строкам тоже не снижает ранг; нужно связать цепочку с блоками разбиения.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.178). `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (комбинаторная геометрия полос, оракул не влияет).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
