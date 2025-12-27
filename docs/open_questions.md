@@ -36,20 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S194-flat-eval-axiom-size-model-check
-  - `NextStepID:` Q43.S195-flat-eval-axiom-size-definition
+  - `LastStepID:` Q43.S195-flat-eval-axiom-size-definition
+  - `NextStepID:` Q43.S196-flat-eval-size-metric-formalize
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.334
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.335
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (размер строки как параметр модели).
-  - `Artifact:` Exact citation.
-  - `Update:` зафиксировано, что в HR'22 Theorem 4.3 $M$ — размер строки (формулы),
-    а $N$ — число строк; это закрепляет метрику line-size, а не line-count.
-    См. `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:938-963`
-    и `formal/Notes/TseitinLocalEF.lean` §16.334.
-  - `Use:` для переноса HR-оценок в flat local‑EF(s) нужно считать размер строки по
-    формульному размеру и учитывать extension-аксиомы как строки; line-count не фиксирует $M$.
+  - `Lens:` Сжатие/канонизация (size metric).
+  - `Artifact:` Reduction.
+  - `Update:` зафиксирована метрика размера flat local‑EF(s) как пара $(N,M)$
+    с line-count $N$ и line-size $M$; extension-аксиомы считаются строками, поэтому
+    $|\\varphi_i|\\le M$ и $t=\\log_2 M$. См. `formal/Notes/TseitinLocalEF.lean` §16.335.
+  - `Use:` модель синхронизирована с HR'22; line-count без line-size больше не допустим.
   - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
