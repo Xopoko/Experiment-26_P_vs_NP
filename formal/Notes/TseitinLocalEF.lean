@@ -3521,9 +3521,10 @@ import Paperproof
      =\\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/59}\\bigr)\\Bigr)$$
   при $\\exp=e^x$ является $|F|^{o(1)}$ (субполином).
   Поэтому любой $M=|F|^k$ с $k>0$ в итоге **превышает** порог, и в Thm. 4.3
-  для poly‑$M$ всегда выбирается large‑$M$ ветка; ветка Thm. 4.1 актуальна
-  лишь для субполиномиальных $M$ (для $\\kappa<1$ порог был бы суперполиномиален,
-  так как $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$).
+  для poly‑$M$ всегда выбирается large‑$M$ ветка, то есть переход к Thm. 4.1;
+  малая‑$M$ ветка релевантна лишь при $M$ ниже порога (субполиномиальном при $\\kappa>1$).
+  (Для $\\kappa<1$ порог был бы суперполиномиален, так как
+  $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$ и $\\exp=e^x$.)
 - `Статус:` reduction (ветка large‑$M$ фиксируется при $\\kappa=59$).
 - `StepID:` Q43.S147-apply-thm41-branch.
 - `InfoGain:` 1.
@@ -3533,5 +3534,29 @@ import Paperproof
   C) Algebrization check: неприменимо.
 - `Следующий шаг:` проверить, где именно в Proof of Thm. 4.3 используется ветка Thm. 4.1,
   и убедиться, что для poly‑$M$ она не требуется.
+
+-/
+
+/-!
+### 16.288. Исследовательский шаг (exact citation): Proof of Thm. 4.3 — Thm. 4.1 применяется при $M$ выше порога
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S148-thm41-branch-audit):`
+  В Proof of Theorem 4.3 авторы явно отделяют ветку $M\\le \\exp(n^{\\alpha})$ и пишут,
+  что при $M$ **выше** порога можно применить Theorem 4.1. Здесь $\\exp$ трактуется как $e^x$
+  (в нотации HR); при $2^x$ порог был бы только меньше. Напоминание: $\\exp((\\log n)^p)$
+  суперполиномиальна при $p>1$, но здесь $p<1$ в режиме $d=\\kappa\\log n/\\log\\log n$.
+- `Exact citation:`
+  Proof of Theorem 4.3: “We may assume that $M\\le \\exp(n^{1/d-1/d(d-1)})$, as otherwise we can
+  apply Theorem 4.1.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`).
+- `Статус:` exact citation (ветка Thm. 4.1 = случай $M$ выше порога).
+- `StepID:` Q43.S148-thm41-branch-audit.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (цитата по тексту).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` выписать явный нижний bound из Thm. 4.1 в режиме $M=\\mathrm{poly}(|F|)$
+  и сопоставить с параметрами $|F|,N$.
 
 -/

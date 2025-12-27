@@ -37,23 +37,22 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S147-apply-thm41-branch
-  - `NextStepID:` Q43.S148-thm41-branch-audit
+  - `LastStepID:` Q43.S148-thm41-branch-audit
+  - `NextStepID:` Q43.S149-largem-bound-from-thm41
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.287
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.288
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд‑офф (large‑$M$ vs poly‑$M$).
-  - `Artifact:` Reduction (Exact).
-  - `Update:` подставляя $\\kappa=59>1$ в пересчёт §16.285, получаем порог
-    $M\\le\\exp(\\Theta((\\log|F|)^{1/59}))$ при $\\exp=e^x$.
-    Этот порог равен $|F|^{o(1)}$ (субполином), поэтому любой $M=|F|^k$, $k>0$,
-    в пределе **превышает** его.
-    Следовательно, для poly‑$M$ в Thm. 4.3 всегда выбирается large‑$M$ ветка,
-    а ветка Thm. 4.1 остаётся релевантной только для субполиномиальных $M$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.287.
-  - `Use:` ветка large‑$M$ фиксирована при $\\kappa=59$; дальше нужно локализовать,
-    где (если вообще) Proof of Thm. 4.3 обращается к ветке Thm. 4.1.
+  - `Lens:` Инвариант (ветка доказательства Thm. 4.3).
+  - `Artifact:` Exact citation.
+  - `Update:` в Proof of Thm. 4.3 написано: “We may assume that $M\\le\\exp(n^{1/d-1/d(d-1)})$,
+    as otherwise we can apply Theorem 4.1.” Это фиксирует, что Thm. 4.1 — ветка для
+    $M$ **выше** порога (large‑$M$), а основной вывод Thm. 4.3 работает при $M$ ниже порога.
+    `exp` трактуется как $e^x$ (в HR); база $2^x$ лишь уменьшает порог.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.288 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`.
+  - `Use:` для $\\kappa=59$ poly‑$M$ попадает в large‑$M$ ветку ⇒ оценку нужно брать из Thm. 4.1;
+    следующий шаг — выписать явную форму bound в режиме $M=\\mathrm{poly}(|F|)$.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
