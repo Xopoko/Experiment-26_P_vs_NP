@@ -28,3 +28,4 @@ Q43.S148-thm41-branch-audit	Exact citation	formal/WIP/Work.lean	PENDING	Proof Th
 Q43.S149-largem-bound-from-thm41	Reduction	formal/WIP/Work.lean	PENDING	Thm 4.1 bound translated to |F| (subpoly for kappa=59)
 Q43.S150-thm41-bound-compare	Reduction	formal/WIP/Work.lean	PENDING	compare Thm 4.1 bound with poly N,M (subpoly for kappa=59)
 Q43.S151-thm41-nontrivial-regime	Barrier	formal/WIP/Work.lean	PENDING	hidden constants in Lemma 4.2 block explicit kappa<1/5 regime
+Q43.S152-extract-constants	Exact citation	formal/WIP/Work.lean	PENDING	Proof Thm 4.1 parameters s=152 log N and ni recurrence

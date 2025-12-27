@@ -37,25 +37,23 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S151-thm41-nontrivial-regime
-  - `NextStepID:` Q43.S152-extract-constants
+  - `LastStepID:` Q43.S152-extract-constants
+  - `NextStepID:` Q43.S153-kappa-constant-derivation
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.291
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.292
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (неявные константы).
-  - `Artifact:` Barrier.
-  - `Update:` чтобы получить сверхполиномиальность из Thm. 4.1 в режиме
-    $d=\\kappa\\log n/\\log\\log n$, нужно $\\kappa<1/5$ (см. §16.290),
-    но Thm. 4.1 использует $O(\\log n/\\log\\log n)$ без явного коэффициента,
-    а Lemma 4.2 вводит лишь существование абсолютных $A,C,n_0$.
-    Поэтому нельзя строго проверить, что $\\kappa<1/5$ допускается.
-    `exp` трактуется как $e^x$; $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.291 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850, 858–859`.
-  - `Use:` локальный барьер: без явных констант нельзя зафиксировать
-    сверхполиномиальный режим Thm. 4.1 при poly‑$M$; следующий шаг — извлечь
-    константы из доказательства или использовать явный режим Håstad’20 Thm. 6.5.
+  - `Lens:` Эквивалентность (параметры Proof of Thm. 4.1).
+  - `Artifact:` Exact citation.
+  - `Update:` в Proof of Thm. 4.1 явно фиксируются параметры индукции:
+    $s=152\\log N$, $t_i=s$, $n_i=\\lfloor n_{i-1}/(4A t_{i-1}\\log^4 n_{i-1})\\rfloor$,
+    и условие $\\log N\\le n^{1/d}/(c_1\\log^4 n)$ (константы $A,c_1$ абсолютные).
+    Эти числа — единственные явные константы, пригодные для попытки вывести
+    допустимый коэффициент в $d=O(\\log n/\\log\\log n)$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.292 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:889–891, 930–931`.
+  - `Use:` есть явные параметры Proof of Thm. 4.1; следующий шаг —
+    попытаться вывести явный коэффициент $\\kappa$ или показать, что без $A$ это невозможно.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

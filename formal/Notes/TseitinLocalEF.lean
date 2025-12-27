@@ -3656,3 +3656,36 @@ import Paperproof
   или перейти к явной константе из Håstad’20 Thm. 6.5 для сравнения.
 
 -/
+
+/-!
+### 16.292. Исследовательский шаг (exact citation): явные параметры в Proof of Thm. 4.1 (шаг к извлечению констант)
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S152-extract-constants):`
+  В Proof of Thm. 4.1 фиксируются явные параметры индукции:
+  $$s=152\\log N,\\quad t_i=s,\\quad n_i=\\bigl\\lfloor n_{i-1}/(4A t_{i-1}\\log^4 n_{i-1})\\bigr\\rfloor,$$
+  а также условие
+  $$\\log N\\le n^{1/d}/(c_1\\log^4 n),$$
+  где $A$ — константа из Lemma 4.2, а $c_1$ — достаточная абсолютная константа.
+  Это единственные явные числовые константы в доказательстве, которые можно
+  использовать для последующего извлечения допустимого коэффициента в
+  $d=O(\\log n/\\log\\log n)$. (Для контекста: $\\exp=e^x$ в нотации HR; смена базы
+  не влияет на проверку допустимого $\\kappa$ здесь.)
+- `Exact citation:`
+  “We choose $t_0=1$ and $n_0=n$, set $s=152\\log N$, and let $t_i=s$ and
+  $n_i=\\lfloor n_{i-1}/(4A t_{i-1}\\log^4 n_{i-1})\\rfloor$ …”  
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:889–891`).
+  “Thus if $\\log N\\le n^{1/d}/(c_1\\log^4 n)$ for constant $c_1>0$ large enough, then we
+  get a contradiction …” (`...:930–931`).
+- `Статус:` exact citation (зафиксированы явные параметры Proof of Thm. 4.1).
+- `StepID:` Q43.S152-extract-constants.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (цитата по тексту).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` на основе этих параметров попытаться вывести явный коэффициент
+  в глубинном режиме $d=\\kappa\\log n/\\log\\log n$ (или показать, что это невозможно без
+  извлечения $A$ из Lemma 4.2).
+
+-/
