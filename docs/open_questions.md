@@ -36,18 +36,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S200-flat-eval-tparam-ologn
-  - `NextStepID:` Q43.S201-flat-eval-tparam-polylogn
+  - `LastStepID:` Q43.S201-flat-eval-tparam-polylogn
+  - `NextStepID:` Q43.S202-flat-eval-hr-compat-polylog
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.340
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.341
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд-офф (poly -> log).
+  - `Lens:` Эквивалентность (quasi-poly -> polylog).
   - `Artifact:` Reduction.
-  - `Update:` из $t\\le\\log_2 S$ и $S(n)\\le n^k+1$ следует $t=O(\\log_2 n)$
-    (при $n\\ge 2$ имеем $S\\le 2n^k$ и $t\\le 1+k\\log_2 n$).
-    См. `formal/Notes/TseitinLocalEF.lean` §16.340.
-  - `Use:` режим poly-size обеспечивает логарифмический t в Q43.
+  - `Update:` если $S(n)\\le n^{(\\log_2 n)^c}=2^{(\\log_2 n)^{c+1}}$, то
+    $t\\le\\log_2 S\\le(\\log_2 n)^{c+1}$, то есть $t=\\mathrm{polylog}(n)$
+    (логарифм базы 2; при $c\\ge 1$ это суперполиномиальный размер).
+    См. `formal/Notes/TseitinLocalEF.lean` §16.341.
+  - `Use:` режим quasi-poly size дает polylog-$t$ для Q43.
   - `BarrierCheck:` A) Relativization: да (арифметика на Nat). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

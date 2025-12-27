@@ -91,3 +91,4 @@ Q43.S197-flat-eval-size-metric-tparam	Proof	formal/WIP/Work.lean	PENDING	define 
 Q43.S198-flat-eval-tparam-usage	Proof	formal/WIP/Work.lean	PENDING	derive t<=proofSize via lineMax (see formal/Notes/TseitinLocalEF.lean 16.338)
 Q43.S199-flat-eval-tparam-ologs	Proof	formal/WIP/Work.lean	PENDING	log2 monotone gives t<=log2 proofSize (see formal/Notes/TseitinLocalEF.lean 16.339)
 Q43.S200-flat-eval-tparam-ologn	Reduction	formal/WIP/Work.lean	PENDING	poly-size implies t=O(log_2 n) (see formal/Notes/TseitinLocalEF.lean 16.340)
+Q43.S201-flat-eval-tparam-polylogn	Reduction	formal/WIP/Work.lean	PENDING	quasi-poly size implies polylog t (see formal/Notes/TseitinLocalEF.lean 16.341)

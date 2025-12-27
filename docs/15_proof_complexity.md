@@ -455,6 +455,11 @@ $t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$.
 имеем $S\\le 2n^k$ и $t\\le\\log_2 S\\le 1+k\\log_2 n$, т.е. $t=O(\\log_2 n)$.
 Это связывает Q43-оценки с режимом depth $O(\\log_2 n)$ при poly-size.
 См. `formal/Notes/TseitinLocalEF.lean` §16.340 (Q43.S200-flat-eval-tparam-ologn).
+**Q43 (t = polylog n при quasi-poly size).**
+Если $S(n)\\le n^{(\\log_2 n)^c}=2^{(\\log_2 n)^{c+1}}$, то
+$t\\le\\log_2 S\\le(\\log_2 n)^{c+1}$, т.е. $t=\\mathrm{polylog}(n)$ (база 2).
+Замечание: при $c\\ge 1$ функция $2^{(\\log_2 n)^{c+1}}$ суперполиномиальна.
+См. `formal/Notes/TseitinLocalEF.lean` §16.341 (Q43.S201-flat-eval-tparam-polylogn).
 **Q43 (swap $s_1$).**
 Замена стартового $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ не ломает HR‑проверки:
 $s_\eta$ и $t(\eta)=\sum s_i+\log_2 M$ монотонно увеличиваются, а в режиме

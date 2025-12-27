@@ -4925,6 +4925,32 @@ import Paperproof
 -/
 
 /-!
+### 16.341. Исследовательский шаг (reduction): polylog t из quasi-poly размера
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S201-flat-eval-tparam-polylogn):`
+  Если суммарный размер доказательства квази-полиномиален, например
+  $$S(n)\\le n^{(\\log_2 n)^c}=2^{(\\log_2 n)^{c+1}},$$
+  то из $t\\le\\log_2 S$ следует
+  $$t\\le (\\log_2 n)^{c+1},$$
+  то есть $t=\\mathrm{polylog}(n)$ (логарифм базы 2).
+  При $c\\ge 1$ рост $2^{(\\log_2 n)^{c+1}}$ суперполиномиален.
+- `Reduction:` режим $S= n^{\\mathrm{polylog}(n)}$ даёт $t=\\mathrm{polylog}(n)$,
+  что совместимо с требованиями Q43 по малым evaluations.
+- `Toy-check:` при $S=2^{(\\log_2 n)^2}$ получаем $t\\le(\\log_2 n)^2$.
+- `Статус:` reduction (quasi-poly size => polylog t).
+- `StepID:` Q43.S201-flat-eval-tparam-polylogn.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: неприменимо (асимптотика).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` связать polylog-$t$ режим с HR-совместимостью
+  (например, проверить условия $t(d)\\le n_d/16$ при $t=(\\log_2 n)^{O(1)}$).
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
