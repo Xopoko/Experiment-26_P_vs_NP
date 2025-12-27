@@ -157,3 +157,4 @@ Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criteri
 Q43.S239-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-log2	Proof	formal/WIP/Work.lean	PENDING	log2 |F| monotone in n for |F|=n^2
 Q43.S240-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-log2-lift	Proof	formal/WIP/Work.lean	PENDING	log2^5 |F| monotone in n for |F|=n^2
 Q43.S241-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift	Proof	formal/WIP/Work.lean	PENDING	scaled log2^5 LHS monotone in n for |F|=n^2
+Q43.S242-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-combine	Proof	formal/WIP/Work.lean	PENDING	bundle LHS/RHS monotonicity for scaled log2^5 threshold
