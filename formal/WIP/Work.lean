@@ -1026,6 +1026,25 @@ theorem Q43_thm41_log2_threshold_c1_grid_of_pow5 {n : Nat} (hn : 2 <= n)
     (Q43_thm41_log2_threshold_c1_grid_mul_iff_pow5 (n:=n)).2 hpow5
   exact (Q43_thm41_log2_threshold_c1_grid_iff_mul_asymptotic (n:=n) hn).mpr hmul
 
+-- Q43.S225-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound:
+-- the log2^5 criterion implies the explicit lower bound |F| >= c1.
+theorem Q43_thm41_log2_threshold_c1_grid_bound {n : Nat} (hn : 2 <= n)
+    (hpow5 : Q43_thm41_log2_threshold_c1_grid_mul_pow5 n) :
+    Q43_thm41_c1_chernoff_ln <= Q43_grid_size n := by
+  have hlog : 1 <= Nat.log2 (Q43_grid_size n) :=
+    Q43_log2_grid_ge_one (n:=n) hn
+  have hpow_pos : 0 < (Nat.log2 (Q43_grid_size n)) ^ 5 := by
+    exact Nat.pow_pos (Nat.succ_le_iff.mp hlog) _
+  have hpow_ge_one : 1 <= (Nat.log2 (Q43_grid_size n)) ^ 5 :=
+    (Nat.succ_le_iff).2 hpow_pos
+  have hmul : Q43_thm41_c1_chernoff_ln * 1
+      <= Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 5 := by
+    exact Nat.mul_le_mul_left _ hpow_ge_one
+  have hmul' : Q43_thm41_c1_chernoff_ln
+      <= Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 5 := by
+    simpa using hmul
+  exact le_trans hmul' hpow5
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
