@@ -37,21 +37,21 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S159-thm41-bound-translate
-  - `NextStepID:` Q43.S160-thm41-const-extract
+  - `LastStepID:` Q43.S160-thm41-const-extract
+  - `NextStepID:` Q43.S161-thm41-recount-plan
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.299
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.300
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд‑офф (depth–size в терминах $|F|$).
-  - `Artifact:` Reduction.
-  - `Update:` в large‑$M$ ветке Thm. 4.1 даёт
-    $N\\ge\\exp(\\Omega(n^{1/d}/\\log^4 n))$ с $\\exp=e^x$; при $|F|=\\Theta(n^2)$,
-    $d=\\kappa\\log n/\\log\\log n$ и $\\kappa=59$ получаем
-    $N\\ge\\exp(\\Omega((\\log|F|)^{1/\\kappa-4+o(1)}))=|F|^{o(1)}$,
-    то есть poly‑$N$ не исключается. См. `formal/Notes/TseitinLocalEF.lean` §16.299.
-  - `Use:` фиксируем, что Thm. 4.1 в режиме $\\kappa=59$ не даёт сверхполиномиальности для grid‑Tseitin.
-  - `BarrierCheck:` A) Relativization: да (асимптотический пересчёт). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Lens:` Инвариант (явные константы).
+  - `Artifact:` Barrier.
+  - `Update:` в Proof Thm. 4.1 константы $c_1$ (“large enough”) и $c_2$ (“some constant”)
+    остаются нечисловыми, и их связь с константами Lemma 4.2 не параметризована; без полного пересчёта
+    нельзя извлечь явный коэффициент в режиме $d=\\kappa\\log n/\\log\\log n$ (exp = $e^x$).
+    См. `formal/Notes/TseitinLocalEF.lean` §16.300 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:874–877, 929–931`.
+  - `Use:` барьер зафиксирован; следующий шаг — либо план полного пересчёта Proof Thm. 4.1, либо смена режима/источника.
+  - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 

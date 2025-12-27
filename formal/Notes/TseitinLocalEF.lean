@@ -3889,3 +3889,34 @@ import Paperproof
   или зафиксировать невозможность без полного пересчёта.
 
 -/
+
+/-!
+### 16.300. Исследовательский шаг (barrier certificate): в Proof Thm. 4.1 константы $c_1,c_2$ заданы лишь как “large/some”
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S160-thm41-const-extract):`
+  В Proof of Thm. 4.1 (HR’22) условия на размер формулируются через
+  $$N\\le \\exp\\bigl(n^{1/d}/(c_1\\log^4 n)\\bigr)$$
+  для “large constant $c_1>0$”, а в конце появляется оценка
+  $$n_d\\ge n/\\log^{d-1}(N)\\,(c_2\\log^4 n)^d$$
+  для “some constant $c_2>0$”. Ни $c_1$, ни $c_2$ не раскрываются численно,
+  и их связь с константами Lemma 4.2 не параметризована.
+  Следовательно, без полного пересчёта Proof Thm. 4.1 нельзя извлечь
+  явный коэффициент в режиме $d=\\kappa\\log n/\\log\\log n$
+  (база $\\exp=e^x$ в нотации HR; замена на $2^x$ только уменьшает порог).
+- `Exact citation:`
+  “Suppose we have a refutation of size $N\\le \\exp\\, n^{1/d}/(c_1\\log^4 n)$ for some large
+  constant $c_1>0$ …” and later
+  “Note that $n_d\\ge n/\\log^{d-1}(N)\\,(c_2\\log^4 n)^d$ for some constant $c_2>0$ …”
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:874–877, 929–931`).
+- `Статус:` barrier certificate (константы $c_1,c_2$ не извлекаются без полного пересчёта).
+- `StepID:` Q43.S160-thm41-const-extract.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (мета‑константы).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` либо выписать полный пересчёт Proof Thm. 4.1 (с явными $c_1,c_2$),
+  либо принять барьер и переключиться на другие источники/режимы.
+
+-/

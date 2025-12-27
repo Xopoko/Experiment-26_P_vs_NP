@@ -36,3 +36,4 @@ Q43.S156-lemma69-recount-needed	Barrier	formal/WIP/Work.lean	PENDING	full recoun
 Q43.S157-pivot-hastad20-kappa	Exact citation	formal/WIP/Work.lean	PENDING	Hastad'20 Thm 6.5 depth regime + exp-LB (exp=e^x, kappa=59)
 Q43.S158-largem-branch-polym-check	Reduction	formal/WIP/Work.lean	PENDING	kappa=59 makes large-M threshold subpoly, so poly M picks Thm 4.1 branch (exp=e^x)
 Q43.S159-thm41-bound-translate	Reduction	formal/WIP/Work.lean	PENDING	Thm 4.1 bound rewritten in |F| terms; for kappa=59 it is subpoly (exp=e^x)
+Q43.S160-thm41-const-extract	Barrier	formal/WIP/Work.lean	PENDING	Proof Thm 4.1 uses unspecified c1/c2; explicit constants require full recount
