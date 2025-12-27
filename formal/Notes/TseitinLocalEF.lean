@@ -3855,3 +3855,37 @@ import Paperproof
   в терминах $|F|$ и $M=\\mathrm{poly}(|F|)$.
 
 -/
+
+/-!
+### 16.299. Исследовательский шаг (reduction): перевод оценки Thm. 4.1 в термины $|F|$ при poly‑$M$
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S159-thm41-bound-translate):`
+  В large‑$M$ ветке (для $M=\\mathrm{poly}(|F|)$) применима Thm. 4.1:
+  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl(n^{1/d}/\\log^4 n\\bigr)\\Bigr),\\qquad \\exp=e^x.$$
+  Для grid‑Tseitin $|F|=\\Theta(n^2)$, поэтому $\\log n=\\tfrac12\\log|F|+O(1)$ и
+  $$n^{1/d}=\\exp\\Bigl(\\tfrac{\\log n}{d}\\Bigr)
+            =\\exp\\Bigl(\\tfrac{\\log\\log n}{\\kappa}\\Bigr)
+            =(\\log n)^{1/\\kappa+o(1)}.$$
+  При $d=\\kappa\\log n/\\log\\log n$ с $\\kappa=59$ получаем
+  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)\\Bigr)
+      =\\exp\\Bigl(\\Omega((\\log|F|)^{-3.98\\ldots})\\Bigr)=|F|^{o(1)}.$$
+  Значит, для любого $N=|F|^C$ bound выполняется автоматически и не запрещает poly‑size.
+  Если трактовать $\\exp$ как $2^x$, оценка только уменьшается; классификация не меняется.
+  Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$, но здесь $p<1$.
+- `Exact citation:`
+  Thm. 4.1: “For $d=O(\\log n/\\log\\log n)$ … requires size $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$”
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850`).
+- `Toy‑тест:` $|F|=n^2$ даёт порог $\\exp((\\log n)^{1/59}/\\log^4 n)=n^{o(1)}$, так что $N=|F|$
+  уже выше lower bound.
+- `Статус:` reduction (перевод bound Thm. 4.1 в $|F|$ для poly‑$M$).
+- `StepID:` Q43.S159-thm41-bound-translate.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (асимптотический пересчёт).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` попробовать извлечь явные константы из Lemma 4.2/Proof of Thm. 4.1
+  или зафиксировать невозможность без полного пересчёта.
+
+-/

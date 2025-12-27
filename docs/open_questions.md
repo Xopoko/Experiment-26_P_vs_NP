@@ -37,19 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S158-largem-branch-polym-check
-  - `NextStepID:` Q43.S159-thm41-bound-translate
+  - `LastStepID:` Q43.S159-thm41-bound-translate
+  - `NextStepID:` Q43.S160-thm41-const-extract
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.298
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.299
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (перевод порога в термины $|F|$).
+  - `Lens:` Трейд‑офф (depth–size в терминах $|F|$).
   - `Artifact:` Reduction.
-  - `Update:` при $\\kappa=59$ (Håstad’20 Thm. 6.5) и $|F|=\\Theta(n^2)$ порог large‑$M$ в Thm. 4.3 равен
-    $\\exp(\\Theta((\\log|F|)^{1/59}))$ с $\\exp=e^x$, что даёт $|F|^{o(1)}$.
-    Поэтому для любого $M=\\mathrm{poly}(|F|)$ ветка large‑$M$ (и переход к Thm. 4.1) неизбежна.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.298.
-  - `Use:` фиксируем режим Thm. 4.3 для poly‑$M$ и можем переводить оценку Thm. 4.1 в термины $|F|$.
+  - `Update:` в large‑$M$ ветке Thm. 4.1 даёт
+    $N\\ge\\exp(\\Omega(n^{1/d}/\\log^4 n))$ с $\\exp=e^x$; при $|F|=\\Theta(n^2)$,
+    $d=\\kappa\\log n/\\log\\log n$ и $\\kappa=59$ получаем
+    $N\\ge\\exp(\\Omega((\\log|F|)^{1/\\kappa-4+o(1)}))=|F|^{o(1)}$,
+    то есть poly‑$N$ не исключается. См. `formal/Notes/TseitinLocalEF.lean` §16.299.
+  - `Use:` фиксируем, что Thm. 4.1 в режиме $\\kappa=59$ не даёт сверхполиномиальности для grid‑Tseitin.
   - `BarrierCheck:` A) Relativization: да (асимптотический пересчёт). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
