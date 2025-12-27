@@ -1931,6 +1931,26 @@ import Paperproof
 -/
 
 /-!
+### 16.218. Исследовательский шаг (counterexample): global fixed‑pair не снижает ранг
+
+- `Линза:` Коммуникация/ранг.
+- `Утверждение (попытка):` если фиксировать одну и ту же пару строк/колонок
+  на всей цепочке (global fixed‑pair), то проекционный ранг может упасть до 1.
+- `Контрпример (toy):` две global‑fixed‑pair 12‑битные проекции остаются различимыми
+  и ненулевыми, значит ранг внутренних узлов равен 2 (см. `formal/WIP/Work.lean`,
+  Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder_globalfixedpair).
+- `Статус:` контрпример (toy, $k=2$).
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: да (toy‑ранг, комбинаторика).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` требовать global fixed‑pair и запретить смену ориентации
+  (fixed‑pair + fixed‑orientation), и проверить, сохраняется ли ранг 2.
+- `StepID:` Q39.S84-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair-sameorder-globalfixedpair.
+- `InfoGain:` 1.
+-/
+
+/-!
 ### 16.189. Исследовательский шаг (counterexample): синхронный глобальный шаг по всем колонкам не снижает проекционный ранг при $k=2$
 
 - `Линза:` Инвариант.
