@@ -11,26 +11,26 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S34-2k-two-strip-laminar-rows (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S35-2k-two-strip-equal-rows
+  - `LastStepID:` Q39.S35-2k-two-strip-equal-rows (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S36-2k-two-strip-equal-rows-single-change
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Трейд‑офф (ламинарные строки).
-  - `Artifact:` Counterexample (two-strip laminar rows).
-  - `Update:` toy-контрпример при $k=2$: даже если для любых двух внутренних узлов
-    множества строк на каждой полосе ламинарны (вложены), проекционный ранг остаётся 2
-    (n=4, $U_2\\subset U_4$ дают независимые проекции). См. `formal/Notes/TseitinQ39.lean` §16.175.
-  - `Use:` ламинарность по строкам не снижает ранг; нужно требовать совпадение строк на обеих полосах.
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.175). `InfoGain:` 1.
+  - `Lens:` Коммуникация/ранг (равные строки).
+  - `Artifact:` Counterexample (two-strip equal rows).
+  - `Update:` toy-контрпример при $k=2$: даже если для каждого внутреннего узла
+    строки пересечений на двух полосах совпадают, проекционный ранг остаётся 2
+    (n=4, $U_2\\subset U_4$ дают независимые проекции). См. `formal/Notes/TseitinQ39.lean` §16.176.
+  - `Use:` равенство строк на обеих полосах не снижает ранг; нужно дополнительно ограничить шаги.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.176). `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (комбинаторная геометрия полос, оракул не влияет).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.175
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.176
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
-  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.175) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
+  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.176) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0

@@ -11,3 +11,4 @@ Q39.S31-2k-two-strip-prefix-chain	Counterexample	formal/Notes/TseitinQ39.lean	PE
 Q39.S32-2k-two-strip-alternating-strip	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	alternating-strip XOR step still gives rank 2
 Q39.S33-2k-two-strip-single-row-change	Counterexample	formal/WIP/Work.lean	PENDING	single-row change on both strips still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.174)
 Q39.S34-2k-two-strip-laminar-rows	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	laminar rows on both strips still give rank 2
+Q39.S35-2k-two-strip-equal-rows	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	equal rows on both strips still give rank 2
