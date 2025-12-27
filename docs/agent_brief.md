@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S104-globalfixedpair-fixedorientation-contiguous-shift-alt17
-- `Do-not-repeat (next 2 runs):` Q39.S104-globalfixedpair-fixedorientation-contiguous-shift-alt17, Q39.S103-globalfixedpair-fixedorientation-contiguous-shift-alt16
+- `LastStepID:` Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula
+- `Do-not-repeat (next 2 runs):` Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula, Q39.S104-globalfixedpair-fixedorientation-contiguous-shift-alt17
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: доказана монотонность по $C$; далее нужна явная формула $n_0(C)$ или монотонность по $n$.
+Q43: $n_0=2^{40}$ даёт порог для всех $C\\le 1024$; далее нужна монотонность по $n$ или формула $n_0(C)$.
 Q39: alt17‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt18‑shift.
 
 ## Что уже сделано (не повторять)
@@ -41,4 +41,4 @@ Q39: alt17‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
