@@ -160,6 +160,10 @@ def Q39_prefix_vec4 : BitVec8 := [true, true, true, true, true, true, true, true
 def Q39_rank2_8 (v w : BitVec8) : Prop :=
   v ≠ Q39_zero8 ∧ w ≠ Q39_zero8 ∧ v ≠ w
 
+instance (v w : BitVec8) : Decidable (Q39_rank2_8 v w) := by
+  unfold Q39_rank2_8
+  infer_instance
+
 theorem Q39_rank2_prefix2_prefix4 : Q39_rank2_8 Q39_prefix_vec2 Q39_prefix_vec4 := by
   decide
 
@@ -280,6 +284,10 @@ def Q39_zero12 : BitVec12 :=
 
 def Q39_rank2_12 (v w : BitVec12) : Prop :=
   v ≠ Q39_zero12 ∧ w ≠ Q39_zero12 ∧ v ≠ w
+
+instance (v w : BitVec12) : Decidable (Q39_rank2_12 v w) := by
+  unfold Q39_rank2_12
+  infer_instance
 
 def Q39_monotone2d_strict_vec1 : BitVec12 :=
   [false, false, true, true, false, false, false, false, true, true, false, false]
@@ -958,14 +966,14 @@ theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n
   rcases hpoly with ⟨k, hk⟩
   refine ⟨k, ?_⟩
   intro n
-  exact le_trans (hle n) (hk n)
+  exact Nat.le_trans (hle n) (hk n)
 
 -- Q43.S140-polym-below-threshold: explicit polynomial bounds imply IsPoly.
 theorem Q43_IsPoly_of_le_pow {s : Nat -> Nat} (k : Nat) (hle : ∀ n, s n <= n ^ k) :
     IsPoly s := by
   refine ⟨k, ?_⟩
   intro n
-  exact le_trans (hle n) (Nat.le_succ _)
+  exact Nat.le_trans (hle n) (Nat.le_succ _)
 
 -- Q43.S170-explicit-c1c2-thm41: package explicit constants for Thm. 4.1.
 def Q43_thm41_c2 (A : Nat) : Nat := 8 * A * 152
@@ -1078,7 +1086,7 @@ theorem Q43_lineMax_le_proofSize {α : Type} (proof : List (List α)) :
         Nat.le_add_right _ _
       have h2 : Q43_lineMax tl <= Q43_lineSize hd + Q43_proofSize tl :=
         Nat.le_trans ih (Nat.le_add_left _ _)
-      exact (max_le_iff).2 ⟨h1, h2⟩
+      exact (Nat.max_le).2 ⟨h1, h2⟩
 
 theorem Q43_tParam_le_proofSize {α : Type} (proof : List (List α)) :
     Q43_tParam (Q43_lineMax proof) <= Q43_proofSize proof := by
@@ -1146,7 +1154,7 @@ theorem Q43_neta_iter_le (n A t logc : Nat) : ∀ k, Q43_neta_iter n A t logc k 
           Q43_neta_step (Q43_neta_iter n A t logc k) A t logc
             <= Q43_neta_iter n A t logc k := by
         exact Q43_neta_step_le _ _ _ _
-      exact le_trans hstep ih
+      exact Nat.le_trans hstep ih
 
 -- Q43.S206-flat-eval-hr-neta-range: eta-range predicate for HR recursion.
 def Q43_etaRange (n eta : Nat) : Prop :=
@@ -1155,7 +1163,7 @@ def Q43_etaRange (n eta : Nat) : Prop :=
 theorem Q43_etaRange_mono {n m eta : Nat} (h : n <= m) (hEta : Q43_etaRange n eta) :
     Q43_etaRange m eta := by
   unfold Q43_etaRange at *
-  exact le_trans hEta (Q43_log2_mono h)
+  exact Nat.le_trans hEta (Q43_log2_mono h)
 
 -- Q43.S207-flat-eval-hr-level-count: level count is the proof depth parameter d.
 def Q43_levelCount (d : Nat) : Nat := d
@@ -1175,7 +1183,7 @@ theorem Q43_etaRange_of_strict {n a c1 eta : Nat} (h : Q43_etaRangeStrict n a c1
       Nat.log2 n / (2 * (a + c1 + 1) * Nat.log2 (Nat.log2 n)) <= Nat.log2 n := by
     simpa using
       (Nat.div_le_self (Nat.log2 n) (2 * (a + c1 + 1) * Nat.log2 (Nat.log2 n)))
-  exact le_trans h hdiv
+  exact Nat.le_trans h hdiv
 
 -- Q43.S209-flat-eval-hr-depth-range-constants: placeholders for implicit HR constants.
 structure Q43_switchingConstants where
@@ -1197,7 +1205,7 @@ theorem Q43_Lemma69_A3_bound {s t : Nat} (ht : t <= s) :
           simp [Nat.add_mul, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
         exact h.symm
       _ = 18 * s := by simp
-  exact le_trans h3 (le_of_eq h4)
+  exact Nat.le_trans h3 (le_of_eq h4)
 
 theorem Q43_Lemma69_A4_bound {s t : Nat} (ht : t <= s) :
     s / 4 + 16 * t <= 17 * s := by
@@ -1212,7 +1220,7 @@ theorem Q43_Lemma69_A4_bound {s t : Nat} (ht : t <= s) :
           simp [Nat.add_mul, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
         exact h.symm
       _ = 17 * s := by simp
-  exact le_trans h3 (le_of_eq h4)
+  exact Nat.le_trans h3 (le_of_eq h4)
 
 -- Q43.S211-flat-eval-hr-depth-range-constants-a1a2: combine A1/A2 with explicit A3/A4 bounds.
 theorem Q43_Lemma69_A12_bound {s t A1 A2 : Nat} (ht : t <= s) :
@@ -1340,7 +1348,7 @@ theorem Q43_thm41_log2_threshold_c1_grid_iff_mul {n : Nat}
     (hlog : 1 <= Nat.log2 (Q43_grid_size n)) :
     Q43_thm41_log2_threshold_c1_grid n ↔ Q43_thm41_log2_threshold_c1_grid_mul n := by
   have hposlog : 0 < Nat.log2 (Q43_grid_size n) := (Nat.succ_le_iff).1 hlog
-  have hpow : 0 < (Nat.log2 (Q43_grid_size n)) ^ 4 := Nat.pow_pos hposlog _
+  have hpow : 0 < (Nat.log2 (Q43_grid_size n)) ^ 4 := Nat.pow_pos hposlog
   have hc1 : 0 < Q43_thm41_c1_chernoff_ln := by decide
   have hpos :
       0 < Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4 :=
@@ -1352,14 +1360,14 @@ theorem Q43_thm41_log2_threshold_c1_grid_iff_mul {n : Nat}
 -- log2(|F|) is at least 1 for grid size |F| = n^2 when n >= 2.
 theorem Q43_log2_grid_ge_one {n : Nat} (hn : 2 <= n) :
     1 <= Nat.log2 (Q43_grid_size n) := by
-  have hn1 : 1 <= n := le_trans (by decide : 1 <= 2) hn
+  have hn1 : 1 <= n := Nat.le_trans (by decide : 1 <= 2) hn
   have hn0 : n ≠ 0 := by
-    exact Nat.ne_of_gt (lt_of_lt_of_le (by decide : 0 < 2) hn)
+    exact Nat.ne_of_gt (Nat.lt_of_lt_of_le (by decide : 0 < 2) hn)
   have hlogn : 1 <= Nat.log2 n := by
     have hpow : 2 ^ 1 <= n := by
       simpa using hn
     exact (Nat.le_log2 hn0).2 hpow
-  exact le_trans hlogn (Q43_log2_le_log2_grid_size (n:=n) hn1)
+  exact Nat.le_trans hlogn (Q43_log2_le_log2_grid_size (n:=n) hn1)
 
 -- Q43.S222-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-asymptotic-apply:
 -- apply the asymptotic log2 condition to the multiplicative threshold.
@@ -1398,7 +1406,7 @@ theorem Q43_thm41_log2_threshold_c1_grid_bound {n : Nat} (hn : 2 <= n)
   have hlog : 1 <= Nat.log2 (Q43_grid_size n) :=
     Q43_log2_grid_ge_one (n:=n) hn
   have hpow_pos : 0 < (Nat.log2 (Q43_grid_size n)) ^ 5 := by
-    exact Nat.pow_pos (Nat.succ_le_iff.mp hlog) _
+    exact Nat.pow_pos (Nat.succ_le_iff.mp hlog)
   have hpow_ge_one : 1 <= (Nat.log2 (Q43_grid_size n)) ^ 5 :=
     (Nat.succ_le_iff).2 hpow_pos
   have hmul : Q43_thm41_c1_chernoff_ln * 1
@@ -1407,7 +1415,7 @@ theorem Q43_thm41_log2_threshold_c1_grid_bound {n : Nat} (hn : 2 <= n)
   have hmul' : Q43_thm41_c1_chernoff_ln
       <= Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 5 := by
     simpa using hmul
-  exact le_trans hmul' hpow5
+  exact Nat.le_trans hmul' hpow5
 
 -- Q43.S226-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply:
 -- package the log2^5 criterion into the regime-d threshold + bound bundle.
@@ -1432,7 +1440,7 @@ theorem Q43_thm41_log2_threshold_c1_grid_param_of_le {n N : Nat}
     (hth : Q43_thm41_log2_threshold_c1_grid n) :
     Q43_thm41_log2_threshold_c1_grid_param n N := by
   have hlog : Nat.log2 N <= Nat.log2 (Q43_grid_size n) := Q43_log2_mono hN
-  exact le_trans hlog hth
+  exact Nat.le_trans hlog hth
 
 def Q43_thm41_regime_d_ok_param (n N : Nat) : Prop :=
   Q43_thm41_log2_threshold_c1_grid_param n N ∧ Q43_thm41_c1_chernoff_ln <= Q43_grid_size n
@@ -1501,7 +1509,12 @@ theorem Q43_pow_le_pow_of_le {a b n : Nat} (h : a <= b) : a ^ n <= b ^ n := by
 theorem Q43_log2_pow_le_mul_succ (a C : Nat) :
     Nat.log2 (a ^ C) <= (Nat.log2 a + 1) * C := by
   by_cases ha : a = 0
-  · simp [ha]
+  · cases C with
+    | zero =>
+        have hlog1 : Nat.log2 1 = 0 := by decide
+        simpa [ha, hlog1]
+    | succ C =>
+        simp [ha, Nat.log2_zero]
   · have hlt : a < 2 ^ (Nat.log2 a + 1) :=
       (Nat.log2_lt ha).1 (Nat.lt_succ_self _)
     have hle : a <= 2 ^ (Nat.log2 a + 1) := Nat.le_of_lt hlt
@@ -1538,7 +1551,7 @@ theorem Q43_log2_grid_pow_le_twice_mul {n C : Nat} (hn : 2 <= n) :
       (Nat.log2 (Q43_grid_size n) + 1) * C
         <= (2 * Nat.log2 (Q43_grid_size n)) * C := by
     exact Nat.mul_le_mul_right _ (Q43_log2_grid_succ_le_twice (n:=n) hn)
-  exact le_trans h1 h2
+  exact Nat.le_trans h1 h2
 
 -- Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold:
 -- use a scaled log2^5 criterion to bound log2(|F|^C).
@@ -1561,6 +1574,10 @@ def Q43_thm41_log2_threshold_c1_grid_pow5_scaled (n C : Nat) : Prop :=
 def Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple (n C : Nat) : Prop :=
   (2 * C * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5
     <= Q43_grid_size n
+
+instance (n C : Nat) : Decidable (Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C) := by
+  unfold Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple
+  infer_instance
 
 theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_iff_simple {n C : Nat} :
     Q43_thm41_log2_threshold_c1_grid_pow5_scaled n C ↔
@@ -1595,7 +1612,7 @@ theorem Q43_thm41_log2_threshold_c1_grid_powC_iff_mul {n C : Nat}
     Q43_thm41_log2_threshold_c1_grid_powC n C ↔
       Q43_thm41_log2_threshold_c1_grid_powC_mul n C := by
   have hposlog : 0 < Nat.log2 (Q43_grid_size n) := (Nat.succ_le_iff).1 hlog
-  have hpow : 0 < (Nat.log2 (Q43_grid_size n)) ^ 4 := Nat.pow_pos hposlog _
+  have hpow : 0 < (Nat.log2 (Q43_grid_size n)) ^ 4 := Nat.pow_pos hposlog
   have hc1 : 0 < Q43_thm41_c1_chernoff_ln := by decide
   have hpos :
       0 < Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4 :=
@@ -1614,7 +1631,7 @@ theorem Q43_thm41_log2_threshold_c1_grid_powC_mul_of_scaled {n C : Nat} (hn : 2 
         <= (2 * Nat.log2 (Q43_grid_size n) * C) *
             (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4) := by
     exact Nat.mul_le_mul hlog (Nat.le_refl _)
-  exact le_trans hmul hscale
+  exact Nat.le_trans hmul hscale
 
 theorem Q43_thm41_log2_threshold_c1_grid_powC_of_scaled {n C : Nat} (hn : 2 <= n)
     (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled n C) :
@@ -1648,7 +1665,7 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C {n C1 C2 : Na
       (2 * C1 * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5
         <= (2 * C2 * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5 := by
     exact Nat.mul_le_mul_right _ hC''
-  exact le_trans hmul h
+  exact Nat.le_trans hmul h
 
 -- Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula:
 -- constant-range explicit threshold for C <= 1024.
@@ -1739,8 +1756,8 @@ theorem Q43_grid_ratio_mono_of_log2_eq {n m : Nat} (h : n <= m)
 theorem Q43_log2_grid_size_eq_double_of_range {k n : Nat} (hk : 2 <= k)
     (hlo : 2 ^ k <= n) (hhi : n <= 5 * 2 ^ (k - 2)) :
     Nat.log2 (Q43_grid_size n) = 2 * k := by
-  have hpowpos : 0 < 2 ^ k := Nat.pow_pos (by decide) _
-  have hnpos : 0 < n := lt_of_lt_of_le hpowpos hlo
+  have hpowpos : 0 < 2 ^ k := Nat.pow_pos (by decide)
+  have hnpos : 0 < n := Nat.lt_of_lt_of_le hpowpos hlo
   have hnne : n ≠ 0 := Nat.ne_of_gt hnpos
   have hne : Q43_grid_size n ≠ 0 := by
     simpa [Q43_grid_size] using (Nat.mul_ne_zero hnne hnne)
@@ -1754,7 +1771,7 @@ theorem Q43_log2_grid_size_eq_double_of_range {k n : Nat} (hk : 2 <= k)
     Q43_pow_le_pow_of_le (a := n) (b := 5 * 2 ^ (k - 2)) (n := 2) hhi
   have hbound : (5 * 2 ^ (k - 2)) ^ 2 < 2 ^ (2 * k + 1) := by
     set t : Nat := 2 ^ (k - 2)
-    have htpos : 0 < t := Nat.pow_pos (by decide) _
+    have htpos : 0 < t := Nat.pow_pos (by decide)
     have hcoeff : 25 < 32 := by decide
     have h1 : 25 * t < 32 * t := (Nat.mul_lt_mul_right (a0 := htpos)).2 hcoeff
     have h2 : 25 * t * t < 32 * t * t := (Nat.mul_lt_mul_right (a0 := htpos)).2 h1
@@ -1814,7 +1831,7 @@ theorem Q43_log2_grid_size_eq_double_succ_of_range {k n : Nat} (hk : 2 <= k)
   have htpos : 0 < t := Nat.pow_pos (by decide) _
   have h3pos : 0 < 3 * t := Nat.mul_pos (by decide) htpos
   have hlo' : 3 * t <= n := by simpa [t] using hlo
-  have hnpos : 0 < n := lt_of_lt_of_le h3pos hlo'
+  have hnpos : 0 < n := Nat.lt_of_lt_of_le h3pos hlo'
   have hnne : n ≠ 0 := Nat.ne_of_gt hnpos
   have hne : Q43_grid_size n ≠ 0 := by
     simpa [Q43_grid_size] using (Nat.mul_ne_zero hnne hnne)
@@ -1823,7 +1840,7 @@ theorem Q43_log2_grid_size_eq_double_succ_of_range {k n : Nat} (hk : 2 <= k)
     have hpow' : 2 ^ ((k - 1) * 2) = (2 ^ (k - 1)) ^ 2 := Nat.pow_mul 2 (k - 1) 2
     simpa [t, Nat.mul_comm, Nat.pow_two] using hpow'
   have hle : 2 <= 2 * k := by
-    have hk1 : 1 <= k := le_trans (by decide : 1 <= 2) hk
+    have hk1 : 1 <= k := Nat.le_trans (by decide : 1 <= 2) hk
     have hle' : 2 * 1 <= 2 * k := Nat.mul_le_mul_left 2 hk1
     simpa using hle'
   have hexp : 2 * (k - 1) + 3 = 2 * k + 1 := by
@@ -1850,7 +1867,7 @@ theorem Q43_log2_grid_size_eq_double_succ_of_range {k n : Nat} (hk : 2 <= k)
   have hlow' : 2 ^ (2 * k + 1) <= (3 * t) ^ 2 := by
     simpa [hpow8, hpow3, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using hmul
   have hlow : 2 ^ (2 * k + 1) <= Q43_grid_size n := by
-    have hlow'' : 2 ^ (2 * k + 1) <= n ^ 2 := le_trans hlow' hpow_lo
+    have hlow'' : 2 ^ (2 * k + 1) <= n ^ 2 := Nat.le_trans hlow' hpow_lo
     simpa [Q43_grid_size, Nat.pow_two] using hlow''
   set u : Nat := 2 ^ (k + 1)
   have hup : n < u := by simpa [u] using hhi
@@ -1897,6 +1914,23 @@ theorem Q43_grid_ratio_mono_on_plateau_upper {k n m : Nat} (hk : 2 <= k)
   have hlog : Nat.log2 (Q43_grid_size n) = Nat.log2 (Q43_grid_size m) := by
     simpa [hlogn, hlogm]
   exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
+
+-- Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-bridge:
+-- counterexample inside the gap [5*2^(k-2), 3*2^(k-1)) for k=12.
+def Q43_gap_k : Nat := 12
+def Q43_gap_n : Nat := 5792
+def Q43_gap_n_succ : Nat := 5793
+
+theorem Q43_gap_range :
+    5 * 2 ^ (Q43_gap_k - 2) <= Q43_gap_n ∧
+    5 * 2 ^ (Q43_gap_k - 2) <= Q43_gap_n_succ ∧
+    Q43_gap_n_succ < 3 * 2 ^ (Q43_gap_k - 1) := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap :
+    Q43_grid_ratio Q43_gap_n_succ < Q43_grid_ratio Q43_gap_n := by
+  decide
 
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by

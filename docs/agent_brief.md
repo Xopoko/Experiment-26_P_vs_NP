@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-cover
-- `Do-not-repeat (next 2 runs):` Q39.S117-globalfixedpair-fixedorientation-contiguous-shift-alt30, Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-cover
+- `LastStepID:` Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bridge
+- `Do-not-repeat (next 2 runs):` Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-cover, Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bridge
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: закрыт верхний плато‑интервал (log2|F|=2k+1); дальше — закрыть середину и сделать lift порога по кускам.
+Q43: контрпример монотонности внутри разрыва; дальше — альтернативная оценка на разрыве и lift порога по кускам.
 Q39: alt30‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt31‑shift.
 
 ## Что уже сделано (не повторять)
@@ -41,4 +41,4 @@ Q39: alt30‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Инвариант
