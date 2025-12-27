@@ -1506,6 +1506,13 @@ theorem Q43_toy_n0_C_le_Cmax {C : Nat} (hC : C <= Q43_toy_Cmax) :
     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 C := by
   exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C hC Q43_toy_n0_Cmax_ok
 
+-- Q43.S238-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-grid:
+-- grid size is monotone in n.
+theorem Q43_grid_size_mono {n m : Nat} (h : n <= m) :
+    Q43_grid_size n <= Q43_grid_size m := by
+  unfold Q43_grid_size
+  exact Nat.mul_le_mul h h
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

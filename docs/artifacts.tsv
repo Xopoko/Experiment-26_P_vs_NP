@@ -150,3 +150,4 @@ Q43.S234-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criteri
 Q43.S235-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0	Proof	formal/WIP/Work.lean	PENDING	toy n0=2^40 for C=1 satisfies 2*c1*log2^5|F| <= |F|
 Q43.S236-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-general	Proof	formal/WIP/Work.lean	PENDING	monotonicity in C for the scaled log2^5 threshold
 Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula	Proof	formal/WIP/Work.lean	PENDING	n0=2^40 works for all C<=1024 via monotonicity in C
+Q43.S238-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-grid	Proof	formal/WIP/Work.lean	PENDING	grid size monotone in n for |F|=n^2
