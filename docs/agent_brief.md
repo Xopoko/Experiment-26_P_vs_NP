@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S230-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m-link
-- `Do-not-repeat (next 2 runs):` Q43.S230-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m-link, Q39.S93-globalfixedpair-fixedorientation-contiguous-shift-alt6
+- `LastStepID:` Q39.S94-globalfixedpair-fixedorientation-contiguous-shift-alt7
+- `Do-not-repeat (next 2 runs):` Q39.S94-globalfixedpair-fixedorientation-contiguous-shift-alt7, Q43.S230-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m-link
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: объединены полиномиальные режимы $N\\le |F|^C$ и $M\\le |F|^K$; следующий шаг — связать с порогом режима $d$.
-Q39: alt6‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt7‑shift.
+Q39: alt7‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt8‑shift.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: alt6‑shift для contiguous blocks при fixed‑orientation всё е�
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
