@@ -58,7 +58,7 @@ Q39.S83-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microstep
 Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-cover	Proof	formal/WIP/Work.lean	PENDING	upper plateau log2|F|=2k+1 gives ratio monotone on [3*2^(k-1), 2^(k+1))
 Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bridge	Counterexample	formal/WIP/Work.lean	PENDING	ratio drops at n=5792->5793 inside gap [5*2^(k-2), 3*2^(k-1)) for k=12
 Q39.S118-globalfixedpair-fixedorientation-contiguous-shift-alt31	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt31-shift still give rank 2
-Q39.S97-globalfixedpair-fixedorientation-contiguous-shift-alt10	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt10-shift still give rank 2
+Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-alternative	Toy	formal/WIP/Work.lean	PENDING	gap endpoint check: ratio at 5*2^(k-2) <= ratio at 3*2^(k-1) for k=12
 Q39.S98-globalfixedpair-fixedorientation-contiguous-shift-alt11	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt11-shift still give rank 2
 Q39.S99-globalfixedpair-fixedorientation-contiguous-shift-alt12	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt12-shift still give rank 2
 Q39.S100-globalfixedpair-fixedorientation-contiguous-shift-alt13	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt13-shift still give rank 2

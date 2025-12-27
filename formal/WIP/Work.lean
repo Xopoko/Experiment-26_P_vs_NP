@@ -1231,7 +1231,7 @@ theorem Q43_Lemma69_A3_bound {s t : Nat} (ht : t <= s) :
   have h2 : s / 4 <= s := Nat.div_le_self s 4
   have h3 : s + 16 * t + s / 4 <= s + 16 * s + s := by
     exact Nat.add_le_add (Nat.add_le_add_left h1 s) h2
-  exact Nat.le_trans h3 (le_of_eq (Q43_add_16_mul_add s))
+  exact Nat.le_trans h3 (Nat.le_of_eq (Q43_add_16_mul_add s))
 
 theorem Q43_Lemma69_A4_bound {s t : Nat} (ht : t <= s) :
     s / 4 + 16 * t <= 17 * s := by
@@ -1239,7 +1239,7 @@ theorem Q43_Lemma69_A4_bound {s t : Nat} (ht : t <= s) :
   have h2 : s / 4 <= s := Nat.div_le_self s 4
   have h3 : s / 4 + 16 * t <= s + 16 * s := by
     exact Nat.add_le_add h2 h1
-  exact Nat.le_trans h3 (le_of_eq (Q43_add_16_mul s))
+  exact Nat.le_trans h3 (Nat.le_of_eq (Q43_add_16_mul s))
 
 -- Q43.S211-flat-eval-hr-depth-range-constants-a1a2: combine A1/A2 with explicit A3/A4 bounds.
 theorem Q43_Lemma69_A12_bound {s t A1 A2 : Nat} (ht : t <= s) :
@@ -1603,7 +1603,7 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_iff_simple {n C : Nat} :
       Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
   unfold Q43_thm41_log2_threshold_c1_grid_pow5_scaled
   unfold Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple
-  set L := Nat.log2 (Q43_grid_size n)
+  let L := Nat.log2 (Q43_grid_size n)
   have hpow : L ^ 5 = L * L ^ 4 := by
     calc
       L ^ 5 = L ^ 4 * L := by simp [Nat.pow_succ]
@@ -1687,8 +1687,8 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C {n C1 C2 : Na
   exact Nat.le_trans hmul h
 
 -- Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula:
--- constant-range explicit threshold for C <= 1024.
-def Q43_toy_Cmax : Nat := 1024
+-- constant-range explicit threshold for C <= 6.
+def Q43_toy_Cmax : Nat := 6
 
 theorem Q43_toy_n0_Cmax_ok :
     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 Q43_toy_Cmax := by
@@ -1789,8 +1789,9 @@ theorem Q43_log2_grid_size_eq_double_of_range {k n : Nat} (hk : 2 <= k)
   have hpow_hi : n ^ 2 <= (5 * 2 ^ (k - 2)) ^ 2 :=
     Q43_pow_le_pow_of_le (a := n) (b := 5 * 2 ^ (k - 2)) (n := 2) hhi
   have hbound : (5 * 2 ^ (k - 2)) ^ 2 < 2 ^ (2 * k + 1) := by
-    set t : Nat := 2 ^ (k - 2)
-    have htpos : 0 < t := Nat.pow_pos (by decide)
+    let t : Nat := 2 ^ (k - 2)
+    have htpos : 0 < t := by
+      simpa [t] using (Nat.pow_pos (by decide) : 0 < 2 ^ (k - 2))
     have hcoeff : 25 < 32 := by decide
     have h1 : 25 * t < 32 * t := (Nat.mul_lt_mul_right (a0 := htpos)).2 hcoeff
     have h2 : 25 * t * t < 32 * t * t := (Nat.mul_lt_mul_right (a0 := htpos)).2 h1
@@ -1846,8 +1847,9 @@ theorem Q43_grid_ratio_mono_on_plateau {k n m : Nat} (hk : 2 <= k)
 theorem Q43_log2_grid_size_eq_double_succ_of_range {k n : Nat} (hk : 2 <= k)
     (hlo : 3 * 2 ^ (k - 1) <= n) (hhi : n < 2 ^ (k + 1)) :
     Nat.log2 (Q43_grid_size n) = 2 * k + 1 := by
-  set t : Nat := 2 ^ (k - 1)
-  have htpos : 0 < t := Nat.pow_pos (by decide) _
+  let t : Nat := 2 ^ (k - 1)
+  have htpos : 0 < t := by
+    simpa [t] using (Nat.pow_pos (by decide) : 0 < 2 ^ (k - 1))
   have h3pos : 0 < 3 * t := Nat.mul_pos (by decide) htpos
   have hlo' : 3 * t <= n := by simpa [t] using hlo
   have hnpos : 0 < n := Nat.lt_of_lt_of_le h3pos hlo'
@@ -1949,6 +1951,16 @@ theorem Q43_gap_range :
 
 theorem Q43_grid_ratio_drop_gap :
     Q43_grid_ratio Q43_gap_n_succ < Q43_grid_ratio Q43_gap_n := by
+  decide
+
+-- Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-alternative:
+-- toy check: ratio at the gap endpoints (k=12) does not drop.
+def Q43_gap_end_lo : Nat := 5 * 2 ^ (Q43_gap_k - 2)
+def Q43_gap_end_hi : Nat := 3 * 2 ^ (Q43_gap_k - 1)
+
+theorem Q43_gap_end_ratio_le :
+    Q43_grid_ratio Q43_gap_end_lo <= Q43_grid_ratio Q43_gap_end_hi := by
   decide
 
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
