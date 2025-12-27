@@ -1417,6 +1417,14 @@ theorem Q43_thm41_log2_threshold_c1_grid_powC_of_scaled {n C : Nat} (hn : 2 <= n
   have hlog : 1 <= Nat.log2 (Q43_grid_size n) := Q43_log2_grid_ge_one (n:=n) hn
   exact (Q43_thm41_log2_threshold_c1_grid_powC_iff_mul (n:=n) (C:=C) hlog).2 hmul
 
+-- Q43.S235-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0:
+-- toy explicit threshold for C=1.
+def Q43_toy_n0_C1 : Nat := 2 ^ 40
+
+theorem Q43_toy_n0_C1_ok :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 1 := by
+  decide
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
