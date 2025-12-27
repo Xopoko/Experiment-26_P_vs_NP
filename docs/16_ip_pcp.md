@@ -33,16 +33,16 @@ $\square$
 $r(n)$ случайных бит и запрашивает $q(n)$ битов «доказательства» (oracle access),
 с полнотой/звуковостью как выше.
 
-**Лемма 16.2 (легкая сторона).** $\mathrm{PCP}(O(\log n), O(1))\subseteq\mathrm{NP}$.
+**Лемма 16.2 (легкая сторона).** $\mathrm{PCP}(O(\log_2 n), O(1))\subseteq\mathrm{NP}$.
 
-*Доказательство.* Пусть $L\in\mathrm{PCP}(r(n),q(n))$ при $r(n)=O(\log n)$
+*Доказательство.* Пусть $L\in\mathrm{PCP}(r(n),q(n))$ при $r(n)=O(\log_2 n)$
 и $q(n)=O(1)$. NP‑верификатор угадывает строку доказательства $\pi$
 (полиномиальной длины) и перебирает все $2^{r(|x|)}=\mathrm{poly}(|x|)$
 случайные строки, симулируя верификатор $V$ с oracle‑доступом к $\pi$.
 Принимаем, если доля принятий $\ge 2/3$. $\square$
 
 **Теорема (PCP, Arora–Safra; ALMSS; Dinur; цитируется).**
-\mathrm{NP}\subseteq\mathrm{PCP}(O(\log n), O(1)), поэтому \mathrm{NP}=\mathrm{PCP}(O(\log n), O(1)).
+\mathrm{NP}\subseteq\mathrm{PCP}(O(\log_2 n), O(1)), поэтому \mathrm{NP}=\mathrm{PCP}(O(\log_2 n), O(1)).
 
 **Типовое следствие (формулировка‑шаблон).** Существует константа
 $\varepsilon>0$, такая что задача отличить выполнимые 3CNF

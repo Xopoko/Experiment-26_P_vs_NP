@@ -4515,6 +4515,31 @@ import Paperproof
 -/
 
 /-!
+### 16.325. Исследовательский шаг (reduction): log_2 в summary вне §15/§11 (PCP, Savitch)
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S185-exp2-quote-scan-logbases-summary-final):`
+  В summary‑разделах `docs/16_ip_pcp.md` и `docs/13_savitch.md` логарифмы в оценках,
+  связанных с двоичным счётом и экспонентой, приведены к $\\log_2$ (например,
+  $r(n)=O(\\log_2 n)$ и $\\log_2 M=O(s(n))$).
+- `Reduction:` замена $\\log\\to\\log_2$ сохраняет асимптотику и согласует записи
+  с двоичной интерпретацией $2^{(\\cdot)}$.
+- `Exact citation:`
+  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Статус:` reduction (нормализация базы в summary).
+- `StepID:` Q43.S185-exp2-quote-scan-logbases-summary-final.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` подтвердить отсутствие оставшихся ambiguity по $\\log$ в summary,
+  либо зафиксировать точку, где база несущественна.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
