@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S24-2k-two-strip-interval-obstruction
-- `Do-not-repeat (next 2 runs):` Q39.S24-2k-two-strip-interval-obstruction, Q39.S23-2k-two-strip-rank-toy
+- `LastStepID:` Q39.S25-2k-two-strip-interval-rank-check
+- `Do-not-repeat (next 2 runs):` Q39.S25-2k-two-strip-interval-rank-check, Q39.S24-2k-two-strip-interval-obstruction
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: следующий шаг прежний (Thm. 4.1 → Thm. 4.3).
-Q39: добавлен инвариант фронтира (swap); следующий шаг — interval rank check.
+Q39: выделен предикат пересечения разреза для фронтира; следующий шаг — interval rank bound.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: добавлен инвариант фронтира (swap); следующ
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инвариант→Двойственность→Инвариант→Коммуникация/ранг→Инвариант
+Последние:Двойственность→Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг

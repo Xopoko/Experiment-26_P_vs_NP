@@ -116,6 +116,20 @@ theorem Q39_frontier_swap (G : Graph) (S : Set Vertex) (e : Edge) :
         have : boundary G S (edgeSwap e) ∨ boundary G S e := Or.inl hswap
         simpa [frontier, edgeSwap_involutive] using this
 
+-- Q39.S25-2k-two-strip-interval-rank-check: frontier edges cross the cut.
+theorem Q39_frontier_cross (G : Graph) (S : Set Vertex) (e : Edge) :
+    frontier G S e → (S e.1 ∧ ¬ S e.2) ∨ (S e.2 ∧ ¬ S e.1) := by
+  intro h
+  cases e with
+  | mk u v =>
+    have h' : boundary G S (u, v) ∨ boundary G S (v, u) := by
+      simpa [frontier, edgeSwap] using h
+    cases h' with
+    | inl h1 =>
+        exact Or.inl h1.2
+    | inr h2 =>
+        exact Or.inr h2.2
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

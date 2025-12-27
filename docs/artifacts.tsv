@@ -1,2 +1,3 @@
 StepID	Type	LeanTarget	Commit	Notes
 Q39.S24-2k-two-strip-interval-obstruction	Proof	formal/WIP/Work.lean	PENDING	frontier swap invariance lemma
+Q39.S25-2k-two-strip-interval-rank-check	Proof	formal/WIP/Work.lean	PENDING	frontier cut separation lemma
