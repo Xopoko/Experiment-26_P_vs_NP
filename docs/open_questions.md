@@ -9,17 +9,17 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S21-boundary-complement-duality (см. `formal/PvNP/Work.lean`)
-  - `NextStepID:` Q39.S22-2k-two-strip-frontier-obstruction
+  - `LastStepID:` Q39.S22-2k-two-strip-frontier-obstruction (см. `formal/PvNP/Work.lean`)
+  - `NextStepID:` Q39.S23-2k-two-strip-rank-toy
   - `LeanTarget:` formal/PvNP/Work.lean
-  - `Lens:` Двойственность (комплемент множества / разворот ребра).
-  - `Artifact:` Proof (формальная лемма о дуальности границы).
-  - `Update:` формально: при Symmetric G, boundary G (¬S) e ↔ boundary G S (edgeSwap e).
-  - `Toy-check:` для EmptySet/FullSet граница пуста; дуальность сохраняется тривиально.
-  - `Use:` симметризует анализ фронтира по S и его дополнению в двухполосном шаге.
-  - `File:` `formal/PvNP/Work.lean` (theorem `Q39_boundary_compl_swap`). `InfoGain:` 1.
+  - `Lens:` Инвариант (frontier без ориентации и инвариантность по S↔¬S).
+  - `Artifact:` Proof (определение frontier и лемма о комплемент‑инвариантности).
+  - `Update:` формально: `frontier` := boundary S ∪ boundary S∘swap, и при Symmetric G выполняется `frontier G S = frontier G (¬S)`.
+  - `Toy-check:` для EmptySet/FullSet frontier пуст; инвариантность тривиальна.
+  - `Use:` позволяет в двухполосном анализе работать с неориентированным фронтиром, не различая S и ¬S.
+  - `File:` `formal/PvNP/Work.lean` (theorem `Q39_frontier_compl`). `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? да (чисто комбинаторная лемма, оракул не влияет).
+    - `A) Relativization check:` Relativizes? да (комбинаторный инвариант, оракул не влияет).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege

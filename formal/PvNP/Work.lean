@@ -11,6 +11,11 @@ abbrev Edge := Vertex × Vertex
 
 def edgeSwap (e : Edge) : Edge := (e.2, e.1)
 
+theorem edgeSwap_involutive (e : Edge) : edgeSwap (edgeSwap e) = e := by
+  cases e with
+  | mk u v =>
+    rfl
+
 def EmptySet : Set Vertex := fun _ => False
 def FullSet : Set Vertex := fun _ => True
 
@@ -18,6 +23,9 @@ def boundary (G : Graph) (S : Set Vertex) : Set Edge :=
   fun e =>
     let (u, v) := e
     G.adj u v = true ∧ S u ∧ ¬ S v
+
+def frontier (G : Graph) (S : Set Vertex) : Set Edge :=
+  fun e => boundary G S e ∨ boundary G S (edgeSwap e)
 
 theorem boundary_empty (G : Graph) : ∀ e, ¬ boundary G EmptySet e := by
   intro e
@@ -61,6 +69,29 @@ theorem Q39_boundary_compl_swap (G : Graph) (hG : Symmetric G) (S : Set Vertex) 
       -- Expand boundary on the original edge.
       simp [boundary]
       exact And.intro h1 (And.intro h'.2.2 h'.2.1)
+
+-- Q39.S22-2k-two-strip-frontier-obstruction: undirected frontier is complement-invariant.
+theorem Q39_frontier_compl (G : Graph) (hG : Symmetric G) (S : Set Vertex) :
+    ∀ e, frontier G S e ↔ frontier G (fun x => ¬ S x) e := by
+  intro e
+  have hswap : boundary G (fun x => ¬ S x) e ↔ boundary G S (edgeSwap e) :=
+    Q39_boundary_compl_swap G hG S e
+  have hswap' : boundary G (fun x => ¬ S x) (edgeSwap e) ↔ boundary G S e := by
+    have h := Q39_boundary_compl_swap G hG S (edgeSwap e)
+    simpa [edgeSwap_involutive] using h
+  constructor
+  · intro h
+    cases h with
+    | inl hleft =>
+        exact Or.inr (hswap'.mpr hleft)
+    | inr hright =>
+        exact Or.inl (hswap.mpr hright)
+  · intro h
+    cases h with
+    | inl hleft =>
+        exact Or.inr (hswap.mp hleft)
+    | inr hright =>
+        exact Or.inl (hswap'.mp hright)
 
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by

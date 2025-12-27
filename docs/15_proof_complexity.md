@@ -393,6 +393,11 @@ Feasible interpolation: короткие доказательства clique-col
 С явной expander‑семьёй это даёт явное bounded‑occ семейство 3‑CNF (см. §16.87).
 Для Tseitin(Grid$_{n,n}$) (где число переменных $N=\Theta(n^2)$) в bounded‑depth Frege известны лишь разнесённые границы для polynomial‑size:
 depth $=\Omega(\log N/\log\log N)$ (Håstad’20, Cor. 6.6) и depth $=O(\log N)$ (upper из GIRS’19; см. §16.92+§16.115+§16.116+§16.120).
+**Q39 (frontier как неориентированный срез).**
+В `formal/PvNP/Work.lean` введён `frontier` как объединение ориентированных границ.
+Для симметрических графов доказана инвариантность `frontier` при замене $S$ на $\\neg S$.
+Это позволяет рассматривать фронтиры в двухполосном шаге без ориентационной двусмысленности.
+Лемма: `Q39_frontier_compl` (см. `formal/PvNP/Work.lean`).
 **Q43 (flat local‑EF(s), параметр‑сводка).**
 При явном $A\le 668$ из HR’22 получаем $n_0(A)=2$, поэтому в HR‑режиме
 условие $n\ge n_0(A)$ избыточно по сравнению с $n\ge 20 C n' \log n'$

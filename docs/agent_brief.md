@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S21-boundary-complement-duality
-- `Do-not-repeat (next 2 runs):` Q39.S21-boundary-complement-duality, Q44.S1-drop-legacy-checks
+- `LastStepID:` Q39.S22-2k-two-strip-frontier-obstruction
+- `Do-not-repeat (next 2 runs):` Q39.S22-2k-two-strip-frontier-obstruction, Q39.S21-boundary-complement-duality
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: следующий шаг прежний (Thm. 4.1 → Thm. 4.3).
-Q39: добавлена дуальность границы/комплемента для симм. графов; следующий шаг — two‑strip obstruction.
+Q39: введён неориентированный frontier и комплемент‑инвариантность; следующий шаг — two‑strip rank toy.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: добавлена дуальность границы/комплемент
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инвариант→Эквивалентность→Трейд‑офф→Инвариант→Двойственность
+Последние:Эквивалентность→Трейд‑офф→Инвариант→Двойственность→Инвариант
