@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048
-- `Do-not-repeat (next 2 runs):` Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048, Q39.S111-globalfixedpair-fixedorientation-contiguous-shift-alt24
+- `LastStepID:` Q39.S112-globalfixedpair-fixedorientation-contiguous-shift-alt25
+- `Do-not-repeat (next 2 runs):` Q39.S112-globalfixedpair-fixedorientation-contiguous-shift-alt25, Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: отношение |F|/log2^5|F| не монотонно (Nat.log2 скачок 2047→2048); дальше — lift порога по кускам/через сглаженный лог.
-Q39: alt24‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt25‑shift.
+Q39: alt25‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt26‑shift.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: alt24‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
