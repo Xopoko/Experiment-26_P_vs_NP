@@ -15,10 +15,11 @@
   - `NextStepID:` Q39.S119-globalfixedpair-fixedorientation-contiguous-shift-alt32
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Коммуникация/ранг (alternating unit frontier).
+  - `Lens:` Инвариант (rank-2 under contiguous shifts).
   - `Artifact:` Counterexample (fixed orientation).
   - `Update:` toy‑контрпример при $k=2$: очередной cyclic alt‑shift (alt31)
     при global fixed‑pair и fixed orientation всё ещё даёт две ненулевые разные проекции ⇒ ранг 2.
+    Добавлен явный `Decidable` для Q39_rank2_12, чтобы `decide` закрывал такие свидетельства.
     См. `formal/WIP/Work.lean`
     (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt31_vec1/vec2).
   - `Use:` следующий тест — следующий alt‑shift (alt32) для contiguous blocks.
