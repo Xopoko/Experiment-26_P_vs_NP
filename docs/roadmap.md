@@ -9,6 +9,13 @@ Active focus:
 - Q43 (flat local-EF(s)): evaluations + switching framework, constants and parameter checks.
 - Q39 (bounded-depth Frege): isolate the XOR/Gaussian-elimination step obstruction.
 
+Q43 reduction update (Q43.S202):
+- Unfolding P-queries replaces HR depth parameter `t` with `t'=(2s+1)t`.
+- If `s,t` are polylog(n) with log base 2, then `t'` stays polylog(n).
+- HR parameter checks reduce to `t'<=n/16` and `s<=n/32` under the same `n_eta` recursion.
+- Depends on §16.165 and §16.342 in `formal/Notes/TseitinLocalEF.lean`.
+- Lean anchor: `formal/WIP/Work.lean` (Q43_tPrime).
+
 Key dependencies:
 - HR'22 switching lemma framework and evaluation definitions.
 - Precise handling of parameters (A, c1, c2) and depth thresholds.

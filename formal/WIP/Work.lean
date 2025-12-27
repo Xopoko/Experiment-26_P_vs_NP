@@ -391,6 +391,20 @@ theorem Q43_tParam_le_log2_proofSize {α : Type} (proof : List (List α)) :
     Q43_tParam (Q43_lineMax proof) <= Nat.log2 (Q43_proofSize proof) := by
   simpa [Q43_tParam] using (Q43_log2_mono (Q43_lineMax_le_proofSize proof))
 
+-- Q43.S202-flat-eval-hr-compat-polylog: unfolded depth parameter t'=(2s+1)t.
+def Q43_tPrime (s t : Nat -> Nat) : Nat -> Nat :=
+  fun n => (2 * s n + 1) * t n
+
+theorem Q43_tPrime_ge (s t : Nat -> Nat) (n : Nat) :
+    t n <= Q43_tPrime s t n := by
+  have h : 1 <= 2 * s n + 1 := by
+    exact Nat.succ_le_succ (Nat.zero_le _)
+  calc
+    t n = 1 * t n := by
+      simp
+    _ <= (2 * s n + 1) * t n := by
+      exact Nat.mul_le_mul_right _ h
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

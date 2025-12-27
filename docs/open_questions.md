@@ -38,19 +38,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S201-flat-eval-tparam-polylogn
-  - `NextStepID:` Q43.S202-flat-eval-hr-compat-polylog
+  - `LastStepID:` Q43.S202-flat-eval-hr-compat-polylog
+  - `NextStepID:` Q43.S203-flat-eval-hr-param-check
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.341
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.342
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (quasi-poly -> polylog).
+  - `Lens:` Эквивалентность (polylog-$t$ -> HR-совместимость через $t'$).
   - `Artifact:` Reduction.
-  - `Update:` если $S(n)\\le n^{(\\log_2 n)^c}=2^{(\\log_2 n)^{c+1}}$, то
-    $t\\le\\log_2 S\\le(\\log_2 n)^{c+1}$, то есть $t=\\mathrm{polylog}(n)$
-    (логарифм базы 2; при $c\\ge 1$ это суперполиномиальный размер).
-    См. `formal/Notes/TseitinLocalEF.lean` §16.341.
-  - `Use:` режим quasi-poly size дает polylog-$t$ для Q43.
+  - `Update:` в flat local‑EF(s) unfolding $P$‑запросов заменяет глубину на
+    $t':=(2s+1)t$; при $s,t=\\mathrm{polylog}(n)$ (логарифм базы $2$) получаем
+    $t'=\\mathrm{polylog}(n)$ и HR‑проверки сводятся к $t'\\le n/16$, $s\\le n/32$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.342.
+  - `Use:` polylog‑режим устойчив при замене $t\\mapsto t'$.
   - `BarrierCheck:` A) Relativization: да (арифметика на Nat). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
