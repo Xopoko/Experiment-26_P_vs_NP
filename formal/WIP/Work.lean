@@ -1004,6 +1004,15 @@ theorem Q43_thm41_log2_threshold_c1_grid_mul_iff_pow5 {n : Nat} :
   · simpa [Nat.pow_succ, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using h
   · simpa [Nat.pow_succ, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using h
 
+-- Q43.S224-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-use:
+-- use the log2^5 criterion to recover the original threshold when n >= 2.
+theorem Q43_thm41_log2_threshold_c1_grid_of_pow5 {n : Nat} (hn : 2 <= n)
+    (hpow5 : Q43_thm41_log2_threshold_c1_grid_mul_pow5 n) :
+    Q43_thm41_log2_threshold_c1_grid n := by
+  have hmul : Q43_thm41_log2_threshold_c1_grid_mul n :=
+    (Q43_thm41_log2_threshold_c1_grid_mul_iff_pow5 (n:=n)).2 hpow5
+  exact (Q43_thm41_log2_threshold_c1_grid_iff_mul_asymptotic (n:=n) hn).mpr hmul
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

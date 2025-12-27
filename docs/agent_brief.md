@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S88-globalfixedpair-fixedorientation-contiguous-shift-alt
-- `Do-not-repeat (next 2 runs):` Q39.S88-globalfixedpair-fixedorientation-contiguous-shift-alt, Q43.S223-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion
+- `LastStepID:` Q43.S224-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-use
+- `Do-not-repeat (next 2 runs):` Q43.S224-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-use, Q39.S88-globalfixedpair-fixedorientation-contiguous-shift-alt
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: порог переписан как $c_1(\\log_2|F|)^5\\le |F|$; следующий шаг — применение к режиму $d$.
+Q43: критерий $c_1(\\log_2|F|)^5\\le |F|$ даёт исходный порог; следующий шаг — явный bound в режиме $d$.
 Q39: alt‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt2‑shift.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: alt‑shift для contiguous blocks при fixed‑orientation всё ещ
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (ещё один alt‑shift для contiguous blocks).
-- Q43 из `docs/open_questions.md` (применить критерий к режиму $d$).
+- Q43 из `docs/open_questions.md` (получить явную нижнюю границу на |F|).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: alt‑shift для contiguous blocks при fixed‑orientation всё ещ
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
