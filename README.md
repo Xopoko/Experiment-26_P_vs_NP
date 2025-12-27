@@ -42,6 +42,13 @@ What it does:
 - Verifies prompt stays **single-line**: `scripts/agent_prompt.txt`.
 - Runs `lake build PvNP` in `formal/` (fails if `lake` missing unless `REQUIRE_LEAN=0`).
 - Optional: `BUILD_NOTES=1` to build Notes, `BUILD_WIP=1` to build WIP, `CHECK_AXIOMS=1` for core axioms audit.
+- Optional: `RUN_MODE=docs|wip|core` to set sane defaults for verification flags.
+
+Artifact helper:
+
+```bash
+python3 scripts/register_artifact.py --step-id Q39.S27-foo --type Proof --lean-target formal/WIP/Work.lean --info-gain 1
+```
 
 Optional toy checks:
 

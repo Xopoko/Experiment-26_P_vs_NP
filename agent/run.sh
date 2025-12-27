@@ -8,6 +8,9 @@ RUN_ID="${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)_pid$$}"
 LOG_FILE="${LOG_FILE:-$LOG_DIR/$RUN_ID.log}"
 LOCK_FILE="${LOCK_FILE:-$LOG_DIR/.agent.lock}"
 REQUIRE_CLEAN="${REQUIRE_CLEAN:-}"
+RUN_MODE="${RUN_MODE:-core}"
+
+export RUN_MODE
 
 if [[ ! -f "$PROMPT_FILE" ]]; then
   echo "error: prompt file not found: $PROMPT_FILE" >&2
@@ -72,6 +75,7 @@ cmd=("$ROOT/agent/codex-run.sh" --infinite -C "$ROOT" --file "$PROMPT_FILE" "$@"
   echo "---- $(date -Is) ----"
   echo "run_id: $RUN_ID"
   echo "require_clean: ${REQUIRE_CLEAN:-0}"
+  echo "run_mode: $RUN_MODE"
   echo "lock: $LOCK_FILE"
   printf 'cmd:'
   printf ' %q' "${cmd[@]}"

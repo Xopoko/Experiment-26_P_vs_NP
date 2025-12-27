@@ -8,10 +8,39 @@ if [ -d formal ] && [ -f formal/lakefile.lean ]; then
     echo "SKIP: FORMAL_SKIP=1"
     exit 0
   fi
-  REQUIRE_LEAN="${REQUIRE_LEAN:-1}"
-  BUILD_NOTES="${BUILD_NOTES:-0}"
-  BUILD_WIP="${BUILD_WIP:-0}"
-  CHECK_AXIOMS="${CHECK_AXIOMS:-1}"
+  set_default() {
+    local name="$1"
+    local val="$2"
+    if [ -z "${!name-}" ]; then
+      printf -v "$name" '%s' "$val"
+    fi
+  }
+
+  RUN_MODE="${RUN_MODE:-}"
+  case "$RUN_MODE" in
+    docs)
+      set_default REQUIRE_LEAN 0
+      set_default BUILD_NOTES 0
+      set_default BUILD_WIP 0
+      set_default CHECK_AXIOMS 0
+      ;;
+    wip)
+      set_default REQUIRE_LEAN 1
+      set_default BUILD_NOTES 0
+      set_default BUILD_WIP 1
+      set_default CHECK_AXIOMS 0
+      ;;
+    core|"")
+      set_default REQUIRE_LEAN 1
+      set_default BUILD_NOTES 0
+      set_default BUILD_WIP 0
+      set_default CHECK_AXIOMS 1
+      ;;
+    *)
+      echo "FAIL: unknown RUN_MODE '$RUN_MODE' (expected docs|wip|core)" >&2
+      exit 2
+      ;;
+  esac
 
   if command -v lake >/dev/null 2>&1; then
     scan_for_pattern() {

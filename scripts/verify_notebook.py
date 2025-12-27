@@ -202,6 +202,24 @@ def _verify_open_questions_structure(*, path: Path) -> None:
         if last_step is not None and last_step.strip():
             _parse_step_id(last_step, context=f"{path}: {qid}: LastStepID")
 
+        barrier_required = _extract_backticked_meta(item, key="BarrierCheckRequired")
+        if barrier_required and barrier_required.strip().lower() in {"yes", "true", "1"}:
+            barrier = _extract_backticked_meta(item, key="BarrierCheck")
+            if barrier is None:
+                raise AssertionError(f"{path}: {qid}: missing `BarrierCheck:`")
+
+            rel = _extract_backticked_meta(item, key="A) Relativization check")
+            if rel is None or not rel.strip():
+                raise AssertionError(f"{path}: {qid}: missing `A) Relativization check:`")
+
+            nat = _extract_backticked_meta(item, key="B) Natural proofs check")
+            if nat is None or not nat.strip():
+                raise AssertionError(f"{path}: {qid}: missing `B) Natural proofs check:`")
+
+            alg = _extract_backticked_meta(item, key="C) Algebrization check")
+            if alg is None or not alg.strip():
+                raise AssertionError(f"{path}: {qid}: missing `C) Algebrization check:`")
+
     print(f"OK: verified open questions structure in {path}")
 
 

@@ -95,6 +95,7 @@ graph TD
 - `PROMPT_FILE`, `LOG_DIR`, `RUN_ID`, `LOG_FILE`
 - `REQUIRE_CLEAN=1` to require a clean git worktree
 - `CODEX_TTY` to control colored output
+- `RUN_MODE=docs|wip|core` to tune verification defaults
 
 ## Verification pipeline
 
@@ -121,6 +122,7 @@ Lean verification knobs (defaults shown):
 - `BUILD_WIP=0` — build `WIP` only when needed.
 - `CHECK_AXIOMS=1` — run the axioms audit for core theorems.
 Core hygiene: `verify_all.sh` fails if `sorry`/`admit`/`axiom` appears in `formal/PvNP/Core/`.
+`RUN_MODE=docs|wip|core` sets sensible defaults for the flags above.
 
 ## Research artifact flow
 
@@ -150,7 +152,7 @@ Core inputs:
 
 Core outputs per run:
 - One artifact (Proof / Counterexample / Exact citation / Toy / Reduction / Barrier).
-- Updated `docs/open_questions.md`, `docs/agent_brief.md`, and `docs/artifacts.tsv`.
+- Updated `docs/open_questions.md`, `docs/agent_brief.md`, and `docs/artifacts.tsv` (see `scripts/register_artifact.py`).
 - Passing `scripts/verify_all.sh`.
 - One commit with `StepID` in the message.
 
