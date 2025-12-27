@@ -1142,6 +1142,15 @@ theorem Q43_log2_le_log2_grid_pow {n N C : Nat} (hN : Q43_polyN n N C) :
     Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) := by
   exact Q43_log2_mono hN
 
+-- Q43.S229-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m:
+-- polynomial regime for M and t = log2 M in terms of |F|.
+def Q43_polyM (n M K : Nat) : Prop :=
+  M <= (Q43_grid_size n) ^ K
+
+theorem Q43_tParam_le_log2_grid_pow {n M K : Nat} (hM : Q43_polyM n M K) :
+    Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) := by
+  simpa [Q43_tParam] using (Q43_log2_mono hM)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

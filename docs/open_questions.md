@@ -36,18 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S228-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly
-  - `NextStepID:` Q43.S229-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m
+  - `LastStepID:` Q43.S229-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m
+  - `NextStepID:` Q43.S230-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m-link
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_log2_le_log2_grid_pow)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_tParam_le_log2_grid_pow)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` зафиксирован полиномиальный режим $N\\le |F|^C$ как отдельная гипотеза
-    и формально проведён переход $\\log_2 N\\le \\log_2(|F|^C)$ по монотонности $\\log_2$.
-    См. `formal/WIP/Work.lean` (Q43_log2_le_log2_grid_pow).
-  - `Use:` следующий шаг — связать этот полиномиальный режим с параметром $M$ и $t=\\log_2 M$.
+  - `Update:` зафиксирован полиномиальный режим $M\\le |F|^K$ и формально показано,
+    что $t=\\log_2 M\\le \\log_2(|F|^K)$ по монотонности $\\log_2$.
+    См. `formal/WIP/Work.lean` (Q43_tParam_le_log2_grid_pow).
+  - `Use:` следующий шаг — связать $N\\le |F|^C$ и $M\\le |F|^K$ с порогом режима $d$.
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
