@@ -4,3 +4,4 @@ Q39.S25-2k-two-strip-interval-rank-check	Proof	formal/WIP/Work.lean	PENDING	fron
 Q39.S26-2k-two-strip-frontier-adj	Proof	formal/WIP/Work.lean	PENDING	frontier edges imply adjacency in symmetric graphs
 Q43.S138-logn-nonimpact-check	Exact citation	formal/WIP/Work.lean	PENDING	HR'22: Thm 4.3 uses Thm 4.1 only for large M
 Q39.S27-2k-two-strip-interval-rank-bound	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	two-strip row-interval rank counterexample
+Q39.S28-2k-two-strip-linked-intervals	Counterexample	formal/WIP/Work.lean	PENDING	linked two-strip row-intervals still give rank 2 (see formal/Notes/TseitinQ39.lean §16.169)
