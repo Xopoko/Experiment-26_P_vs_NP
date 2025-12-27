@@ -36,18 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S168-explicit-c-chernoff
-  - `NextStepID:` Q43.S169-propagate-explicit-a0
+  - `LastStepID:` Q43.S169-propagate-explicit-a0
+  - `NextStepID:` Q43.S170-explicit-c1c2-thm41
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.308
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.309
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд‑офф (явный Chernoff‑$C$).
+  - `Lens:` Эквивалентность (явный $A_0$).
   - `Artifact:` Reduction.
-  - `Update:` получен явный $C$ для Lemma 5.4 через Chernoff для отрицательной ассоциации
-    (exp = $e^x$, $\\log=\\ln$): достаточно $C\\ge 120000$ при $\\delta=0.01$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.308.
-  - `Use:` теперь $A_0=78C$ численно; следующий шаг — протащить это в Lemma 4.2/Thm. 4.1.
+  - `Update:` явный $A_0=78C$ получен из $C\\ge 120000$; фактор $(A_0\\log n'/\\Delta)^{a+b}$
+    в Proof Lemma 4.2 становится численно явным, значит $c_1,c_2$ в Thm. 4.1 выписываемы.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.309.
+  - `Use:` неявные константы сняты; следующий шаг — выписать явные $c_1,c_2$ в Thm. 4.1.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
