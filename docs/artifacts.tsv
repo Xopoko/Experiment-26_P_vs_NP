@@ -164,3 +164,4 @@ Q43.S243-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criteri
 Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048	Counterexample	formal/WIP/Work.lean	PENDING	Nat.log2 floor breaks ratio monotonicity (2047->2048)
 Q39.S112-globalfixedpair-fixedorientation-contiguous-shift-alt25	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt25-shift still give rank 2
 Q43.S245-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-log2-jump	Proof	formal/WIP/Work.lean	PENDING	monotonicity of ratio under equal log2 |F|
+Q39.S113-globalfixedpair-fixedorientation-contiguous-shift-alt26	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt26-shift still give rank 2
