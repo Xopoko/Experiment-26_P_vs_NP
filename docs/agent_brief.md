@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S48-2k-two-strip-chain-strip-support-global-synchronous
-- `Do-not-repeat (next 2 runs):` Q43.S191-flat-eval-construction-pivot, Q39.S48-2k-two-strip-chain-strip-support-global-synchronous
+- `LastStepID:` Q39.S49-2k-two-strip-chain-strip-support-rowcol-lockstep
+- `Do-not-repeat (next 2 runs):` Q43.S191-flat-eval-construction-pivot, Q39.S49-2k-two-strip-chain-strip-support-rowcol-lockstep
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: pivot на размер развёрнутых формул; следующий шаг — ограничить |φ_i| или обойти развёртывание.
-Q39: синхронный глобальный шаг всё равно даёт ранг 2; следующий шаг — row/column lock‑step.
+Q39: row/column lock‑step всё равно даёт ранг 2; следующий шаг — континуальный прямоугольник.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: синхронный глобальный шаг всё равно даёт
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (проверить row/column lock‑step для XOR‑шага).
+- Q39 из `docs/open_questions.md` (проверить континуальный прямоугольник для XOR‑шага).
 - Q43 из `docs/open_questions.md` (ограничить размер аксиом |φ_i| или обойти развёртывание).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: синхронный глобальный шаг всё равно даёт
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инвариант→Эквивалентность→Коммуникация/ранг→Трейд‑офф→Инвариант
+Последние:Эквивалентность→Коммуникация/ранг→Трейд‑офф→Инвариант→Коммуникация/ранг
