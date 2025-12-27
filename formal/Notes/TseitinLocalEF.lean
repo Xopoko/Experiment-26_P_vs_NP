@@ -4640,6 +4640,32 @@ import Paperproof
 -/
 
 /-!
+### 16.330. Исследовательский шаг (reduction): exit log‑base audit в summary
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S190-exp2-quote-scan-logbases-summary-exit):`
+  Postaudit завершён: оставшиеся summary‑оценки используют либо явный $\\log_2$,
+  либо формы $O(\\log n)$/$O(N\\log N)$, где смена базы меняет только константу.
+  При последующих правках любые экспоненциальные формы будут записываться как
+  $2^{(\\cdot)}$ или $e^{(\\cdot)}$.
+- `Reduction:` лог‑аудит завершён; Q43 возвращается к содержательному вопросу
+  про cost‑$t$ evaluations в flat local‑EF(s).
+- `Exact citation:`
+  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Статус:` reduction (audit exit).
+- `StepID:` Q43.S190-exp2-quote-scan-logbases-summary-exit.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` начать содержательный шаг по Q43: либо схема построения cost‑$t$
+  evaluations для каждой строки, либо точная точка поломки (nesting/глобальная поддержка).
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
