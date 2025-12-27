@@ -71,6 +71,7 @@ Q39.S106-globalfixedpair-fixedorientation-contiguous-shift-alt19	Counterexample	
 Q39.S107-globalfixedpair-fixedorientation-contiguous-shift-alt20	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt20-shift still give rank 2
 Q39.S108-globalfixedpair-fixedorientation-contiguous-shift-alt21	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt21-shift still give rank 2
 Q39.S109-globalfixedpair-fixedorientation-contiguous-shift-alt22	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt22-shift still give rank 2
+Q39.S110-globalfixedpair-fixedorientation-contiguous-shift-alt23	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt23-shift still give rank 2
 Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
 Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
 Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold
