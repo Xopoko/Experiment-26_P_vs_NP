@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S43-2k-two-strip-chain-dyadic-carry-microsteps
-- `Do-not-repeat (next 2 runs):` Q39.S42-2k-two-strip-chain-dyadic-prefix-stepwise, Q39.S43-2k-two-strip-chain-dyadic-carry-microsteps
+- `LastStepID:` Q39.S44-2k-two-strip-chain-dyadic-microsteps-distinct-support
+- `Do-not-repeat (next 2 runs):` Q39.S43-2k-two-strip-chain-dyadic-carry-microsteps, Q39.S44-2k-two-strip-chain-dyadic-microsteps-distinct-support
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: явный $A_0$ получен; следующий шаг — выписать явные $c_1,c_2$ в Thm. 4.1.
-Q39: dyadic-carry микрошаги всё равно дают ранг 2; следующий шаг — требовать distinct support на микрошаге.
+Q39: distinct-support микрошаги всё равно дают ранг 2; следующий шаг — требовать distinct support на полосах.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: dyadic-carry микрошаги всё равно дают ранг 2; сл
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Трейд‑офф→Эквивалентность→Инвариант→Коммуникация/ранг→Инвариант
+Последние:Эквивалентность→Инвариант→Коммуникация/ранг→Инвариант→Трейд‑офф
