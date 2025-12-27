@@ -37,24 +37,21 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S153-kappa-constant-derivation
-  - `NextStepID:` Q43.S154-lemma42-constants-extract
+  - `LastStepID:` Q43.S154-lemma42-constants-extract
+  - `NextStepID:` Q43.S155-lemma69-constant-extract
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.293
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.294
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (неявные константы).
-  - `Artifact:` Barrier.
-  - `Update:` попытка вывести явный коэффициент $\\kappa$ упирается в Proof of Lemma 4.2:
-    там фигурируют “absolute constant $A$” и “appropriate constants $A_0,A_1,A_2$” без чисел,
-    а эти константы входят экспоненциально (через $A_1^s, A_2^s$), поэтому прямо
-    определяют допустимый коэффициент в $O(\\log n/\\log\\log n)$.
-    Без явных $A_0,A_1,A_2$ нельзя строго подтвердить режим $\\kappa<1/5$.
-    `exp` трактуется как $e^x$; база $2^x$ лишь уменьшает пороги.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.293 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1972–1974, 1996`.
-  - `Use:` локальный барьер: для явного $\\kappa$ нужно извлечь численные $A_0,A_1,A_2$;
-    следующий шаг — попробовать это из Lemma 6.9/6.8.
+  - `Lens:` Эквивалентность (явные константы Lemma 6.8/6.9).
+  - `Artifact:` Exact citation.
+  - `Update:` Lemma 6.8 даёт явные неравенства $b\\le 3a$ и $s/64\\le a$,
+    а Lemma 6.9 лишь утверждает существование константы $A>0$ в оценке
+    числа дополнительных бит (число $A$ не фиксируется).
+    См. `formal/Notes/TseitinLocalEF.lean` §16.294 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1944, 1960`.
+  - `Use:` явный коэффициент $1/64$ извлечён, но $A$ остаётся неявным;
+    следующий шаг — попытаться оценить $A$ по Proof of Lemma 6.9.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
