@@ -38,18 +38,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S212-flat-eval-hr-depth-range-constants-a0
-  - `NextStepID:` Q43.S213-flat-eval-hr-depth-range-constants-a0-extract
+  - `LastStepID:` Q43.S213-flat-eval-hr-depth-range-constants-a0-extract
+  - `NextStepID:` Q43.S214-flat-eval-hr-depth-range-constants-a0-explicit-c
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.352
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_A0_from_C)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` лог‑фактор $A_0\\log n'$ агрегируется с $\\Delta^a\\Delta^b$ в
-    $(A_0\\log n')\\,\\Delta^{a+b}$; формально доказано через $\\Delta^{a+b}=\\Delta^a\\Delta^b$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.352.
-  - `Use:` следующий шаг — извлечь явное значение $A_0$ из Lemma 5.5/4.2.
+  - `Update:` определён `Q43_A0_from_C C := 78*C` и
+    лемма `Q43_A0_from_C_bound` специализирует агрегацию $A_0\\log n'$ для этого выбора.
+    См. `formal/WIP/Work.lean`.
+  - `Use:` следующий шаг — сделать $C$ явным (Chernoff) и получить численный $A_0$.
   - `BarrierCheck:` A) Relativization: да (арифметика параметров). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S72-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating
-- `Do-not-repeat (next 2 runs):` Q43.S212-flat-eval-hr-depth-range-constants-a0, Q39.S72-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating
+- `LastStepID:` Q43.S213-flat-eval-hr-depth-range-constants-a0-extract
+- `Do-not-repeat (next 2 runs):` Q43.S213-flat-eval-hr-depth-range-constants-a0-extract, Q43.S212-flat-eval-hr-depth-range-constants-a0
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: $A_0\\log n'\\,\\Delta^{a+b}$ агрегирован; следующий шаг — явное $A_0$ из Lemma 5.5/4.2.
+Q43: $A_0$ зафиксирован как $78C$; следующий шаг — явный $C$ из Lemma 5.5 (Chernoff).
 Q39: alternating unit‑frontier не снижает ранг; следующий шаг — global order при чередовании.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: alternating unit‑frontier не снижает ранг; следующи�
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (проверить global order при чередовании unit‑frontier).
-- Q43 из `docs/open_questions.md` (вытащить явный $A_0$).
+- Q43 из `docs/open_questions.md` (вытащить явный $C$ для $A_0=78C$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: alternating unit‑frontier не снижает ранг; следующи�
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Коммуникация/ранг→Эквивалентность→Эквивалентность→Коммуникация/ранг
+Последние:Коммуникация/ранг→Эквивалентность→Эквивалентность→Коммуникация/ранг→Эквивалентность

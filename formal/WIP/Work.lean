@@ -640,6 +640,16 @@ theorem Q43_Lemma69_A0_bound {a b A0 logn delta : Nat} :
     (A0 * logn) * (delta ^ a) * (delta ^ b) = (A0 * logn) * (delta ^ (a + b)) := by
   simpa [Nat.pow_add, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm]
 
+-- Q43.S213-flat-eval-hr-depth-range-constants-a0-extract:
+-- explicit A0 from Lemma 5.5 (A0 := 78*C).
+def Q43_A0_from_C (C : Nat) : Nat := 78 * C
+
+theorem Q43_A0_from_C_bound {a b C logn delta : Nat} :
+    (Q43_A0_from_C C * logn) * (delta ^ a) * (delta ^ b)
+      = (Q43_A0_from_C C * logn) * (delta ^ (a + b)) := by
+  simpa [Q43_A0_from_C] using
+    (Q43_Lemma69_A0_bound (a:=a) (b:=b) (A0:=78 * C) (logn:=logn) (delta:=delta))
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
