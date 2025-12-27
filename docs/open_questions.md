@@ -36,19 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S225-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound
-  - `NextStepID:` Q43.S226-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply
+  - `LastStepID:` Q43.S226-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply
+  - `NextStepID:` Q43.S227-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_bound)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_regime_d_ok_of_pow5)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
   - `Update:` критерий $c_1(\\log_2|F|)^5\\le |F|$ (для $|F|=n^2$)
-    даёт явную нижнюю границу $|F|\\ge c_1$ при $n\\ge 2$.
-    См. `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_bound).
-  - `Use:` следующий шаг — применить этот bound в режиме $d$
-    и связать его с параметрами конструкции.
+    теперь упакован в режим‑$d$ пакет: порог $\\log_2|F|$ и явный bound $|F|\\ge c_1$.
+    См. `formal/WIP/Work.lean` (Q43_thm41_regime_d_ok_of_pow5).
+  - `Use:` следующий шаг — привязать этот пакет к параметрам режима $d$ (N,M).
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
