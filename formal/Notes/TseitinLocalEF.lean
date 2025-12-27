@@ -4589,6 +4589,30 @@ import Paperproof
 -/
 
 /-!
+### 16.328. Исследовательский шаг (reduction): log_2 в summary‑audit (basic inclusions)
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S188-exp2-quote-scan-logbases-summary-closeout):`
+  В summary‑разделе `docs/03_basic_inclusions.md` логарифмы для счётчиков и
+  Savitch‑шаблона приведены к $\\log_2$ (log² → log_2²), согласуя базу с двоичным счётом.
+- `Reduction:` смена базы $\\log\\to\\log_2$ меняет только константы и не влияет
+  на полиномиальность памяти.
+- `Exact citation:`
+  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Статус:` reduction (нормализация базы в summary).
+- `StepID:` Q43.S188-exp2-quote-scan-logbases-summary-closeout.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` зафиксировать, что оставшиеся $\\log$ в summary несущественны
+  (или отметить исключения).
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

@@ -36,18 +36,17 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S187-exp2-quote-scan-logbases-summary-audit
-  - `NextStepID:` Q43.S188-exp2-quote-scan-logbases-summary-closeout
+  - `LastStepID:` Q43.S188-exp2-quote-scan-logbases-summary-closeout
+  - `NextStepID:` Q43.S189-exp2-quote-scan-logbases-summary-postaudit
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.327
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.328
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (log‑base нормализация).
+  - `Lens:` Сжатие/канонизация (log‑base нормализация).
   - `Artifact:` Reduction.
-  - `Update:` в summary‑разделе `docs/09_circuit_complexity.md` логарифмы согласованы как $\\ln$
-    в нижней оценке Razborov’85, чтобы не смешивать $\\ln$ и $\\log$.
-    См. сводку `formal/Notes/TseitinLocalEF.lean` §16.327.
-  - `Use:` завершить аудит summary‑логарифмов и зафиксировать, что оставшиеся базы несущественны.
+  - `Update:` в summary‑разделе `docs/03_basic_inclusions.md` логарифмы для счётчиков и
+    Savitch‑шаблона приведены к $\\log_2$ (log² → log_2²); см. `formal/Notes/TseitinLocalEF.lean` §16.328.
+  - `Use:` зафиксировать, что оставшиеся $\\log$ в summary несущественны (или отметить исключения).
   - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
