@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S113-globalfixedpair-fixedorientation-contiguous-shift-alt26
-- `Do-not-repeat (next 2 runs):` Q39.S113-globalfixedpair-fixedorientation-contiguous-shift-alt26, Q43.S245-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-log2-jump
+- `LastStepID:` Q39.S114-globalfixedpair-fixedorientation-contiguous-shift-alt27
+- `Do-not-repeat (next 2 runs):` Q39.S114-globalfixedpair-fixedorientation-contiguous-shift-alt27, Q43.S245-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-log2-jump
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: монотонность отношения доказана при фиксированном log2|F|; дальше — описать под‑полки log2 и поднять порог от n0.
-Q39: alt26‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt27‑shift.
+Q39: alt27‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt28‑shift.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: alt26‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Коммуникация/ранг→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
