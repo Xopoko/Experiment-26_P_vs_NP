@@ -4491,6 +4491,30 @@ import Paperproof
 -/
 
 /-!
+### 16.324. Исследовательский шаг (reduction): log_2 в summary вне §15 (switching lemma)
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S184-exp2-quote-scan-logbases-summary-remaining):`
+  В summary‑разделе `docs/11_switching_lemma_ac0.md` логарифмы в выводе
+  $S\\ge 2^{\\Omega(n^{1/(k-1)})}$ приведены к $\\log_2 S$,
+  чтобы формулы с $2^{(\\cdot)}$ согласовывались с $\\exp_2$‑конвенцией.
+- `Reduction:` замена $\\log\\to\\log_2$ меняет константу в big‑O и не влияет на
+  асимптотику порогов вида $O(\\log n)$ и $2^{\\Omega((\\log n)^k)}$.
+- `Exact citation:`
+  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Статус:` reduction (нормализация базы в summary).
+- `StepID:` Q43.S184-exp2-quote-scan-logbases-summary-remaining.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` завершить sweep по оставшимся summary‑файлам вне §15/§11.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

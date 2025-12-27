@@ -36,18 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S183-exp2-quote-scan-logbases-summary-sweep
-  - `NextStepID:` Q43.S184-exp2-quote-scan-logbases-summary-remaining
+  - `LastStepID:` Q43.S184-exp2-quote-scan-logbases-summary-remaining
+  - `NextStepID:` Q43.S185-exp2-quote-scan-logbases-summary-final
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.323
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.324
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Сжатие/канонизация (log‑base нормализация).
+  - `Lens:` Эквивалентность (log‑base нормализация).
   - `Artifact:` Reduction.
-  - `Update:` в summary‑блоках `docs/15_proof_complexity.md` лог‑база приведена к $\\log_2$
-    (в том числе в пороге $\\Omega(\\log_2 N/\\log_2\\log_2 N)$ и HR‑проверках).
-    См. сводку `formal/Notes/TseitinLocalEF.lean` §16.323.
-  - `Use:` просканировать remaining summary‑участки вне §15 и привести $\\log$ к $\\log_2$/$\\ln$ при необходимости.
+  - `Update:` в summary‑разделе `docs/11_switching_lemma_ac0.md` логарифмы в выводе
+    $S\\ge 2^{\\Omega(n^{1/(k-1)})}$ приведены к $\\log_2 S$ для согласования с $2^{(\\cdot)}$.
+    См. сводку `formal/Notes/TseitinLocalEF.lean` §16.324.
+  - `Use:` завершить sweep по оставшимся summary‑файлам вне §15/§11 и привести $\\log$ к $\\log_2$/$\\ln$ при необходимости.
   - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
