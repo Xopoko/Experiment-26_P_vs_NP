@@ -973,6 +973,19 @@ theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt31 :
       Q39_globalfixedpair_fixedorientation_contiguous_shift_alt31_vec2 := by
   decide
 
+-- Q39.S119-globalfixedpair-fixedorientation-contiguous-shift-alt32:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt32_vec1 : BitVec12 :=
+  [false, true, true, true, false, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt32_vec2 : BitVec12 :=
+  [false, false, true, true, true, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt32 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt32_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt32_vec2 := by
+  decide
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by
@@ -1212,14 +1225,14 @@ theorem Q43_add_16_mul (s : Nat) : s + 16 * s = 17 * s := by
       simpa using (Nat.add_mul 1 16 s).symm
     _ = 17 * s := by
       have h : (1 + 16) = 17 := by decide
-      simpa [h]
+      simp [h]
 
 theorem Q43_add_16_mul_add (s : Nat) : s + 16 * s + s = 18 * s := by
   calc
     s + 16 * s + s = (s + 16 * s) + s := by
       simp [Nat.add_assoc]
     _ = 17 * s + s := by
-      simpa [Q43_add_16_mul]
+      simp [Q43_add_16_mul]
     _ = 18 * s := by
       have h : (17 + 1) = 18 := by decide
       simpa [h] using (Nat.add_mul 17 1 s).symm
@@ -1266,7 +1279,7 @@ theorem Q43_Lemma69_A12_bound {s t A1 A2 : Nat} (ht : t <= s) :
 -- Q43.S212-flat-eval-hr-depth-range-constants-a0: explicit A0 wrapper for log term.
 theorem Q43_Lemma69_A0_bound {a b A0 logn delta : Nat} :
     (A0 * logn) * (delta ^ a) * (delta ^ b) = (A0 * logn) * (delta ^ (a + b)) := by
-  simpa [Nat.pow_add, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm]
+  simp [Nat.pow_add, Nat.mul_assoc]
 
 -- Q43.S213-flat-eval-hr-depth-range-constants-a0-extract:
 -- explicit A0 from Lemma 5.5 (A0 := 78*C).
@@ -1531,7 +1544,7 @@ theorem Q43_log2_pow_le_mul_succ (a C : Nat) :
   · cases C with
     | zero =>
         have hlog1 : Nat.log2 1 = 0 := by decide
-        simpa [ha, hlog1]
+        simp [ha, hlog1]
     | succ C =>
         simp [ha, Nat.log2_zero]
   · have hlt : a < 2 ^ (Nat.log2 a + 1) :=
@@ -1805,20 +1818,20 @@ theorem Q43_log2_grid_size_eq_double_of_range {k n : Nat} (hk : 2 <= k)
     have hexp : 2 * (k - 2) + 5 = 2 * k + 1 := by
       calc
         2 * (k - 2) + 5 = (2 * k - 4) + 5 := by
-          simp [Nat.mul_sub_left_distrib, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+          simp [Nat.mul_sub_left_distrib, Nat.mul_comm]
         _ = (2 * k - 4) + 4 + 1 := by simp [Nat.add_assoc]
         _ = 2 * k + 1 := by
           have hsub : (2 * k - 4) + 4 = 2 * k := Nat.sub_add_cancel hle
-          simpa [hsub, Nat.add_assoc]
+          simp [hsub]
     have hpow32 : 2 ^ (2 * k + 1) = 32 * t * t := by
       calc
-        2 ^ (2 * k + 1) = 2 ^ (2 * (k - 2) + 5) := by simpa [hexp]
+        2 ^ (2 * k + 1) = 2 ^ (2 * (k - 2) + 5) := by simp [hexp]
         _ = 2 ^ (2 * (k - 2)) * 2 ^ 5 := by
-          simpa [Nat.pow_add]
+          simp [Nat.pow_add]
         _ = 32 * t * t := by
-          simp [t, hpowt, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+          simp [t, hpowt, Nat.mul_comm, Nat.mul_assoc]
     have hpow5 : (5 * t) ^ 2 = 25 * t * t := by
-      simp [Nat.pow_two, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+      simp [Nat.pow_two, Nat.mul_comm, Nat.mul_left_comm]
     simpa [t, hpow5, hpow32] using h2
   have hupper : Q43_grid_size n < 2 ^ (2 * k + 1) := by
     have hpow_hi' : Q43_grid_size n <= (5 * 2 ^ (k - 2)) ^ 2 := by
@@ -1838,7 +1851,7 @@ theorem Q43_grid_ratio_mono_on_plateau {k n m : Nat} (hk : 2 <= k)
   have hlogm : Nat.log2 (Q43_grid_size m) = 2 * k :=
     Q43_log2_grid_size_eq_double_of_range (k:=k) (n:=m) hk hm hm_hi
   have hlog : Nat.log2 (Q43_grid_size n) = Nat.log2 (Q43_grid_size m) := by
-    simpa [hlogn, hlogm]
+    simp [hlogn, hlogm]
   exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
 
 -- Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
@@ -1873,15 +1886,15 @@ theorem Q43_log2_grid_size_eq_double_succ_of_range {k n : Nat} (hk : 2 <= k)
   have hpow8 : 2 ^ (2 * k + 1) = 8 * t * t := by
     calc
       2 ^ (2 * k + 1) = 2 ^ (2 * (k - 1) + 3) := by
-        simpa [hexp]
+        simp [hexp]
       _ = 2 ^ (2 * (k - 1)) * 2 ^ 3 := by
         simp [Nat.pow_add]
       _ = (t * t) * 8 := by
         simp [hpowt]
       _ = 8 * t * t := by
-        simp [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+        simp [Nat.mul_comm, Nat.mul_assoc]
   have hpow3 : (3 * t) ^ 2 = 9 * t * t := by
-    simp [Nat.pow_two, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+    simp [Nat.pow_two, Nat.mul_comm, Nat.mul_left_comm]
   have hcoeff : 8 <= 9 := by decide
   have hmul : 8 * t * t <= 9 * t * t := by
     have hmul' : 8 * (t * t) <= 9 * (t * t) := Nat.mul_le_mul_right _ hcoeff
@@ -1909,9 +1922,9 @@ theorem Q43_log2_grid_size_eq_double_succ_of_range {k n : Nat} (hk : 2 <= k)
   have hexp_u : (k + 1) * 2 = 2 * k + 2 := by
     calc
       (k + 1) * 2 = k * 2 + 1 * 2 := by
-        simpa [Nat.add_mul]
+        simp [Nat.add_mul]
       _ = 2 * k + 2 := by
-        simp [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+        simp [Nat.mul_comm]
   have hu2 : u ^ 2 = 2 ^ (2 * k + 2) := by
     have hpow' : 2 ^ ((k + 1) * 2) = (2 ^ (k + 1)) ^ 2 := Nat.pow_mul 2 (k + 1) 2
     calc
@@ -1938,7 +1951,7 @@ theorem Q43_grid_ratio_mono_on_plateau_upper {k n m : Nat} (hk : 2 <= k)
   have hlogm : Nat.log2 (Q43_grid_size m) = 2 * k + 1 :=
     Q43_log2_grid_size_eq_double_succ_of_range (k:=k) (n:=m) hk hm hm_hi
   have hlog : Nat.log2 (Q43_grid_size n) = Nat.log2 (Q43_grid_size m) := by
-    simpa [hlogn, hlogm]
+    simp [hlogn, hlogm]
   exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
 
 -- Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
