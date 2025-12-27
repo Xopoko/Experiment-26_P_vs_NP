@@ -130,6 +130,25 @@ theorem Q39_frontier_cross (G : Graph) (S : Set Vertex) (e : Edge) :
     | inr h2 =>
         exact Or.inr h2.2
 
+-- Q39.S26-2k-two-strip-frontier-adj: frontier edges are real edges in symmetric graphs.
+theorem Q39_frontier_adj (G : Graph) (hG : Symmetric G) (S : Set Vertex) (e : Edge) :
+    frontier G S e → G.adj e.1 e.2 = true := by
+  intro h
+  cases e with
+  | mk u v =>
+    have h' : boundary G S (u, v) ∨ boundary G S (v, u) := by
+      simpa [frontier, edgeSwap] using h
+    cases h' with
+    | inl h1 =>
+        exact h1.1
+    | inr h2 =>
+        have huv : G.adj v u = true := h2.1
+        calc
+          G.adj u v = G.adj v u := by
+            symm
+            exact hG u v
+          _ = true := huv
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

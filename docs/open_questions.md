@@ -10,23 +10,23 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S25-2k-two-strip-interval-rank-check (см. `formal/WIP/Work.lean`)
-  - `NextStepID:` Q39.S26-2k-two-strip-interval-rank-bound
+  - `LastStepID:` Q39.S26-2k-two-strip-frontier-adj (см. `formal/WIP/Work.lean`)
+  - `NextStepID:` Q39.S27-2k-two-strip-interval-rank-bound
   - `LeanTarget:` formal/WIP/Work.lean
   - `Lens:` Коммуникация/ранг (две полосы).
-  - `Artifact:` Proof (frontier cut separation).
-  - `Update:` proved that any frontier edge crosses the cut: either `(S u ∧ ¬ S v)` or `(S v ∧ ¬ S u)`.
-    Lemma `Q39_frontier_cross` drops adjacency and isolates the cut predicate.
-    This is the basic predicate used when setting up interval rank arguments.
-    Lean: `formal/WIP/Work.lean`.
-  - `Use:` выделяет предикат “ребро пересекает разрез” для двухполосного ранга.
-  - `File:` `formal/WIP/Work.lean` (lemma `Q39_frontier_cross`). `InfoGain:` 1.
+  - `Artifact:` Proof (frontier adjacency in symmetric graphs).
+  - `Update:` proved that in symmetric graphs any `frontier` edge is a genuine edge:
+    `frontier G S e → G.adj e.1 e.2 = true`. This removes the orientation nuisance
+    when treating frontiers as undirected cuts.
+    Lean: `formal/WIP/Work.lean`, lemma `Q39_frontier_adj`.
+  - `Use:` позволяет работать с фронтиром как с неориентированным множеством рёбер.
+  - `File:` `formal/WIP/Work.lean` (lemma `Q39_frontier_adj`). `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (дефиниционное свойство, оракул не влияет).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` Q39_frontier_cross (Lean lemma в WIP)
+  - `PublicSurface:` Q39_frontier_adj (Lean lemma в WIP)
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.166) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
