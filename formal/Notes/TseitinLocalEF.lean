@@ -574,7 +574,7 @@ import Paperproof
   Тогда число строк $N$ удовлетворяет той же форме нижней оценки, что и HR’22 Theorem 4.3, но с заменой
   $$\\log M\\ \\rightsquigarrow\\ t':=(2s+1)\\log M,$$
   то есть
-  $$N\\ \\ge\\ \\exp\\!\\left(\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{O(1)}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)\\right).$$
+  $$N\\ \\ge\\ 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{O(1)}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)}.$$
 - `Доказательство:`
   Повторяем доказательство HR’22 Theorem 4.3 (см. `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, Thm. 4.3 + Proof; PDF p. 19–20), меняя ровно одно место:
   в Lemma 4.4/4.5 вместо “decision trees querying edges … of depth $t:=\\log M$” используем edge‑only locally consistent деревья глубины
@@ -589,30 +589,30 @@ import Paperproof
 - `Toy‑тест:` при $s=0$ (нет extension‑переменных) имеем $t'=\\log M$, и формула совпадает с HR’22 Theorem 4.3.
 - `Статус:` доказано (условный перенос HR’22 нижней оценки на depth‑$d$ flat local‑EF(s), цена — множитель $(2s+1)^d$ в знаменателе экспоненты).
 - `Барьер‑чек:` r — применимо (switching‑леммы/decision trees релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 проверить “почти tightness”: при каких режимах $s$ и $M$ нижняя оценка остаётся $\\exp(n^{1-o(1)})$ и сравнить с известным upper $2^{O(n)}$ (резолюция).
+- `Следующий шаг:` для Q43 проверить “почти tightness”: при каких режимах $s$ и $M$ нижняя оценка остаётся $2^{n^{1-o(1)}}$ и сравнить с известным upper $2^{O(n)}$ (резолюция).
 
 ### 16.175. Исследовательский шаг (toy computation): режимы “почти tightness” для corollary при $t'=(2s+1)\\log M$
 
 - `Линза:` Инвариант.
 - `Утверждение (Q43.S13-tightness-regime):`
   Пусть выполняется lower bound из §16.174:
-  $$N\\ge \\exp\\!\\left(\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{C}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)\\right)$$
+  $$N\\ge 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{C}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)}$$
   для некоторой абсолютной константы $C\\ge 1$.
   Тогда:
   1) если
      $$d\\cdot\\log\\bigl((\\log n)^{C}(2s+1)\\log M\\bigr)=o(\\log n),\\tag{*}$$
      то показатель экспоненты равен $n^{1-o(1)}$, то есть
-     $$N\\ge \\exp\\bigl(n^{1-o(1)}\\bigr);$$
-  2) в частности, если $(2s+1)\\log M\\le \\log^{O(1)}n$ и $d=o(\\log n/\\log\\log n)$, то условие $(*)$ выполнено и снова $N\\ge \\exp(n^{1-o(1)})$;
-  3) при фиксированной глубине $d=O(1)$ и $(2s+1)\\log M\\le \\log^{O(1)}n$ получаем $N\\ge \\exp(\\Omega(n/\\log^{O(1)}n))$, что согласуется с известным upper $2^{O(n)}$ (резолюция).
+     $$N\\ge 2^{n^{1-o(1)}};$$
+  2) в частности, если $(2s+1)\\log M\\le \\log^{O(1)}n$ и $d=o(\\log n/\\log\\log n)$, то условие $(*)$ выполнено и снова $N\\ge 2^{n^{1-o(1)}}$;
+  3) при фиксированной глубине $d=O(1)$ и $(2s+1)\\log M\\le \\log^{O(1)}n$ получаем $N\\ge 2^{\\Omega(n/\\log^{O(1)}n)}$, что согласуется с известным upper $2^{O(n)}$ (резолюция).
 - `Toy‑вычисление:`
   Из $(*)$ следует
-  $$\\bigl((\\log n)^{C}(2s+1)\\log M\\bigr)^d=\\exp\\bigl(o(\\log n)\\bigr)=n^{o(1)}.$$
+  $$\\bigl((\\log n)^{C}(2s+1)\\log M\\bigr)^d=2^{o(\\log n)}=n^{o(1)}.$$
   Тогда показатель экспоненты равен
   $$\\Omega\\Bigl(\\frac{n}{n^{o(1)}}\\Bigr)=n^{1-o(1)}.$$
   Пункт (2) — частный случай, т.к. при $(2s+1)\\log M\\le \\log^{K}n$ имеем $\\log((\\log n)^C(2s+1)\\log M)=O(\\log\\log n)$, и потому
   $d\\cdot O(\\log\\log n)=o(\\log n)$ при $d=o(\\log n/\\log\\log n)$.
-- `Статус:` проверено (явный критерий, когда corollary даёт $\\exp(n^{1-o(1)})$).
+- `Статус:` проверено (явный критерий, когда corollary даёт $2^{n^{1-o(1)}}$).
 - `Барьер‑чек:` r — применимо (это лишь алгебра над параметрами + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` для Q43 оценить “порог по $s$”: при каких $s=s(n)$ (при $M=\\mathrm{poly}(n)$ и $d=o(\\log n/\\log\\log n)$) условие $(*)$ перестаёт быть верным.
 
@@ -622,8 +622,8 @@ import Paperproof
 - `Утверждение (Q43.S14-threshold-in-s):`
   В режиме $M=\\mathrm{poly}(n)$ (то есть $\\log M=O(\\log n)$) и $d=o(\\log n/\\log\\log n)$ условие $(*)$ из §16.175 эквивалентно
   $$d\\cdot\\log(2s+1)=o(\\log n).\\tag{**}$$
-  В частности, lower bound из §16.174 даёт $N\\ge\\exp(n^{1-o(1)})$ при любом $s$ таком, что
-  $$\\log s=o(\\log n/d)\\quad\\text{(то есть)}\\quad s\\le \\exp\\bigl(o(\\log n/d)\\bigr).$$
+  В частности, lower bound из §16.174 даёт $N\\ge 2^{n^{1-o(1)}}$ при любом $s$ таком, что
+  $$\\log s=o(\\log n/d)\\quad\\text{(то есть)}\\quad s\\le 2^{o(\\log n/d)}.$$
 - `Toy‑вычисление:`
   При $\\log M=O(\\log n)$ имеем $\\log\\log M=O(\\log\\log n)$, и потому
   $$\\log\\bigl((\\log n)^C(2s+1)\\log M\\bigr)=\\log(2s+1)+O(\\log\\log n).$$
@@ -639,12 +639,12 @@ import Paperproof
 - `Линза:` Трейд‑офф.
 - `Утверждение (Q43.S15-poly-s-depth-regime):`
   Пусть $M=\\mathrm{poly}(n)$, $s=n^{\\varepsilon}$ для фиксированного $\\varepsilon\\in(0,1)$, и применим corollary §16.174:
-  $$N\\ge \\exp\\!\\left(\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{O(1)}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)\\right).$$
+  $$N\\ge 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{O(1)}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)}.$$
   Тогда показатель экспоненты имеет порядок
   $$\\Omega\\Bigl(\\frac{n^{1-\\varepsilon d}}{\\log^{O(d)} n}\\Bigr).\\tag{***}$$
   Отсюда:
-  1) (**почти tightness**) $N\\ge \\exp(n^{1-o(1)})$ возможно только при $\\varepsilon d=o(1)$ (т.е. $d=o(1/\\varepsilon)$);
-  2) (**нетривиальность**) $N\\ge \\exp(n^{\\Omega(1)})$ сохраняется для любой константной глубины $d$ с $\\varepsilon d<1$;
+  1) (**почти tightness**) $N\\ge 2^{n^{1-o(1)}}$ возможно только при $\\varepsilon d=o(1)$ (т.е. $d=o(1/\\varepsilon)$);
+  2) (**нетривиальность**) $N\\ge 2^{n^{\\Omega(1)}}$ сохраняется для любой константной глубины $d$ с $\\varepsilon d<1$;
   3) при $d\\ge 1/\\varepsilon$ показатель в $(***)$ становится $n^{o(1)}$, и bound перестаёт давать сверхполиномиальную нижнюю оценку на $N$.
 - `Toy‑вычисление:`
   При $s=n^{\\varepsilon}$ имеем $2s+1=\\Theta(n^{\\varepsilon})$ и при $M=\\mathrm{poly}(n)$ также $\\log M=\\Theta(\\log n)$.
@@ -654,27 +654,27 @@ import Paperproof
   Пункты (1)–(3) следуют из сравнения $n^{1-\\varepsilon d}$ с $n^{1-o(1)}$, $n^{\\Omega(1)}$ и $n^{o(1)}$ соответственно.
 - `Статус:` проверено (явный “depth‑порог” при полиномиальных flat‑extensions).
 - `Барьер‑чек:` r — применимо (параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 рассмотреть промежуточные режимы $s=\\exp((\\log n)^\\alpha)$ и сравнить порог $d\\log(2s+1)=o(\\log n)$ с $d=o(\\log n/\\log\\log n)$.
+- `Следующий шаг:` для Q43 рассмотреть промежуточные режимы $s=2^{(\\log n)^\\alpha}$ и сравнить порог $d\\log(2s+1)=o(\\log n)$ с $d=o(\\log n/\\log\\log n)$.
 
-### 16.178. Исследовательский шаг (toy computation): режим $s=\\exp((\\log n)^\\alpha)$ — depth‑порог $d\\approx \\log^{1-\\alpha}n$
+### 16.178. Исследовательский шаг (toy computation): режим $s=2^{(\\log n)^\\alpha}$ — depth‑порог $d\\approx \\log^{1-\\alpha}n$
 
 - `Линза:` Трейд‑офф.
 - `Утверждение (Q43.S16-subexp-s-regime):`
-  Пусть $M=\\mathrm{poly}(n)$ и $s=\\exp((\\log n)^\\alpha)$ для некоторого $\\alpha>0$.
+  Пусть $M=\\mathrm{poly}(n)$ и $s=2^{(\\log n)^\\alpha}$ для некоторого $\\alpha>0$.
   Тогда показатель экспоненты в corollary §16.174 имеет вид
-  $$\\Omega\\Bigl(\\frac{n\\,\\exp(-d\\,(\\log n)^\\alpha)}{\\log^{O(d)}n}\\Bigr).\\tag{****}$$
+  $$\\Omega\\Bigl(\\frac{n\\,2^{-d\\,(\\log n)^\\alpha}}{\\log^{O(d)}n}\\Bigr).\\tag{****}$$
   В частности:
-  1) если $0<\\alpha<1$ и $d=o(\\log^{1-\\alpha}n)$, то $N\\ge\\exp(n^{1-o(1)})$;
-  2) если $0<\\alpha<1$ и $d=c\\,\\log^{1-\\alpha}n$ для константы $c\\in(0,1)$, то $N\\ge\\exp(n^{1-c-o(1)})$;
+  1) если $0<\\alpha<1$ и $d=o(\\log^{1-\\alpha}n)$, то $N\\ge 2^{n^{1-o(1)}}$;
+  2) если $0<\\alpha<1$ и $d=c\\,\\log^{1-\\alpha}n$ для константы $c\\in(0,1)$, то $N\\ge 2^{n^{1-c-o(1)}}$;
   3) если $\\alpha>1$, то уже при $d\\ge 1$ выражение $(****)$ стремится к 0, и corollary §16.174 перестаёт давать сверхполиномиальную нижнюю оценку на $N$.
 - `Toy‑вычисление:`
-  При $s=\\exp((\\log n)^\\alpha)$ имеем $2s+1=\\exp((\\log n)^\\alpha+O(1))$, а при $M=\\mathrm{poly}(n)$ также $\\log M=\\Theta(\\log n)$.
+  При $s=2^{(\\log n)^\\alpha}$ имеем $2s+1=2^{(\\log n)^\\alpha+O(1)}$, а при $M=\\mathrm{poly}(n)$ также $\\log M=\\Theta(\\log n)$.
   Тогда знаменатель в §16.174 равен
-  $$\\bigl((\\log n)^{O(1)}(2s+1)\\log M\\bigr)^d\\ =\\ \\exp(d(\\log n)^\\alpha)\\cdot\\log^{O(d)}n,$$
+  $$\\bigl((\\log n)^{O(1)}(2s+1)\\log M\\bigr)^d\\ =\\ 2^{d(\\log n)^\\alpha}\\cdot\\log^{O(d)}n,$$
   что даёт $(****)$.
-  Пункт (1): из $d=o(\\log^{1-\\alpha}n)$ следует $d(\\log n)^\\alpha=o(\\log n)$, а также автоматически $d=o(\\log n/\\log\\log n)$, так что $\\log^{O(d)}n=\\exp(o(\\log n))=n^{o(1)}$.
-  Пункт (2): при $d=c\\log^{1-\\alpha}n$ имеем $\\exp(d(\\log n)^\\alpha)=\\exp(c\\log n)=n^c$, а $\\log^{O(d)}n=\\exp(o(\\log n))=n^{o(1)}$.
-  Пункт (3): при $\\alpha>1$ уже $\\exp(d(\\log n)^\\alpha)\\gg n$, поэтому $n\\exp(-d(\\log n)^\\alpha)=o(1)$.
+  Пункт (1): из $d=o(\\log^{1-\\alpha}n)$ следует $d(\\log n)^\\alpha=o(\\log n)$, а также автоматически $d=o(\\log n/\\log\\log n)$, так что $\\log^{O(d)}n=2^{o(\\log n)}=n^{o(1)}$.
+  Пункт (2): при $d=c\\log^{1-\\alpha}n$ имеем $2^{d(\\log n)^\\alpha}=2^{c\\log n}=n^c$, а $\\log^{O(d)}n=2^{o(\\log n)}=n^{o(1)}$.
+  Пункт (3): при $\\alpha>1$ уже $2^{d(\\log n)^\\alpha}\\gg n$, поэтому $n\\,2^{-d(\\log n)^\\alpha}=o(1)$.
 - `Статус:` проверено (явный “phase transition”: при $\\alpha>1$ bound тривиализируется уже на глубине 1).
 - `Барьер‑чек:` r — применимо (параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` для Q43 выделить “максимально допустимый” рост $s(n)$ из условия $d\\log(2s+1)=o(\\log n)$ при $d=\\Theta(\\log n/\\log\\log n)$ (граница между нетривиальным и тривиальным lower bound).
@@ -685,16 +685,16 @@ import Paperproof
 - `Утверждение (Q43.S17-max-s-critical-depth):`
   В режиме $M=\\mathrm{poly}(n)$ и “критической” глубины
   $$d=\\Theta\\left(\\frac{\\log n}{\\log\\log n}\\right),$$
-  условие $(**)$ из §16.176 (эквивалентное “почти tightness” $N\\ge\\exp(n^{1-o(1)})$) равносильно
+  условие $(**)$ из §16.176 (эквивалентное “почти tightness” $N\\ge 2^{n^{1-o(1)}}$) равносильно
   $$\\log(2s+1)=o(\\log\\log n),$$
   то есть
-  $$s=\\exp(o(\\log\\log n))=(\\log n)^{o(1)}.$$
+  $$s=2^{o(\\log\\log n)}=(\\log n)^{o(1)}.$$
 - `Toy‑вычисление:`
   Подставим $d=\\Theta(\\log n/\\log\\log n)$ в $(**)$ из §16.176:
   $$d\\log(2s+1)=o(\\log n)\\ \\Longleftrightarrow\\ \\frac{\\log n}{\\log\\log n}\\cdot\\log(2s+1)=o(\\log n)\\ \\Longleftrightarrow\\ \\log(2s+1)=o(\\log\\log n).$$
-  Отсюда $2s+1=\\exp(o(\\log\\log n))$ и потому $s=\\exp(o(\\log\\log n))$.
-  Равенство $\\exp(o(\\log\\log n))=(\\log n)^{o(1)}$ следует из $\\exp(a\\log\\log n)=(\\log n)^a$.
-- `Статус:` проверено (явный максимальный рост $s(n)$ при критической глубине для сохранения $\\exp(n^{1-o(1)})$).
+  Отсюда $2s+1=2^{o(\\log\\log n)}$ и потому $s=2^{o(\\log\\log n)}$.
+  Равенство $2^{o(\\log\\log n)}=(\\log n)^{o(1)}$ следует из $2^{a\\log\\log n}=(\\log n)^a$.
+- `Статус:` проверено (явный максимальный рост $s(n)$ при критической глубине для сохранения $2^{n^{1-o(1)}}$).
 - `Барьер‑чек:` r — применимо (чистая параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` для Q43 оценить “границу нетривиальности” при $d=\\Theta(\\log n/\\log\\log n)$: если $s=(\\log n)^c$, какой показатель $n^{1-\\Theta(1)}$ даёт corollary §16.174 (вместо $n^{1-o(1)}$).
 
@@ -710,17 +710,17 @@ import Paperproof
   $$\\Omega\\bigl(n^{1-\\kappa(C+1+c)-o(1)}\\bigr),$$
   где $C=O(1)$ — абсолютная константа из polylog‑фактора $(\\log n)^{O(1)}$ в §16.174 (унаследованного от HR’22 Thm. 4.3).
   В частности, при $\\kappa(C+1+c)<1$ получаем нетривиальный bound
-  $$N\\ge \\exp\\bigl(n^{\\Omega(1)}\\bigr),$$
+  $$N\\ge 2^{n^{\\Omega(1)}},$$
   а при $\\kappa(C+1+c)\\ge 1$ этот bound перестаёт давать сверхполиномиальную нижнюю оценку на $N$.
 - `Toy‑вычисление:`
   В §16.174 оценка имеет вид
-  $$N\\ge \\exp\\!\\left(\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{C}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)\\right)$$
+  $$N\\ge 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{C}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)}$$
   для некоторой фиксированной $C\\ge 1$.
   При $M=\\mathrm{poly}(n)$ имеем $\\log M=\\Theta(\\log n)$, а при $s=(\\log n)^c$ имеем $2s+1=\\Theta((\\log n)^c)$.
   Тогда
   $$((\\log n)^{C}(2s+1)\\log M)^{d}=\\bigl((\\log n)^{C+1+c}\\bigr)^{d}.$$
   Подставляя $d=(\\kappa+o(1))\\log n/\\log\\log n$, получаем
-  $$\\bigl((\\log n)^{C+1+c}\\bigr)^{d}=\\exp\\bigl((\\kappa+o(1))(C+1+c)\\log n\\bigr)=n^{\\kappa(C+1+c)+o(1)}.$$
+  $$\\bigl((\\log n)^{C+1+c}\\bigr)^{d}=2^{(\\kappa+o(1))(C+1+c)\\log n}=n^{\\kappa(C+1+c)+o(1)}.$$
   Поэтому показатель экспоненты равен
   $$\\Omega\\Bigl(\\frac{n}{n^{\\kappa(C+1+c)+o(1)}}\\Bigr)=\\Omega\\bigl(n^{1-\\kappa(C+1+c)-o(1)}\\bigr).$$
 - `Статус:` проверено (критическая глубина превращает polylog‑$s$ в константную потерю в степени $n$).
@@ -827,10 +827,10 @@ import Paperproof
   Если хотим уложиться в глубину $D$, то берём $d:=\\lfloor (D-1)/3\\rfloor$.
   Чтобы минимизировать грубую оценку на размер, можно взять все $t_i$ одинаковыми: $t:=\\lceil m^{1/d}\\rceil$, тогда $t^d\\ge m$.
   Из Lemma 21 получаем
-  $$|\\Phi^1(\\emptyset,U)|\\ \\le\\ (2^{t+1}t)^d\\ =\\ \\exp\\bigl(O(d\\,t)\\bigr).$$
+  $$|\\Phi^1(\\emptyset,U)|\\ \\le\\ (2^{t+1}t)^d\\ =\\ 2^{O(d\\,t)}.$$
   В режиме $D\\asymp \\log m/\\log\\log m$ имеем $d\\asymp \\log m/\\log\\log m$ и
-  $$t=m^{1/d}=\\exp\\bigl(\\Theta(\\log m/d)\\bigr)=\\exp\\bigl(\\Theta(\\log\\log m)\\bigr)=\\log^{\\Theta(1)}m,$$
-  так что $d\\,t=\\log^{\\Theta(1)}m$ и потому $|\\Phi^1(\\emptyset,U)|=\\exp(\\log^{\\Theta(1)}m)$ (quasi‑poly bound).
+  $$t=m^{1/d}=2^{\\Theta(\\log m/d)}=2^{\\Theta(\\log\\log m)}=\\log^{\\Theta(1)}m,$$
+  так что $d\\,t=\\log^{\\Theta(1)}m$ и потому $|\\Phi^1(\\emptyset,U)|=2^{\\log^{\\Theta(1)}m}$ (quasi‑poly bound).
   Наконец, Lemma 24 (p. 11) даёт вывод XOR‑шага размера $\\le c\\cdot|\\Phi^1(\\emptyset,U)|^6$, то есть по этой оценке также quasi‑poly при таком $D$.
 - `Статус:` проверено (параметрический разрыв: GIRS‑compact не даёт $\\mathrm{poly}(m)$ при $D\\asymp\\log m/\\log\\log m$).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
@@ -843,12 +843,12 @@ import Paperproof
   Пусть $d\\le 59\\,\\frac{\\log n}{\\log\\log n}$ (как в Håstad’20, Thm. 6.5) и рассмотрим Tseitin(Grid$_n$) с нечётной суммой зарядов.
   Если бы существовала процедура, которая для каждого XOR‑шагa, возникающего в стандартном гауссовом/column‑summing каркасе (суммирование $\\mathbb F_2$‑уравнений на границах регионов),
   строила depth‑$d$ Frege‑вывод этого шага размера $\\mathrm{poly}(n)$, то существовала бы depth‑$d$ Frege‑рефутация Tseitin(Grid$_n$) размера $\\mathrm{poly}(n)$.
-  Сравнивая с Håstad’20 Thm. 6.5 (любой depth‑$d$ refutation имеет размер $\\ge \\exp(\\Omega(n^{1/(58(d+1))}))$) получаем противоречие **лишь в тех режимах $d$, где эта нижняя оценка сверхполиномиальна** (т.е. $n^{1/(58(d+1))}=\\omega(\\log n)$, эквивалентно $d=o(\\log n/\\log\\log n)$).
+  Сравнивая с Håstad’20 Thm. 6.5 (любой depth‑$d$ refutation имеет размер $\\ge 2^{\\Omega(n^{1/(58(d+1))})}$) получаем противоречие **лишь в тех режимах $d$, где эта нижняя оценка сверхполиномиальна** (т.е. $n^{1/(58(d+1))}=\\omega(\\log n)$, эквивалентно $d=o(\\log n/\\log\\log n)$).
   В режиме $d=\\Theta(\\log n/\\log\\log n)$ сама по себе Thm. 6.5 не запрещает polynomial‑size (см. контрпример‑проверку §16.187).
 - `Доказательство:`
   1) (Нижняя оценка.) По Håstad’20, Thm. 6.5 (`../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`, p. 17 в тексте pdf‑to‑text)
   при $d\\le 59\\,\\frac{\\log n}{\\log\\log n}$ любая depth‑$d$ Frege‑рефутация Tseitin(Grid$_n$) имеет размер
-  $$\\ge \\exp\\bigl(\\Omega(n^{1/(58(d+1))})\\bigr).$$
+  $$\\ge 2^{\\Omega(n^{1/(58(d+1))})}.$$
   2) (Каркас по XOR‑суммированию.) В гауссовом/column‑summing рассуждении противоречие $0=1$ получается как $\\mathbb F_2$‑линейная комбинация вершинных уравнений
   (сумма всех вершинных уравнений даёт $0=\\bigoplus_v \\chi(v)=1$).
   Любой такой вывод можно разложить на $T=\\mathrm{poly}(n)$ локальных XOR‑шагов вида
@@ -856,9 +856,9 @@ import Paperproof
   (см. редукцию «XOR‑шаг ↔ 3‑вершинный Tseitin» в §16.126).
   3) (Склейка.) Если каждый из этих $T$ шагов имеет depth‑$d$ Frege‑вывод размера $\\mathrm{poly}(n)$, то их конкатенация даёт depth‑$d$ refutation размера $T\\cdot\\mathrm{poly}(n)=\\mathrm{poly}(n)$.
   4) (Когда возникает противоречие.) Конкатенация даёт refutation размера $\\mathrm{poly}(n)$, что противоречит пункту (1) **только если**
-  $$\\exp\\bigl(\\Omega(n^{1/(58(d+1))})\\bigr)\\ \\text{сверхполиномиальна по }n.$$
+  $$2^{\\Omega(n^{1/(58(d+1))})}\\ \\text{сверхполиномиальна по }n.$$
   В этом случае в XOR‑каркасе действительно есть “плохой шаг” размера
-  $$\\exp\\bigl(\\Omega(n^{1/(58(d+1))})\\bigr)/\\mathrm{poly}(n).$$
+  $$2^{\\Omega(n^{1/(58(d+1))})}/\\mathrm{poly}(n).$$
 - `Toy‑тест:` если $d=o(\\log n/\\log\\log n)$, то $n^{1/(58(d+1))}=\\omega(\\log n)$ и lower bound в (1) сверхполиномиален; значит “универсальный poly XOR‑step” в таком depth‑режиме невозможен.
 - `Статус:` доказано (корректная формулировка: аргумент даёт барьер лишь в режиме $d=o(\\log n/\\log\\log n)$).
 - `Барьер‑чек:` r — применимо (LB Håstad’20 через switching‑лемму релятивизируется), NP — неприменимо, alg — неприменимо.
@@ -870,13 +870,13 @@ import Paperproof
 - `Утверждение (Q39.S6-block-carcas-or-impossibility):`
   Утверждение вида «Håstad’20 Thm. 6.5 запрещает polynomial‑size refutation при $d=\\Theta(\\log n/\\log\\log n)$» неверно:
   при $d=(\\kappa+o(1))\\frac{\\log n}{\\log\\log n}$ нижняя оценка Thm. 6.5 даёт лишь
-  $$\\mathrm{size}\\ \\ge\\ \\exp\\bigl(\\Omega(\\log^{1/(58\\kappa)}n)\\bigr)=n^{o(1)},$$
+  $$\\mathrm{size}\\ \\ge\\ 2^{\\Omega(\\log^{1/(58\\kappa)}n)}=n^{o(1)},$$
   что совместимо с polynomial‑size.
   Поэтому из Thm. 6.5 нельзя вывести, что “универсальный poly XOR‑step” невозможен на *критической* глубине; нужен структурный аргумент про base‑change/blocks.
 - `Toy‑вычисление:`
   Подставим $d=(\\kappa+o(1))\\frac{\\log n}{\\log\\log n}$ в экспоненту Thm. 6.5:
   $$n^{1/(58(d+1))}=\\exp\\Bigl(\\frac{\\log n}{58(d+1)}\\Bigr)=\\exp\\Bigl(\\Theta\\bigl(\\tfrac{\\log\\log n}{58\\kappa}\\bigr)\\Bigr)=\\log^{\\Theta(1)}n.$$
-  Отсюда $\\exp(\\Omega(n^{1/(58(d+1))}))=\\exp(\\Omega(\\log^{\\Theta(1)}n))=n^{o(1)}\\le n$ (например, при $\\kappa\\ge 1/58$).
+  Отсюда $2^{\\Omega(n^{1/(58(d+1))})}=2^{\\Omega(\\log^{\\Theta(1)}n)}=n^{o(1)}\\le n$ (например, при $\\kappa\\ge 1/58$).
   Следовательно, наличие refutation размера $n^{10}$ при такой глубине **не** противоречило бы Thm. 6.5.
 - `Статус:` контрпример‑проверка (уточняет, где именно “LB ⇒ тяжёлый XOR‑шаг” работает).
 - `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
@@ -1087,25 +1087,25 @@ import Paperproof
   Пусть $M=\\mathrm{poly}(n)$, $s=(\\log n)^c$ для фиксированного $c\\ge 0$, и
   $$d=\\left(\\kappa+o(1)\\right)\\frac{\\log n}{\\log\\log n}.$$
   Тогда corollary §16.197 даёт
-  $$N\\ge\\exp\\bigl(\\Omega(n^{1-\\kappa(5+c)-o(1)})\\bigr).$$
-  В частности, lower bound нетривиален ($N\\ge\\exp(n^{\\Omega(1)})$) тогда и только тогда, когда
+  $$N\\ge 2^{\\Omega(n^{1-\\kappa(5+c)-o(1)})}.$$
+  В частности, lower bound нетривиален ($N\\ge 2^{n^{\\Omega(1)}}$) тогда и только тогда, когда
   $$\\kappa<\\frac{1}{5+c}.$$
 - `Toy‑вычисление:`
   В §16.197 имеем
-  $$N\\ge \\exp\\!\\left(\\Omega\\left(\\frac{n}{\\bigl((\\log n)^4(2s+1)\\log M\\bigr)^d}\\right)\\right).$$
+  $$N\\ge 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^4(2s+1)\\log M\\bigr)^d}\\right)}.$$
   При $M=\\mathrm{poly}(n)$ получаем $\\log M=\\Theta(\\log n)$, а при $s=(\\log n)^c$ имеем $2s+1=\\Theta((\\log n)^c)$.
   Тогда
   $$\\bigl((\\log n)^4(2s+1)\\log M\\bigr)^d=\\bigl((\\log n)^{5+c}\\bigr)^d.$$
   Подставляя $d=(\\kappa+o(1))\\log n/\\log\\log n$, получаем
-  $$\\bigl((\\log n)^{5+c}\\bigr)^d=\\exp\\bigl((\\kappa+o(1))(5+c)\\log n\\bigr)=n^{\\kappa(5+c)+o(1)},$$
+  $$\\bigl((\\log n)^{5+c}\\bigr)^d=2^{(\\kappa+o(1))(5+c)\\log n}=n^{\\kappa(5+c)+o(1)},$$
   и потому показатель экспоненты равен $n^{1-\\kappa(5+c)-o(1)}$.
 - `Toy‑тест:` при $c=0$, $M=n^2$, $\\kappa=1/6$ имеем
-  $$\\bigl((\\log n)^5\\bigr)^d=\\exp\\bigl((5/6+o(1))\\log n\\bigr)=n^{5/6+o(1)},$$
-  значит $N\\ge\\exp(\\Omega(n^{1/6}))$.
+  $$\\bigl((\\log n)^5\\bigr)^d=2^{(5/6+o(1))\\log n}=n^{5/6+o(1)},$$
+  значит $N\\ge 2^{\\Omega(n^{1/6})}$.
 - `Статус:` проверено (явный $\\kappa$‑порог при критической глубине с $c_1=4$).
 - `InfoGain:` 1.
 - `Барьер‑чек:` r — применимо (параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` оценить вклад фактора $M^{s/\\ell}$ при естественном выборе $\\ell:=t'=(2s+1)\\log M$ и проверить, остаётся ли он $\\exp(\\Theta(1))$ (Q43.S32-m-factor-ell-constant).
+- `Следующий шаг:` оценить вклад фактора $M^{s/\\ell}$ при естественном выборе $\\ell:=t'=(2s+1)\\log M$ и проверить, остаётся ли он $2^{\\Theta(1)}$ (Q43.S32-m-factor-ell-constant).
 
 ### 16.199. Исследовательский шаг (toy computation): константность фактора $M^{s/\\ell}$ при $\\ell=t'$
 
@@ -1114,13 +1114,13 @@ import Paperproof
   Пусть $s\\ge 0$, $M>1$ и
   $$\\ell:=t':=(2s+1)\\log M.$$
   Тогда
-  $$M^{s/\\ell}=\\exp\\!\\left(\\frac{s}{2s+1}\\right)\\le e^{1/2},$$
+  $$M^{s/\\ell}=2^{\\frac{s}{2s+1}}\\le 2^{1/2},$$
   то есть фактор $M^{s/\\ell}$ — абсолютная константа и поглощается в $A$.
 - `Toy‑вычисление:`
-  $$M^{s/\\ell}=\\exp\\!\\left(\\frac{s}{\\ell}\\cdot\\log M\\right)=\\exp\\!\\left(\\frac{s}{(2s+1)\\log M}\\cdot\\log M\\right)=\\exp\\!\\left(\\frac{s}{2s+1}\\right).$$
-  Так как $s/(2s+1)\\le 1/2$ при $s\\ge 0$, получаем $M^{s/\\ell}\\le e^{1/2}$.
-  (Если $\\log$ берётся по основанию $2$, то $M^{s/\\ell}=2^{s/(2s+1)}\\le\\sqrt{2}$.)
-- `Toy‑тест:` при $s=1$, $M=2$ имеем $2^{1/(3\\log 2)}=e^{1/3}<e^{1/2}$.
+  $$M^{s/\\ell}=2^{\\frac{s}{\\ell}\\cdot\\log M}=2^{\\frac{s}{(2s+1)\\log M}\\cdot\\log M}=2^{\\frac{s}{2s+1}}.$$
+  Так как $s/(2s+1)\\le 1/2$ при $s\\ge 0$, получаем $M^{s/\\ell}\\le 2^{1/2}$.
+  (При переходе к $e^x$ получаем $M^{s/\\ell}=e^{s/(2s+1)}\\le e^{1/2}$.)
+- `Toy‑тест:` при $s=1$, $M=2$ имеем $2^{1/3}\\le\\sqrt{2}$.
 - `Статус:` проверено (фактор $M^{s/\\ell}$ константен при $\\ell=t'$).
 - `InfoGain:` 1.
 - `Барьер‑чек:` r — применимо (чистая арифметика в параметрах), NP — неприменимо, alg — неприменимо.
@@ -3157,16 +3157,16 @@ import Paperproof
   При $A=668$ имеем $n_0(A)=2$, и при HR‑параметрах ($C\\ge 3$, $t\\le s\\le n'/32$) условие
   $n\\ge 20 C n'\\log n'$ автоматически даёт $n\\ge n_0(A)$. То есть требование $n\\ge n_0(A)$ избыточно.
 - `Доказательство:`
-  По §16.214 $n_0(A)=\\lceil \\exp((48e^{1/2}/A)^{1/3})\\rceil$. Для $A=668$ имеем
+  По §16.214 $n_0(A)=\\lceil e^{(48e^{1/2}/A)^{1/3}}\\rceil$. Для $A=668$ имеем
   $48e^{1/2}/668<1/8$, поскольку $e^{1/2}<5/3$ (из ряда $e^{1/2}$) и
   $48\\cdot(5/3)=80<668/8$. Тогда $(48e^{1/2}/668)^{1/3}<1/2$, откуда
-  $\\exp((48e^{1/2}/668)^{1/3})<\\exp(1/2)<2$, а показатель положителен, значит $\\exp(\\cdot)>1$.
+  $e^{(48e^{1/2}/668)^{1/3}}<e^{1/2}<2$, а показатель положителен, значит $e^{\\cdot}>1$.
   Следовательно, $n_0(668)=2$.
   Далее из $t,s,n'\\in\\mathbb N^+$ и $t\\le s\\le n'/32$ следует $n'\\ge 32\\ge 2$.
   Поэтому при $C\\ge 3$ имеем
   $$n\\ge 20 C n'\\log n'\\ge 20\\cdot 3\\cdot 2\\cdot (\\log 2)\\ge 20\\cdot 3\\cdot 2\\cdot \\frac12=60>2,$$
   где $\\log 2\\ge 1/2$ так как $e^{1/2}<2$. Значит $n\\ge n_0(668)$, и условие $n\\ge n_0(A)$ лишнее.
-- `Toy‑тест:` численно $\\exp((48e^{1/2}/668)^{1/3})\\approx 1.634$, так что $n_0(668)=2$;
+- `Toy‑тест:` численно $e^{(48e^{1/2}/668)^{1/3}}\\approx 1.634$, так что $n_0(668)=2$;
   минимальный RHS при $C=3,n'=2$ даёт $20\\cdot 3\\cdot 2\\log 2\\approx 83$.
 - `Статус:` доказано (доминирование условия $n\\ge 20 C n'\\log n'$).
 - `StepID:` Q43.S131-compare-n0-a.
@@ -3347,16 +3347,15 @@ import Paperproof
 - `Следующий шаг:` проверить, не используется ли Proof of Thm. 4.1 как под‑шаг в Proof of Thm. 4.3
   (или зафиксировать, что они независимы) — Q43.S138-logn-nonimpact-check.
 
-### 16.281. Исследовательский шаг (toy): poly‑$M$ vs порог $\\exp(n^{\\alpha})$ в Thm. 4.3
+### 16.281. Исследовательский шаг (toy): poly‑$M$ vs порог $2^{n^{\\alpha}}$ в Thm. 4.3
 
 - `Линза:` Трейд‑офф.
 - `Утверждение (проверка):` сравнить polynomial‑$M$ с порогом
-  $\\exp(n^{\\alpha})$, где $\\alpha=1/d-1/(d(d-1))$ и $d=\\lfloor\\log_2 n/\\log_2\\log_2 n\\rfloor$.
-  Здесь $\\exp$ трактуем как $e^x$ (как в HR), а версия с $2^x$ даёт ещё меньший порог.
+  $2^{n^{\\alpha}}$, где $\\alpha=1/d-1/(d(d-1))$ и $d=\\lfloor\\log_2 n/\\log_2\\log_2 n\\rfloor$.
+  Здесь база согласована с $\\log_2$ (HR‑конвенция); переход к $e^x$ даёт лишь множитель $\\ln 2$ в показателе.
 - `Toy‑тест:` скрипт `scripts/toy_q43_s141.py` для $n=2^8,\\dots,2^{32}$ и $k\\in\\{1,2,4,8\\}$
   показывает, что $n^{\\alpha}\\lesssim\\log n$, поэтому уже при $k=1$ имеем $k\\log n>n^{\\alpha}$
-  (а при $k\\ge 2$ тем более). Значит $M=n^k$ **не** меньше $\\exp(n^{\\alpha})$ даже для base $e$;
-  для base $2$ порог ещё меньше.
+  (а при $k\\ge 2$ тем более). Значит $M=n^k$ **не** меньше $2^{n^{\\alpha}}$.
   Пример: $n=2^{16}$, $d=4$, $\\alpha=1/6$, $n^{\\alpha}\\approx 6.35$, а $k\\log n\\approx 22.2$ при $k=2$.
 - `Статус:` toy‑комputation (порог large‑$M$ не автоматически выше polynomial‑$M$ при $d=\\Theta(\\log n/\\log\\log n)$).
 - `StepID:` Q43.S141-poly-vs-exp-threshold.
@@ -3371,9 +3370,9 @@ import Paperproof
   В формулировке HR’22 Theorem 4.3 $n$ — это сторона $n\\times n$ grid в Tseitin($G_n$),
   $N$ — число строк (length) Frege‑доказательства, а каждая строка имеет размер $M$ и глубину $d$.
   Нижняя оценка выражается как
-  $$N\\ \\ge\\ \\exp\\!\\left(\\Omega\\left(\\frac{n}{((\\log n)^{O(1)}\\,\\log M)^d}\\right)\\right),$$
-  где $\\exp$ понимается как $e^x$ (в тексте используется `exp`).
-  В Proof of Thm. 4.3 параметр large‑$M$ формулируется как $M\\le\\exp(n^{1/d-1/(d(d-1))})$,
+  $$N\\ \\ge\\ 2^{\\Omega\\left(\\frac{n}{((\\log n)^{O(1)}\\,\\log M)^d}\\right)},$$
+  где $\\log$ — по базе $2$ (HR‑конвенция).
+  В Proof of Thm. 4.3 параметр large‑$M$ формулируется как $M\\le 2^{n^{1/d-1/(d(d-1))}}$,
   где $n$ — тот же размер стороны грида.
 - `Exact citation:`
   Формулировка Thm. 4.3: “Tseitin($G_n$) with odd charges at all nodes of the $n\\times n$ grid … If each line
@@ -3406,10 +3405,10 @@ import Paperproof
   Следовательно, $|F_n|=\\Theta(n^2)$ и
   $$n=\\Theta(\\sqrt{N_{\\mathrm{var}}})=\\Theta(\\sqrt{|F_n|}).$$
   Поэтому large‑$M$ порог из HR Thm. 4.3
-  $$M\\le \\exp\\bigl(n^{\\alpha}\\bigr),\\qquad \\alpha=1/d-1/(d(d-1)),$$
+  $$M\\le 2^{n^{\\alpha}},\\qquad \\alpha=1/d-1/(d(d-1)),$$
   переписывается как
-  $$M\\le \\exp\\bigl((N_{\\mathrm{var}})^{\\alpha/2}\\bigr)=\\exp\\bigl(|F_n|^{\\alpha/2}\\bigr),$$
-  где $\\exp$ понимается как $e^x$ (как в HR); вариант с $2^x$ даёт ещё меньший порог.
+  $$M\\le 2^{(N_{\\mathrm{var}})^{\\alpha/2}}=2^{|F_n|^{\\alpha/2}},$$
+  где база согласована с $\\log_2$ (HR‑конвенция).
 - `Toy‑тест:` $n=4$ даёт $|E|=2\\cdot 4\\cdot 3=24$ и $8(n-1)^2=72$ клауз,
   что согласуется с $\\Theta(n^2)$.
 - `Статус:` reduction/equivalence (связь параметра $n$ с $N_{\\mathrm{var}}$ и $|F_n|$).
@@ -3428,22 +3427,20 @@ import Paperproof
 - `Утверждение (Q43.S144-translate-largem-vs-polyn):`
   Пусть $d=\\kappa\\,\\frac{\\log n}{\\log\\log n}$ (константа $\\kappa>0$),
   и large‑$M$ порог из HR Thm. 4.3 записан как
-  $$M\\le \\exp\\bigl(n^{\\alpha}\\bigr),\\qquad \\alpha=\\frac1d-\\frac1{d(d-1)}.$$
+  $$M\\le 2^{n^{\\alpha}},\\qquad \\alpha=\\frac1d-\\frac1{d(d-1)}.$$
   Тогда при $n=\\Theta(\\sqrt{|F|})$ получаем
-  $$n^{\\alpha}=\\exp\\Bigl((1+o(1))\\frac{\\log n}{d}\\Bigr)
-      =\\exp\\Bigl((1+o(1))\\frac{\\log\\log n}{\\kappa}\\Bigr)
+  $$n^{\\alpha}=2^{(1+o(1))\\frac{\\log n}{d}}
+      =2^{(1+o(1))\\frac{\\log\\log n}{\\kappa}}
       =(\\log n)^{1/\\kappa+o(1)},$$
   и, поскольку $\\log n=\\tfrac12\\log|F|+O(1)$,
-  $$\\exp\\bigl(n^{\\alpha}\\bigr)=\\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)\\Bigr).$$
-  Здесь $\\exp$ трактуется как $e^x$ (в HR); вариант $2^x$ даёт лишь константный множитель
-  в экспоненте и, следовательно, **меньший** порог.
-  Для $M=|F|^k=\\exp(k\\log|F|)$ сравнение зависит от $\\kappa$:
-  1) $\\kappa<1$: $1/\\kappa>1$, значит $\\exp((\\log|F|)^{1/\\kappa})$ **суперполиномиален**
-     (так как $\\exp((\\log n)^p)$ суперполиномиален при $p>1$), и poly‑$M$ остаётся ниже порога.
-  2) $\\kappa=1$: порог $\\exp(\\Theta(\\log|F|))=|F|^{\\Theta(1)}$; при точном коэффициенте
+  $$2^{n^{\\alpha}}=2^{\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)}.$$
+  Для $M=|F|^k=2^{k\\log|F|}$ сравнение зависит от $\\kappa$:
+  1) $\\kappa<1$: $1/\\kappa>1$, значит $2^{(\\log|F|)^{1/\\kappa}}$ **суперполиномиален**
+     (так как $2^{(\\log n)^p}$ суперполиномиально при $p>1$), и poly‑$M$ остаётся ниже порога.
+  2) $\\kappa=1$: порог $2^{\\Theta(\\log|F|)}=|F|^{\\Theta(1)}$; при точном коэффициенте
      из $n=\\Theta(\\sqrt{|F|})$ получаем порог $|F|^{1/2+o(1)}$, так что poly‑$M$ с $k>1/2$
      **превышает** порог.
-  3) $\\kappa>1$: $\\exp((\\log|F|)^{1/\\kappa})=|F|^{o(1)}$ (субполином), поэтому
+  3) $\\kappa>1$: $2^{(\\log|F|)^{1/\\kappa}}=|F|^{o(1)}$ (субполином), поэтому
      любой $M=|F|^k$ с $k>0$ **превышает** порог.
 - `Toy‑тест:` при $\\kappa=1$ и $|F|=n^2$ имеем порог $M\\lesssim n=|F|^{1/2}$,
   тогда $M=|F|$ уже попадает в large‑$M$ ветку.
@@ -3463,14 +3460,13 @@ import Paperproof
 - `Утверждение (Q43.S145-kappa-regime-decision):`
   В целевом режиме глубины $d=\\kappa\\,\\log n/\\log\\log n$ мы фиксируем $\\kappa\\ge 1$
   (например, $\\kappa=59$ из диапазона Håstad’20 для grid‑LB), тогда
-  $$\\exp\\bigl(n^{\\alpha}\\bigr)=\\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)\\Bigr)
+  $$2^{n^{\\alpha}}=2^{\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)}
      =|F|^{o(1)}\\quad\\text{при }\\kappa>1,$$
   а при $\\kappa=1$ порог имеет вид $|F|^{1/2+o(1)}$.
   Следовательно, для любого $M=|F|^k$ с $k>0$ мы оказываемся в large‑$M$ ветке
   (при $\\kappa>1$ всегда, при $\\kappa=1$ — когда $k>1/2$).
-  Здесь $\\exp$ понимается как $e^x$ (в HR); замена на $2^x$ уменьшает порог ещё сильнее.
-  Для сравнения: при $\\kappa<1$ получаем $\\exp((\\log|F|)^{1/\\kappa})$ с $1/\\kappa>1$,
-  а значит порог суперполиномиален (см. правило: $\\exp((\\log n)^p)$ суперполиномиально при $p>1$).
+  Для сравнения: при $\\kappa<1$ получаем $2^{(\\log|F|)^{1/\\kappa}}$ с $1/\\kappa>1$,
+  а значит порог суперполиномиален (см. правило: $2^{(\\log n)^p}$ суперполиномиально при $p>1$).
 - `Toy‑тест:` при $\\kappa=1$, $|F|=n^2$, порог $M\\lesssim n=|F|^{1/2}$, так что $M=|F|$
   уже попадает в large‑$M$ ветку.
 - `Статус:` reduction (фиксирован режим $\\kappa\\ge 1$ и соответствующая ветка large‑$M$).
@@ -3492,8 +3488,9 @@ import Paperproof
   $$d\\le 59\\,\\frac{\\log n}{\\log\\log n},$$
   где $n$ — сторона $n\\times n$ grid. Это фиксирует режим $\\kappa=59$ для
   шкалы $d=\\kappa\\log n/\\log\\log n$.
-  В тексте рядом стоит размерная нижняя оценка вида $\\exp(\\cdot)$; здесь база $\\exp$
-  не влияет на извлечение $\\kappa$, но в наших заметках $\\exp$ трактуется как $e^x$.
+  В тексте рядом стоит размерная нижняя оценка вида $2^{(\\cdot)}$; здесь база
+  не влияет на извлечение $\\kappa$, но в наших заметках используем $2^x$
+  (с переходом к $e^x$ через множитель $\\ln 2$ в показателе).
 - `Exact citation:`
   В текстовом слое PDF дробь набрана “в столбик”: строка с числителем `log n`
   непосредственно перед Theorem 6.5 и строка Theorem 6.5 с `d ≤ 59 log log n`
@@ -3517,14 +3514,14 @@ import Paperproof
 - `Линза:` Трейд‑офф.
 - `Утверждение (Q43.S147-apply-thm41-branch):`
   Из §16.285 и $\\kappa=59>1$ (Håstad’20, Thm. 6.5) получаем, что large‑$M$ порог
-  $$M\\le \\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)\\Bigr)
-     =\\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/59}\\bigr)\\Bigr)$$
-  при $\\exp=e^x$ является $|F|^{o(1)}$ (субполином).
+  $$M\\le 2^{\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)}
+     =2^{\\Theta\\bigl((\\log|F|)^{1/59}\\bigr)}$$
+  является $|F|^{o(1)}$ (субполином).
   Поэтому любой $M=|F|^k$ с $k>0$ в итоге **превышает** порог, и в Thm. 4.3
   для poly‑$M$ всегда выбирается large‑$M$ ветка, то есть переход к Thm. 4.1;
   малая‑$M$ ветка релевантна лишь при $M$ ниже порога (субполиномиальном при $\\kappa>1$).
   (Для $\\kappa<1$ порог был бы суперполиномиален, так как
-  $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$ и $\\exp=e^x$.)
+  $2^{(\\log n)^p}$ суперполиномиально при $p>1$.)
 - `Статус:` reduction (ветка large‑$M$ фиксируется при $\\kappa=59$).
 - `StepID:` Q43.S147-apply-thm41-branch.
 - `InfoGain:` 1.
@@ -3542,10 +3539,10 @@ import Paperproof
 
 - `Линза:` Инвариант.
 - `Утверждение (Q43.S148-thm41-branch-audit):`
-  В Proof of Theorem 4.3 авторы явно отделяют ветку $M\\le \\exp(n^{\\alpha})$ и пишут,
-  что при $M$ **выше** порога можно применить Theorem 4.1. Здесь $\\exp$ трактуется как $e^x$
-  (в нотации HR); при $2^x$ порог был бы только меньше. Напоминание: $\\exp((\\log n)^p)$
-  суперполиномиальна при $p>1$, но здесь $p<1$ в режиме $d=\\kappa\\log n/\\log\\log n$.
+  В Proof of Theorem 4.3 авторы явно отделяют ветку $M\\le 2^{n^{\\alpha}}$ и пишут,
+  что при $M$ **выше** порога можно применить Theorem 4.1. Напоминание:
+  $2^{(\\log n)^p}$ суперполиномиально при $p>1$, но здесь $p<1$ в режиме
+  $d=\\kappa\\log n/\\log\\log n$.
 - `Exact citation:`
   Proof of Theorem 4.3: “We may assume that $M\\le \\exp(n^{1/d-1/d(d-1)})$, as otherwise we can
   apply Theorem 4.1.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`).
@@ -3567,19 +3564,19 @@ import Paperproof
 - `Линза:` Эквивалентность.
 - `Утверждение (Q43.S149-largem-bound-from-thm41):`
   Thm. 4.1 даёт нижнюю оценку
-  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl(n^{1/d}/\\log^4 n\\bigr)\\Bigr),$$
-  где $\\exp=e^x$ (в нотации HR; при $2^x$ bound только уменьшается).
+  $$N\\ \\ge\\ 2^{\\Omega\\bigl(n^{1/d}/\\log^4 n\\bigr)},$$
+  где база согласована с $\\log_2$ (HR‑конвенция).
   В режиме $d=\\kappa\\,\\log n/\\log\\log n$ имеем
-  $$n^{1/d}=\\exp\\Bigl(\\tfrac{\\log n}{d}\\Bigr)
-            =\\exp\\Bigl(\\tfrac{\\log\\log n}{\\kappa}\\Bigr)
+  $$n^{1/d}=2^{\\tfrac{\\log n}{d}}
+            =2^{\\tfrac{\\log\\log n}{\\kappa}}
             =(\\log n)^{1/\\kappa+o(1)},$$
   и потому
-  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl((\\log n)^{1/\\kappa-4+o(1)}\\bigr)\\Bigr).$$
+  $$N\\ \\ge\\ 2^{\\Omega\\bigl((\\log n)^{1/\\kappa-4+o(1)}\\bigr)}.$$
   Для $|F|=\\Theta(n^2)$ получаем
-  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)\\Bigr).$$
+  $$N\\ \\ge\\ 2^{\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)}.$$
   При $\\kappa=59$ показатель отрицательный, значит bound субполиномиален:
-  $$N\\ \\ge\\ \\exp\\bigl(\\Omega((\\log|F|)^{-3.98\\ldots})\\bigr)=|F|^{o(1)}.$$
-  Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$,
+  $$N\\ \\ge\\ 2^{\\Omega((\\log|F|)^{-3.98\\ldots})}=|F|^{o(1)}.$$
+  Напоминание: $2^{(\\log n)^p}$ суперполиномиально при $p>1$,
   но здесь $p=1/\\kappa-4<1$.
 - `Exact citation:`
   Thm. 4.1: “For $d=O(\\log n/\\log\\log n)$ … requires size $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$”
@@ -3603,14 +3600,13 @@ import Paperproof
 - `Утверждение (Q43.S150-thm41-bound-compare):`
   В целевом режиме $M=|F|^k$ и $N=|F|^C$ (полиномиальные линии и длина доказательства)
   large‑$M$ ветка Thm. 4.1 даёт
-  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)\\Bigr),\\qquad \\exp=e^x.$$
+  $$N\\ \\ge\\ 2^{\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)}.$$
   При $\\kappa=59$ показатель $1/\\kappa-4<0$, поэтому
-  $$N\\ \\ge\\ \\exp\\bigl(\\Omega((\\log|F|)^{-3.98\\ldots})\\bigr)=|F|^{o(1)},$$
+  $$N\\ \\ge\\ 2^{\\Omega((\\log|F|)^{-3.98\\ldots})}=|F|^{o(1)},$$
   то есть bound **субполиномиален** и автоматически выполняется для любого $N=|F|^C$.
   Более того, чтобы получить сверхполиномиальную нижнюю оценку вида
-  $\\exp((\\log|F|)^p)$ с $p>1$, нужно $1/\\kappa-4>1$, то есть $\\kappa<1/5$.
-  Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$; смена базы на $2^x$
-  только уменьшает порог и не меняет классификацию.
+  $2^{(\\log|F|)^p}$ с $p>1$, нужно $1/\\kappa-4>1$, то есть $\\kappa<1/5$.
+  Напоминание: $2^{(\\log n)^p}$ суперполиномиально при $p>1$.
 - `Exact citation:`
   Thm. 4.1 формулируется как $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$ (см.
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850`).
@@ -3639,8 +3635,7 @@ import Paperproof
   а ключевая Lemma 4.2 говорит лишь о существовании абсолютных констант $A,C,n_0$.
   Поэтому нельзя строго утверждать, что конкретный режим $\\kappa<1/5$ попадает
   в область применимости теоремы. Это локальный барьер для вывода
-  сверхполиномиальности при poly‑$M$ (exp трактуется как $e^x$; для $2^x$ порог только меньше;
-  $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$).
+  сверхполиномиальности при poly‑$M$ ($2^{(\\log n)^p}$ суперполиномиально при $p>1$).
 - `Exact citation:`
   Thm. 4.1: “For $d=O(\\log n/\\log\\log n)$ … requires size $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850`).
@@ -3798,16 +3793,16 @@ import Paperproof
 -/
 
 /-!
-### 16.297. Исследовательский шаг (exact citation): pivot to Håstad’20 Thm. 6.5 с явным $\\kappa$ и базой $\\exp$
+### 16.297. Исследовательский шаг (exact citation): pivot to Håstad’20 Thm. 6.5 с явным $\\kappa$ и базой $2^x$
 
 - `Линза:` Трейд‑офф.
 - `Утверждение (Q43.S157-pivot-hastad20-kappa):`
   В Håstad (2020), Thm. 6.5, глубина ограничена как
   $$d\\le 59\\,\\frac{\\log n}{\\log\\log n},$$
   где $n$ — сторона $n\\times n$ grid, и одновременно утверждается
-  $$\\mathrm{size}\\ge \\exp\\bigl(\\Omega(n^{1/(58(d+1))})\\bigr).$$
-  Здесь $\\exp$ понимается как $e^x$ (база не влияет на извлечение $\\kappa$,
-  но влияет на пороги: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$).
+  $$\\mathrm{size}\\ge 2^{\\Omega(n^{1/(58(d+1))})}.$$
+  База не влияет на извлечение $\\kappa$, но влияет на пороги:
+  $2^{(\\log n)^p}$ суперполиномиально при $p>1$.
   Это фиксирует явную константу $\\kappa=59$ для режима $d=\\kappa\\log n/\\log\\log n$,
   что позволяет перейти от неявных констант HR’22 к явному depth‑порогу.
 - `Exact citation:`
@@ -3823,7 +3818,7 @@ import Paperproof
   B) Natural proofs check: неприменимо.
   C) Algebrization check: неприменимо.
 - `Следующий шаг:` применить $\\kappa=59$ к порогу large‑$M$ в Thm. 4.3
-  и проверить режим для $M=\\mathrm{poly}(|F|)$ (с учётом $\\exp=e^x$).
+  и проверить режим для $M=\\mathrm{poly}(|F|)$.
 
 -/
 
@@ -3834,16 +3829,15 @@ import Paperproof
 - `Утверждение (Q43.S158-largem-branch-polym-check):`
   Пусть $d=\\kappa\\log n/\\log\\log n$ с $\\kappa=59$ (Håstad’20, Thm. 6.5) и $|F|=\\Theta(n^2)$ для Tseitin(Grid$_n$).
   Тогда порог large‑$M$ в Thm. 4.3 имеет вид
-  $$M\\le \\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)\\Bigr)
-      =\\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/59}\\bigr)\\Bigr),$$
-  где $\\exp=e^x$ (если заменить на $2^x$, порог ещё меньше).
+  $$M\\le 2^{\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)}
+      =2^{\\Theta\\bigl((\\log|F|)^{1/59}\\bigr)},$$
   Поскольку $(\\log|F|)^{1/59}=o(\\log|F|)$, имеем
-  $$\\exp\\bigl(\\Theta((\\log|F|)^{1/59})\\bigr)=|F|^{o(1)},$$
+  $$2^{\\Theta((\\log|F|)^{1/59})}=|F|^{o(1)},$$
   то есть порог субполиномиален. Следовательно, для любого $k>0$ при достаточно больших $|F|$
   выполняется $|F|^k$ выше порога, и ветка large‑$M$ (то есть переход к Thm. 4.1)
   применяется ко всем $M=\\mathrm{poly}(|F|)$.
-  Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$, но здесь $p=1/59<1$.
-- `Toy‑тест:` $|F|=n^2$: порог $\\exp((2\\log n)^{1/59})=n^{o(1)}$, так что $M=|F|$ уже в large‑ветке.
+  Напоминание: $2^{(\\log n)^p}$ суперполиномиально при $p>1$, но здесь $p=1/59<1$.
+- `Toy‑тест:` $|F|=n^2$: порог $2^{(2\\log n)^{1/59}}=n^{o(1)}$, так что $M=|F|$ уже в large‑ветке.
 - `Статус:` reduction (large‑$M$ ветка фиксируется для $M=\\mathrm{poly}(|F|)$ при $\\kappa=59$).
 - `StepID:` Q43.S158-largem-branch-polym-check.
 - `InfoGain:` 1.
@@ -3862,21 +3856,20 @@ import Paperproof
 - `Линза:` Трейд‑офф.
 - `Утверждение (Q43.S159-thm41-bound-translate):`
   В large‑$M$ ветке (для $M=\\mathrm{poly}(|F|)$) применима Thm. 4.1:
-  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl(n^{1/d}/\\log^4 n\\bigr)\\Bigr),\\qquad \\exp=e^x.$$
+  $$N\\ \\ge\\ 2^{\\Omega\\bigl(n^{1/d}/\\log^4 n\\bigr)}.$$
   Для grid‑Tseitin $|F|=\\Theta(n^2)$, поэтому $\\log n=\\tfrac12\\log|F|+O(1)$ и
-  $$n^{1/d}=\\exp\\Bigl(\\tfrac{\\log n}{d}\\Bigr)
-            =\\exp\\Bigl(\\tfrac{\\log\\log n}{\\kappa}\\Bigr)
+  $$n^{1/d}=2^{\\tfrac{\\log n}{d}}
+            =2^{\\tfrac{\\log\\log n}{\\kappa}}
             =(\\log n)^{1/\\kappa+o(1)}.$$
   При $d=\\kappa\\log n/\\log\\log n$ с $\\kappa=59$ получаем
-  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)\\Bigr)
-      =\\exp\\Bigl(\\Omega((\\log|F|)^{-3.98\\ldots})\\Bigr)=|F|^{o(1)}.$$
+  $$N\\ \\ge\\ 2^{\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)}
+      =2^{\\Omega((\\log|F|)^{-3.98\\ldots})}=|F|^{o(1)}.$$
   Значит, для любого $N=|F|^C$ bound выполняется автоматически и не запрещает poly‑size.
-  Если трактовать $\\exp$ как $2^x$, оценка только уменьшается; классификация не меняется.
-  Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$, но здесь $p<1$.
+  Напоминание: $2^{(\\log n)^p}$ суперполиномиально при $p>1$, но здесь $p<1$.
 - `Exact citation:`
   Thm. 4.1: “For $d=O(\\log n/\\log\\log n)$ … requires size $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850`).
-- `Toy‑тест:` $|F|=n^2$ даёт порог $\\exp((\\log n)^{1/59}/\\log^4 n)=n^{o(1)}$, так что $N=|F|$
+- `Toy‑тест:` $|F|=n^2$ даёт порог $2^{(\\log n)^{1/59}/\\log^4 n}=n^{o(1)}$, так что $N=|F|$
   уже выше lower bound.
 - `Статус:` reduction (перевод bound Thm. 4.1 в $|F|$ для poly‑$M$).
 - `StepID:` Q43.S159-thm41-bound-translate.
@@ -4141,9 +4134,9 @@ import Paperproof
 - `Утверждение (Q43.S168-explicit-c-chernoff):`
   По Prop. 5 (Dubhashi–Ranjan, 1996) Chernoff–Hoeffding применим к отрицательно
   ассоциированным индикаторам, а Theorem A.16 (Arora–Barak) даёт (exp = $e^x$)
-  $$\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 2\\exp(-\\delta^2\\mu/3)\\quad(0<\\delta\\le 1).$$
+  $$\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 2e^{-\\delta^2\\mu/3}\\quad(0<\\delta\\le 1).$$
   В Lemma 5.4 имеем $\\mu=k/n'^2=C\\log n'$ (лог = $\\ln$) и $\\delta=0.01$, поэтому
-  $$\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 2\\exp(-(\\delta^2 C/3)\\log n')=2\\,n'^{-\\delta^2 C/3}.$$
+  $$\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 2e^{-(\\delta^2 C/3)\\log n'}=2\\,n'^{-\\delta^2 C/3}.$$
   Для $n'\\ge 2$ достаточно взять $C\\ge 12/\\delta^2=120000$, чтобы
   $\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 1/n'^3$; далее union bound по $n'^2$ квадратам
   даёт вероятность $\\ge 1-1/n'$. (Если $\\log=\\log_2$, то $C$ умножается на $\\ln 2$.)
@@ -4185,7 +4178,7 @@ import Paperproof
   B) Natural proofs check: неприменимо.
   C) Algebrization check: неприменимо.
 - `Следующий шаг:` выписать явные $c_1,c_2$ в формулировке Thm. 4.1 и проверить,
-  что дальнейшие пороги (например, $M>\\exp(n^\\alpha)$) интерпретируются корректно.
+  что дальнейшие пороги (например, $M>2^{n^\\alpha}$) интерпретируются корректно.
 
 -/
 
@@ -4195,9 +4188,9 @@ import Paperproof
 - `Линза:` Трейд‑офф.
 - `Утверждение (Q43.S171-check-thm41-threshold):`
   В HR’22 явно сказано, что $\\log$ берётся по базе $2$; значит порог
-  $$M\\le \\exp\\bigl(n^{\\alpha}\\bigr),\\qquad \\alpha=\\frac1d-\\frac1{d(d-1)},$$
-  в Proof Thm. 4.3 естественно читать как $\\exp_2(x)=2^x$.
-  Если использовать $\\exp_e(x)=e^x$, то это эквивалентно замене
+  $$M\\le 2^{n^{\\alpha}},\\qquad \\alpha=\\frac1d-\\frac1{d(d-1)},$$
+  в Proof Thm. 4.3 естественно читать как степень $2^x$.
+  Если использовать $e^x$, то это эквивалентно замене
   $n^{\\alpha}\\mapsto (\\ln 2)\\,n^{\\alpha}$ (константный множитель в экспоненте),
   поэтому асимптотические сравнения Q43 сохраняются; для явных констант
   нужно умножать/делить на $\\ln 2$ при смене базы.
@@ -4214,7 +4207,7 @@ import Paperproof
   A) Relativization check: релятивизуется (смена базы — числовая).
   B) Natural proofs check: неприменимо.
   C) Algebrization check: неприменимо.
-- `Следующий шаг:` привести все пороги $M>\\exp(n^\\alpha)$ в Q43 к базе $2$
+- `Следующий шаг:` привести все пороги $M>2^{n^\\alpha}$ в Q43 к базе $2$
   и проверить, что явные $c_1,c_2$ пересчитаны в той же базе.
 
 -/
@@ -4224,13 +4217,13 @@ import Paperproof
 
 - `Линза:` Эквивалентность.
 - `Утверждение (Q43.S172-exp2-consistency):`
-  В контексте HR’22 принимаем $\\exp(x)=2^x$ как стандартный выбор,
+  В контексте HR’22 принимаем базу $2$ как стандартный выбор,
   согласованный с $\\log_2$. При переходе к $e^x$ достаточно заменить
   $x\\mapsto (\\ln 2)\\,x$, то есть явные константы $c_1,c_2$ и пороги
-  $M>\\exp(n^\\alpha)$ меняются лишь на фактор $\\ln 2$ в показателе.
+  $M>2^{n^\\alpha}$ меняются лишь на фактор $\\ln 2$ в показателе.
   Это не влияет на сравнения вида “poly vs exp” и на факт, что
-  $\\exp\\bigl((\\log n)^k\\bigr)$ суперполиномиальна при $k>1$.
-- `Toy‑тест:` $2^{(\\log_2 n)^2}=\\exp\\bigl((\\ln 2)(\\log_2 n)^2\\bigr)$
+  $2^{(\\log n)^k}$ суперполиномиально при $k>1$.
+- `Toy‑тест:` $2^{(\\log_2 n)^2}=e^{(\\ln 2)(\\log_2 n)^2}$
   и превосходит $n^c$ для любого фиксированного $c$.
 - `Exact citation:`
   определение базы логарифма — `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`;
@@ -4242,7 +4235,7 @@ import Paperproof
   A) Relativization check: релятивизуется (числовая смена базы).
   B) Natural proofs check: неприменимо.
   C) Algebrization check: неприменимо.
-- `Следующий шаг:` пересчитать явные $c_1,c_2$ и все пороги с $\\exp$
+- `Следующий шаг:` пересчитать явные $c_1,c_2$ и все пороги с $2^{(\\cdot)}$
   в единой базе $2$ (для констант — учесть множители $\\ln 2$).
 
 -/
@@ -4252,7 +4245,7 @@ import Paperproof
 
 - `Линза:` Эквивалентность.
 - `Утверждение (Q43.S173-exp2-c1c2-rescale):`
-  Переходим к соглашению $\\exp(x)=\\exp_2(x)=2^x$ и $\\log=\\log_2$.
+  Переходим к соглашению $\\exp_2(x):=2^x$ и $\\log=\\log_2$.
   Тогда явные константы из §16.310 уже согласованы с базой $2$ (они получены
   из битового кодирования и $\\log_2$), и формула Proof Thm. 4.1 читается как
   $$N\\le 2^{\\,n^{1/d}/(c_1\\log_2^4 n)}\\qquad\\text{и}\\qquad
@@ -4277,7 +4270,32 @@ import Paperproof
   B) Natural proofs check: неприменимо.
   C) Algebrization check: неприменимо.
 - `Следующий шаг:` провести единый проход по Q43 и заменить все
-  $\\exp(\\cdot)$ на $2^{(\\cdot)}$ с фиксированной базой.
+  $2^{(\\cdot)}$ и связанные пороги на единую базу $2$.
+
+-/
+
+/-!
+### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S174-exp2-threshold-sweep):`
+  Во всех Q43‑оценках экспоненциального роста использована форма $2^{(\\cdot)}$
+  (в соответствии с $\\log_2$ из HR’22); для хвостов Чернова и оценок,
+  где явно используется натуральная база, записано $e^{(\\cdot)}$.
+  Оставшиеся упоминания `exp` — только в прямых цитатах источников.
+- `Toy‑тест:` $2^{(\\log n)^k}$ суперполиномиально при $k>1$; например
+  $2^{(\\log_2 n)^2}=n^{\\log_2 n}$ превосходит $n^c$ для любого фиксированного $c$.
+- `Exact citation:`
+  база логарифмов $\\log_2$ в HR’22 — `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Статус:` reduction (нормализация обозначений).
+- `StepID:` Q43.S174-exp2-threshold-sweep.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` пройти цитаты Q43 и добавить короткие пометы “exp in source = 2^x”
+  там, где это влияет на интерпретацию порогов.
 
 -/
 

@@ -188,6 +188,13 @@ theorem Q43_thm41_c1_exp2_eq (A : Nat) : Q43_thm41_c1_exp2 A = Q43_thm41_c1 A :=
 theorem Q43_thm41_c2_exp2_eq (A : Nat) : Q43_thm41_c2_exp2 A = Q43_thm41_c2 A := by
   rfl
 
+-- Q43.S174-exp2-threshold-sweep: base-2 large-M threshold helper.
+def Q43_largeM_threshold (n alpha : Nat) : Nat := Q43_exp2 (n ^ alpha)
+
+theorem Q43_largeM_threshold_def (n alpha : Nat) :
+    Q43_largeM_threshold n alpha = Q43_exp2 (n ^ alpha) := by
+  rfl
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

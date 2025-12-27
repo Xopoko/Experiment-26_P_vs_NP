@@ -36,19 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S173-exp2-c1c2-rescale
-  - `NextStepID:` Q43.S174-exp2-threshold-sweep
+  - `LastStepID:` Q43.S174-exp2-threshold-sweep
+  - `NextStepID:` Q43.S175-exp2-quote-annotation
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.313
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.314
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (c1,c2 rescale).
+  - `Lens:` Сжатие/канонизация (exp→$2^{(\\cdot)}$).
   - `Artifact:` Reduction.
-  - `Update:` $c_1,c_2$ из §16.310 согласованы с $\\exp_2$ (битовое кодирование и $\\log_2$);
-    при переходе к $e^x$ требуется явный множитель $\\ln 2$ в показателе и
-    $c_1^{(e)}=c_1/(\\ln2)^5$, $c_2^{(e)}=c_2/(\\ln2)^4$ (с поглощением $(\\ln2)^{-(d-1)}$).
-    См. `formal/Notes/TseitinLocalEF.lean` §16.313.
-  - `Use:` пройти весь Q43 и заменить $\\exp(\\cdot)$ на $2^{(\\cdot)}$ в единой базе.
+  - `Update:` в Q43 все асимптотические $\\exp(\\cdot)$ заменены на $2^{(\\cdot)}$,
+    а натуральные экспоненты (Чернов) записаны как $e^{(\\cdot)}$; оставшиеся `exp(…)`
+    — только прямые цитаты источников. См. `formal/Notes/TseitinLocalEF.lean` §16.314.
+  - `Use:` пройти цитаты Q43 и добавить пометы “exp in source = $2^x$” там, где это влияет на пороги.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
