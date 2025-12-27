@@ -101,4 +101,4 @@ Q43.S197-flat-eval-size-metric-tparam	Proof	formal/WIP/Work.lean	PENDING	define 
 Q43.S198-flat-eval-tparam-usage	Proof	formal/WIP/Work.lean	PENDING	derive t<=proofSize via lineMax (see formal/Notes/TseitinLocalEF.lean 16.338)
 Q43.S199-flat-eval-tparam-ologs	Proof	formal/WIP/Work.lean	PENDING	log2 monotone gives t<=log2 proofSize (see formal/Notes/TseitinLocalEF.lean 16.339)
 Q43.S200-flat-eval-tparam-ologn	Reduction	formal/WIP/Work.lean	PENDING	poly-size implies t=O(log_2 n) (see formal/Notes/TseitinLocalEF.lean 16.340)
-Q43.S205-flat-eval-hr-neta-recursion	Reduction	formal/WIP/Work.lean	PENDING	explicit lower bound n_eta >= n/(A log_2^{a+c1} n)^eta (see formal/Notes/TseitinLocalEF.lean 16.345)
+Q39.S66-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d	Counterexample	formal/WIP/Work.lean	PENDING	2D monotone blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.207)
