@@ -42,6 +42,7 @@ Q39.S65-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microstep
 Q39.S68-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix	Counterexample	formal/WIP/Work.lean	PENDING	strict 2D-prefix blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.209)
 Q39.S69-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier	Counterexample	formal/WIP/Work.lean	PENDING	frontier blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.210)
 Q39.S70-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit	Counterexample	formal/WIP/Work.lean	PENDING	unit frontier blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.211)
+Q39.S71-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip	Counterexample	formal/WIP/Work.lean	PENDING	one-strip unit frontier still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.212)
 Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
 Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
 Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold
