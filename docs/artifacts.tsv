@@ -63,3 +63,4 @@ Q43.S176-exp2-quote-sweep	Exact citation	formal/WIP/Work.lean	PENDING	sweep exp 
 Q43.S177-exp2-quote-scan-core	Exact citation	formal/WIP/Work.lean	PENDING	scan core exp quotes and fix base (see formal/Notes/TseitinLocalEF.lean §16.317)
 Q43.S178-exp2-quote-scan-remaining	Exact citation	formal/WIP/Work.lean	PENDING	scan remaining exp citations in core/summary (see formal/Notes/TseitinLocalEF.lean §16.318)
 Q43.S179-exp2-quote-scan-analytic	Exact citation	formal/WIP/Work.lean	PENDING	mark analytic exp as e^x (see formal/Notes/TseitinLocalEF.lean §16.319)
+Q43.S180-exp2-quote-scan-logbases	Exact citation	formal/WIP/Work.lean	PENDING	log_2 vs ln made explicit in GIRS-analytic steps (see formal/Notes/TseitinLocalEF.lean §16.320)

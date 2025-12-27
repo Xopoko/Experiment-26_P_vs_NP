@@ -4397,6 +4397,28 @@ import Paperproof
 -/
 
 /-!
+### 16.320. Исследовательский шаг (exact citation): лог‑база в аналитике GIRS‑upper
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S180-exp2-quote-scan-logbases):`
+  В аналитических местах GIRS‑upper (`formal/Notes/TseitinCore.lean` §16.119–§16.121)
+  база логарифмов сделана явной: в переходах вида $2^{\\log X}=X$ используется $\\log_2$,
+  а в оптимизации через $L:=\\ln X$ сохраняется натуральный логарифм.
+- `Exact citation:`
+  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Статус:` exact citation (база логов отмечена; асимптотика не меняется).
+- `StepID:` Q43.S180-exp2-quote-scan-logbases.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` просканировать оставшиеся $\\log$ в core и привести к $\\log_2$/$\\ln$ при необходимости.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
