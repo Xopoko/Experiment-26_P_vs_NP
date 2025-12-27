@@ -1804,6 +1804,100 @@ theorem Q43_grid_ratio_mono_on_plateau {k n m : Nat} (hk : 2 <= k)
     simpa [hlogn, hlogm]
   exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
 
+-- Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-intervals-cover:
+-- upper plateau: for n in [(3/2)·2^k, 2^(k+1)) (k≥2), log2 |F| = 2k+1 for |F|=n^2.
+theorem Q43_log2_grid_size_eq_double_succ_of_range {k n : Nat} (hk : 2 <= k)
+    (hlo : 3 * 2 ^ (k - 1) <= n) (hhi : n < 2 ^ (k + 1)) :
+    Nat.log2 (Q43_grid_size n) = 2 * k + 1 := by
+  set t : Nat := 2 ^ (k - 1)
+  have htpos : 0 < t := Nat.pow_pos (by decide) _
+  have h3pos : 0 < 3 * t := Nat.mul_pos (by decide) htpos
+  have hlo' : 3 * t <= n := by simpa [t] using hlo
+  have hnpos : 0 < n := lt_of_lt_of_le h3pos hlo'
+  have hnne : n ≠ 0 := Nat.ne_of_gt hnpos
+  have hne : Q43_grid_size n ≠ 0 := by
+    simpa [Q43_grid_size] using (Nat.mul_ne_zero hnne hnne)
+  have hpow_lo : (3 * t) ^ 2 <= n ^ 2 := Q43_pow_le_pow_of_le hlo'
+  have hpowt : 2 ^ (2 * (k - 1)) = t * t := by
+    have hpow' : 2 ^ ((k - 1) * 2) = (2 ^ (k - 1)) ^ 2 := Nat.pow_mul 2 (k - 1) 2
+    simpa [t, Nat.mul_comm, Nat.pow_two] using hpow'
+  have hle : 2 <= 2 * k := by
+    have hk1 : 1 <= k := le_trans (by decide : 1 <= 2) hk
+    have hle' : 2 * 1 <= 2 * k := Nat.mul_le_mul_left 2 hk1
+    simpa using hle'
+  have hexp : 2 * (k - 1) + 3 = 2 * k + 1 := by
+    calc
+      2 * (k - 1) + 3 = (2 * k - 2) + 3 := by
+        simp [Nat.mul_sub_left_distrib, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+      _ = (2 * k - 2) + 2 + 1 := by simp [Nat.add_assoc]
+      _ = 2 * k + 1 := by
+        have hsub : (2 * k - 2) + 2 = 2 * k := Nat.sub_add_cancel hle
+        simpa [hsub, Nat.add_assoc]
+  have hpow8 : 2 ^ (2 * k + 1) = 8 * t * t := by
+    calc
+      2 ^ (2 * k + 1) = 2 ^ (2 * (k - 1) + 3) := by simpa [hexp]
+      _ = 2 ^ (2 * (k - 1)) * 2 ^ 3 := by
+        simp [Nat.pow_add]
+      _ = 8 * t * t := by
+        simp [t, hpowt, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+  have hpow3 : (3 * t) ^ 2 = 9 * t * t := by
+    simp [Nat.pow_two, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+  have hcoeff : 8 <= 9 := by decide
+  have hmul : 8 * t * t <= 9 * t * t := by
+    have hmul' : 8 * (t * t) <= 9 * (t * t) := Nat.mul_le_mul_right _ hcoeff
+    simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using hmul'
+  have hlow' : 2 ^ (2 * k + 1) <= (3 * t) ^ 2 := by
+    simpa [hpow8, hpow3, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using hmul
+  have hlow : 2 ^ (2 * k + 1) <= Q43_grid_size n := by
+    have hlow'' : 2 ^ (2 * k + 1) <= n ^ 2 := le_trans hlow' hpow_lo
+    simpa [Q43_grid_size, Nat.pow_two] using hlow''
+  set u : Nat := 2 ^ (k + 1)
+  have hup : n < u := by simpa [u] using hhi
+  have htpos_u : 0 < u := Nat.pow_pos (by decide) _
+  have h1 : n * n < n * u := by
+    have h1' : n * n < u * n := (Nat.mul_lt_mul_right (a0 := hnpos)).2 hup
+    simpa [Nat.mul_comm] using h1'
+  have h2 : n * u < u * u := by
+    exact (Nat.mul_lt_mul_right (a0 := htpos_u)).2 hup
+  have hmul' : n * n < u * u := lt_trans h1 h2
+  have hpow_hi : n ^ 2 < u ^ 2 := by
+    simpa [Nat.pow_two, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc] using hmul'
+  have hexp_u : (k + 1) * 2 = 2 * k + 2 := by
+    calc
+      (k + 1) * 2 = k * 2 + 1 * 2 := by
+        simpa [Nat.add_mul]
+      _ = 2 * k + 2 := by
+        simp [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+  have hu2 : u ^ 2 = 2 ^ (2 * k + 2) := by
+    have hpow' : 2 ^ ((k + 1) * 2) = (2 ^ (k + 1)) ^ 2 := Nat.pow_mul 2 (k + 1) 2
+    calc
+      u ^ 2 = (2 ^ (k + 1)) ^ 2 := by rfl
+      _ = 2 ^ ((k + 1) * 2) := by
+        symm
+        exact hpow'
+      _ = 2 ^ (2 * k + 2) := by
+        simp [hexp_u]
+  have hupper : Q43_grid_size n < 2 ^ (2 * k + 2) := by
+    have hpow_hi' : n ^ 2 < 2 ^ (2 * k + 2) := by
+      simpa [hu2] using hpow_hi
+    simpa [Q43_grid_size, Nat.pow_two] using hpow_hi'
+  exact (Nat.log2_eq_iff hne).2 ⟨hlow, hupper⟩
+
+-- apply the upper plateau to the ratio monotonicity on [3·2^(k-1), 2^(k+1)).
+theorem Q43_grid_ratio_mono_on_plateau_upper {k n m : Nat} (hk : 2 <= k)
+    (hn : 3 * 2 ^ (k - 1) <= n) (hm : 3 * 2 ^ (k - 1) <= m)
+    (hn_hi : n < 2 ^ (k + 1)) (hm_hi : m < 2 ^ (k + 1))
+    (h : n <= m) :
+    Q43_grid_ratio n <= Q43_grid_ratio m := by
+  have hlogn : Nat.log2 (Q43_grid_size n) = 2 * k + 1 :=
+    Q43_log2_grid_size_eq_double_succ_of_range (k:=k) (n:=n) hk hn hn_hi
+  have hlogm : Nat.log2 (Q43_grid_size m) = 2 * k + 1 :=
+    Q43_log2_grid_size_eq_double_succ_of_range (k:=k) (n:=m) hk hm hm_hi
+  have hlog : Nat.log2 (Q43_grid_size n) = Nat.log2 (Q43_grid_size m) := by
+    simpa [hlogn, hlogm]
+  exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
