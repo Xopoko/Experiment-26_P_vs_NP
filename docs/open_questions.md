@@ -38,19 +38,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S203-flat-eval-hr-param-check
-  - `NextStepID:` Q43.S204-flat-eval-hr-neta-threshold
+  - `LastStepID:` Q43.S204-flat-eval-hr-neta-threshold
+  - `NextStepID:` Q43.S205-flat-eval-hr-neta-recursion
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.343
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.344
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (HR‑пороги vs polylog).
+  - `Lens:` Трейд‑офф (HR‑рекурсия $n_\\eta$).
   - `Artifact:` Reduction.
-  - `Update:` если $t'(n)\\le(\\log_2 n)^a$ и $s(n)\\le(\\log_2 n)^b$ при фиксированных $a,b$,
-    то существует $n_0$, что для $n\\ge n_0$ получаем $t'\\le n/16$ и $s\\le n/32$;
-    HR‑проверки редуцируются к контролю, что рекурсия $n_\\eta$ не опускается ниже $n_0$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.343.
-  - `Use:` пороги HR сведены к нижней границе на $n_\\eta$ при polylog‑режиме.
+  - `Update:` в HR‑рекурсии $n_\\eta=\\lfloor n_{\\eta-1}/(A\\,t'\\,\\log_2^{c_1} n_{\\eta-1})\\rfloor$
+    при $t'\\!=\\mathrm{polylog}(n)$ существует $n_0$ и горизонт $\\eta_*$, что
+    $n_\\eta\\ge n_0$ и выполняются $t'(\\eta)\\le n_\\eta/16$, $s(\\eta)\\le n_\\eta/32$
+    для всех $\\eta\\le\\eta_*$. См. `formal/Notes/TseitinLocalEF.lean` §16.344.
+  - `Use:` HR‑пороги сведены к контролю спада $n_\\eta$ в polylog‑режиме.
   - `BarrierCheck:` A) Relativization: да (арифметика на Nat). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

@@ -413,6 +413,16 @@ theorem Q43_hrThreshold_of_le {n t s : Nat} (ht : t <= n / 16) (hs : s <= n / 32
     Q43_hrThreshold n t s := by
   exact And.intro ht hs
 
+-- Q43.S204-flat-eval-hr-neta-threshold: one-step HR recursion placeholder.
+def Q43_hrDenom (A t logc : Nat) : Nat := A * t * logc
+
+def Q43_neta_step (n A t logc : Nat) : Nat :=
+  n / Q43_hrDenom A t logc
+
+theorem Q43_neta_step_le (n A t logc : Nat) :
+    Q43_neta_step n A t logc <= n := by
+  simpa [Q43_neta_step, Q43_hrDenom] using (Nat.div_le_self n (A * t * logc))
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
