@@ -303,6 +303,18 @@ theorem Q39_rank2_monotone2d_strict_prefix :
     Q39_rank2_12 Q39_monotone2d_strict_prefix_vec1 Q39_monotone2d_strict_prefix_vec2 := by
   decide
 
+-- Q39.S69-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier:
+-- strict 2D-prefix with frontier blocks still gives rank 2.
+def Q39_frontier_block_vec1 : BitVec12 :=
+  [false, true, true, false, false, false, false, true, true, false, false, false]
+
+def Q39_frontier_block_vec2 : BitVec12 :=
+  [false, false, false, true, true, true, false, false, false, true, true, true]
+
+theorem Q39_rank2_frontier_block :
+    Q39_rank2_12 Q39_frontier_block_vec1 Q39_frontier_block_vec2 := by
+  decide
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by
