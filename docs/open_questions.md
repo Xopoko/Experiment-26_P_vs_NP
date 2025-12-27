@@ -36,21 +36,21 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048
-  - `NextStepID:` Q43.S245-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-log2-jump
+  - `LastStepID:` Q43.S245-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-log2-jump
+  - `NextStepID:` Q43.S246-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_grid_ratio_drop_2047_2048)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_grid_ratio_mono_of_log2_eq)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
-  - `Artifact:` Counterexample.
-  - `Update:` контрпример монотонности отношения
-    $|F|/\\log_2^5|F|$ при $\\log_2:=\\mathrm{Nat.log2}$:
-    `Q43_grid_ratio 2048 < Q43_grid_ratio 2047` из-за скачка $\\log_2$.
-    См. `formal/WIP/Work.lean` (Q43_grid_ratio_drop_2047_2048).
-  - `Use:` следующий шаг — поднять порог без глобальной монотонности:
-    либо покусково по интервалам $[2^k,2^{k+1})$ (фиксированный $\\log_2$),
-    либо заменить на вещественный лог и дать нижнюю оценку, устойчивую к скачкам.
+  - `Artifact:` Proof.
+  - `Update:` доказана монотонность отношения $|F|/\\log_2^5|F|$
+    при фиксированном значении $\\log_2|F|$:
+    `Q43_grid_ratio_mono_of_log2_eq` использует равенство `Nat.log2` и монотонность числителя.
+    См. `formal/WIP/Work.lean` (Q43_grid_ratio_mono_of_log2_eq).
+  - `Use:` следующий шаг — описать интервалы $n$, где
+    `Nat.log2 (Q43_grid_size n)` постоянно (две под‑полки на каждом $[2^k,2^{k+1})$),
+    и применить кусочную монотонность для lift порога от $n_0$.
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

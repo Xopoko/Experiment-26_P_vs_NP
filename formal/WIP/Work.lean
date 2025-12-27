@@ -1659,6 +1659,16 @@ theorem Q43_grid_ratio_drop_2047_2048 :
     Q43_grid_ratio 2048 < Q43_grid_ratio 2047 := by
   decide
 
+-- Q43.S245-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-log2-jump:
+-- ratio is monotone on subranges where log2 |F| is constant.
+theorem Q43_grid_ratio_mono_of_log2_eq {n m : Nat} (h : n <= m)
+    (hlog : Nat.log2 (Q43_grid_size n) = Nat.log2 (Q43_grid_size m)) :
+    Q43_grid_ratio n <= Q43_grid_ratio m := by
+  unfold Q43_grid_ratio
+  have hgrid : Q43_grid_size n <= Q43_grid_size m := Q43_grid_size_mono h
+  simpa [hlog] using
+    (Nat.div_le_div_right (c := (Nat.log2 (Q43_grid_size m)) ^ 5) hgrid)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
