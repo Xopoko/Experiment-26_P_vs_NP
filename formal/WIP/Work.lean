@@ -235,6 +235,15 @@ theorem Q39_rank2_alternating_bothchange :
     Q39_rank2_8 Q39_alternating_bothchange_vec1 Q39_alternating_bothchange_vec2 := by
   decide
 
+-- Q39.S63-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-active-columnstep:
+-- column-steps keep both strips active and change supports, yet rank 2 persists.
+def Q39_active_column_vec1 : BitVec8 := [true, true, false, false, true, true, false, false]
+def Q39_active_column_vec2 : BitVec8 := [false, false, true, true, false, false, true, true]
+
+theorem Q39_rank2_active_column :
+    Q39_rank2_8 Q39_active_column_vec1 Q39_active_column_vec2 := by
+  decide
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by
