@@ -11,26 +11,26 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S71-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S72-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating
+  - `LastStepID:` Q39.S72-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S73-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Коммуникация/ранг (one-strip unit frontier).
-  - `Artifact:` Counterexample (one-strip unit frontier).
-  - `Update:` toy‑контрпример при $k=2$: даже при **one‑strip unit‑frontier**
+  - `Lens:` Коммуникация/ранг (alternating unit frontier).
+  - `Artifact:` Counterexample (alternating unit frontier).
+  - `Update:` toy‑контрпример при $k=2$: даже при **alternating unit‑frontier**
     в строгой 2D‑prefix‑цепочке получаем
-    $p_{\\mathrm{fr}}(U_2)=(001000,000000)$ и
-    $p_{\\mathrm{fr}}(U_3)=(000100,000000)$ ⇒ ранг 2.
-    См. `formal/Notes/TseitinQ39.lean` §16.212 и toy‑ранг в `formal/WIP/Work.lean`.
-  - `Use:` one‑strip unit‑frontier не снижает ранг; следующий тест —
-    требовать чередование полос.
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.212). `InfoGain:` 1.
+    $p_{\\mathrm{fr}}(U_2)=(000100,000000)$ и
+    $p_{\\mathrm{fr}}(U_3)=(000000,001000)$ ⇒ ранг 2.
+    См. `formal/Notes/TseitinQ39.lean` §16.213 и toy‑ранг в `formal/WIP/Work.lean`.
+  - `Use:` alternating unit‑frontier не снижает ранг; следующий тест —
+    требовать глобальный порядок строк при чередовании.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.213). `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? да (строгая 2D‑prefix‑цепочка с one‑strip unit‑frontier).
+    - `A) Relativization check:` Relativizes? да (строгая 2D‑prefix‑цепочка с alternating unit‑frontier).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.212
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.213
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.

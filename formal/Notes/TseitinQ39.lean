@@ -1827,6 +1827,30 @@ import Paperproof
 -/
 
 /-!
+### 16.213. Исследовательский шаг (counterexample): alternating unit‑frontier не снижает ранг
+
+- `Линза:` Коммуникация/ранг.
+- `Утверждение (попытка):` Усилим условие: в строгой 2D‑prefix цепочке
+  unit‑frontier чередуется между полосами $S_{j-1}$ и $S_{j+1}$ на каждом шаге.
+  Ожидание: такое чередование снизит проекционный ранг до 1.
+- `Контрпример (toy):` Возьмём grid $6\\times 6$, $j=3$ и цепочку
+  $$U_1=[1,3]\\times[1,2],\\qquad U_2=[1,4]\\times[1,2],\\qquad U_3=[1,4]\\times[1,3].$$
+  Тогда frontier на $S_{j-1}$ — единичная строка $\\{4\\}$ для $U_2$,
+  а для $U_3$ frontier переключается на $S_{j+1}$ (единичная строка $\\{3\\}$).
+  В порядке $(e_1,\\dots,e_6,f_1,\\dots,f_6)$:
+  $$p_{\\mathrm{fr}}(U_2)=(000100,000000),\\qquad p_{\\mathrm{fr}}(U_3)=(000000,001000),$$
+  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
+- `Toy‑тест:` $n=6$, $j=3$: alternating unit‑frontier даёт ранг 2
+  (см. `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_alternating).
+- `Статус:` контрпример (toy, $k=2$): alternating unit‑frontier не снижает ранг.
+- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
+- `Следующий шаг:` усилить условие: требовать, чтобы frontier чередовался **и**
+  оставался в фиксированном порядке по строкам (global order), и проверить ранг.
+- `StepID:` Q39.S72-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating.
+- `InfoGain:` 1.
+-/
+
+/-!
 ### 16.189. Исследовательский шаг (counterexample): синхронный глобальный шаг по всем колонкам не снижает проекционный ранг при $k=2$
 
 - `Линза:` Инвариант.
