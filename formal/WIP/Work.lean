@@ -467,6 +467,15 @@ theorem Q43_neta_iter_le (n A t logc : Nat) : ∀ k, Q43_neta_iter n A t logc k 
         exact Q43_neta_step_le _ _ _ _
       exact le_trans hstep ih
 
+-- Q43.S206-flat-eval-hr-neta-range: eta-range predicate for HR recursion.
+def Q43_etaRange (n eta : Nat) : Prop :=
+  eta <= Nat.log2 n
+
+theorem Q43_etaRange_mono {n m eta : Nat} (h : n <= m) (hEta : Q43_etaRange n eta) :
+    Q43_etaRange m eta := by
+  unfold Q43_etaRange at *
+  exact le_trans hEta (Q43_log2_mono h)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

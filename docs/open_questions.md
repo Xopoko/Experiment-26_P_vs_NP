@@ -38,21 +38,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S205-flat-eval-hr-neta-recursion
-  - `NextStepID:` Q43.S206-flat-eval-hr-neta-range
+  - `LastStepID:` Q43.S206-flat-eval-hr-neta-range
+  - `NextStepID:` Q43.S207-flat-eval-hr-level-count
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.345
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.346
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (нижняя оценка $n_\\eta$).
+  - `Lens:` Инвариант (диапазон $\\eta$).
   - `Artifact:` Reduction.
-  - `Update:` при $t'(m)\\le(\\log_2 m)^a$ и HR‑рекурсии
-    $n_\\eta=\\lfloor n_{\\eta-1}/(A\\,t'\\,\\log_2^{c_1} n_{\\eta-1})\\rfloor$
-    имеем $n_\\eta\\ge n/(A\\,\\log_2^{a+c_1} n)^\\eta$; отсюда при
-    $\\eta\\le \\log_2 n/(2(a+c_1+1)\\log_2\\log_2 n)$ получаем $n_\\eta\\ge n^{1/2}$
-    и пороги HR сохраняются. См. `formal/Notes/TseitinLocalEF.lean` §16.345.
-  - `Use:` явная формула спада $n_\\eta$ редуцирует проверку порогов к диапазону $\\eta$.
-  - `BarrierCheck:` A) Relativization: да (арифметика на Nat). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Update:` при $t'(m)\\le(\\log_2 m)^a$ и $n_\\eta\\ge n/(A\\,\\log_2^{a+c_1} n)^\\eta$
+    выбор $\\eta\\le \\log_2 n/(2(a+c_1+1)\\log_2\\log_2 n)$ гарантирует $n_\\eta\\ge n^{1/2}$,
+    и для $n$ достаточно большого выполняются $t'(\\eta)\\le n_\\eta/16$, $s(\\eta)\\le n_\\eta/32$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.346.
+  - `Use:` диапазон $\\eta$ зафиксирован; дальше нужно связать его с числом уровней HR‑рекурсии.
+  - `BarrierCheck:` A) Relativization: да (параметрическая оценка). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 
