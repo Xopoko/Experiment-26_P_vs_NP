@@ -171,6 +171,16 @@ def Q39_global_order_vec2 : BitVec8 := Q39_prefix_vec4
 theorem Q39_rank2_global_order : Q39_rank2_8 Q39_global_order_vec1 Q39_global_order_vec2 := by
   simpa [Q39_global_order_vec1, Q39_global_order_vec2] using Q39_rank2_prefix2_prefix4
 
+-- Q39.S56-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps:
+-- microstep chain still exposes the same rank-2 witness.
+def Q39_global_order_micro_vec1 : BitVec8 := Q39_prefix_vec2
+def Q39_global_order_micro_vec2 : BitVec8 := Q39_prefix_vec4
+
+theorem Q39_rank2_global_order_microsteps :
+    Q39_rank2_8 Q39_global_order_micro_vec1 Q39_global_order_micro_vec2 := by
+  simpa [Q39_global_order_micro_vec1, Q39_global_order_micro_vec2] using
+    Q39_rank2_prefix2_prefix4
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by

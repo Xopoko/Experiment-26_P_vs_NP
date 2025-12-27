@@ -31,6 +31,7 @@ Q39.S52-2k-two-strip-chain-strip-support-rowcol-2d-prefix	Counterexample	formal/
 Q39.S53-2k-two-strip-chain-strip-support-rowcol-2d-prefix-microsteps	Counterexample	formal/WIP/Work.lean	PENDING	2D-prefix microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.194)
 Q39.S54-2k-two-strip-chain-strip-support-rowcol-2d-prefix-lockstep	Counterexample	formal/WIP/Work.lean	PENDING	global 2D-prefix lock-step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.195)
 Q39.S55-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order	Counterexample	formal/WIP/Work.lean	PENDING	global block order still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.196)
+Q39.S56-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps	Counterexample	formal/WIP/Work.lean	PENDING	global block-order microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.197)
 Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
 Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
 Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold

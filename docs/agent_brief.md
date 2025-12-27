@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S55-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order
-- `Do-not-repeat (next 2 runs):` Q39.S54-2k-two-strip-chain-strip-support-rowcol-2d-prefix-lockstep, Q39.S55-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order
+- `LastStepID:` Q39.S56-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps
+- `Do-not-repeat (next 2 runs):` Q39.S55-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order, Q39.S56-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: t сведён к polylog n при quasi-poly size; следующий шаг — проверить HR-совместимость.
-Q39: глобальный порядок блоков всё равно даёт ранг 2; следующий шаг — микрошаги без «скачков».
+Q39: глобальный порядок блоков с микрошагами даёт ранг 2; следующий шаг — строгая альтернация row/column шагов.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: глобальный порядок блоков всё равно даёт
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (проверить микрошаги глобального порядка блоков без «скачков»).
+- Q39 из `docs/open_questions.md` (проверить строгую альтернацию row/column микрошагов).
 - Q43 из `docs/open_questions.md` (проверить HR-совместимость при t=polylog).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: глобальный порядок блоков всё равно даёт
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Трейд-офф→Эквивалентность→Инвариант→Коммуникация/ранг
+Последние:Трейд-офф→Эквивалентность→Инвариант→Коммуникация/ранг→Инвариант
