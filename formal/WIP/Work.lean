@@ -171,6 +171,12 @@ def Q43_thm41_c1 (A : Nat) : Nat := 16 * 152 * Q43_thm41_c2 A
 -- Q43.S171-check-thm41-threshold: exp base 2 for HR'22 conventions.
 def Q43_exp2 (x : Nat) : Nat := 2 ^ x
 
+-- Q43.S172-exp2-consistency: generic exp base for clarity.
+def Q43_exp_base (b x : Nat) : Nat := b ^ x
+
+theorem Q43_exp2_eq_base (x : Nat) : Q43_exp2 x = Q43_exp_base 2 x := by
+  rfl
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
