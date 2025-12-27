@@ -23,17 +23,5 @@ lake build Notes
 lake build WIP
 ```
 
-Mathlib caches (recommended if you start importing `Mathlib.*`):
-
-```bash
-cd formal
-lake exe cache get
-```
-
-Mathlib import tips:
-- `Mathlib.Data.ZMod.Basic` does not provide `Field`/`IsDomain` for `ZMod p`; use `import Mathlib.Algebra.Field.ZMod`.
-- Consider `set_option autoImplicit false` in scratch files to catch missing imports early.
-- Prefer targeted cache downloads (e.g. `lake exe cache get Mathlib/Algebra/Field/ZMod.lean`) to avoid long full-cache fetches.
-
 Policy:
 - The final theorem (P != NP or P = NP) must be fully formalized in Lean and live in `PvNP/Core/`.
