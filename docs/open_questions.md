@@ -11,8 +11,8 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S105-globalfixedpair-fixedorientation-contiguous-shift-alt18
-  - `NextStepID:` Q39.S106-globalfixedpair-fixedorientation-contiguous-shift-alt19
+  - `LastStepID:` Q39.S106-globalfixedpair-fixedorientation-contiguous-shift-alt19
+  - `NextStepID:` Q39.S107-globalfixedpair-fixedorientation-contiguous-shift-alt20
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Коммуникация/ранг (alternating unit frontier).
@@ -21,15 +21,15 @@
     при global fixed‑pair и fixed orientation всё ещё даёт две ненулевые разные проекции ⇒ ранг 2.
     Toy‑check: попытка «убить» через wrap‑shift не снижает ранг.
     См. `formal/WIP/Work.lean`
-    (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt18_vec1/vec2).
-  - `Use:` следующий тест — следующий alt‑shift (alt19) для contiguous blocks.
+    (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt19_vec1/vec2).
+  - `Use:` следующий тест — следующий alt‑shift (alt20) для contiguous blocks.
   - `File:` `formal/WIP/Work.lean`. `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (toy‑ранг, комбинаторика).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt18)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt19)
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.

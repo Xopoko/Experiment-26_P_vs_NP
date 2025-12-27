@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S238-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-grid
-- `Do-not-repeat (next 2 runs):` Q43.S238-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-grid, Q39.S105-globalfixedpair-fixedorientation-contiguous-shift-alt18
+- `LastStepID:` Q39.S106-globalfixedpair-fixedorientation-contiguous-shift-alt19
+- `Do-not-repeat (next 2 runs):` Q39.S106-globalfixedpair-fixedorientation-contiguous-shift-alt19, Q43.S238-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-grid
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: монотонность |F|=n^2 по n зафиксирована; далее — монотонность log2|F| и общий шаг к порогу.
-Q39: alt18‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt19‑shift.
+Q39: alt19‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt20‑shift.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: alt18‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
