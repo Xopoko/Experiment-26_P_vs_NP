@@ -36,17 +36,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S139-polym-avoids-thm41-branch (IsPoly monotone)
-  - `NextStepID:` Q43.S140-polym-below-threshold
+  - `LastStepID:` Q43.S140-polym-below-threshold (IsPoly from polynomial bound)
+  - `NextStepID:` Q43.S141-poly-vs-exp-threshold
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` Q43_IsPoly_of_le (formal/WIP/Work.lean)
+  - `PublicSurface:` Q43_IsPoly_of_le_pow (formal/WIP/Work.lean)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Трейд‑офф (режимы по $M$ в HR Thm. 4.3).
-  - `Artifact:` Proof (IsPoly monotonicity).
-  - `Update:` добавлена лемма `Q43_IsPoly_of_le`: если $t$ полиномиальна и $s\\le t$ покомпонентно, то $s$ тоже полиномиальна;
-    toy‑check: при $n=0$ “+1” в определении IsPoly закрывает крайний случай.
-  - `Use:` позволяет переводить явные верхние оценки $M\\le n^k$ в `IsPoly`, чтобы отделить “poly‑$M$” от large‑$M$ ветки.
+  - `Artifact:` Proof (IsPoly from explicit polynomial bound).
+  - `Update:` добавлена лемма `Q43_IsPoly_of_le_pow`: если $s(n)\\le n^k$ для всех $n$, то $s$ полиномиальна в смысле `IsPoly`.
+    Доказательство использует монотонность через $n^k\\le n^k+1$ (Nat.le_succ) и ровно тот же показатель $k$.
+    Toy‑check: константная функция $s(n)=1$ полиномиальна при $k=0$.
+    Это фиксирует переход от явных polynomial‑bounds к `IsPoly` без дополнительных предположений.
+    Дальше нужно сравнить poly‑$M$ с large‑$M$ порогом из HR Thm. 4.3.
+  - `Use:` позволяет формально переводить “$M$ polynomial‑size” в `IsPoly` перед сравнением с large‑$M$ веткой.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

@@ -156,6 +156,13 @@ theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n
   intro n
   exact le_trans (hle n) (hk n)
 
+-- Q43.S140-polym-below-threshold: explicit polynomial bounds imply IsPoly.
+theorem Q43_IsPoly_of_le_pow {s : Nat -> Nat} (k : Nat) (hle : ∀ n, s n <= n ^ k) :
+    IsPoly s := by
+  refine ⟨k, ?_⟩
+  intro n
+  exact le_trans (hle n) (Nat.le_succ _)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
