@@ -36,20 +36,21 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S190-exp2-quote-scan-logbases-summary-exit
-  - `NextStepID:` Q43.S191-flat-eval-construction-pivot
+  - `LastStepID:` Q43.S191-flat-eval-construction-pivot
+  - `NextStepID:` Q43.S192-flat-eval-axiom-size-bound
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.330
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.331
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (log‑base audit exit).
+  - `Lens:` Трейд‑офф (size vs support).
   - `Artifact:` Reduction.
-  - `Update:` postaudit завершён: оставшиеся summary‑оценки либо с $\\log_2$,
-    либо в $O(\\log n)$/$O(N\\log N)$, где база несущественна; правило —
-    писать экспоненты как $2^{(\\cdot)}$ или $e^{(\\cdot)}$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.330.
-  - `Use:` аудит лог‑баз в summary закрыт; следующий шаг — вернуться к
-    построению cost‑$t$ evaluations или локализовать точку поломки.
+  - `Update:` pivot: размер формулы после развёртывания $p_i\\mapsto\\varphi_i(X)$
+    контролируется числом вхождений $p_i$ и размерами $|\\varphi_i|$; если
+    $|\\varphi_i|\\le\\mathrm{poly}(s)$ и $|F|=\\mathrm{poly}(n)$, то
+    $M(F)\\le\\mathrm{poly}(s)\\cdot\\mathrm{poly}(n)$ и $t=\\log_2 M(F)=O(\\log n+\\log s)$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.331.
+  - `Use:` Q43 сводится к контролю $|\\varphi_i|$ (или к eval‑конструкции без полного
+    развёртывания) для обеспечения малых evaluations.
   - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

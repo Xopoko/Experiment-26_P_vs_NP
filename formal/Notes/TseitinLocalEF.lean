@@ -4666,6 +4666,37 @@ import Paperproof
 -/
 
 /-!
+### 16.331. Исследовательский шаг (reduction): pivot — размер формулы после развёртывания extension‑переменных
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S191-flat-eval-construction-pivot):`
+  В flat local‑EF(s) при развёртывании $p_i\\leftrightarrow\\varphi_i(X)$ в строке $F$
+  размер формулы по $X$ оценивается как
+  $$M(F)\\le |F| + \\sum_{p_i\\in \\mathrm{vars}(F)} \\#_F(p_i)\\cdot|\\varphi_i|.$$
+  Поэтому если для всех $i$ выполнено $|\\varphi_i|\\le \\mathrm{poly}(s)$ и
+  $|F|=\\mathrm{poly}(n)$, то $M(F)\\le \\mathrm{poly}(s)\\cdot \\mathrm{poly}(n)$,
+  а параметр HR $t=\\log_2 M(F)$ остаётся $O(\\log n+\\log s)$.
+- `Reduction:` построение cost‑$t$ evaluations для строк flat local‑EF(s) сводится к
+  контролю размера формул $|\\varphi_i|$ (или к альтернативной оценке $M(F)$ без
+  развёртывания); без такой оценки $M(F)$ может быть сколь угодно большим даже при
+  $|\\mathrm{supp}(\\varphi_i)|\\le s$.
+- `Toy‑test:` если $F$ содержит $m$ копий $p$ и $|\\varphi|=2^{(\\log_2 n)^2}$,
+  то $M(F)=m\\cdot 2^{(\\log_2 n)^2}$ и $t=\\log_2 m + (\\log_2 n)^2$
+  (форма $2^{(\\log_2 n)^2}$ суперполиномиальна).
+- `Статус:` reduction (pivot: размер формулы после развёртывания — узкое место).
+- `StepID:` Q43.S191-flat-eval-construction-pivot.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (чистый подсчёт размера формулы).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` зафиксировать требуемое ограничение на $|\\varphi_i|$
+  (например, $|\\varphi_i|\\le \\mathrm{poly}(s)$ как часть модели local‑EF(s))
+  или предложить eval‑конструкцию, не зависящую от полного развёртывания.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
