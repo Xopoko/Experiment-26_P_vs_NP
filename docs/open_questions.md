@@ -37,20 +37,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S161-thm41-recount-plan
-  - `NextStepID:` Q43.S162-recount-lemma69-bits
+  - `LastStepID:` Q43.S162-recount-lemma69-bits
+  - `NextStepID:` Q43.S163-map-lemma42-a0a1a2
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.301
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.302
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (цепочка зависимостей констант).
+  - `Lens:` Инвариант (явные бит‑константы).
   - `Artifact:` Reduction.
-  - `Update:` выписан план пересчёта: $c_1,c_2$ из Proof Thm. 4.1 сводятся к явному $A$ в Lemma 4.2,
-    который зависит от $A_0,A_1,A_2$ из её доказательства, а те — от бит‑счёта в Lemma 6.9
-    (термины $A_1|S^*_g|,A_2|S^*_g|$). База $\\exp=e^x$ (HR‑нотация); при $2^x$ пороги только меньше.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.301 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:889–891, 1972–1974, 1996, 2336–2341`.
-  - `Use:` следующий шаг — пересчитать Lemma 6.9/6.8 с явными $A_1,A_2$ или зафиксировать невозможность.
+  - `Update:` пересчёт Lemma 6.9 по $A_1,A_2$ уже выполнен: $A_1^{\\mathrm{tot}}=24$ (или $A_1\\le 15$ без подписей)
+    из §16.224 и $A_2\\le 16$ из §16.225, опираясь на термины $A_1|S^{*}_g|,A_2|S^{*}_g|$ в Lemma 6.9.
+    База $\\exp=e^x$ (HR‑нотация); при $2^x$ пороги только меньше. См. `formal/Notes/TseitinLocalEF.lean` §16.302 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2336–2341`.
+  - `Use:` следующий шаг — сопоставить эти $A_1,A_2$ с одноимёнными константами в Proof Lemma 4.2 и оценить $A_0$.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

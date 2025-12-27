@@ -38,3 +38,4 @@ Q43.S158-largem-branch-polym-check	Reduction	formal/WIP/Work.lean	PENDING	kappa=
 Q43.S159-thm41-bound-translate	Reduction	formal/WIP/Work.lean	PENDING	Thm 4.1 bound rewritten in |F| terms; for kappa=59 it is subpoly (exp=e^x)
 Q43.S160-thm41-const-extract	Barrier	formal/WIP/Work.lean	PENDING	Proof Thm 4.1 uses unspecified c1/c2; explicit constants require full recount
 Q43.S161-thm41-recount-plan	Reduction	formal/WIP/Work.lean	PENDING	Explicit c1/c2 reduces to extracting A from Lemma 4.2 and A0/A1/A2 from Lemma 6.9
+Q43.S162-recount-lemma69-bits	Reduction	formal/WIP/Work.lean	PENDING	Explicit A1/A2 for Lemma 6.9 already fixed (A1tot=24, A2<=16); map to Lemma 4.2 constants
