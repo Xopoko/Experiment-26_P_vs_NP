@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S81-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap
-- `Do-not-repeat (next 2 runs):` Q39.S81-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap, Q43.S217-flat-eval-hr-depth-range-constants-a0-c1c2-apply-thm41
+- `LastStepID:` Q39.S82-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair
+- `Do-not-repeat (next 2 runs):` Q39.S82-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair, Q39.S81-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: log2‑порог Thm. 4.1 записан с явным $c_1$; следующий шаг — проверить режим $d$ и перевод в $|F|$.
-Q39: row/column swap‑симметрия не снижает ранг; следующий шаг — fixed‑pair row/column swap.
+Q39: fixed‑pair row/column swap не снижает ранг; следующий шаг — fixed‑pair + same‑order.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: row/column swap‑симметрия не снижает ранг; след
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (fixed‑pair row/column swap).
+- Q39 из `docs/open_questions.md` (fixed‑pair + same‑order).
 - Q43 из `docs/open_questions.md` (проверить log2‑порог в режиме $d$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: row/column swap‑симметрия не снижает ранг; след
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Коммуникация/ранг→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность

@@ -1891,6 +1891,26 @@ import Paperproof
 -/
 
 /-!
+### 16.216. Исследовательский шаг (counterexample): fixed‑pair row/column swap не снижает ранг
+
+- `Линза:` Коммуникация/ранг.
+- `Утверждение (попытка):` если разрешить только одну фиксированную пару строк/колонок
+  (fixed‑pair) и требовать row/column swap на каждом шаге, то проекционный ранг может упасть до 1.
+- `Контрпример (toy):` две фикс‑парные strip‑симметричные 12‑битные проекции остаются
+  различимыми и ненулевыми, значит ранг внутренних узлов равен 2
+  (см. `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair).
+- `Статус:` контрпример (toy, $k=2$).
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: да (toy‑ранг, комбинаторика).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` потребовать фиксированную пару **и** одинаковый порядок
+  в обеих полосах (fixed‑pair + same‑order) и проверить, сохраняется ли ранг 2.
+- `StepID:` Q39.S82-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair.
+- `InfoGain:` 1.
+-/
+
+/-!
 ### 16.189. Исследовательский шаг (counterexample): синхронный глобальный шаг по всем колонкам не снижает проекционный ранг при $k=2$
 
 - `Линза:` Инвариант.
