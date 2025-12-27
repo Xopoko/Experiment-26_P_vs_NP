@@ -4190,6 +4190,36 @@ import Paperproof
 -/
 
 /-!
+### 16.311. Исследовательский шаг (reduction): база log/exp в пороге large‑$M$
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S171-check-thm41-threshold):`
+  В HR’22 явно сказано, что $\\log$ берётся по базе $2$; значит порог
+  $$M\\le \\exp\\bigl(n^{\\alpha}\\bigr),\\qquad \\alpha=\\frac1d-\\frac1{d(d-1)},$$
+  в Proof Thm. 4.3 естественно читать как $\\exp_2(x)=2^x$.
+  Если использовать $\\exp_e(x)=e^x$, то это эквивалентно замене
+  $n^{\\alpha}\\mapsto (\\ln 2)\\,n^{\\alpha}$ (константный множитель в экспоненте),
+  поэтому асимптотические сравнения Q43 сохраняются; для явных констант
+  нужно умножать/делить на $\\ln 2$ при смене базы.
+- `Toy‑тест:` при $\\alpha=1/2$ имеем $2^{\\sqrt n}=e^{(\\ln 2)\\sqrt n}$,
+  то есть различие только в постоянном множителе показателя.
+- `Exact citation:`
+  “Logarithms are denoted by log and are always with respect to the base 2.”
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`);
+  порог $M\\le\\exp(n^{\\alpha})$ — `...:1104–1106`.
+- `Статус:` reduction (согласование баз логарифма и экспоненты).
+- `StepID:` Q43.S171-check-thm41-threshold.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (смена базы — числовая).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` привести все пороги $M>\\exp(n^\\alpha)$ в Q43 к базе $2$
+  и проверить, что явные $c_1,c_2$ пересчитаны в той же базе.
+
+-/
+
+/-!
 ### 16.310. Исследовательский шаг (reduction): явные $c_1,c_2$ в Proof Thm. 4.1
 
 - `Линза:` Эквивалентность.

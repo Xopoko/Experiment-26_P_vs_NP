@@ -36,19 +36,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S170-explicit-c1c2-thm41
-  - `NextStepID:` Q43.S171-check-thm41-threshold
+  - `LastStepID:` Q43.S171-check-thm41-threshold
+  - `NextStepID:` Q43.S172-exp2-consistency
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.310
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.311
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (явный $A_0$).
+  - `Lens:` Трейд‑офф (база log/exp).
   - `Artifact:` Reduction.
-  - `Update:` явные $c_1,c_2$ в Thm. 4.1: $A_{\\mathrm{bits}}=76\\Rightarrow A=2^{76}$
-    (при $\\log=\\ln$ заменить на $e^{76\\ln2}$), $c_2=8\\cdot152\\cdot A$ и
-    $c_1=16\\cdot152\\cdot c_2$; Proof Thm. 4.1 переписан с явными константами.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.310.
-  - `Use:` дальше проверить корректность порога $M>e^{n^\\alpha}$ и базу логарифмов в Q43.
+  - `Update:` в HR’22 $\\log$ по базе $2$, значит порог $M\\le\\exp(n^{\\alpha})$
+    читается как $2^{n^{\\alpha}}$ (смена базы экспоненты даёт лишь множитель $\\ln 2$
+    в показателе). См. `formal/Notes/TseitinLocalEF.lean` §16.311.
+  - `Use:` привести все пороги $M>\\exp(n^\\alpha)$ к базе $2$ и пересчитать явные
+    $c_1,c_2$ в той же базе.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

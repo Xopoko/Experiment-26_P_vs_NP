@@ -54,3 +54,4 @@ Q43.S167-freeze-a0-parameter	Reduction	formal/WIP/Work.lean	PENDING	parameterize
 Q43.S168-explicit-c-chernoff	Reduction	formal/WIP/Work.lean	PENDING	explicit C via Chernoff for negative association (see formal/Notes/TseitinLocalEF.lean §16.308)
 Q43.S169-propagate-explicit-a0	Reduction	formal/WIP/Work.lean	PENDING	explicit A0 propagates to Thm 4.1 constants (see formal/Notes/TseitinLocalEF.lean §16.309)
 Q43.S170-explicit-c1c2-thm41	Reduction	formal/WIP/Work.lean	PENDING	explicit c1,c2 for Thm 4.1 (see formal/Notes/TseitinLocalEF.lean §16.310)
+Q43.S171-check-thm41-threshold	Reduction	formal/WIP/Work.lean	PENDING	log base 2 ⇒ exp = 2^x for large-M threshold (see formal/Notes/TseitinLocalEF.lean §16.311)
