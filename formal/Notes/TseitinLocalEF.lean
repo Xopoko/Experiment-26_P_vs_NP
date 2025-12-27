@@ -5188,6 +5188,29 @@ import Paperproof
 -/
 
 /-!
+### 16.350. Исследовательский шаг (proof): явные верхние оценки для $A_3,A_4$
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S210-flat-eval-hr-depth-range-constants-recount):`
+  В доказательстве Lemma 6.9 используются оценки
+  $$s+16t+s/4\\le A_3 s\\qquad\\text{и}\\qquad |S_g^*|\\le s/4+16t\\le A_4 s,$$
+  где $t\\le s$. Отсюда можно зафиксировать явные целые константы
+  $$A_3\\le 18,\\qquad A_4\\le 17.$$
+- `Proof:` формально в Lean доказаны неравенства
+  $s+16t+s/4\\le 18s$ и $s/4+16t\\le 17s$ при $t\\le s$
+  (см. `formal/WIP/Work.lean`, Q43_Lemma69_A3_bound, Q43_Lemma69_A4_bound).
+- `Статус:` proof (явные верхние оценки для $A_3,A_4$).
+- `StepID:` Q43.S210-flat-eval-hr-depth-range-constants-recount.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: да (чистая арифметика параметров).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` извлечь явные $A_1,A_2$ (и затем $A_0$) из Lemma 6.9/4.2.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

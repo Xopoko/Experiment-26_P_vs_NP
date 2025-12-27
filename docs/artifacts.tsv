@@ -106,3 +106,4 @@ Q43.S200-flat-eval-tparam-ologn	Reduction	formal/WIP/Work.lean	PENDING	poly-size
 Q43.S207-flat-eval-hr-level-count	Reduction	formal/WIP/Work.lean	PENDING	level count equals depth d in HR construction (see formal/Notes/TseitinLocalEF.lean 16.347)
 Q43.S208-flat-eval-hr-depth-range	Reduction	formal/WIP/Work.lean	PENDING	depth coefficient kappa bound from eta range (see formal/Notes/TseitinLocalEF.lean 16.348)
 Q43.S209-flat-eval-hr-depth-range-constants	Barrier	formal/WIP/Work.lean	PENDING	implicit constants in HR Lemma 4.2/6.9 block explicit kappa (see formal/Notes/TseitinLocalEF.lean 16.349)
+Q43.S210-flat-eval-hr-depth-range-constants-recount	Proof	formal/WIP/Work.lean	PENDING	explicit A3/A4 bounds from Lemma 6.9 algebra (see formal/Notes/TseitinLocalEF.lean 16.350)

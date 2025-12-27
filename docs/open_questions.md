@@ -38,19 +38,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S209-flat-eval-hr-depth-range-constants
-  - `NextStepID:` Q43.S210-flat-eval-hr-depth-range-constants-recount
+  - `LastStepID:` Q43.S210-flat-eval-hr-depth-range-constants-recount
+  - `NextStepID:` Q43.S211-flat-eval-hr-depth-range-constants-a1a2
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.349
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.350
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
-  - `Artifact:` Barrier.
-  - `Update:` в HR’22 константы из Switching/Multi‑switching введены как “существующие”
-    (без чисел), поэтому сравнение $\\kappa$ с $1/(2(a+c_1+1))$ пока недоступно.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.349.
-  - `Use:` следующая попытка — явный пересчёт Lemma 6.9/4.2 или внешний bound для $a,c_1$.
-  - `BarrierCheck:` A) Relativization: да (параметрическая связь). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Artifact:` Proof.
+  - `Update:` из $t\\le s$ извлечены явные верхние оценки
+    $A_3\\le 18$ и $A_4\\le 17$ в Lemma 6.9 (см. Lean‑код в `formal/WIP/Work.lean`);
+    это фиксирует часть констант, но $A_1,A_2$ остаются неявными.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.350.
+  - `Use:` следующий шаг — извлечь явные $A_1,A_2$ и затем $A_0$ из Lemma 6.9/4.2.
+  - `BarrierCheck:` A) Relativization: да (арифметика параметров). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 
