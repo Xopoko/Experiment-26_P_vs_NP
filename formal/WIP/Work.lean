@@ -1083,6 +1083,30 @@ theorem Q43_thm41_regime_d_ok_of_pow5 {n : Nat} (hn : 2 <= n)
   · exact Q43_thm41_log2_threshold_c1_grid_of_pow5 (n:=n) hn hpow5
   · exact Q43_thm41_log2_threshold_c1_grid_bound (n:=n) hn hpow5
 
+-- Q43.S227-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params:
+-- apply the regime-d bundle to parameter N via log2 monotonicity.
+def Q43_thm41_log2_threshold_c1_grid_param (n N : Nat) : Prop :=
+  Nat.log2 N
+    <= Q43_grid_size n / (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4)
+
+theorem Q43_thm41_log2_threshold_c1_grid_param_of_le {n N : Nat}
+    (hN : N <= Q43_grid_size n)
+    (hth : Q43_thm41_log2_threshold_c1_grid n) :
+    Q43_thm41_log2_threshold_c1_grid_param n N := by
+  have hlog : Nat.log2 N <= Nat.log2 (Q43_grid_size n) := Q43_log2_mono hN
+  exact le_trans hlog hth
+
+def Q43_thm41_regime_d_ok_param (n N : Nat) : Prop :=
+  Q43_thm41_log2_threshold_c1_grid_param n N ∧ Q43_thm41_c1_chernoff_ln <= Q43_grid_size n
+
+theorem Q43_thm41_regime_d_ok_param_of_le {n N : Nat}
+    (hN : N <= Q43_grid_size n)
+    (hok : Q43_thm41_regime_d_ok n) :
+    Q43_thm41_regime_d_ok_param n N := by
+  rcases hok with ⟨hth, hbound⟩
+  refine ⟨?_, hbound⟩
+  exact Q43_thm41_log2_threshold_c1_grid_param_of_le (n:=n) (N:=N) hN hth
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
