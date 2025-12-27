@@ -37,20 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S140-polym-below-threshold (IsPoly from polynomial bound)
-  - `NextStepID:` Q43.S141-poly-vs-exp-threshold
+  - `LastStepID:` Q43.S141-poly-vs-exp-threshold (toy check)
+  - `NextStepID:` Q43.S142-parameter-map-n-vs-bign
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` Q43_IsPoly_of_le_pow (formal/WIP/Work.lean)
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.281
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Трейд‑офф (режимы по $M$ в HR Thm. 4.3).
-  - `Artifact:` Proof (IsPoly from explicit polynomial bound).
-  - `Update:` добавлена лемма `Q43_IsPoly_of_le_pow`: если $s(n)\\le n^k$ для всех $n$, то $s$ полиномиальна в смысле `IsPoly`.
-    Доказательство использует монотонность через $n^k\\le n^k+1$ (Nat.le_succ) и ровно тот же показатель $k$.
-    Toy‑check: константная функция $s(n)=1$ полиномиальна при $k=0$.
-    Это фиксирует переход от явных polynomial‑bounds к `IsPoly` без дополнительных предположений.
-    Дальше нужно сравнить poly‑$M$ с large‑$M$ порогом из HR Thm. 4.3.
-  - `Use:` позволяет формально переводить “$M$ polynomial‑size” в `IsPoly` перед сравнением с large‑$M$ веткой.
+  - `Artifact:` Toy computation (poly $M$ vs exp threshold).
+  - `Update:` скрипт `scripts/toy_q43_s141.py` сравнивает $M=n^k$ с порогом
+    $\\exp(n^{\\alpha})$ при $\\alpha=1/d-1/(d(d-1))$ и $d=\\lfloor\\log_2 n/\\log_2\\log_2 n\\rfloor$.
+    Здесь $\\exp$ трактуется как $e^x$ (в HR), версия $2^x$ даёт ещё меньший порог.
+    Для $n=2^8..2^{32}$ даже при $k=1$ выходит $k\\log n>n^{\\alpha}$ (а при $k\\ge 2$ тем более),
+    т.е. poly‑$M$ **не** автоматически ниже порога large‑$M$.
+  - `Use:` нужен явный мэппинг параметров HR (что именно означает $n$ и как $M=\\mathrm{poly}(N)$ связан с порогом).
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
