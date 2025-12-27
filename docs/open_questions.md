@@ -37,21 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S144-translate-largem-vs-polyn (large‑M vs poly)
-  - `NextStepID:` Q43.S145-kappa-regime-decision
+  - `LastStepID:` Q43.S145-kappa-regime-decision (kappa regime)
+  - `NextStepID:` Q43.S146-kappa-constant-source
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.284
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.285
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд‑офф (large‑$M$ vs poly‑$M$).
-  - `Artifact:` Reduction (threshold comparison).
-  - `Update:` при $d=\\kappa\\,\\log n/\\log\\log n$ получаем
-    $\\exp(n^{\\alpha})=\\exp(\\Theta((\\log|F|)^{1/\\kappa}))$ (exp = $e^x$; base $2$ даёт меньший порог).
-    Значит для $M=|F|^k$: если $\\kappa<1$, порог суперполиномиален и poly‑$M$ ниже;
-    если $\\kappa=1$, порог около $|F|^{1/2}$ и poly‑$M$ с $k>1/2$ выше;
-    если $\\kappa>1$, порог субполиномиален и любой $k>0$ выше.
-  - `Use:` теперь нужно зафиксировать используемую константу $\\kappa$ в depth‑режиме,
-    чтобы определить, попадает ли poly‑$M$ в large‑$M$ ветку.
+  - `Lens:` Инвариант (выбор режима $\\kappa$).
+  - `Artifact:` Reduction (regime decision).
+  - `Update:` фиксируем режим $\\kappa\\ge 1$ (например, $\\kappa=59$ из Håstad’20),
+    тогда $\\exp(n^{\\alpha})=\\exp(\\Theta((\\log|F|)^{1/\\kappa}))=|F|^{o(1)}$ при $\\kappa>1$,
+    а при $\\kappa=1$ порог $|F|^{1/2+o(1)}$. Поэтому для $M=|F|^k$ с $k>0$ мы в large‑$M$ ветке
+    (для $\\kappa>1$ всегда, для $\\kappa=1$ при $k>1/2$). Здесь $\\exp=e^x$; base $2$ уменьшает порог.
+  - `Use:` теперь достаточно подтвердить выбранную константу $\\kappa$ из источника и зафиксировать,
+    что для $M=\\mathrm{poly}(|F|)$ применяется ветка Theorem 4.1.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

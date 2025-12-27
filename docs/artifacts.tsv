@@ -21,3 +21,4 @@ Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly 
 Q43.S142-parameter-map-n-vs-bign	Exact citation	formal/WIP/Work.lean	PENDING	HR Thm 4.3 parameters: n grid side, N proof length, M line size (exp=e^x)
 Q43.S143-translate-n-parameter	Reduction	formal/WIP/Work.lean	PENDING	n parameter maps to |F|=Theta(n^2) for Tseitin grid
 Q43.S144-translate-largem-vs-polyn	Reduction	formal/WIP/Work.lean	PENDING	compare exp(n^alpha) large-M threshold to poly(|F|) for d=k log n/log log n
+Q43.S145-kappa-regime-decision	Reduction	formal/WIP/Work.lean	PENDING	fix kappa>=1 implies poly(|F|) in large-M branch
