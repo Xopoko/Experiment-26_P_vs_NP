@@ -11,26 +11,25 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S59-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-distinct-strips (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S60-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct
+  - `LastStepID:` Q39.S60-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S61-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct-support-per-step
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Коммуникация/ранг (distinct strips).
-  - `Artifact:` Counterexample (distinct strips).
-  - `Update:` toy‑контрпример при $k=2$: при блоках $C_1=\\{2\\}\\prec C_2=\\{3,4\\}$
-    и чередовании column/row‑шагов поддержки полос различаются на каждом шаге, но
-    $U_1=R_1\\times C_1$, $U_3=(R_1\\cup R_2)\\times(C_1\\cup C_2)$ дают
-    $p(\\delta(U_1))=(1100,0000)$ и $p(\\delta(U_3))=(1111,0000)$ ⇒ ранг 2.
-    См. `formal/Notes/TseitinQ39.lean` §16.200 и toy‑ранг в `formal/WIP/Work.lean`.
-  - `Use:` различие поддержек полос не снижает ранг; следующий тест —
-    требовать **обе** полосы активны и поддержки различны на каждом шаге.
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.200). `InfoGain:` 1.
+  - `Lens:` Инвариант (both active + distinct).
+  - `Artifact:` Counterexample (both active + distinct).
+  - `Update:` toy‑контрпример при $k=2$: при $C=\\{2,3\\}$ обе полосы активны и их
+    поддержки различны, но $U_1=R_1\\times C$, $U_2=R_2\\times C$ дают
+    $p(\\delta(U_1))=(1100,1100)$ и $p(\\delta(U_2))=(0011,1100)$ ⇒ ранг 2.
+    См. `formal/Notes/TseitinQ39.lean` §16.201 и toy‑ранг в `formal/WIP/Work.lean`.
+  - `Use:` даже “both strips active + distinct” не снижает ранг; следующий тест —
+    требовать изменения на каждой полосе на каждом шаге.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.201). `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? да (различие поддержек на полосах).
+    - `A) Relativization check:` Relativizes? да (активность и различие полос).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.200
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.201
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.

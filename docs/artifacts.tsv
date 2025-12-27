@@ -35,6 +35,7 @@ Q39.S56-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microstep
 Q39.S57-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating	Counterexample	formal/WIP/Work.lean	PENDING	alternating row/column microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.198)
 Q39.S58-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips	Counterexample	formal/WIP/Work.lean	PENDING	both strips active still give rank 2 (see formal/Notes/TseitinQ39.lean §16.199)
 Q39.S59-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-distinct-strips	Counterexample	formal/WIP/Work.lean	PENDING	distinct strip supports still give rank 2 (see formal/Notes/TseitinQ39.lean §16.200)
+Q39.S60-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct	Counterexample	formal/WIP/Work.lean	PENDING	both strips active + distinct supports still give rank 2 (see formal/Notes/TseitinQ39.lean §16.201)
 Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
 Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
 Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold

@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S59-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-distinct-strips
-- `Do-not-repeat (next 2 runs):` Q39.S58-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips, Q39.S59-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-distinct-strips
+- `LastStepID:` Q39.S60-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct
+- `Do-not-repeat (next 2 runs):` Q39.S59-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-distinct-strips, Q39.S60-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: t сведён к polylog n при quasi-poly size; следующий шаг — проверить HR-совместимость.
-Q39: различие поддержек полос не снижает ранг; следующий шаг — обе полосы активны и различны.
+Q39: обе полосы активны и различны, но ранг 2 сохраняется; следующий шаг — менять обе полосы на каждом шаге.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: различие поддержек полос не снижает ранг
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (проверить “обе полосы активны + различие поддержек”).
+- Q39 из `docs/open_questions.md` (проверить “обе полосы меняются на каждом шаге”).
 - Q43 из `docs/open_questions.md` (проверить HR-совместимость при t=polylog).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: различие поддержек полос не снижает ранг
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг
+Последние:Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг→Инвариант
