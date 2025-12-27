@@ -896,6 +896,25 @@ theorem Q43_thm41_log2_threshold_c1_grid_explicit (n : Nat) :
           Q43_grid_size n / (27680440320000 * (Nat.log2 (Q43_grid_size n)) ^ 4) := by
   simp [Q43_thm41_log2_threshold_c1_grid, Q43_thm41_c1_chernoff_ln_eval]
 
+-- Q43.S220-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d:
+-- turn the log2 threshold into a multiplication form (for regime checks).
+def Q43_thm41_log2_threshold_c1_grid_mul (n : Nat) : Prop :=
+  Nat.log2 (Q43_grid_size n) *
+      (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4)
+    <= Q43_grid_size n
+
+theorem Q43_thm41_log2_threshold_c1_grid_iff_mul {n : Nat}
+    (hlog : 1 <= Nat.log2 (Q43_grid_size n)) :
+    Q43_thm41_log2_threshold_c1_grid n ↔ Q43_thm41_log2_threshold_c1_grid_mul n := by
+  have hposlog : 0 < Nat.log2 (Q43_grid_size n) := (Nat.succ_le_iff).1 hlog
+  have hpow : 0 < (Nat.log2 (Q43_grid_size n)) ^ 4 := Nat.pow_pos hposlog _
+  have hc1 : 0 < Q43_thm41_c1_chernoff_ln := by decide
+  have hpos :
+      0 < Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4 :=
+    Nat.mul_pos hc1 hpow
+  unfold Q43_thm41_log2_threshold_c1_grid Q43_thm41_log2_threshold_c1_grid_mul
+  simpa using (Nat.le_div_iff_mul_le hpos)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

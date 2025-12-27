@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S84-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair-sameorder-globalfixedpair
-- `Do-not-repeat (next 2 runs):` Q39.S84-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair-sameorder-globalfixedpair, Q43.S219-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-final
+- `LastStepID:` Q43.S220-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d
+- `Do-not-repeat (next 2 runs):` Q43.S220-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d, Q39.S84-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair-sameorder-globalfixedpair
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: log2‑порог переписан в терминах $|F|=n^2$; следующий шаг — проверить режим $d$.
+Q43: log2‑порог переведён в мультипликативную форму; следующий шаг — проверить режим $d$.
 Q39: global fixed‑pair не снижает ранг; следующий шаг — fixed‑orientation при global fixed‑pair.
 
 ## Что уже сделано (не повторять)
@@ -41,4 +41,4 @@ Q39: global fixed‑pair не снижает ранг; следующий шаг
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность

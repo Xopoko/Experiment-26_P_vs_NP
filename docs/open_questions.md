@@ -36,18 +36,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S219-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-final
-  - `NextStepID:` Q43.S220-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d
+  - `LastStepID:` Q43.S220-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d
+  - `NextStepID:` Q43.S221-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-asymptotic
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_explicit)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_iff_mul)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` log2‑порог Thm. 4.1 переписан в терминах $|F|=n^2$ с явным
-    `c1=27,680,440,320,000`: $\\log_2 |F|\\le |F|/(c_1\\log_2^4 |F|)$.
+  - `Update:` log2‑порог переписан в мультипликативную форму
+    $\\log_2 |F|\\cdot c_1\\log_2^4|F|\\le |F|$ при $\\log_2|F|\\ge 1$,
+    что убирает деление и удобнее для режима $d$.
     См. `formal/WIP/Work.lean`.
-  - `Use:` следующий шаг — проверить выполнение этого порога в нужном режиме $d$
+  - `Use:` следующий шаг — проверить эту мультипликативную форму в нужном режиме $d$
     (в терминах $|F|$).
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
