@@ -434,6 +434,11 @@ $|\mathrm{supp}(\varphi_i)|\le s$, и тогда $t$ становится суп
 и лемма: если строка входит в proof, то ее размер не превышает суммарный размер proof.
 Это дает формальное ядро для метрики $(N,M)$ и для контроля $M$ через суммарный размер.
 См. `formal/WIP/Work.lean` (Q43_lineSize/Q43_proofSize/Q43_lineSize_le_proofSize).
+**Q43 (t parameter formalized).**
+В `formal/WIP/Work.lean` введен параметр $t:=\\log_2 M$ как `Nat.log2 M` и
+доказана оценка $t\\le M$ (лемма `Q43_tParam_le`). Это фиксирует базовую
+связь между line-size $M$ и глубиной evaluations в Q43.
+См. `formal/WIP/Work.lean` (Q43_tParam/Q43_tParam_le).
 **Q43 (swap $s_1$).**
 Замена стартового $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ не ломает HR‑проверки:
 $s_\eta$ и $t(\eta)=\sum s_i+\log_2 M$ монотонно увеличиваются, а в режиме

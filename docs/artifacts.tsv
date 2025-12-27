@@ -87,3 +87,4 @@ Q43.S193-flat-eval-axiom-size-accounting	Reduction	formal/WIP/Work.lean	PENDING	
 Q43.S194-flat-eval-axiom-size-model-check	Exact citation	formal/WIP/Work.lean	PENDING	HR'22 Thm 4.3 defines line size M and line count N (see formal/Notes/TseitinLocalEF.lean 16.334)
 Q43.S195-flat-eval-axiom-size-definition	Reduction	formal/WIP/Work.lean	PENDING	define size metric (N,M) for flat local-EF(s) (see formal/Notes/TseitinLocalEF.lean 16.335)
 Q43.S196-flat-eval-size-metric-formalize	Proof	formal/WIP/Work.lean	PENDING	formalize line-size metrics and lineSize<=proofSize lemma (see formal/Notes/TseitinLocalEF.lean 16.336)
+Q43.S197-flat-eval-size-metric-tparam	Proof	formal/WIP/Work.lean	PENDING	define t=log2 M and bound t<=M (see formal/Notes/TseitinLocalEF.lean 16.337)

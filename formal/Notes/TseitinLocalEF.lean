@@ -4834,6 +4834,28 @@ import Paperproof
 -/
 
 /-!
+### 16.337. Исследовательский шаг (proof): параметр t как log_2 M
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S197-flat-eval-size-metric-tparam):`
+  В `formal/WIP/Work.lean` введен параметр $t:=\\log_2 M$ как `Nat.log2 M` и доказана
+  базовая оценка $t\\le M$ (лемма `Q43_tParam_le`), что фиксирует связь размера строки
+  и параметра глубины evaluation.
+- `Доказательство (Lean):`
+  определения `Q43_tParam` и лемма `Q43_tParam_le` (см. `formal/WIP/Work.lean`).
+- `Статус:` proof (Lean-код компилируется).
+- `StepID:` Q43.S197-flat-eval-size-metric-tparam.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: неприменимо (арифметика натуральных).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` использовать $t=\\log_2 M$ в формальных формулировках Q43 и
+  связать $M$ с proofSize через lineMax/lineSize.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

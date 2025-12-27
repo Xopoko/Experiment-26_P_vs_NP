@@ -256,6 +256,13 @@ theorem Q43_lineSize_le_proofSize {α : Type} {line : List α} {proof : List (Li
           have h' := ih h
           exact Nat.le_trans h' (Nat.le_add_left _ _)
 
+-- Q43.S197-flat-eval-size-metric-tparam: t parameter from line size.
+def Q43_tParam (M : Nat) : Nat :=
+  Nat.log2 M
+
+theorem Q43_tParam_le (M : Nat) : Q43_tParam M <= M := by
+  simpa [Q43_tParam] using (Nat.log2_le_self M)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
