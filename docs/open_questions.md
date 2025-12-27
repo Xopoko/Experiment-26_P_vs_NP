@@ -11,27 +11,27 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S32-2k-two-strip-alternating-strip (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S33-2k-two-strip-single-row-change
+  - `LastStepID:` Q39.S33-2k-two-strip-single-row-change (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S34-2k-two-strip-laminar-rows
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Коммуникация/ранг (чередование полос).
-  - `Artifact:` Counterexample (two-strip alternating strip).
-  - `Update:` toy-контрпример при $k=2$: даже если для каждого XOR‑шага родитель совпадает
-    с одним ребёнком на левой полосе и с другим — на правой (чередование полос),
-    проекционный ранг на двух полосах остаётся 2 (n=4, $U_L$ и $U_R$ дают независимые проекции).
-    См. `formal/Notes/TseitinQ39.lean` §16.173.
-  - `Use:` чередование полос на XOR‑шаге не снижает ранг; нужно более жёсткое «одно‑строчное» ограничение.
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.173). `InfoGain:` 1.
+  - `Lens:` Инвариант (одно‑строчное изменение).
+  - `Artifact:` Counterexample (two-strip single-row change).
+  - `Update:` toy-контрпример при $k=2$: даже если каждый XOR‑шаг меняет
+    на каждой полосе не более одной строки (single-row change),
+    проекционный ранг на двух полосах остаётся 2 (n=4, $U_1$ и $U_2$ дают независимые проекции).
+    См. `formal/Notes/TseitinQ39.lean` §16.174.
+  - `Use:` одно‑строчное изменение не снижает ранг; требуется ламинарность по строкам.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.174). `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (комбинаторная геометрия полос, оракул не влияет).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.173
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.174
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
-  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.173) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
+  Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.174) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
 
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0

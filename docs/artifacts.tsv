@@ -9,3 +9,4 @@ Q39.S29-2k-two-strip-rectangular-geometry	Counterexample	formal/Notes/TseitinQ39
 Q39.S30-2k-two-strip-anchored-rectangles	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	two-strip anchored rectangles (prefix rows) still give rank 2
 Q39.S31-2k-two-strip-prefix-chain	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	prefix-chain of anchored rectangles still gives rank 2
 Q39.S32-2k-two-strip-alternating-strip	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	alternating-strip XOR step still gives rank 2
+Q39.S33-2k-two-strip-single-row-change	Counterexample	formal/WIP/Work.lean	PENDING	single-row change on both strips still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.174)
