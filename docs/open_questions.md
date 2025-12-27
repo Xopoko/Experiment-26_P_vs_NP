@@ -11,22 +11,22 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S67-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S68-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix
+  - `LastStepID:` Q39.S68-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S69-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Коммуникация/ранг (strict 2D monotone).
-  - `Artifact:` Counterexample (strict 2D monotone).
-  - `Update:` toy‑контрпример при $k=2$: даже при **строгой** 2D‑монотонности
-    в цепочке $U_1=R_1\\times C_1$, $U_2=R_2\\times C_2$, $U_3=R_3\\times C_3$
+  - `Lens:` Коммуникация/ранг (strict 2D‑prefix).
+  - `Artifact:` Counterexample (strict 2D‑prefix).
+  - `Update:` toy‑контрпример при $k=2$: даже при **строгой 2D‑prefix**‑монотонности
+    в цепочке $U_1=[1,2]\\times[1,2]$, $U_2=[1,4]\\times[1,4]$, $U_3=[1,5]\\times[1,5]$
     (grid $6\\times6$) получаем
-    $p(\\delta(U_2))=(001100,001100)$ и $p(\\delta(U_3))=(000011,000011)$ ⇒ ранг 2.
-    См. `formal/Notes/TseitinQ39.lean` §16.208 и toy‑ранг в `formal/WIP/Work.lean`.
-  - `Use:` строгая 2D‑монотонность блоков не снижает ранг; следующий тест —
-    требовать 2D‑prefix (строгий рост и префиксность).
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.208). `InfoGain:` 1.
+    $p(\\delta(U_2))=(111100,111100)$ и $p(\\delta(U_3))=(111110,111110)$ ⇒ ранг 2.
+    См. `formal/Notes/TseitinQ39.lean` §16.209 и toy‑ранг в `formal/WIP/Work.lean`.
+  - `Use:` строгая 2D‑prefix‑монотонность блоков не снижает ранг; следующий тест —
+    требовать **фронтирный блок** в пересечениях с полосами.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.209). `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? да (строгая 2D‑монотонность блоков).
+    - `A) Relativization check:` Relativizes? да (строгая 2D‑prefix‑монотонность блоков).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege

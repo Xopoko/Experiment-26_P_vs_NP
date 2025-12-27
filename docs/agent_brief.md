@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S207-flat-eval-hr-level-count
-- `Do-not-repeat (next 2 runs):` Q39.S67-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict, Q43.S207-flat-eval-hr-level-count
+- `LastStepID:` Q39.S68-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix
+- `Do-not-repeat (next 2 runs):` Q43.S207-flat-eval-hr-level-count, Q39.S68-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: число уровней = глубина $d$; следующий шаг — сверить $d$ с диапазоном $\\eta$.
-Q39: строгая 2D‑монотонность блоков не снижает ранг; следующий шаг — 2D‑prefix.
+Q39: строгая 2D‑prefix‑монотонность блоков не снижает ранг; следующий шаг — фронтирный блок.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: строгая 2D‑монотонность блоков не снижае
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (проверить 2D‑prefix при строгом росте блоков).
+- Q39 из `docs/open_questions.md` (проверить фронтирный блок при строгом 2D‑prefix).
 - Q43 из `docs/open_questions.md` (сверить глубину $d$ с диапазоном $\\eta$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: строгая 2D‑монотонность блоков не снижае
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Инвариант→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
