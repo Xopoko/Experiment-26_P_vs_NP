@@ -280,6 +280,21 @@ theorem Q43_tParam_le_proofSize {α : Type} (proof : List (List α)) :
     Q43_tParam (Q43_lineMax proof) <= Q43_proofSize proof := by
   exact Nat.le_trans (Q43_tParam_le (Q43_lineMax proof)) (Q43_lineMax_le_proofSize proof)
 
+-- Q43.S199-flat-eval-tparam-ologs: log2 monotone bound for proof size.
+theorem Q43_log2_mono {a b : Nat} (h : a <= b) : Nat.log2 a <= Nat.log2 b := by
+  by_cases hb : b = 0
+  · have ha : a = 0 := Nat.eq_zero_of_le_zero (by simpa [hb] using h)
+    simp [ha, hb]
+  · by_cases ha : a = 0
+    · simp [ha]
+    · have hpow_le_a : 2 ^ Nat.log2 a <= a := Nat.log2_self_le ha
+      have hpow_le_b : 2 ^ Nat.log2 a <= b := Nat.le_trans hpow_le_a h
+      exact (Nat.le_log2 hb).2 hpow_le_b
+
+theorem Q43_tParam_le_log2_proofSize {α : Type} (proof : List (List α)) :
+    Q43_tParam (Q43_lineMax proof) <= Nat.log2 (Q43_proofSize proof) := by
+  simpa [Q43_tParam] using (Q43_log2_mono (Q43_lineMax_le_proofSize proof))
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

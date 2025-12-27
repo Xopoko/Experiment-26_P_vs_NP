@@ -89,3 +89,4 @@ Q43.S195-flat-eval-axiom-size-definition	Reduction	formal/WIP/Work.lean	PENDING	
 Q43.S196-flat-eval-size-metric-formalize	Proof	formal/WIP/Work.lean	PENDING	formalize line-size metrics and lineSize<=proofSize lemma (see formal/Notes/TseitinLocalEF.lean 16.336)
 Q43.S197-flat-eval-size-metric-tparam	Proof	formal/WIP/Work.lean	PENDING	define t=log2 M and bound t<=M (see formal/Notes/TseitinLocalEF.lean 16.337)
 Q43.S198-flat-eval-tparam-usage	Proof	formal/WIP/Work.lean	PENDING	derive t<=proofSize via lineMax (see formal/Notes/TseitinLocalEF.lean 16.338)
+Q43.S199-flat-eval-tparam-ologs	Proof	formal/WIP/Work.lean	PENDING	log2 monotone gives t<=log2 proofSize (see formal/Notes/TseitinLocalEF.lean 16.339)

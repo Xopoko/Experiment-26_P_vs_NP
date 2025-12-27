@@ -445,6 +445,11 @@ $|\mathrm{supp}(\varphi_i)|\le s$, и тогда $t$ становится суп
 $t=\\log_2(\\mathrm{lineMax})\\le\\mathrm{proofSize}$ через `Q43_tParam_le_proofSize`.
 Это дает формальную связь между $t$ и общей метрикой размера.
 См. `formal/WIP/Work.lean` (Q43_lineMax_le_proofSize/Q43_tParam_le_proofSize).
+**Q43 (t <= log_2 S).**
+В `formal/WIP/Work.lean` доказана монотонность $\\log_2$ на Nat и лемма
+$t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$.
+Это формализует связь $t \\le \\log_2 S$ при $S=\\mathrm{proofSize}$ (логарифм базы 2).
+См. `formal/WIP/Work.lean` (Q43_log2_mono/Q43_tParam_le_log2_proofSize).
 **Q43 (swap $s_1$).**
 Замена стартового $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ не ломает HR‑проверки:
 $s_\eta$ и $t(\eta)=\sum s_i+\log_2 M$ монотонно увеличиваются, а в режиме

@@ -4878,6 +4878,28 @@ import Paperproof
 -/
 
 /-!
+### 16.339. Исследовательский шаг (proof): t <= log_2 proofSize
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S199-flat-eval-tparam-ologs):`
+  В `formal/WIP/Work.lean` доказано, что $\\log_2$ монотонна на Nat и
+  $t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$; это даёт явную
+  форму связи $t \\le \\log_2 S$ при $S=\\mathrm{proofSize}$.
+- `Доказательство (Lean):`
+  леммы `Q43_log2_mono` и `Q43_tParam_le_log2_proofSize` (см. `formal/WIP/Work.lean`).
+- `Статус:` proof (Lean-код компилируется).
+- `StepID:` Q43.S199-flat-eval-tparam-ologs.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: неприменимо (арифметика натуральных).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` при необходимости вывести явный bound $t\\le c\\log_2 n$
+  для полиномиального $S$ и использовать его в Q43-оценках.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
