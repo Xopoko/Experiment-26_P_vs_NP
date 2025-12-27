@@ -37,21 +37,22 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S154-lemma42-constants-extract
-  - `NextStepID:` Q43.S155-lemma69-constant-extract
+  - `LastStepID:` Q43.S155-lemma69-constant-extract
+  - `NextStepID:` Q43.S156-lemma69-recount-needed
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.294
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.295
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (явные константы Lemma 6.8/6.9).
-  - `Artifact:` Exact citation.
-  - `Update:` Lemma 6.8 даёт явные неравенства $b\\le 3a$ и $s/64\\le a$,
-    а Lemma 6.9 лишь утверждает существование константы $A>0$ в оценке
-    числа дополнительных бит (число $A$ не фиксируется).
-    См. `formal/Notes/TseitinLocalEF.lean` §16.294 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1944, 1960`.
-  - `Use:` явный коэффициент $1/64$ извлечён, но $A$ остаётся неявным;
-    следующий шаг — попытаться оценить $A$ по Proof of Lemma 6.9.
+  - `Lens:` Инвариант (неявные константы Proof of Lemma 6.9).
+  - `Artifact:` Barrier.
+  - `Update:` Proof of Lemma 6.9 опирается на “constant number/amount of bits per potential edge”
+    и завершает подсчёт фразой “another $A|S^*_g|$ bits for some constant $A$”,
+    не давая численного значения $A$. Без полного пересчёта конструкции
+    извлечь явный $A$ невозможно.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.295 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2066–2069, 2108–2114`.
+  - `Use:` барьер: явный $A$ не извлекается из текста; следующий шаг —
+    либо зафиксировать это как постоянный барьер, либо выполнять полный пересчёт.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

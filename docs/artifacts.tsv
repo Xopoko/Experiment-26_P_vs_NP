@@ -31,3 +31,4 @@ Q43.S151-thm41-nontrivial-regime	Barrier	formal/WIP/Work.lean	PENDING	hidden con
 Q43.S152-extract-constants	Exact citation	formal/WIP/Work.lean	PENDING	Proof Thm 4.1 parameters s=152 log N and ni recurrence
 Q43.S153-kappa-constant-derivation	Barrier	formal/WIP/Work.lean	PENDING	implicit A0/A1/A2 in Lemma 4.2 block explicit kappa
 Q43.S154-lemma42-constants-extract	Exact citation	formal/WIP/Work.lean	PENDING	Lemma 6.8 gives s/64<=a; Lemma 6.9 only existential A
+Q43.S155-lemma69-constant-extract	Barrier	formal/WIP/Work.lean	PENDING	Proof Lemma 6.9 uses "constant number of bits" and leaves A implicit

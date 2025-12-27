@@ -3744,3 +3744,29 @@ import Paperproof
   или зафиксировать, что это требует полного пересчёта конструкции.
 
 -/
+
+/-!
+### 16.295. Исследовательский шаг (barrier certificate): в Proof of Lemma 6.9 нет явного числа для $A$
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S155-lemma69-constant-extract):`
+  Proof of Lemma 6.9 оперирует “constant number/amount of bits per potential edge” и
+  завершает подсчёт формулой “another $A|S^*_g|$ bits for some constant $A$”, но нигде
+  не даёт численного значения $A$. Следовательно, извлечение явного $A$ требует
+  полного повторного пересчёта конструкции (и всех скрытых “constant number of bits”),
+  что выходит за рамки текущего шага.
+- `Exact citation:`
+  “read … a constant number of bits per potential edge” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2066–2069`),
+  “read a constant amount of extra information per potential edge” (`...:2108–2110`),
+  “we need another $A|S^*_g|$ bits for some constant $A$” (`...:2111–2114`).
+- `Статус:` barrier certificate (явный $A$ не извлекается без полного пересчёта).
+- `StepID:` Q43.S155-lemma69-constant-extract.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (мета‑константы).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` зафиксировать этот барьер как постоянный или провести
+  отдельный полный пересчёт Proof of Lemma 6.9 с явными константами.
+
+-/
