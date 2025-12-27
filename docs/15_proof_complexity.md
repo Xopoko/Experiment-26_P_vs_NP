@@ -594,6 +594,12 @@ In `formal/WIP/Work.lean` the lemma `Q43_log2_grid_pow_le_mul_succ` shows
 This uses only base‑2 `log2` and no `exp`, so the comparison reduces to a
 polynomial factor in `log2|F|` before applying the log2^5 regime criterion.
 Next step: use `log2|F| >= 1` (for `n >= 2`) to replace `log2|F| + 1` by `2 log2|F|`.
+**Q43 (scaled log2^5 threshold for |F|^C).**
+In `formal/WIP/Work.lean` the lemma `Q43_thm41_log2_threshold_c1_grid_powC_of_scaled`
+derives `log2(|F|^C) <= |F|/(c1 log2^4|F|)` from a scaled log2^5 criterion
+`(2 log2|F| * C) * (c1 log2^4|F|) <= |F|`, still in base‑2 `log2`.
+This isolates the remaining task to an explicit threshold `|F| >= n0(C)` and
+the algebraic rewrite to the standard `2C·c1·log2^5|F| <= |F|`.
 Кратко: Tseitin — паритеты на графе (нечетная сумма зарядов ⇒ невыполнимость);
 нижние оценки через ограниченную степень и экспансию; Clique-Coloring —
 несовместимость клики и раскраски.

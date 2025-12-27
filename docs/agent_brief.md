@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S97-globalfixedpair-fixedorientation-contiguous-shift-alt10
-- `Do-not-repeat (next 2 runs):` Q39.S96-globalfixedpair-fixedorientation-contiguous-shift-alt9, Q39.S97-globalfixedpair-fixedorientation-contiguous-shift-alt10
+- `LastStepID:` Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold
+- `Do-not-repeat (next 2 runs):` Q39.S97-globalfixedpair-fixedorientation-contiguous-shift-alt10, Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: доказано $\\log_2(|F|^C)\\le (\\log_2|F|+1)C$; следующий шаг — при $n\\ge 2$ заменить $\\log_2|F|+1\\le 2\\log_2|F|$ и сравнить $2C\\,c_1\\log_2^5|F|$ с $|F|$.
+Q43: получено $\\log_2(|F|^C)\\le |F|/(c_1\\log_2^4|F|)$ из scaled log2^5; следующий шаг — переписать scaled‑условие как $2C\\,c_1\\log_2^5|F|\\le |F|$ и зафиксировать $|F|\\ge n_0(C)$.
 Q39: alt10‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt11‑shift.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: alt10‑shift для contiguous blocks при fixed‑orientation всё е
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (следующий alt‑shift для contiguous blocks).
-- Q43 из `docs/open_questions.md` (сравнить $2C\\,c_1\\log_2^5|F|$ с $|F|$).
+- Q43 из `docs/open_questions.md` (зафиксировать явный порог $|F|\\ge n_0(C)$ из $2C\\,c_1\\log_2^5|F|\\le |F|$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: alt10‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Коммуникация/ранг
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность

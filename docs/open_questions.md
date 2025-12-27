@@ -37,20 +37,21 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S232-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare
-  - `NextStepID:` Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold
+  - `LastStepID:` Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold
+  - `NextStepID:` Q43.S234-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-final
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_log2_grid_pow_le_mul_succ)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_powC_of_scaled)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` доказано неравенство $\\log_2(|F|^C)\\le (\\log_2|F|+1)C$
-    для $|F|=Q43\\_grid\\_size(n)$ (база $\\log_2$, без `exp`).
-    Toy‑check: использована монотонность `log2` и оценка $a\\le 2^{\\log_2 a+1}$, контрпримеров нет.
-    См. `formal/WIP/Work.lean` (Q43_log2_grid_pow_le_mul_succ).
-  - `Use:` следующий шаг — при $n\\ge 2$ заменить $\\log_2|F|+1\\le 2\\log_2|F|$
-    и сравнить $2C\\,c_1\\log_2^5|F|$ с $|F|$ для явного порога $|F|\\ge n_0(C)$.
+  - `Update:` при $n\\ge 2$ доказано $\\log_2(|F|^C)\\le 2\\log_2|F|\\cdot C$
+    и из «scaled log2^5» условия получена явная оценка
+    $\\log_2(|F|^C)\\le |F|/(c_1\\log_2^4|F|)$ (база $\\log_2$).
+    Toy‑check: замена $\\log_2|F|+1\\le 2\\log_2|F|$ при $\\log_2|F|\\ge 1$; контрпримеров нет.
+    См. `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_powC_of_scaled).
+  - `Use:` следующий шаг — переписать scaled‑условие как $2C\\,c_1\\log_2^5|F|\\le |F|$
+    и выбрать явный порог $|F|\\ge n_0(C)$.
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

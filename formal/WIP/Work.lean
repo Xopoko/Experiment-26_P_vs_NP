@@ -1262,6 +1262,75 @@ theorem Q43_log2_grid_pow_le_mul_succ (n C : Nat) :
     Nat.log2 ((Q43_grid_size n) ^ C) <= (Nat.log2 (Q43_grid_size n) + 1) * C := by
   simpa using (Q43_log2_pow_le_mul_succ (a:=Q43_grid_size n) (C:=C))
 
+theorem Q43_log2_grid_succ_le_twice {n : Nat} (hn : 2 <= n) :
+    Nat.log2 (Q43_grid_size n) + 1 <= 2 * Nat.log2 (Q43_grid_size n) := by
+  have hlog : 1 <= Nat.log2 (Q43_grid_size n) := Q43_log2_grid_ge_one (n:=n) hn
+  have hsum :
+      Nat.log2 (Q43_grid_size n) + 1
+        <= Nat.log2 (Q43_grid_size n) + Nat.log2 (Q43_grid_size n) :=
+    Nat.add_le_add_left hlog _
+  simpa [Nat.two_mul] using hsum
+
+theorem Q43_log2_grid_pow_le_twice_mul {n C : Nat} (hn : 2 <= n) :
+    Nat.log2 ((Q43_grid_size n) ^ C) <= 2 * Nat.log2 (Q43_grid_size n) * C := by
+  have h1 := Q43_log2_grid_pow_le_mul_succ (n:=n) (C:=C)
+  have h2 :
+      (Nat.log2 (Q43_grid_size n) + 1) * C
+        <= (2 * Nat.log2 (Q43_grid_size n)) * C := by
+    exact Nat.mul_le_mul_right _ (Q43_log2_grid_succ_le_twice (n:=n) hn)
+  exact le_trans h1 h2
+
+-- Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold:
+-- use a scaled log2^5 criterion to bound log2(|F|^C).
+def Q43_thm41_log2_threshold_c1_grid_powC (n C : Nat) : Prop :=
+  Nat.log2 ((Q43_grid_size n) ^ C)
+    <= Q43_grid_size n / (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4)
+
+def Q43_thm41_log2_threshold_c1_grid_powC_mul (n C : Nat) : Prop :=
+  Nat.log2 ((Q43_grid_size n) ^ C) *
+      (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4)
+    <= Q43_grid_size n
+
+def Q43_thm41_log2_threshold_c1_grid_pow5_scaled (n C : Nat) : Prop :=
+  (2 * Nat.log2 (Q43_grid_size n) * C) *
+      (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4)
+    <= Q43_grid_size n
+
+theorem Q43_thm41_log2_threshold_c1_grid_powC_iff_mul {n C : Nat}
+    (hlog : 1 <= Nat.log2 (Q43_grid_size n)) :
+    Q43_thm41_log2_threshold_c1_grid_powC n C ↔
+      Q43_thm41_log2_threshold_c1_grid_powC_mul n C := by
+  have hposlog : 0 < Nat.log2 (Q43_grid_size n) := (Nat.succ_le_iff).1 hlog
+  have hpow : 0 < (Nat.log2 (Q43_grid_size n)) ^ 4 := Nat.pow_pos hposlog _
+  have hc1 : 0 < Q43_thm41_c1_chernoff_ln := by decide
+  have hpos :
+      0 < Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4 :=
+    Nat.mul_pos hc1 hpow
+  unfold Q43_thm41_log2_threshold_c1_grid_powC Q43_thm41_log2_threshold_c1_grid_powC_mul
+  simpa using (Nat.le_div_iff_mul_le hpos)
+
+theorem Q43_thm41_log2_threshold_c1_grid_powC_mul_of_scaled {n C : Nat} (hn : 2 <= n)
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled n C) :
+    Q43_thm41_log2_threshold_c1_grid_powC_mul n C := by
+  have hlog : Nat.log2 ((Q43_grid_size n) ^ C) <= 2 * Nat.log2 (Q43_grid_size n) * C :=
+    Q43_log2_grid_pow_le_twice_mul (n:=n) (C:=C) hn
+  have hmul :
+      Nat.log2 ((Q43_grid_size n) ^ C) *
+          (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4)
+        <= (2 * Nat.log2 (Q43_grid_size n) * C) *
+            (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4) := by
+    exact Nat.mul_le_mul hlog (Nat.le_refl _)
+  exact le_trans hmul hscale
+
+theorem Q43_thm41_log2_threshold_c1_grid_powC_of_scaled {n C : Nat} (hn : 2 <= n)
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled n C) :
+    Q43_thm41_log2_threshold_c1_grid_powC n C := by
+  have hmul :
+      Q43_thm41_log2_threshold_c1_grid_powC_mul n C :=
+    Q43_thm41_log2_threshold_c1_grid_powC_mul_of_scaled (n:=n) (C:=C) hn hscale
+  have hlog : 1 <= Nat.log2 (Q43_grid_size n) := Q43_log2_grid_ge_one (n:=n) hn
+  exact (Q43_thm41_log2_threshold_c1_grid_powC_iff_mul (n:=n) (C:=C) hlog).2 hmul
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
