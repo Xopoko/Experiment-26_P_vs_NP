@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bridge
-- `Do-not-repeat (next 2 runs):` Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-cover, Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bridge
+- `LastStepID:` Q39.S118-globalfixedpair-fixedorientation-contiguous-shift-alt31
+- `Do-not-repeat (next 2 runs):` Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bridge, Q39.S118-globalfixedpair-fixedorientation-contiguous-shift-alt31
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: контрпример монотонности внутри разрыва; дальше — альтернативная оценка на разрыве и lift порога по кускам.
-Q39: alt30‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt31‑shift.
+Q39: alt31‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt32‑shift.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: alt30‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Инвариант
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Инвариант→Коммуникация/ранг

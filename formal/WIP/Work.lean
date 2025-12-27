@@ -960,6 +960,19 @@ theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt30 :
       Q39_globalfixedpair_fixedorientation_contiguous_shift_alt30_vec2 := by
   decide
 
+-- Q39.S118-globalfixedpair-fixedorientation-contiguous-shift-alt31:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt31_vec1 : BitVec12 :=
+  [true, true, true, false, false, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt31_vec2 : BitVec12 :=
+  [false, true, true, true, false, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt31 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt31_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt31_vec2 := by
+  decide
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by
@@ -1191,6 +1204,26 @@ structure Q43_switchingConstants where
   C : Nat
   n0 : Nat
 
+theorem Q43_add_16_mul (s : Nat) : s + 16 * s = 17 * s := by
+  calc
+    s + 16 * s = 1 * s + 16 * s := by
+      simp
+    _ = (1 + 16) * s := by
+      simpa using (Nat.add_mul 1 16 s).symm
+    _ = 17 * s := by
+      have h : (1 + 16) = 17 := by decide
+      simpa [h]
+
+theorem Q43_add_16_mul_add (s : Nat) : s + 16 * s + s = 18 * s := by
+  calc
+    s + 16 * s + s = (s + 16 * s) + s := by
+      simp [Nat.add_assoc]
+    _ = 17 * s + s := by
+      simpa [Q43_add_16_mul]
+    _ = 18 * s := by
+      have h : (17 + 1) = 18 := by decide
+      simpa [h] using (Nat.add_mul 17 1 s).symm
+
 -- Q43.S210-flat-eval-hr-depth-range-constants-recount: coarse explicit bounds from Lemma 6.9 algebra.
 theorem Q43_Lemma69_A3_bound {s t : Nat} (ht : t <= s) :
     s + 16 * t + s / 4 <= 18 * s := by
@@ -1198,14 +1231,7 @@ theorem Q43_Lemma69_A3_bound {s t : Nat} (ht : t <= s) :
   have h2 : s / 4 <= s := Nat.div_le_self s 4
   have h3 : s + 16 * t + s / 4 <= s + 16 * s + s := by
     exact Nat.add_le_add (Nat.add_le_add_left h1 s) h2
-  have h4 : s + 16 * s + s = 18 * s := by
-    calc
-      s + 16 * s + s = (1 + 16 + 1) * s := by
-        have h : (1 + 16 + 1) * s = s + 16 * s + s := by
-          simp [Nat.add_mul, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
-        exact h.symm
-      _ = 18 * s := by simp
-  exact Nat.le_trans h3 (le_of_eq h4)
+  exact Nat.le_trans h3 (le_of_eq (Q43_add_16_mul_add s))
 
 theorem Q43_Lemma69_A4_bound {s t : Nat} (ht : t <= s) :
     s / 4 + 16 * t <= 17 * s := by
@@ -1213,14 +1239,7 @@ theorem Q43_Lemma69_A4_bound {s t : Nat} (ht : t <= s) :
   have h2 : s / 4 <= s := Nat.div_le_self s 4
   have h3 : s / 4 + 16 * t <= s + 16 * s := by
     exact Nat.add_le_add h2 h1
-  have h4 : s + 16 * s = 17 * s := by
-    calc
-      s + 16 * s = (1 + 16) * s := by
-        have h : (1 + 16) * s = s + 16 * s := by
-          simp [Nat.add_mul, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
-        exact h.symm
-      _ = 17 * s := by simp
-  exact Nat.le_trans h3 (le_of_eq h4)
+  exact Nat.le_trans h3 (le_of_eq (Q43_add_16_mul s))
 
 -- Q43.S211-flat-eval-hr-depth-range-constants-a1a2: combine A1/A2 with explicit A3/A4 bounds.
 theorem Q43_Lemma69_A12_bound {s t A1 A2 : Nat} (ht : t <= s) :
