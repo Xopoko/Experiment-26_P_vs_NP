@@ -5157,6 +5157,37 @@ import Paperproof
 -/
 
 /-!
+### 16.349. Исследовательский шаг (barrier): константы $a,c_1$ в HR не извлечены
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S209-flat-eval-hr-depth-range-constants):`
+  Для сравнения $\\kappa$ с $1/(2(a+c_1+1))$ нужны явные константы из HR‑переключающих
+  лемм. В тексте HR эти константы задаются как **существующие** (без численных значений),
+  что делает явное сравнение недоступным без полного пересчёта доказательства.
+- `Exact citation:`
+  Lemma 4.2 (Switching Lemma) вводит **абсолютные** константы $A,C,n_0$ без чисел:
+  “There are absolute constants A, C, n0 > 0 …” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1542–1547`).
+  Lemma 6.9 также вводит константу существования:
+  “There is a constant A > 0 …” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1960–1966`).
+  В доказательстве Lemma 4.2 появляются “appropriate constants $A_0,A_1,A_2$”
+  без значений (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1987–1996`),
+  а в доказательстве Lemma 6.9 — константы $A_1,A_2,A_3,A_4$ “for some constant”
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2336–2351`).
+- `Barrier certificate:` без явных $A,C,n_0$ и констант из Lemma 6.9 нельзя вычислить
+  численные $a,c_1$ в пороге $\\eta$; сравнение $\\kappa$ остаётся нефиксируемым.
+- `Статус:` barrier (константы неявны).
+- `StepID:` Q43.S209-flat-eval-hr-depth-range-constants.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: да (чистая параметрическая связь).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` пересчитать Lemma 6.9/4.2 с явными числами либо зафиксировать
+  диапазон $\\kappa$ через внешние явные константы (если удастся).
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

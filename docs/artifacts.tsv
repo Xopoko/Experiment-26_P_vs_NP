@@ -104,3 +104,4 @@ Q43.S199-flat-eval-tparam-ologs	Proof	formal/WIP/Work.lean	PENDING	log2 monotone
 Q43.S200-flat-eval-tparam-ologn	Reduction	formal/WIP/Work.lean	PENDING	poly-size implies t=O(log_2 n) (see formal/Notes/TseitinLocalEF.lean 16.340)
 Q43.S207-flat-eval-hr-level-count	Reduction	formal/WIP/Work.lean	PENDING	level count equals depth d in HR construction (see formal/Notes/TseitinLocalEF.lean 16.347)
 Q43.S208-flat-eval-hr-depth-range	Reduction	formal/WIP/Work.lean	PENDING	depth coefficient kappa bound from eta range (see formal/Notes/TseitinLocalEF.lean 16.348)
+Q43.S209-flat-eval-hr-depth-range-constants	Barrier	formal/WIP/Work.lean	PENDING	implicit constants in HR Lemma 4.2/6.9 block explicit kappa (see formal/Notes/TseitinLocalEF.lean 16.349)

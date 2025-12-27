@@ -528,6 +528,12 @@ theorem Q43_etaRange_of_strict {n a c1 eta : Nat} (h : Q43_etaRangeStrict n a c1
       (Nat.div_le_self (Nat.log2 n) (2 * (a + c1 + 1) * Nat.log2 (Nat.log2 n)))
   exact le_trans h hdiv
 
+-- Q43.S209-flat-eval-hr-depth-range-constants: placeholders for implicit HR constants.
+structure Q43_switchingConstants where
+  A : Nat
+  C : Nat
+  n0 : Nat
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
