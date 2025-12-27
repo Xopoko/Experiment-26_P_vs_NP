@@ -1637,6 +1637,15 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_iff_ratio {n C : Nat
     simpa using (Nat.le_div_iff_mul_le hpos)
   exact h.symm
 
+-- Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048:
+-- Nat.log2 floor makes the ratio non-monotone across the 2^k jump.
+def Q43_grid_ratio (n : Nat) : Nat :=
+  Q43_grid_size n / (Nat.log2 (Q43_grid_size n)) ^ 5
+
+theorem Q43_grid_ratio_drop_2047_2048 :
+    Q43_grid_ratio 2048 < Q43_grid_ratio 2047 := by
+  decide
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

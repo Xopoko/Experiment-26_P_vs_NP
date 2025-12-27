@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S111-globalfixedpair-fixedorientation-contiguous-shift-alt24
-- `Do-not-repeat (next 2 runs):` Q39.S111-globalfixedpair-fixedorientation-contiguous-shift-alt24, Q43.S243-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-finish
+- `LastStepID:` Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048
+- `Do-not-repeat (next 2 runs):` Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048, Q39.S111-globalfixedpair-fixedorientation-contiguous-shift-alt24
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: критерий переписан как отношение |F|/log2^5|F|; далее — монотонность отношения и lift от n0.
+Q43: отношение |F|/log2^5|F| не монотонно (Nat.log2 скачок 2047→2048); дальше — lift порога по кускам/через сглаженный лог.
 Q39: alt24‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt25‑shift.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: alt24‑shift для contiguous blocks при fixed‑orientation всё е
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (следующий alt‑shift для contiguous blocks).
-- Q43 из `docs/open_questions.md` (выбрать явный порог $|F|\\ge n_0(C)$ для $2C\\,c_1\\log_2^5|F|\\le |F|$).
+- Q43 из `docs/open_questions.md` (lift порога без глобальной монотонности отношения).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: alt24‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
