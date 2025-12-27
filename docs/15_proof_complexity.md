@@ -429,6 +429,11 @@ extension-аксиомы $p_i\leftrightarrow\varphi_i(X)$ входят как с
 Если аксиомы не учитываются в размере, можно взять $|\varphi_i|=2^{(\log_2 n)^2}$ при
 $|\mathrm{supp}(\varphi_i)|\le s$, и тогда $t$ становится суперполиномиальным.
 См. `formal/Notes/TseitinLocalEF.lean` §16.332 (Q43.S192-flat-eval-axiom-size-bound).
+**Q43 (size metric formalized).**
+В `formal/WIP/Work.lean` зафиксированы определения line-size/line-count/line-max
+и лемма: если строка входит в proof, то ее размер не превышает суммарный размер proof.
+Это дает формальное ядро для метрики $(N,M)$ и для контроля $M$ через суммарный размер.
+См. `formal/WIP/Work.lean` (Q43_lineSize/Q43_proofSize/Q43_lineSize_le_proofSize).
 **Q43 (swap $s_1$).**
 Замена стартового $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ не ломает HR‑проверки:
 $s_\eta$ и $t(\eta)=\sum s_i+\log_2 M$ монотонно увеличиваются, а в режиме

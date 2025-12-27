@@ -4811,6 +4811,29 @@ import Paperproof
 -/
 
 /-!
+### 16.336. Исследовательский шаг (proof): формализация метрики размера (N,M)
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S196-flat-eval-size-metric-formalize):`
+  В `formal/WIP/Work.lean` введены определения метрик line-size/line-count/line-max
+  и доказана лемма: если строка входит в proof, то ее размер не превышает суммарный
+  размер proof (line-size <= proofSize).
+- `Доказательство (Lean):`
+  определения `Q43_lineSize`, `Q43_proofSize`, `Q43_lineCount`, `Q43_lineMax` и
+  лемма `Q43_lineSize_le_proofSize` (см. `formal/WIP/Work.lean`).
+- `Статус:` proof (Lean-код компилируется).
+- `StepID:` Q43.S196-flat-eval-size-metric-formalize.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: неприменимо (определения/арифметика натуральных).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` связать параметры (N,M) с `t=log_2 M` и записать зависимость
+  eval-порогов в терминах этих определений.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

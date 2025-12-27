@@ -225,6 +225,37 @@ def Q43_exp_quote_scan_analytic : Prop := True
 theorem Q43_exp_quote_scan_analytic_trivial : Q43_exp_quote_scan_analytic := by
   trivial
 
+-- Q43.S196-flat-eval-size-metric-formalize: size metrics for line-based proofs.
+def Q43_lineSize {α : Type} (line : List α) : Nat :=
+  line.length
+
+def Q43_proofSize {α : Type} : List (List α) -> Nat
+  | [] => 0
+  | line :: rest => Q43_lineSize line + Q43_proofSize rest
+
+def Q43_lineCount {α : Type} (proof : List (List α)) : Nat :=
+  proof.length
+
+def Q43_lineMax {α : Type} : List (List α) -> Nat
+  | [] => 0
+  | line :: rest => max (Q43_lineSize line) (Q43_lineMax rest)
+
+theorem Q43_lineSize_le_proofSize {α : Type} {line : List α} {proof : List (List α)} :
+    line ∈ proof -> Q43_lineSize line <= Q43_proofSize proof := by
+  intro hmem
+  induction proof with
+  | nil =>
+      cases hmem
+  | cons hd tl ih =>
+      simp [Q43_proofSize, Q43_lineSize] at hmem ⊢
+      cases hmem with
+      | inl h =>
+          subst h
+          exact Nat.le_add_right _ _
+      | inr h =>
+          have h' := ih h
+          exact Nat.le_trans h' (Nat.le_add_left _ _)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

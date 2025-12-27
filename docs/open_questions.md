@@ -36,19 +36,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S195-flat-eval-axiom-size-definition
-  - `NextStepID:` Q43.S196-flat-eval-size-metric-formalize
+  - `LastStepID:` Q43.S196-flat-eval-size-metric-formalize
+  - `NextStepID:` Q43.S197-flat-eval-size-metric-tparam
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.335
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.336
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Сжатие/канонизация (size metric).
-  - `Artifact:` Reduction.
-  - `Update:` зафиксирована метрика размера flat local‑EF(s) как пара $(N,M)$
-    с line-count $N$ и line-size $M$; extension-аксиомы считаются строками, поэтому
-    $|\\varphi_i|\\le M$ и $t=\\log_2 M$. См. `formal/Notes/TseitinLocalEF.lean` §16.335.
-  - `Use:` модель синхронизирована с HR'22; line-count без line-size больше не допустим.
-  - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Lens:` Инвариант (line-size как параметр модели).
+  - `Artifact:` Proof.
+  - `Update:` формализованы определения line-size/line-count/line-max и лемма
+    `line-size <= proofSize` в `formal/WIP/Work.lean`; это фиксирует ядро метрики $(N,M)$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.336.
+  - `Use:` теперь можно формально связывать $t=\\log_2 M$ с метрикой размера.
+  - `BarrierCheck:` A) Relativization: да (арифметика на Nat). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 
