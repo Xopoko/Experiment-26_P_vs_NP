@@ -6,15 +6,15 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S39-2k-two-strip-chain-block-consistency
-- `Do-not-repeat (next 2 runs):` Q43.S166-chernoff-recount, Q39.S39-2k-two-strip-chain-block-consistency
+- `LastStepID:` Q39.S40-2k-two-strip-chain-lockstep-blocks
+- `Do-not-repeat (next 2 runs):` Q39.S39-2k-two-strip-chain-block-consistency, Q39.S40-2k-two-strip-chain-lockstep-blocks
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: Chernoff‑шаг в Lemma 5.5 не даёт явного $C$; $A_0$ остаётся параметром.
 Следующий шаг — либо явный пересчёт Chernoff‑констант, либо фиксация $A_0$ как параметра.
-Q39: одно‑полосные block‑обновления всё равно дают ранг 2; следующий шаг — проверить lock‑step обновления блоков.
+Q39: lock‑step block‑обновления всё равно дают ранг 2; следующий шаг — проверить dyadic/ламинарный режим.
 
 ## Что уже сделано (не повторять)
 
@@ -42,4 +42,4 @@ Q39: одно‑полосные block‑обновления всё равно 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Инвариант→Инвариант→Эквивалентность→Инвариант
+Последние:Инвариант→Инвариант→Эквивалентность→Инвариант→Коммуникация/ранг

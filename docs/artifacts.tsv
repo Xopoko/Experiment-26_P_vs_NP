@@ -16,6 +16,7 @@ Q39.S36-2k-two-strip-equal-rows-single-change	Counterexample	formal/Notes/Tseiti
 Q39.S37-2k-two-strip-equal-rows-single-change-chain	Counterexample	formal/WIP/Work.lean	PENDING	chain of single-row equal-rows XOR steps still gives rank 2
 Q39.S38-2k-two-strip-chain-block-alignment	Counterexample	formal/WIP/Work.lean	PENDING	block-aligned chain still gives rank 2
 Q39.S39-2k-two-strip-chain-block-consistency	Counterexample	formal/WIP/Work.lean	PENDING	one-strip block-consistent updates still give rank 2 (see formal/Notes/TseitinQ39.lean §16.180)
+Q39.S40-2k-two-strip-chain-lockstep-blocks	Counterexample	formal/WIP/Work.lean	PENDING	lock-step block updates still give rank 2 (see formal/Notes/TseitinQ39.lean §16.181)
 Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
 Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
 Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold
