@@ -3826,3 +3826,32 @@ import Paperproof
   и проверить режим для $M=\\mathrm{poly}(|F|)$ (с учётом $\\exp=e^x$).
 
 -/
+
+/-!
+### 16.298. Исследовательский шаг (reduction): при $\\kappa=59$ порог large‑$M$ субполиномиален, значит $M=\\mathrm{poly}(|F|)$ всегда в large‑ветке
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S158-largem-branch-polym-check):`
+  Пусть $d=\\kappa\\log n/\\log\\log n$ с $\\kappa=59$ (Håstad’20, Thm. 6.5) и $|F|=\\Theta(n^2)$ для Tseitin(Grid$_n$).
+  Тогда порог large‑$M$ в Thm. 4.3 имеет вид
+  $$M\\le \\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)\\Bigr)
+      =\\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/59}\\bigr)\\Bigr),$$
+  где $\\exp=e^x$ (если заменить на $2^x$, порог ещё меньше).
+  Поскольку $(\\log|F|)^{1/59}=o(\\log|F|)$, имеем
+  $$\\exp\\bigl(\\Theta((\\log|F|)^{1/59})\\bigr)=|F|^{o(1)},$$
+  то есть порог субполиномиален. Следовательно, для любого $k>0$ при достаточно больших $|F|$
+  выполняется $|F|^k$ выше порога, и ветка large‑$M$ (то есть переход к Thm. 4.1)
+  применяется ко всем $M=\\mathrm{poly}(|F|)$.
+  Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$, но здесь $p=1/59<1$.
+- `Toy‑тест:` $|F|=n^2$: порог $\\exp((2\\log n)^{1/59})=n^{o(1)}$, так что $M=|F|$ уже в large‑ветке.
+- `Статус:` reduction (large‑$M$ ветка фиксируется для $M=\\mathrm{poly}(|F|)$ при $\\kappa=59$).
+- `StepID:` Q43.S158-largem-branch-polym-check.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (асимптотический пересчёт).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` связать large‑ветку Thm. 4.3 с явной оценкой из Thm. 4.1
+  в терминах $|F|$ и $M=\\mathrm{poly}(|F|)$.
+
+-/

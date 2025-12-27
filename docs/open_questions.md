@@ -37,23 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S157-pivot-hastad20-kappa
-  - `NextStepID:` Q43.S158-largem-branch-polym-check
+  - `LastStepID:` Q43.S158-largem-branch-polym-check
+  - `NextStepID:` Q43.S159-thm41-bound-translate
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.297
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.298
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд‑офф (depth–size).
-  - `Artifact:` Exact citation.
-  - `Update:` зафиксирован явный режим глубины из Håstad’20 Thm. 6.5:
-    $d\\le 59\\,\\log n/\\log\\log n$ и lower bound
-    $\\mathrm{size}\\ge\\exp(\\Omega(n^{1/(58(d+1))}))$ с $\\exp=e^x$
-    (числитель $\\log n$ вынесен строкой выше в pdf‑to‑text).
-    См. `formal/Notes/TseitinLocalEF.lean` §16.297 и
-    `resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`.
-  - `Use:` теперь можно проверить, что при $\\kappa=59$ порог large‑$M$ в Thm. 4.3 субполиномиален,
-    и для $M=\\mathrm{poly}(|F|)$ выбирается ветка Thm. 4.1 (учитывая $\\exp=e^x$).
-  - `BarrierCheck:` A) Relativization: да (цитата по тексту). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Lens:` Эквивалентность (перевод порога в термины $|F|$).
+  - `Artifact:` Reduction.
+  - `Update:` при $\\kappa=59$ (Håstad’20 Thm. 6.5) и $|F|=\\Theta(n^2)$ порог large‑$M$ в Thm. 4.3 равен
+    $\\exp(\\Theta((\\log|F|)^{1/59}))$ с $\\exp=e^x$, что даёт $|F|^{o(1)}$.
+    Поэтому для любого $M=\\mathrm{poly}(|F|)$ ветка large‑$M$ (и переход к Thm. 4.1) неизбежна.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.298.
+  - `Use:` фиксируем режим Thm. 4.3 для poly‑$M$ и можем переводить оценку Thm. 4.1 в термины $|F|$.
+  - `BarrierCheck:` A) Relativization: да (асимптотический пересчёт). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 
