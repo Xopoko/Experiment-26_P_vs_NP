@@ -37,22 +37,25 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S148-thm41-branch-audit
-  - `NextStepID:` Q43.S149-largem-bound-from-thm41
+  - `LastStepID:` Q43.S149-largem-bound-from-thm41
+  - `NextStepID:` Q43.S150-thm41-bound-compare
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.288
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.289
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (ветка доказательства Thm. 4.3).
-  - `Artifact:` Exact citation.
-  - `Update:` в Proof of Thm. 4.3 написано: “We may assume that $M\\le\\exp(n^{1/d-1/d(d-1)})$,
-    as otherwise we can apply Theorem 4.1.” Это фиксирует, что Thm. 4.1 — ветка для
-    $M$ **выше** порога (large‑$M$), а основной вывод Thm. 4.3 работает при $M$ ниже порога.
-    `exp` трактуется как $e^x$ (в HR); база $2^x$ лишь уменьшает порог.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.288 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`.
-  - `Use:` для $\\kappa=59$ poly‑$M$ попадает в large‑$M$ ветку ⇒ оценку нужно брать из Thm. 4.1;
-    следующий шаг — выписать явную форму bound в режиме $M=\\mathrm{poly}(|F|)$.
+  - `Lens:` Эквивалентность (перевод bound в $|F|$).
+  - `Artifact:` Reduction (Exact).
+  - `Update:` Thm. 4.1 даёт $N\\ge\\exp(\\Omega(n^{1/d}/\\log^4 n))$ (exp=$e^x$).
+    При $d=\\kappa\\log n/\\log\\log n$ получаем
+    $N\\ge\\exp(\\Omega((\\log n)^{1/\\kappa-4+o(1)}))$ и, с $|F|=\\Theta(n^2)$,
+    $N\\ge\\exp(\\Omega((\\log|F|)^{1/\\kappa-4+o(1)}))$.
+    Для $\\kappa=59$ показатель отрицательный, значит bound субполиномиален:
+    $N\\ge\\exp(\\Omega((\\log|F|)^{-3.98\\ldots}))=|F|^{o(1)}$.
+    Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.289.
+  - `Use:` large‑$M$ ветка Thm. 4.1 при $\\kappa=59$ даёт лишь $|F|^{o(1)}$‑bound;
+    следующий шаг — сравнить с целевыми $N,|F|,M$ и проверить, есть ли режим с
+    нетривиальной сверхполиномиальностью.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

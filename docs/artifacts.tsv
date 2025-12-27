@@ -25,3 +25,4 @@ Q43.S145-kappa-regime-decision	Reduction	formal/WIP/Work.lean	PENDING	fix kappa>
 Q43.S146-kappa-constant-source	Exact citation	formal/WIP/Work.lean	PENDING	Hastad'20 Thm 6.5 sets kappa=59 for d<=59 log n/log log n
 Q43.S147-apply-thm41-branch	Reduction	formal/WIP/Work.lean	PENDING	kappa=59 forces large-M branch for poly M in Thm 4.3
 Q43.S148-thm41-branch-audit	Exact citation	formal/WIP/Work.lean	PENDING	Proof Thm 4.3: if M > exp(n^alpha) apply Thm 4.1
+Q43.S149-largem-bound-from-thm41	Reduction	formal/WIP/Work.lean	PENDING	Thm 4.1 bound translated to |F| (subpoly for kappa=59)

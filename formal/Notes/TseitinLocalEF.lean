@@ -3560,3 +3560,38 @@ import Paperproof
   и сопоставить с параметрами $|F|,N$.
 
 -/
+
+/-!
+### 16.289. Исследовательский шаг (reduction): large‑$M$ ветка Thm. 4.1 в режиме $d=\\kappa\\log n/\\log\\log n$
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S149-largem-bound-from-thm41):`
+  Thm. 4.1 даёт нижнюю оценку
+  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl(n^{1/d}/\\log^4 n\\bigr)\\Bigr),$$
+  где $\\exp=e^x$ (в нотации HR; при $2^x$ bound только уменьшается).
+  В режиме $d=\\kappa\\,\\log n/\\log\\log n$ имеем
+  $$n^{1/d}=\\exp\\Bigl(\\tfrac{\\log n}{d}\\Bigr)
+            =\\exp\\Bigl(\\tfrac{\\log\\log n}{\\kappa}\\Bigr)
+            =(\\log n)^{1/\\kappa+o(1)},$$
+  и потому
+  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl((\\log n)^{1/\\kappa-4+o(1)}\\bigr)\\Bigr).$$
+  Для $|F|=\\Theta(n^2)$ получаем
+  $$N\\ \\ge\\ \\exp\\Bigl(\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)\\Bigr).$$
+  При $\\kappa=59$ показатель отрицательный, значит bound субполиномиален:
+  $$N\\ \\ge\\ \\exp\\bigl(\\Omega((\\log|F|)^{-3.98\\ldots})\\bigr)=|F|^{o(1)}.$$
+  Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$,
+  но здесь $p=1/\\kappa-4<1$.
+- `Exact citation:`
+  Thm. 4.1: “For $d=O(\\log n/\\log\\log n)$ … requires size $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$”
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850`).
+- `Статус:` reduction (перевод bound Thm. 4.1 в параметры $|F|$ и $\\kappa$).
+- `StepID:` Q43.S149-largem-bound-from-thm41.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (асимптотический пересчёт).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` сравнить этот bound с параметрами $N,|F|,M$ в целевой модели
+  и проверить, есть ли режим, где Thm. 4.1 даёт нетривиальную сверхполиномиальность.
+
+-/
