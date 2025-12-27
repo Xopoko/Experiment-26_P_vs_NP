@@ -7,3 +7,4 @@ Q39.S27-2k-two-strip-interval-rank-bound	Counterexample	formal/Notes/TseitinQ39.
 Q39.S28-2k-two-strip-linked-intervals	Counterexample	formal/WIP/Work.lean	PENDING	linked two-strip row-intervals still give rank 2 (see formal/Notes/TseitinQ39.lean §16.169)
 Q39.S29-2k-two-strip-rectangular-geometry	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	two-strip rectangular geometry in a 2-column slab still gives rank 2
 Q39.S30-2k-two-strip-anchored-rectangles	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	two-strip anchored rectangles (prefix rows) still give rank 2
+Q39.S31-2k-two-strip-prefix-chain	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	prefix-chain of anchored rectangles still gives rank 2
