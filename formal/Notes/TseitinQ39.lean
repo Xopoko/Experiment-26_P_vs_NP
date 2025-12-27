@@ -1871,6 +1871,26 @@ import Paperproof
 -/
 
 /-!
+### 16.215. Исследовательский шаг (counterexample): row/column swap symmetry не снижает ранг
+
+- `Линза:` Коммуникация/ранг.
+- `Утверждение (попытка):` если каждый шаг симметричен по полосам
+  (row/column swap), то проекционный ранг может упасть до 1.
+- `Контрпример (toy):` две strip‑симметричные 12‑битные проекции остаются различимыми
+  и ненулевыми, поэтому ранг внутренних узлов равен 2 (см. `formal/WIP/Work.lean`,
+  Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap).
+- `Статус:` контрпример (toy, $k=2$).
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: да (toy‑ранг, комбинаторика).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` требовать фиксированную пару строк/колонок на каждом шаге
+  (row/column swap + fixed‑pair) и проверить, остаётся ли ранг 2.
+- `StepID:` Q39.S81-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap.
+- `InfoGain:` 1.
+-/
+
+/-!
 ### 16.189. Исследовательский шаг (counterexample): синхронный глобальный шаг по всем колонкам не снижает проекционный ранг при $k=2$
 
 - `Линза:` Инвариант.
