@@ -21,7 +21,7 @@ Q39.S41-2k-two-strip-chain-lockstep-dyadic-blocks	Counterexample	formal/WIP/Work
 Q39.S42-2k-two-strip-chain-dyadic-prefix-stepwise	Counterexample	formal/WIP/Work.lean	PENDING	stepwise dyadic-prefix chain still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.183)
 Q39.S43-2k-two-strip-chain-dyadic-carry-microsteps	Counterexample	formal/WIP/Work.lean	PENDING	dyadic-carry microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.184)
 Q39.S44-2k-two-strip-chain-dyadic-microsteps-distinct-support	Counterexample	formal/WIP/Work.lean	PENDING	distinct-support microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.185)
-Q39.S45-2k-two-strip-chain-dyadic-microsteps-strip-support	Counterexample	formal/WIP/Work.lean	PENDING	distinct strip support still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.186)
+Q39.S46-2k-two-strip-chain-strip-support-synchronized	Counterexample	formal/WIP/Work.lean	PENDING	synchronized strip template still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.187)
 Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
 Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
 Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold
