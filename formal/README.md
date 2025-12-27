@@ -23,5 +23,12 @@ lake build Notes
 lake build WIP
 ```
 
+Mathlib caches (recommended if you start importing `Mathlib.*`):
+
+```bash
+cd formal
+lake exe cache get
+```
+
 Policy:
 - The final theorem (P != NP or P = NP) must be fully formalized in Lean and live in `PvNP/Core/`.
