@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S100-globalfixedpair-fixedorientation-contiguous-shift-alt13
-- `Do-not-repeat (next 2 runs):` Q43.S234-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-final, Q39.S100-globalfixedpair-fixedorientation-contiguous-shift-alt13
+- `LastStepID:` Q39.S101-globalfixedpair-fixedorientation-contiguous-shift-alt14
+- `Do-not-repeat (next 2 runs):` Q39.S101-globalfixedpair-fixedorientation-contiguous-shift-alt14, Q39.S100-globalfixedpair-fixedorientation-contiguous-shift-alt13
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: scaled‑условие переписано как $2C\\,c_1\\log_2^5|F|\\le |F|$; следующий шаг — выбрать явный порог $|F|\\ge n_0(C)$.
-Q39: alt13‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt14‑shift.
+Q39: alt14‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt15‑shift.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: alt13‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
