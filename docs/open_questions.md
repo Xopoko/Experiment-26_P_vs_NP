@@ -36,19 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S199-flat-eval-tparam-ologs
-  - `NextStepID:` Q43.S200-flat-eval-tparam-ologn
+  - `LastStepID:` Q43.S200-flat-eval-tparam-ologn
+  - `NextStepID:` Q43.S201-flat-eval-tparam-polylogn
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.339
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.340
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (t vs log S).
-  - `Artifact:` Proof.
-  - `Update:` доказана монотонность $\\log_2$ и связь
-    $t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$
-    (леммы `Q43_log2_mono` и `Q43_tParam_le_log2_proofSize`).
-    См. `formal/Notes/TseitinLocalEF.lean` §16.339.
-  - `Use:` теперь $t$ привязан к $\\log_2 S$ при $S=\\mathrm{proofSize}$.
+  - `Lens:` Трейд-офф (poly -> log).
+  - `Artifact:` Reduction.
+  - `Update:` из $t\\le\\log_2 S$ и $S(n)\\le n^k+1$ следует $t=O(\\log_2 n)$
+    (при $n\\ge 2$ имеем $S\\le 2n^k$ и $t\\le 1+k\\log_2 n$).
+    См. `formal/Notes/TseitinLocalEF.lean` §16.340.
+  - `Use:` режим poly-size обеспечивает логарифмический t в Q43.
   - `BarrierCheck:` A) Relativization: да (арифметика на Nat). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

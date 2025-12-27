@@ -450,6 +450,11 @@ $t=\\log_2(\\mathrm{lineMax})\\le\\mathrm{proofSize}$ через `Q43_tParam_le_
 $t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$.
 Это формализует связь $t \\le \\log_2 S$ при $S=\\mathrm{proofSize}$ (логарифм базы 2).
 См. `formal/WIP/Work.lean` (Q43_log2_mono/Q43_tParam_le_log2_proofSize).
+**Q43 (t = O(log_2 n) для poly-size).**
+Если суммарный размер $S(n)$ полиномиален, $S(n)\\le n^k+1$, то при $n\\ge 2$
+имеем $S\\le 2n^k$ и $t\\le\\log_2 S\\le 1+k\\log_2 n$, т.е. $t=O(\\log_2 n)$.
+Это связывает Q43-оценки с режимом depth $O(\\log_2 n)$ при poly-size.
+См. `formal/Notes/TseitinLocalEF.lean` §16.340 (Q43.S200-flat-eval-tparam-ologn).
 **Q43 (swap $s_1$).**
 Замена стартового $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ не ломает HR‑проверки:
 $s_\eta$ и $t(\eta)=\sum s_i+\log_2 M$ монотонно увеличиваются, а в режиме
