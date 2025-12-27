@@ -271,6 +271,26 @@ theorem Q39_rank2_monotone2d :
     Q39_rank2_8 Q39_monotone2d_vec1 Q39_monotone2d_vec2 := by
   decide
 
+-- Q39.S67-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict:
+-- strict 2D monotone block order still gives rank 2.
+abbrev BitVec12 := List Bool
+
+def Q39_zero12 : BitVec12 :=
+  [false, false, false, false, false, false, false, false, false, false, false, false]
+
+def Q39_rank2_12 (v w : BitVec12) : Prop :=
+  v ≠ Q39_zero12 ∧ w ≠ Q39_zero12 ∧ v ≠ w
+
+def Q39_monotone2d_strict_vec1 : BitVec12 :=
+  [false, false, true, true, false, false, false, false, true, true, false, false]
+
+def Q39_monotone2d_strict_vec2 : BitVec12 :=
+  [false, false, false, false, true, true, false, false, false, false, true, true]
+
+theorem Q39_rank2_monotone2d_strict :
+    Q39_rank2_12 Q39_monotone2d_strict_vec1 Q39_monotone2d_strict_vec2 := by
+  decide
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by
