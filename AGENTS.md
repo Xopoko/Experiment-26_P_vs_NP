@@ -29,7 +29,7 @@ Doc‑comments в `formal/Notes/*.lean` — это **заметки**, не фо
   - `agent_brief.md` — оперативная память проекта (с Do-not-repeat).
   - `sources.md` — ровно те источники, на которые реально опираемся.
 - `formal/`
-  - `PvNP/` — определения и доказательства.
+- `PvNP/Core/` — определения и доказательства.
   - `Notes/` — длинные исследовательские заметки в Lean (doc‑comments, Lean-first).
 - `scripts/`
   - `verify_notebook.py` — проверка структуры md (если есть).
@@ -93,7 +93,7 @@ Doc‑comments в `formal/Notes/*.lean` — это **заметки**, не фо
 
 ### 1) Proof
 - Обязательно содержит **реальный Lean‑код** (не только текст в doc‑comments).
-- Добавь или измени `def`/`theorem` в `formal/PvNP/*.lean` (или другом ядре `formal/`).
+- Добавь или измени `def`/`theorem` в `formal/PvNP/Core/*.lean` (или другом ядре `formal/`).
 - Файл компилируется, `scripts/verify_all.sh` проходит.
 - В `docs/` добавь краткий “человеческий” комментарий на 5–15 строк и ссылку на файл.
 

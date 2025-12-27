@@ -1,6 +1,6 @@
 import Paperproof
-import PvNP.SAT
-import PvNP.Graph
+import PvNP.Core.SAT
+import PvNP.Core.Graph
 
 namespace PvNP
 

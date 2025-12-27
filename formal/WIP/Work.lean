@@ -1,6 +1,6 @@
 import Paperproof
-import PvNP.Defs
-import PvNP.Graph
+import PvNP.Core.Defs
+import PvNP.Core.Graph
 
 namespace PvNP
 

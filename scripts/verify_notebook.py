@@ -11,6 +11,8 @@ from pathlib import Path
 
 
 _STEP_ID_RE = re.compile(r"^Q\d{1,4}\.S\d{1,4}(?:-[a-z0-9][a-z0-9-]*)?$")
+_ARTIFACT_TYPES = {"Proof", "Counterexample", "Exact citation", "Toy", "Reduction", "Barrier"}
+_ARTIFACT_HEADERS = {"StepID", "Type", "LeanTarget", "Commit", "Notes"}
 
 
 def _load_manifest_ids(path: Path) -> set[str]:
@@ -84,6 +86,47 @@ def _extract_backticked_meta(lines: list[str], *, key: str) -> str | None:
     return None
 
 
+def _verify_artifacts_log(*, path: Path) -> None:
+    if not path.exists():
+        raise AssertionError(f"Missing required file: {path}")
+
+    with path.open("r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f, delimiter="\t")
+        if set(reader.fieldnames or []) != _ARTIFACT_HEADERS:
+            raise AssertionError(
+                f"Unexpected header in {path}. Expected: {sorted(_ARTIFACT_HEADERS)}; got: {reader.fieldnames}"
+            )
+
+        seen_steps: set[str] = set()
+        for idx, row in enumerate(reader, start=2):
+            step_id = (row.get("StepID") or "").strip()
+            if not step_id:
+                raise AssertionError(f"{path}:{idx}: missing StepID")
+            _parse_step_id(step_id, context=f"{path}:{idx}: StepID")
+            if step_id in seen_steps:
+                raise AssertionError(f"{path}:{idx}: duplicate StepID {step_id}")
+            seen_steps.add(step_id)
+
+            art_type = (row.get("Type") or "").strip()
+            if art_type not in _ARTIFACT_TYPES:
+                raise AssertionError(
+                    f"{path}:{idx}: invalid Type {art_type!r} (expected one of {sorted(_ARTIFACT_TYPES)})"
+                )
+
+            lean_target = (row.get("LeanTarget") or "").strip()
+            if not lean_target:
+                raise AssertionError(f"{path}:{idx}: missing LeanTarget")
+
+            commit = (row.get("Commit") or "").strip()
+            if not commit:
+                raise AssertionError(f"{path}:{idx}: missing Commit (use PENDING if needed)")
+            if commit != "PENDING":
+                if not re.fullmatch(r"[0-9a-fA-F]{7,40}", commit):
+                    raise AssertionError(f"{path}:{idx}: invalid Commit {commit!r}")
+
+    print(f"OK: verified artifacts log in {path}")
+
+
 def _verify_open_questions_structure(*, path: Path) -> None:
     if not path.exists():
         raise AssertionError(f"Missing required file: {path}")
@@ -137,21 +180,27 @@ def _verify_open_questions_structure(*, path: Path) -> None:
             raise AssertionError(f"{path}: {qid}: missing `NextStepID:`")
         _parse_step_id(next_step, context=f"{path}: {qid}: NextStepID")
 
-    success = _extract_backticked_meta(item, key="Success")
-    if success is None:
-        raise AssertionError(f"{path}: {qid}: missing `Success:`")
-    if not success.strip():
-        raise AssertionError(f"{path}: {qid}: empty `Success:`")
+        success = _extract_backticked_meta(item, key="Success")
+        if success is None:
+            raise AssertionError(f"{path}: {qid}: missing `Success:`")
+        if not success.strip():
+            raise AssertionError(f"{path}: {qid}: empty `Success:`")
 
-    lean_target = _extract_backticked_meta(item, key="LeanTarget")
-    if lean_target is None:
-        raise AssertionError(f"{path}: {qid}: missing `LeanTarget:`")
-    if not lean_target.strip():
-        raise AssertionError(f"{path}: {qid}: empty `LeanTarget:`")
+        public_surface = _extract_backticked_meta(item, key="PublicSurface")
+        if public_surface is None:
+            raise AssertionError(f"{path}: {qid}: missing `PublicSurface:`")
+        if not public_surface.strip():
+            raise AssertionError(f"{path}: {qid}: empty `PublicSurface:`")
 
-    last_step = _extract_backticked_meta(item, key="LastStepID")
-    if last_step is not None and last_step.strip():
-        _parse_step_id(last_step, context=f"{path}: {qid}: LastStepID")
+        lean_target = _extract_backticked_meta(item, key="LeanTarget")
+        if lean_target is None:
+            raise AssertionError(f"{path}: {qid}: missing `LeanTarget:`")
+        if not lean_target.strip():
+            raise AssertionError(f"{path}: {qid}: empty `LeanTarget:`")
+
+        last_step = _extract_backticked_meta(item, key="LastStepID")
+        if last_step is not None and last_step.strip():
+            _parse_step_id(last_step, context=f"{path}: {qid}: LastStepID")
 
     print(f"OK: verified open questions structure in {path}")
 
@@ -357,6 +406,7 @@ def main(argv: list[str]) -> int:
         )
         _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
         _verify_open_questions_structure(path=Path("docs/open_questions.md"))
+        _verify_artifacts_log(path=Path("docs/artifacts.tsv"))
         _verify_prompt_files(paths=[Path("scripts/agent_prompt.txt")])
     return 0
 

@@ -18,4 +18,4 @@ $N$ останавливается за $O(|x|^k)$ шагов на всех ве
 
 **Гипотеза $\mathrm{P}\neq\mathrm{NP}$.** Существует язык $L\in\mathrm{NP}$, такой что $L\notin\mathrm{P}$.
 
-**Lean‑скелет:** определения языка/классов $P,NP$ заведены в `formal/PvNP/Defs.lean`.
+**Lean‑скелет:** определения языка/классов $P,NP$ заведены в `formal/PvNP/Core/Defs.lean`.

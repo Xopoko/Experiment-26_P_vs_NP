@@ -16,13 +16,15 @@ This repo is a compact, continuously-verified research log aimed at making real 
 - `docs/` — main text (kept short; history lives in git).
   - `docs/open_questions.md` — the active research queue; **one run picks exactly one item**.
   - `docs/agent_brief.md` — bounded “working memory” to prevent loops (Do-not-repeat).
+  - `docs/artifacts.tsv` — append-only artifact log (StepID/type/target/commit).
 - `formal/` — Lean 4 formalization layer.
-  - `formal/PvNP/` — core definitions/lemmas.
+  - `formal/PvNP/Core/` — authoritative definitions/lemmas (no `sorry`/`axiom`).
+  - `formal/WIP/` — work-in-progress Lean proofs (non-authoritative).
   - `formal/Notes/` — long research notes as Lean doc‑comments (Lean-first).
 - `resources/manifest.tsv` + `resources/downloads/` — bibliography + pinned PDFs/HTML (hygiene is checked).
 - `resources/text_cache/` — optional extracted text cache for fast `rg` over PDFs (gitignored).
 - `agent/` — runnable wrappers around Codex CLI, with per-run logs under `agent/logs/` (gitignored).
-- `scripts/verify_all.sh` — project verifier (docs + toy checks + optional formal build).
+- `scripts/verify_all.sh` — project verifier (docs + toy checks + formal build).
 - `scripts/verify_notebook.py` — markdown/toy checks only (used by `verify_all.sh`).
 
 ## Verification
@@ -36,8 +38,10 @@ scripts/verify_all.sh
 What it does:
 - Verifies `docs/` references to `resources/downloads/` against `resources/manifest.tsv`.
 - Verifies `docs/open_questions.md` structure and `docs/agent_brief.md` boundedness/anti-loop fields.
+- Verifies `docs/artifacts.tsv` header/format.
 - Verifies prompt stays **single-line**: `scripts/agent_prompt.txt`.
-- If Lean is installed, runs `lake build PvNP Notes` in `formal/` (skipped otherwise).
+- Runs `lake build PvNP` in `formal/` (fails if `lake` missing unless `REQUIRE_LEAN=0`).
+- Optional: `BUILD_NOTES=1` to build Notes, `BUILD_WIP=1` to build WIP, `CHECK_AXIOMS=1` for core axioms audit.
 
 Optional toy checks:
 

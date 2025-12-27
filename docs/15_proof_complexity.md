@@ -394,10 +394,10 @@ Feasible interpolation: короткие доказательства clique-col
 Для Tseitin(Grid$_{n,n}$) (где число переменных $N=\Theta(n^2)$) в bounded‑depth Frege известны лишь разнесённые границы для polynomial‑size:
 depth $=\Omega(\log N/\log\log N)$ (Håstad’20, Cor. 6.6) и depth $=O(\log N)$ (upper из GIRS’19; см. §16.92+§16.115+§16.116+§16.120).
 **Q39 (frontier как неориентированный срез).**
-В `formal/PvNP/Work.lean` введён `frontier` как объединение ориентированных границ.
+В `formal/WIP/Work.lean` введён `frontier` как объединение ориентированных границ.
 Для симметрических графов доказана инвариантность `frontier` при замене $S$ на $\\neg S$.
 Это позволяет рассматривать фронтиры в двухполосном шаге без ориентационной двусмысленности.
-Лемма: `Q39_frontier_compl` (см. `formal/PvNP/Work.lean`).
+Лемма: `Q39_frontier_compl` (см. `formal/WIP/Work.lean`).
 **Q39 (two‑strip toy rank).**
 Toy при $n=4$: даже если каждый внутренний узел имеет
 $|S_j\\cap\\delta(U)|\\le 2$ и $|S_{j+1}\\cap\\delta(U)|\\le 2$, проекционный ранг на два блока

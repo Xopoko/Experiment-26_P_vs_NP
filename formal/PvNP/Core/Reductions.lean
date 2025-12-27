@@ -1,5 +1,5 @@
 import Paperproof
-import PvNP.Defs
+import PvNP.Core.Defs
 
 namespace PvNP
 

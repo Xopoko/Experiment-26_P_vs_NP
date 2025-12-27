@@ -3,6 +3,7 @@
 Правило: **каждый прогон агента выбирает ровно 1 пункт ниже** и делает измеримый прогресс:
 `Proof` / `Counterexample` / `Exact citation` / `Toy` / `Reduction` / `Barrier` + барьер‑чек.
 Затем обновляет пункт.
+Каждый активный пункт содержит `Success`, `PublicSurface` и `LeanTarget`.
 
 ## Активные
 
@@ -11,7 +12,7 @@
   - `Status:` ACTIVE
   - `LastStepID:` Q39.S23-2k-two-strip-rank-toy (см. `formal/Notes/TseitinQ39.lean`)
   - `NextStepID:` Q39.S24-2k-two-strip-interval-obstruction
-  - `LeanTarget:` formal/PvNP/Work.lean
+  - `LeanTarget:` formal/WIP/Work.lean
   - `Lens:` Коммуникация/ранг (две полосы).
   - `Artifact:` Toy (двухполосный пример ранга).
   - `Update:` toy: $n=4$, $S_j=\\{e_1..e_4\\}$, $S_{j+1}=\\{f_1..f_4\\}$, блоки
@@ -26,6 +27,7 @@
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
+  - `PublicSurface:` Q39_two_strip_interval_obstruction (Lean lemma в WIP)
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Update: «единичный фронтир» невозможен уже для целей с $|S_j\\cap\\delta(U_{\\mathrm{root}})|\\ge 3$ (требуется узел с пересечением ≥2).
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.166) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
@@ -35,7 +37,8 @@
   - `Status:` ACTIVE
   - `LastStepID:` Q43.S137-logn-remaining-scan (см. `formal/Notes/TseitinLocalEF.lean` §16.280)
   - `NextStepID:` Q43.S138-logn-nonimpact-check
-  - `LeanTarget:` formal/PvNP/Work.lean
+  - `LeanTarget:` formal/WIP/Work.lean
+  - `PublicSurface:` Q43_logn_nonimpact_check (Lean lemma или точка поломки в WIP)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   Контекст: evaluation‑каркас перенесён, явный параметр $A$ извлечён; показано, что при $A=668$
   $n_0(A)=2$, поэтому в HR‑режиме единственным ограничением по $n$ остаётся

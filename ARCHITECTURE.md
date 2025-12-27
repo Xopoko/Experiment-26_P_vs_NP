@@ -5,7 +5,7 @@ where to improve it.
 
 ## Goals and invariants
 
-- Proof-first: the only authoritative results are in `formal/`.
+- Proof-first: authoritative results live in `formal/PvNP/Core/` (no `sorry`/`axiom`).
 - Docs are navigation + reasoning; they are not proofs.
 - One agent run = one checkable artifact.
 - No notebooks: the project is Lean-first and CLI-verified.
@@ -56,10 +56,13 @@ graph TD
 - `docs/` — structured written theory; kept short; history is in git.
   - `docs/open_questions.md` — active queue; each item has `StepID`, `NextStepID`, `LeanTarget`.
   - `docs/agent_brief.md` — bounded working memory to avoid loops.
+  - `docs/artifacts.tsv` — append-only artifact log (StepID/type/target/commit).
   - `docs/roadmap.md`, `docs/sources.md` — route and citations.
 - `formal/` — Lean 4 proof layer.
-  - `formal/PvNP/` — definitions/lemmas that are meant to be real proofs.
+  - `formal/PvNP/Core/` — authoritative definitions/lemmas (no `sorry`/`axiom`).
+  - `formal/WIP/` — work-in-progress Lean proofs (non-authoritative).
   - `formal/Notes/` — research notes as Lean doc-comments (not proofs).
+  - `formal/Checks/` — Lean checks (axioms audit).
   - `formal/lakefile.lean` — depends on `Paperproof`.
 - `agent/` — runner wrappers around Codex CLI.
 - `scripts/` — verification and tooling (checks, arXiv search).
@@ -101,9 +104,9 @@ graph TD
   B --> C[Docs structure checks]
   B --> D[Resource hygiene]
   B --> E[Prompt format check]
-  A --> F{Lean available}
-  F -->|yes| G[Lean build]
-  F -->|no| H[Skip formal build]
+  A --> F{lake installed?}
+  F -->|yes| G[Lean build + checks]
+  F -->|no| H[Fail unless REQUIRE_LEAN=0]
 ```
 
 Optional toy checks can be executed with:
@@ -111,6 +114,13 @@ Optional toy checks can be executed with:
 ```bash
 python3 scripts/verify_notebook.py --checks path/to/toy_checks.py
 ```
+
+Lean verification knobs (defaults shown):
+- `REQUIRE_LEAN=1` — fail if `lake` is missing (set to `0` to skip).
+- `BUILD_NOTES=0` — build `Notes` only when needed.
+- `BUILD_WIP=0` — build `WIP` only when needed.
+- `CHECK_AXIOMS=1` — run the axioms audit for core theorems.
+Core hygiene: `verify_all.sh` fails if `sorry`/`admit`/`axiom` appears in `formal/PvNP/Core/`.
 
 ## Research artifact flow
 
@@ -140,7 +150,7 @@ Core inputs:
 
 Core outputs per run:
 - One artifact (Proof / Counterexample / Exact citation / Toy / Reduction / Barrier).
-- Updated `docs/open_questions.md` and `docs/agent_brief.md`.
+- Updated `docs/open_questions.md`, `docs/agent_brief.md`, and `docs/artifacts.tsv`.
 - Passing `scripts/verify_all.sh`.
 - One commit with `StepID` in the message.
 
@@ -179,10 +189,12 @@ graph TD
 
 ## Formal layer structure
 
-- `formal/PvNP/Main.lean` — entry point for core proofs.
-- `formal/PvNP/Work.lean` — WIP proof file and placeholders for active tasks.
+- `formal/PvNP/Main.lean` — entry point for authoritative core.
+- `formal/PvNP/Core/*.lean` — authoritative definitions/lemmas (no `sorry`/`axiom`).
+- `formal/WIP/Work.lean` — WIP proof file and placeholders for active tasks.
 - `formal/Notes.lean` — imports all note modules.
 - `formal/Notes/*.lean` — long research notes (doc-comments, not proof terms).
+- `formal/Checks/AxiomsCheck.lean` — axioms audit list for core theorems.
 - `Paperproof` — external dependency defined in `formal/lakefile.lean`.
 
 ## Key control points (where to improve)
@@ -190,23 +202,26 @@ graph TD
 - `AGENTS.md`: tighten/relax constraints, artifacts, and anti-loop policy.
 - `scripts/agent_prompt.txt`: single-line prompt, easiest high-leverage change.
 - `docs/open_questions.md`: quality of StepID + Success criteria determines progress.
-- `formal/PvNP/Work.lean`: current proof surface for new Lean facts.
+- `formal/PvNP/Core/`: authoritative zone (no `sorry`/`axiom`).
+- `formal/WIP/Work.lean`: current proof surface for new Lean facts.
 - `scripts/verify_notebook.py`: structural invariants for stability.
 
 ## Operating assumptions
 
-- Lean build is optional but preferred; `verify_all.sh` skips if `lake` is missing.
+- Lean build is required by default; set `REQUIRE_LEAN=0` to skip if needed.
+- Core builds always; `BUILD_NOTES=1`/`BUILD_WIP=1` opt into Notes/WIP builds.
 - Docs are short and curated; long reasoning goes into `formal/Notes/`.
-- Only `formal/` proofs are considered authoritative.
+- Only `formal/PvNP/Core/` proofs are considered authoritative.
 
 ## Extension checklist
 
 - Add new research question: edit `docs/open_questions.md` with `LeanTarget`.
-- Add new Lean fact: implement in `formal/PvNP/` and import via `formal/PvNP/Main.lean`.
+- Add authoritative Lean fact: implement in `formal/PvNP/Core/` and import via `formal/PvNP/Main.lean`.
+- Add WIP Lean fact: implement in `formal/WIP/` (non-authoritative).
 - Add new resource: append to `resources/manifest.tsv`, download to `resources/downloads/`.
 - Add new check: implement a small `toy_checks.py` and wire through `--checks`.
 
 ## Known hot spots
 
 - Q39 and Q43 are active research items (see `docs/open_questions.md`).
-- `formal/PvNP/Work.lean` contains placeholders for current formal targets.
+- `formal/WIP/Work.lean` contains placeholders for current formal targets.
