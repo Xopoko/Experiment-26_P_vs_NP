@@ -38,19 +38,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S207-flat-eval-hr-level-count
-  - `NextStepID:` Q43.S208-flat-eval-hr-depth-range
+  - `LastStepID:` Q43.S208-flat-eval-hr-depth-range
+  - `NextStepID:` Q43.S209-flat-eval-hr-depth-range-constants
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.347
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.348
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Reduction.
-  - `Update:` в HR’22 (Section 3.4) последовательность рестрикций имеет длину $d$
-    (глубина доказательства), а $t(k)$‑evaluations строятся индукцией по $k=1,\\dots,d$,
-    т.е. число уровней равно $d$. См. `formal/Notes/TseitinLocalEF.lean` §16.347.
-  - `Use:` для проверки диапазона $\\eta$ достаточно ограничить глубину $d$.
-  - `BarrierCheck:` A) Relativization: да (цитирование + параметрическая связь). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Update:` диапазон $\\eta$ из §16.346 сводится к коэффициенту глубины:
+    при $d=\\kappa\\,\\frac{\\log_2 n}{\\log_2\\log_2 n}$ требуется
+    $\\kappa\\le \\frac{1}{2(a+c_1+1)}$; без явных $a,c_1$ это неразрешимо.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.348.
+  - `Use:` проверка диапазона $\\eta$ сводится к извлечению $a,c_1$ и сравнению с $\\kappa$.
+  - `BarrierCheck:` A) Relativization: да (параметрическая оценка). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 

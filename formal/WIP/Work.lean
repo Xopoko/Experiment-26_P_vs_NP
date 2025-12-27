@@ -514,6 +514,20 @@ def Q43_levelCount (d : Nat) : Nat := d
 theorem Q43_levelCount_le {d n : Nat} (h : d <= n) : Q43_levelCount d <= n := by
   simpa [Q43_levelCount] using h
 
+-- Q43.S208-flat-eval-hr-depth-range: strict eta-range bound from HR recursion.
+def Q43_etaRangeStrict (n a c1 eta : Nat) : Prop :=
+  eta <= Nat.log2 n / (2 * (a + c1 + 1) * Nat.log2 (Nat.log2 n))
+
+theorem Q43_etaRange_of_strict {n a c1 eta : Nat} (h : Q43_etaRangeStrict n a c1 eta) :
+    Q43_etaRange n eta := by
+  unfold Q43_etaRangeStrict at h
+  unfold Q43_etaRange
+  have hdiv :
+      Nat.log2 n / (2 * (a + c1 + 1) * Nat.log2 (Nat.log2 n)) <= Nat.log2 n := by
+    simpa using
+      (Nat.div_le_self (Nat.log2 n) (2 * (a + c1 + 1) * Nat.log2 (Nat.log2 n)))
+  exact le_trans h hdiv
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
