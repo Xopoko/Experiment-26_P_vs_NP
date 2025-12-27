@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S96-globalfixedpair-fixedorientation-contiguous-shift-alt9
-- `Do-not-repeat (next 2 runs):` Q43.S232-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare, Q39.S96-globalfixedpair-fixedorientation-contiguous-shift-alt9
+- `LastStepID:` Q39.S97-globalfixedpair-fixedorientation-contiguous-shift-alt10
+- `Do-not-repeat (next 2 runs):` Q39.S96-globalfixedpair-fixedorientation-contiguous-shift-alt9, Q39.S97-globalfixedpair-fixedorientation-contiguous-shift-alt10
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: доказано $\\log_2(|F|^C)\\le (\\log_2|F|+1)C$; следующий шаг — при $n\\ge 2$ заменить $\\log_2|F|+1\\le 2\\log_2|F|$ и сравнить $2C\\,c_1\\log_2^5|F|$ с $|F|$.
-Q39: alt9‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt10‑shift.
+Q39: alt10‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt11‑shift.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: alt9‑shift для contiguous blocks при fixed‑orientation всё е�
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Коммуникация/ранг

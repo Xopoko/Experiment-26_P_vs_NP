@@ -447,6 +447,10 @@ Toy при $k=2$: следующий циклический сдвиг contiguou
 Toy при $k=2$: следующий циклический сдвиг contiguous‑блоков при fixed‑orientation
 по‑прежнему даёт две разные ненулевые проекции, так что ранг остаётся 2.
 См. `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt9`).
+**Q39 (contiguous shift alt10).**
+Toy при $k=2$: следующий циклический сдвиг contiguous‑блоков при fixed‑orientation
+по‑прежнему даёт две разные ненулевые проекции, так что ранг остаётся 2.
+См. `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt10`).
 **Q43 (flat local‑EF(s), параметр‑сводка).**
 При явном $A\le 668$ из HR’22 получаем $n_0(A)=2$, поэтому в HR‑режиме
 условие $n\ge n_0(A)$ избыточно по сравнению с $n\ge 20 C n' \log_2 n'$
