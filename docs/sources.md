@@ -90,6 +90,10 @@
 - M. Lauria (2015), *Lecture 2: Resolution Lower Bounds via the Pigeonhole Principle* (PDF): ../resources/downloads/lauria_lecture2_2015.pdf
 - University of Toronto (TSS, 2021), *Introduction to Proof Complexity* (notes, PDF): ../resources/downloads/tss_proof_complexity_notes.pdf
 
+**Вероятностные оценки**
+- D. Dubhashi, D. Ranjan (1996), *Balls and Bins: A Study in Negative Dependence* (BRICS RS-96-25, PDF):
+  ../resources/downloads/dubhashi_ranjan_1996_balls_bins_negative_dependence.pdf
+
 **Неравномерность (P/poly)**
 - Karp–Lipton (1980), *Some connections between nonuniform and uniform complexity classes*
   (`../resources/downloads/trevisan_lecture05_2008.pdf`).

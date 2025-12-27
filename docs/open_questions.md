@@ -36,20 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S167-freeze-a0-parameter
-  - `NextStepID:` Q43.S168-explicit-c-chernoff
+  - `LastStepID:` Q43.S168-explicit-c-chernoff
+  - `NextStepID:` Q43.S169-propagate-explicit-a0
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.307
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.308
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (параметризация $A_0$).
+  - `Lens:` Трейд‑офф (явный Chernoff‑$C$).
   - `Artifact:` Reduction.
-  - `Update:` зафиксирован параметризованный режим: если принять $A_0$ как внешний параметр,
-    то дальнейший вывод Lemma 4.2/Thm. 4.1 остаётся явным через $A_0,A_1,A_2$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.307 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1975–1979`.
-  - `Use:` численная явность сведена к одной константе $A_0$; можно продолжать анализ
-    в параметризованной версии или пересчитать Chernoff‑шаг для явного $C$.
+  - `Update:` получен явный $C$ для Lemma 5.4 через Chernoff для отрицательной ассоциации
+    (exp = $e^x$, $\\log=\\ln$): достаточно $C\\ge 120000$ при $\\delta=0.01$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.308.
+  - `Use:` теперь $A_0=78C$ численно; следующий шаг — протащить это в Lemma 4.2/Thm. 4.1.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

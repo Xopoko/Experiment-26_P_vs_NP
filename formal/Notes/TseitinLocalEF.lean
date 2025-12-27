@@ -4133,3 +4133,32 @@ import Paperproof
   либо использовать параметризованную версию при дальнейшем анализе.
 
 -/
+
+/-!
+### 16.308. Исследовательский шаг (reduction): явный Chernoff‑константный $C$ для Lemma 5.4
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S168-explicit-c-chernoff):`
+  По Prop. 5 (Dubhashi–Ranjan, 1996) Chernoff–Hoeffding применим к отрицательно
+  ассоциированным индикаторам, а Theorem A.16 (Arora–Barak) даёт (exp = $e^x$)
+  $$\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 2\\exp(-\\delta^2\\mu/3)\\quad(0<\\delta\\le 1).$$
+  В Lemma 5.4 имеем $\\mu=k/n'^2=C\\log n'$ (лог = $\\ln$) и $\\delta=0.01$, поэтому
+  $$\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 2\\exp(-(\\delta^2 C/3)\\log n')=2\\,n'^{-\\delta^2 C/3}.$$
+  Для $n'\\ge 2$ достаточно взять $C\\ge 12/\\delta^2=120000$, чтобы
+  $\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 1/n'^3$; далее union bound по $n'^2$ квадратам
+  даёт вероятность $\\ge 1-1/n'$. (Если $\\log=\\log_2$, то $C$ умножается на $\\ln 2$.)
+- `Exact citation:`
+  Dubhashi–Ranjan (1996), Proposition 5 “(−A and Chernoff–Hoeffding Bounds)”
+  (PDF p.7 / printed p.5) — Chernoff для отрицательной ассоциации;
+  Arora–Barak (2009 draft), Theorem A.16 (PDF p.540) — формула Chernoff.
+- `Статус:` reduction (явный $C$ получен).
+- `StepID:` Q43.S168-explicit-c-chernoff.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (вероятностные константы).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` пропагировать явный $C$ в $A_0=78C$ и проверить, как это влияет на
+  параметры Lemma 4.2 / Thm. 4.1.
+
+-/
