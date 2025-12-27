@@ -4053,3 +4053,30 @@ import Paperproof
   (или зафиксировать барьер на уровне Chernoff/негативной корреляции).
 
 -/
+
+/-!
+### 16.305. Исследовательский шаг (barrier certificate): константа $C$ в Lemma 5.5 остаётся неявной
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S165-bound-c-lemma55):`
+  В доказательстве Lemma 5.5 константа $C$ выбирается как “large enough” для
+  применения Chernoff‑оценок при отрицательной корреляции и последующего
+  union bound. Численное значение $C$ не фиксируется; следовательно, явная
+  численная оценка для $A_0=78C$ (см. §16.304) недостижима без полного
+  пересчёта Chernoff‑шагов.
+- `Exact citation:`
+  “Since the Chernoff bounds continue to hold for negatively correlated random variables
+  it holds that $X(i,j)\\in(1\\pm0.01)k/n'^2$ except with probability $1/n'^3$ for a large enough
+  constant $C>0$.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1348–1350`)
+  and the statement of Lemma 5.5 using $C$ (`...:1353–1354`).
+- `Статус:` barrier certificate (явный $C$ не извлекается из текста).
+- `StepID:` Q43.S165-bound-c-lemma55.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (мета‑константы).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` либо пересчитать Chernoff‑шаги с явными константами,
+  либо принять барьер и заморозить явные численные $A_0$.
+
+-/

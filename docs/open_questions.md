@@ -37,20 +37,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S164-bound-a0-lemma55
-  - `NextStepID:` Q43.S165-bound-c-lemma55
+  - `LastStepID:` Q43.S165-bound-c-lemma55
+  - `NextStepID:` Q43.S166-chernoff-recount
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.304
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.305
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (явный $A_0$).
-  - `Artifact:` Reduction.
-  - `Update:` из Lemma 5.5 получено явное выражение $A_0=78C$:
-    $(13C\\log n')/(n/n')\\le (78C\\log n')/\\Delta$ при $\\Delta\\ge n/(6n')$,
-    что даёт фактор $(A_0\\log n'/\\Delta)^{a+b}$ в Proof Lemma 4.2.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.304 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1353–1363, 1401–1402, 1975–1979`.
-  - `Use:` следующий шаг — извлечь численную оценку для $C$ в Lemma 5.5 (или зафиксировать барьер).
+  - `Lens:` Инвариант (Chernoff‑константа).
+  - `Artifact:` Barrier.
+  - `Update:` константа $C$ в Lemma 5.5 выбирается как “large enough” для Chernoff‑оценки
+    при отрицательной корреляции и union bound; явное значение не фиксируется, поэтому
+    численный $A_0=78C$ остаётся неявным. См. `formal/Notes/TseitinLocalEF.lean` §16.305 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1348–1354`.
+  - `Use:` барьер зафиксирован; следующий шаг — пересчитать Chernoff‑шаги с явными константами или заморозить $A_0$.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
