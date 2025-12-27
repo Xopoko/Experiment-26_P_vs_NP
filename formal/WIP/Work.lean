@@ -932,6 +932,19 @@ theorem Q43_thm41_log2_threshold_c1_grid_iff_mul {n : Nat}
   unfold Q43_thm41_log2_threshold_c1_grid Q43_thm41_log2_threshold_c1_grid_mul
   simpa using (Nat.le_div_iff_mul_le hpos)
 
+-- Q43.S221-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-asymptotic:
+-- log2(|F|) is at least 1 for grid size |F| = n^2 when n >= 2.
+theorem Q43_log2_grid_ge_one {n : Nat} (hn : 2 <= n) :
+    1 <= Nat.log2 (Q43_grid_size n) := by
+  have hn1 : 1 <= n := le_trans (by decide : 1 <= 2) hn
+  have hn0 : n ≠ 0 := by
+    exact Nat.ne_of_gt (lt_of_lt_of_le (by decide : 0 < 2) hn)
+  have hlogn : 1 <= Nat.log2 n := by
+    have hpow : 2 ^ 1 <= n := by
+      simpa using hn
+    exact (Nat.le_log2 hn0).2 hpow
+  exact le_trans hlogn (Q43_log2_le_log2_grid_size (n:=n) hn1)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

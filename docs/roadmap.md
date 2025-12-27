@@ -16,6 +16,12 @@ Q43 reduction update (Q43.S202):
 - Depends on §16.165 and §16.342 in `formal/Notes/TseitinLocalEF.lean`.
 - Lean anchor: `formal/WIP/Work.lean` (Q43_tPrime).
 
+Q43 log2 threshold asymptotic check (Q43.S221):
+- For grid size |F|=n^2, `log2 |F| >= 1` holds once `n >= 2`.
+- This clears the side condition in the multiplicative threshold form.
+- Lean anchor: `formal/WIP/Work.lean` (Q43_log2_grid_ge_one).
+- Next: apply it in the regime-d inequality to remove division.
+
 Key dependencies:
 - HR'22 switching lemma framework and evaluation definitions.
 - Precise handling of parameters (A, c1, c2) and depth thresholds.
