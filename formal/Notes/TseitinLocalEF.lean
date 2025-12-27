@@ -4729,6 +4729,35 @@ import Paperproof
 -/
 
 /-!
+### 16.333. Исследовательский шаг (reduction): axiom-size accounting vs line-count в flat local-EF(s)
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S193-flat-eval-axiom-size-accounting):`
+  Если размер доказательства $S$ измеряется суммарным размером строк (сумма длин/литералов),
+  то каждая строка имеет размер $\\le S$, в частности $|\\varphi_i|\\le S$ для любой
+  extension-аксиомы $p_i\\leftrightarrow\\varphi_i(X)$. Тогда $M(F)\\le S+S^2$ и
+  $t=\\log_2 M(F)=O(\\log_2 S)$, как в §16.332.
+  Если же $S$ — только число строк, то $|\\varphi_i|$ не ограничен размером доказательства,
+  и контроль $t$ требует дополнительного ограничения на $|\\varphi_i|$.
+- `Reduction:` Q43 сводится к выбору метрики размера в модели local-EF(s):
+  line-size даёт автоматический bound на $|\\varphi_i|$, line-count требует явного ограничения
+  или отдельного барьера.
+- `Toy-check:` при line-count можно взять доказательство из одной строки
+  $p\\leftrightarrow\\varphi(X)$ с $|\\varphi|=2^{(\\log_2 n)^2}$, и тогда
+  $t=(\\log_2 n)^2$ суперполиномиален.
+- `Статус:` reduction (accounting: line-size vs line-count).
+- `StepID:` Q43.S193-flat-eval-axiom-size-accounting.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: релятивизуется (чистый подсчет размера доказательства).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` уточнить, какая метрика размера используется в определения local-EF(s)
+  и в каких местах допускаются "бесплатные" extension-аксиомы.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
