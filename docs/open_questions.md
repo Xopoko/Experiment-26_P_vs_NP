@@ -36,21 +36,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S191-flat-eval-construction-pivot
-  - `NextStepID:` Q43.S192-flat-eval-axiom-size-bound
+  - `LastStepID:` Q43.S192-flat-eval-axiom-size-bound
+  - `NextStepID:` Q43.S193-flat-eval-axiom-size-accounting
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.331
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.332
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд‑офф (size vs support).
+  - `Lens:` Трейд-офф (size vs line size).
   - `Artifact:` Reduction.
-  - `Update:` pivot: размер формулы после развёртывания $p_i\\mapsto\\varphi_i(X)$
-    контролируется числом вхождений $p_i$ и размерами $|\\varphi_i|$; если
-    $|\\varphi_i|\\le\\mathrm{poly}(s)$ и $|F|=\\mathrm{poly}(n)$, то
-    $M(F)\\le\\mathrm{poly}(s)\\cdot\\mathrm{poly}(n)$ и $t=\\log_2 M(F)=O(\\log n+\\log s)$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.331.
-  - `Use:` Q43 сводится к контролю $|\\varphi_i|$ (или к eval‑конструкции без полного
-    развёртывания) для обеспечения малых evaluations.
+  - `Update:` показано, что при стандартной метрике размера (линии считаются в $S$)
+    имеем $|\\varphi_i|\\le S$ и $M(F)\\le S+S^2$, так что $t=\\log_2 M(F)=O(\\log_2 S)$;
+    если аксиомы не учитываются в размере, возможен контрпример $|\\varphi_i|=2^{(\\log_2 n)^2}$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.332.
+  - `Use:` контроль $|\\varphi_i|$ сводится к учёту размера строк в модели local‑EF(s);
+    если extension-аксиомы считаются "бесплатными", нужен явный барьер/ограничение.
   - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

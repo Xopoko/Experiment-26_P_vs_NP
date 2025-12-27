@@ -4697,6 +4697,38 @@ import Paperproof
 -/
 
 /-!
+### 16.332. Исследовательский шаг (reduction): axiom-size bound через размер линий в flat local-EF(s)
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S192-flat-eval-axiom-size-bound):`
+  Пусть есть flat local-EF(s) доказательство размера $S$, где размер линии измеряется числом
+  символов/литералов и каждая extension-аксиома записана как строка
+  $p_i\\leftrightarrow\\varphi_i(X)$.
+  Тогда для любой строки $F$:
+  $$M(F)\\le |F| + \\sum_{p_i\\in\\mathrm{vars}(F)} \\#_F(p_i)\\cdot|\\varphi_i|
+           \\le |F| + |F|\\cdot \\max_i |\\varphi_i|
+           \\le S + S^2,$$
+  и потому $t=\\log_2 M(F)=O(\\log_2 S)$. Если $S=\\mathrm{poly}(n)$, то $t=O(\\log_2 n)$.
+- `Reduction:` контроль $|\\varphi_i|$ сводится к стандартному ограничению на размер линий;
+  дополнительное условие $|\\varphi_i|\\le \\mathrm{poly}(s)$ нужно только если
+  extension-аксиомы считаются "бесплатными".
+- `Toy-kill:` если аксиомы не учитываются в размере, можно взять
+  $|\\varphi_i|=2^{(\\log_2 n)^2}$ при $|\\mathrm{supp}(\\varphi_i)|\\le s$ и получить
+  $t=(\\log_2 n)^2+O(\\log_2 |F|)$, что суперполиномиально.
+- `Статус:` reduction (axiom-size bound = line-size bound в стандартной метрике).
+- `StepID:` Q43.S192-flat-eval-axiom-size-bound.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: релятивизуется (чистый подсчет размеров строк/подстановки).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` проверить, учитываются ли extension-аксиомы в размере модели local-EF(s);
+  если нет - зафиксировать это как барьер или усилить модель явным ограничением на
+  $|\\varphi_i|$.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

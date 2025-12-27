@@ -82,3 +82,4 @@ Q43.S188-exp2-quote-scan-logbases-summary-closeout	Reduction	formal/WIP/Work.lea
 Q43.S189-exp2-quote-scan-logbases-summary-postaudit	Reduction	formal/WIP/Work.lean	PENDING	postaudit: remaining summary logs are base-agnostic (see formal/Notes/TseitinLocalEF.lean §16.329)
 Q43.S190-exp2-quote-scan-logbases-summary-exit	Reduction	formal/WIP/Work.lean	PENDING	audit exit: summary log bases settled (see formal/Notes/TseitinLocalEF.lean §16.330)
 Q43.S191-flat-eval-construction-pivot	Reduction	formal/WIP/Work.lean	PENDING	pivot: bound expanded formula size to control t (see formal/Notes/TseitinLocalEF.lean §16.331)
+Q43.S192-flat-eval-axiom-size-bound	Reduction	formal/WIP/Work.lean	PENDING	axiom-size bound via line-size accounting (see formal/Notes/TseitinLocalEF.lean 16.332)

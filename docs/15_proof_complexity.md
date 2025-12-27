@@ -421,6 +421,14 @@ $|S_j\\cap\\delta(U)|\\le 2$ и $|S_{j+1}\\cap\\delta(U)|\\le 2$, проекци
 Это обеспечивает совместимость условий $t'(d)\le n_d/16$ и $t'\le s_\eta\le n'/32$
 при достаточно большом $n$; возможна замена $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ без изменения
 asymptotics (см. §16.276, Q43.S133-hr-compatibility-check).
+**Q43 (axiom-size bound).**
+Если в flat local-EF(s) размер доказательства $S$ измеряется размером строк и
+extension-аксиомы $p_i\leftrightarrow\varphi_i(X)$ входят как строки, то $|\varphi_i|\le S$.
+Тогда для любой строки $F$ размер развёртывания $M(F)\le |F|+|F|\cdot\max_i|\varphi_i|\le S+S^2$,
+поэтому $t=\log_2 M(F)=O(\log_2 S)$, а при $S=\mathrm{poly}(n)$ получаем $t=O(\log_2 n)$.
+Если аксиомы не учитываются в размере, можно взять $|\varphi_i|=2^{(\log_2 n)^2}$ при
+$|\mathrm{supp}(\varphi_i)|\le s$, и тогда $t$ становится суперполиномиальным.
+См. `formal/Notes/TseitinLocalEF.lean` §16.332 (Q43.S192-flat-eval-axiom-size-bound).
 **Q43 (swap $s_1$).**
 Замена стартового $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ не ломает HR‑проверки:
 $s_\eta$ и $t(\eta)=\sum s_i+\log_2 M$ монотонно увеличиваются, а в режиме
