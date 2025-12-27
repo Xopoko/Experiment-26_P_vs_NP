@@ -168,3 +168,4 @@ Q39.S113-globalfixedpair-fixedorientation-contiguous-shift-alt26	Counterexample	
 Q39.S114-globalfixedpair-fixedorientation-contiguous-shift-alt27	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt27-shift still give rank 2
 Q39.S115-globalfixedpair-fixedorientation-contiguous-shift-alt28	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt28-shift still give rank 2
 Q43.S246-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals	Proof	formal/WIP/Work.lean	PENDING	plateau log2|F|=2k on n in [2^k,5·2^(k-2)]
+Q39.S116-globalfixedpair-fixedorientation-contiguous-shift-alt29	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt29-shift still give rank 2
