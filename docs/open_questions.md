@@ -37,24 +37,25 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S150-thm41-bound-compare
-  - `NextStepID:` Q43.S151-thm41-nontrivial-regime
+  - `LastStepID:` Q43.S151-thm41-nontrivial-regime
+  - `NextStepID:` Q43.S152-extract-constants
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.290
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.291
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд‑офф (poly‑режим vs lower bound).
-  - `Artifact:` Reduction (Exact).
-  - `Update:` в poly‑режиме $N=|F|^C$, $M=|F|^k$ large‑$M$ bound Thm. 4.1 даёт
-    $N\\ge\\exp(\\Omega((\\log|F|)^{1/\\kappa-4+o(1)}))$ (exp=$e^x$).
-    Для $\\kappa=59$ это субполиномиально: $N\\ge\\exp(\\Omega((\\log|F|)^{-3.98\\ldots}))=|F|^{o(1)}$,
-    так что bound автоматически выполнен для любого $N=|F|^C$.
-    Сверхполиномиальность возможна лишь при $1/\\kappa-4>1$, то есть $\\kappa<1/5$.
-    Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.290.
-  - `Use:` при $\\kappa=59$ Thm. 4.1 не даёт нетривиального роста для poly‑$N$;
-    следующий шаг — проверить, есть ли реалистичный режим глубины с $\\kappa<1/5$
-    (или другой масштаб $d$), где bound становится сверхполиномиальным.
+  - `Lens:` Инвариант (неявные константы).
+  - `Artifact:` Barrier.
+  - `Update:` чтобы получить сверхполиномиальность из Thm. 4.1 в режиме
+    $d=\\kappa\\log n/\\log\\log n$, нужно $\\kappa<1/5$ (см. §16.290),
+    но Thm. 4.1 использует $O(\\log n/\\log\\log n)$ без явного коэффициента,
+    а Lemma 4.2 вводит лишь существование абсолютных $A,C,n_0$.
+    Поэтому нельзя строго проверить, что $\\kappa<1/5$ допускается.
+    `exp` трактуется как $e^x$; $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.291 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850, 858–859`.
+  - `Use:` локальный барьер: без явных констант нельзя зафиксировать
+    сверхполиномиальный режим Thm. 4.1 при poly‑$M$; следующий шаг — извлечь
+    константы из доказательства или использовать явный режим Håstad’20 Thm. 6.5.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
