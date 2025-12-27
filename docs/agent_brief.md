@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S210-flat-eval-hr-depth-range-constants-recount
-- `Do-not-repeat (next 2 runs):` Q39.S69-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier, Q43.S210-flat-eval-hr-depth-range-constants-recount
+- `LastStepID:` Q39.S70-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit
+- `Do-not-repeat (next 2 runs):` Q43.S210-flat-eval-hr-depth-range-constants-recount, Q39.S70-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: верхние оценки $A_3,A_4$ зафиксированы; следующий шаг — $A_1,A_2$ (и затем $A_0$).
-Q39: frontier‑блоки не снижают ранг; следующий шаг — unit‑frontier.
+Q39: unit‑frontier не снижает ранг; следующий шаг — one‑strip unit‑frontier.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: frontier‑блоки не снижают ранг; следующий ша
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (проверить unit‑frontier при строгом 2D‑prefix).
+- Q39 из `docs/open_questions.md` (проверить one‑strip unit‑frontier при строгом 2D‑prefix).
 - Q43 из `docs/open_questions.md` (вытащить явные $A_1,A_2$ и проверить режим $\\kappa$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: frontier‑блоки не снижают ранг; следующий ша
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Эквивалентность→Коммуникация/ранг
+Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Эквивалентность
