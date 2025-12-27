@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S65-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone
-- `Do-not-repeat (next 2 runs):` Q39.S64-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block, Q39.S65-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone
+- `LastStepID:` Q43.S205-flat-eval-hr-neta-recursion
+- `Do-not-repeat (next 2 runs):` Q39.S65-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone, Q43.S205-flat-eval-hr-neta-recursion
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: пороги HR сведены к $n_\\eta\\ge n_0$; следующий шаг — явная нижняя оценка $n_\\eta$ по уровням.
+Q43: есть явная нижняя оценка $n_\\eta$; следующий шаг — диапазон $\\eta$ для HR‑параметров.
 Q39: монотонный порядок блоков не снижает ранг; следующий шаг — двумерная монотонность.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: монотонный порядок блоков не снижает ран
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (проверить двумерную монотонность по строкам и колонкам).
-- Q43 из `docs/open_questions.md` (вывести явное $n_\\eta\\ge n/\\log_2^{O(\\eta)} n$ и порог $t'(\\eta)$).
+- Q43 из `docs/open_questions.md` (зафиксировать диапазон $\\eta$ для HR‑параметров).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: монотонный порядок блоков не снижает ран
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Инвариант→Трейд‑офф→Коммуникация/ранг→Коммуникация/ранг
+Последние:Инвариант→Трейд‑офф→Коммуникация/ранг→Коммуникация/ранг→Инвариант

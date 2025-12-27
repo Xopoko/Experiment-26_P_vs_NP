@@ -37,19 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S204-flat-eval-hr-neta-threshold
-  - `NextStepID:` Q43.S205-flat-eval-hr-neta-recursion
+  - `LastStepID:` Q43.S205-flat-eval-hr-neta-recursion
+  - `NextStepID:` Q43.S206-flat-eval-hr-neta-range
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.344
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.345
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд‑офф (HR‑рекурсия $n_\\eta$).
+  - `Lens:` Инвариант (нижняя оценка $n_\\eta$).
   - `Artifact:` Reduction.
-  - `Update:` в HR‑рекурсии $n_\\eta=\\lfloor n_{\\eta-1}/(A\\,t'\\,\\log_2^{c_1} n_{\\eta-1})\\rfloor$
-    при $t'\\!=\\mathrm{polylog}(n)$ существует $n_0$ и горизонт $\\eta_*$, что
-    $n_\\eta\\ge n_0$ и выполняются $t'(\\eta)\\le n_\\eta/16$, $s(\\eta)\\le n_\\eta/32$
-    для всех $\\eta\\le\\eta_*$. См. `formal/Notes/TseitinLocalEF.lean` §16.344.
-  - `Use:` HR‑пороги сведены к контролю спада $n_\\eta$ в polylog‑режиме.
+  - `Update:` при $t'(m)\\le(\\log_2 m)^a$ и HR‑рекурсии
+    $n_\\eta=\\lfloor n_{\\eta-1}/(A\\,t'\\,\\log_2^{c_1} n_{\\eta-1})\\rfloor$
+    имеем $n_\\eta\\ge n/(A\\,\\log_2^{a+c_1} n)^\\eta$; отсюда при
+    $\\eta\\le \\log_2 n/(2(a+c_1+1)\\log_2\\log_2 n)$ получаем $n_\\eta\\ge n^{1/2}$
+    и пороги HR сохраняются. См. `formal/Notes/TseitinLocalEF.lean` §16.345.
+  - `Use:` явная формула спада $n_\\eta$ редуцирует проверку порогов к диапазону $\\eta$.
   - `BarrierCheck:` A) Relativization: да (арифметика на Nat). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

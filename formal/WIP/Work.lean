@@ -441,6 +441,23 @@ theorem Q43_neta_step_le (n A t logc : Nat) :
     Q43_neta_step n A t logc <= n := by
   simpa [Q43_neta_step, Q43_hrDenom] using (Nat.div_le_self n (A * t * logc))
 
+def Q43_neta_iter (n A t logc : Nat) : Nat -> Nat
+  | 0 => n
+  | Nat.succ k => Q43_neta_step (Q43_neta_iter n A t logc k) A t logc
+
+theorem Q43_neta_iter_le (n A t logc : Nat) : ∀ k, Q43_neta_iter n A t logc k <= n := by
+  intro k
+  induction k with
+  | zero =>
+      simp [Q43_neta_iter]
+  | succ k ih =>
+      simp [Q43_neta_iter]
+      have hstep :
+          Q43_neta_step (Q43_neta_iter n A t logc k) A t logc
+            <= Q43_neta_iter n A t logc k := by
+        exact Q43_neta_step_le _ _ _ _
+      exact le_trans hstep ih
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
