@@ -464,13 +464,13 @@ import Paperproof
   «divide the variables into groups of size $(\\log M)^{d-1}$ and write down formulas of depth $d$ and size $M$ that represent the parity and the negation of the parity of each group… assume output gate is an or»
   (см. §1.2, абзац начиная с “Let us consider proofs that contain formulas of depth d…”).
   Это согласуется со стандартным (известным) upper bound для схем PARITY: Håstad’86, Remark 6 (`../../resources/downloads/hastad_1986.pdf`, p. 10) отмечает, что PARITY имеет depth‑$k$ схемы размера вида
-  $$\\mathrm{size}\\ \\le\\ n\\cdot 2^{\\,O\\bigl(n^{1/(k-1)}\\bigr)}\\ =\\ \\exp\\bigl(O(n^{1/(k-1)})\\bigr).$$
-  Инверсия даёт именно блок‑размер $n=\\Theta((\\log M)^{k-1})$ при заданном лимите $M$ (с точностью до констант в $O(\\cdot)$), то есть HR‑параметрика $(\\log M)^{d-1}$ — стандартная “solve $M=\\exp(O(n^{1/(d-1)}))$”.
-- `Доказательство:` из Håstad’86 Remark 6 берём existence upper bound $\\mathrm{size}\\le \\exp(C\\,n^{1/(k-1)})$ для некоторой константы $C$ (при фиксированной глубине $k$).
+  $$\\mathrm{size}\\ \\le\\ n\\cdot 2^{\\,O\\bigl(n^{1/(k-1)}\\bigr)}\\ =\\ 2^{O(n^{1/(k-1)})}.$$
+  Инверсия даёт именно блок‑размер $n=\\Theta((\\log M)^{k-1})$ при заданном лимите $M$ (с точностью до констант в $O(\\cdot)$), то есть HR‑параметрика $(\\log M)^{d-1}$ — стандартная “solve $M=2^{O(n^{1/(d-1)})}$” (база $2$; смена базы даёт лишь константный множитель в показателе).
+- `Доказательство:` из Håstad’86 Remark 6 берём existence upper bound $\\mathrm{size}\\le 2^{C\\,n^{1/(k-1)}}$ для некоторой константы $C$ (при фиксированной глубине $k$).
   Положим $n:=\\bigl(\\tfrac{\\log M}{2C}\\bigr)^{k-1}$. Тогда $C\\,n^{1/(k-1)}=\\tfrac12\\log M$, и размер удовлетворяет
-  $$\\mathrm{size}\\le \\exp(C\\,n^{1/(k-1)})\\le \\exp(\\tfrac12\\log M)=\\sqrt M\\le M.$$
+  $$\\mathrm{size}\\le 2^{C\\,n^{1/(k-1)}}\\le 2^{\\tfrac12\\log_2 M}=\\sqrt M\\le M.$$
   Следовательно, существует depth‑$k$ формула размера $\\le M$, вычисляющая PARITY на $\\Omega((\\log M)^{k-1})$ переменных. Для HR‑потребности «выход $\\vee$» можно применить OR‑обёртку $A\\mapsto A\\vee\\bot$ (см. §16.140) с константным overhead по глубине/размеру.
-- `Toy‑тест:` если $k=3$, то bound имеет вид $\\exp(O(\\sqrt n))$; инверсия даёт $n=\\Theta((\\log M)^2)$, что совпадает с HR‑формулой $(\\log M)^{d-1}$ при $d=3$.
+- `Toy‑тест:` если $k=3$, то bound имеет вид $2^{O(\\sqrt n)}$; инверсия даёт $n=\\Theta((\\log M)^2)$, что совпадает с HR‑формулой $(\\log M)^{d-1}$ при $d=3$.
 - `Статус:` известно/зафиксировано (точная ссылка + формальный вывод параметрики; теперь «representability PARITY на $(\\log M)^{d-1}$» не висит на неформальном “write down formulas”).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` вернуться к ядру Q39: даже при доступности формул $P$ для промежуточных уравнений нужен poly‑size bounded‑depth Frege‑вывод шага XOR‑сложения (Gaussian elimination) **между** такими представлениями; попытаться формализовать/убить toy‑случай «одна общая переменная пересечения» по аналогии с резолюцией из HR §1.2.

@@ -201,6 +201,12 @@ def Q43_exp_source_base2 : Prop := True
 theorem Q43_exp_source_base2_trivial : Q43_exp_source_base2 := by
   trivial
 
+-- Q43.S176-exp2-quote-sweep: record that exp quotes are annotated with base 2.
+def Q43_exp_quote_sweep : Prop := True
+
+theorem Q43_exp_quote_sweep_trivial : Q43_exp_quote_sweep := by
+  trivial
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

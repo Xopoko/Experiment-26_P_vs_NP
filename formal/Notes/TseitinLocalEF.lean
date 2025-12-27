@@ -3380,8 +3380,7 @@ import Paperproof
   $\\exp\\,\\Omega\\bigl(n/((\\log n)^{O(1)}\\log M)^d\\bigr)$” и далее “Suppose we are given a Frege refutation …
   consisting of $N$ lines” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:939–962`).
   В Proof of Thm. 4.3: “Suppose we are given a proof of length $N=\\exp(n/((\\log n)^c\\log M)^d)$ …
-  We may assume that $M\\le\\exp(n^{1/d-1/d(d-1)})$” (`…:1104–1106`).
-  Здесь `exp` в цитате интерпретируем как $2^x$ по конвенции $\\log_2$ в HR’22.
+  We may assume that $M\\le\\exp(n^{1/d-1/d(d-1)})$” (`…:1104–1106`; `exp` в цитате = $2^x$ по конвенции $\\log_2$ в HR’22).
 - `Статус:` exact citation (фиксация параметров $n,N,M,d$ и базы экспоненты).
 - `StepID:` Q43.S142-parameter-map-n-vs-bign.
 - `InfoGain:` 1.
@@ -3546,8 +3545,7 @@ import Paperproof
   $d=\\kappa\\log n/\\log\\log n$.
 - `Exact citation:`
   Proof of Theorem 4.3: “We may assume that $M\\le \\exp(n^{1/d-1/d(d-1)})$, as otherwise we can
-  apply Theorem 4.1.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`).
-  Здесь `exp` в цитате интерпретируем как $2^x$.
+  apply Theorem 4.1.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`; `exp` в цитате = $2^x$ по конвенции $\\log_2$ в HR’22).
 - `Статус:` exact citation (ветка Thm. 4.1 = случай $M$ выше порога).
 - `StepID:` Q43.S148-thm41-branch-audit.
 - `InfoGain:` 1.
@@ -3811,8 +3809,7 @@ import Paperproof
   строка с числителем `log n` непосредственно перед Theorem 6.5 и строки
   `Theorem 6.5. Suppose that d ≤ 59 log log n` и
   `requires size exp(Ω(n 1/58(d +1) ))`
-  (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`).
-  Здесь `exp` в цитате интерпретируем как $2^x$ (логарифмы в тексте — по базе 2).
+  (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`; `exp` в цитате = $2^x$, логарифмы — по базе 2).
 - `Статус:` exact citation (явная $\\kappa=59$ и форма exp‑LB).
 - `StepID:` Q43.S157-pivot-hastad20-kappa.
 - `InfoGain:` 1.
@@ -4297,6 +4294,29 @@ import Paperproof
   C) Algebrization check: неприменимо.
 - `Следующий шаг:` согласовать аналогичные пометы в других разделах,
   где сохраняются прямые цитаты с `exp`.
+
+-/
+
+/-!
+### 16.316. Исследовательский шаг (exact citation): sweep exp‑цитат с явной базой
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S176-exp2-quote-sweep):`
+  Для всех прямых цитат с `exp(…)` в Q43 теперь явно указана база ($2^x$) рядом с ссылкой,
+  а единственная «экспонента в кавычках» вне Q43 (формула “solve $M=2^{O(n^{1/(d-1)})}$” в §16.142)
+  приведена к форме $2^{(\\cdot)}$ для устранения неоднозначности.
+- `Exact citation:`
+  HR’22 Proof Thm. 4.3 (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`);
+  Håstad’20 Thm. 6.5 (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`).
+- `Статус:` exact citation (явная база для цитат с `exp`).
+- `StepID:` Q43.S176-exp2-quote-sweep.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (комментарии к цитатам).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` проверить, остались ли цитаты с `exp` вне Q43 (например, в Q39/Q16.x),
+  и при необходимости зафиксировать базу рядом с цитированием.
 
 -/
 

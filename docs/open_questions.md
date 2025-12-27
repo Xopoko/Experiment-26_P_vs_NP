@@ -36,18 +36,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S175-exp2-quote-annotation
-  - `NextStepID:` Q43.S176-exp2-quote-sweep
+  - `LastStepID:` Q43.S176-exp2-quote-sweep
+  - `NextStepID:` Q43.S177-exp2-quote-scan-core
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.315
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.316
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (exp‑цитаты).
-  - `Artifact:` Reduction.
-  - `Update:` в цитатах HR’22/Håstad’20 с `exp(…)` добавлены пометы, что интерпретация
-    идёт как $2^x$ (согласовано с $\\log_2$). См. `formal/Notes/TseitinLocalEF.lean` §16.315.
-  - `Use:` согласовать такие пометы в остальных разделах, где сохраняются прямые цитаты с `exp`.
-  - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Lens:` Сжатие/канонизация (exp‑цитаты).
+  - `Artifact:` Exact citation.
+  - `Update:` в цитатах Q43 с `exp(…)` база $2$ указана рядом со ссылками; в §16.142 формула
+    “solve $M=2^{O(n^{1/(d-1)})}$” приведена к базе $2$, чтобы снять неоднозначность.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.316 и `formal/Notes/TseitinQ39.lean` §16.142.
+  - `Use:` проверить, остались ли прямые цитаты с `exp(…)` вне Q43 (например, в Q39/Q16.x), и при необходимости
+    зафиксировать базу рядом с источником.
+  - `BarrierCheck:` A) Relativization: да (комментарии к цитатам). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 

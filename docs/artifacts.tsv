@@ -59,3 +59,4 @@ Q43.S172-exp2-consistency	Reduction	formal/WIP/Work.lean	PENDING	unify exp as 2^
 Q43.S173-exp2-c1c2-rescale	Reduction	formal/WIP/Work.lean	PENDING	rescale c1,c2 to exp2 conventions (see formal/Notes/TseitinLocalEF.lean §16.313)
 Q43.S174-exp2-threshold-sweep	Reduction	formal/WIP/Work.lean	PENDING	normalize exp to 2^{·} across Q43 (see formal/Notes/TseitinLocalEF.lean §16.314)
 Q43.S175-exp2-quote-annotation	Exact citation	formal/WIP/Work.lean	PENDING	annotate exp quotes as base 2 (see formal/Notes/TseitinLocalEF.lean §16.315)
+Q43.S176-exp2-quote-sweep	Exact citation	formal/WIP/Work.lean	PENDING	sweep exp quotes with base-2 notes (see formal/Notes/TseitinLocalEF.lean §16.316)
