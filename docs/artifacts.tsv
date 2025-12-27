@@ -122,3 +122,4 @@ Q43.S212-flat-eval-hr-depth-range-constants-a0	Proof	formal/WIP/Work.lean	PENDIN
 Q43.S213-flat-eval-hr-depth-range-constants-a0-extract	Proof	formal/WIP/Work.lean	PENDING	define A0=78*C and specialize the A0 log term
 Q43.S214-flat-eval-hr-depth-range-constants-a0-explicit-c	Proof	formal/WIP/Work.lean	PENDING	explicit Chernoff C=120000 (exp=e^x, log=ln) and A0=78*C
 Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0	Proof	formal/WIP/Work.lean	PENDING	rewrite A0 log factor using 9,360,000
+Q43.S216-flat-eval-hr-depth-range-constants-a0-c1c2-explicit	Proof	formal/WIP/Work.lean	PENDING	explicit c1,c2 from numeric A0

@@ -35,20 +35,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0
-  - `NextStepID:` Q43.S216-flat-eval-hr-depth-range-constants-a0-c1c2-explicit
+  - `LastStepID:` Q43.S216-flat-eval-hr-depth-range-constants-a0-c1c2-explicit
+  - `NextStepID:` Q43.S217-flat-eval-hr-depth-range-constants-a0-c1c2-apply-thm41
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_A0_chernoff_ln_bound_explicit)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_c1_chernoff_ln_eval/Q43_thm41_c2_chernoff_ln_eval)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` лемма `Q43_A0_chernoff_ln_bound_explicit` переписывает
-    $(A_0\\log n')\\,\\Delta^a\\,\\Delta^b$ как
-    $(9{,}360{,}000\\cdot\\log n')\\,\\Delta^{a+b}$.
+  - `Update:` зафиксированы явные численные $c_1,c_2$ при $A_0=9{,}360{,}000$:
+    `c2=11,381,760,000` и `c1=27,680,440,320,000` (формулы `c2:=8*A0*152`,
+    `c1:=16*152*c2`; базовые конвенции `exp=e^x`, `log=ln`).
     См. `formal/WIP/Work.lean`.
-  - `Use:` следующий шаг — выписать явные $c_1,c_2$ в Thm. 4.1, используя численный $A_0$.
-  - `BarrierCheck:` A) Relativization: да (арифметика параметров). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Use:` следующий шаг — подставить эти $c_1,c_2$ в проверку порога Thm. 4.1 (режим `log2`).
+  - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 

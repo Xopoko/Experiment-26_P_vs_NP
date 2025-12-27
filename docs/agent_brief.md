@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S79-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted
-- `Do-not-repeat (next 2 runs):` Q39.S79-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted, Q39.S78-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored
+- `LastStepID:` Q43.S216-flat-eval-hr-depth-range-constants-a0-c1c2-explicit
+- `Do-not-repeat (next 2 runs):` Q43.S216-flat-eval-hr-depth-range-constants-a0-c1c2-explicit, Q39.S79-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: явный $A_0$ протолкнут в лог‑фактор; следующий шаг — явные $c_1,c_2$ в Thm. 4.1.
+Q43: явные $c_1,c_2$ вычислены при $A_0$; следующий шаг — проверить порог Thm. 4.1 в режиме `log2`.
 Q39: сдвинутые якорные блоки не снижают ранг; следующий шаг — сбалансированные якорные блоки.
 
 ## Что уже сделано (не повторять)
@@ -41,4 +41,4 @@ Q39: сдвинутые якорные блоки не снижают ранг; 
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
