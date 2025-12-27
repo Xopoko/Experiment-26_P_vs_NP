@@ -244,12 +244,13 @@ import Paperproof
 - `Линза:` Трейд‑офф.
 - `Утверждение:` Рассмотрим Tseitin‑противоречие на $n\times n$ решётке (grid).
   Если $d\le \frac{\log n}{59\log\log n}$, то любая depth‑$d$ Frege‑рефутация имеет размер
-  $\exp(\Omega(n^{1/(58(d+1))}))$ (Håstad 2020, Thm. 6.5; `../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`).
+  $2^{\Omega(n^{1/(58(d+1))})}$ (Håstad 2020, Thm. 6.5; `../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`,
+  `exp` в источнике = $2^x$).
   В частности, любая полиномиальная
   по $n$ (а значит и по числу переменных $N=\Theta(n^2)$) Frege‑рефутация требует формул глубины
   $\Omega(\log n/\log\log n)$ (Håstad 2020, Cor. 6.6).
 - `Toy‑тест:` при константной глубине $d=O(1)$ получаем superpolynomial нижнюю оценку
-  $\exp(\Omega(n^{\Omega(1)}))=\exp(\Omega(N^{\Omega(1)}))$ для Tseitin(Grid$_{n,n}$).
+  $2^{\Omega(n^{\Omega(1)})}=2^{\Omega(N^{\Omega(1)})}$ для Tseitin(Grid$_{n,n}$).
 - `Статус:` известный факт (точная ссылка).
 - `Барьер‑чек:` r — неприменимо (нижняя оценка для ограниченной модели доказательств),
   NP — неприменимо, alg — неприменимо.

@@ -4321,6 +4321,29 @@ import Paperproof
 -/
 
 /-!
+### 16.317. Исследовательский шаг (exact citation): scan core‑цитат с `exp` и фиксация базы $2^x$
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S177-exp2-quote-scan-core):`
+  В §16.92 (`formal/Notes/TseitinCore.lean`) формулировка Thm. 6.5 (Håstad’20)
+  записана в базе $2$ и снабжена пометой “`exp` в источнике = $2^x$”;
+  это закрывает прямую `exp`‑цитату вне Q43 без изменения асимптотики.
+- `Exact citation:`
+  Håstad’20 Thm. 6.5 (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`;
+  см. также `../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`).
+- `Статус:` exact citation (база экспоненты зафиксирована как $2^x$).
+- `StepID:` Q43.S177-exp2-quote-scan-core.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (комментарии к цитатам).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` проверить, остались ли прямые цитаты с `exp` в `formal/Notes/TseitinCore.lean`
+  и в summary‑файлах, и при необходимости привести к базе $2$ или явно указать $e^x$.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

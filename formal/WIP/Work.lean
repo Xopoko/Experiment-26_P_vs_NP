@@ -207,6 +207,12 @@ def Q43_exp_quote_sweep : Prop := True
 theorem Q43_exp_quote_sweep_trivial : Q43_exp_quote_sweep := by
   trivial
 
+-- Q43.S177-exp2-quote-scan-core: record base-2 note in core citations.
+def Q43_exp_quote_scan_core : Prop := True
+
+theorem Q43_exp_quote_scan_core_trivial : Q43_exp_quote_scan_core := by
+  trivial
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
