@@ -1176,6 +1176,22 @@ theorem Q43_polyNM_log2_bounds {n N C M K : Nat} (h : Q43_polyNM n N C M K) :
   exact ⟨Q43_log2_le_log2_grid_pow (n:=n) (N:=N) (C:=C) hN,
     Q43_tParam_le_log2_grid_pow (n:=n) (M:=M) (K:=K) hM⟩
 
+-- Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold:
+-- bundle the regime-d criterion with poly N/M log2 bounds.
+theorem Q43_regime_d_ok_polyNM_bounds {n N C M K : Nat} (hn : 2 <= n)
+    (hpow5 : Q43_thm41_log2_threshold_c1_grid_mul_pow5 n)
+    (hpoly : Q43_polyNM n N C M K) :
+    Q43_thm41_regime_d_ok n ∧
+      Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
+      Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) := by
+  have hreg : Q43_thm41_regime_d_ok n :=
+    Q43_thm41_regime_d_ok_of_pow5 (n:=n) hn hpow5
+  have hbounds :
+      Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
+      Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) :=
+    Q43_polyNM_log2_bounds (n:=n) (N:=N) (C:=C) (M:=M) (K:=K) hpoly
+  exact ⟨hreg, hbounds⟩
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

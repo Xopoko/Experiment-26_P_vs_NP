@@ -132,3 +132,4 @@ Q43.S217-flat-eval-hr-depth-range-constants-a0-c1c2-apply-thm41	Proof	formal/WIP
 Q43.S218-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime	Proof	formal/WIP/Work.lean	PENDING	log2 n <= log2 |F| for |F|=n^2
 Q43.S219-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-final	Proof	formal/WIP/Work.lean	PENDING	log2 threshold rewritten in |F| with explicit c1
 Q43.S230-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m-link	Proof	formal/WIP/Work.lean	PENDING	combine poly N/M regimes and log2 bounds
+Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold	Proof	formal/WIP/Work.lean	PENDING	bundle regime-d criterion with poly N/M log2 bounds

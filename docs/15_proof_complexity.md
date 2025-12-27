@@ -570,6 +570,12 @@ $\\log_2 |F|\\le |F|/(c_1\\log_2^4 |F|)$.
 $\\log_2 |F|\\cdot c_1\\log_2^4 |F|\\le |F|$ при $\\log_2 |F|\\ge 1$.
 Это удобно для проверки режима $d$ без деления (все оценки остаются в базе $\\log_2$).
 См. `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_iff_mul).
+**Q43 (regime-d bundle + poly N/M bounds).**
+In `formal/WIP/Work.lean` the lemma `Q43_regime_d_ok_polyNM_bounds` is added.
+It packages the log2^5 regime-d criterion (via `Q43_thm41_regime_d_ok_of_pow5`)
+with the poly N/M log2 bounds from `Q43_polyNM_log2_bounds`.
+This separates the regime-d hypothesis from the polynomial-size assumptions,
+so the next step is to compare `log2 ((|F|)^C)` with `|F|/(c1 log2^4 |F|)`.
 Кратко: Tseitin — паритеты на графе (нечетная сумма зарядов ⇒ невыполнимость);
 нижние оценки через ограниченную степень и экспансию; Clique-Coloring —
 несовместимость клики и раскраски.
