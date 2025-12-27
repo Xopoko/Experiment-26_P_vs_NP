@@ -1608,6 +1608,22 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_sides_mono {n m C : 
   exact ⟨Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_lhs_mono (n:=n) (m:=m) (C:=C) h,
     Q43_grid_size_mono h⟩
 
+-- Q43.S243-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-finish:
+-- rewrite the scaled log2^5 threshold as a ratio bound.
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_iff_ratio {n C : Nat}
+    (hpos : 0 < (Nat.log2 (Q43_grid_size n)) ^ 5) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C
+      ↔ 2 * C * Q43_thm41_c1_chernoff_ln
+          <= Q43_grid_size n / (Nat.log2 (Q43_grid_size n)) ^ 5 := by
+  unfold Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple
+  have h :
+      2 * C * Q43_thm41_c1_chernoff_ln
+          <= Q43_grid_size n / (Nat.log2 (Q43_grid_size n)) ^ 5
+        ↔ (2 * C * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5
+            <= Q43_grid_size n := by
+    simpa using (Nat.le_div_iff_mul_le hpos)
+  exact h.symm
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

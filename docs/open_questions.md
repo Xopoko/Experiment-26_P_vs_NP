@@ -37,20 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S242-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-combine
-  - `NextStepID:` Q43.S243-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-finish
+  - `LastStepID:` Q43.S243-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-finish
+  - `NextStepID:` Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_sides_mono)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_iff_ratio)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` объединены монотонности левой и правой частей
-    для порогового неравенства $(2C\\,c_1)\\,\\log_2^5|F|\\le |F|$.
-    См. `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_sides_mono).
-  - `Use:` следующий шаг — завершить lift критерия
-    $2C\\,c_1\\log_2^5|F|\\le |F|$ от $n_0$ к $n\\ge n_0$
-    с использованием монотонности и сравнения роста.
+  - `Update:` переписан критерий
+    $(2C\\,c_1)\\,\\log_2^5|F|\\le |F|$ в эквивалентную форму
+    $2C\\,c_1\\le |F|/\\log_2^5|F|$ (при $\\log_2|F|>0$).
+    См. `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_iff_ratio).
+  - `Use:` следующий шаг — доказать монотонность отношения
+    $|F|/\\log_2^5|F|$ по $n$ и поднять порог от $n_0$.
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
