@@ -219,6 +219,12 @@ def Q43_exp_quote_scan_remaining : Prop := True
 theorem Q43_exp_quote_scan_remaining_trivial : Q43_exp_quote_scan_remaining := by
   trivial
 
+-- Q43.S179-exp2-quote-scan-analytic: record base-e notes in analytic steps.
+def Q43_exp_quote_scan_analytic : Prop := True
+
+theorem Q43_exp_quote_scan_analytic_trivial : Q43_exp_quote_scan_analytic := by
+  trivial
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

@@ -4372,6 +4372,31 @@ import Paperproof
 -/
 
 /-!
+### 16.319. Исследовательский шаг (exact citation): аналитические `exp(…)` → явное $e^x$ в core
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S179-exp2-quote-scan-analytic):`
+  В аналитических местах `formal/Notes/TseitinCore.lean` (оптимизация $f(d)=dX^{2/d}$)
+  все оставшиеся `exp(…)` заменены на явные $e^{(\cdot)}$, а в доказательстве
+  зафиксировано, что используется натуральный логарифм $\\ln$.
+  Это устраняет неоднозначность базы в асимптотике (особенно в шагах с $\\ln X$).
+- `Exact citation:`
+  Galesi–Itsykson–Riazanov–Sofronova 2019, Claim 28 (раздел 4.3),
+  `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`
+  (используется для формулы $\\mathrm{poly}(|T|)\\cdot 2^{O(d\\cdot X^{2/d})}$, далее проводится аналитическая оптимизация).
+- `Статус:` exact citation (база $e^x$ явно указана для аналитических шагов).
+- `StepID:` Q43.S179-exp2-quote-scan-analytic.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения в аналитике).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` пройти места с $\\log$ в аналитических разделах и решить,
+  где нужно оставлять $\\log_2$ vs $\\ln$ (без влияния на асимптотику).
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

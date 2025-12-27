@@ -36,19 +36,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S178-exp2-quote-scan-remaining
-  - `NextStepID:` Q43.S179-exp2-quote-scan-analytic
+  - `LastStepID:` Q43.S179-exp2-quote-scan-analytic
+  - `NextStepID:` Q43.S180-exp2-quote-scan-logbases
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.318
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.319
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Сжатие/канонизация (exp‑цитаты).
+  - `Lens:` Эквивалентность (exp‑цитаты).
   - `Artifact:` Exact citation.
-  - `Update:` в `formal/Notes/TseitinCore.lean` экспоненциальные оценки 16.86/16.87/16.88
-    приведены к виду $2^{(\cdot)}$, а summary‑файлы согласованы по базе.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.318.
-  - `Use:` пройти оставшиеся аналитические `exp(…)` в `formal/Notes/TseitinCore.lean`
-    (места с $\\ln$) и явно отметить, где $e^x$.
+  - `Update:` в аналитических шагах `formal/Notes/TseitinCore.lean` (оптимизация $f(d)$)
+    `exp(…)` заменены на явные $e^{(\cdot)}$, а логарифмы согласованы как $\\ln$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.319.
+  - `Use:` пройти места с $\\log$ в аналитических разделах и решить, где оставить $\\log_2$
+    vs $\\ln$ (без влияния на асимптотику).
   - `BarrierCheck:` A) Relativization: да (комментарии к цитатам). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
