@@ -1564,6 +1564,14 @@ theorem Q43_log2_grid_size_pow5_mono {n m : Nat} (h : n <= m) :
     (Nat.log2 (Q43_grid_size n)) ^ 5 <= (Nat.log2 (Q43_grid_size m)) ^ 5 := by
   exact Q43_pow_le_pow_of_le (Q43_log2_grid_size_mono h)
 
+-- Q43.S241-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift:
+-- scaled log2^5 term is monotone in n for |F|=n^2.
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_lhs_mono {n m C : Nat}
+    (h : n <= m) :
+    (2 * C * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5
+      <= (2 * C * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size m)) ^ 5 := by
+  exact Nat.mul_le_mul_left _ (Q43_log2_grid_size_pow5_mono h)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
