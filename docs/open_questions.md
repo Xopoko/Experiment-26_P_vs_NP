@@ -37,20 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S142-parameter-map-n-vs-bign (parameter map)
-  - `NextStepID:` Q43.S143-translate-n-parameter
+  - `LastStepID:` Q43.S143-translate-n-parameter (n→size map)
+  - `NextStepID:` Q43.S144-translate-largem-vs-polyn
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.282
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.283
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Трейд‑офф (режимы по $M$ в HR Thm. 4.3).
-  - `Artifact:` Exact citation (parameter map in HR Thm. 4.3).
-  - `Update:` в HR Thm. 4.3 фиксировано: $n$ — сторона $n\\times n$ grid,
-    $N$ — число строк доказательства, каждая строка имеет размер $M$ и глубину $d$,
-    а нижняя оценка выражается как $N\\ge\\exp(\\Omega(n/((\\log n)^{O(1)}\\log M)^d))$ с $\\exp=e^x$.
-    В Proof of Thm. 4.3 large‑$M$ порог дан как $M\\le\\exp(n^{1/d-1/(d(d-1))})$ в тех же $n$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.282 с точными строками.
-  - `Use:` теперь можно корректно переводить пороги из HR в термины нашего $N$/$|F|$.
+  - `Lens:` Эквивалентность (перевод параметров $n\\leftrightarrow|F|$).
+  - `Artifact:` Reduction (parameter translation).
+  - `Update:` для grid $G_n$: $|V|=n^2$, $|E|=2n(n-1)$, поэтому число переменных
+    $N_{\\mathrm{var}}=\\Theta(n^2)$; стандартная CNF‑кодировка паритета даёт
+    $|F_n|=\\Theta(n^2)$ (например, $8(n-1)^2$ клауз).
+    Следовательно $n=\\Theta(\\sqrt{N_{\\mathrm{var}}})=\\Theta(\\sqrt{|F_n|})$, и порог
+    $M\\le\\exp(n^{\\alpha})$ (exp = $e^x$) переписывается как $M\\le\\exp(|F_n|^{\\alpha/2})$.
+  - `Use:` можно сравнивать large‑$M$ условие с $M=\\mathrm{poly}(|F|)$ в терминах размера формулы.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

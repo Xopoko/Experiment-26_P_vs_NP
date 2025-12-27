@@ -3393,4 +3393,33 @@ import Paperproof
   (например, $|\\mathrm{Tseitin}(G_n)|=\\Theta(n^2)$) и переписать порог large‑$M$
   в терминах $N$ или $|F|$ для сравнения с poly‑$M$ режимом.
 
+### 16.283. Исследовательский шаг (reduction): перевод параметра $n$ в размер формулы для Tseitin(Grid)
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S143-translate-n-parameter):`
+  Пусть $G_n$ — $n\\times n$ grid. Тогда $|V|=n^2$ и $|E|=2n(n-1)$.
+  В Tseitin($G_n$) каждая переменная соответствует ребру, так что число переменных
+  $$N_{\\mathrm{var}}:=|E|=2n(n-1)=\\Theta(n^2).$$
+  Для стандартной CNF‑кодировки паритета на вершине степени $d$ нужно $2^{d-1}$ клауз,
+  поэтому для grid (степени $2,3,4$) число клауз равно
+  $$2\\cdot 4\\ +\\ 4\\cdot 4(n-2)\\ +\\ 8\\cdot (n-2)^2\\ =\\ 8(n-1)^2\\ =\\ \\Theta(n^2).$$
+  Следовательно, $|F_n|=\\Theta(n^2)$ и
+  $$n=\\Theta(\\sqrt{N_{\\mathrm{var}}})=\\Theta(\\sqrt{|F_n|}).$$
+  Поэтому large‑$M$ порог из HR Thm. 4.3
+  $$M\\le \\exp\\bigl(n^{\\alpha}\\bigr),\\qquad \\alpha=1/d-1/(d(d-1)),$$
+  переписывается как
+  $$M\\le \\exp\\bigl((N_{\\mathrm{var}})^{\\alpha/2}\\bigr)=\\exp\\bigl(|F_n|^{\\alpha/2}\\bigr),$$
+  где $\\exp$ понимается как $e^x$ (как в HR); вариант с $2^x$ даёт ещё меньший порог.
+- `Toy‑тест:` $n=4$ даёт $|E|=2\\cdot 4\\cdot 3=24$ и $8(n-1)^2=72$ клауз,
+  что согласуется с $\\Theta(n^2)$.
+- `Статус:` reduction/equivalence (связь параметра $n$ с $N_{\\mathrm{var}}$ и $|F_n|$).
+- `StepID:` Q43.S143-translate-n-parameter.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (комбинаторный пересчёт).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` подставить $n=\\Theta(\\sqrt{|F|})$ в порог large‑$M$
+  и сравнить с режимом $M=\\mathrm{poly}(|F|)$ при $d=\\Theta(\\log n/\\log\\log n)$.
+
 -/
