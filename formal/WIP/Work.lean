@@ -958,6 +958,12 @@ theorem Q43_log2_grid_ge_one {n : Nat} (hn : 2 <= n) :
     exact (Nat.le_log2 hn0).2 hpow
   exact le_trans hlogn (Q43_log2_le_log2_grid_size (n:=n) hn1)
 
+-- Q43.S222-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-asymptotic-apply:
+-- apply the asymptotic log2 condition to the multiplicative threshold.
+theorem Q43_thm41_log2_threshold_c1_grid_iff_mul_asymptotic {n : Nat} (hn : 2 <= n) :
+    Q43_thm41_log2_threshold_c1_grid n ↔ Q43_thm41_log2_threshold_c1_grid_mul n := by
+  exact Q43_thm41_log2_threshold_c1_grid_iff_mul (Q43_log2_grid_ge_one (n:=n) hn)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
