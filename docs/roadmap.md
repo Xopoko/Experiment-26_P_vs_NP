@@ -22,6 +22,12 @@ Q43 log2 threshold asymptotic check (Q43.S221):
 - Lean anchor: `formal/WIP/Work.lean` (Q43_log2_grid_ge_one).
 - Next: apply it in the regime-d inequality to remove division.
 
+Q43 log2 monotonicity in n (Q43.S239):
+- For |F|=n^2, prove `log2 |F|` is monotone in n.
+- Reduces to grid-size monotonicity plus `log2` monotonicity.
+- Supports lifting the regime-d threshold from n0 to larger n.
+- Lean anchor: `formal/WIP/Work.lean` (Q43_log2_grid_size_mono).
+
 Key dependencies:
 - HR'22 switching lemma framework and evaluation definitions.
 - Precise handling of parameters (A, c1, c2) and depth thresholds.
