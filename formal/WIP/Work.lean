@@ -977,6 +977,20 @@ theorem Q43_thm41_log2_threshold_c1_grid_iff_mul_asymptotic {n : Nat} (hn : 2 <=
     Q43_thm41_log2_threshold_c1_grid n ↔ Q43_thm41_log2_threshold_c1_grid_mul n := by
   exact Q43_thm41_log2_threshold_c1_grid_iff_mul (Q43_log2_grid_ge_one (n:=n) hn)
 
+-- Q43.S223-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion:
+-- rewrite the multiplicative threshold using a single log2^5 term.
+def Q43_thm41_log2_threshold_c1_grid_mul_pow5 (n : Nat) : Prop :=
+  Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 5 <= Q43_grid_size n
+
+theorem Q43_thm41_log2_threshold_c1_grid_mul_iff_pow5 {n : Nat} :
+    Q43_thm41_log2_threshold_c1_grid_mul n
+      ↔ Q43_thm41_log2_threshold_c1_grid_mul_pow5 n := by
+  unfold Q43_thm41_log2_threshold_c1_grid_mul
+  unfold Q43_thm41_log2_threshold_c1_grid_mul_pow5
+  constructor <;> intro h
+  · simpa [Nat.pow_succ, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using h
+  · simpa [Nat.pow_succ, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using h
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
