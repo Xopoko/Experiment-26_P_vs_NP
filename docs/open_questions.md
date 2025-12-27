@@ -36,20 +36,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S246-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals
-  - `NextStepID:` Q43.S247-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-apply
+  - `LastStepID:` Q43.S247-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-apply
+  - `NextStepID:` Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-cover
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_log2_grid_size_eq_double_of_range)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_grid_ratio_mono_on_plateau)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` доказана “плато‑лемма” для $|F|=n^2$:
-    если $k\\ge 2$ и $2^k\\le n\\le 5\\cdot 2^{k-2}$, то
-    $\\log_2|F|=2k$ (значит log2‑уровень постоянен на под‑интервале).
-    См. `formal/WIP/Work.lean` (Q43_log2_grid_size_eq_double_of_range).
-  - `Use:` следующий шаг — применить плато‑лемму к
-    lift порога на интервале и расширить покрытие (две под‑полки на $[2^k,2^{k+1})$).
+  - `Update:` применена плато‑лемма к монотонности отношения:
+    если $n\\le m$ и оба лежат в $[2^k,5\\cdot 2^{k-2}]$ (при $k\\ge 2$),
+    то $|F|/\\log_2^5|F|$ монотонно по $n$ на этом под‑интервале.
+    См. `formal/WIP/Work.lean` (Q43_grid_ratio_mono_on_plateau).
+  - `Use:` следующий шаг — покрыть весь $[2^k,2^{k+1})$ второй под‑полкой
+    и показать lift порога от $n_0$ по кускам.
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

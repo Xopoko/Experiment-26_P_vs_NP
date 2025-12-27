@@ -1776,6 +1776,21 @@ theorem Q43_log2_grid_size_eq_double_of_range {k n : Nat} (hk : 2 <= k)
     exact lt_of_le_of_lt hpow_hi' hbound
   exact (Nat.log2_eq_iff hne).2 ⟨hlow, hupper⟩
 
+-- Q43.S247-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-apply:
+-- apply the plateau lemma to the ratio monotonicity on the sub-interval.
+theorem Q43_grid_ratio_mono_on_plateau {k n m : Nat} (hk : 2 <= k)
+    (hn : 2 ^ k <= n) (hm : 2 ^ k <= m)
+    (hn_hi : n <= 5 * 2 ^ (k - 2)) (hm_hi : m <= 5 * 2 ^ (k - 2))
+    (h : n <= m) :
+    Q43_grid_ratio n <= Q43_grid_ratio m := by
+  have hlogn : Nat.log2 (Q43_grid_size n) = 2 * k :=
+    Q43_log2_grid_size_eq_double_of_range (k:=k) (n:=n) hk hn hn_hi
+  have hlogm : Nat.log2 (Q43_grid_size m) = 2 * k :=
+    Q43_log2_grid_size_eq_double_of_range (k:=k) (n:=m) hk hm hm_hi
+  have hlog : Nat.log2 (Q43_grid_size n) = Nat.log2 (Q43_grid_size m) := by
+    simpa [hlogn, hlogm]
+  exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
