@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S61-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct-support-per-step
-- `Do-not-repeat (next 2 runs):` Q39.S60-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct, Q39.S61-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct-support-per-step
+- `LastStepID:` Q39.S62-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-change-per-step
+- `Do-not-repeat (next 2 runs):` Q39.S61-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct-support-per-step, Q39.S62-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-change-per-step
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: t сведён к polylog n при quasi-poly size; следующий шаг — проверить HR-совместимость.
-Q39: обе полосы меняются на каждом шаге, но ранг 2 сохраняется; следующий шаг — это реализовать при строгом чередовании row/column.
+Q39: строгая альтернация + обе полосы меняются, но ранг 2 сохраняется; следующий шаг — column‑шаги с активностью обеих полос.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: обе полосы меняются на каждом шаге, но ра�
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (проверить “оба strip‑support меняются при чередовании row/column”).
+- Q39 из `docs/open_questions.md` (проверить column‑шаги: обе полосы активны и меняются).
 - Q43 из `docs/open_questions.md` (проверить HR-совместимость при t=polylog).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: обе полосы меняются на каждом шаге, но ра�
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг
+Последние:Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг→Инвариант
