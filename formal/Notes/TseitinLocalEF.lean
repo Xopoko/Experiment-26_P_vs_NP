@@ -3364,4 +3364,33 @@ import Paperproof
 - `Следующий шаг:` уточнить параметризацию HR (что именно означает $n$ в пороге)
   и сравнить с фактическим полиномиальным режимом $M=\\mathrm{poly}(N)$.
 
+### 16.282. Исследовательский шаг (exact citation): параметры Thm. 4.3 — $n$ это сторона грида, $N$ это длина доказательства
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S142-parameter-map-n-vs-bign):`
+  В формулировке HR’22 Theorem 4.3 $n$ — это сторона $n\\times n$ grid в Tseitin($G_n$),
+  $N$ — число строк (length) Frege‑доказательства, а каждая строка имеет размер $M$ и глубину $d$.
+  Нижняя оценка выражается как
+  $$N\\ \\ge\\ \\exp\\!\\left(\\Omega\\left(\\frac{n}{((\\log n)^{O(1)}\\,\\log M)^d}\\right)\\right),$$
+  где $\\exp$ понимается как $e^x$ (в тексте используется `exp`).
+  В Proof of Thm. 4.3 параметр large‑$M$ формулируется как $M\\le\\exp(n^{1/d-1/(d(d-1))})$,
+  где $n$ — тот же размер стороны грида.
+- `Exact citation:`
+  Формулировка Thm. 4.3: “Tseitin($G_n$) with odd charges at all nodes of the $n\\times n$ grid … If each line
+  of the refutation is of size $M$ and depth $d$, then the number of lines in the refutation is
+  $\\exp\\,\\Omega\\bigl(n/((\\log n)^{O(1)}\\log M)^d\\bigr)$” и далее “Suppose we are given a Frege refutation …
+  consisting of $N$ lines” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:939–962`).
+  В Proof of Thm. 4.3: “Suppose we are given a proof of length $N=\\exp(n/((\\log n)^c\\log M)^d)$ …
+  We may assume that $M\\le\\exp(n^{1/d-1/d(d-1)})$” (`…:1104–1106`).
+- `Статус:` exact citation (фиксация параметров $n,N,M,d$ и базы экспоненты).
+- `StepID:` Q43.S142-parameter-map-n-vs-bign.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (проверка по тексту).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` выразить $n$ в терминах размера формулы/числа переменных
+  (например, $|\\mathrm{Tseitin}(G_n)|=\\Theta(n^2)$) и переписать порог large‑$M$
+  в терминах $N$ или $|F|$ для сравнения с poly‑$M$ режимом.
+
 -/

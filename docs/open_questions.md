@@ -37,20 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S141-poly-vs-exp-threshold (toy check)
-  - `NextStepID:` Q43.S142-parameter-map-n-vs-bign
+  - `LastStepID:` Q43.S142-parameter-map-n-vs-bign (parameter map)
+  - `NextStepID:` Q43.S143-translate-n-parameter
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.281
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.282
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Трейд‑офф (режимы по $M$ в HR Thm. 4.3).
-  - `Artifact:` Toy computation (poly $M$ vs exp threshold).
-  - `Update:` скрипт `scripts/toy_q43_s141.py` сравнивает $M=n^k$ с порогом
-    $\\exp(n^{\\alpha})$ при $\\alpha=1/d-1/(d(d-1))$ и $d=\\lfloor\\log_2 n/\\log_2\\log_2 n\\rfloor$.
-    Здесь $\\exp$ трактуется как $e^x$ (в HR), версия $2^x$ даёт ещё меньший порог.
-    Для $n=2^8..2^{32}$ даже при $k=1$ выходит $k\\log n>n^{\\alpha}$ (а при $k\\ge 2$ тем более),
-    т.е. poly‑$M$ **не** автоматически ниже порога large‑$M$.
-  - `Use:` нужен явный мэппинг параметров HR (что именно означает $n$ и как $M=\\mathrm{poly}(N)$ связан с порогом).
+  - `Artifact:` Exact citation (parameter map in HR Thm. 4.3).
+  - `Update:` в HR Thm. 4.3 фиксировано: $n$ — сторона $n\\times n$ grid,
+    $N$ — число строк доказательства, каждая строка имеет размер $M$ и глубину $d$,
+    а нижняя оценка выражается как $N\\ge\\exp(\\Omega(n/((\\log n)^{O(1)}\\log M)^d))$ с $\\exp=e^x$.
+    В Proof of Thm. 4.3 large‑$M$ порог дан как $M\\le\\exp(n^{1/d-1/(d(d-1))})$ в тех же $n$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.282 с точными строками.
+  - `Use:` теперь можно корректно переводить пороги из HR в термины нашего $N$/$|F|$.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

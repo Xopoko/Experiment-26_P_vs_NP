@@ -18,3 +18,4 @@ Q39.S38-2k-two-strip-chain-block-alignment	Counterexample	formal/WIP/Work.lean	P
 Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
 Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
 Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold
+Q43.S142-parameter-map-n-vs-bign	Exact citation	formal/WIP/Work.lean	PENDING	HR Thm 4.3 parameters: n grid side, N proof length, M line size (exp=e^x)
