@@ -11,24 +11,24 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S85-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair-sameorder-globalfixedpair-fixedorientation
-  - `NextStepID:` Q39.S86-globalfixedpair-fixedorientation-contiguous
+  - `LastStepID:` Q39.S86-globalfixedpair-fixedorientation-contiguous
+  - `NextStepID:` Q39.S87-globalfixedpair-fixedorientation-contiguous-shift
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Коммуникация/ранг (alternating unit frontier).
   - `Artifact:` Counterexample (fixed orientation).
-  - `Update:` toy‑контрпример при $k=2$: при global fixed‑pair + fixed orientation
-    остаются две разные ненулевые проекции ⇒ ранг 2.
+  - `Update:` toy‑контрпример при $k=2$: contiguous blocks при global fixed‑pair
+    и fixed orientation всё ещё дают две ненулевые разные проекции ⇒ ранг 2.
     См. `formal/WIP/Work.lean`
-    (Q39_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder_globalfixedpair_fixedorientation_vec1/vec2).
-  - `Use:` следующий тест — contiguous blocks при fixed‑orientation (без чередования).
+    (Q39_globalfixedpair_fixedorientation_contiguous_vec1/vec2).
+  - `Use:` следующий тест — contiguous blocks с фиксированным сдвигом (без чередования).
   - `File:` `formal/WIP/Work.lean`. `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (toy‑ранг, комбинаторика).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder_globalfixedpair_fixedorientation)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q39_rank2_globalfixedpair_fixedorientation_contiguous)
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.

@@ -536,6 +536,19 @@ theorem Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixe
       Q39_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder_globalfixedpair_fixedorientation_vec2 := by
   decide
 
+-- Q39.S86-globalfixedpair-fixedorientation-contiguous:
+-- contiguous blocks with fixed orientation still give rank 2.
+def Q39_globalfixedpair_fixedorientation_contiguous_vec1 : BitVec12 :=
+  [true, true, true, false, false, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_vec2 : BitVec12 :=
+  [false, false, false, true, true, true, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_vec2 := by
+  decide
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by
