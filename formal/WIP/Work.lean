@@ -692,6 +692,14 @@ theorem Q43_A0_chernoff_ln_bound {a b logn delta : Nat} :
     (Q43_A0_from_C_bound (a:=a) (b:=b) (C:=Q43_C_chernoff_ln)
       (logn:=logn) (delta:=delta))
 
+-- Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0:
+-- rewrite the A0 log factor using the explicit A0 value.
+theorem Q43_A0_chernoff_ln_bound_explicit {a b logn delta : Nat} :
+    (Q43_A0_chernoff_ln * logn) * (delta ^ a) * (delta ^ b)
+      = (9360000 * logn) * (delta ^ (a + b)) := by
+  simpa [Q43_A0_chernoff_ln_eval] using
+    (Q43_A0_chernoff_ln_bound (a:=a) (b:=b) (logn:=logn) (delta:=delta))
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
