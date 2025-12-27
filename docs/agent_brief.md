@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S75-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase
-- `Do-not-repeat (next 2 runs):` Q39.S75-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase, Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0
+- `LastStepID:` Q39.S76-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks
+- `Do-not-repeat (next 2 runs):` Q39.S76-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks, Q39.S75-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: явный $A_0$ протолкнут в лог‑фактор; следующий шаг — явные $c_1,c_2$ в Thm. 4.1.
-Q39: двухфазное расписание не снижает ранг; следующий шаг — фиксированные длины фаз.
+Q39: фиксированные длины фаз не снижают ранг; следующий шаг — межфазное чередование блоков.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: двухфазное расписание не снижает ранг; с�
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (блочное расписание с фиксированными длинами фаз).
+- Q39 из `docs/open_questions.md` (межфазное чередование блоков).
 - Q43 из `docs/open_questions.md` (выписать явные $c_1,c_2$ через численный $A_0$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: двухфазное расписание не снижает ранг; с�
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
