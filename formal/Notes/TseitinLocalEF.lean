@@ -3770,3 +3770,29 @@ import Paperproof
   отдельный полный пересчёт Proof of Lemma 6.9 с явными константами.
 
 -/
+
+/-!
+### 16.296. Исследовательский шаг (barrier certificate): полный пересчёт Lemma 6.9 необходим для явного $A$
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S156-lemma69-recount-needed):`
+  В Lemma 6.9 и её proof‑outline стоимость оценивается через “constant number/amount of bits”
+  и множитель $A|S^*_g|$, при этом ни одна из этих констант не параметризована.
+  Это значит, что получить явное числовое значение $A$ можно только через
+  полный пересчёт всей конструкции (включая все «константные» бит‑оценки),
+  что существенно выходит за рамки текущего шага. Мы фиксируем это как
+  постоянный локальный барьер для извлечения явного $\\kappa$ из Thm. 4.1.
+- `Exact citation:`
+  “constant number of bits per potential edge” and “another $A|S^*_g|$ bits for some constant $A$”
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2066–2069, 2111–2114`).
+- `Статус:` barrier certificate (без полного пересчёта явный $A$ не извлекается).
+- `StepID:` Q43.S156-lemma69-recount-needed.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (мета‑константы).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` либо принять барьер и переключиться на явные константы
+  из Håstad’20 (Thm. 6.5), либо планировать отдельный полный пересчёт Lemma 6.9.
+
+-/
