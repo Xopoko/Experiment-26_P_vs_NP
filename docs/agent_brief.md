@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0
-- `Do-not-repeat (next 2 runs):` Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0, Q39.S74-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule
+- `LastStepID:` Q39.S75-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase
+- `Do-not-repeat (next 2 runs):` Q39.S75-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase, Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: явный $A_0$ протолкнут в лог‑фактор; следующий шаг — явные $c_1,c_2$ в Thm. 4.1.
-Q39: фиксированное расписание чередования не снижает ранг; следующий шаг — двухфазное расписание.
+Q39: двухфазное расписание не снижает ранг; следующий шаг — фиксированные длины фаз.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: фиксированное расписание чередования не
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (двухфазное расписание чередования).
+- Q39 из `docs/open_questions.md` (блочное расписание с фиксированными длинами фаз).
 - Q43 из `docs/open_questions.md` (выписать явные $c_1,c_2$ через численный $A_0$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: фиксированное расписание чередования не
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
