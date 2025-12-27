@@ -1438,6 +1438,23 @@ theorem Q43_toy_n0_C1_ok :
     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 1 := by
   decide
 
+-- Q43.S236-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-general:
+-- monotone in C: larger C makes the inequality harder.
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C {n C1 C2 : Nat}
+    (hC : C1 <= C2)
+    (h : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C2) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C1 := by
+  unfold Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple at *
+  have hC' : 2 * C1 <= 2 * C2 := Nat.mul_le_mul_left _ hC
+  have hC'' :
+      2 * C1 * Q43_thm41_c1_chernoff_ln <= 2 * C2 * Q43_thm41_c1_chernoff_ln := by
+    exact Nat.mul_le_mul_right _ hC'
+  have hmul :
+      (2 * C1 * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5
+        <= (2 * C2 * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5 := by
+    exact Nat.mul_le_mul_right _ hC''
+  exact le_trans hmul h
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

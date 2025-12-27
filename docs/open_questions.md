@@ -37,20 +37,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S235-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0
-  - `NextStepID:` Q43.S236-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-general
+  - `LastStepID:` Q43.S236-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-general
+  - `NextStepID:` Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_toy_n0_C1_ok)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` toy‑порог для $C=1$: взято $n_0=2^{40}$ (то есть $|F|=n_0^2=2^{80}$),
-    и в Lean проверено $2\\,c_1\\log_2^5|F|\\le |F|$ через
-    `Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple`.
-    См. `formal/WIP/Work.lean` (Q43_toy_n0_C1_ok).
-  - `Use:` следующий шаг — обобщить на произвольный $C$ (явная формула $n_0(C)$
-    или монотонность неравенства по $n$).
+  - `Update:` доказана монотонность по $C$: если
+    $2C_2\\,c_1\\log_2^5|F|\\le |F|$, то для любого $C_1\\le C_2$ тоже верно.
+    См. `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C).
+  - `Use:` следующий шаг — явная формула $n_0(C)$ или монотонность по $n$
+    для фиксированного $C$.
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
