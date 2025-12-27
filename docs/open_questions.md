@@ -11,24 +11,24 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S52-2k-two-strip-chain-strip-support-rowcol-2d-prefix (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S53-2k-two-strip-chain-strip-support-rowcol-2d-prefix-microsteps
+  - `LastStepID:` Q39.S53-2k-two-strip-chain-strip-support-rowcol-2d-prefix-microsteps (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S54-2k-two-strip-chain-strip-support-rowcol-2d-prefix-lockstep
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Инвариант (2D‑prefix).
-  - `Artifact:` Counterexample (2D‑prefix chain).
-  - `Update:` toy‑контрпример при $k=2$: 2D‑prefix цепочка $U_t=[1..t]\\times[1..t]$
+  - `Lens:` Инвариант (2D‑prefix microsteps).
+  - `Artifact:` Counterexample (2D‑prefix microsteps).
+  - `Update:` toy‑контрпример при $k=2$: полная 2D‑prefix цепочка $U_t=[1..t]\\times[1..t]$
     даёт $p(\\delta(U_2))=(1111,0000)$ и $p(\\delta(U_4))=(1111,1111)$ ⇒ ранг 2.
-    См. `formal/Notes/TseitinQ39.lean` §16.193.
-  - `Use:` 2D‑prefix режим не снижает ранг; нужно учитывать все микрошаги
-    или вводить более сильную геометрию/согласование.
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.193). `InfoGain:` 1.
+    См. `formal/Notes/TseitinQ39.lean` §16.194.
+  - `Use:` 2D‑prefix микрошаги не снижают ранг; нужно усилить синхронизацию
+    или искать точку глобального base‑change.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.194). `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (комбинаторика полос/прямоугольников).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.193
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.194
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
