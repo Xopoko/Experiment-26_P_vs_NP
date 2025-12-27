@@ -9,17 +9,20 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S22-2k-two-strip-frontier-obstruction (см. `formal/PvNP/Work.lean`)
-  - `NextStepID:` Q39.S23-2k-two-strip-rank-toy
+  - `LastStepID:` Q39.S23-2k-two-strip-rank-toy (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S24-2k-two-strip-interval-obstruction
   - `LeanTarget:` formal/PvNP/Work.lean
-  - `Lens:` Инвариант (frontier без ориентации и инвариантность по S↔¬S).
-  - `Artifact:` Proof (определение frontier и лемма о комплемент‑инвариантности).
-  - `Update:` формально: `frontier` := boundary S ∪ boundary S∘swap, и при Symmetric G выполняется `frontier G S = frontier G (¬S)`.
-  - `Toy-check:` для EmptySet/FullSet frontier пуст; инвариантность тривиальна.
-  - `Use:` позволяет в двухполосном анализе работать с неориентированным фронтиром, не различая S и ¬S.
-  - `File:` `formal/PvNP/Work.lean` (theorem `Q39_frontier_compl`). `InfoGain:` 1.
+  - `Lens:` Коммуникация/ранг (две полосы).
+  - `Artifact:` Toy (двухполосный пример ранга).
+  - `Update:` toy: $n=4$, $S_j=\\{e_1..e_4\\}$, $S_{j+1}=\\{f_1..f_4\\}$, блоки
+    $B_1=\\{e_1,e_2,f_1,f_2\\}$, $B_2=\\{e_3,e_4,f_3,f_4\\}$, узлы
+    $U_1=\\{(1,j+1),(2,j+1)\\}$, $U_2=\\{(3,j+1),(4,j+1)\\}$; при
+    $|S_j\\cap\\delta(U_i)|=|S_{j+1}\\cap\\delta(U_i)|=2$ проекции независимы, ранг = 2.
+  - `Toy-check:` $n=4$, $j=1$: две полосы дают по 2 ребра на узел, но ранг остаётся 2.
+  - `Use:` показывает, что ограничение по размеру фронтира на двух полосах не даёт ранга ≤1 при $k=2$.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.167). `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? да (комбинаторный инвариант, оракул не влияет).
+    - `A) Relativization check:` Relativizes? да (комбинаторный пример, оракул не влияет).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege

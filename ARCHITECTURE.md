@@ -15,26 +15,26 @@ where to improve it.
 
 ```mermaid
 graph TD
-  A[AGENTS.md<br/>protocol + guardrails]
-  B[scripts/agent_prompt.txt<br/>single-line prompt]
-  C[agent/run.sh<br/>runner + logs]
-  D[agent/codex-run.sh<br/>codex exec wrapper]
-  E[agent/logs/*.log<br/>per-run logs]
+  A[AGENTS rules]
+  B[Agent prompt]
+  C[Agent runner]
+  D[Codex wrapper]
+  E[Agent logs]
 
-  F[P_vs_NP.md<br/>index]
-  G[docs/*<br/>short theory + queue]
-  H[docs/open_questions.md<br/>active queue]
-  I[docs/agent_brief.md<br/>bounded memory]
+  F[Index]
+  G[Docs]
+  H[Open questions]
+  I[Agent brief]
 
-  J[formal/PvNP/*<br/>Lean core]
-  K[formal/Notes/*<br/>Lean notes]
-  L[formal/lakefile.lean<br/>Paperproof dep]
+  J[Lean core]
+  K[Lean notes]
+  L[Lean package]
 
-  M[resources/manifest.tsv<br/>bibliography index]
-  N[resources/downloads/*<br/>PDF/HTML store]
-  O[resources/text_cache/*<br/>optional cache]
-  P[scripts/verify_all.sh<br/>CI gate]
-  Q[scripts/verify_notebook.py<br/>structure checks]
+  M[Manifest]
+  N[Downloads]
+  O[Text cache]
+  P[Verify all]
+  Q[Verify docs]
 
   A --> B --> C --> D --> E
   F --> G
@@ -69,14 +69,14 @@ graph TD
 
 ```mermaid
 graph TD
-  A[agent/run.sh] --> B{REQUIRE_CLEAN?}
-  B -->|yes| C[git clean check]
-  B -->|no| D[skip check]
-  C --> E[log header + lock]
+  A[Run script] --> B{Require clean}
+  B -->|yes| C[Git clean check]
+  B -->|no| D[Skip check]
+  C --> E[Log header and lock]
   D --> E
-  E --> F[agent/codex-run.sh<br/>codex exec/resume]
-  F --> G[agent/logs/RUN_ID.log]
-  G --> H[agent/logs/latest.log symlink]
+  E --> F[Codex runner]
+  F --> G[Run log file]
+  G --> H[Latest log link]
 ```
 
 ### Runner behavior
@@ -97,13 +97,13 @@ graph TD
 
 ```mermaid
 graph TD
-  A[scripts/verify_all.sh] --> B[scripts/verify_notebook.py]
-  B --> C[docs structure checks<br/>open_questions + agent_brief]
-  B --> D[resources hygiene<br/>manifest vs downloads]
-  B --> E[prompt single-line check]
-  A --> F{Lean available?}
-  F -->|yes| G[lake build -R PvNP Notes]
-  F -->|no| H[skip formal build]
+  A[Verify all] --> B[Verify docs]
+  B --> C[Docs structure checks]
+  B --> D[Resource hygiene]
+  B --> E[Prompt format check]
+  A --> F{Lean available}
+  F -->|yes| G[Lean build]
+  F -->|no| H[Skip formal build]
 ```
 
 Optional toy checks can be executed with:
@@ -116,14 +116,14 @@ python3 scripts/verify_notebook.py --checks path/to/toy_checks.py
 
 ```mermaid
 graph TD
-  A[docs/open_questions.md] --> B[Pick 1 item]
-  B --> C[Artifact: Proof / Counterexample / Exact citation / Toy / Barrier]
-  C --> D[Update docs/open_questions.md]
-  C --> E[Update docs/agent_brief.md]
-  C --> F{Proof?}
-  F -->|yes| G[formal/PvNP/*.lean<br/>real Lean code]
-  F -->|no| H[docs/* or formal/Notes/*]
-  G --> I[scripts/verify_all.sh]
+  A[Open questions] --> B[Pick one item]
+  B --> C[Build one artifact]
+  C --> D[Update open questions]
+  C --> E[Update agent brief]
+  C --> F{Proof}
+  F -->|yes| G[Lean core code]
+  F -->|no| H[Docs or Notes]
+  G --> I[Verify all]
   H --> I
 ```
 
@@ -146,21 +146,17 @@ Core outputs per run:
 
 ```mermaid
 graph TD
-  A[Start run] --> B[Read AGENTS md]
-  B --> C[Read agent brief and open questions]
-  C --> D{Select item}
-  D -->|ok| E[Pick lens]
-  E --> F[Formalize claim and toy test]
-  F --> G{Artifact ready}
-  G -->|no| H[Mark blocked and stop]
-  G -->|yes| I[Barrier checks]
-  I --> J[Update open questions and agent brief]
-  J --> K{Proof artifact}
-  K -->|yes| L[Write Lean code in LeanTarget]
-  K -->|no| M[Update docs or Notes]
-  L --> N[Run verify all]
-  M --> N
-  N --> O[Commit with StepID]
+  A[Start run] --> B[Read rules]
+  B --> C[Read state]
+  C --> D[Choose item]
+  D --> E[Choose lens]
+  E --> F[Try to falsify]
+  F --> G[Build artifact]
+  G --> H[Barrier check]
+  H --> I[Update files]
+  I --> J[Write Lean if proof]
+  J --> K[Verify all]
+  K --> L[Commit]
 ```
 
 Protocol highlights:
@@ -173,12 +169,12 @@ Protocol highlights:
 
 ```mermaid
 graph TD
-  A[resources/manifest.tsv] --> B[resources/download_resources.py]
-  B --> C[resources/downloads/*]
-  C --> D[resources/extract_text_cache.py]
-  D --> E[resources/text_cache/*]
-  F[resources/downloads/arxiv-metadata-oai-snapshot.json] --> G[scripts/arxiv_search.py]
-  G --> H[resources/arxiv/*.tsv]
+  A[Manifest] --> B[Download script]
+  B --> C[Downloads]
+  C --> D[Text cache builder]
+  D --> E[Text cache]
+  F[arXiv metadata] --> G[arXiv search]
+  G --> H[arXiv slices]
 ```
 
 ## Formal layer structure
