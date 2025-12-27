@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S204-flat-eval-hr-neta-threshold
-- `Do-not-repeat (next 2 runs):` Q43.S203-flat-eval-hr-param-check, Q43.S204-flat-eval-hr-neta-threshold
+- `LastStepID:` Q39.S64-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block
+- `Do-not-repeat (next 2 runs):` Q43.S204-flat-eval-hr-neta-threshold, Q39.S64-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: пороги HR сведены к $n_\\eta\\ge n_0$; следующий шаг — явная нижняя оценка $n_\\eta$ по уровням.
-Q39: активные column‑шаги не снижают ранг; следующий шаг — локальные блоки на обеих полосах.
+Q39: локальный блок на обеих полосах не снижает ранг; следующий шаг — монотонный порядок блоков.
 
 ## Что уже сделано (не повторять)
 
@@ -23,7 +23,7 @@ Q39: активные column‑шаги не снижают ранг; следу
 
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
-- Q39 из `docs/open_questions.md` (проверить локальные шаги по одному блоку на обеих полосах).
+- Q39 из `docs/open_questions.md` (проверить монотонный порядок блоков без возвратов).
 - Q43 из `docs/open_questions.md` (вывести явное $n_\\eta\\ge n/\\log_2^{O(\\eta)} n$ и порог $t'(\\eta)$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
@@ -41,4 +41,4 @@ Q39: активные column‑шаги не снижают ранг; следу
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инвариант→Коммуникация/ранг→Эквивалентность→Инвариант→Трейд‑офф
+Последние:Коммуникация/ранг→Эквивалентность→Инвариант→Трейд‑офф→Коммуникация/ранг
