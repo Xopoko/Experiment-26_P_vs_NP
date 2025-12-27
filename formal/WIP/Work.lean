@@ -496,6 +496,12 @@ theorem Q43_etaRange_mono {n m eta : Nat} (h : n <= m) (hEta : Q43_etaRange n et
   unfold Q43_etaRange at *
   exact le_trans hEta (Q43_log2_mono h)
 
+-- Q43.S207-flat-eval-hr-level-count: level count is the proof depth parameter d.
+def Q43_levelCount (d : Nat) : Nat := d
+
+theorem Q43_levelCount_le {d n : Nat} (h : d <= n) : Q43_levelCount d <= n := by
+  simpa [Q43_levelCount] using h
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

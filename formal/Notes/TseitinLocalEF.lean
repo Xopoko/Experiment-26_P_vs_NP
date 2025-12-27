@@ -5097,6 +5097,38 @@ import Paperproof
 -/
 
 /-!
+### 16.347. Исследовательский шаг (reduction): число уровней = глубина $d$
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S207-flat-eval-hr-level-count):`
+  В HR’22 (Section 3.4) явно строится **последовательность** полных ограничений
+  $\\sigma_1,\\dots,\\sigma_d$ для Frege‑доказательства глубины $d$, и все
+  $t(k)$‑evaluations определяются индукцией по $k=1,\\dots,d$. Следовательно,
+  число уровней в конструкции HR равно $d$.
+- `Reduction:` для проверки диапазона $\\eta$ достаточно контролировать глубину
+  $d$ в режиме Thm. 4.3 и убедиться, что $d$ попадает в допустимый диапазон
+  $\\eta\\le \\frac{\\log_2 n}{2(a+c_1+1)\\log_2\\log_2 n}$ (см. §16.346).
+- `Exact citation:`
+  HR’22 Section 3.4: “Consider a Frege proof of depth d … We intend to construct a sequence
+  of full restrictions $\\sigma_1,\\sigma_2,\\dots,\\sigma_d$ … From the sequence of restrictions we
+  require that all sub‑formulas occurring in the proof of depth at most k have functionally
+  equivalent $t(k)$‑evaluations … We construct these $t(k)$‑evaluations by induction on k.”
+  (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:798–823`).
+- `Toy‑check:` при $d=1$ имеем одну рестрикцию и одно $t(1)$‑evaluation, что
+  согласуется с “1 уровень = глубина 1”.
+- `Статус:` reduction (уровни HR = глубина $d$).
+- `StepID:` Q43.S207-flat-eval-hr-level-count.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: да (цитирование + параметрическая связь).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` сопоставить глубину $d$ режима Thm. 4.3 с диапазоном $\\eta$
+  из §16.346 и проверить, что $d$ не превышает допустимый горизонт.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

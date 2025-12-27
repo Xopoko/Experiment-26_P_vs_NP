@@ -38,20 +38,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S206-flat-eval-hr-neta-range
-  - `NextStepID:` Q43.S207-flat-eval-hr-level-count
+  - `LastStepID:` Q43.S207-flat-eval-hr-level-count
+  - `NextStepID:` Q43.S208-flat-eval-hr-depth-range
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.346
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.347
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (диапазон $\\eta$).
+  - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Reduction.
-  - `Update:` при $t'(m)\\le(\\log_2 m)^a$ и $n_\\eta\\ge n/(A\\,\\log_2^{a+c_1} n)^\\eta$
-    выбор $\\eta\\le \\log_2 n/(2(a+c_1+1)\\log_2\\log_2 n)$ гарантирует $n_\\eta\\ge n^{1/2}$,
-    и для $n$ достаточно большого выполняются $t'(\\eta)\\le n_\\eta/16$, $s(\\eta)\\le n_\\eta/32$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.346.
-  - `Use:` диапазон $\\eta$ зафиксирован; дальше нужно связать его с числом уровней HR‑рекурсии.
-  - `BarrierCheck:` A) Relativization: да (параметрическая оценка). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Update:` в HR’22 (Section 3.4) последовательность рестрикций имеет длину $d$
+    (глубина доказательства), а $t(k)$‑evaluations строятся индукцией по $k=1,\\dots,d$,
+    т.е. число уровней равно $d$. См. `formal/Notes/TseitinLocalEF.lean` §16.347.
+  - `Use:` для проверки диапазона $\\eta$ достаточно ограничить глубину $d$.
+  - `BarrierCheck:` A) Relativization: да (цитирование + параметрическая связь). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 

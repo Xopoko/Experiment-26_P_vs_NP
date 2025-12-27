@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S67-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict
-- `Do-not-repeat (next 2 runs):` Q39.S66-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d, Q39.S67-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict
+- `LastStepID:` Q43.S207-flat-eval-hr-level-count
+- `Do-not-repeat (next 2 runs):` Q39.S67-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict, Q43.S207-flat-eval-hr-level-count
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: диапазон $\\eta$ зафиксирован; следующий шаг — число уровней в HR‑рекурсии.
+Q43: число уровней = глубина $d$; следующий шаг — сверить $d$ с диапазоном $\\eta$.
 Q39: строгая 2D‑монотонность блоков не снижает ранг; следующий шаг — 2D‑prefix.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: строгая 2D‑монотонность блоков не снижае
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (проверить 2D‑prefix при строгом росте блоков).
-- Q43 из `docs/open_questions.md` (связать диапазон $\\eta$ с числом уровней HR).
+- Q43 из `docs/open_questions.md` (сверить глубину $d$ с диапазоном $\\eta$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: строгая 2D‑монотонность блоков не снижае
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг
+Последние:Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг→Эквивалентность
