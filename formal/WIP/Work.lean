@@ -663,6 +663,22 @@ theorem Q43_A0_from_C_bound {a b C logn delta : Nat} :
   simpa [Q43_A0_from_C] using
     (Q43_Lemma69_A0_bound (a:=a) (b:=b) (A0:=78 * C) (logn:=logn) (delta:=delta))
 
+-- Q43.S214-flat-eval-hr-depth-range-constants-a0-explicit-c:
+-- explicit Chernoff constant for exp = e^x and log = ln, then A0 = 78*C.
+def Q43_C_chernoff_ln : Nat := 120000
+
+def Q43_A0_chernoff_ln : Nat := Q43_A0_from_C Q43_C_chernoff_ln
+
+theorem Q43_A0_chernoff_ln_eval : Q43_A0_chernoff_ln = 9360000 := by
+  decide
+
+theorem Q43_A0_chernoff_ln_bound {a b logn delta : Nat} :
+    (Q43_A0_chernoff_ln * logn) * (delta ^ a) * (delta ^ b)
+      = (Q43_A0_chernoff_ln * logn) * (delta ^ (a + b)) := by
+  simpa [Q43_A0_chernoff_ln] using
+    (Q43_A0_from_C_bound (a:=a) (b:=b) (C:=Q43_C_chernoff_ln)
+      (logn:=logn) (delta:=delta))
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

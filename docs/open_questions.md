@@ -35,18 +35,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S213-flat-eval-hr-depth-range-constants-a0-extract
-  - `NextStepID:` Q43.S214-flat-eval-hr-depth-range-constants-a0-explicit-c
+  - `LastStepID:` Q43.S214-flat-eval-hr-depth-range-constants-a0-explicit-c
+  - `NextStepID:` Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_A0_from_C)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_C_chernoff_ln)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` определён `Q43_A0_from_C C := 78*C` и
-    лемма `Q43_A0_from_C_bound` специализирует агрегацию $A_0\\log n'$ для этого выбора.
+  - `Update:` зафиксирован `C=120000` (Chernoff, `exp=e^x`, `log=ln`) и
+    `A0=78*C=9,360,000` в `Q43_A0_chernoff_ln`/`Q43_A0_chernoff_ln_eval`.
     См. `formal/WIP/Work.lean`.
-  - `Use:` следующий шаг — сделать $C$ явным (Chernoff) и получить численный $A_0$.
+  - `Use:` следующий шаг — пропагировать численный $A_0$ в параметры Lemma 4.2/Thm 4.1.
   - `BarrierCheck:` A) Relativization: да (арифметика параметров). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

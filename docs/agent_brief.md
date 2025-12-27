@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S73-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order
-- `Do-not-repeat (next 2 runs):` Q39.S73-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order, Q43.S213-flat-eval-hr-depth-range-constants-a0-extract
+- `LastStepID:` Q43.S214-flat-eval-hr-depth-range-constants-a0-explicit-c
+- `Do-not-repeat (next 2 runs):` Q43.S214-flat-eval-hr-depth-range-constants-a0-explicit-c, Q39.S73-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: $A_0$ зафиксирован как $78C$; следующий шаг — явный $C$ из Lemma 5.5 (Chernoff).
+Q43: явный $C=120000$ (exp=e^x, log=ln) и $A_0=9{,}360{,}000$; следующий шаг — пропагировать $A_0$.
 Q39: global order при alternating unit‑frontier не снижает ранг; следующий шаг — фиксированное расписание полос.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: global order при alternating unit‑frontier не снижает ран�
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (фиксировать global order + расписание чередования).
-- Q43 из `docs/open_questions.md` (вытащить явный $C$ для $A_0=78C$).
+- Q43 из `docs/open_questions.md` (протолкнуть явный $A_0$ в параметры Lemma 4.2/Thm 4.1).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: global order при alternating unit‑frontier не снижает ран�
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
