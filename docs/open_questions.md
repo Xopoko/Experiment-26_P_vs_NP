@@ -11,26 +11,25 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S64-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block (см. `formal/Notes/TseitinQ39.lean`)
-  - `NextStepID:` Q39.S65-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone
+  - `LastStepID:` Q39.S65-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone (см. `formal/Notes/TseitinQ39.lean`)
+  - `NextStepID:` Q39.S66-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Коммуникация/ранг (local block).
-  - `Artifact:` Counterexample (local block).
-  - `Update:` toy‑контрпример при $k=2$: даже если на каждом шаге поддержки на
-    полосах $S_{j-1}$ и $S_{j+1}$ меняются на **один блок** (локальный размер шага),
-    в цепочке $U_1=R_1\\times C_1$, $U_2=R_1\\times C_2$, $U_3=R_2\\times C_2$ имеем
-    $p(\\delta(U_2))=(1100,1100)$ и $p(\\delta(U_3))=(0011,0011)$ ⇒ ранг 2.
-    См. `formal/Notes/TseitinQ39.lean` §16.205 и toy‑ранг в `formal/WIP/Work.lean`.
-  - `Use:` локальный размер шага на обеих полосах не снижает ранг; следующий тест —
-    монотонный порядок блоков (без возвратов).
-  - `File:` `formal/Notes/TseitinQ39.lean` (§16.205). `InfoGain:` 1.
+  - `Lens:` Коммуникация/ранг (monotone blocks).
+  - `Artifact:` Counterexample (monotone blocks).
+  - `Update:` toy‑контрпример при $k=2$: даже при **монотонном порядке блоков**
+    в цепочке $U_1=R_1\\times C_1$, $U_2=R_1\\times C_2$, $U_3=R_2\\times C_2$
+    имеем $p(\\delta(U_2))=(1100,1100)$ и $p(\\delta(U_3))=(0011,0011)$ ⇒ ранг 2.
+    См. `formal/Notes/TseitinQ39.lean` §16.206 и toy‑ранг в `formal/WIP/Work.lean`.
+  - `Use:` монотонный порядок блоков не снижает ранг; следующий тест —
+    двумерная монотонность по строкам и колонкам.
+  - `File:` `formal/Notes/TseitinQ39.lean` (§16.206). `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? да (локальные блоки).
+    - `A) Relativization check:` Relativizes? да (монотонный порядок блоков).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.205
+  - `PublicSurface:` `formal/Notes/TseitinQ39.lean` §16.206
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.
