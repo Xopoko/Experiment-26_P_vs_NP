@@ -38,6 +38,7 @@ cd_dir=""
 json=false
 output_last_message=""
 prompt_args=()
+tty_mode="${CODEX_TTY:-auto}"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -160,17 +161,65 @@ if [[ "$inside_git_repo" != "true" ]]; then
   codex_cmd+=(--skip-git-repo-check)
 fi
 
+has_script=false
+if command -v script >/dev/null 2>&1; then
+  has_script=true
+fi
+
+should_use_tty() {
+  case "${tty_mode}" in
+    1|true|TRUE|yes|YES|on|ON) return 0 ;;
+    0|false|FALSE|no|NO|off|OFF) return 1 ;;
+    *) [[ "$has_script" == "true" ]] ;;
+  esac
+}
+
+cmd_to_string() {
+  local out=""
+  for arg in "$@"; do
+    out+=$(printf '%q ' "$arg")
+  done
+  printf '%s' "${out% }"
+}
+
 extract_session_id_from_output() {
   local output_file="$1"
   local session_id=""
 
   if [[ "$json" == "true" ]]; then
-    session_id="$(sed -nE 's/.*"thread_id":"([0-9a-fA-F-]{36})".*/\1/p' "$output_file" | head -n 1)"
+    session_id="$(sed -E 's/\x1B\[[0-9;]*[[:alpha:]]//g' "$output_file" | tr -d '\r' | sed -nE 's/.*"thread_id":"([0-9a-fA-F-]{36})".*/\1/p' | head -n 1)"
   else
-    session_id="$(sed -nE 's/^[[:space:]]*session id:[[:space:]]*([0-9a-fA-F-]{36}).*/\1/p' "$output_file" | head -n 1)"
+    session_id="$(sed -E 's/\x1B\[[0-9;]*[[:alpha:]]//g' "$output_file" | tr -d '\r' | sed -nE 's/^[[:space:]]*session id:[[:space:]]*([0-9a-fA-F-]{36}).*/\1/p' | head -n 1)"
   fi
 
   printf '%s' "$session_id"
+}
+
+run_codex_with_prompt() {
+  local prompt="$1"
+  shift
+  if should_use_tty; then
+    local cmd_str
+    cmd_str="$(cmd_to_string "${codex_cmd[@]}" "$@")"
+    script -q -e -c "$cmd_str" /dev/null <<<"$prompt"
+  else
+    "${codex_cmd[@]}" "$@" <<<"$prompt"
+  fi
+}
+
+spawn_codex_with_prompt() {
+  local pid_var="$1"
+  local prompt="$2"
+  local output_path="$3"
+  shift 3
+  if should_use_tty; then
+    local cmd_str
+    cmd_str="$(cmd_to_string "${codex_cmd[@]}" "$@")"
+    script -q -e -c "$cmd_str" /dev/null <<<"$prompt" >"$output_path" 2>&1 &
+  else
+    "${codex_cmd[@]}" "$@" <<<"$prompt" >"$output_path" 2>&1 &
+  fi
+  printf -v "$pid_var" '%s' "$!"
 }
 
 if [[ "$infinite" == "true" ]]; then
@@ -257,8 +306,7 @@ if [[ "$infinite" == "true" ]]; then
   tee "$first_run_output" <"$fifo" &
   tee_pid=$!
 
-  "${codex_cmd[@]}" - <<<"$prompt" >"$fifo" 2>&1 &
-  codex_pid=$!
+  spawn_codex_with_prompt codex_pid "$prompt" "$fifo" -
   wait "$codex_pid"
   exit_code=$?
   codex_pid=""
@@ -282,8 +330,7 @@ if [[ "$infinite" == "true" ]]; then
 
   while true; do
     exit_code=0
-    "${codex_cmd[@]}" resume "$session_id" - <<<"$prompt" &
-    codex_pid=$!
+    spawn_codex_with_prompt codex_pid "$prompt" "/dev/stdout" resume "$session_id" -
     if ! wait "$codex_pid"; then
       exit_code=$?
     fi
@@ -300,12 +347,12 @@ if [[ -n "$prompt_file" ]]; then
     echo "error: file not found: $prompt_file" >&2
     exit 2
   fi
-  cat "$prompt_file" | "${codex_cmd[@]}" -
+  run_codex_with_prompt "$(cat "$prompt_file")" -
   exit $?
 fi
 
 if [[ ${#prompt_args[@]} -gt 0 ]]; then
-  printf '%s' "${prompt_args[*]}" | "${codex_cmd[@]}" -
+  run_codex_with_prompt "${prompt_args[*]}" -
   exit $?
 fi
 
