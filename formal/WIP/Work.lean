@@ -93,6 +93,29 @@ theorem Q39_frontier_compl (G : Graph) (hG : Symmetric G) (S : Set Vertex) :
     | inr hright =>
         exact Or.inl (hswap'.mp hright)
 
+-- Q39.S24-2k-two-strip-interval-obstruction: frontier is invariant under edge orientation.
+theorem Q39_frontier_swap (G : Graph) (S : Set Vertex) (e : Edge) :
+    frontier G S (edgeSwap e) ↔ frontier G S e := by
+  constructor <;> intro h
+  · have h' : boundary G S (edgeSwap e) ∨ boundary G S e := by
+      simpa [frontier, edgeSwap_involutive] using h
+    cases h' with
+    | inl hswap =>
+        have : boundary G S e ∨ boundary G S (edgeSwap e) := Or.inr hswap
+        simpa [frontier] using this
+    | inr hmain =>
+        have : boundary G S e ∨ boundary G S (edgeSwap e) := Or.inl hmain
+        simpa [frontier] using this
+  · have h' : boundary G S e ∨ boundary G S (edgeSwap e) := by
+      simpa [frontier] using h
+    cases h' with
+    | inl hmain =>
+        have : boundary G S (edgeSwap e) ∨ boundary G S e := Or.inr hmain
+        simpa [frontier, edgeSwap_involutive] using this
+    | inr hswap =>
+        have : boundary G S (edgeSwap e) ∨ boundary G S e := Or.inl hswap
+        simpa [frontier, edgeSwap_involutive] using this
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
