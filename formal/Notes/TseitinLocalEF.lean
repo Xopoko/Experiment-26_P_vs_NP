@@ -4080,3 +4080,30 @@ import Paperproof
   либо принять барьер и заморозить явные численные $A_0$.
 
 -/
+
+/-!
+### 16.306. Исследовательский шаг (barrier certificate): явный $C$ в Lemma 5.5 требует полного пересчёта Chernoff‑шага
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S166-chernoff-recount):`
+  В Lemma 5.5 константа $C$ задаётся как “large enough” через Chernoff‑оценку
+  для отрицательно коррелированных индикаторов и последующий union bound.
+  Текст не фиксирует численное значение, а извлечь его можно только через
+  полный пересчёт Chernoff‑шагов (включая константы в хвостах для $\delta=0.01$).
+  Следовательно, явный численный $C$ (и $A_0=78C$) недостижим без отдельного
+  полного деривационного шага.
+- `Exact citation:`
+  “Since the Chernoff bounds continue to hold for negatively correlated random variables
+  it holds that $X(i,j)\\in(1\\pm0.01)k/n'^2$ except with probability $1/n'^3$ for a large enough
+  constant $C>0$.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1348–1350`).
+- `Статус:` barrier certificate (явный $C$ не фиксируется).
+- `StepID:` Q43.S166-chernoff-recount.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (мета‑константы).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` либо провести полный пересчёт Chernoff‑шага с явными константами,
+  либо зафиксировать $C$ как параметр и закрыть численную часть.
+
+-/

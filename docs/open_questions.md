@@ -37,19 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S165-bound-c-lemma55
-  - `NextStepID:` Q43.S166-chernoff-recount
+  - `LastStepID:` Q43.S166-chernoff-recount
+  - `NextStepID:` Q43.S167-freeze-a0-parameter
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.305
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.306
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (Chernoff‑константа).
+  - `Lens:` Эквивалентность (Chernoff‑шаг).
   - `Artifact:` Barrier.
-  - `Update:` константа $C$ в Lemma 5.5 выбирается как “large enough” для Chernoff‑оценки
-    при отрицательной корреляции и union bound; явное значение не фиксируется, поэтому
-    численный $A_0=78C$ остаётся неявным. См. `formal/Notes/TseitinLocalEF.lean` §16.305 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1348–1354`.
-  - `Use:` барьер зафиксирован; следующий шаг — пересчитать Chernoff‑шаги с явными константами или заморозить $A_0$.
+  - `Update:` Chernoff‑шаг для отрицательно коррелированных индикаторов в Lemma 5.5
+    использует “large enough” $C$ без численной фиксации; извлечение $C$ требует
+    полного пересчёта Chernoff‑констант. См. `formal/Notes/TseitinLocalEF.lean` §16.306 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1348–1350`.
+  - `Use:` барьер зафиксирован; следующий шаг — либо пересчитать Chernoff‑шаг с явными константами,
+    либо зафиксировать $A_0$ как параметр.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
