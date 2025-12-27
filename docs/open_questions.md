@@ -37,19 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S162-recount-lemma69-bits
-  - `NextStepID:` Q43.S163-map-lemma42-a0a1a2
+  - `LastStepID:` Q43.S163-map-lemma42-a0a1a2
+  - `NextStepID:` Q43.S164-bound-a0-lemma55
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.302
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.303
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (явные бит‑константы).
+  - `Lens:` Эквивалентность (источники констант).
   - `Artifact:` Reduction.
-  - `Update:` пересчёт Lemma 6.9 по $A_1,A_2$ уже выполнен: $A_1^{\\mathrm{tot}}=24$ (или $A_1\\le 15$ без подписей)
-    из §16.224 и $A_2\\le 16$ из §16.225, опираясь на термины $A_1|S^{*}_g|,A_2|S^{*}_g|$ в Lemma 6.9.
-    База $\\exp=e^x$ (HR‑нотация); при $2^x$ пороги только меньше. См. `formal/Notes/TseitinLocalEF.lean` §16.302 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2336–2341`.
-  - `Use:` следующий шаг — сопоставить эти $A_1,A_2$ с одноимёнными константами в Proof Lemma 4.2 и оценить $A_0$.
+  - `Update:` в Proof Lemma 4.2 локализовано происхождение $A_0,A_1,A_2$:
+    $A_0$ идёт из Lemma 5.5 через множитель $(A_0\\log n'/\\Delta)^{a+b}$,
+    $A_1$ и $A_2$ поглощают $A^s$ из Lemma 6.9 и свёртки рядов при $b\\le 2a$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.303 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1972–1974, 1975–1979, 1987–1996`.
+  - `Use:` следующий шаг — извлечь явный $A_0$ из Lemma 5.5 (или зафиксировать барьер).
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
