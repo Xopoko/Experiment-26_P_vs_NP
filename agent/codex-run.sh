@@ -10,7 +10,8 @@ Usage:
 
 Options:
   -f, --file FILE              Read prompt from file
-      --infinite               Re-run Codex forever using the same session
+      --infinite               Re-run Codex forever (rotates session by default)
+      --session-cycles N       In --infinite, start a new session every N runs (default: 10; 0 = never)
   -m, --model MODEL            Pass through to `codex exec --model`
   -s, --sandbox MODE           Pass through to `codex exec --sandbox`
   -a, --ask-for-approval MODE  Pass through to `codex exec --ask-for-approval`
@@ -30,6 +31,7 @@ EOF
 
 prompt_file=""
 infinite=false
+session_cycles="${CODEX_SESSION_CYCLES:-10}"
 model=""
 sandbox=""
 approval=""
@@ -49,6 +51,18 @@ while [[ $# -gt 0 ]]; do
     --infinite|infinite)
       infinite=true
       shift
+      ;;
+    --session-cycles)
+      session_cycles="${2:-}"
+      if [[ -z "$session_cycles" ]]; then
+        echo "error: --session-cycles requires a value" >&2
+        exit 2
+      fi
+      if [[ ! "$session_cycles" =~ ^[0-9]+$ ]]; then
+        echo "error: --session-cycles must be a non-negative integer" >&2
+        exit 2
+      fi
+      shift 2
       ;;
     -f|--file)
       prompt_file="${2:-}"
@@ -121,6 +135,11 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
+if [[ ! "$session_cycles" =~ ^[0-9]+$ ]]; then
+  echo "error: session cycle count must be a non-negative integer" >&2
+  exit 2
+fi
 
 if ! command -v codex >/dev/null 2>&1; then
   echo "error: 'codex' not found in PATH" >&2
@@ -227,6 +246,8 @@ if [[ "$infinite" == "true" ]]; then
   tee_pid=""
   fifo=""
   first_run_output=""
+  session_id=""
+  cycle_count=0
 
   kill_tree() {
     local root_pid="$1"
@@ -297,38 +318,51 @@ if [[ "$infinite" == "true" ]]; then
     prompt="$(cat)"
   fi
 
-  session_id=""
-  fifo="$(mktemp)"
-  rm -f "$fifo"
-  mkfifo "$fifo"
-  first_run_output="$(mktemp)"
+  start_new_session() {
+    local new_session_id=""
 
-  tee "$first_run_output" <"$fifo" &
-  tee_pid=$!
+    fifo="$(mktemp)"
+    rm -f "$fifo"
+    mkfifo "$fifo"
+    first_run_output="$(mktemp)"
 
-  spawn_codex_with_prompt codex_pid "$prompt" "$fifo" -
-  wait "$codex_pid"
-  exit_code=$?
-  codex_pid=""
+    tee "$first_run_output" <"$fifo" &
+    tee_pid=$!
 
-  rm -f "$fifo"
-  fifo=""
-  wait "$tee_pid" || true
-  tee_pid=""
+    spawn_codex_with_prompt codex_pid "$prompt" "$fifo" -
+    wait "$codex_pid"
+    exit_code=$?
+    codex_pid=""
 
-  if [[ "$exit_code" -ne 0 ]]; then
-    exit "$exit_code"
-  fi
+    rm -f "$fifo"
+    fifo=""
+    wait "$tee_pid" || true
+    tee_pid=""
 
-  session_id="$(extract_session_id_from_output "$first_run_output")"
-  rm -f "$first_run_output"
-  first_run_output=""
-  if [[ -z "$session_id" ]]; then
-    echo "error: unable to determine Codex session id (try adding --json)" >&2
-    exit 1
-  fi
+    if [[ "$exit_code" -ne 0 ]]; then
+      exit "$exit_code"
+    fi
+
+    new_session_id="$(extract_session_id_from_output "$first_run_output")"
+    rm -f "$first_run_output"
+    first_run_output=""
+    if [[ -z "$new_session_id" ]]; then
+      echo "error: unable to determine Codex session id (try adding --json)" >&2
+      exit 1
+    fi
+
+    session_id="$new_session_id"
+    cycle_count=1
+  }
+
+  start_new_session
 
   while true; do
+    if [[ "$session_cycles" -gt 0 && "$cycle_count" -ge "$session_cycles" ]]; then
+      start_new_session
+      continue
+    fi
+
     exit_code=0
     spawn_codex_with_prompt codex_pid "$prompt" "/dev/stdout" resume "$session_id" -
     if ! wait "$codex_pid"; then
@@ -339,6 +373,8 @@ if [[ "$infinite" == "true" ]]; then
     if [[ "$exit_code" -ne 0 ]]; then
       exit "$exit_code"
     fi
+
+    cycle_count=$((cycle_count + 1))
   done
 fi
 
