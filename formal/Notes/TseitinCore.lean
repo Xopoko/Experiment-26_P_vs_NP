@@ -45,10 +45,10 @@ import Paperproof
   (Itsykson–Oparin 2013, Cor. 1). Тогда по trade‑off “width ⇒ size”
   (Ben‑Sasson–Wigderson 2001; также сформулировано как Thm. 1 в Itsykson–Oparin 2013)
   получаем для числа переменных $n:=|E|$ (где $S$ — размер dag‑resolution, а $ST$ — размер tree‑like resolution):
-  $$S(\mathrm{Tseitin}(G,\chi))\ \ge\ \exp\!\left(\Omega\!\left(\frac{(e(G)-k-1)^2}{n}\right)\right),\qquad
+  $$S(\mathrm{Tseitin}(G,\chi))\ \ge\ 2^{\Omega\!\left(\frac{(e(G)-k-1)^2}{n}\right)},\qquad
     ST(\mathrm{Tseitin}(G,\chi))\ \ge\ 2^{\,e(G)-k-1}.$$
   В частности, для семейства графов степени $O(1)$ с $e(G)=\Omega(|V|)$ (экспандеры)
-  имеем $n=\Theta(|V|)$ и потому $S\ge \exp(\Omega(|V|))$.
+  имеем $n=\Theta(|V|)$ и потому $S\ge 2^{\Omega(|V|)}$.
 - `Toy‑тест:` цикл $C_n$ имеет $e(C_n)=2$, значит оценка даёт лишь константную
   нижнюю границу на ширину/размер; это согласуется с тем, что “плохая” экспансия
   не должна давать сильных нижних оценок.
@@ -71,7 +71,7 @@ import Paperproof
   имеет нечётную сумму зарядов, и $F_n$ — 3‑CNF кодировка Tseitin($G_n,\chi_n$) из §16.85.
   Тогда:
   (i) $F_n$ невыполнима; (ii) $|F_n|=\Theta(|V_n|)$; (iii) bounded‑occ = 8;
-  (iv) размер резолюционного опровержения $S(F_n)=\exp(\Omega(|V_n|))$ (по §16.86).
+  (iv) размер резолюционного опровержения $S(F_n)=2^{\Omega(|V_n|)}$ (по §16.86).
 - `Toy‑тест:` если $G$ — цикл, то $e(G)=2$ и §16.86 даёт лишь константные границы;
   на экспандере $e(G)=\Omega(|V|)$ и при $|E|=\Theta(|V|)$ получаем экспоненту
   $\Omega(|V|)$ в нижней оценке на $S(F)$.
@@ -118,7 +118,7 @@ import Paperproof
 - `Известный факт (PC, $\mathrm{char}(F)\ne 2$):` для любой последовательности bounded‑degree
   графов $\{G_n\}$ с $c(G_n)=\Omega(1)$ (экспандеры) любая PC‑рефутация
   $\mathrm{Tseitin}(G_n)$ над полем нечётной или нулевой характеристики имеет степень
-  $\Omega(|V_n|)$, а по связи degree→size также размер $\exp(\Omega(|V_n|))$
+  $\Omega(|V_n|)$, а по связи degree→size также размер $2^{\Omega(|V_n|)}$
   (Razborov 2023, Thm. 6.8 + абзац после Thm. 6.9).
 - `Toy‑тест:` $G=C_3$ и $\chi\equiv 1$. Сумма трёх уравнений даёт
   $(x_{12}\oplus x_{12})\oplus(x_{23}\oplus x_{23})\oplus(x_{31}\oplus x_{31})=1$,
@@ -322,7 +322,7 @@ import Paperproof
   имеет размер $n^{\Omega((\log n)/d^2)}$ (Pitassi–Rossman–Servedio–Tan 2016, Thm. 1,
   `../../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf`).
   Следовательно, любая polynomial‑size Frege‑рефутация требует глубины $d=\Omega(\sqrt{\log n})$.
-- `Toy‑тест:` если $d=O(1)$, то нижняя оценка даёт размер $\exp(\Omega((\log n)^2))=n^{\Omega(\log n)}$ (quasi‑poly),
+- `Toy‑тест:` если $d=O(1)$, то нижняя оценка даёт размер $2^{\Omega((\log n)^2)}=n^{\Omega(\log n)}$ (quasi‑poly),
   а если $d=\Theta(\sqrt{\log n})$, то показатель $(\log n)/d^2=\Theta(1)$ и оценка перестаёт быть superpolynomial.
 - `Статус:` известный факт (точная ссылка).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.

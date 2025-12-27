@@ -36,19 +36,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S177-exp2-quote-scan-core
-  - `NextStepID:` Q43.S178-exp2-quote-scan-remaining
+  - `LastStepID:` Q43.S178-exp2-quote-scan-remaining
+  - `NextStepID:` Q43.S179-exp2-quote-scan-analytic
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.317
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.318
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (exp‑цитаты).
+  - `Lens:` Сжатие/канонизация (exp‑цитаты).
   - `Artifact:` Exact citation.
-  - `Update:` в §16.92 (`formal/Notes/TseitinCore.lean`) формулировка Thm. 6.5 (Håstad’20) переписана как
-    $2^{(\cdot)}$ и помечена, что `exp` в источнике = $2^x$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.317.
-  - `Use:` проверить, остались ли прямые цитаты с `exp(…)` в `formal/Notes/TseitinCore.lean` и summary‑файлах,
-    и при необходимости явно указать базу ($2^x$ или $e^x$).
+  - `Update:` в `formal/Notes/TseitinCore.lean` экспоненциальные оценки 16.86/16.87/16.88
+    приведены к виду $2^{(\cdot)}$, а summary‑файлы согласованы по базе.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.318.
+  - `Use:` пройти оставшиеся аналитические `exp(…)` в `formal/Notes/TseitinCore.lean`
+    (места с $\\ln$) и явно отметить, где $e^x$.
   - `BarrierCheck:` A) Relativization: да (комментарии к цитатам). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
@@ -157,8 +157,8 @@
 - [x] **Q11 (TseitinCNF vs PC над $\\mathbb F_2$):** в `formal/Notes/TseitinCore.lean` §16.89
   дан явный PC‑вывод линейного уравнения вершины из 4 клауз и итоговая рефутация степени 3 и размера $O(|V|)$.
 - [x] **Q10 (Tseitin vs EF/PC):** в `formal/Notes/TseitinCore.lean` §16.88 зафиксировано: над полями нечётной/нулевой характеристики любая PC‑рефутация $\\mathrm{Tseitin}(G_n)$ для bounded‑degree экспандеров имеет степень $\\Omega(|V_n|)$ и, по связи degree→size, экспоненциальный размер (Razborov 2023, Thm. 6.8 + абзац после Thm. 6.9). Над $\\mathbb F_2$ степень 1 (сумма уравнений). Там же записан EF‑каркас: из 3‑CNF по вершинам выводятся XOR‑уравнения, их XOR‑сумма даёт $0=1$.
-- [x] **Q9 (bounded‑occ Tseitin‑семейство):** в `formal/Notes/TseitinCore.lean` §16.87 зафиксировано: явная 3‑регулярная expander family (см. `../resources/downloads/arora_barak.pdf`, §16.3, Remark 16.10) ⇒ $e(G)=\\Omega(|V|)$, а значит 3‑CNF Tseitin из §16.85 имеет bounded‑occ = 8 и резолюционный размер $\\exp(\\Omega(|V|))$ по §16.86.
-- [x] **Q8 (Tseitin ⇒ резолюционные нижние оценки):** извлечено из `../resources/downloads/itsykson_oparin_2013_tseitin.pdf` (Cor. 1 + Thm. 1) и зафиксировано как **формально изложенный** шаг `formal/Notes/TseitinCore.lean` §16.86: для $\\deg(G)\\le k$ имеем $W\\ge e(G)-1$ и $S\\ge \\exp((e(G)-k-1)^2/|E|)$, значит на bounded‑degree экспандерах резолюция экспоненциальна.
+- [x] **Q9 (bounded‑occ Tseitin‑семейство):** в `formal/Notes/TseitinCore.lean` §16.87 зафиксировано: явная 3‑регулярная expander family (см. `../resources/downloads/arora_barak.pdf`, §16.3, Remark 16.10) ⇒ $e(G)=\\Omega(|V|)$, а значит 3‑CNF Tseitin из §16.85 имеет bounded‑occ = 8 и резолюционный размер $2^{\\Omega(|V|)}$ по §16.86.
+- [x] **Q8 (Tseitin ⇒ резолюционные нижние оценки):** извлечено из `../resources/downloads/itsykson_oparin_2013_tseitin.pdf` (Cor. 1 + Thm. 1) и зафиксировано как **формально изложенный** шаг `formal/Notes/TseitinCore.lean` §16.86: для $\\deg(G)\\le k$ имеем $W\\ge e(G)-1$ и $S\\ge 2^{(e(G)-k-1)^2/|E|}$, значит на bounded‑degree экспандерах резолюция экспоненциальна.
 - [x] **Q7 (Tseitin как кандидат):** в `formal/Notes/TseitinCore.lean` §16.85 задано определение XOR‑системы Tseitin($G,\\chi$), доказана невыполнимость при нечётной сумме зарядов (паритетный инвариант) и выписана явная 3‑CNF кодировка для 3‑регулярных графов (размер $4|V|$, bounded‑occ = 8).
 - [x] **Q6 (planar+occ для 15.7.4d):** доказано Planar‑3‑SAT ≤p Planar‑3‑SAT(≤4‑occ) (локальный split, сохраняющий планарность) в `formal/Notes/Encodings.lean` §16.84; факт добавлен в Лемму 15.7.4d.
 - [x] **Q5 (planar 3‑SAT blow‑up для 15.7.4d):** добавлена оценка $|r(\\varphi)|=O(|\\varphi|^2)$ как **формально изложенный** шаг `formal/Notes/Encodings.lean` §16.83 и 1‑строчная ремарка в Лемме 15.7.4d.

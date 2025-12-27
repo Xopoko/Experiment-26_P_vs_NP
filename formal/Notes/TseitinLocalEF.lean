@@ -4344,6 +4344,34 @@ import Paperproof
 -/
 
 /-!
+### 16.318. Исследовательский шаг (exact citation): scan remaining exp‑цитат в core/summary
+
+- `Линза:` Сжатие/канонизация.
+- `Утверждение (Q43.S178-exp2-quote-scan-remaining):`
+  В `formal/Notes/TseitinCore.lean` экспоненциальные оценки, ссылающиеся на
+  Itsykson–Oparin’13 и Razborov’23, приведены к форме $2^{(\cdot)}$,
+  а в summary‑файлах согласованы те же базы. Это фиксирует трактовку `exp`
+  как $2^x$ для соответствующих цитат (смена базы даёт лишь константный множитель в показателе).
+- `Exact citation:`
+  Itsykson–Oparin 2013, Cor. 1 + Thm. 1
+  (`../../resources/downloads/itsykson_oparin_2013_tseitin.pdf`);
+  Razborov 2023, Thm. 6.8
+  (`../../resources/downloads/razborov_2023_proof_complexity_ecm.pdf`);
+  Pitassi–Rossman–Servedio–Tan 2016, Thm. 1
+  (`../../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf`).
+- `Статус:` exact citation (база $2^x$ зафиксирована для core/summary‑формул).
+- `StepID:` Q43.S178-exp2-quote-scan-remaining.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (комментарии к цитатам).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` пройти оставшиеся `exp(…)` в `formal/Notes/TseitinCore.lean`
+  (особенно аналитические места с $\\ln$) и явно отметить, где $e^x$.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
