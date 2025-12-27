@@ -4565,6 +4565,30 @@ import Paperproof
 -/
 
 /-!
+### 16.327. Исследовательский шаг (reduction): log/ln в summary‑audit (circuit complexity)
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S187-exp2-quote-scan-logbases-summary-audit):`
+  В summary‑разделе `docs/09_circuit_complexity.md` логарифмы согласованы как
+  $\\ln$ в Razborov’85 нижней оценке (чтобы избежать смешения $\\ln$ и $\\log$).
+- `Reduction:` смена базы логарифма в выражениях вида $m^{C\\log m}$ поглощается
+  в константу $C$, поэтому явное указание $\\ln$ не меняет асимптотику.
+- `Exact citation:`
+  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Статус:` reduction (нормализация базы в summary).
+- `StepID:` Q43.S187-exp2-quote-scan-logbases-summary-audit.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (обозначения).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` завершить аудит summary‑логарифмов и зафиксировать,
+  что оставшиеся базы несущественны.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

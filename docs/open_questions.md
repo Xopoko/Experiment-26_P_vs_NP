@@ -36,18 +36,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S186-exp2-quote-scan-logbases-summary-tail
-  - `NextStepID:` Q43.S187-exp2-quote-scan-logbases-summary-audit
+  - `LastStepID:` Q43.S187-exp2-quote-scan-logbases-summary-audit
+  - `NextStepID:` Q43.S188-exp2-quote-scan-logbases-summary-closeout
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.326
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.327
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (log‑base нормализация).
   - `Artifact:` Reduction.
-  - `Update:` в summary‑разделе `docs/12_time_hierarchy.md` лог‑база приведена к $\\log_2$
-    в оценках универсальной симуляции и теоремы иерархии.
-    См. сводку `formal/Notes/TseitinLocalEF.lean` §16.326.
-  - `Use:` пройти остаточные summary‑файлы на ambiguity по $\\log$ и закрыть sweep.
+  - `Update:` в summary‑разделе `docs/09_circuit_complexity.md` логарифмы согласованы как $\\ln$
+    в нижней оценке Razborov’85, чтобы не смешивать $\\ln$ и $\\log$.
+    См. сводку `formal/Notes/TseitinLocalEF.lean` §16.327.
+  - `Use:` завершить аудит summary‑логарифмов и зафиксировать, что оставшиеся базы несущественны.
   - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
