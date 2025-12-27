@@ -589,6 +589,28 @@ theorem Q43_Lemma69_A4_bound {s t : Nat} (ht : t <= s) :
       _ = 17 * s := by simp
   exact le_trans h3 (le_of_eq h4)
 
+-- Q43.S211-flat-eval-hr-depth-range-constants-a1a2: combine A1/A2 with explicit A3/A4 bounds.
+theorem Q43_Lemma69_A12_bound {s t A1 A2 : Nat} (ht : t <= s) :
+    9 * (s / 4 + 16 * t) + A1 * (s / 4 + 16 * t) + A2 * (s / 4 + 16 * t) +
+        (s + 16 * t + s / 4)
+      <= (9 + A1 + A2) * (17 * s) + 18 * s := by
+  have hS : s / 4 + 16 * t <= 17 * s := Q43_Lemma69_A4_bound ht
+  have hT : s + 16 * t + s / 4 <= 18 * s := Q43_Lemma69_A3_bound ht
+  have h9 : 9 * (s / 4 + 16 * t) <= 9 * (17 * s) := Nat.mul_le_mul_left 9 hS
+  have hA1 : A1 * (s / 4 + 16 * t) <= A1 * (17 * s) := Nat.mul_le_mul_left A1 hS
+  have hA2 : A2 * (s / 4 + 16 * t) <= A2 * (17 * s) := Nat.mul_le_mul_left A2 hS
+  have hsum :
+      9 * (s / 4 + 16 * t) + A1 * (s / 4 + 16 * t) + A2 * (s / 4 + 16 * t) +
+          (s + 16 * t + s / 4)
+        <= 9 * (17 * s) + A1 * (17 * s) + A2 * (17 * s) + 18 * s := by
+    exact Nat.add_le_add (Nat.add_le_add (Nat.add_le_add h9 hA1) hA2) hT
+  calc
+    9 * (s / 4 + 16 * t) + A1 * (s / 4 + 16 * t) + A2 * (s / 4 + 16 * t) +
+          (s + 16 * t + s / 4)
+        <= 9 * (17 * s) + A1 * (17 * s) + A2 * (17 * s) + 18 * s := hsum
+    _ = (9 + A1 + A2) * (17 * s) + 18 * s := by
+      simp [Nat.add_mul, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

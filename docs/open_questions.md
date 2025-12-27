@@ -38,19 +38,18 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S210-flat-eval-hr-depth-range-constants-recount
-  - `NextStepID:` Q43.S211-flat-eval-hr-depth-range-constants-a1a2
+  - `LastStepID:` Q43.S211-flat-eval-hr-depth-range-constants-a1a2
+  - `NextStepID:` Q43.S212-flat-eval-hr-depth-range-constants-a0
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.350
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.351
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` из $t\\le s$ извлечены явные верхние оценки
-    $A_3\\le 18$ и $A_4\\le 17$ в Lemma 6.9 (см. Lean‑код в `formal/WIP/Work.lean`);
-    это фиксирует часть констант, но $A_1,A_2$ остаются неявными.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.350.
-  - `Use:` следующий шаг — извлечь явные $A_1,A_2$ и затем $A_0$ из Lemma 6.9/4.2.
+  - `Update:` при $t\\le s$ суммарный вклад блоков $|S_g^*|$ и хвоста $s+16t+s/4$
+    ограничен $(9+A_1+A_2)\\cdot 17s + 18s$, т.е. $A$ сводится к $A_1,A_2$
+    и явным $A_3,A_4$; см. `formal/Notes/TseitinLocalEF.lean` §16.351.
+  - `Use:` следующий шаг — извлечь явные $A_1,A_2$, затем $A_0$ из Lemma 6.9/4.2.
   - `BarrierCheck:` A) Relativization: да (арифметика параметров). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
