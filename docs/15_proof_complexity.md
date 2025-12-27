@@ -427,6 +427,12 @@ Toy при $k=2$: даже при фиксированной паре строк
 В `formal/WIP/Work.lean` зафиксированы такие проекции и лемма
 `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair`.
 Это исключает «fixed‑pair swap» как простой путь к рангу 1.
+**Q39 (fixed‑pair + same‑order).**
+Toy при $k=2$: даже при fixed‑pair и одинаковом порядке в обеих полосах
+две ненулевые проекции остаются различимыми, поэтому ранг 2 сохраняется.
+В `formal/WIP/Work.lean` зафиксированы такие проекции и лемма
+`Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder`.
+Это исключает same‑order как простой механизм снижения ранга в fixed‑pair режиме.
 **Q43 (flat local‑EF(s), параметр‑сводка).**
 При явном $A\le 668$ из HR’22 получаем $n_0(A)=2$, поэтому в HR‑режиме
 условие $n\ge n_0(A)$ избыточно по сравнению с $n\ge 20 C n' \log_2 n'$
