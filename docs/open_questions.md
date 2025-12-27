@@ -38,19 +38,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S202-flat-eval-hr-compat-polylog
-  - `NextStepID:` Q43.S203-flat-eval-hr-param-check
+  - `LastStepID:` Q43.S203-flat-eval-hr-param-check
+  - `NextStepID:` Q43.S204-flat-eval-hr-neta-threshold
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.342
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.343
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (polylog-$t$ -> HR-совместимость через $t'$).
+  - `Lens:` Инвариант (HR‑пороги vs polylog).
   - `Artifact:` Reduction.
-  - `Update:` в flat local‑EF(s) unfolding $P$‑запросов заменяет глубину на
-    $t':=(2s+1)t$; при $s,t=\\mathrm{polylog}(n)$ (логарифм базы $2$) получаем
-    $t'=\\mathrm{polylog}(n)$ и HR‑проверки сводятся к $t'\\le n/16$, $s\\le n/32$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.342.
-  - `Use:` polylog‑режим устойчив при замене $t\\mapsto t'$.
+  - `Update:` если $t'(n)\\le(\\log_2 n)^a$ и $s(n)\\le(\\log_2 n)^b$ при фиксированных $a,b$,
+    то существует $n_0$, что для $n\\ge n_0$ получаем $t'\\le n/16$ и $s\\le n/32$;
+    HR‑проверки редуцируются к контролю, что рекурсия $n_\\eta$ не опускается ниже $n_0$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.343.
+  - `Use:` пороги HR сведены к нижней границе на $n_\\eta$ при polylog‑режиме.
   - `BarrierCheck:` A) Relativization: да (арифметика на Nat). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S202-flat-eval-hr-compat-polylog
-- `Do-not-repeat (next 2 runs):` Q39.S63-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-active-columnstep, Q43.S202-flat-eval-hr-compat-polylog
+- `LastStepID:` Q43.S203-flat-eval-hr-param-check
+- `Do-not-repeat (next 2 runs):` Q43.S202-flat-eval-hr-compat-polylog, Q43.S203-flat-eval-hr-param-check
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: $t'=(2s+1)t$ polylog при $s,t$ polylog; следующий шаг — параметр‑чек HR (например, $t'\\le n/16$).
+Q43: polylog $t'$ даёт $t'\\le n/16$ при $n\\ge n_0$; следующий шаг — протащить порог через HR‑рекурсию $n_\\eta$.
 Q39: активные column‑шаги не снижают ранг; следующий шаг — локальные блоки на обеих полосах.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: активные column‑шаги не снижают ранг; следу
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (проверить локальные шаги по одному блоку на обеих полосах).
-- Q43 из `docs/open_questions.md` (проверить HR‑порог $t'\\le n/16$ после $t\\mapsto t'$).
+- Q43 из `docs/open_questions.md` (проверить порог $t'(\\eta)\\le n_\\eta/16$ на всей HR‑рекурсии).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: активные column‑шаги не снижают ранг; следу
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инвариант→Коммуникация/ранг→Инвариант→Коммуникация/ранг→Эквивалентность
+Последние:Коммуникация/ранг→Инвариант→Коммуникация/ранг→Эквивалентность→Инвариант

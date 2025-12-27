@@ -405,6 +405,14 @@ theorem Q43_tPrime_ge (s t : Nat -> Nat) (n : Nat) :
     _ <= (2 * s n + 1) * t n := by
       exact Nat.mul_le_mul_right _ h
 
+-- Q43.S203-flat-eval-hr-param-check: HR threshold predicate for t' and s.
+def Q43_hrThreshold (n t s : Nat) : Prop :=
+  t <= n / 16 ∧ s <= n / 32
+
+theorem Q43_hrThreshold_of_le {n t s : Nat} (ht : t <= n / 16) (hs : s <= n / 32) :
+    Q43_hrThreshold n t s := by
+  exact And.intro ht hs
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
