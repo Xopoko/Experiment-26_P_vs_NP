@@ -4758,6 +4758,33 @@ import Paperproof
 -/
 
 /-!
+### 16.334. Исследовательский шаг (exact citation): line-size M в HR'22 Theorem 4.3
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S194-flat-eval-axiom-size-model-check):`
+  В HR'22 параметр $M$ задается как размер строки (формулы), а $N$ - число строк;
+  это фиксирует метрику "line-size" и исключает трактовку "размер = число строк".
+- `Exact citation:`
+  Håstad–Risse (2022), "Tseitin formulas on the grid are hard for bounded depth Frege",
+  Theorem 4.3 (paper p. 16; PDF p. 18): "If each line of the refutation is of size M and depth d..."
+  и далее: "refutation ... consisting of N lines, where each line is a formula of size M".
+  `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:938-963`.
+  (В статье log = log_2, поэтому exp в формулировке читаем как 2^x.)
+- `Reduction:` для переноса HR-параметров в flat local-EF(s) нужно измерять размер строки
+  по формульному размеру и считать extension-аксиомы строками; line-count не фиксирует $M$.
+- `Статус:` exact citation (size metric pinned).
+- `StepID:` Q43.S194-flat-eval-axiom-size-model-check.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: неприменимо (точная цитата).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` явно зафиксировать метрику размера в определении local-EF(s)
+  (line-size vs line-count) или отметить барьер при "free" extension-аксиомах.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.

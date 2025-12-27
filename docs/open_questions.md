@@ -36,21 +36,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S193-flat-eval-axiom-size-accounting
-  - `NextStepID:` Q43.S194-flat-eval-axiom-size-model-check
+  - `LastStepID:` Q43.S194-flat-eval-axiom-size-model-check
+  - `NextStepID:` Q43.S195-flat-eval-axiom-size-definition
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.333
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.334
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (line-size vs line-count).
-  - `Artifact:` Reduction.
-  - `Update:` проверена зависимость от метрики размера: при line-size каждая строка
-    имеет размер $\\le S$, значит $|\\varphi_i|\\le S$ и $t=O(\\log_2 S)$; при line-count
-    требуется отдельный bound на $|\\varphi_i|$ (иначе возможен $|\\varphi_i|=2^{(\\log_2 n)^2}$).
-    См. `formal/Notes/TseitinLocalEF.lean` §16.333.
-  - `Use:` Q43 теперь сводится к выбору метрики размера local‑EF(s):
-    line-size автоматически контролирует $|\\varphi_i|$, line-count требует явного ограничения
-    или барьерной формулировки.
+  - `Lens:` Инвариант (размер строки как параметр модели).
+  - `Artifact:` Exact citation.
+  - `Update:` зафиксировано, что в HR'22 Theorem 4.3 $M$ — размер строки (формулы),
+    а $N$ — число строк; это закрепляет метрику line-size, а не line-count.
+    См. `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:938-963`
+    и `formal/Notes/TseitinLocalEF.lean` §16.334.
+  - `Use:` для переноса HR-оценок в flat local‑EF(s) нужно считать размер строки по
+    формульному размеру и учитывать extension-аксиомы как строки; line-count не фиксирует $M$.
   - `BarrierCheck:` A) Relativization: да (обозначения). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

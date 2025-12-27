@@ -84,3 +84,4 @@ Q43.S190-exp2-quote-scan-logbases-summary-exit	Reduction	formal/WIP/Work.lean	PE
 Q43.S191-flat-eval-construction-pivot	Reduction	formal/WIP/Work.lean	PENDING	pivot: bound expanded formula size to control t (see formal/Notes/TseitinLocalEF.lean §16.331)
 Q43.S192-flat-eval-axiom-size-bound	Reduction	formal/WIP/Work.lean	PENDING	axiom-size bound via line-size accounting (see formal/Notes/TseitinLocalEF.lean 16.332)
 Q43.S193-flat-eval-axiom-size-accounting	Reduction	formal/WIP/Work.lean	PENDING	line-size vs line-count accounting for axiom size (see formal/Notes/TseitinLocalEF.lean 16.333)
+Q43.S194-flat-eval-axiom-size-model-check	Exact citation	formal/WIP/Work.lean	PENDING	HR'22 Thm 4.3 defines line size M and line count N (see formal/Notes/TseitinLocalEF.lean 16.334)
