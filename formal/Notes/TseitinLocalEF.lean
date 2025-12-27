@@ -3484,4 +3484,29 @@ import Paperproof
   (например, глубинного режима/константы в используемом LB/UB) и зафиксировать вывод
   о применимости ветки Theorem 4.1 для $M=\\mathrm{poly}(|F|)$.
 
+### 16.286. Исследовательский шаг (exact citation): константа $\\kappa=59$ из Håstad’20 Thm. 6.5
+
+- `Линза:` Инвариант.
+- `Утверждение (Q43.S146-kappa-constant-source):`
+  В Håstad (2020), Theorem 6.5, глубина ограничена как
+  $$d\\le 59\\,\\frac{\\log n}{\\log\\log n},$$
+  где $n$ — сторона $n\\times n$ grid. Это фиксирует режим $\\kappa=59$ для
+  шкалы $d=\\kappa\\log n/\\log\\log n$.
+  В тексте рядом стоит размерная нижняя оценка вида $\\exp(\\cdot)$; здесь база $\\exp$
+  не влияет на извлечение $\\kappa$, но в наших заметках $\\exp$ трактуется как $e^x$.
+- `Exact citation:`
+  В текстовом слое PDF дробь набрана “в столбик”: строка с числителем `log n`
+  непосредственно перед Theorem 6.5 и строка Theorem 6.5 с `d ≤ 59 log log n`
+  (“log n” над “log log n”), что даёт $d\\le 59\\,\\log n/\\log\\log n$
+  (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–826`).
+- `Статус:` exact citation (константа $\\kappa=59$ в depth‑режиме).
+- `StepID:` Q43.S146-kappa-constant-source.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (цитата по тексту).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` применить $\\kappa=59$ в выводе §16.284–§16.285 и
+  зафиксировать, что poly‑$M$ попадает в large‑$M$ ветку Theorem 4.1.
+
 -/

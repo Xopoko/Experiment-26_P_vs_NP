@@ -37,20 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S145-kappa-regime-decision (kappa regime)
-  - `NextStepID:` Q43.S146-kappa-constant-source
+  - `LastStepID:` Q43.S146-kappa-constant-source (kappa source)
+  - `NextStepID:` Q43.S147-apply-thm41-branch
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.285
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.286
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (выбор режима $\\kappa$).
-  - `Artifact:` Reduction (regime decision).
-  - `Update:` фиксируем режим $\\kappa\\ge 1$ (например, $\\kappa=59$ из Håstad’20),
-    тогда $\\exp(n^{\\alpha})=\\exp(\\Theta((\\log|F|)^{1/\\kappa}))=|F|^{o(1)}$ при $\\kappa>1$,
-    а при $\\kappa=1$ порог $|F|^{1/2+o(1)}$. Поэтому для $M=|F|^k$ с $k>0$ мы в large‑$M$ ветке
-    (для $\\kappa>1$ всегда, для $\\kappa=1$ при $k>1/2$). Здесь $\\exp=e^x$; base $2$ уменьшает порог.
-  - `Use:` теперь достаточно подтвердить выбранную константу $\\kappa$ из источника и зафиксировать,
-    что для $M=\\mathrm{poly}(|F|)$ применяется ветка Theorem 4.1.
+  - `Lens:` Инвариант (источник $\\kappa$).
+  - `Artifact:` Exact citation (kappa constant).
+  - `Update:` Håstad’20 Thm. 6.5 фиксирует режим
+    $d\\le 59\\,\\log n/\\log\\log n$ (в тексте дробь набрана “в столбик”: строка `log n` над строкой `log log n`).
+    Это даёт $\\kappa=59$ для режима $d=\\kappa\\log n/\\log\\log n$; рядом стоит размерная оценка с $\\exp(\\cdot)$
+    (в наших заметках $\\exp=e^x$, но база не влияет на вывод $\\kappa$).
+    См. `formal/Notes/TseitinLocalEF.lean` §16.286.
+  - `Use:` теперь можно подставить $\\kappa=59$ в сравнение large‑$M$ vs poly‑$M$ и зафиксировать ветку Thm. 4.1.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
