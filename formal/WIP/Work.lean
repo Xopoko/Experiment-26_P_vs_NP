@@ -1708,6 +1708,61 @@ theorem Q43_grid_ratio_mono_of_log2_eq {n m : Nat} (h : n <= m)
   simpa [hlog] using
     (Nat.div_le_div_right (c := (Nat.log2 (Q43_grid_size m)) ^ 5) hgrid)
 
+-- Q43.S246-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals:
+-- a concrete plateau: for n in [2^k, (5/4)·2^k] (k≥2), log2 |F| is constant for |F|=n^2.
+theorem Q43_log2_grid_size_eq_double_of_range {k n : Nat} (hk : 2 <= k)
+    (hlo : 2 ^ k <= n) (hhi : n <= 5 * 2 ^ (k - 2)) :
+    Nat.log2 (Q43_grid_size n) = 2 * k := by
+  have hpowpos : 0 < 2 ^ k := Nat.pow_pos (by decide) _
+  have hnpos : 0 < n := lt_of_lt_of_le hpowpos hlo
+  have hnne : n ≠ 0 := Nat.ne_of_gt hnpos
+  have hne : Q43_grid_size n ≠ 0 := by
+    simpa [Q43_grid_size] using (Nat.mul_ne_zero hnne hnne)
+  have hpow : (2 ^ k) ^ 2 <= n ^ 2 :=
+    Q43_pow_le_pow_of_le (a := 2 ^ k) (b := n) (n := 2) hlo
+  have hlow : 2 ^ (2 * k) <= Q43_grid_size n := by
+    have hpow2 : 2 ^ (2 * k) = (2 ^ k) ^ 2 := by
+      simpa [Nat.mul_comm] using (Nat.pow_mul 2 k 2)
+    simpa [hpow2, Q43_grid_size, Nat.pow_two] using hpow
+  have hpow_hi : n ^ 2 <= (5 * 2 ^ (k - 2)) ^ 2 :=
+    Q43_pow_le_pow_of_le (a := n) (b := 5 * 2 ^ (k - 2)) (n := 2) hhi
+  have hbound : (5 * 2 ^ (k - 2)) ^ 2 < 2 ^ (2 * k + 1) := by
+    set t : Nat := 2 ^ (k - 2)
+    have htpos : 0 < t := Nat.pow_pos (by decide) _
+    have hcoeff : 25 < 32 := by decide
+    have h1 : 25 * t < 32 * t := (Nat.mul_lt_mul_right (a0 := htpos)).2 hcoeff
+    have h2 : 25 * t * t < 32 * t * t := (Nat.mul_lt_mul_right (a0 := htpos)).2 h1
+    have hpowt : 2 ^ (2 * (k - 2)) = t * t := by
+      have hpow' : 2 ^ ((k - 2) * 2) = (2 ^ (k - 2)) ^ 2 :=
+        Nat.pow_mul 2 (k - 2) 2
+      simpa [t, Nat.mul_comm, Nat.pow_two] using hpow'
+    have hle : 4 <= 2 * k := by
+      have hle' : 2 * 2 <= 2 * k := Nat.mul_le_mul_left 2 hk
+      simpa using hle'
+    have hexp : 2 * (k - 2) + 5 = 2 * k + 1 := by
+      calc
+        2 * (k - 2) + 5 = (2 * k - 4) + 5 := by
+          simp [Nat.mul_sub_left_distrib, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+        _ = (2 * k - 4) + 4 + 1 := by simp [Nat.add_assoc]
+        _ = 2 * k + 1 := by
+          have hsub : (2 * k - 4) + 4 = 2 * k := Nat.sub_add_cancel hle
+          simpa [hsub, Nat.add_assoc]
+    have hpow32 : 2 ^ (2 * k + 1) = 32 * t * t := by
+      calc
+        2 ^ (2 * k + 1) = 2 ^ (2 * (k - 2) + 5) := by simpa [hexp]
+        _ = 2 ^ (2 * (k - 2)) * 2 ^ 5 := by
+          simpa [Nat.pow_add]
+        _ = 32 * t * t := by
+          simp [t, hpowt, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+    have hpow5 : (5 * t) ^ 2 = 25 * t * t := by
+      simp [Nat.pow_two, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+    simpa [t, hpow5, hpow32] using h2
+  have hupper : Q43_grid_size n < 2 ^ (2 * k + 1) := by
+    have hpow_hi' : Q43_grid_size n <= (5 * 2 ^ (k - 2)) ^ 2 := by
+      simpa [Q43_grid_size, Nat.pow_two] using hpow_hi
+    exact lt_of_le_of_lt hpow_hi' hbound
+  exact (Nat.log2_eq_iff hne).2 ⟨hlow, hupper⟩
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
