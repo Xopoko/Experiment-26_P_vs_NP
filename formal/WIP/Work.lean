@@ -795,6 +795,23 @@ theorem Q43_thm41_c2_chernoff_ln_eval : Q43_thm41_c2_chernoff_ln = 11381760000 :
 theorem Q43_thm41_c1_chernoff_ln_eval : Q43_thm41_c1_chernoff_ln = 27680440320000 := by
   decide
 
+-- Q43.S217-flat-eval-hr-depth-range-constants-a0-c1c2-apply-thm41:
+-- log2-threshold predicate with explicit c1,c2 for Thm. 4.1.
+def Q43_thm41_log2_denom_c2 (n : Nat) : Nat :=
+  Q43_thm41_c2_chernoff_ln * (Nat.log2 n) ^ 4
+
+theorem Q43_thm41_log2_denom_c2_explicit (n : Nat) :
+    Q43_thm41_log2_denom_c2 n = 11381760000 * (Nat.log2 n) ^ 4 := by
+  simp [Q43_thm41_log2_denom_c2, Q43_thm41_c2_chernoff_ln_eval]
+
+def Q43_thm41_log2_threshold_c1 (n : Nat) : Prop :=
+  Nat.log2 n <= n / (Q43_thm41_c1_chernoff_ln * (Nat.log2 n) ^ 4)
+
+theorem Q43_thm41_log2_threshold_c1_explicit (n : Nat) :
+    Q43_thm41_log2_threshold_c1 n
+      ↔ Nat.log2 n <= n / (27680440320000 * (Nat.log2 n) ^ 4) := by
+  simp [Q43_thm41_log2_threshold_c1, Q43_thm41_c1_chernoff_ln_eval]
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
