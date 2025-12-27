@@ -347,25 +347,25 @@ import Paperproof
 - `Статус:` известный факт (точная ссылка + уточнение про режим растущей глубины; обновляет вывод для Q15).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` если понадобится связать с «поиском доказательств», извлечь Cor. 34 из той же работы:
-  bounded‑depth Frege размера $S$ ⇒ tree‑like Resolution размера $2^{\mathrm{poly}(\log S)}$.
+  bounded‑depth Frege размера $S$ ⇒ tree‑like Resolution размера $2^{\mathrm{poly}(\log_2 S)}$.
 
 ### 16.98. Исследовательский шаг: bounded‑depth Frege ⇒ tree‑like Resolution (quasi‑poly) для Tseitin (GIRS 2019, Cor. 34)
 
 - `Линза:` Эквивалентность.
 - `Утверждение:` Для любой невыполнимой Tseitin‑CNF $\mathrm{Tseitin}(G,f)$: если она имеет доказательство размера $S$
   в bounded‑depth Frege (в смысле статьи; ниже упоминается «constant‑depth Frege»), то она имеет tree‑like Resolution‑опровержение
-  размера $\le 2^{\mathrm{poly}(\log S)}$ (Galesi–Itsykson–Riazanov–Sofronova 2019, Cor. 34,
+  размера $\le 2^{\mathrm{poly}(\log_2 S)}$ (Galesi–Itsykson–Riazanov–Sofronova 2019, Cor. 34,
   `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`).
 - `Доказательство (эскиз из §5 той же работы):` там используется (i) верхняя оценка на tree‑like Resolution через ширину:
   по §16.99 (Beame–Beck–Impagliazzo 2016, Lemma 61) имеем $\mathrm{size}_{\mathrm{TL\text{-}Res}}\le n^{O(\mathrm{cw}(G))}$;
   по §16.100–16.101 (и определению $w(G):=W(T(G,\\varphi)\\vdash\\bot)-1$) получаем $\mathrm{cw}(G)\le w(G)+2$, значит
-  $\mathrm{size}_{\mathrm{TL\text{-}Res}}(T(G,\\varphi))\le n^{O(w(G))}=2^{O(\mathrm{tw}(G)\,\Delta(G)\,\log n)}$
+  $\mathrm{size}_{\mathrm{TL\text{-}Res}}(T(G,\\varphi))\le n^{O(w(G))}=2^{O(\mathrm{tw}(G)\,\Delta(G)\,\log_2 n)}$
   (Harvey–Wood 2014, (2); см. §16.102); (ii) нижняя оценка из главной теоремы для bounded‑depth Frege: $S\ge 2^{\mathrm{tw}(G)^{\varepsilon}}$
   для некоторой константы $\varepsilon>0$ (глубина фиксирована); (iii) тривиально $S\ge|\mathrm{Tseitin}(G,f)|\ge 2^{\Delta(G)-1}$ и $S\ge n$.
-  Отсюда $\mathrm{tw}(G)\le (\log S)^{1/\varepsilon}$, $\Delta(G)\le O(\log S)$ и $\log n\le O(\log S)$, и подстановка в (i)
-  даёт $2^{O((\log S)^{1/\varepsilon+2})}=2^{\mathrm{poly}(\log S)}$.
-- `Toy‑тест:` если $S=n^{O(1)}$, то получаем tree‑like Resolution размера $\le 2^{\mathrm{poly}(\log n)}=n^{\mathrm{polylog}\,n}$ (quasi‑poly).
-- `Статус:` известный факт (точная формулировка + минимальный вывод «откуда берётся» $2^{\mathrm{poly}(\log S)}$).
+  Отсюда $\mathrm{tw}(G)\le (\log_2 S)^{1/\varepsilon}$, $\Delta(G)\le O(\log_2 S)$ и $\log_2 n\le O(\log_2 S)$, и подстановка в (i)
+  даёт $2^{O((\log_2 S)^{1/\varepsilon+2})}=2^{\mathrm{poly}(\log_2 S)}$.
+- `Toy‑тест:` если $S=n^{O(1)}$, то получаем tree‑like Resolution размера $\le 2^{\mathrm{poly}(\log_2 n)}=n^{\mathrm{polylog}\,n}$ (quasi‑poly).
+- `Статус:` известный факт (точная формулировка + минимальный вывод «откуда берётся» $2^{\mathrm{poly}(\log_2 S)}$).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` при необходимости перенести цепочку §16.99–16.102 (определение $w(G)$ и $n^{O(w(G))}$) в основной текст
   рядом с формулировкой Cor. 34, чтобы не ссылаться на «см. обсуждение».
@@ -433,18 +433,18 @@ import Paperproof
 - `Следующий шаг:` сопоставить эту treewidth‑формулу с альтернативной параметризацией Tseitin‑width через branch‑width
   из Alekhnovich–Razborov (2011) (возможная замена $\\mathrm{tw}(L(G))$ на эквивалентную «ширину»).
 
-### 16.102. Исследовательский шаг: $n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}$ (через оценки на $\\mathrm{tw}(L(G))$)
+### 16.102. Исследовательский шаг: $n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log_2 n)}$ (через оценки на $\\mathrm{tw}(L(G))$)
 
 - `Линза:` Трейд‑офф.
 - `Утверждение:` Пусть $G$ — связный граф на $n$ вершинах и $\\varphi$ — нечётная разметка, так что Tseitin‑CNF $T(G,\\varphi)$ невыполнима.
   Обозначим $w(G):=W(T(G,\\varphi)\\vdash\\bot)-1$. Тогда
-  $$n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}.$$
+  $$n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log_2 n)}.$$
 - `Доказательство:` По §16.101 имеем $w(G)+1=\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}$.
   По Harvey–Wood (2014), неравенство (2), $\\mathrm{tw}(L(G))\\le (\\mathrm{tw}(G)+1)\\Delta(G)-1$
   (`../../resources/downloads/harvey_wood_2014_treewidth_line_graphs.pdf`).
   Следовательно $w(G)=O(\\mathrm{tw}(G)\\,\\Delta(G))$ и потому
-  $$n^{O(w(G))}=2^{O(w(G)\\log n)}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log n)}.$$
-- `Toy‑тест:` для звезды $K_{1,n}$: $\\mathrm{tw}(G)=1$, $\\Delta(G)=n$, и формула даёт $2^{O(n\\log n)}$, что согласуется с $n^{O(w)}$ при $w=n-1$ (16.101).
+  $$n^{O(w(G))}=2^{O(w(G)\\log_2 n)}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log_2 n)}.$$
+- `Toy‑тест:` для звезды $K_{1,n}$: $\\mathrm{tw}(G)=1$, $\\Delta(G)=n$, и формула даёт $2^{O(n\\log_2 n)}$, что согласуется с $n^{O(w)}$ при $w=n-1$ (16.101).
 - `Статус:` доказано (вывод из известных фактов).
 - `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
 - `Следующий шаг:` обновить формулировку в §16.98/Cor. 34, чтобы $2^{O(\\mathrm{tw}(G)\\Delta(G)\\log n)}$ появлялось с явной ссылкой (закрыть Q20).
