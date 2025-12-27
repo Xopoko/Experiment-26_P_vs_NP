@@ -26,3 +26,4 @@ Q43.S146-kappa-constant-source	Exact citation	formal/WIP/Work.lean	PENDING	Hasta
 Q43.S147-apply-thm41-branch	Reduction	formal/WIP/Work.lean	PENDING	kappa=59 forces large-M branch for poly M in Thm 4.3
 Q43.S148-thm41-branch-audit	Exact citation	formal/WIP/Work.lean	PENDING	Proof Thm 4.3: if M > exp(n^alpha) apply Thm 4.1
 Q43.S149-largem-bound-from-thm41	Reduction	formal/WIP/Work.lean	PENDING	Thm 4.1 bound translated to |F| (subpoly for kappa=59)
+Q43.S150-thm41-bound-compare	Reduction	formal/WIP/Work.lean	PENDING	compare Thm 4.1 bound with poly N,M (subpoly for kappa=59)

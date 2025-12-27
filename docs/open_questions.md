@@ -37,25 +37,24 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S149-largem-bound-from-thm41
-  - `NextStepID:` Q43.S150-thm41-bound-compare
+  - `LastStepID:` Q43.S150-thm41-bound-compare
+  - `NextStepID:` Q43.S151-thm41-nontrivial-regime
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.289
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.290
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (перевод bound в $|F|$).
+  - `Lens:` Трейд‑офф (poly‑режим vs lower bound).
   - `Artifact:` Reduction (Exact).
-  - `Update:` Thm. 4.1 даёт $N\\ge\\exp(\\Omega(n^{1/d}/\\log^4 n))$ (exp=$e^x$).
-    При $d=\\kappa\\log n/\\log\\log n$ получаем
-    $N\\ge\\exp(\\Omega((\\log n)^{1/\\kappa-4+o(1)}))$ и, с $|F|=\\Theta(n^2)$,
-    $N\\ge\\exp(\\Omega((\\log|F|)^{1/\\kappa-4+o(1)}))$.
-    Для $\\kappa=59$ показатель отрицательный, значит bound субполиномиален:
-    $N\\ge\\exp(\\Omega((\\log|F|)^{-3.98\\ldots}))=|F|^{o(1)}$.
+  - `Update:` в poly‑режиме $N=|F|^C$, $M=|F|^k$ large‑$M$ bound Thm. 4.1 даёт
+    $N\\ge\\exp(\\Omega((\\log|F|)^{1/\\kappa-4+o(1)}))$ (exp=$e^x$).
+    Для $\\kappa=59$ это субполиномиально: $N\\ge\\exp(\\Omega((\\log|F|)^{-3.98\\ldots}))=|F|^{o(1)}$,
+    так что bound автоматически выполнен для любого $N=|F|^C$.
+    Сверхполиномиальность возможна лишь при $1/\\kappa-4>1$, то есть $\\kappa<1/5$.
     Напоминание: $\\exp((\\log n)^p)$ суперполиномиальна при $p>1$.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.289.
-  - `Use:` large‑$M$ ветка Thm. 4.1 при $\\kappa=59$ даёт лишь $|F|^{o(1)}$‑bound;
-    следующий шаг — сравнить с целевыми $N,|F|,M$ и проверить, есть ли режим с
-    нетривиальной сверхполиномиальностью.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.290.
+  - `Use:` при $\\kappa=59$ Thm. 4.1 не даёт нетривиального роста для poly‑$N$;
+    следующий шаг — проверить, есть ли реалистичный режим глубины с $\\kappa<1/5$
+    (или другой масштаб $d$), где bound становится сверхполиномиальным.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
