@@ -36,19 +36,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S218-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime
-  - `NextStepID:` Q43.S219-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-final
+  - `LastStepID:` Q43.S219-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-final
+  - `NextStepID:` Q43.S220-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_log2_le_log2_grid_size)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_explicit)
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (уровни ↔ глубина).
   - `Artifact:` Proof.
-  - `Update:` доказано, что для grid‑размера $|F|=n^2$ выполняется
-    $\\log_2 n\\le \\log_2 |F|$ при $n\\ge 1$, что позволяет выражать log2‑порог
-    Thm. 4.1 через $|F|$. См. `formal/WIP/Work.lean`.
-  - `Use:` следующий шаг — проверить выполнение log2‑порога в нужном режиме $d$
-    после замены $n\\mapsto |F|$.
+  - `Update:` log2‑порог Thm. 4.1 переписан в терминах $|F|=n^2$ с явным
+    `c1=27,680,440,320,000`: $\\log_2 |F|\\le |F|/(c_1\\log_2^4 |F|)$.
+    См. `formal/WIP/Work.lean`.
+  - `Use:` следующий шаг — проверить выполнение этого порога в нужном режиме $d$
+    (в терминах $|F|$).
   - `BarrierCheck:` A) Relativization: да (чистая арифметика констант). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
