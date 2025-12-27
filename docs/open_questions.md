@@ -37,20 +37,21 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S143-translate-n-parameter (n→size map)
-  - `NextStepID:` Q43.S144-translate-largem-vs-polyn
+  - `LastStepID:` Q43.S144-translate-largem-vs-polyn (large‑M vs poly)
+  - `NextStepID:` Q43.S145-kappa-regime-decision
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.283
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.284
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Эквивалентность (перевод параметров $n\\leftrightarrow|F|$).
-  - `Artifact:` Reduction (parameter translation).
-  - `Update:` для grid $G_n$: $|V|=n^2$, $|E|=2n(n-1)$, поэтому число переменных
-    $N_{\\mathrm{var}}=\\Theta(n^2)$; стандартная CNF‑кодировка паритета даёт
-    $|F_n|=\\Theta(n^2)$ (например, $8(n-1)^2$ клауз).
-    Следовательно $n=\\Theta(\\sqrt{N_{\\mathrm{var}}})=\\Theta(\\sqrt{|F_n|})$, и порог
-    $M\\le\\exp(n^{\\alpha})$ (exp = $e^x$) переписывается как $M\\le\\exp(|F_n|^{\\alpha/2})$.
-  - `Use:` можно сравнивать large‑$M$ условие с $M=\\mathrm{poly}(|F|)$ в терминах размера формулы.
+  - `Lens:` Трейд‑офф (large‑$M$ vs poly‑$M$).
+  - `Artifact:` Reduction (threshold comparison).
+  - `Update:` при $d=\\kappa\\,\\log n/\\log\\log n$ получаем
+    $\\exp(n^{\\alpha})=\\exp(\\Theta((\\log|F|)^{1/\\kappa}))$ (exp = $e^x$; base $2$ даёт меньший порог).
+    Значит для $M=|F|^k$: если $\\kappa<1$, порог суперполиномиален и poly‑$M$ ниже;
+    если $\\kappa=1$, порог около $|F|^{1/2}$ и poly‑$M$ с $k>1/2$ выше;
+    если $\\kappa>1$, порог субполиномиален и любой $k>0$ выше.
+  - `Use:` теперь нужно зафиксировать используемую константу $\\kappa$ в depth‑режиме,
+    чтобы определить, попадает ли poly‑$M$ в large‑$M$ ветку.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

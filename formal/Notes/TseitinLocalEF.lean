@@ -3422,4 +3422,39 @@ import Paperproof
 - `Следующий шаг:` подставить $n=\\Theta(\\sqrt{|F|})$ в порог large‑$M$
   и сравнить с режимом $M=\\mathrm{poly}(|F|)$ при $d=\\Theta(\\log n/\\log\\log n)$.
 
+### 16.284. Исследовательский шаг (reduction): large‑$M$ порог vs $M=\\mathrm{poly}(|F|)$ при $d=\\kappa\\,\\log n/\\log\\log n$
+
+- `Линза:` Трейд‑офф.
+- `Утверждение (Q43.S144-translate-largem-vs-polyn):`
+  Пусть $d=\\kappa\\,\\frac{\\log n}{\\log\\log n}$ (константа $\\kappa>0$),
+  и large‑$M$ порог из HR Thm. 4.3 записан как
+  $$M\\le \\exp\\bigl(n^{\\alpha}\\bigr),\\qquad \\alpha=\\frac1d-\\frac1{d(d-1)}.$$
+  Тогда при $n=\\Theta(\\sqrt{|F|})$ получаем
+  $$n^{\\alpha}=\\exp\\Bigl((1+o(1))\\frac{\\log n}{d}\\Bigr)
+      =\\exp\\Bigl((1+o(1))\\frac{\\log\\log n}{\\kappa}\\Bigr)
+      =(\\log n)^{1/\\kappa+o(1)},$$
+  и, поскольку $\\log n=\\tfrac12\\log|F|+O(1)$,
+  $$\\exp\\bigl(n^{\\alpha}\\bigr)=\\exp\\Bigl(\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)\\Bigr).$$
+  Здесь $\\exp$ трактуется как $e^x$ (в HR); вариант $2^x$ даёт лишь константный множитель
+  в экспоненте и, следовательно, **меньший** порог.
+  Для $M=|F|^k=\\exp(k\\log|F|)$ сравнение зависит от $\\kappa$:
+  1) $\\kappa<1$: $1/\\kappa>1$, значит $\\exp((\\log|F|)^{1/\\kappa})$ **суперполиномиален**
+     (так как $\\exp((\\log n)^p)$ суперполиномиален при $p>1$), и poly‑$M$ остаётся ниже порога.
+  2) $\\kappa=1$: порог $\\exp(\\Theta(\\log|F|))=|F|^{\\Theta(1)}$; при точном коэффициенте
+     из $n=\\Theta(\\sqrt{|F|})$ получаем порог $|F|^{1/2+o(1)}$, так что poly‑$M$ с $k>1/2$
+     **превышает** порог.
+  3) $\\kappa>1$: $\\exp((\\log|F|)^{1/\\kappa})=|F|^{o(1)}$ (субполином), поэтому
+     любой $M=|F|^k$ с $k>0$ **превышает** порог.
+- `Toy‑тест:` при $\\kappa=1$ и $|F|=n^2$ имеем порог $M\\lesssim n=|F|^{1/2}$,
+  тогда $M=|F|$ уже попадает в large‑$M$ ветку.
+- `Статус:` reduction (сопоставление large‑$M$ порога с polynomial‑$M$ в терминах $|F|$).
+- `StepID:` Q43.S144-translate-largem-vs-polyn.
+- `InfoGain:` 1.
+- `Барьер‑чек (A/B/C):`
+  A) Relativization check: релятивизуется (асимптотический пересчёт).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` зафиксировать конкретное значение $\\kappa$ из используемого
+  depth‑режима и сделать вывод, применима ли ветка Theorem 4.1 для $M=\\mathrm{poly}(|F|)$.
+
 -/
