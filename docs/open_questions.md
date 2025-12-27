@@ -11,24 +11,24 @@
 - [ ] **Q39 (Tseitin(Grid): depth‑gap для polynomial‑size в bounded‑depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S119-globalfixedpair-fixedorientation-contiguous-shift-alt32
-  - `NextStepID:` Q39.S120-globalfixedpair-fixedorientation-contiguous-shift-alt33
+  - `LastStepID:` Q39.S120-globalfixedpair-fixedorientation-contiguous-shift-alt33
+  - `NextStepID:` Q39.S121-globalfixedpair-fixedorientation-contiguous-shift-alt34
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Коммуникация/ранг (rank-2 witness).
   - `Artifact:` Counterexample (fixed orientation).
-  - `Update:` toy‑контрпример при $k=2$: очередной cyclic alt‑shift (alt32)
+  - `Update:` toy‑контрпример при $k=2$: очередной cyclic alt‑shift (alt33)
     при global fixed‑pair и fixed orientation всё ещё даёт две ненулевые разные проекции ⇒ ранг 2.
     См. `formal/WIP/Work.lean`
-    (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt32_vec1/vec2).
-  - `Use:` следующий тест — следующий alt‑shift (alt33) для contiguous blocks.
+    (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt33_vec1/vec2).
+  - `Use:` следующий тест — следующий alt‑shift (alt34) для contiguous blocks.
   - `File:` `formal/WIP/Work.lean`. `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? да (toy‑ранг, комбинаторика).
     - `B) Natural proofs check:` N/A (нет свойства булевых функций/схем).
     - `C) Algebrization check:` N/A (нет арифметизации/полиномиальных расширений).
   - `Success:` либо явный upper на глубине $O(\log N/\log\log N)$, либо барьер/контрпример для “XOR‑step” в bounded‑depth Frege
-  - `PublicSurface:` `formal/WIP/Work.lean` (Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt32)
+  - `PublicSurface:` `formal/WIP/Work.lean` (Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt33)
   Контекст: узел — синтаксически симулировать Gaussian elimination шаг; фиксированные разбиения ломаются, even‑batching не спасает.
   Примечание: ориентационная инвариантность фронтира зафиксирована в `formal/WIP/Work.lean`.
   Детали: `formal/Notes/TseitinQ39.lean` (§16.153–§16.177) и краткая сводка в `formal/Notes/TseitinLocalEF.lean` §16.187.

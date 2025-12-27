@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S119-globalfixedpair-fixedorientation-contiguous-shift-alt32
-- `Do-not-repeat (next 2 runs):` Q39.S119-globalfixedpair-fixedorientation-contiguous-shift-alt32, Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-alternative
+- `LastStepID:` Q39.S120-globalfixedpair-fixedorientation-contiguous-shift-alt33
+- `Do-not-repeat (next 2 runs):` Q39.S120-globalfixedpair-fixedorientation-contiguous-shift-alt33, Q39.S119-globalfixedpair-fixedorientation-contiguous-shift-alt32
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: toy‑проверка на концах разрыва; дальше — явная оценка на разрыве и lift порога по кускам.
-Q39: alt32‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt33‑shift.
+Q39: alt33‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt34‑shift.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: alt32‑shift для contiguous blocks при fixed‑orientation всё е
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Коммуникация/ранг→Эквивалентность→Инвариант→Коммуникация/ранг→Эквивалентность
+Последние:Эквивалентность→Инвариант→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
