@@ -163,6 +163,11 @@ theorem Q43_IsPoly_of_le_pow {s : Nat -> Nat} (k : Nat) (hle : ∀ n, s n <= n ^
   intro n
   exact le_trans (hle n) (Nat.le_succ _)
 
+-- Q43.S170-explicit-c1c2-thm41: package explicit constants for Thm. 4.1.
+def Q43_thm41_c2 (A : Nat) : Nat := 8 * A * 152
+
+def Q43_thm41_c1 (A : Nat) : Nat := 16 * 152 * Q43_thm41_c2 A
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

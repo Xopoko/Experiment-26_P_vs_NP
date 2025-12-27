@@ -36,18 +36,19 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S169-propagate-explicit-a0
-  - `NextStepID:` Q43.S170-explicit-c1c2-thm41
+  - `LastStepID:` Q43.S170-explicit-c1c2-thm41
+  - `NextStepID:` Q43.S171-check-thm41-threshold
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.309
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.310
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
   - `Lens:` Эквивалентность (явный $A_0$).
   - `Artifact:` Reduction.
-  - `Update:` явный $A_0=78C$ получен из $C\\ge 120000$; фактор $(A_0\\log n'/\\Delta)^{a+b}$
-    в Proof Lemma 4.2 становится численно явным, значит $c_1,c_2$ в Thm. 4.1 выписываемы.
-    См. `formal/Notes/TseitinLocalEF.lean` §16.309.
-  - `Use:` неявные константы сняты; следующий шаг — выписать явные $c_1,c_2$ в Thm. 4.1.
+  - `Update:` явные $c_1,c_2$ в Thm. 4.1: $A_{\\mathrm{bits}}=76\\Rightarrow A=2^{76}$
+    (при $\\log=\\ln$ заменить на $e^{76\\ln2}$), $c_2=8\\cdot152\\cdot A$ и
+    $c_1=16\\cdot152\\cdot c_2$; Proof Thm. 4.1 переписан с явными константами.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.310.
+  - `Use:` дальше проверить корректность порога $M>e^{n^\\alpha}$ и базу логарифмов в Q43.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
