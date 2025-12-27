@@ -37,20 +37,20 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S160-thm41-const-extract
-  - `NextStepID:` Q43.S161-thm41-recount-plan
+  - `LastStepID:` Q43.S161-thm41-recount-plan
+  - `NextStepID:` Q43.S162-recount-lemma69-bits
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.300
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.301
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (явные константы).
-  - `Artifact:` Barrier.
-  - `Update:` в Proof Thm. 4.1 константы $c_1$ (“large enough”) и $c_2$ (“some constant”)
-    остаются нечисловыми, и их связь с константами Lemma 4.2 не параметризована; без полного пересчёта
-    нельзя извлечь явный коэффициент в режиме $d=\\kappa\\log n/\\log\\log n$ (exp = $e^x$).
-    См. `formal/Notes/TseitinLocalEF.lean` §16.300 и
-    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:874–877, 929–931`.
-  - `Use:` барьер зафиксирован; следующий шаг — либо план полного пересчёта Proof Thm. 4.1, либо смена режима/источника.
+  - `Lens:` Эквивалентность (цепочка зависимостей констант).
+  - `Artifact:` Reduction.
+  - `Update:` выписан план пересчёта: $c_1,c_2$ из Proof Thm. 4.1 сводятся к явному $A$ в Lemma 4.2,
+    который зависит от $A_0,A_1,A_2$ из её доказательства, а те — от бит‑счёта в Lemma 6.9
+    (термины $A_1|S^*_g|,A_2|S^*_g|$). База $\\exp=e^x$ (HR‑нотация); при $2^x$ пороги только меньше.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.301 и
+    `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:889–891, 1972–1974, 1996, 2336–2341`.
+  - `Use:` следующий шаг — пересчитать Lemma 6.9/6.8 с явными $A_1,A_2$ или зафиксировать невозможность.
   - `BarrierCheck:` A) Relativization: да (мета‑константы). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
