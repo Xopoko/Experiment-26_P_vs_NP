@@ -53,6 +53,8 @@
   ../resources/downloads/urquhart_1996_complexity_of_propositional_proofs.pdf
 - A. Urquhart (1987), *Hard Examples for Resolution* (PDF): ../resources/downloads/urquhart_1987_hard_examples_resolution.pdf
 - J. Håstad (2020), *On small-depth Frege proofs for Tseitin for grids* (PDF): ../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf
+- J. Håstad, K. Risse (2022), *On bounded depth proofs for Tseitin formulas on the grid; revisited* (PDF):
+  ../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf
 - N. Galesi, D. Itsykson, A. Riazanov, A. Sofronova (2019), *Bounded-depth Frege complexity of Tseitin formulas for all graphs*
   (ECCC TR19-069, PDF): ../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf
 - M. Alekhnovich, A. A. Razborov (2011), *Satisfiability, branch-width and Tseitin tautologies* (PDF):
