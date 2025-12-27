@@ -181,6 +181,15 @@ theorem Q39_rank2_global_order_microsteps :
   simpa [Q39_global_order_micro_vec1, Q39_global_order_micro_vec2] using
     Q39_rank2_prefix2_prefix4
 
+-- Q39.S57-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating:
+-- alternating row/column microsteps still give two distinct nonzero projections.
+def Q39_alternating_vec1 : BitVec8 := Q39_prefix_vec2
+def Q39_alternating_vec2 : BitVec8 := [false, false, true, true, false, false, true, true]
+
+theorem Q39_rank2_alternating :
+    Q39_rank2_8 Q39_alternating_vec1 Q39_alternating_vec2 := by
+  decide
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by
