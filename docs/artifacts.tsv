@@ -23,6 +23,7 @@ Q39.S43-2k-two-strip-chain-dyadic-carry-microsteps	Counterexample	formal/WIP/Wor
 Q39.S44-2k-two-strip-chain-dyadic-microsteps-distinct-support	Counterexample	formal/WIP/Work.lean	PENDING	distinct-support microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.185)
 Q39.S46-2k-two-strip-chain-strip-support-synchronized	Counterexample	formal/WIP/Work.lean	PENDING	synchronized strip template still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.187)
 Q39.S47-2k-two-strip-chain-strip-support-global-schedule	Counterexample	formal/WIP/Work.lean	PENDING	global block order still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.188)
+Q39.S48-2k-two-strip-chain-strip-support-global-synchronous	Counterexample	formal/WIP/Work.lean	PENDING	global synchronous step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.189)
 Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
 Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
 Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold
