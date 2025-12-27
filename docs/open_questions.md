@@ -37,20 +37,23 @@
 - [ ] **Q43 (flat local‑EF(s): существуют ли “малые” evaluations для poly‑size доказательств?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S146-kappa-constant-source (kappa source)
-  - `NextStepID:` Q43.S147-apply-thm41-branch
+  - `LastStepID:` Q43.S147-apply-thm41-branch
+  - `NextStepID:` Q43.S148-thm41-branch-audit
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.286
+  - `PublicSurface:` `formal/Notes/TseitinLocalEF.lean` §16.287
   - `Success:` либо схема построения cost‑$t$ evaluations (с $t=\mathrm{polylog}(n)$) для каждой строки flat local‑EF(s)‑доказательства, либо точная точка поломки (где multi‑switching/representation требует nesting или глобальной поддержки)
-  - `Lens:` Инвариант (источник $\\kappa$).
-  - `Artifact:` Exact citation (kappa constant).
-  - `Update:` Håstad’20 Thm. 6.5 фиксирует режим
-    $d\\le 59\\,\\log n/\\log\\log n$ (в тексте дробь набрана “в столбик”: строка `log n` над строкой `log log n`).
-    Это даёт $\\kappa=59$ для режима $d=\\kappa\\log n/\\log\\log n$; рядом стоит размерная оценка с $\\exp(\\cdot)$
-    (в наших заметках $\\exp=e^x$, но база не влияет на вывод $\\kappa$).
-    См. `formal/Notes/TseitinLocalEF.lean` §16.286.
-  - `Use:` теперь можно подставить $\\kappa=59$ в сравнение large‑$M$ vs poly‑$M$ и зафиксировать ветку Thm. 4.1.
+  - `Lens:` Трейд‑офф (large‑$M$ vs poly‑$M$).
+  - `Artifact:` Reduction (Exact).
+  - `Update:` подставляя $\\kappa=59>1$ в пересчёт §16.285, получаем порог
+    $M\\le\\exp(\\Theta((\\log|F|)^{1/59}))$ при $\\exp=e^x$.
+    Этот порог равен $|F|^{o(1)}$ (субполином), поэтому любой $M=|F|^k$, $k>0$,
+    в пределе **превышает** его.
+    Следовательно, для poly‑$M$ в Thm. 4.3 всегда выбирается large‑$M$ ветка,
+    а ветка Thm. 4.1 остаётся релевантной только для субполиномиальных $M$.
+    См. `formal/Notes/TseitinLocalEF.lean` §16.287.
+  - `Use:` ветка large‑$M$ фиксирована при $\\kappa=59$; дальше нужно локализовать,
+    где (если вообще) Proof of Thm. 4.3 обращается к ветке Thm. 4.1.
   - `BarrierCheck:` A) Relativization: да (чисто арифметическое не зависит от оракула). B) Natural proofs: N/A. C) Algebrization: N/A.
   - `InfoGain:` 1.
   Детали (контекст и параметр‑аудит): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
