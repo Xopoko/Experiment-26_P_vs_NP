@@ -6,14 +6,14 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q39.S29-2k-two-strip-rectangular-geometry
-- `Do-not-repeat (next 2 runs):` Q39.S28-2k-two-strip-linked-intervals, Q39.S29-2k-two-strip-rectangular-geometry
+- `LastStepID:` Q39.S30-2k-two-strip-anchored-rectangles
+- `Do-not-repeat (next 2 runs):` Q39.S29-2k-two-strip-rectangular-geometry, Q39.S30-2k-two-strip-anchored-rectangles
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
 Q43: large‑$M$ ветка Thm. 4.3 использует Thm. 4.1; следующий шаг — снять её для poly‑$M$.
-Q39: прямоугольники на двухколоночной полосе не снижают ранг; следующий шаг — anchored-прямоугольники.
+Q39: anchored-прямоугольники на двухколоночной полосе не снижают ранг; следующий шаг — prefix-цепочка.
 
 ## Что уже сделано (не повторять)
 
@@ -41,4 +41,4 @@ Q39: прямоугольники на двухколоночной полосе
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Инвариант→Трейд‑офф→Коммуникация/ранг→Инвариант→Коммуникация/ранг
+Последние:Трейд‑офф→Коммуникация/ранг→Инвариант→Коммуникация/ранг→Инвариант
