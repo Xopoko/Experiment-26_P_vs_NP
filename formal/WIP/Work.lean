@@ -611,6 +611,11 @@ theorem Q43_Lemma69_A12_bound {s t A1 A2 : Nat} (ht : t <= s) :
     _ = (9 + A1 + A2) * (17 * s) + 18 * s := by
       simp [Nat.add_mul, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
 
+-- Q43.S212-flat-eval-hr-depth-range-constants-a0: explicit A0 wrapper for log term.
+theorem Q43_Lemma69_A0_bound {a b A0 logn delta : Nat} :
+    (A0 * logn) * (delta ^ a) * (delta ^ b) = (A0 * logn) * (delta ^ (a + b)) := by
+  simpa [Nat.pow_add, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm]
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

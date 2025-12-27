@@ -6,13 +6,13 @@
 
 ## Anti-loop (обновлять, не раздувать)
 
-- `LastStepID:` Q43.S211-flat-eval-hr-depth-range-constants-a1a2
-- `Do-not-repeat (next 2 runs):` Q39.S70-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit, Q43.S211-flat-eval-hr-depth-range-constants-a1a2
+- `LastStepID:` Q43.S212-flat-eval-hr-depth-range-constants-a0
+- `Do-not-repeat (next 2 runs):` Q43.S211-flat-eval-hr-depth-range-constants-a1a2, Q43.S212-flat-eval-hr-depth-range-constants-a0
 - `Last InfoGain:` 1
 
 ## Текущее направление (держать 1–2 строки)
 
-Q43: $A$ сводится к $A_1,A_2$ и явным $A_3,A_4$; следующий шаг — $A_1,A_2$ (и затем $A_0$).
+Q43: $A_0\\log n'\\,\\Delta^{a+b}$ агрегирован; следующий шаг — явное $A_0$ из Lemma 5.5/4.2.
 Q39: unit‑frontier не снижает ранг; следующий шаг — one‑strip unit‑frontier.
 
 ## Что уже сделано (не повторять)
@@ -24,7 +24,7 @@ Q39: unit‑frontier не снижает ранг; следующий шаг —
 ## Активные “неповторимые” задачи (выбрать одну за прогон)
 
 - Q39 из `docs/open_questions.md` (проверить one‑strip unit‑frontier при строгом 2D‑prefix).
-- Q43 из `docs/open_questions.md` (вытащить явные $A_1,A_2$ и затем $A_0$).
+- Q43 из `docs/open_questions.md` (вытащить явный $A_0$).
 
 ## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
 
@@ -41,4 +41,4 @@ Q39: unit‑frontier не снижает ранг; следующий шаг —
 
 ## Линзы (держать 5 последних; обновлять, не наращивать)
 
-Последние:Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг→Эквивалентность
+Последние:Эквивалентность→Эквивалентность→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг

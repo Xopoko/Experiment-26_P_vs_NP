@@ -5234,6 +5234,27 @@ import Paperproof
 -/
 
 /-!
+### 16.352. Исследовательский шаг (proof): явная агрегация $A_0$‑фактора
+
+- `Линза:` Эквивалентность.
+- `Утверждение (Q43.S212-flat-eval-hr-depth-range-constants-a0):`
+  Лог‑фактор $A_0\\log n'$ умножается на $\\Delta^{a+b}$, и произведение
+  $\\Delta^a\\cdot\\Delta^b$ можно свернуть в $\\Delta^{a+b}$:
+  $$(A_0\\log n')\\,\\Delta^a\\,\\Delta^b=(A_0\\log n')\\,\\Delta^{a+b}.$$
+- `Proof:` формальная лемма в Lean использует $\\Delta^{a+b}=\\Delta^a\\cdot\\Delta^b$
+  (см. `formal/WIP/Work.lean`, Q43_Lemma69_A0_bound).
+- `Статус:` proof (агрегация $A_0$‑фактора).
+- `StepID:` Q43.S212-flat-eval-hr-depth-range-constants-a0.
+- `InfoGain:` 1.
+- `Барьер-чек (A/B/C):`
+  A) Relativization check: да (чистая арифметика).
+  B) Natural proofs check: неприменимо.
+  C) Algebrization check: неприменимо.
+- `Следующий шаг:` извлечь явное значение $A_0$ из Lemma 5.5/4.2.
+
+-/
+
+/-!
 ### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
 
 - `Линза:` Сжатие/канонизация.
