@@ -148,6 +148,14 @@ theorem Q39_frontier_adj (G : Graph) (hG : Symmetric G) (S : Set Vertex) (e : Ed
             exact hG u v
           _ = true := huv
 
+-- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
+theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
+    IsPoly s := by
+  rcases hpoly with ⟨k, hk⟩
+  refine ⟨k, ?_⟩
+  intro n
+  exact le_trans (hle n) (hk n)
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
