@@ -604,6 +604,11 @@ derives `log2(|F|^C) <= |F|/(c1 log2^4|F|)` from a scaled log2^5 criterion
 `(2 log2|F| * C) * (c1 log2^4|F|) <= |F|`, still in base‑2 `log2`.
 This isolates the remaining task to an explicit threshold `|F| >= n0(C)` and
 the algebraic rewrite to the standard `2C·c1·log2^5|F| <= |F|`.
+**Q43 (scaled log2^5 rewrite).**
+In `formal/WIP/Work.lean` the lemma
+`Q43_thm41_log2_threshold_c1_grid_pow5_scaled_iff_simple` rewrites the scaled
+condition into the compact form `2C·c1·log2^5|F| <= |F|` (still base‑2 `log2`).
+This makes the remaining task purely a threshold choice `|F| >= n0(C)`.
 Кратко: Tseitin — паритеты на графе (нечетная сумма зарядов ⇒ невыполнимость);
 нижние оценки через ограниченную степень и экспансию; Clique-Coloring —
 несовместимость клики и раскраски.

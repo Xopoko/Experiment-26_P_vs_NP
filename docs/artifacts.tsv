@@ -139,3 +139,4 @@ Q43.S230-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criteri
 Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold	Proof	formal/WIP/Work.lean	PENDING	bundle regime-d criterion with poly N/M log2 bounds
 Q43.S232-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare	Proof	formal/WIP/Work.lean	PENDING	log2(|F|^C) <= (log2|F|+1)C for |F|=n^2
 Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold	Proof	formal/WIP/Work.lean	PENDING	scaled log2^5 implies log2(|F|^C) <= |F|/(c1 log2^4|F|)
+Q43.S234-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-final	Proof	formal/WIP/Work.lean	PENDING	rewrite scaled log2^5 as 2C*c1*log2^5|F| <= |F|

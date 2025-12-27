@@ -1309,6 +1309,40 @@ def Q43_thm41_log2_threshold_c1_grid_pow5_scaled (n C : Nat) : Prop :=
       (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4)
     <= Q43_grid_size n
 
+-- Q43.S234-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-final:
+-- rewrite the scaled log2^5 criterion as 2*C*c1*log2^5|F| <= |F|.
+def Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple (n C : Nat) : Prop :=
+  (2 * C * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5
+    <= Q43_grid_size n
+
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_iff_simple {n C : Nat} :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled n C ↔
+      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
+  unfold Q43_thm41_log2_threshold_c1_grid_pow5_scaled
+  unfold Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple
+  set L := Nat.log2 (Q43_grid_size n)
+  have hpow : L ^ 5 = L * L ^ 4 := by
+    calc
+      L ^ 5 = L ^ 4 * L := by simp [Nat.pow_succ]
+      _ = L * L ^ 4 := by exact Nat.mul_comm _ _
+  have hrewrite :
+      (2 * L * C) * (Q43_thm41_c1_chernoff_ln * L ^ 4)
+        = (2 * C * Q43_thm41_c1_chernoff_ln) * (L * L ^ 4) := by
+    ac_rfl
+  constructor
+  · intro h
+    have h' :
+        (2 * C * Q43_thm41_c1_chernoff_ln) * (L * L ^ 4)
+          <= Q43_grid_size n := by
+      simpa [hrewrite, L] using h
+    simpa [← hpow, L] using h'
+  · intro h
+    have h' :
+        (2 * C * Q43_thm41_c1_chernoff_ln) * (L * L ^ 4)
+          <= Q43_grid_size n := by
+      simpa [hpow, L] using h
+    simpa [hrewrite, L] using h'
+
 theorem Q43_thm41_log2_threshold_c1_grid_powC_iff_mul {n C : Nat}
     (hlog : 1 <= Nat.log2 (Q43_grid_size n)) :
     Q43_thm41_log2_threshold_c1_grid_powC n C ↔
