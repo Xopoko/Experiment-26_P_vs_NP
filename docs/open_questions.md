@@ -37,8 +37,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S267-log2-jump-lemma
-  - `NextStepID:` Q43.S268-nk-sqrt-bounds
+  - `LastStepID:` Q43.S268-nk-sqrt-bounds
+  - `NextStepID:` Q43.S269-define-floor-sqrt-lean
   - `LeanTarget:` formal/WIP/Work.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
@@ -48,12 +48,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     (Q43_grid_ratio_drop_gap_k23, Q43_grid_ratio_drop_gap_k24, Q43_grid_ratio_drop_gap_k25);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (log2 jump points).
-  - `Artifact:` Proof.
-  - `Update:` Lean lemma states the log2 jump from explicit bounds on `n^2` and `(n+1)^2`:
-    `Q43_log2_grid_size_eq_of_bounds`, `Q43_log2_grid_size_eq_succ_of_bounds`,
-    and the bundled `Q43_log2_grid_size_jump` in `formal/WIP/Work.lean`.
-  - `Use:` formalize the log2-jump lemma in Lean and lift from samples to all `k`.
+  - `Lens:` Equivalence (floor sqrt vs bounds).
+  - `Artifact:` Exact citation.
+  - `Update:` exact citation for integer sqrt bounds used by the toy script:
+    Python docs define `math.isqrt(n)` as the floor of sqrt `n`, i.e., the greatest
+    `a` such that `a^2 <= n`. Source: https://docs.python.org/3/library/math.html#math.isqrt
+  - `Use:` define a floor-sqrt in Lean and use the bound to connect `n_k` with the log2 jump lemma.
   - `BarrierCheck:` A) Relativization check: yes (arithmetic + floor log2).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

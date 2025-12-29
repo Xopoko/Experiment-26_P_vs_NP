@@ -206,3 +206,4 @@ Q43.S266-bitlength-log2-doc	Exact citation	formal/WIP/Work.lean	PENDING	Python i
 Q39.S136-globalfixedpair-fixedorientation-contiguous-shift-alt49	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt49-shift still give rank 2
 Q43.S267-log2-jump-lemma	Proof	formal/WIP/Work.lean	PENDING	log2 jump from explicit bounds on n^2 and (n+1)^2
 Q39.S137-globalfixedpair-fixedorientation-contiguous-shift-alt50	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt50-shift still give rank 2
+Q43.S268-nk-sqrt-bounds	Exact citation	formal/WIP/Work.lean	PENDING	Python math.isqrt floor sqrt bound (a^2 <= n)

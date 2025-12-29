@@ -6,13 +6,13 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S137-globalfixedpair-fixedorientation-contiguous-shift-alt50
-- `Do-not-repeat (next 2 runs):` Q39.S137-globalfixedpair-fixedorientation-contiguous-shift-alt50, Q43.S267-log2-jump-lemma
+- `LastStepID:` Q43.S268-nk-sqrt-bounds
+- `Do-not-repeat (next 2 runs):` Q43.S268-nk-sqrt-bounds, Q39.S137-globalfixedpair-fixedorientation-contiguous-shift-alt50
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
-Q43: log2 jump lemma now in Lean; next is to show n_k bounds from sqrt to apply it.
+Q43: isqrt floor bound cited; next is to define floor-sqrt in Lean and connect to n_k.
 Q39: alt50shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt51shift.
 
 ## What has already been done (do not repeat)
@@ -41,4 +41,4 @@ Q39: alt50shift for contiguous blocks with fixedorientation still gives rank 2; 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Communication/Rank->Invariant->Communication/Rank->Equivalence->Invariant
+Latest:Equivalence->Communication/Rank->Invariant->Communication/Rank->Equivalence
