@@ -116,6 +116,15 @@ theorem Q39_frontier_swap (G : Graph) (S : Set Vertex) (e : Edge) :
         have : boundary G S (edgeSwap e) ∨ boundary G S e := Or.inl hswap
         simpa [frontier, edgeSwap_involutive] using this
 
+-- Q39.S141-frontier-complement-swap-invariant: complement + swap leaves the frontier unchanged.
+theorem Q39_frontier_compl_swap (G : Graph) (hG : Symmetric G) (S : Set Vertex) (e : Edge) :
+    frontier G (fun x => ¬ S x) (edgeSwap e) ↔ frontier G S e := by
+  have hswap : frontier G (fun x => ¬ S x) (edgeSwap e) ↔ frontier G (fun x => ¬ S x) e :=
+    Q39_frontier_swap G (fun x => ¬ S x) e
+  have hcompl : frontier G (fun x => ¬ S x) e ↔ frontier G S e :=
+    (Q39_frontier_compl G hG S e).symm
+  exact hswap.trans hcompl
+
 -- Q39.S25-2k-two-strip-interval-rank-check: frontier edges cross the cut.
 theorem Q39_frontier_cross (G : Graph) (S : Set Vertex) (e : Edge) :
     frontier G S e → (S e.1 ∧ ¬ S e.2) ∨ (S e.2 ∧ ¬ S e.1) := by

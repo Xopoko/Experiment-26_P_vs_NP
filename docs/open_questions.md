@@ -11,22 +11,24 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q39 (Tseitin(Grid): depth gap for polynomial size in bounded-depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S140-globalfixedpair-fixedorientation-contiguous-shift-alt53
-  - `NextStepID:` Q39.S141-globalfixedpair-fixedorientation-contiguous-shift-alt54
+  - `LastStepID:` Q39.S141-frontier-complement-swap-invariant
+  - `NextStepID:` Q39.S142-globalfixedpair-fixedorientation-contiguous-shift-alt54
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Communication/rank (rank-2 witness).
-  - `Artifact:` Counterexample (fixed orientation).
-  - `Update:` toy-counterexample for $k=2$: another cyclic alt-shift (alt53)
-    with a global fixed-pair and fixed orientation still gives two non-zero different projections, rank 2.
-    See `formal/WIP/Work.lean`.
-    (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt53_vec1/vec2).
+  - `Lens:` Invariant (frontier symmetries).
+  - `Artifact:` Proof.
+  - `Update:` added a clean symmetry lemma `Q39_frontier_compl_swap`:
+    in a symmetric graph, complementing the cut and reversing edge orientation preserves the frontier.
+    The proof is a short stitch of `Q39_frontier_compl` and `Q39_frontier_swap`.
+    This is a compact, presentation-friendly statement for Paperproof screenshots.
+    It also isolates a reusable invariant for later rank/projection arguments.
+    See `formal/WIP/Work.lean` (Q39_frontier_compl_swap).
   - `Use:` the next test is the next alt-shift (alt54) for contiguous blocks.
   - `PublicSurface:` `formal/WIP/Work.lean`
-    (Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt53).
+    (Q39_frontier_compl_swap).
   - `File:` `formal/WIP/Work.lean`. `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? yes (toy-rank, combinatorics).
+    - `A) Relativization check:` Relativizes? yes (graph symmetry + set complements).
     - `B) Natural proofs check:` N/A (no property of Boolean functions/circuits).
     - `C) Algebrization check:` N/A (no arithmetization/polynomial extensions).
   - `Success:` either an explicit upper at depth $O(\log N/\log\log N)$, or a barrier/counterexample for the "XOR step" in bounded-depth Frege
