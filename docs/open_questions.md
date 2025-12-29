@@ -12,22 +12,20 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q39 (Tseitin(Grid): depth gap for polynomial size in bounded-depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S142-toy-alt54-rank2-oracle
-  - `NextStepID:` Q39.S143-contiguous-alt-rank2-classify-or-barrier
+  - `LastStepID:` Q39.S143-contiguous-alt-rank2-k117
+  - `NextStepID:` Q39.S144-contiguous-alt-rank2-classify-or-barrier
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Communication/rank (projection rank witness).
-  - `Artifact:` Toy.
-  - `Oracle:` `python3 scripts/toy_q39_rank2.py --alt 54`
+  - `Artifact:` Counterexample.
+  - `Oracle:` `python3 scripts/toy_q39_rank2.py --alt 118`
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
-  - `StopRule:` if >=5 consecutive contiguous alt-shifts keep rank=2, switch to classification
-    (lemma: contiguous alt-shifts preserve rank-2) or a barrier certificate; if rank!=2, record the failure and stop.
-  - `Update:` added oracle `scripts/toy_q39_rank2.py` that parses the latest contiguous alt-shift
-    vectors from `formal/WIP/Verified/Q39.lean`, computes the next shift (alt54), and checks rank=2.
-    The alt54 witness remains rank-2 (nonzero distinct vectors), so the contiguous alt-shift
-    search continues to yield counterexamples and is now reproducible.
+  - `StopRule:` reached >5 consecutive contiguous alt-shifts with rank=2 (now alt54..alt117);
+    stop extending and switch to classification or a barrier certificate; if rank!=2, record the failure and stop.
+  - `Update:` imported contiguous alt-shift witnesses alt54..alt117 into `formal/WIP/Verified/Q39.lean`,
+    each `by decide` rank=2, so the stop-rule threshold is exceeded and the next step is classification/barrier.
   - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
-    (contiguous alt-shift vectors up to alt53).
+    (contiguous alt-shift vectors up to alt117).
   - `File:` `scripts/toy_q39_rank2.py`. `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? yes (finite combinatorial rank check).
@@ -41,11 +39,11 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S280-gap-min-global-cleanup
-  - `NextStepID:` Q43.S281-gap-min-global-use
+  - `LastStepID:` Q43.S281-gap-drop-nk-k31-k104
+  - `NextStepID:` Q43.S282-gap-min-global-use
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
-  - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0).
+  - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
     then derive a general gap-drop lemma from the jump.
@@ -59,8 +57,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Invariant (uniform `k ≥ 12` bridge at `n_k`).
   - `Artifact:` Proof.
-  - `Update:` added `Q43_gap_min_ratio_drop_global_grid` to expose the global drop as a direct
-    `Q43_grid_ratio` inequality for downstream cleanup.
+  - `Update:` extended the explicit n_k-linked gap-drop counterexamples to k=31..104 in
+    `formal/WIP/Verified/Q43.lean` (all `by decide`), so the verified table now covers k=12..104.
   - `Use:` next: route remaining gap-min uses through `Q43_gap_min_ratio_drop_global_grid`.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.

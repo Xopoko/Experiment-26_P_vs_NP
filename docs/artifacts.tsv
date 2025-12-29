@@ -6,3 +6,5 @@ Q43.S275-gap-drop-nk-k26-k30	Proof	formal/WIP/Verified/Q43.lean	34701f6f12c8be4b
 Q43.S276-gap-drop-nk-uniform-kge12	Proof	formal/WIP/Verified/Q43.lean	3294985d2677bbae1fd4436f2c75c74d90886c68	uniform ratio-drop at n_k for all k>=12
 Q43.S279-gap-min-global-bridge-apply	Proof	formal/WIP/Verified/Q43.lean	06cf3d7bd46591464a2ed250bf102b40a449927b	apply uniform n_k drop to the global gap-min ratio (k=12)
 Q43.S280-gap-min-global-cleanup	Proof	formal/WIP/Verified/Q43.lean	3c8e6819e132331519b40f674509c959afbf7de5	rewrite global drop as direct grid_ratio inequality
+Q39.S143-contiguous-alt-rank2-k117	Counterexample	formal/WIP/Verified/Q39.lean	9ef222488dcb625ff2c5e5ffddcc6f756a8a7f19	extend contiguous alt-shift witnesses to alt117 (rank=2 by decide)
+Q43.S281-gap-drop-nk-k31-k104	Proof	formal/WIP/Verified/Q43.lean	9ef222488dcb625ff2c5e5ffddcc6f756a8a7f19	extend n_k-linked gap-drop counterexamples to k=31..104

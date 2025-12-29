@@ -22,7 +22,7 @@ def grid_ratio(n: int) -> int:
 
 
 def main() -> None:
-    ks = list(range(12, 31))
+    ks = list(range(12, 105))
     print("Toy check: n_k = floor(sqrt(2^(2k+1)-1))")
     print("Verify log2(n_k^2)=2k, log2((n_k+1)^2)=2k+1, and ratio drop.")
     failures = 0
