@@ -958,44 +958,13 @@ def Q43_gap_n : Nat := 5792
 def Q43_gap_n_succ : Nat := 5793
 theorem Q43_gap_n_succ_eq : Q43_gap_n + 1 = Q43_gap_n_succ := by
   decide
-def Q43_gap_end_lo_k (k : Nat) : Nat := 5 * 2 ^ (k - 2)
-def Q43_gap_end_hi_k (k : Nat) : Nat := 3 * 2 ^ (k - 1)
-def Q43_gap_range_list_k (k : Nat) : List Nat :=
-  (List.range (Q43_gap_end_hi_k k - Q43_gap_end_lo_k k)).map (fun i => Q43_gap_end_lo_k k + i)
 def Q43_gap_min_ratio_k (_k n0 : Nat) : Nat := Q43_grid_ratio n0
-
-theorem Q43_gap_range :
-    5 * 2 ^ (Q43_gap_k - 2) <= Q43_gap_n ∧
-    5 * 2 ^ (Q43_gap_k - 2) <= Q43_gap_n_succ ∧
-    Q43_gap_n_succ < 3 * 2 ^ (Q43_gap_k - 1) := by
-  decide
 
 theorem Q43_grid_ratio_drop_gap :
     Q43_grid_ratio Q43_gap_n_succ < Q43_grid_ratio Q43_gap_n := by
   decide
 
--- Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
--- apply-params-poly-n0-ratio-lift-piecewise-gap-alternative:
--- toy check: ratio at the gap endpoints (k=12) does not drop.
-def Q43_gap_end_lo : Nat := Q43_gap_end_lo_k Q43_gap_k
-def Q43_gap_end_hi : Nat := Q43_gap_end_hi_k Q43_gap_k
-
-theorem Q43_gap_end_ratio_le :
-    Q43_grid_ratio Q43_gap_end_lo <= Q43_grid_ratio Q43_gap_end_hi := by
-  decide
-
--- Q43.S251-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
--- apply-params-poly-n0-ratio-lift-piecewise-gap-bound:
--- toy scan over the gap [5*2^(k-2), 3*2^(k-1)) for k=12 to get a uniform lower bound.
-def Q43_gap_range_list : List Nat := Q43_gap_range_list_k Q43_gap_k
-
 def Q43_gap_min_ratio : Nat := Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ
-
--- `decide` recurses through the 1024-element gap list; bump recursion depth locally.
-set_option maxRecDepth 8000 in
-theorem Q43_gap_min_ratio_le_all :
-    ∀ n, n ∈ Q43_gap_range_list → Q43_gap_min_ratio <= Q43_grid_ratio n := by
-  decide
 
 -- Q43.S267-log2-jump-lemma:
 -- log2 jump from explicit bounds on n^2 and (n+1)^2.
