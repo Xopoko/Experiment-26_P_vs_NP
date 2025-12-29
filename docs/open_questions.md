@@ -11,19 +11,19 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q39 (Tseitin(Grid): depth gap for polynomial size in bounded-depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S133-globalfixedpair-fixedorientation-contiguous-shift-alt46
-  - `NextStepID:` Q39.S134-globalfixedpair-fixedorientation-contiguous-shift-alt47
+  - `LastStepID:` Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48
+  - `NextStepID:` Q39.S136-globalfixedpair-fixedorientation-contiguous-shift-alt49
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Communication/rank (rank-2 witness).
   - `Artifact:` Counterexample (fixed orientation).
-  - `Update:` toy-counterexample for $k=2$: another cyclic alt-shift (alt46)
+  - `Update:` toy-counterexample for $k=2$: another cyclic alt-shift (alt48)
     with a global fixed-pair and fixed orientation still gives two non-zero different projections, rank 2.
     See `formal/WIP/Work.lean`.
-    (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt46_vec1/vec2).
-  - `Use:` the next test is the next alt-shift (alt47) for contiguous blocks.
+    (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt48_vec1/vec2).
+  - `Use:` the next test is the next alt-shift (alt49) for contiguous blocks.
   - `PublicSurface:` `formal/WIP/Work.lean`
-    (Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt46).
+    (Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt48).
   - `File:` `formal/WIP/Work.lean`. `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? yes (toy-rank, combinatorics).
@@ -37,22 +37,26 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S263-gap-drop-k23-k25
-  - `NextStepID:` Q43.S264-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bound-generalize-allk
+  - `LastStepID:` Q43.S264
+  - `NextStepID:` Q43.S265
   - `LeanTarget:` formal/WIP/Work.lean
+  - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
+  - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
+    then derive a general gap-drop lemma from the jump.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Work.lean`
-    (Q43_grid_ratio_drop_gap_k23, Q43_grid_ratio_drop_gap_k24, Q43_grid_ratio_drop_gap_k25)
+    (Q43_grid_ratio_drop_gap_k23, Q43_grid_ratio_drop_gap_k24, Q43_grid_ratio_drop_gap_k25);
+    `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Equivalence (levels <-> depth).
-  - `Artifact:` Counterexample.
-  - `Update:` counterexamples in the gap for $k=23,24,25$: ratio drops at
-    $n=11863283\\to11863284$, $23726566\\to23726567$, $47453132\\to47453133$
-    inside $[5\\cdot 2^{k-2}, 3\\cdot 2^{k-1})$.
-    See `formal/WIP/Work.lean` (Q43_grid_ratio_drop_gap_k23/k24/k25).
-  - `Use:` the next step is a general (without brute force) lower limit for all $k$,
-    then lift the threshold from $n_0$ in pieces.
-  - `BarrierCheck:` A) Relativization: yes (arithmetic + floor log2). B) Natural proofs: N/A. C) Algebrization: N/A.
+  - `Lens:` Invariant (log2 jump points).
+  - `Artifact:` Toy.
+  - `Update:` toy computation shows the gap-drop points are exactly
+    `n_k = floor(sqrt(2^(2k+1)-1))` so that `log2(n_k^2)=2k` and `log2((n_k+1)^2)=2k+1`,
+    and the ratio drops at `n_k->n_k+1` for all `k=12..25`.
+    See `scripts/toy_q43_gap_sqrt2.py`.
+  - `Use:` formalize the log2-jump lemma in Lean and lift from samples to all `k`.
+  - `BarrierCheck:` A) Relativization check: yes (arithmetic + floor log2).
+    B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
   Details (context and audit parameter): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 

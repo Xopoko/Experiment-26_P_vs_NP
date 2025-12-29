@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S263-gap-drop-k23-k25
-- `Do-not-repeat (next 2 runs):` Q43.S263-gap-drop-k23-k25, Q43.S262-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k22
+- `LastStepID:` Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48
+- `Do-not-repeat (next 2 runs):` Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48, Q43.S264
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
-Q43: drop in ratio in gap persists at k=23..25; next is the all-k bound and lift in pieces.
-Q39: alt46shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt47shift.
+Q43: gap-drop points match log2 jump at n_k=floor(sqrt(2^(2k+1)-1)); next is a Lean lemma to lift all k.
+Q39: alt48shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt49shift.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q39: alt46shift for contiguous blocks with fixedorientation still gives rank 2; 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence->Communication/Rank->Equivalence->Communication/Rank->Equivalence
+Latest:Communication/Rank->Invariant->Communication/Rank->Equivalence->Communication/Rank
