@@ -39,27 +39,26 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S274-gap-drop-from-jump
-  - `NextStepID:` Q43.S275-gap-drop-nk-k26-k30
+  - `LastStepID:` Q43.S275-gap-drop-nk-k26-k30
+  - `NextStepID:` Q43.S276-gap-drop-nk-uniform-kge12
   - `LeanTarget:` formal/WIP/Work.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
     then derive a general gap-drop lemma from the jump.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Work.lean`
-    (Q43_grid_ratio_drop_gap_k23, Q43_grid_ratio_drop_gap_k24, Q43_grid_ratio_drop_gap_k25,
+    (Q43_grid_ratio_drop_gap_k23..Q43_grid_ratio_drop_gap_k30,
      Q43_gap_min_ratio_le_all, Q43_gap_min_ratio_le_all_k12,
-     Q43_nk, Q43_log2_jump_nk, Q43_nk_eq_gap_n12..Q43_nk_eq_gap_n25, Q43_gap_ks,
+     Q43_nk, Q43_log2_jump_nk, Q43_nk_eq_gap_n12..Q43_nk_eq_gap_n30, Q43_gap_ks,
      Q43_grid_ratio_drop_nk_of_mem, Q43_floorSqrt_eq_of_sq_bounds);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (canonical jump point `n_k`).
+  - `Lens:` Compression/canonization (explicit bridge at `n_k`).
   - `Artifact:` Proof.
-  - `Update:` proved that the existing gap-drop counterexamples (k=12..25) occur exactly at the
-    canonical log2-jump points `n_k := floorSqrt(2^(2k+1)-1)`:
-    added `Q43_floorSqrt_eq_of_sq_bounds`, `Q43_nk_eq_gap_n12..Q43_nk_eq_gap_n25`,
-    and `Q43_grid_ratio_drop_nk_of_mem` (k membership list `Q43_gap_ks`).
-  - `Use:` extend the `n_k`-linked gap-drop lemma to k=26..30 (match the toy oracle range), or prove a uniform k≥12 statement.
+  - `Update:` extended the `n_k`-linked gap-drop bridge to k=26..30
+    (added `Q43_grid_ratio_drop_gap_k26..Q43_grid_ratio_drop_gap_k30`,
+     `Q43_nk_eq_gap_n26..Q43_nk_eq_gap_n30`, and expanded `Q43_gap_ks`).
+  - `Use:` replace the k-list bridge with a uniform lemma for all k≥12 (no hardcoded constants).
   - `BarrierCheck:` A) Relativization check: yes (Nat floor-sqrt + log2 bounds).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

@@ -2474,6 +2474,78 @@ theorem Q43_grid_ratio_drop_gap_k25 :
     Q43_grid_ratio Q43_gap_n25_succ < Q43_grid_ratio Q43_gap_n25 := by
   decide
 
+-- Q43.S275-gap-drop-nk-k26-k30:
+-- extend gap-drop counterexamples inside the gap for k=26..30.
+def Q43_gap_k26 : Nat := 26
+def Q43_gap_n26 : Nat := 94906265
+def Q43_gap_n26_succ : Nat := 94906266
+
+theorem Q43_gap_range_k26 :
+    Q43_gap_end_lo_k Q43_gap_k26 <= Q43_gap_n26 ∧
+    Q43_gap_end_lo_k Q43_gap_k26 <= Q43_gap_n26_succ ∧
+    Q43_gap_n26_succ < Q43_gap_end_hi_k Q43_gap_k26 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k26 :
+    Q43_grid_ratio Q43_gap_n26_succ < Q43_grid_ratio Q43_gap_n26 := by
+  decide
+
+def Q43_gap_k27 : Nat := 27
+def Q43_gap_n27 : Nat := 189812531
+def Q43_gap_n27_succ : Nat := 189812532
+
+theorem Q43_gap_range_k27 :
+    Q43_gap_end_lo_k Q43_gap_k27 <= Q43_gap_n27 ∧
+    Q43_gap_end_lo_k Q43_gap_k27 <= Q43_gap_n27_succ ∧
+    Q43_gap_n27_succ < Q43_gap_end_hi_k Q43_gap_k27 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k27 :
+    Q43_grid_ratio Q43_gap_n27_succ < Q43_grid_ratio Q43_gap_n27 := by
+  decide
+
+def Q43_gap_k28 : Nat := 28
+def Q43_gap_n28 : Nat := 379625062
+def Q43_gap_n28_succ : Nat := 379625063
+
+theorem Q43_gap_range_k28 :
+    Q43_gap_end_lo_k Q43_gap_k28 <= Q43_gap_n28 ∧
+    Q43_gap_end_lo_k Q43_gap_k28 <= Q43_gap_n28_succ ∧
+    Q43_gap_n28_succ < Q43_gap_end_hi_k Q43_gap_k28 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k28 :
+    Q43_grid_ratio Q43_gap_n28_succ < Q43_grid_ratio Q43_gap_n28 := by
+  decide
+
+def Q43_gap_k29 : Nat := 29
+def Q43_gap_n29 : Nat := 759250124
+def Q43_gap_n29_succ : Nat := 759250125
+
+theorem Q43_gap_range_k29 :
+    Q43_gap_end_lo_k Q43_gap_k29 <= Q43_gap_n29 ∧
+    Q43_gap_end_lo_k Q43_gap_k29 <= Q43_gap_n29_succ ∧
+    Q43_gap_n29_succ < Q43_gap_end_hi_k Q43_gap_k29 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k29 :
+    Q43_grid_ratio Q43_gap_n29_succ < Q43_grid_ratio Q43_gap_n29 := by
+  decide
+
+def Q43_gap_k30 : Nat := 30
+def Q43_gap_n30 : Nat := 1518500249
+def Q43_gap_n30_succ : Nat := 1518500250
+
+theorem Q43_gap_range_k30 :
+    Q43_gap_end_lo_k Q43_gap_k30 <= Q43_gap_n30 ∧
+    Q43_gap_end_lo_k Q43_gap_k30 <= Q43_gap_n30_succ ∧
+    Q43_gap_n30_succ < Q43_gap_end_hi_k Q43_gap_k30 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k30 :
+    Q43_grid_ratio Q43_gap_n30_succ < Q43_grid_ratio Q43_gap_n30 := by
+  decide
+
 -- Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
 -- apply-params-poly-n0-ratio-lift-piecewise-gap-alternative:
 -- toy check: ratio at the gap endpoints (k=12) does not drop.
@@ -2871,7 +2943,32 @@ theorem Q43_nk_eq_gap_n25 : Q43_nk 25 = Q43_gap_n25 := by
   refine
     Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 25 + 1) - 1) (m:=Q43_gap_n25) (by decide) (by decide)
 
-def Q43_gap_ks : List Nat := [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+theorem Q43_nk_eq_gap_n26 : Q43_nk 26 = Q43_gap_n26 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 26 + 1) - 1) (m:=Q43_gap_n26) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n27 : Q43_nk 27 = Q43_gap_n27 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 27 + 1) - 1) (m:=Q43_gap_n27) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n28 : Q43_nk 28 = Q43_gap_n28 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 28 + 1) - 1) (m:=Q43_gap_n28) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n29 : Q43_nk 29 = Q43_gap_n29 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 29 + 1) - 1) (m:=Q43_gap_n29) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n30 : Q43_nk 30 = Q43_gap_n30 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 30 + 1) - 1) (m:=Q43_gap_n30) (by decide) (by decide)
+
+def Q43_gap_ks : List Nat := [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
 
 theorem Q43_grid_ratio_drop_nk_of_mem {k : Nat} (hk : k ∈ Q43_gap_ks) :
     Q43_grid_ratio (Q43_nk k + 1) < Q43_grid_ratio (Q43_nk k) := by
@@ -2915,8 +3012,23 @@ theorem Q43_grid_ratio_drop_nk_of_mem {k : Nat} (hk : k ∈ Q43_gap_ks) :
   rcases hk with rfl | hk
   ·
     simpa [Q43_nk_eq_gap_n24, Q43_gap_n24, Q43_gap_n24_succ] using Q43_grid_ratio_drop_gap_k24
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n25, Q43_gap_n25, Q43_gap_n25_succ] using Q43_grid_ratio_drop_gap_k25
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n26, Q43_gap_n26, Q43_gap_n26_succ] using Q43_grid_ratio_drop_gap_k26
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n27, Q43_gap_n27, Q43_gap_n27_succ] using Q43_grid_ratio_drop_gap_k27
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n28, Q43_gap_n28, Q43_gap_n28_succ] using Q43_grid_ratio_drop_gap_k28
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n29, Q43_gap_n29, Q43_gap_n29_succ] using Q43_grid_ratio_drop_gap_k29
   cases hk
-  simpa [Q43_nk_eq_gap_n25, Q43_gap_n25, Q43_gap_n25_succ] using Q43_grid_ratio_drop_gap_k25
+  simpa [Q43_nk_eq_gap_n30, Q43_gap_n30, Q43_gap_n30_succ] using Q43_grid_ratio_drop_gap_k30
 
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
