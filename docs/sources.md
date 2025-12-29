@@ -7,6 +7,8 @@
 - S. Arora, B. Barak, *Computational Complexity: A Modern Approach* (draft PDF): ../resources/downloads/arora_barak.pdf
 - A. Rao (2022), *Lecture 5: Hierarchy Theorems (CSEP 531)* (PDF):
   ../resources/downloads/uw_hierarchy_2022_lecture5.pdf
+- Python Software Foundation, *Built-in Types — Python 3 documentation* (int.bit_length):
+  https://docs.python.org/3/library/stdtypes.html#int.bit_length
 
 **Reviews (status and context)**
 - L. Fortnow (2021), *Fifty Years of P Versus NP and the Possibility of the Impossible* (PDF): ../resources/downloads/fortnow_pvnp50_2021.pdf

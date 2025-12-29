@@ -37,8 +37,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S265-gap-drop-k26-k30
-  - `NextStepID:` Q43.S266-log2-jump-lemma
+  - `LastStepID:` Q43.S266-bitlength-log2-doc
+  - `NextStepID:` Q43.S267-log2-jump-lemma
   - `LeanTarget:` formal/WIP/Work.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
@@ -48,12 +48,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     (Q43_grid_ratio_drop_gap_k23, Q43_grid_ratio_drop_gap_k24, Q43_grid_ratio_drop_gap_k25);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (log2 jump points).
-  - `Artifact:` Toy.
-  - `Update:` toy computation extends the gap-drop alignment to `k=26..30`:
-    `n_k = floor(sqrt(2^(2k+1)-1))` gives `log2(n_k^2)=2k`, `log2((n_k+1)^2)=2k+1`,
-    and the ratio drops at `n_k->n_k+1` for all `k=12..30`.
-    See `scripts/toy_q43_gap_sqrt2.py`.
+  - `Lens:` Equivalence (bit_length vs floor log2).
+  - `Artifact:` Exact citation.
+  - `Update:` exact citation for the integer log2 convention used in the toy script:
+    Python docs state that for nonzero `x`, `x.bit_length()` is the unique `k`
+    with `2**(k-1) <= abs(x) < 2**k`, hence `floor(log2 x)=k-1` for `x>0`.
+    Source: https://docs.python.org/3/library/stdtypes.html#int.bit_length
   - `Use:` formalize the log2-jump lemma in Lean and lift from samples to all `k`.
   - `BarrierCheck:` A) Relativization check: yes (arithmetic + floor log2).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
