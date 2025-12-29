@@ -2328,6 +2328,52 @@ theorem Q43_grid_ratio_drop_gap_k22 :
     Q43_grid_ratio Q43_gap_n22_succ < Q43_grid_ratio Q43_gap_n22 := by
   decide
 
+-- Q43.S263-gap-drop-k23-k25:
+-- counterexample inside the gap for k=23.
+def Q43_gap_k23 : Nat := 23
+def Q43_gap_n23 : Nat := 11863283
+def Q43_gap_n23_succ : Nat := 11863284
+
+theorem Q43_gap_range_k23 :
+    Q43_gap_end_lo_k Q43_gap_k23 <= Q43_gap_n23 ∧
+    Q43_gap_end_lo_k Q43_gap_k23 <= Q43_gap_n23_succ ∧
+    Q43_gap_n23_succ < Q43_gap_end_hi_k Q43_gap_k23 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k23 :
+    Q43_grid_ratio Q43_gap_n23_succ < Q43_grid_ratio Q43_gap_n23 := by
+  decide
+
+-- counterexample inside the gap for k=24.
+def Q43_gap_k24 : Nat := 24
+def Q43_gap_n24 : Nat := 23726566
+def Q43_gap_n24_succ : Nat := 23726567
+
+theorem Q43_gap_range_k24 :
+    Q43_gap_end_lo_k Q43_gap_k24 <= Q43_gap_n24 ∧
+    Q43_gap_end_lo_k Q43_gap_k24 <= Q43_gap_n24_succ ∧
+    Q43_gap_n24_succ < Q43_gap_end_hi_k Q43_gap_k24 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k24 :
+    Q43_grid_ratio Q43_gap_n24_succ < Q43_grid_ratio Q43_gap_n24 := by
+  decide
+
+-- counterexample inside the gap for k=25.
+def Q43_gap_k25 : Nat := 25
+def Q43_gap_n25 : Nat := 47453132
+def Q43_gap_n25_succ : Nat := 47453133
+
+theorem Q43_gap_range_k25 :
+    Q43_gap_end_lo_k Q43_gap_k25 <= Q43_gap_n25 ∧
+    Q43_gap_end_lo_k Q43_gap_k25 <= Q43_gap_n25_succ ∧
+    Q43_gap_n25_succ < Q43_gap_end_hi_k Q43_gap_k25 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k25 :
+    Q43_grid_ratio Q43_gap_n25_succ < Q43_grid_ratio Q43_gap_n25 := by
+  decide
+
 -- Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
 -- apply-params-poly-n0-ratio-lift-piecewise-gap-alternative:
 -- toy check: ratio at the gap endpoints (k=12) does not drop.

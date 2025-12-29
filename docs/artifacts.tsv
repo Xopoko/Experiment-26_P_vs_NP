@@ -197,3 +197,4 @@ Q43.S246-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criteri
 Q39.S116-globalfixedpair-fixedorientation-contiguous-shift-alt29	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt29-shift still give rank 2
 Q43.S247-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-apply	Proof	formal/WIP/Work.lean	PENDING	apply plateau to ratio monotonicity on sub-interval
 Q39.S117-globalfixedpair-fixedorientation-contiguous-shift-alt30	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt30-shift still give rank 2
+Q43.S263-gap-drop-k23-k25	Counterexample	formal/WIP/Work.lean	PENDING	gap drops at k=23..25 inside [5*2^(k-2), 3*2^(k-1))
