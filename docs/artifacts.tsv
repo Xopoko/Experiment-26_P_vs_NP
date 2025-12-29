@@ -201,3 +201,4 @@ Q43.S263-gap-drop-k23-k25	Counterexample	formal/WIP/Work.lean	PENDING	gap drops 
 Q39.S134-globalfixedpair-fixedorientation-contiguous-shift-alt47	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt47-shift still give rank 2
 Q43.S264	Toy	formal/WIP/Work.lean	PENDING	log2 jump at n_k=floor(sqrt(2^(2k+1)-1)) matches gap drop for k=12..25 (script)
 Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt48-shift still give rank 2
+Q43.S265-gap-drop-k26-k30	Toy	formal/WIP/Work.lean	PENDING	extend gap-drop check to k=26..30 (script)

@@ -6,13 +6,13 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48
-- `Do-not-repeat (next 2 runs):` Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48, Q43.S264
+- `LastStepID:` Q43.S265-gap-drop-k26-k30
+- `Do-not-repeat (next 2 runs):` Q43.S265-gap-drop-k26-k30, Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
-Q43: gap-drop points match log2 jump at n_k=floor(sqrt(2^(2k+1)-1)); next is a Lean lemma to lift all k.
+Q43: gap-drop points match log2 jump at n_k=floor(sqrt(2^(2k+1)-1)) through k=30; next is a Lean lemma to lift all k.
 Q39: alt48shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt49shift.
 
 ## What has already been done (do not repeat)
@@ -41,4 +41,4 @@ Q39: alt48shift for contiguous blocks with fixedorientation still gives rank 2; 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Communication/Rank->Invariant->Communication/Rank->Equivalence->Communication/Rank
+Latest:Invariant->Communication/Rank->Invariant->Communication/Rank->Equivalence
