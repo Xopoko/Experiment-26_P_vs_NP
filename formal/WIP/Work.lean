@@ -2512,6 +2512,23 @@ theorem Q43_log2_grid_size_jump {n k : Nat} (hn : 0 < n)
   refine ⟨Q43_log2_grid_size_eq_of_bounds (n:=n) (k:=k) hn hlow hhigh, ?_⟩
   exact Q43_log2_grid_size_eq_succ_of_bounds (n:=n) (k:=k) hlow' hhigh'
 
+-- Q43.S269-define-floor-sqrt-lean:
+-- floor-sqrt defined via the minimal m with n < (m+1)^2.
+theorem Q43_exists_sq_upper (n : Nat) : ∃ m, n < (m + 1) ^ 2 := by
+  refine ⟨n, ?_⟩
+  have hlt : n < n + 1 := Nat.lt_succ_self n
+  have hpos : 1 <= n + 1 := Nat.succ_le_succ (Nat.zero_le n)
+  have hmul : n + 1 <= (n + 1) * (n + 1) := by
+    simpa [Nat.mul_one] using (Nat.mul_le_mul_left (n + 1) hpos)
+  have hlt' : n < (n + 1) * (n + 1) := Nat.lt_of_lt_of_le hlt hmul
+  simpa [Nat.pow_two] using hlt'
+
+def Q43_floorSqrt (n : Nat) : Nat :=
+  Nat.find (Q43_exists_sq_upper n)
+
+theorem Q43_floorSqrt_upper (n : Nat) : n < (Q43_floorSqrt n + 1) ^ 2 := by
+  simpa [Q43_floorSqrt] using (Nat.find_spec (Q43_exists_sq_upper n))
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

@@ -37,8 +37,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S268-nk-sqrt-bounds
-  - `NextStepID:` Q43.S269-define-floor-sqrt-lean
+  - `LastStepID:` Q43.S269-define-floor-sqrt-lean
+  - `NextStepID:` Q43.S270-floor-sqrt-lower-bound
   - `LeanTarget:` formal/WIP/Work.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
@@ -48,12 +48,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     (Q43_grid_ratio_drop_gap_k23, Q43_grid_ratio_drop_gap_k24, Q43_grid_ratio_drop_gap_k25);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Equivalence (floor sqrt vs bounds).
-  - `Artifact:` Exact citation.
-  - `Update:` exact citation for integer sqrt bounds used by the toy script:
-    Python docs define `math.isqrt(n)` as the floor of sqrt `n`, i.e., the greatest
-    `a` such that `a^2 <= n`. Source: https://docs.python.org/3/library/math.html#math.isqrt
-  - `Use:` define a floor-sqrt in Lean and use the bound to connect `n_k` with the log2 jump lemma.
+  - `Lens:` Invariant (log2 jump points).
+  - `Artifact:` Proof.
+  - `Update:` defined a floor-sqrt function via `Nat.find` with the upper-bound
+    lemma `Q43_floorSqrt_upper : n < (floorSqrt n + 1)^2`.
+    See `Q43_exists_sq_upper`, `Q43_floorSqrt`, and `Q43_floorSqrt_upper` in `formal/WIP/Work.lean`.
+  - `Use:` prove the lower bound `(floorSqrt n)^2 <= n` to complete the isqrt bounds.
   - `BarrierCheck:` A) Relativization check: yes (arithmetic + floor log2).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
