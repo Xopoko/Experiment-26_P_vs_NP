@@ -1,2 +1,3 @@
 StepID	Type	LeanTarget	Commit	Notes
 Q39.S142-toy-alt54-rank2-oracle	Toy	scripts/toy_q39_rank2.py	2b80d5e39ed99b04f1729284bc4d49b671e776b5	alt54 contiguous shift rank-2 oracle (shifted witness from alt53)
+Q43.S273-log2-jump-nk	Proof	formal/WIP/Work.lean	b675d97b29e44016134a57c7f822dad91557c42c	log2 jump at n_k^2 via floor-sqrt bounds (k>=1)

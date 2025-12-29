@@ -2591,6 +2591,205 @@ theorem Q43_floorSqrt_bounds (n : Nat) :
     (Q43_floorSqrt n) ^ 2 <= n ∧ n < (Q43_floorSqrt n + 1) ^ 2 := by
   exact ⟨Q43_floorSqrt_lower n, Q43_floorSqrt_upper n⟩
 
+-- Q43.S273-log2-jump-nk:
+-- define n_k via floor sqrt and show the log2 jump at n_k^2 (k>=1).
+theorem Q43_le_floorSqrt_of_sq_le {n m : Nat} (h : m ^ 2 <= n) :
+    m <= Q43_floorSqrt n := by
+  by_cases hle : m <= Q43_floorSqrt n
+  · exact hle
+  ·
+    have hlt : Q43_floorSqrt n < m := Nat.lt_of_not_ge hle
+    have hle' : Q43_floorSqrt n + 1 <= m := (Nat.succ_le_iff).2 hlt
+    have hpow : (Q43_floorSqrt n + 1) ^ 2 <= m ^ 2 := Q43_pow_le_pow_of_le hle'
+    have hpow' : (Q43_floorSqrt n + 1) ^ 2 <= n := Nat.le_trans hpow h
+    have hupper : n < (Q43_floorSqrt n + 1) ^ 2 := Q43_floorSqrt_upper n
+    have hcontr : (Q43_floorSqrt n + 1) ^ 2 < (Q43_floorSqrt n + 1) ^ 2 :=
+      Nat.lt_of_le_of_lt hpow' hupper
+    exact (False.elim (Nat.lt_irrefl _ hcontr))
+
+theorem Q43_floorSqrt_lt_of_lt_sq {n b : Nat} (h : n < b ^ 2) :
+    Q43_floorSqrt n < b := by
+  by_cases hle : b <= Q43_floorSqrt n
+  ·
+    have hpow : b ^ 2 <= (Q43_floorSqrt n) ^ 2 := Q43_pow_le_pow_of_le hle
+    have hlow : (Q43_floorSqrt n) ^ 2 <= n := Q43_floorSqrt_lower n
+    have hle' : b ^ 2 <= n := Nat.le_trans hpow hlow
+    have hcontr : b ^ 2 < b ^ 2 := Nat.lt_of_le_of_lt hle' h
+    exact (False.elim (Nat.lt_irrefl _ hcontr))
+  ·
+    exact Nat.lt_of_not_ge hle
+
+theorem Q43_pow_le_pow_succ_sub_one (k : Nat) :
+    2 ^ (2 * k) <= 2 ^ (2 * k + 1) - 1 := by
+  have hpos : 1 <= 2 ^ (2 * k) := by
+    have hpos' : 0 < 2 ^ (2 * k) := Nat.pow_pos (by decide)
+    exact (Nat.succ_le_iff).2 hpos'
+  have hle_add : 2 ^ (2 * k) + 1 <= 2 ^ (2 * k) + 2 ^ (2 * k) :=
+    Nat.add_le_add_left hpos _
+  have hle_mul : 2 ^ (2 * k) + 1 <= 2 * 2 ^ (2 * k) := by
+    simpa [Nat.two_mul, Nat.add_comm, Nat.add_left_comm, Nat.add_assoc] using hle_add
+  have hpow_succ : 2 * 2 ^ (2 * k) = 2 ^ (2 * k + 1) := by
+    calc
+      2 * 2 ^ (2 * k) = 2 ^ (2 * k) * 2 := by
+        simp [Nat.mul_comm]
+      _ = 2 ^ (2 * k + 1) := by
+        simpa using (Nat.pow_succ 2 (2 * k)).symm
+  have hle_succ : 2 ^ (2 * k) + 1 <= 2 ^ (2 * k + 1) := by
+    simpa [hpow_succ] using hle_mul
+  have hlt : 2 ^ (2 * k) < 2 ^ (2 * k + 1) := by
+    have hstep : 2 ^ (2 * k) < 2 ^ (2 * k) + 1 := Nat.lt_succ_self _
+    exact Nat.lt_of_lt_of_le hstep hle_succ
+  exact Nat.le_sub_one_of_lt hlt
+
+def Q43_nk (k : Nat) : Nat := Q43_floorSqrt (2 ^ (2 * k + 1) - 1)
+
+theorem Q43_nk_sq_le (k : Nat) :
+    (Q43_nk k) ^ 2 <= 2 ^ (2 * k + 1) - 1 := by
+  simpa [Q43_nk] using (Q43_floorSqrt_lower (2 ^ (2 * k + 1) - 1))
+
+theorem Q43_nk_sq_lt (k : Nat) :
+    (Q43_nk k) ^ 2 < 2 ^ (2 * k + 1) := by
+  have hle : (Q43_nk k) ^ 2 <= 2 ^ (2 * k + 1) - 1 := Q43_nk_sq_le k
+  have hpos : 1 <= 2 ^ (2 * k + 1) := by
+    have hpos' : 0 < 2 ^ (2 * k + 1) := Nat.pow_pos (by decide)
+    exact (Nat.succ_le_iff).2 hpos'
+  have hsum : 2 ^ (2 * k + 1) - 1 + 1 = 2 ^ (2 * k + 1) := Nat.sub_add_cancel hpos
+  have hlt : 2 ^ (2 * k + 1) - 1 < 2 ^ (2 * k + 1) := by
+    have h := Nat.lt_succ_self (2 ^ (2 * k + 1) - 1)
+    simpa [hsum] using h
+  exact Nat.lt_of_le_of_lt hle hlt
+
+theorem Q43_nk_ge_pow (k : Nat) : 2 ^ k <= Q43_nk k := by
+  have hpow2 : (2 ^ k) ^ 2 = 2 ^ (2 * k) := by
+    simpa [Nat.mul_comm] using (Nat.pow_mul 2 k 2).symm
+  have hle : (2 ^ k) ^ 2 <= 2 ^ (2 * k + 1) - 1 := by
+    have hle' : 2 ^ (2 * k) <= 2 ^ (2 * k + 1) - 1 :=
+      Q43_pow_le_pow_succ_sub_one k
+    simpa [hpow2] using hle'
+  exact Q43_le_floorSqrt_of_sq_le (n:=2 ^ (2 * k + 1) - 1) (m:=2 ^ k) hle
+
+theorem Q43_nk_sq_ge (k : Nat) :
+    2 ^ (2 * k) <= (Q43_nk k) ^ 2 := by
+  have hle : 2 ^ k <= Q43_nk k := Q43_nk_ge_pow k
+  have hpow : (2 ^ k) ^ 2 <= (Q43_nk k) ^ 2 := Q43_pow_le_pow_of_le hle
+  have hpow2 : 2 ^ (2 * k) = (2 ^ k) ^ 2 := by
+    simpa [Nat.mul_comm] using (Nat.pow_mul 2 k 2)
+  simpa [hpow2] using hpow
+
+theorem Q43_nk_succ_sq_ge (k : Nat) :
+    2 ^ (2 * k + 1) <= (Q43_nk k + 1) ^ 2 := by
+  have hupper : 2 ^ (2 * k + 1) - 1 < (Q43_nk k + 1) ^ 2 := by
+    simpa [Q43_nk] using (Q43_floorSqrt_upper (2 ^ (2 * k + 1) - 1))
+  have hpos : 1 <= 2 ^ (2 * k + 1) := by
+    have hpos' : 0 < 2 ^ (2 * k + 1) := Nat.pow_pos (by decide)
+    exact (Nat.succ_le_iff).2 hpos'
+  have hsum : 2 ^ (2 * k + 1) - 1 + 1 = 2 ^ (2 * k + 1) := Nat.sub_add_cancel hpos
+  have hle : 2 ^ (2 * k + 1) - 1 + 1 <= (Q43_nk k + 1) ^ 2 :=
+    (Nat.succ_le_iff).2 hupper
+  simpa [hsum] using hle
+
+theorem Q43_nk_succ_sq_lt {k : Nat} (hk : 1 <= k) :
+    (Q43_nk k + 1) ^ 2 < 2 ^ (2 * k + 2) := by
+  let t : Nat := 2 ^ (k - 1)
+  have htpos : 0 < t := by
+    simpa [t] using (Nat.pow_pos (by decide) : 0 < 2 ^ (k - 1))
+  have hk1 : k - 1 + 1 = k := Nat.sub_add_cancel hk
+  have hpowt : 2 ^ (2 * (k - 1)) = t * t := by
+    have hpow' : 2 ^ ((k - 1) * 2) = (2 ^ (k - 1)) ^ 2 := Nat.pow_mul 2 (k - 1) 2
+    simpa [t, Nat.mul_comm, Nat.pow_two] using hpow'
+  have hexp : 2 * (k - 1) + 3 = 2 * k + 1 := by
+    calc
+      2 * (k - 1) + 3 = (2 * (k - 1) + 2) + 1 := by
+        simp [Nat.add_assoc]
+      _ = 2 * ((k - 1) + 1) + 1 := by
+        simp [Nat.mul_add, Nat.add_assoc]
+      _ = 2 * k + 1 := by
+        simp [hk1]
+  have hpow8 : 2 ^ (2 * k + 1) = 8 * t * t := by
+    calc
+      2 ^ (2 * k + 1) = 2 ^ (2 * (k - 1) + 3) := by
+        simp [hexp]
+      _ = 2 ^ (2 * (k - 1)) * 2 ^ 3 := by
+        simp [Nat.pow_add]
+      _ = (t * t) * 8 := by
+        simp [hpowt]
+      _ = 8 * t * t := by
+        simp [Nat.mul_comm, Nat.mul_assoc]
+  have hpow3 : (3 * t) ^ 2 = 9 * t * t := by
+    simp [Nat.pow_two, Nat.mul_comm, Nat.mul_left_comm]
+  have hcoeff : 8 <= 9 := by decide
+  have hmul : 8 * t * t <= 9 * t * t := by
+    have hmul' : 8 * (t * t) <= 9 * (t * t) := Nat.mul_le_mul_right _ hcoeff
+    simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using hmul'
+  have hle_pow : 2 ^ (2 * k + 1) <= (3 * t) ^ 2 := by
+    calc
+      2 ^ (2 * k + 1) = 8 * t * t := hpow8
+      _ <= 9 * t * t := hmul
+      _ = (3 * t) ^ 2 := hpow3.symm
+  have hpos_pow : 1 <= 2 ^ (2 * k + 1) := by
+    have hpos' : 0 < 2 ^ (2 * k + 1) := Nat.pow_pos (by decide)
+    exact (Nat.succ_le_iff).2 hpos'
+  have hlt_pow : 2 ^ (2 * k + 1) - 1 < (3 * t) ^ 2 := by
+    have hlt : 2 ^ (2 * k + 1) - 1 < 2 ^ (2 * k + 1) := by
+      have hsum : 2 ^ (2 * k + 1) - 1 + 1 = 2 ^ (2 * k + 1) :=
+        Nat.sub_add_cancel hpos_pow
+      have h := Nat.lt_succ_self (2 ^ (2 * k + 1) - 1)
+      simpa [hsum] using h
+    exact Nat.lt_of_lt_of_le hlt hle_pow
+  have hnk_lt : Q43_nk k < 3 * t :=
+    Q43_floorSqrt_lt_of_lt_sq (n:=2 ^ (2 * k + 1) - 1) (b:=3 * t) hlt_pow
+  have hnk_succ_le : Q43_nk k + 1 <= 3 * t := (Nat.succ_le_iff).2 hnk_lt
+  have hpow_succ : (Q43_nk k + 1) ^ 2 <= (3 * t) ^ 2 :=
+    Q43_pow_le_pow_of_le hnk_succ_le
+  have hexp2 : 2 * (k - 1) + 4 = 2 * k + 2 := by
+    calc
+      2 * (k - 1) + 4 = (2 * (k - 1) + 2) + 2 := by
+        simp [Nat.add_assoc]
+      _ = 2 * ((k - 1) + 1) + 2 := by
+        simp [Nat.mul_add, Nat.add_assoc]
+      _ = 2 * k + 2 := by
+        simp [hk1]
+  have hpow16 : 2 ^ (2 * k + 2) = 16 * t * t := by
+    calc
+      2 ^ (2 * k + 2) = 2 ^ (2 * (k - 1) + 4) := by
+        simp [hexp2]
+      _ = 2 ^ (2 * (k - 1)) * 2 ^ 4 := by
+        simp [Nat.pow_add]
+      _ = (t * t) * 16 := by
+        simp [hpowt]
+      _ = 16 * t * t := by
+        simp [Nat.mul_comm, Nat.mul_assoc]
+  have hcoeff' : 9 < 16 := by decide
+  have hmul' : 9 * t * t < 16 * t * t := by
+    have htpos2 : 0 < t * t := Nat.mul_pos htpos htpos
+    have hmul'' : 9 * (t * t) < 16 * (t * t) :=
+      (Nat.mul_lt_mul_right (a0 := htpos2)).2 hcoeff'
+    simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using hmul''
+  have hlt_pow2 : (3 * t) ^ 2 < 2 ^ (2 * k + 2) := by
+    calc
+      (3 * t) ^ 2 = 9 * t * t := hpow3
+      _ < 16 * t * t := hmul'
+      _ = 2 ^ (2 * k + 2) := hpow16.symm
+  exact Nat.lt_of_le_of_lt hpow_succ hlt_pow2
+
+theorem Q43_log2_jump_nk {k : Nat} (hk : 1 <= k) :
+    Nat.log2 ((Q43_nk k) ^ 2) = 2 * k ∧
+      Nat.log2 ((Q43_nk k + 1) ^ 2) = 2 * k + 1 := by
+  have hlow : 2 ^ (2 * k) <= (Q43_nk k) ^ 2 := Q43_nk_sq_ge k
+  have hhigh : (Q43_nk k) ^ 2 < 2 ^ (2 * k + 1) := Q43_nk_sq_lt k
+  have hlow' : 2 ^ (2 * k + 1) <= (Q43_nk k + 1) ^ 2 := Q43_nk_succ_sq_ge k
+  have hhigh' : (Q43_nk k + 1) ^ 2 < 2 ^ (2 * k + 2) :=
+    Q43_nk_succ_sq_lt (k:=k) hk
+  have hnpos : 0 < Q43_nk k := by
+    have hpos : 0 < 2 ^ k := Nat.pow_pos (by decide)
+    exact Nat.lt_of_lt_of_le hpos (Q43_nk_ge_pow k)
+  have hlog := Q43_log2_grid_size_jump (n:=Q43_nk k) (k:=k) hnpos
+    (by simpa [Q43_grid_size, Nat.pow_two] using hlow)
+    (by simpa [Q43_grid_size, Nat.pow_two] using hhigh)
+    (by simpa [Q43_grid_size, Nat.pow_two] using hlow')
+    (by simpa [Q43_grid_size, Nat.pow_two] using hhigh')
+  simpa [Q43_grid_size, Nat.pow_two] using hlog
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
