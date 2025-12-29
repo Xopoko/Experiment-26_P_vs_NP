@@ -1286,6 +1286,1264 @@ theorem Q43_grid_ratio_drop_gap_k30 :
     Q43_grid_ratio Q43_gap_n30_succ < Q43_grid_ratio Q43_gap_n30 := by
   decide
 
+-- Q43.S272-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k31:
+-- counterexample inside the gap for k=31.
+def Q43_gap_k31 : Nat := 31
+def Q43_gap_n31 : Nat := 3037000499
+def Q43_gap_n31_succ : Nat := 3037000500
+
+theorem Q43_gap_range_k31 :
+    Q43_gap_end_lo_k Q43_gap_k31 <= Q43_gap_n31 ∧
+    Q43_gap_end_lo_k Q43_gap_k31 <= Q43_gap_n31_succ ∧
+    Q43_gap_n31_succ < Q43_gap_end_hi_k Q43_gap_k31 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k31 :
+    Q43_grid_ratio Q43_gap_n31_succ < Q43_grid_ratio Q43_gap_n31 := by
+  decide
+
+-- Q43.S273-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k32:
+-- counterexample inside the gap for k=32.
+def Q43_gap_k32 : Nat := 32
+def Q43_gap_n32 : Nat := 6074000999
+def Q43_gap_n32_succ : Nat := 6074001000
+
+theorem Q43_gap_range_k32 :
+    Q43_gap_end_lo_k Q43_gap_k32 <= Q43_gap_n32 ∧
+    Q43_gap_end_lo_k Q43_gap_k32 <= Q43_gap_n32_succ ∧
+    Q43_gap_n32_succ < Q43_gap_end_hi_k Q43_gap_k32 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k32 :
+    Q43_grid_ratio Q43_gap_n32_succ < Q43_grid_ratio Q43_gap_n32 := by
+  decide
+
+-- Q43.S274-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k33:
+-- counterexample inside the gap for k=33.
+def Q43_gap_k33 : Nat := 33
+def Q43_gap_n33 : Nat := 12148001999
+def Q43_gap_n33_succ : Nat := 12148002000
+
+theorem Q43_gap_range_k33 :
+    Q43_gap_end_lo_k Q43_gap_k33 <= Q43_gap_n33 ∧
+    Q43_gap_end_lo_k Q43_gap_k33 <= Q43_gap_n33_succ ∧
+    Q43_gap_n33_succ < Q43_gap_end_hi_k Q43_gap_k33 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k33 :
+    Q43_grid_ratio Q43_gap_n33_succ < Q43_grid_ratio Q43_gap_n33 := by
+  decide
+
+-- Q43.S275-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k34:
+-- counterexample inside the gap for k=34.
+def Q43_gap_k34 : Nat := 34
+def Q43_gap_n34 : Nat := 24296003999
+def Q43_gap_n34_succ : Nat := 24296004000
+
+theorem Q43_gap_range_k34 :
+    Q43_gap_end_lo_k Q43_gap_k34 <= Q43_gap_n34 ∧
+    Q43_gap_end_lo_k Q43_gap_k34 <= Q43_gap_n34_succ ∧
+    Q43_gap_n34_succ < Q43_gap_end_hi_k Q43_gap_k34 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k34 :
+    Q43_grid_ratio Q43_gap_n34_succ < Q43_grid_ratio Q43_gap_n34 := by
+  decide
+
+-- Q43.S276-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k35:
+-- counterexample inside the gap for k=35.
+def Q43_gap_k35 : Nat := 35
+def Q43_gap_n35 : Nat := 48592007999
+def Q43_gap_n35_succ : Nat := 48592008000
+
+theorem Q43_gap_range_k35 :
+    Q43_gap_end_lo_k Q43_gap_k35 <= Q43_gap_n35 ∧
+    Q43_gap_end_lo_k Q43_gap_k35 <= Q43_gap_n35_succ ∧
+    Q43_gap_n35_succ < Q43_gap_end_hi_k Q43_gap_k35 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k35 :
+    Q43_grid_ratio Q43_gap_n35_succ < Q43_grid_ratio Q43_gap_n35 := by
+  decide
+
+-- Q43.S277-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k36:
+-- counterexample inside the gap for k=36.
+def Q43_gap_k36 : Nat := 36
+def Q43_gap_n36 : Nat := 97184015999
+def Q43_gap_n36_succ : Nat := 97184016000
+
+theorem Q43_gap_range_k36 :
+    Q43_gap_end_lo_k Q43_gap_k36 <= Q43_gap_n36 ∧
+    Q43_gap_end_lo_k Q43_gap_k36 <= Q43_gap_n36_succ ∧
+    Q43_gap_n36_succ < Q43_gap_end_hi_k Q43_gap_k36 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k36 :
+    Q43_grid_ratio Q43_gap_n36_succ < Q43_grid_ratio Q43_gap_n36 := by
+  decide
+
+-- Q43.S278-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k37:
+-- counterexample inside the gap for k=37.
+def Q43_gap_k37 : Nat := 37
+def Q43_gap_n37 : Nat := 194368031998
+def Q43_gap_n37_succ : Nat := 194368031999
+
+theorem Q43_gap_range_k37 :
+    Q43_gap_end_lo_k Q43_gap_k37 <= Q43_gap_n37 ∧
+    Q43_gap_end_lo_k Q43_gap_k37 <= Q43_gap_n37_succ ∧
+    Q43_gap_n37_succ < Q43_gap_end_hi_k Q43_gap_k37 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k37 :
+    Q43_grid_ratio Q43_gap_n37_succ < Q43_grid_ratio Q43_gap_n37 := by
+  decide
+
+-- Q43.S279-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k38:
+-- counterexample inside the gap for k=38.
+def Q43_gap_k38 : Nat := 38
+def Q43_gap_n38 : Nat := 388736063996
+def Q43_gap_n38_succ : Nat := 388736063997
+
+theorem Q43_gap_range_k38 :
+    Q43_gap_end_lo_k Q43_gap_k38 <= Q43_gap_n38 ∧
+    Q43_gap_end_lo_k Q43_gap_k38 <= Q43_gap_n38_succ ∧
+    Q43_gap_n38_succ < Q43_gap_end_hi_k Q43_gap_k38 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k38 :
+    Q43_grid_ratio Q43_gap_n38_succ < Q43_grid_ratio Q43_gap_n38 := by
+  decide
+
+-- Q43.S280-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k39:
+-- counterexample inside the gap for k=39.
+def Q43_gap_k39 : Nat := 39
+def Q43_gap_n39 : Nat := 777472127993
+def Q43_gap_n39_succ : Nat := 777472127994
+
+theorem Q43_gap_range_k39 :
+    Q43_gap_end_lo_k Q43_gap_k39 <= Q43_gap_n39 ∧
+    Q43_gap_end_lo_k Q43_gap_k39 <= Q43_gap_n39_succ ∧
+    Q43_gap_n39_succ < Q43_gap_end_hi_k Q43_gap_k39 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k39 :
+    Q43_grid_ratio Q43_gap_n39_succ < Q43_grid_ratio Q43_gap_n39 := by
+  decide
+
+-- Q43.S281-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k40:
+-- counterexample inside the gap for k=40.
+def Q43_gap_k40 : Nat := 40
+def Q43_gap_n40 : Nat := 1554944255987
+def Q43_gap_n40_succ : Nat := 1554944255988
+
+theorem Q43_gap_range_k40 :
+    Q43_gap_end_lo_k Q43_gap_k40 <= Q43_gap_n40 ∧
+    Q43_gap_end_lo_k Q43_gap_k40 <= Q43_gap_n40_succ ∧
+    Q43_gap_n40_succ < Q43_gap_end_hi_k Q43_gap_k40 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k40 :
+    Q43_grid_ratio Q43_gap_n40_succ < Q43_grid_ratio Q43_gap_n40 := by
+  decide
+
+-- Q43.S282-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k41:
+-- counterexample inside the gap for k=41.
+def Q43_gap_k41 : Nat := 41
+def Q43_gap_n41 : Nat := 3109888511975
+def Q43_gap_n41_succ : Nat := 3109888511976
+
+theorem Q43_gap_range_k41 :
+    Q43_gap_end_lo_k Q43_gap_k41 <= Q43_gap_n41 ∧
+    Q43_gap_end_lo_k Q43_gap_k41 <= Q43_gap_n41_succ ∧
+    Q43_gap_n41_succ < Q43_gap_end_hi_k Q43_gap_k41 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k41 :
+    Q43_grid_ratio Q43_gap_n41_succ < Q43_grid_ratio Q43_gap_n41 := by
+  decide
+
+-- Q43.S283-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k42:
+-- counterexample inside the gap for k=42.
+def Q43_gap_k42 : Nat := 42
+def Q43_gap_n42 : Nat := 6219777023950
+def Q43_gap_n42_succ : Nat := 6219777023951
+
+theorem Q43_gap_range_k42 :
+    Q43_gap_end_lo_k Q43_gap_k42 <= Q43_gap_n42 ∧
+    Q43_gap_end_lo_k Q43_gap_k42 <= Q43_gap_n42_succ ∧
+    Q43_gap_n42_succ < Q43_gap_end_hi_k Q43_gap_k42 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k42 :
+    Q43_grid_ratio Q43_gap_n42_succ < Q43_grid_ratio Q43_gap_n42 := by
+  decide
+
+-- Q43.S284-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k43:
+-- counterexample inside the gap for k=43.
+def Q43_gap_k43 : Nat := 43
+def Q43_gap_n43 : Nat := 12439554047901
+def Q43_gap_n43_succ : Nat := 12439554047902
+
+theorem Q43_gap_range_k43 :
+    Q43_gap_end_lo_k Q43_gap_k43 <= Q43_gap_n43 ∧
+    Q43_gap_end_lo_k Q43_gap_k43 <= Q43_gap_n43_succ ∧
+    Q43_gap_n43_succ < Q43_gap_end_hi_k Q43_gap_k43 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k43 :
+    Q43_grid_ratio Q43_gap_n43_succ < Q43_grid_ratio Q43_gap_n43 := by
+  decide
+
+-- Q43.S285-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k44:
+-- counterexample inside the gap for k=44.
+def Q43_gap_k44 : Nat := 44
+def Q43_gap_n44 : Nat := 24879108095803
+def Q43_gap_n44_succ : Nat := 24879108095804
+
+theorem Q43_gap_range_k44 :
+    Q43_gap_end_lo_k Q43_gap_k44 <= Q43_gap_n44 ∧
+    Q43_gap_end_lo_k Q43_gap_k44 <= Q43_gap_n44_succ ∧
+    Q43_gap_n44_succ < Q43_gap_end_hi_k Q43_gap_k44 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k44 :
+    Q43_grid_ratio Q43_gap_n44_succ < Q43_grid_ratio Q43_gap_n44 := by
+  decide
+
+-- Q43.S286-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k45:
+-- counterexample inside the gap for k=45.
+def Q43_gap_k45 : Nat := 45
+def Q43_gap_n45 : Nat := 49758216191607
+def Q43_gap_n45_succ : Nat := 49758216191608
+
+theorem Q43_gap_range_k45 :
+    Q43_gap_end_lo_k Q43_gap_k45 <= Q43_gap_n45 ∧
+    Q43_gap_end_lo_k Q43_gap_k45 <= Q43_gap_n45_succ ∧
+    Q43_gap_n45_succ < Q43_gap_end_hi_k Q43_gap_k45 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k45 :
+    Q43_grid_ratio Q43_gap_n45_succ < Q43_grid_ratio Q43_gap_n45 := by
+  decide
+
+-- Q43.S287-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k46:
+-- counterexample inside the gap for k=46.
+def Q43_gap_k46 : Nat := 46
+def Q43_gap_n46 : Nat := 99516432383215
+def Q43_gap_n46_succ : Nat := 99516432383216
+
+theorem Q43_gap_range_k46 :
+    Q43_gap_end_lo_k Q43_gap_k46 <= Q43_gap_n46 ∧
+    Q43_gap_end_lo_k Q43_gap_k46 <= Q43_gap_n46_succ ∧
+    Q43_gap_n46_succ < Q43_gap_end_hi_k Q43_gap_k46 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k46 :
+    Q43_grid_ratio Q43_gap_n46_succ < Q43_grid_ratio Q43_gap_n46 := by
+  decide
+
+-- Q43.S288-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k47:
+-- counterexample inside the gap for k=47.
+def Q43_gap_k47 : Nat := 47
+def Q43_gap_n47 : Nat := 199032864766430
+def Q43_gap_n47_succ : Nat := 199032864766431
+
+theorem Q43_gap_range_k47 :
+    Q43_gap_end_lo_k Q43_gap_k47 <= Q43_gap_n47 ∧
+    Q43_gap_end_lo_k Q43_gap_k47 <= Q43_gap_n47_succ ∧
+    Q43_gap_n47_succ < Q43_gap_end_hi_k Q43_gap_k47 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k47 :
+    Q43_grid_ratio Q43_gap_n47_succ < Q43_grid_ratio Q43_gap_n47 := by
+  decide
+
+-- Q43.S289-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k48:
+-- counterexample inside the gap for k=48.
+def Q43_gap_k48 : Nat := 48
+def Q43_gap_n48 : Nat := 398065729532860
+def Q43_gap_n48_succ : Nat := 398065729532861
+
+theorem Q43_gap_range_k48 :
+    Q43_gap_end_lo_k Q43_gap_k48 <= Q43_gap_n48 ∧
+    Q43_gap_end_lo_k Q43_gap_k48 <= Q43_gap_n48_succ ∧
+    Q43_gap_n48_succ < Q43_gap_end_hi_k Q43_gap_k48 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k48 :
+    Q43_grid_ratio Q43_gap_n48_succ < Q43_grid_ratio Q43_gap_n48 := by
+  decide
+
+-- Q43.S290-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k49:
+-- counterexample inside the gap for k=49.
+def Q43_gap_k49 : Nat := 49
+def Q43_gap_n49 : Nat := 796131459065721
+def Q43_gap_n49_succ : Nat := 796131459065722
+
+theorem Q43_gap_range_k49 :
+    Q43_gap_end_lo_k Q43_gap_k49 <= Q43_gap_n49 ∧
+    Q43_gap_end_lo_k Q43_gap_k49 <= Q43_gap_n49_succ ∧
+    Q43_gap_n49_succ < Q43_gap_end_hi_k Q43_gap_k49 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k49 :
+    Q43_grid_ratio Q43_gap_n49_succ < Q43_grid_ratio Q43_gap_n49 := by
+  decide
+
+-- Q43.S291-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k50:
+-- counterexample inside the gap for k=50.
+def Q43_gap_k50 : Nat := 50
+def Q43_gap_n50 : Nat := 1592262918131443
+def Q43_gap_n50_succ : Nat := 1592262918131444
+
+theorem Q43_gap_range_k50 :
+    Q43_gap_end_lo_k Q43_gap_k50 <= Q43_gap_n50 ∧
+    Q43_gap_end_lo_k Q43_gap_k50 <= Q43_gap_n50_succ ∧
+    Q43_gap_n50_succ < Q43_gap_end_hi_k Q43_gap_k50 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k50 :
+    Q43_grid_ratio Q43_gap_n50_succ < Q43_grid_ratio Q43_gap_n50 := by
+  decide
+
+-- Q43.S292-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k51:
+-- counterexample inside the gap for k=51.
+def Q43_gap_k51 : Nat := 51
+def Q43_gap_n51 : Nat := 3184525836262886
+def Q43_gap_n51_succ : Nat := 3184525836262887
+
+theorem Q43_gap_range_k51 :
+    Q43_gap_end_lo_k Q43_gap_k51 <= Q43_gap_n51 ∧
+    Q43_gap_end_lo_k Q43_gap_k51 <= Q43_gap_n51_succ ∧
+    Q43_gap_n51_succ < Q43_gap_end_hi_k Q43_gap_k51 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k51 :
+    Q43_grid_ratio Q43_gap_n51_succ < Q43_grid_ratio Q43_gap_n51 := by
+  decide
+
+-- Q43.S293-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k52:
+-- counterexample inside the gap for k=52.
+def Q43_gap_k52 : Nat := 52
+def Q43_gap_n52 : Nat := 6369051672525772
+def Q43_gap_n52_succ : Nat := 6369051672525773
+
+theorem Q43_gap_range_k52 :
+    Q43_gap_end_lo_k Q43_gap_k52 <= Q43_gap_n52 ∧
+    Q43_gap_end_lo_k Q43_gap_k52 <= Q43_gap_n52_succ ∧
+    Q43_gap_n52_succ < Q43_gap_end_hi_k Q43_gap_k52 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k52 :
+    Q43_grid_ratio Q43_gap_n52_succ < Q43_grid_ratio Q43_gap_n52 := by
+  decide
+
+-- Q43.S294-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k53:
+-- counterexample inside the gap for k=53.
+def Q43_gap_k53 : Nat := 53
+def Q43_gap_n53 : Nat := 12738103345051545
+def Q43_gap_n53_succ : Nat := 12738103345051546
+
+theorem Q43_gap_range_k53 :
+    Q43_gap_end_lo_k Q43_gap_k53 <= Q43_gap_n53 ∧
+    Q43_gap_end_lo_k Q43_gap_k53 <= Q43_gap_n53_succ ∧
+    Q43_gap_n53_succ < Q43_gap_end_hi_k Q43_gap_k53 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k53 :
+    Q43_grid_ratio Q43_gap_n53_succ < Q43_grid_ratio Q43_gap_n53 := by
+  decide
+
+-- Q43.S295-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k54:
+-- counterexample inside the gap for k=54.
+def Q43_gap_k54 : Nat := 54
+def Q43_gap_n54 : Nat := 25476206690103090
+def Q43_gap_n54_succ : Nat := 25476206690103091
+
+theorem Q43_gap_range_k54 :
+    Q43_gap_end_lo_k Q43_gap_k54 <= Q43_gap_n54 ∧
+    Q43_gap_end_lo_k Q43_gap_k54 <= Q43_gap_n54_succ ∧
+    Q43_gap_n54_succ < Q43_gap_end_hi_k Q43_gap_k54 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k54 :
+    Q43_grid_ratio Q43_gap_n54_succ < Q43_grid_ratio Q43_gap_n54 := by
+  decide
+
+-- Q43.S296-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k55:
+-- counterexample inside the gap for k=55.
+def Q43_gap_k55 : Nat := 55
+def Q43_gap_n55 : Nat := 50952413380206180
+def Q43_gap_n55_succ : Nat := 50952413380206181
+
+theorem Q43_gap_range_k55 :
+    Q43_gap_end_lo_k Q43_gap_k55 <= Q43_gap_n55 ∧
+    Q43_gap_end_lo_k Q43_gap_k55 <= Q43_gap_n55_succ ∧
+    Q43_gap_n55_succ < Q43_gap_end_hi_k Q43_gap_k55 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k55 :
+    Q43_grid_ratio Q43_gap_n55_succ < Q43_grid_ratio Q43_gap_n55 := by
+  decide
+
+-- Q43.S297-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k56:
+-- counterexample inside the gap for k=56.
+def Q43_gap_k56 : Nat := 56
+def Q43_gap_n56 : Nat := 101904826760412361
+def Q43_gap_n56_succ : Nat := 101904826760412362
+
+theorem Q43_gap_range_k56 :
+    Q43_gap_end_lo_k Q43_gap_k56 <= Q43_gap_n56 ∧
+    Q43_gap_end_lo_k Q43_gap_k56 <= Q43_gap_n56_succ ∧
+    Q43_gap_n56_succ < Q43_gap_end_hi_k Q43_gap_k56 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k56 :
+    Q43_grid_ratio Q43_gap_n56_succ < Q43_grid_ratio Q43_gap_n56 := by
+  decide
+
+-- Q43.S298-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k57:
+-- counterexample inside the gap for k=57.
+def Q43_gap_k57 : Nat := 57
+def Q43_gap_n57 : Nat := 203809653520824722
+def Q43_gap_n57_succ : Nat := 203809653520824723
+
+theorem Q43_gap_range_k57 :
+    Q43_gap_end_lo_k Q43_gap_k57 <= Q43_gap_n57 ∧
+    Q43_gap_end_lo_k Q43_gap_k57 <= Q43_gap_n57_succ ∧
+    Q43_gap_n57_succ < Q43_gap_end_hi_k Q43_gap_k57 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k57 :
+    Q43_grid_ratio Q43_gap_n57_succ < Q43_grid_ratio Q43_gap_n57 := by
+  decide
+
+-- Q43.S299-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k58:
+-- counterexample inside the gap for k=58.
+def Q43_gap_k58 : Nat := 58
+def Q43_gap_n58 : Nat := 407619307041649444
+def Q43_gap_n58_succ : Nat := 407619307041649445
+
+theorem Q43_gap_range_k58 :
+    Q43_gap_end_lo_k Q43_gap_k58 <= Q43_gap_n58 ∧
+    Q43_gap_end_lo_k Q43_gap_k58 <= Q43_gap_n58_succ ∧
+    Q43_gap_n58_succ < Q43_gap_end_hi_k Q43_gap_k58 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k58 :
+    Q43_grid_ratio Q43_gap_n58_succ < Q43_grid_ratio Q43_gap_n58 := by
+  decide
+
+-- Q43.S300-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k59:
+-- counterexample inside the gap for k=59.
+def Q43_gap_k59 : Nat := 59
+def Q43_gap_n59 : Nat := 815238614083298888
+def Q43_gap_n59_succ : Nat := 815238614083298889
+
+theorem Q43_gap_range_k59 :
+    Q43_gap_end_lo_k Q43_gap_k59 <= Q43_gap_n59 ∧
+    Q43_gap_end_lo_k Q43_gap_k59 <= Q43_gap_n59_succ ∧
+    Q43_gap_n59_succ < Q43_gap_end_hi_k Q43_gap_k59 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k59 :
+    Q43_grid_ratio Q43_gap_n59_succ < Q43_grid_ratio Q43_gap_n59 := by
+  decide
+
+-- Q43.S301-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k60:
+-- counterexample inside the gap for k=60.
+def Q43_gap_k60 : Nat := 60
+def Q43_gap_n60 : Nat := 1630477228166597776
+def Q43_gap_n60_succ : Nat := 1630477228166597777
+
+theorem Q43_gap_range_k60 :
+    Q43_gap_end_lo_k Q43_gap_k60 <= Q43_gap_n60 ∧
+    Q43_gap_end_lo_k Q43_gap_k60 <= Q43_gap_n60_succ ∧
+    Q43_gap_n60_succ < Q43_gap_end_hi_k Q43_gap_k60 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k60 :
+    Q43_grid_ratio Q43_gap_n60_succ < Q43_grid_ratio Q43_gap_n60 := by
+  decide
+
+-- Q43.S302-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k61:
+-- counterexample inside the gap for k=61.
+def Q43_gap_k61 : Nat := 61
+def Q43_gap_n61 : Nat := 3260954456333195553
+def Q43_gap_n61_succ : Nat := 3260954456333195554
+
+theorem Q43_gap_range_k61 :
+    Q43_gap_end_lo_k Q43_gap_k61 <= Q43_gap_n61 ∧
+    Q43_gap_end_lo_k Q43_gap_k61 <= Q43_gap_n61_succ ∧
+    Q43_gap_n61_succ < Q43_gap_end_hi_k Q43_gap_k61 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k61 :
+    Q43_grid_ratio Q43_gap_n61_succ < Q43_grid_ratio Q43_gap_n61 := by
+  decide
+
+-- Q43.S303-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k62:
+-- counterexample inside the gap for k=62.
+def Q43_gap_k62 : Nat := 62
+def Q43_gap_n62 : Nat := 6521908912666391106
+def Q43_gap_n62_succ : Nat := 6521908912666391107
+
+theorem Q43_gap_range_k62 :
+    Q43_gap_end_lo_k Q43_gap_k62 <= Q43_gap_n62 ∧
+    Q43_gap_end_lo_k Q43_gap_k62 <= Q43_gap_n62_succ ∧
+    Q43_gap_n62_succ < Q43_gap_end_hi_k Q43_gap_k62 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k62 :
+    Q43_grid_ratio Q43_gap_n62_succ < Q43_grid_ratio Q43_gap_n62 := by
+  decide
+
+-- Q43.S304-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k63:
+-- counterexample inside the gap for k=63.
+def Q43_gap_k63 : Nat := 63
+def Q43_gap_n63 : Nat := 13043817825332782212
+def Q43_gap_n63_succ : Nat := 13043817825332782213
+
+theorem Q43_gap_range_k63 :
+    Q43_gap_end_lo_k Q43_gap_k63 <= Q43_gap_n63 ∧
+    Q43_gap_end_lo_k Q43_gap_k63 <= Q43_gap_n63_succ ∧
+    Q43_gap_n63_succ < Q43_gap_end_hi_k Q43_gap_k63 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k63 :
+    Q43_grid_ratio Q43_gap_n63_succ < Q43_grid_ratio Q43_gap_n63 := by
+  decide
+
+-- Q43.S305-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k64:
+-- counterexample inside the gap for k=64.
+def Q43_gap_k64 : Nat := 64
+def Q43_gap_n64 : Nat := 26087635650665564424
+def Q43_gap_n64_succ : Nat := 26087635650665564425
+
+theorem Q43_gap_range_k64 :
+    Q43_gap_end_lo_k Q43_gap_k64 <= Q43_gap_n64 ∧
+    Q43_gap_end_lo_k Q43_gap_k64 <= Q43_gap_n64_succ ∧
+    Q43_gap_n64_succ < Q43_gap_end_hi_k Q43_gap_k64 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k64 :
+    Q43_grid_ratio Q43_gap_n64_succ < Q43_grid_ratio Q43_gap_n64 := by
+  decide
+
+-- Q43.S306-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k65:
+-- counterexample inside the gap for k=65.
+def Q43_gap_k65 : Nat := 65
+def Q43_gap_n65 : Nat := 52175271301331128849
+def Q43_gap_n65_succ : Nat := 52175271301331128850
+
+theorem Q43_gap_range_k65 :
+    Q43_gap_end_lo_k Q43_gap_k65 <= Q43_gap_n65 ∧
+    Q43_gap_end_lo_k Q43_gap_k65 <= Q43_gap_n65_succ ∧
+    Q43_gap_n65_succ < Q43_gap_end_hi_k Q43_gap_k65 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k65 :
+    Q43_grid_ratio Q43_gap_n65_succ < Q43_grid_ratio Q43_gap_n65 := by
+  decide
+
+-- Q43.S307-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k66:
+-- counterexample inside the gap for k=66.
+def Q43_gap_k66 : Nat := 66
+def Q43_gap_n66 : Nat := 104350542602662257698
+def Q43_gap_n66_succ : Nat := 104350542602662257699
+
+theorem Q43_gap_range_k66 :
+    Q43_gap_end_lo_k Q43_gap_k66 <= Q43_gap_n66 ∧
+    Q43_gap_end_lo_k Q43_gap_k66 <= Q43_gap_n66_succ ∧
+    Q43_gap_n66_succ < Q43_gap_end_hi_k Q43_gap_k66 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k66 :
+    Q43_grid_ratio Q43_gap_n66_succ < Q43_grid_ratio Q43_gap_n66 := by
+  decide
+
+-- Q43.S308-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k67:
+-- counterexample inside the gap for k=67.
+def Q43_gap_k67 : Nat := 67
+def Q43_gap_n67 : Nat := 208701085205324515397
+def Q43_gap_n67_succ : Nat := 208701085205324515398
+
+theorem Q43_gap_range_k67 :
+    Q43_gap_end_lo_k Q43_gap_k67 <= Q43_gap_n67 ∧
+    Q43_gap_end_lo_k Q43_gap_k67 <= Q43_gap_n67_succ ∧
+    Q43_gap_n67_succ < Q43_gap_end_hi_k Q43_gap_k67 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k67 :
+    Q43_grid_ratio Q43_gap_n67_succ < Q43_grid_ratio Q43_gap_n67 := by
+  decide
+
+-- Q43.S309-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k68:
+-- counterexample inside the gap for k=68.
+def Q43_gap_k68 : Nat := 68
+def Q43_gap_n68 : Nat := 417402170410649030795
+def Q43_gap_n68_succ : Nat := 417402170410649030796
+
+theorem Q43_gap_range_k68 :
+    Q43_gap_end_lo_k Q43_gap_k68 <= Q43_gap_n68 ∧
+    Q43_gap_end_lo_k Q43_gap_k68 <= Q43_gap_n68_succ ∧
+    Q43_gap_n68_succ < Q43_gap_end_hi_k Q43_gap_k68 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k68 :
+    Q43_grid_ratio Q43_gap_n68_succ < Q43_grid_ratio Q43_gap_n68 := by
+  decide
+
+-- Q43.S310-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k69:
+-- counterexample inside the gap for k=69.
+def Q43_gap_k69 : Nat := 69
+def Q43_gap_n69 : Nat := 834804340821298061590
+def Q43_gap_n69_succ : Nat := 834804340821298061591
+
+theorem Q43_gap_range_k69 :
+    Q43_gap_end_lo_k Q43_gap_k69 <= Q43_gap_n69 ∧
+    Q43_gap_end_lo_k Q43_gap_k69 <= Q43_gap_n69_succ ∧
+    Q43_gap_n69_succ < Q43_gap_end_hi_k Q43_gap_k69 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k69 :
+    Q43_grid_ratio Q43_gap_n69_succ < Q43_grid_ratio Q43_gap_n69 := by
+  decide
+
+-- Q43.S311-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k70:
+-- counterexample inside the gap for k=70.
+def Q43_gap_k70 : Nat := 70
+def Q43_gap_n70 : Nat := 1669608681642596123180
+def Q43_gap_n70_succ : Nat := 1669608681642596123181
+
+theorem Q43_gap_range_k70 :
+    Q43_gap_end_lo_k Q43_gap_k70 <= Q43_gap_n70 ∧
+    Q43_gap_end_lo_k Q43_gap_k70 <= Q43_gap_n70_succ ∧
+    Q43_gap_n70_succ < Q43_gap_end_hi_k Q43_gap_k70 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k70 :
+    Q43_grid_ratio Q43_gap_n70_succ < Q43_grid_ratio Q43_gap_n70 := by
+  decide
+
+-- Q43.S312-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k71:
+-- counterexample inside the gap for k=71.
+def Q43_gap_k71 : Nat := 71
+def Q43_gap_n71 : Nat := 3339217363285192246361
+def Q43_gap_n71_succ : Nat := 3339217363285192246362
+
+theorem Q43_gap_range_k71 :
+    Q43_gap_end_lo_k Q43_gap_k71 <= Q43_gap_n71 ∧
+    Q43_gap_end_lo_k Q43_gap_k71 <= Q43_gap_n71_succ ∧
+    Q43_gap_n71_succ < Q43_gap_end_hi_k Q43_gap_k71 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k71 :
+    Q43_grid_ratio Q43_gap_n71_succ < Q43_grid_ratio Q43_gap_n71 := by
+  decide
+
+-- Q43.S313-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k72:
+-- counterexample inside the gap for k=72.
+def Q43_gap_k72 : Nat := 72
+def Q43_gap_n72 : Nat := 6678434726570384492722
+def Q43_gap_n72_succ : Nat := 6678434726570384492723
+
+theorem Q43_gap_range_k72 :
+    Q43_gap_end_lo_k Q43_gap_k72 <= Q43_gap_n72 ∧
+    Q43_gap_end_lo_k Q43_gap_k72 <= Q43_gap_n72_succ ∧
+    Q43_gap_n72_succ < Q43_gap_end_hi_k Q43_gap_k72 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k72 :
+    Q43_grid_ratio Q43_gap_n72_succ < Q43_grid_ratio Q43_gap_n72 := by
+  decide
+
+-- Q43.S314-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k73:
+-- counterexample inside the gap for k=73.
+def Q43_gap_k73 : Nat := 73
+def Q43_gap_n73 : Nat := 13356869453140768985445
+def Q43_gap_n73_succ : Nat := 13356869453140768985446
+
+theorem Q43_gap_range_k73 :
+    Q43_gap_end_lo_k Q43_gap_k73 <= Q43_gap_n73 ∧
+    Q43_gap_end_lo_k Q43_gap_k73 <= Q43_gap_n73_succ ∧
+    Q43_gap_n73_succ < Q43_gap_end_hi_k Q43_gap_k73 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k73 :
+    Q43_grid_ratio Q43_gap_n73_succ < Q43_grid_ratio Q43_gap_n73 := by
+  decide
+
+-- Q43.S315-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k74:
+-- counterexample inside the gap for k=74.
+def Q43_gap_k74 : Nat := 74
+def Q43_gap_n74 : Nat := 26713738906281537970891
+def Q43_gap_n74_succ : Nat := 26713738906281537970892
+
+theorem Q43_gap_range_k74 :
+    Q43_gap_end_lo_k Q43_gap_k74 <= Q43_gap_n74 ∧
+    Q43_gap_end_lo_k Q43_gap_k74 <= Q43_gap_n74_succ ∧
+    Q43_gap_n74_succ < Q43_gap_end_hi_k Q43_gap_k74 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k74 :
+    Q43_grid_ratio Q43_gap_n74_succ < Q43_grid_ratio Q43_gap_n74 := by
+  decide
+
+-- Q43.S316-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k75:
+-- counterexample inside the gap for k=75.
+def Q43_gap_k75 : Nat := 75
+def Q43_gap_n75 : Nat := 53427477812563075941783
+def Q43_gap_n75_succ : Nat := 53427477812563075941784
+
+theorem Q43_gap_range_k75 :
+    Q43_gap_end_lo_k Q43_gap_k75 <= Q43_gap_n75 ∧
+    Q43_gap_end_lo_k Q43_gap_k75 <= Q43_gap_n75_succ ∧
+    Q43_gap_n75_succ < Q43_gap_end_hi_k Q43_gap_k75 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k75 :
+    Q43_grid_ratio Q43_gap_n75_succ < Q43_grid_ratio Q43_gap_n75 := by
+  decide
+
+-- Q43.S317-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k76:
+-- counterexample inside the gap for k=76.
+def Q43_gap_k76 : Nat := 76
+def Q43_gap_n76 : Nat := 106854955625126151883567
+def Q43_gap_n76_succ : Nat := 106854955625126151883568
+
+theorem Q43_gap_range_k76 :
+    Q43_gap_end_lo_k Q43_gap_k76 <= Q43_gap_n76 ∧
+    Q43_gap_end_lo_k Q43_gap_k76 <= Q43_gap_n76_succ ∧
+    Q43_gap_n76_succ < Q43_gap_end_hi_k Q43_gap_k76 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k76 :
+    Q43_grid_ratio Q43_gap_n76_succ < Q43_grid_ratio Q43_gap_n76 := by
+  decide
+
+-- Q43.S318-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k77:
+-- counterexample inside the gap for k=77.
+def Q43_gap_k77 : Nat := 77
+def Q43_gap_n77 : Nat := 213709911250252303767135
+def Q43_gap_n77_succ : Nat := 213709911250252303767136
+
+theorem Q43_gap_range_k77 :
+    Q43_gap_end_lo_k Q43_gap_k77 <= Q43_gap_n77 ∧
+    Q43_gap_end_lo_k Q43_gap_k77 <= Q43_gap_n77_succ ∧
+    Q43_gap_n77_succ < Q43_gap_end_hi_k Q43_gap_k77 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k77 :
+    Q43_grid_ratio Q43_gap_n77_succ < Q43_grid_ratio Q43_gap_n77 := by
+  decide
+
+-- Q43.S319-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k78:
+-- counterexample inside the gap for k=78.
+def Q43_gap_k78 : Nat := 78
+def Q43_gap_n78 : Nat := 427419822500504607534270
+def Q43_gap_n78_succ : Nat := 427419822500504607534271
+
+theorem Q43_gap_range_k78 :
+    Q43_gap_end_lo_k Q43_gap_k78 <= Q43_gap_n78 ∧
+    Q43_gap_end_lo_k Q43_gap_k78 <= Q43_gap_n78_succ ∧
+    Q43_gap_n78_succ < Q43_gap_end_hi_k Q43_gap_k78 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k78 :
+    Q43_grid_ratio Q43_gap_n78_succ < Q43_grid_ratio Q43_gap_n78 := by
+  decide
+
+-- Q43.S320-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k79:
+-- counterexample inside the gap for k=79.
+def Q43_gap_k79 : Nat := 79
+def Q43_gap_n79 : Nat := 854839645001009215068541
+def Q43_gap_n79_succ : Nat := 854839645001009215068542
+
+theorem Q43_gap_range_k79 :
+    Q43_gap_end_lo_k Q43_gap_k79 <= Q43_gap_n79 ∧
+    Q43_gap_end_lo_k Q43_gap_k79 <= Q43_gap_n79_succ ∧
+    Q43_gap_n79_succ < Q43_gap_end_hi_k Q43_gap_k79 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k79 :
+    Q43_grid_ratio Q43_gap_n79_succ < Q43_grid_ratio Q43_gap_n79 := by
+  decide
+
+-- Q43.S321-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k80:
+-- counterexample inside the gap for k=80.
+def Q43_gap_k80 : Nat := 80
+def Q43_gap_n80 : Nat := 1709679290002018430137083
+def Q43_gap_n80_succ : Nat := 1709679290002018430137084
+
+theorem Q43_gap_range_k80 :
+    Q43_gap_end_lo_k Q43_gap_k80 <= Q43_gap_n80 ∧
+    Q43_gap_end_lo_k Q43_gap_k80 <= Q43_gap_n80_succ ∧
+    Q43_gap_n80_succ < Q43_gap_end_hi_k Q43_gap_k80 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k80 :
+    Q43_grid_ratio Q43_gap_n80_succ < Q43_grid_ratio Q43_gap_n80 := by
+  decide
+
+-- Q43.S322-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k81:
+-- counterexample inside the gap for k=81.
+def Q43_gap_k81 : Nat := 81
+def Q43_gap_n81 : Nat := 3419358580004036860274166
+def Q43_gap_n81_succ : Nat := 3419358580004036860274167
+
+theorem Q43_gap_range_k81 :
+    Q43_gap_end_lo_k Q43_gap_k81 <= Q43_gap_n81 ∧
+    Q43_gap_end_lo_k Q43_gap_k81 <= Q43_gap_n81_succ ∧
+    Q43_gap_n81_succ < Q43_gap_end_hi_k Q43_gap_k81 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k81 :
+    Q43_grid_ratio Q43_gap_n81_succ < Q43_grid_ratio Q43_gap_n81 := by
+  decide
+
+-- Q43.S323-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k82:
+-- counterexample inside the gap for k=82.
+def Q43_gap_k82 : Nat := 82
+def Q43_gap_n82 : Nat := 6838717160008073720548332
+def Q43_gap_n82_succ : Nat := 6838717160008073720548333
+
+theorem Q43_gap_range_k82 :
+    Q43_gap_end_lo_k Q43_gap_k82 <= Q43_gap_n82 ∧
+    Q43_gap_end_lo_k Q43_gap_k82 <= Q43_gap_n82_succ ∧
+    Q43_gap_n82_succ < Q43_gap_end_hi_k Q43_gap_k82 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k82 :
+    Q43_grid_ratio Q43_gap_n82_succ < Q43_grid_ratio Q43_gap_n82 := by
+  decide
+
+-- Q43.S324-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k83:
+-- counterexample inside the gap for k=83.
+def Q43_gap_k83 : Nat := 83
+def Q43_gap_n83 : Nat := 13677434320016147441096664
+def Q43_gap_n83_succ : Nat := 13677434320016147441096665
+
+theorem Q43_gap_range_k83 :
+    Q43_gap_end_lo_k Q43_gap_k83 <= Q43_gap_n83 ∧
+    Q43_gap_end_lo_k Q43_gap_k83 <= Q43_gap_n83_succ ∧
+    Q43_gap_n83_succ < Q43_gap_end_hi_k Q43_gap_k83 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k83 :
+    Q43_grid_ratio Q43_gap_n83_succ < Q43_grid_ratio Q43_gap_n83 := by
+  decide
+
+-- Q43.S325-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k84:
+-- counterexample inside the gap for k=84.
+def Q43_gap_k84 : Nat := 84
+def Q43_gap_n84 : Nat := 27354868640032294882193329
+def Q43_gap_n84_succ : Nat := 27354868640032294882193330
+
+theorem Q43_gap_range_k84 :
+    Q43_gap_end_lo_k Q43_gap_k84 <= Q43_gap_n84 ∧
+    Q43_gap_end_lo_k Q43_gap_k84 <= Q43_gap_n84_succ ∧
+    Q43_gap_n84_succ < Q43_gap_end_hi_k Q43_gap_k84 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k84 :
+    Q43_grid_ratio Q43_gap_n84_succ < Q43_grid_ratio Q43_gap_n84 := by
+  decide
+
+-- Q43.S326-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k85:
+-- counterexample inside the gap for k=85.
+def Q43_gap_k85 : Nat := 85
+def Q43_gap_n85 : Nat := 54709737280064589764386658
+def Q43_gap_n85_succ : Nat := 54709737280064589764386659
+
+theorem Q43_gap_range_k85 :
+    Q43_gap_end_lo_k Q43_gap_k85 <= Q43_gap_n85 ∧
+    Q43_gap_end_lo_k Q43_gap_k85 <= Q43_gap_n85_succ ∧
+    Q43_gap_n85_succ < Q43_gap_end_hi_k Q43_gap_k85 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k85 :
+    Q43_grid_ratio Q43_gap_n85_succ < Q43_grid_ratio Q43_gap_n85 := by
+  decide
+
+-- Q43.S327-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k86:
+-- counterexample inside the gap for k=86.
+def Q43_gap_k86 : Nat := 86
+def Q43_gap_n86 : Nat := 109419474560129179528773316
+def Q43_gap_n86_succ : Nat := 109419474560129179528773317
+
+theorem Q43_gap_range_k86 :
+    Q43_gap_end_lo_k Q43_gap_k86 <= Q43_gap_n86 ∧
+    Q43_gap_end_lo_k Q43_gap_k86 <= Q43_gap_n86_succ ∧
+    Q43_gap_n86_succ < Q43_gap_end_hi_k Q43_gap_k86 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k86 :
+    Q43_grid_ratio Q43_gap_n86_succ < Q43_grid_ratio Q43_gap_n86 := by
+  decide
+
+-- Q43.S328-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k87:
+-- counterexample inside the gap for k=87.
+def Q43_gap_k87 : Nat := 87
+def Q43_gap_n87 : Nat := 218838949120258359057546633
+def Q43_gap_n87_succ : Nat := 218838949120258359057546634
+
+theorem Q43_gap_range_k87 :
+    Q43_gap_end_lo_k Q43_gap_k87 <= Q43_gap_n87 ∧
+    Q43_gap_end_lo_k Q43_gap_k87 <= Q43_gap_n87_succ ∧
+    Q43_gap_n87_succ < Q43_gap_end_hi_k Q43_gap_k87 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k87 :
+    Q43_grid_ratio Q43_gap_n87_succ < Q43_grid_ratio Q43_gap_n87 := by
+  decide
+
+-- Q43.S329-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k88:
+-- counterexample inside the gap for k=88.
+def Q43_gap_k88 : Nat := 88
+def Q43_gap_n88 : Nat := 437677898240516718115093267
+def Q43_gap_n88_succ : Nat := 437677898240516718115093268
+
+theorem Q43_gap_range_k88 :
+    Q43_gap_end_lo_k Q43_gap_k88 <= Q43_gap_n88 ∧
+    Q43_gap_end_lo_k Q43_gap_k88 <= Q43_gap_n88_succ ∧
+    Q43_gap_n88_succ < Q43_gap_end_hi_k Q43_gap_k88 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k88 :
+    Q43_grid_ratio Q43_gap_n88_succ < Q43_grid_ratio Q43_gap_n88 := by
+  decide
+
+-- Q43.S330-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k89:
+-- counterexample inside the gap for k=89.
+def Q43_gap_k89 : Nat := 89
+def Q43_gap_n89 : Nat := 875355796481033436230186534
+def Q43_gap_n89_succ : Nat := 875355796481033436230186535
+
+theorem Q43_gap_range_k89 :
+    Q43_gap_end_lo_k Q43_gap_k89 <= Q43_gap_n89 ∧
+    Q43_gap_end_lo_k Q43_gap_k89 <= Q43_gap_n89_succ ∧
+    Q43_gap_n89_succ < Q43_gap_end_hi_k Q43_gap_k89 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k89 :
+    Q43_grid_ratio Q43_gap_n89_succ < Q43_grid_ratio Q43_gap_n89 := by
+  decide
+
+-- Q43.S331-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k90:
+-- counterexample inside the gap for k=90.
+def Q43_gap_k90 : Nat := 90
+def Q43_gap_n90 : Nat := 1750711592962066872460373069
+def Q43_gap_n90_succ : Nat := 1750711592962066872460373070
+
+theorem Q43_gap_range_k90 :
+    Q43_gap_end_lo_k Q43_gap_k90 <= Q43_gap_n90 ∧
+    Q43_gap_end_lo_k Q43_gap_k90 <= Q43_gap_n90_succ ∧
+    Q43_gap_n90_succ < Q43_gap_end_hi_k Q43_gap_k90 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k90 :
+    Q43_grid_ratio Q43_gap_n90_succ < Q43_grid_ratio Q43_gap_n90 := by
+  decide
+
+-- Q43.S332-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k91:
+-- counterexample inside the gap for k=91.
+def Q43_gap_k91 : Nat := 91
+def Q43_gap_n91 : Nat := 3501423185924133744920746139
+def Q43_gap_n91_succ : Nat := 3501423185924133744920746140
+
+theorem Q43_gap_range_k91 :
+    Q43_gap_end_lo_k Q43_gap_k91 <= Q43_gap_n91 ∧
+    Q43_gap_end_lo_k Q43_gap_k91 <= Q43_gap_n91_succ ∧
+    Q43_gap_n91_succ < Q43_gap_end_hi_k Q43_gap_k91 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k91 :
+    Q43_grid_ratio Q43_gap_n91_succ < Q43_grid_ratio Q43_gap_n91 := by
+  decide
+
+-- Q43.S333-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k92:
+-- counterexample inside the gap for k=92.
+def Q43_gap_k92 : Nat := 92
+def Q43_gap_n92 : Nat := 7002846371848267489841492278
+def Q43_gap_n92_succ : Nat := 7002846371848267489841492279
+
+theorem Q43_gap_range_k92 :
+    Q43_gap_end_lo_k Q43_gap_k92 <= Q43_gap_n92 ∧
+    Q43_gap_end_lo_k Q43_gap_k92 <= Q43_gap_n92_succ ∧
+    Q43_gap_n92_succ < Q43_gap_end_hi_k Q43_gap_k92 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k92 :
+    Q43_grid_ratio Q43_gap_n92_succ < Q43_grid_ratio Q43_gap_n92 := by
+  decide
+
+-- Q43.S334-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k93:
+-- counterexample inside the gap for k=93.
+def Q43_gap_k93 : Nat := 93
+def Q43_gap_n93 : Nat := 14005692743696534979682984556
+def Q43_gap_n93_succ : Nat := 14005692743696534979682984557
+
+theorem Q43_gap_range_k93 :
+    Q43_gap_end_lo_k Q43_gap_k93 <= Q43_gap_n93 ∧
+    Q43_gap_end_lo_k Q43_gap_k93 <= Q43_gap_n93_succ ∧
+    Q43_gap_n93_succ < Q43_gap_end_hi_k Q43_gap_k93 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k93 :
+    Q43_grid_ratio Q43_gap_n93_succ < Q43_grid_ratio Q43_gap_n93 := by
+  decide
+
+-- Q43.S335-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k94:
+-- counterexample inside the gap for k=94.
+def Q43_gap_k94 : Nat := 94
+def Q43_gap_n94 : Nat := 28011385487393069959365969113
+def Q43_gap_n94_succ : Nat := 28011385487393069959365969114
+
+theorem Q43_gap_range_k94 :
+    Q43_gap_end_lo_k Q43_gap_k94 <= Q43_gap_n94 ∧
+    Q43_gap_end_lo_k Q43_gap_k94 <= Q43_gap_n94_succ ∧
+    Q43_gap_n94_succ < Q43_gap_end_hi_k Q43_gap_k94 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k94 :
+    Q43_grid_ratio Q43_gap_n94_succ < Q43_grid_ratio Q43_gap_n94 := by
+  decide
+
+-- Q43.S336-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k95:
+-- counterexample inside the gap for k=95.
+def Q43_gap_k95 : Nat := 95
+def Q43_gap_n95 : Nat := 56022770974786139918731938227
+def Q43_gap_n95_succ : Nat := 56022770974786139918731938228
+
+theorem Q43_gap_range_k95 :
+    Q43_gap_end_lo_k Q43_gap_k95 <= Q43_gap_n95 ∧
+    Q43_gap_end_lo_k Q43_gap_k95 <= Q43_gap_n95_succ ∧
+    Q43_gap_n95_succ < Q43_gap_end_hi_k Q43_gap_k95 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k95 :
+    Q43_grid_ratio Q43_gap_n95_succ < Q43_grid_ratio Q43_gap_n95 := by
+  decide
+
+-- Q43.S337-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k96:
+-- counterexample inside the gap for k=96.
+def Q43_gap_k96 : Nat := 96
+def Q43_gap_n96 : Nat := 112045541949572279837463876454
+def Q43_gap_n96_succ : Nat := 112045541949572279837463876455
+
+theorem Q43_gap_range_k96 :
+    Q43_gap_end_lo_k Q43_gap_k96 <= Q43_gap_n96 ∧
+    Q43_gap_end_lo_k Q43_gap_k96 <= Q43_gap_n96_succ ∧
+    Q43_gap_n96_succ < Q43_gap_end_hi_k Q43_gap_k96 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k96 :
+    Q43_grid_ratio Q43_gap_n96_succ < Q43_grid_ratio Q43_gap_n96 := by
+  decide
+
+-- Q43.S338-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k97:
+-- counterexample inside the gap for k=97.
+def Q43_gap_k97 : Nat := 97
+def Q43_gap_n97 : Nat := 224091083899144559674927752909
+def Q43_gap_n97_succ : Nat := 224091083899144559674927752910
+
+theorem Q43_gap_range_k97 :
+    Q43_gap_end_lo_k Q43_gap_k97 <= Q43_gap_n97 ∧
+    Q43_gap_end_lo_k Q43_gap_k97 <= Q43_gap_n97_succ ∧
+    Q43_gap_n97_succ < Q43_gap_end_hi_k Q43_gap_k97 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k97 :
+    Q43_grid_ratio Q43_gap_n97_succ < Q43_grid_ratio Q43_gap_n97 := by
+  decide
+
+-- Q43.S339-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k98:
+-- counterexample inside the gap for k=98.
+def Q43_gap_k98 : Nat := 98
+def Q43_gap_n98 : Nat := 448182167798289119349855505819
+def Q43_gap_n98_succ : Nat := 448182167798289119349855505820
+
+theorem Q43_gap_range_k98 :
+    Q43_gap_end_lo_k Q43_gap_k98 <= Q43_gap_n98 ∧
+    Q43_gap_end_lo_k Q43_gap_k98 <= Q43_gap_n98_succ ∧
+    Q43_gap_n98_succ < Q43_gap_end_hi_k Q43_gap_k98 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k98 :
+    Q43_grid_ratio Q43_gap_n98_succ < Q43_grid_ratio Q43_gap_n98 := by
+  decide
+
+-- Q43.S340-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k99:
+-- counterexample inside the gap for k=99.
+def Q43_gap_k99 : Nat := 99
+def Q43_gap_n99 : Nat := 896364335596578238699711011639
+def Q43_gap_n99_succ : Nat := 896364335596578238699711011640
+
+theorem Q43_gap_range_k99 :
+    Q43_gap_end_lo_k Q43_gap_k99 <= Q43_gap_n99 ∧
+    Q43_gap_end_lo_k Q43_gap_k99 <= Q43_gap_n99_succ ∧
+    Q43_gap_n99_succ < Q43_gap_end_hi_k Q43_gap_k99 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k99 :
+    Q43_grid_ratio Q43_gap_n99_succ < Q43_grid_ratio Q43_gap_n99 := by
+  decide
+
+-- Q43.S341-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k100:
+-- counterexample inside the gap for k=100.
+def Q43_gap_k100 : Nat := 100
+def Q43_gap_n100 : Nat := 1792728671193156477399422023278
+def Q43_gap_n100_succ : Nat := 1792728671193156477399422023279
+
+theorem Q43_gap_range_k100 :
+    Q43_gap_end_lo_k Q43_gap_k100 <= Q43_gap_n100 ∧
+    Q43_gap_end_lo_k Q43_gap_k100 <= Q43_gap_n100_succ ∧
+    Q43_gap_n100_succ < Q43_gap_end_hi_k Q43_gap_k100 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k100 :
+    Q43_grid_ratio Q43_gap_n100_succ < Q43_grid_ratio Q43_gap_n100 := by
+  decide
+
+-- Q43.S342-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k101:
+-- counterexample inside the gap for k=101.
+def Q43_gap_k101 : Nat := 101
+def Q43_gap_n101 : Nat := 3585457342386312954798844046557
+def Q43_gap_n101_succ : Nat := 3585457342386312954798844046558
+
+theorem Q43_gap_range_k101 :
+    Q43_gap_end_lo_k Q43_gap_k101 <= Q43_gap_n101 ∧
+    Q43_gap_end_lo_k Q43_gap_k101 <= Q43_gap_n101_succ ∧
+    Q43_gap_n101_succ < Q43_gap_end_hi_k Q43_gap_k101 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k101 :
+    Q43_grid_ratio Q43_gap_n101_succ < Q43_grid_ratio Q43_gap_n101 := by
+  decide
+
+-- Q43.S343-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k102:
+-- counterexample inside the gap for k=102.
+def Q43_gap_k102 : Nat := 102
+def Q43_gap_n102 : Nat := 7170914684772625909597688093114
+def Q43_gap_n102_succ : Nat := 7170914684772625909597688093115
+
+theorem Q43_gap_range_k102 :
+    Q43_gap_end_lo_k Q43_gap_k102 <= Q43_gap_n102 ∧
+    Q43_gap_end_lo_k Q43_gap_k102 <= Q43_gap_n102_succ ∧
+    Q43_gap_n102_succ < Q43_gap_end_hi_k Q43_gap_k102 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k102 :
+    Q43_grid_ratio Q43_gap_n102_succ < Q43_grid_ratio Q43_gap_n102 := by
+  decide
+
+-- Q43.S344-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k103:
+-- counterexample inside the gap for k=103.
+def Q43_gap_k103 : Nat := 103
+def Q43_gap_n103 : Nat := 14341829369545251819195376186229
+def Q43_gap_n103_succ : Nat := 14341829369545251819195376186230
+
+theorem Q43_gap_range_k103 :
+    Q43_gap_end_lo_k Q43_gap_k103 <= Q43_gap_n103 ∧
+    Q43_gap_end_lo_k Q43_gap_k103 <= Q43_gap_n103_succ ∧
+    Q43_gap_n103_succ < Q43_gap_end_hi_k Q43_gap_k103 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k103 :
+    Q43_grid_ratio Q43_gap_n103_succ < Q43_grid_ratio Q43_gap_n103 := by
+  decide
+
+-- Q43.S345-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k104:
+-- counterexample inside the gap for k=104.
+def Q43_gap_k104 : Nat := 104
+def Q43_gap_n104 : Nat := 28683658739090503638390752372458
+def Q43_gap_n104_succ : Nat := 28683658739090503638390752372459
+
+theorem Q43_gap_range_k104 :
+    Q43_gap_end_lo_k Q43_gap_k104 <= Q43_gap_n104 ∧
+    Q43_gap_end_lo_k Q43_gap_k104 <= Q43_gap_n104_succ ∧
+    Q43_gap_n104_succ < Q43_gap_end_hi_k Q43_gap_k104 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k104 :
+    Q43_grid_ratio Q43_gap_n104_succ < Q43_grid_ratio Q43_gap_n104 := by
+  decide
+
 -- Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
 -- apply-params-poly-n0-ratio-lift-piecewise-gap-alternative:
 -- toy check: ratio at the gap endpoints (k=12) does not drop.

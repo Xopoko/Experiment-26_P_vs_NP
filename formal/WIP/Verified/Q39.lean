@@ -1269,4 +1269,837 @@ theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt53 :
       Q39_globalfixedpair_fixedorientation_contiguous_shift_alt53_vec2 := by
   decide
 
+
+-- Q39.S141-globalfixedpair-fixedorientation-contiguous-shift-alt54:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt54_vec1 : BitVec12 :=
+  [true, true, false, false, false, false, false, false, false, false, false, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt54_vec2 : BitVec12 :=
+  [true, true, true, false, false, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt54 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt54_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt54_vec2 := by
+  decide
+
+-- Q39.S142-globalfixedpair-fixedorientation-contiguous-shift-alt55:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt55_vec1 : BitVec12 :=
+  [true, true, true, false, false, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt55_vec2 : BitVec12 :=
+  [false, true, true, true, false, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt55 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt55_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt55_vec2 := by
+  decide
+
+-- Q39.S143-globalfixedpair-fixedorientation-contiguous-shift-alt56:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt56_vec1 : BitVec12 :=
+  [false, true, true, true, false, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt56_vec2 : BitVec12 :=
+  [false, false, true, true, true, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt56 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt56_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt56_vec2 := by
+  decide
+
+-- Q39.S144-globalfixedpair-fixedorientation-contiguous-shift-alt57:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt57_vec1 : BitVec12 :=
+  [false, false, true, true, true, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt57_vec2 : BitVec12 :=
+  [false, false, false, true, true, true, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt57 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt57_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt57_vec2 := by
+  decide
+
+-- Q39.S145-globalfixedpair-fixedorientation-contiguous-shift-alt58:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt58_vec1 : BitVec12 :=
+  [false, false, false, true, true, true, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt58_vec2 : BitVec12 :=
+  [false, false, false, false, true, true, true, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt58 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt58_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt58_vec2 := by
+  decide
+
+-- Q39.S146-globalfixedpair-fixedorientation-contiguous-shift-alt59:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt59_vec1 : BitVec12 :=
+  [false, false, false, false, true, true, true, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt59_vec2 : BitVec12 :=
+  [false, false, false, false, false, true, true, true, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt59 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt59_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt59_vec2 := by
+  decide
+
+-- Q39.S147-globalfixedpair-fixedorientation-contiguous-shift-alt60:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt60_vec1 : BitVec12 :=
+  [false, false, false, false, false, true, true, true, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt60_vec2 : BitVec12 :=
+  [false, false, false, false, false, false, true, true, true, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt60 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt60_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt60_vec2 := by
+  decide
+
+-- Q39.S148-globalfixedpair-fixedorientation-contiguous-shift-alt61:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt61_vec1 : BitVec12 :=
+  [false, false, false, false, false, false, true, true, true, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt61_vec2 : BitVec12 :=
+  [false, false, false, false, false, false, false, true, true, true, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt61 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt61_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt61_vec2 := by
+  decide
+
+-- Q39.S149-globalfixedpair-fixedorientation-contiguous-shift-alt62:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt62_vec1 : BitVec12 :=
+  [false, false, false, false, false, false, false, true, true, true, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt62_vec2 : BitVec12 :=
+  [false, false, false, false, false, false, false, false, true, true, true, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt62 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt62_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt62_vec2 := by
+  decide
+
+-- Q39.S150-globalfixedpair-fixedorientation-contiguous-shift-alt63:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt63_vec1 : BitVec12 :=
+  [false, false, false, false, false, false, false, false, true, true, true, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt63_vec2 : BitVec12 :=
+  [false, false, false, false, false, false, false, false, false, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt63 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt63_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt63_vec2 := by
+  decide
+
+-- Q39.S151-globalfixedpair-fixedorientation-contiguous-shift-alt64:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt64_vec1 : BitVec12 :=
+  [false, false, false, false, false, false, false, false, false, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt64_vec2 : BitVec12 :=
+  [true, false, false, false, false, false, false, false, false, false, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt64 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt64_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt64_vec2 := by
+  decide
+
+-- Q39.S152-globalfixedpair-fixedorientation-contiguous-shift-alt65:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt65_vec1 : BitVec12 :=
+  [true, false, false, false, false, false, false, false, false, false, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt65_vec2 : BitVec12 :=
+  [true, true, false, false, false, false, false, false, false, false, false, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt65 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt65_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt65_vec2 := by
+  decide
+
+-- Q39.S153-globalfixedpair-fixedorientation-contiguous-shift-alt66:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt66_vec1 : BitVec12 :=
+  [true, true, false, false, false, false, false, false, false, false, false, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt66_vec2 : BitVec12 :=
+  [true, true, true, false, false, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt66 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt66_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt66_vec2 := by
+  decide
+
+-- Q39.S154-globalfixedpair-fixedorientation-contiguous-shift-alt67:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt67_vec1 : BitVec12 :=
+  [true, true, true, false, false, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt67_vec2 : BitVec12 :=
+  [true, true, true, true, false, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt67 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt67_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt67_vec2 := by
+  decide
+
+-- Q39.S155-globalfixedpair-fixedorientation-contiguous-shift-alt68:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt68_vec1 : BitVec12 :=
+  [true, true, true, true, false, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt68_vec2 : BitVec12 :=
+  [true, true, true, true, true, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt68 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt68_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt68_vec2 := by
+  decide
+
+-- Q39.S156-globalfixedpair-fixedorientation-contiguous-shift-alt69:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt69_vec1 : BitVec12 :=
+  [true, true, true, true, true, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt69_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt69 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt69_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt69_vec2 := by
+  decide
+
+-- Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt70_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt70_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt70 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt70_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt70_vec2 := by
+  decide
+
+-- Q39.S158-globalfixedpair-fixedorientation-contiguous-shift-alt71:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt71_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt71_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt71 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt71_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt71_vec2 := by
+  decide
+
+-- Q39.S159-globalfixedpair-fixedorientation-contiguous-shift-alt72:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt72_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt72_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt72 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt72_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt72_vec2 := by
+  decide
+
+-- Q39.S160-globalfixedpair-fixedorientation-contiguous-shift-alt73:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt73_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt73_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt73 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt73_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt73_vec2 := by
+  decide
+
+-- Q39.S161-globalfixedpair-fixedorientation-contiguous-shift-alt74:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt74_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt74_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt74 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt74_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt74_vec2 := by
+  decide
+
+-- Q39.S162-globalfixedpair-fixedorientation-contiguous-shift-alt75:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt75_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt75_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt75 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt75_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt75_vec2 := by
+  decide
+
+-- Q39.S163-globalfixedpair-fixedorientation-contiguous-shift-alt76:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt76_vec1 : BitVec12 :=
+  [false, true, true, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt76_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt76 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt76_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt76_vec2 := by
+  decide
+
+-- Q39.S164-globalfixedpair-fixedorientation-contiguous-shift-alt77:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt77_vec1 : BitVec12 :=
+  [true, false, true, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt77_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt77 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt77_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt77_vec2 := by
+  decide
+
+-- Q39.S165-globalfixedpair-fixedorientation-contiguous-shift-alt78:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt78_vec1 : BitVec12 :=
+  [true, true, false, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt78_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt78 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt78_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt78_vec2 := by
+  decide
+
+-- Q39.S166-globalfixedpair-fixedorientation-contiguous-shift-alt79:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt79_vec1 : BitVec12 :=
+  [true, true, true, false, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt79_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt79 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt79_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt79_vec2 := by
+  decide
+
+-- Q39.S167-globalfixedpair-fixedorientation-contiguous-shift-alt80:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt80_vec1 : BitVec12 :=
+  [true, true, true, true, false, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt80_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt80 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt80_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt80_vec2 := by
+  decide
+
+-- Q39.S168-globalfixedpair-fixedorientation-contiguous-shift-alt81:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt81_vec1 : BitVec12 :=
+  [true, true, true, true, true, false, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt81_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt81 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt81_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt81_vec2 := by
+  decide
+
+-- Q39.S169-globalfixedpair-fixedorientation-contiguous-shift-alt82:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt82_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, false, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt82_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt82 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt82_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt82_vec2 := by
+  decide
+
+-- Q39.S170-globalfixedpair-fixedorientation-contiguous-shift-alt83:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt83_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, false, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt83_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt83 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt83_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt83_vec2 := by
+  decide
+
+-- Q39.S171-globalfixedpair-fixedorientation-contiguous-shift-alt84:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt84_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, false, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt84_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt84 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt84_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt84_vec2 := by
+  decide
+
+-- Q39.S172-globalfixedpair-fixedorientation-contiguous-shift-alt85:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt85_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, false, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt85_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt85 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt85_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt85_vec2 := by
+  decide
+
+-- Q39.S173-globalfixedpair-fixedorientation-contiguous-shift-alt86:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt86_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, false, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt86_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt86 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt86_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt86_vec2 := by
+  decide
+
+-- Q39.S174-globalfixedpair-fixedorientation-contiguous-shift-alt87:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt87_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt87_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt87 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt87_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt87_vec2 := by
+  decide
+
+-- Q39.S175-globalfixedpair-fixedorientation-contiguous-shift-alt88:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt88_vec1 : BitVec12 :=
+  [false, true, true, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt88_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt88 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt88_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt88_vec2 := by
+  decide
+
+-- Q39.S176-globalfixedpair-fixedorientation-contiguous-shift-alt89:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt89_vec1 : BitVec12 :=
+  [true, false, true, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt89_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt89 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt89_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt89_vec2 := by
+  decide
+
+-- Q39.S177-globalfixedpair-fixedorientation-contiguous-shift-alt90:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt90_vec1 : BitVec12 :=
+  [true, true, false, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt90_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt90 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt90_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt90_vec2 := by
+  decide
+
+-- Q39.S178-globalfixedpair-fixedorientation-contiguous-shift-alt91:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt91_vec1 : BitVec12 :=
+  [true, true, true, false, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt91_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt91 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt91_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt91_vec2 := by
+  decide
+
+-- Q39.S179-globalfixedpair-fixedorientation-contiguous-shift-alt92:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt92_vec1 : BitVec12 :=
+  [true, true, true, true, false, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt92_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt92 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt92_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt92_vec2 := by
+  decide
+
+-- Q39.S180-globalfixedpair-fixedorientation-contiguous-shift-alt93:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt93_vec1 : BitVec12 :=
+  [true, true, true, true, true, false, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt93_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt93 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt93_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt93_vec2 := by
+  decide
+
+-- Q39.S181-globalfixedpair-fixedorientation-contiguous-shift-alt94:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt94_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, false, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt94_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt94 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt94_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt94_vec2 := by
+  decide
+
+-- Q39.S182-globalfixedpair-fixedorientation-contiguous-shift-alt95:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt95_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, false, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt95_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt95 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt95_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt95_vec2 := by
+  decide
+
+-- Q39.S183-globalfixedpair-fixedorientation-contiguous-shift-alt96:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt96_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, false, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt96_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt96 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt96_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt96_vec2 := by
+  decide
+
+-- Q39.S184-globalfixedpair-fixedorientation-contiguous-shift-alt97:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt97_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, false, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt97_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt97 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt97_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt97_vec2 := by
+  decide
+
+-- Q39.S185-globalfixedpair-fixedorientation-contiguous-shift-alt98:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt98_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, false, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt98_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt98 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt98_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt98_vec2 := by
+  decide
+
+-- Q39.S186-globalfixedpair-fixedorientation-contiguous-shift-alt99:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt99_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt99_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt99 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt99_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt99_vec2 := by
+  decide
+
+-- Q39.S187-globalfixedpair-fixedorientation-contiguous-shift-alt100:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt100_vec1 : BitVec12 :=
+  [false, true, true, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt100_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt100 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt100_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt100_vec2 := by
+  decide
+
+-- Q39.S188-globalfixedpair-fixedorientation-contiguous-shift-alt101:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt101_vec1 : BitVec12 :=
+  [true, false, true, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt101_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt101 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt101_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt101_vec2 := by
+  decide
+
+-- Q39.S189-globalfixedpair-fixedorientation-contiguous-shift-alt102:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt102_vec1 : BitVec12 :=
+  [true, true, false, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt102_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt102 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt102_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt102_vec2 := by
+  decide
+
+-- Q39.S190-globalfixedpair-fixedorientation-contiguous-shift-alt103:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt103_vec1 : BitVec12 :=
+  [true, true, true, false, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt103_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt103 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt103_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt103_vec2 := by
+  decide
+
+-- Q39.S191-globalfixedpair-fixedorientation-contiguous-shift-alt104:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt104_vec1 : BitVec12 :=
+  [true, true, true, true, false, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt104_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt104 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt104_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt104_vec2 := by
+  decide
+
+-- Q39.S192-globalfixedpair-fixedorientation-contiguous-shift-alt105:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt105_vec1 : BitVec12 :=
+  [true, true, true, true, true, false, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt105_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt105 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt105_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt105_vec2 := by
+  decide
+
+-- Q39.S193-globalfixedpair-fixedorientation-contiguous-shift-alt106:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt106_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, false, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt106_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt106 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt106_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt106_vec2 := by
+  decide
+
+-- Q39.S194-globalfixedpair-fixedorientation-contiguous-shift-alt107:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt107_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, false, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt107_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt107 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt107_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt107_vec2 := by
+  decide
+
+-- Q39.S195-globalfixedpair-fixedorientation-contiguous-shift-alt108:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt108_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, false, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt108_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt108 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt108_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt108_vec2 := by
+  decide
+
+-- Q39.S196-globalfixedpair-fixedorientation-contiguous-shift-alt109:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt109_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, false, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt109_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt109 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt109_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt109_vec2 := by
+  decide
+
+-- Q39.S197-globalfixedpair-fixedorientation-contiguous-shift-alt110:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt110_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, false, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt110_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt110 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt110_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt110_vec2 := by
+  decide
+
+-- Q39.S198-globalfixedpair-fixedorientation-contiguous-shift-alt111:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt111_vec1 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt111_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt111 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt111_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt111_vec2 := by
+  decide
+
+-- Q39.S199-globalfixedpair-fixedorientation-contiguous-shift-alt112:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt112_vec1 : BitVec12 :=
+  [false, true, true, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt112_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt112 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt112_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt112_vec2 := by
+  decide
+
+-- Q39.S200-globalfixedpair-fixedorientation-contiguous-shift-alt113:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt113_vec1 : BitVec12 :=
+  [true, false, true, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt113_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt113 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt113_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt113_vec2 := by
+  decide
+
+-- Q39.S201-globalfixedpair-fixedorientation-contiguous-shift-alt114:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt114_vec1 : BitVec12 :=
+  [true, true, false, true, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt114_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt114 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt114_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt114_vec2 := by
+  decide
+
+-- Q39.S202-globalfixedpair-fixedorientation-contiguous-shift-alt115:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt115_vec1 : BitVec12 :=
+  [true, true, true, false, true, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt115_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt115 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt115_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt115_vec2 := by
+  decide
+
+-- Q39.S203-globalfixedpair-fixedorientation-contiguous-shift-alt116:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt116_vec1 : BitVec12 :=
+  [true, true, true, true, false, true, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt116_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt116 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt116_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt116_vec2 := by
+  decide
+
+-- Q39.S204-globalfixedpair-fixedorientation-contiguous-shift-alt117:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt117_vec1 : BitVec12 :=
+  [true, true, true, true, true, false, true, true, true, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt117_vec2 : BitVec12 :=
+  [true, true, true, true, true, true, true, true, true, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt117 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt117_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt117_vec2 := by
+  decide
+
 end PvNP
