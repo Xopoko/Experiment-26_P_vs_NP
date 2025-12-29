@@ -32,7 +32,7 @@ Q43 gap-min bridge simplification (Q43.S278):
 - Route the gap-min ratio alias through the uniform `n_k` drop lemma instead of k-lists.
 - This keeps the ratio-drop witness uniform for all `k ≥ 12`.
 - The bridge is now a one-line Lean proof that reuses `Q43_grid_ratio_drop_nk`.
-- Lean anchor: `formal/WIP/Verified/Q43.lean` (Q43_gap_min_ratio_drop_nk).
+- Lean anchor: `formal/WIP/Verified/Q43.lean` (Q43_grid_ratio_drop_nk).
 - No new external sources required.
 
 Q43 gap-min global bridge apply (Q43.S279):

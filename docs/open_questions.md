@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S297-gap-min-global-consolidate-klist
-  - `NextStepID:` Q43.S298-gap-min-global-alias-cleanup
+  - `LastStepID:` Q43.S298-gap-min-global-alias-cleanup
+  - `NextStepID:` Q43.S299-logn-remaining-scan
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -50,17 +50,14 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Verified/Q43.lean`
     (Q43_nk, Q43_log2_jump_nk, Q43_grid_ratio_drop_nk_of_ge, Q43_grid_ratio_drop_nk,
-     Q43_gap_n_succ_eq, Q43_gap_min_ratio_drop_nk, Q43_gap_min_ratio_drop_global,
-     Q43_gap_min_ratio_drop_global_grid, Q43_gap_min_ratio_drop_global_grid_of_drop,
-     Q43_gap_min_ratio_drop_global_grid_succ_le, Q43_lt_of_succ_le,
-     Q43_gap_min_ratio_drop_global_grid_of_succ_le,
+     Q43_gap_n_succ_eq, Q43_gap_min_ratio_drop_global,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Compression/canonization (reduce redundant gap-scan scaffolding).
+  - `Lens:` Specification/definitions audit (inline gap-min aliases).
   - `Artifact:` Proof.
-  - `Update:` removed the remaining gap-scan endpoints and list lemma; only k=12 witness remains.
-  - `Use:` next: simplify the gap-min alias wrappers (rename or inline `Q43_gap_min_ratio_k`).
+  - `Update:` inlined `Q43_gap_min_ratio_k` into direct `Q43_grid_ratio` uses and removed wrapper lemmas.
+  - `Use:` next: finish the `Q43.S137` TODO (formal flat local-EF(s) evaluation statement).
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 0.

@@ -958,13 +958,12 @@ def Q43_gap_n : Nat := 5792
 def Q43_gap_n_succ : Nat := 5793
 theorem Q43_gap_n_succ_eq : Q43_gap_n + 1 = Q43_gap_n_succ := by
   decide
-def Q43_gap_min_ratio_k (_k n0 : Nat) : Nat := Q43_grid_ratio n0
 
 theorem Q43_grid_ratio_drop_gap :
     Q43_grid_ratio Q43_gap_n_succ < Q43_grid_ratio Q43_gap_n := by
   decide
 
-def Q43_gap_min_ratio : Nat := Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ
+def Q43_gap_min_ratio : Nat := Q43_grid_ratio Q43_gap_n_succ
 
 -- Q43.S267-log2-jump-lemma:
 -- log2 jump from explicit bounds on n^2 and (n+1)^2.
@@ -1680,54 +1679,14 @@ theorem Q43_grid_ratio_drop_nk {k : Nat} (hk : 12 <= k) :
     Q43_grid_ratio (Q43_nk k + 1) < Q43_grid_ratio (Q43_nk k) := by
   simpa using (Q43_grid_ratio_drop_nk_of_ge (k := k) hk)
 
--- Q43.S278-simplify-gap-min-bridge:
--- bridge the gap-min ratio alias directly to the uniform n_k drop.
-theorem Q43_gap_min_ratio_drop_nk {k : Nat} (hk : 12 <= k) :
-    Q43_gap_min_ratio_k k (Q43_nk k + 1) < Q43_gap_min_ratio_k k (Q43_nk k) := by
-  simpa [Q43_gap_min_ratio_k] using (Q43_grid_ratio_drop_nk (k := k) hk)
-
 -- Q43.S279-gap-min-global-bridge-apply:
 -- apply the uniform n_k bridge to the global gap-min ratio at k=12.
 theorem Q43_gap_min_ratio_drop_global :
-    Q43_gap_min_ratio < Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n := by
+    Q43_gap_min_ratio < Q43_grid_ratio Q43_gap_n := by
   have hk : 12 <= Q43_gap_k := by
     simp [Q43_gap_k]
-  have hdrop := Q43_gap_min_ratio_drop_nk (k := Q43_gap_k) hk
+  have hdrop := Q43_grid_ratio_drop_nk (k := Q43_gap_k) hk
   simpa [Q43_gap_min_ratio, Q43_gap_k, Q43_nk_eq_gap_n12, Q43_gap_n_succ_eq] using hdrop
-
--- Q43.S285-gap-min-global-route:
--- route the global drop through the grid_ratio form without re-expanding the alias.
-theorem Q43_gap_min_ratio_drop_global_grid_of_drop
-    (h : Q43_gap_min_ratio < Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n) :
-    Q43_gap_min_ratio < Q43_grid_ratio Q43_gap_n := by
-  simpa [Q43_gap_min_ratio_k] using h
-
--- Q43.S282-gap-min-global-use:
--- lift the global drop to a +1 bound in grid_ratio form.
-theorem Q43_gap_min_ratio_drop_global_grid_succ_le :
-    Q43_gap_min_ratio + 1 <= Q43_grid_ratio Q43_gap_n := by
-  have h : Q43_gap_min_ratio < Q43_grid_ratio Q43_gap_n :=
-    Q43_gap_min_ratio_drop_global_grid_of_drop Q43_gap_min_ratio_drop_global
-  exact (Nat.succ_le_iff).2 h
-
--- Q43.S284-gap-min-global-le-bridge:
--- turn a succ-le bound into a strict inequality.
-theorem Q43_lt_of_succ_le {a b : Nat} (h : a + 1 <= b) : a < b := by
-  exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _) h
-
--- Q43.S283-gap-min-global-succ-use:
--- repackage the +1 bound as a strict inequality.
-theorem Q43_gap_min_ratio_drop_global_grid_of_succ_le
-    (h : Q43_gap_min_ratio + 1 <= Q43_grid_ratio Q43_gap_n) :
-    Q43_gap_min_ratio < Q43_grid_ratio Q43_gap_n := by
-  exact Q43_lt_of_succ_le h
-
--- Q43.S280-gap-min-global-cleanup:
--- expose the global drop as a grid_ratio inequality.
-theorem Q43_gap_min_ratio_drop_global_grid :
-    Q43_gap_min_ratio < Q43_grid_ratio Q43_gap_n := by
-  exact Q43_gap_min_ratio_drop_global_grid_of_succ_le
-    Q43_gap_min_ratio_drop_global_grid_succ_le
 
 -- TODO(Q43.S137-logn-remaining-scan): add the formal flat local-EF(s) evaluation statement.
 
