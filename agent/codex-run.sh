@@ -11,7 +11,7 @@ Usage:
 Options:
   -f, --file FILE              Read prompt from file
       --infinite               Re-run Codex forever (rotates session by default)
-      --session-cycles N       In --infinite, start a new session every N runs (default: 10; 0 = never)
+      --session-cycles N       In --infinite, start a new session every N runs (default: 5; 0 = never)
   -m, --model MODEL            Pass through to `codex exec --model`
   -s, --sandbox MODE           Pass through to `codex exec --sandbox`
   -a, --ask-for-approval MODE  Pass through to `codex exec --ask-for-approval`
@@ -31,7 +31,7 @@ EOF
 
 prompt_file=""
 infinite=false
-session_cycles="${CODEX_SESSION_CYCLES:-10}"
+session_cycles="${CODEX_SESSION_CYCLES:-5}"
 model=""
 sandbox=""
 approval=""
