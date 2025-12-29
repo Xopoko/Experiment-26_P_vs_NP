@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S286-gap-min-global-route-apply
-  - `NextStepID:` Q43.S287-gap-min-global-prune-klist
+  - `LastStepID:` Q43.S287-gap-min-global-prune-klist
+  - `NextStepID:` Q43.S288-gap-min-global-prune-klist-21-30
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -59,9 +59,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Invariant (uniform `k ≥ 12` bridge at `n_k`).
   - `Artifact:` Proof.
-  - `Update:` removed the redundant k=12 gap-min lemma that expanded `Q43_gap_min_ratio_k`;
-    `Q43_gap_min_ratio_le_all` is now the single gap-scan statement.
-  - `Use:` next: consider pruning unused k-list gap-range witnesses or consolidating the k>=12 scan.
+  - `Update:` pruned the unused k=13..20 gap-range/ratio-drop blocks and their n_k=gap_n lemmas.
+  - `Use:` next: continue pruning k=21..30 or fold the remaining k-list into a single uniform note.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 0.

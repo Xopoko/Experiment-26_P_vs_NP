@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S286-gap-min-global-route-apply
-- `Do-not-repeat (next 2 runs):` Q43.S286-gap-min-global-route-apply, Q43.S285-gap-min-global-route
+- `LastStepID:` Q43.S287-gap-min-global-prune-klist
+- `Do-not-repeat (next 2 runs):` Q43.S287-gap-min-global-prune-klist, Q43.S286-gap-min-global-route-apply
 - `Last InfoGain:` 0
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: gap-min global drop uses the grid_ratio route; removed redundant k=12 lemma; next prune unused k-list witnesses.
+Q43: pruned k=13..20 gap-range/drop blocks; next prune k=21..30 or consolidate the k-list.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: gap-min global drop uses the grid_ratio route; removed redundant k=12 lemma
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Trade-off->Invariant->Equivalence/translation->Invariant
+Latest:Trade-off->Invariant->Equivalence/translation->Invariant->Compression/canonization
