@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S298-gap-min-global-alias-cleanup
-- `Do-not-repeat (next 2 runs):` Q43.S298-gap-min-global-alias-cleanup, Q43.S297-gap-min-global-consolidate-klist
-- `Last InfoGain:` 0
+- `LastStepID:` Q43.S299-logn-remaining-scan
+- `Do-not-repeat (next 2 runs):` Q43.S299-logn-remaining-scan, Q43.S298-gap-min-global-alias-cleanup
+- `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: inlined the gap-min alias; next formalize the Q43.S137 evaluation statement.
+Q43: isolated log2 N parameter; next check Thm. 4.1 dependency in Thm. 4.3/Lemma 4.5.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: inlined the gap-min alias; next formalize the Q43.S137 evaluation statement
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Specification/definitions audit->Compression/canonization->Automation/tactic engineering->Compression/canonization->Automation/tactic engineering
+Latest:Equivalence/translation->Specification/definitions audit->Compression/canonization->Automation/tactic engineering->Compression/canonization

@@ -463,12 +463,20 @@ def Q43_thm41_log2_threshold_c1_grid_param (n N : Nat) : Prop :=
   Nat.log2 N
     <= Q43_grid_size n / (Q43_thm41_c1_chernoff_ln * (Nat.log2 (Q43_grid_size n)) ^ 4)
 
+-- Q43.S299-logn-remaining-scan:
+-- isolate the remaining log2 N usage in the Thm. 4.1 threshold via log2 monotonicity.
+theorem Q43_thm41_log2_threshold_c1_grid_param_of_log2 {n N : Nat}
+    (hlog : Nat.log2 N <= Nat.log2 (Q43_grid_size n))
+    (hth : Q43_thm41_log2_threshold_c1_grid n) :
+    Q43_thm41_log2_threshold_c1_grid_param n N := by
+  exact Nat.le_trans hlog hth
+
 theorem Q43_thm41_log2_threshold_c1_grid_param_of_le {n N : Nat}
     (hN : N <= Q43_grid_size n)
     (hth : Q43_thm41_log2_threshold_c1_grid n) :
     Q43_thm41_log2_threshold_c1_grid_param n N := by
   have hlog : Nat.log2 N <= Nat.log2 (Q43_grid_size n) := Q43_log2_mono hN
-  exact Nat.le_trans hlog hth
+  exact Q43_thm41_log2_threshold_c1_grid_param_of_log2 (n:=n) (N:=N) hlog hth
 
 def Q43_thm41_regime_d_ok_param (n N : Nat) : Prop :=
   Q43_thm41_log2_threshold_c1_grid_param n N ∧ Q43_thm41_c1_chernoff_ln <= Q43_grid_size n
@@ -1687,7 +1695,5 @@ theorem Q43_gap_min_ratio_drop_global :
     simp [Q43_gap_k]
   have hdrop := Q43_grid_ratio_drop_nk (k := Q43_gap_k) hk
   simpa [Q43_gap_min_ratio, Q43_gap_k, Q43_nk_eq_gap_n12, Q43_gap_n_succ_eq] using hdrop
-
--- TODO(Q43.S137-logn-remaining-scan): add the formal flat local-EF(s) evaluation statement.
 
 end PvNP
