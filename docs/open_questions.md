@@ -11,24 +11,24 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q39 (Tseitin(Grid): depth gap for polynomial size in bounded-depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S141-frontier-complement-swap-invariant
-  - `NextStepID:` Q39.S142-globalfixedpair-fixedorientation-contiguous-shift-alt54
+  - `LastStepID:` Q39.S142-toy-alt54-rank2-oracle
+  - `NextStepID:` Q39.S143-contiguous-alt-rank2-classify-or-barrier
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
-  - `Lens:` Invariant (frontier symmetries).
-  - `Artifact:` Proof.
-  - `Update:` added a clean symmetry lemma `Q39_frontier_compl_swap`:
-    in a symmetric graph, complementing the cut and reversing edge orientation preserves the frontier.
-    The proof is a short stitch of `Q39_frontier_compl` and `Q39_frontier_swap`.
-    This is a compact, presentation-friendly statement for Paperproof screenshots.
-    It also isolates a reusable invariant for later rank/projection arguments.
-    See `formal/WIP/Work.lean` (Q39_frontier_compl_swap).
-  - `Use:` the next test is the next alt-shift (alt54) for contiguous blocks.
-  - `PublicSurface:` `formal/WIP/Work.lean`
-    (Q39_frontier_compl_swap).
-  - `File:` `formal/WIP/Work.lean`. `InfoGain:` 1.
+  - `Lens:` Communication/rank (projection rank witness).
+  - `Artifact:` Toy.
+  - `Update:` added oracle `scripts/toy_q39_rank2.py` that parses the latest contiguous alt-shift
+    vectors from `formal/WIP/Work.lean`, computes the next shift (alt54), and checks rank=2.
+    The alt54 witness remains rank-2 (nonzero distinct vectors), so the contiguous alt-shift
+    search continues to yield counterexamples and is now reproducible.
+  - `Use:` run `python3 scripts/toy_q39_rank2.py --alt 54`.
+    Stop-rule: if ≥5 consecutive contiguous alt-shifts keep rank=2, switch to classification
+    (lemma: contiguous alt-shifts preserve rank-2) or a barrier certificate (no further alt++ steps).
+  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Work.lean`
+    (contiguous alt-shift vectors up to alt53).
+  - `File:` `scripts/toy_q39_rank2.py`. `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? yes (graph symmetry + set complements).
+    - `A) Relativization check:` Relativizes? yes (finite combinatorial rank check).
     - `B) Natural proofs check:` N/A (no property of Boolean functions/circuits).
     - `C) Algebrization check:` N/A (no arithmetization/polynomial extensions).
   - `Success:` either an explicit upper at depth $O(\log N/\log\log N)$, or a barrier/counterexample for the "XOR step" in bounded-depth Frege

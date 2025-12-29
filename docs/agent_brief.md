@@ -6,13 +6,13 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S141-frontier-complement-swap-invariant
-- `Do-not-repeat (next 2 runs):` Q39.S141-frontier-complement-swap-invariant, Q43.S272-gap-min-ratio-recdepth-raise
+- `LastStepID:` Q39.S142-toy-alt54-rank2-oracle
+- `Do-not-repeat (next 2 runs):` Q39.S142-toy-alt54-rank2-oracle, Q39.S141-frontier-complement-swap-invariant
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
-Q39: frontier complement+swap invariant is in; next test alt54 contiguous shift.
+Q39: alt54 contiguous shift oracle in; next step is classify contiguous shifts or barrier.
 Q43: define n_k via Q43_floorSqrt and show the log2 jump at n_k^2.
 
 ## What has already been done (do not repeat)
@@ -41,4 +41,4 @@ Q43: define n_k via Q43_floorSqrt and show the log2 jump at n_k^2.
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Communication/Rank->Communication/Rank->Equivalence->Compression/canonization
+Latest:Communication/Rank->Invariant->Communication/Rank->Communication/Rank->Equivalence
