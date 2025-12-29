@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S302-flat-eval-proofsize-to-linemax
-  - `NextStepID:` Q43.S303-flat-eval-quasipoly-linemax
+  - `LastStepID:` Q43.S303-flat-eval-quasipoly-linemax
+  - `NextStepID:` Q43.S304-flat-eval-quasipoly-bridge
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -52,16 +52,16 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     (Q43_nk, Q43_log2_jump_nk, Q43_grid_ratio_drop_nk_of_ge, Q43_grid_ratio_drop_nk,
      Q43_gap_n_succ_eq, Q43_gap_min_ratio_drop_global,
      Q43_log2_poly_bound, Q43_tParam_le_log2_poly_bound, Q43_tParam_lineMax_le_log2_poly_bound,
+     Q43_tParam_le_polylog_of_quasipoly, Q43_tParam_lineMax_le_polylog_of_quasipoly,
      Q43_thm41_log2_threshold_c1_grid_param_of_log2,
      Q43_thm41_regime_d_ok_param_of_log2,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (lineMax ≤ proofSize).
+  - `Lens:` Trade-off (quasi-poly size to polylog t).
   - `Artifact:` Proof.
-  - `Update:` added `Q43_tParam_lineMax_le_log2_poly_bound` to push the polynomial log2 bound
-    from proof size to lineMax.
-  - `Use:` next: add the quasi-poly lineMax bound via `Nat.log2_two_pow` and `Q43_log2_mono`.
+  - `Update:` added `Q43_tParam_le_polylog_of_quasipoly` and the lineMax specialization.
+  - `Use:` next: bridge the quasi-poly bound into the flat evaluation statement (choose the M/N regime).
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

@@ -585,6 +585,23 @@ theorem Q43_tParam_lineMax_le_log2_poly_bound {α : Type} {proof : List (List α
   have hM : Q43_lineMax proof <= n ^ k + 1 := Nat.le_trans hline hsize
   exact Q43_tParam_le_log2_poly_bound (n := n) (k := k) (M := Q43_lineMax proof) hn hM
 
+-- Q43.S303-flat-eval-quasipoly-linemax:
+-- quasi-polynomial size bounds yield polylog t-parameter bounds.
+theorem Q43_tParam_le_polylog_of_quasipoly {n c M : Nat}
+    (hM : M <= 2 ^ ((Nat.log2 n) ^ (c + 1))) :
+    Q43_tParam M <= (Nat.log2 n) ^ (c + 1) := by
+  have hlog : Nat.log2 M <= Nat.log2 (2 ^ ((Nat.log2 n) ^ (c + 1))) := Q43_log2_mono hM
+  have hfinal : Nat.log2 M <= (Nat.log2 n) ^ (c + 1) := by
+    simpa [Nat.log2_two_pow] using hlog
+  simpa [Q43_tParam] using hfinal
+
+theorem Q43_tParam_lineMax_le_polylog_of_quasipoly {α : Type} {proof : List (List α)} {n c : Nat}
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 n) ^ (c + 1))) :
+    Q43_tParam (Q43_lineMax proof) <= (Nat.log2 n) ^ (c + 1) := by
+  have hline : Q43_lineMax proof <= Q43_proofSize proof := Q43_lineMax_le_proofSize proof
+  have hM : Q43_lineMax proof <= 2 ^ ((Nat.log2 n) ^ (c + 1)) := Nat.le_trans hline hsize
+  exact Q43_tParam_le_polylog_of_quasipoly (n := n) (c := c) (M := Q43_lineMax proof) hM
+
 theorem Q43_polyNM_log2_bounds {n N C M K : Nat} (hn : 2 <= n) (h : Q43_polyNM n N C M K) :
     Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
     Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) ∧
