@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S279-gap-min-global-bridge-apply
-- `Do-not-repeat (next 2 runs):` Q43.S279-gap-min-global-bridge-apply, Q43.S278-simplify-gap-min-bridge
+- `LastStepID:` Q43.S280-gap-min-global-cleanup
+- `Do-not-repeat (next 2 runs):` Q43.S280-gap-min-global-cleanup, Q43.S279-gap-min-global-bridge-apply
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: alt54 contiguous shift oracle in; next step is classify contiguous shifts or barrier.
-Q43: gap-min global bridge applied; next cleanup/wire downstream uses to the uniform n_k drop.
+Q43: global gap-min drop rewritten as grid_ratio inequality; next wire downstream uses to it.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: gap-min global bridge applied; next cleanup/wire downstream uses to the uni
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence->Invariant->Compression/canonization->Invariant->Compression/canonization
+Latest:Invariant->Equivalence->Invariant->Compression/canonization->Invariant
