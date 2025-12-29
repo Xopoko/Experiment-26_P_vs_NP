@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S300-logn-nonimpact-check
-- `Do-not-repeat (next 2 runs):` Q43.S300-logn-nonimpact-check, Q43.S299-logn-remaining-scan
+- `LastStepID:` Q43.S301-flat-eval-evaluation-statement
+- `Do-not-repeat (next 2 runs):` Q43.S301-flat-eval-evaluation-statement, Q43.S300-logn-nonimpact-check
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: log2 N bound lifted to regime predicate; next formalize flat local-EF(s) evaluation statement.
+Q43: added log2 polynomial size bound; next instantiate the lineMax bound and quasi-poly case.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: log2 N bound lifted to regime predicate; next formalize flat local-EF(s) ev
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Equivalence/translation->Specification/definitions audit->Compression/canonization->Automation/tactic engineering
+Latest:Trade-off->Invariant->Equivalence/translation->Specification/definitions audit->Compression/canonization

@@ -26,3 +26,4 @@ Q43.S296-gap-min-global-prune-klist-101-104	Proof	formal/WIP/Verified/Q43.lean	c
 Q43.S297-gap-min-global-consolidate-klist	Proof	formal/WIP/Verified/Q43.lean	0f5edd7d023dab39e8e427bb6d41a357e980d972	trim gap scan scaffolding
 Q43.S298-gap-min-global-alias-cleanup	Proof	formal/WIP/Verified/Q43.lean	4d53645b01f43362c935af6cc99dd61f6331fc98	inline gap-min alias
 Q43.S299-logn-remaining-scan	Proof	formal/WIP/Verified/Q43.lean	ffdfedb6688451e0656461ce427fdd9ee1edb20f	isolate log2 N parameter
+Q43.S300-logn-nonimpact-check	Proof	formal/WIP/Verified/Q43.lean	cc45eb82e4b4ab0a1213f62dbf09715160e73ad4	lift log2 N regime

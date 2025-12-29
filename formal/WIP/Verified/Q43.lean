@@ -519,29 +519,6 @@ theorem Q43_tParam_le_log2_grid_pow {n M K : Nat} (hM : Q43_polyM n M K) :
 def Q43_polyNM (n N C M K : Nat) : Prop :=
   Q43_polyN n N C ∧ Q43_polyM n M K
 
-theorem Q43_polyNM_log2_bounds {n N C M K : Nat} (h : Q43_polyNM n N C M K) :
-    Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
-    Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) := by
-  rcases h with ⟨hN, hM⟩
-  exact ⟨Q43_log2_le_log2_grid_pow (n:=n) (N:=N) (C:=C) hN,
-    Q43_tParam_le_log2_grid_pow (n:=n) (M:=M) (K:=K) hM⟩
-
--- Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold:
--- bundle the regime-d criterion with poly N/M log2 bounds.
-theorem Q43_regime_d_ok_polyNM_bounds {n N C M K : Nat} (hn : 2 <= n)
-    (hpow5 : Q43_thm41_log2_threshold_c1_grid_mul_pow5 n)
-    (hpoly : Q43_polyNM n N C M K) :
-    Q43_thm41_regime_d_ok n ∧
-      Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
-      Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) := by
-  have hreg : Q43_thm41_regime_d_ok n :=
-    Q43_thm41_regime_d_ok_of_pow5 (n:=n) hn hpow5
-  have hbounds :
-      Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
-      Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) :=
-    Q43_polyNM_log2_bounds (n:=n) (N:=N) (C:=C) (M:=M) (K:=K) hpoly
-  exact ⟨hreg, hbounds⟩
-
 theorem Q43_pow_le_pow_of_le {a b n : Nat} (h : a <= b) : a ^ n <= b ^ n := by
   induction n with
   | zero =>
@@ -571,6 +548,70 @@ theorem Q43_log2_pow_le_mul_succ (a C : Nat) :
     have hlog : Nat.log2 (a ^ C) <= Nat.log2 (2 ^ ((Nat.log2 a + 1) * C)) :=
       Q43_log2_mono hpow'
     simpa [Nat.log2_two_pow] using hlog
+
+-- Q43.S301-flat-eval-evaluation-statement:
+-- polynomial size bounds yield explicit log2 t-parameter bounds.
+theorem Q43_log2_poly_bound {n k : Nat} (hn : 2 <= n) :
+    Nat.log2 (n ^ k + 1) <= (Nat.log2 n + 1) * k + 1 := by
+  have hnpos : 0 < n := Nat.lt_of_lt_of_le (by decide : 0 < 2) hn
+  have hpow_pos : 0 < n ^ k := Nat.pow_pos hnpos
+  have hpow_ge_one : 1 <= n ^ k := (Nat.succ_le_iff).2 hpow_pos
+  have hle' : n ^ k + 1 <= n ^ k + n ^ k := Nat.add_le_add_left hpow_ge_one _
+  have hle : n ^ k + 1 <= 2 * n ^ k := by
+    simpa [Nat.two_mul] using hle'
+  have hlog : Nat.log2 (n ^ k + 1) <= Nat.log2 (2 * n ^ k) := Q43_log2_mono hle
+  have hne : n ^ k ≠ 0 := Nat.ne_of_gt hpow_pos
+  have hlog2 : Nat.log2 (2 * n ^ k) = Nat.log2 (n ^ k) + 1 := by
+    simpa using (Nat.log2_two_mul (n := n ^ k) hne)
+  have hlog' : Nat.log2 (n ^ k + 1) <= Nat.log2 (n ^ k) + 1 := by
+    simpa [hlog2] using hlog
+  have hpow : Nat.log2 (n ^ k) <= (Nat.log2 n + 1) * k :=
+    Q43_log2_pow_le_mul_succ (a := n) (C := k)
+  exact Nat.le_trans hlog' (Nat.add_le_add_right hpow 1)
+
+theorem Q43_tParam_le_log2_poly_bound {n k M : Nat} (hn : 2 <= n) (hM : M <= n ^ k + 1) :
+    Q43_tParam M <= (Nat.log2 n + 1) * k + 1 := by
+  have hlog : Nat.log2 M <= Nat.log2 (n ^ k + 1) := Q43_log2_mono hM
+  have hpoly : Nat.log2 (n ^ k + 1) <= (Nat.log2 n + 1) * k + 1 :=
+    Q43_log2_poly_bound (n := n) (k := k) hn
+  simpa [Q43_tParam] using (Nat.le_trans hlog hpoly)
+
+theorem Q43_polyNM_log2_bounds {n N C M K : Nat} (hn : 2 <= n) (h : Q43_polyNM n N C M K) :
+    Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
+    Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) ∧
+    Q43_tParam M <= (Nat.log2 (Q43_grid_size n) + 1) * K + 1 := by
+  rcases h with ⟨hN, hM⟩
+  have hn1 : 1 <= n := Nat.le_trans (by decide : 1 <= 2) hn
+  have hmul : n <= Q43_grid_size n := by
+    calc
+      n = n * 1 := by simp
+      _ <= n * n := by
+        exact Nat.mul_le_mul_left n hn1
+  have hgrid : 2 <= Q43_grid_size n := Nat.le_trans hn hmul
+  have hM' : M <= (Q43_grid_size n) ^ K + 1 := Nat.le_trans hM (Nat.le_succ _)
+  have hpoly :
+      Q43_tParam M <= (Nat.log2 (Q43_grid_size n) + 1) * K + 1 :=
+    Q43_tParam_le_log2_poly_bound (n := Q43_grid_size n) (k := K) (M := M) hgrid hM'
+  exact ⟨Q43_log2_le_log2_grid_pow (n:=n) (N:=N) (C:=C) hN,
+    Q43_tParam_le_log2_grid_pow (n:=n) (M:=M) (K:=K) hM, hpoly⟩
+
+-- Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold:
+-- bundle the regime-d criterion with poly N/M log2 bounds.
+theorem Q43_regime_d_ok_polyNM_bounds {n N C M K : Nat} (hn : 2 <= n)
+    (hpow5 : Q43_thm41_log2_threshold_c1_grid_mul_pow5 n)
+    (hpoly : Q43_polyNM n N C M K) :
+    Q43_thm41_regime_d_ok n ∧
+      Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
+      Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) ∧
+      Q43_tParam M <= (Nat.log2 (Q43_grid_size n) + 1) * K + 1 := by
+  have hreg : Q43_thm41_regime_d_ok n :=
+    Q43_thm41_regime_d_ok_of_pow5 (n:=n) hn hpow5
+  have hbounds :
+      Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
+      Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) ∧
+      Q43_tParam M <= (Nat.log2 (Q43_grid_size n) + 1) * K + 1 :=
+    Q43_polyNM_log2_bounds (n:=n) (N:=N) (C:=C) (M:=M) (K:=K) hn hpoly
+  exact ⟨hreg, hbounds⟩
 
 -- Q43.S232-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare:
 -- bound log2(|F|^C) by (log2|F| + 1) * C.
