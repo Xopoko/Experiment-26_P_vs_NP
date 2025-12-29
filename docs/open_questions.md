@@ -41,8 +41,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S278-simplify-gap-min-bridge
-  - `NextStepID:` Q43.S279-gap-min-global-bridge-apply
+  - `LastStepID:` Q43.S279-gap-min-global-bridge-apply
+  - `NextStepID:` Q43.S280-gap-min-global-cleanup
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0).
@@ -52,15 +52,17 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Verified/Q43.lean`
     (Q43_nk, Q43_log2_jump_nk, Q43_grid_ratio_drop_nk_of_ge, Q43_grid_ratio_drop_nk,
+     Q43_gap_n_succ_eq, Q43_gap_min_ratio_drop_nk, Q43_gap_min_ratio_drop_global,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Invariant (uniform `k ≥ 12` bridge at `n_k`).
   - `Artifact:` Proof.
-  - `Update:` added `Q43_gap_min_ratio_drop_nk`, routing the gap-min ratio alias directly through
-    the uniform `Q43_grid_ratio_drop_nk` lemma (no k-list).
-  - `Use:` next: apply the bridge in the global gap-min statement (or remove obsolete k-list usages).
-  - `BarrierCheck:` A) Relativization check: yes (alias lemma over Nat inequalities).
+  - `Update:` added `Q43_gap_n_succ_eq` plus `Q43_gap_min_ratio_drop_global`, applying the uniform
+    `n_k` drop directly to the global gap-min ratio (oracle run remains all `-> ok`).
+  - `Use:` next: remove any remaining k-list uses and wire downstream gap-min statements through
+    `Q43_gap_min_ratio_drop_global`.
+  - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
   Details (context and audit parameter): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

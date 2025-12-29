@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S278-simplify-gap-min-bridge
-- `Do-not-repeat (next 2 runs):` Q43.S278-simplify-gap-min-bridge, Q43.S277-retire-gap-ks-list
+- `LastStepID:` Q43.S279-gap-min-global-bridge-apply
+- `Do-not-repeat (next 2 runs):` Q43.S279-gap-min-global-bridge-apply, Q43.S278-simplify-gap-min-bridge
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: alt54 contiguous shift oracle in; next step is classify contiguous shifts or barrier.
-Q43: gap-min bridge now points to the uniform n_k drop; next apply it in the global gap-min statement.
+Q43: gap-min global bridge applied; next cleanup/wire downstream uses to the uniform n_k drop.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: gap-min bridge now points to the uniform n_k drop; next apply it in the glo
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Compression/canonization->Invariant->Compression/canonization->Communication/Rank
+Latest:Equivalence->Invariant->Compression/canonization->Invariant->Compression/canonization

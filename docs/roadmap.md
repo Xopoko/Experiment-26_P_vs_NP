@@ -35,6 +35,13 @@ Q43 gap-min bridge simplification (Q43.S278):
 - Lean anchor: `formal/WIP/Verified/Q43.lean` (Q43_gap_min_ratio_drop_nk).
 - No new external sources required.
 
+Q43 gap-min global bridge apply (Q43.S279):
+- Apply the uniform `n_k` drop to the global gap-min ratio at `k=12`.
+- Align `n_k + 1` with the concrete `Q43_gap_n_succ` witness via a small equality lemma.
+- Removes the last dependency on the ad hoc gap witness for the global statement.
+- Lean anchor: `formal/WIP/Verified/Q43.lean` (Q43_gap_min_ratio_drop_global).
+- Next: wire downstream gap-min uses through the global lemma and drop obsolete k-list hooks.
+
 Key dependencies:
 - HR'22 switching lemma framework and evaluation definitions.
 - Precise handling of parameters (A, c1, c2) and depth thresholds.

@@ -980,6 +980,8 @@ theorem Q43_grid_ratio_mono_on_plateau_upper {k n m : Nat} (hk : 2 <= k)
 def Q43_gap_k : Nat := 12
 def Q43_gap_n : Nat := 5792
 def Q43_gap_n_succ : Nat := 5793
+theorem Q43_gap_n_succ_eq : Q43_gap_n + 1 = Q43_gap_n_succ := by
+  decide
 def Q43_gap_end_lo_k (k : Nat) : Nat := 5 * 2 ^ (k - 2)
 def Q43_gap_end_hi_k (k : Nat) : Nat := 3 * 2 ^ (k - 1)
 def Q43_gap_range_list_k (k : Nat) : List Nat :=
@@ -2125,6 +2127,15 @@ theorem Q43_grid_ratio_drop_nk {k : Nat} (hk : 12 <= k) :
 theorem Q43_gap_min_ratio_drop_nk {k : Nat} (hk : 12 <= k) :
     Q43_gap_min_ratio_k k (Q43_nk k + 1) < Q43_gap_min_ratio_k k (Q43_nk k) := by
   simpa [Q43_gap_min_ratio_k] using (Q43_grid_ratio_drop_nk (k := k) hk)
+
+-- Q43.S279-gap-min-global-bridge-apply:
+-- apply the uniform n_k bridge to the global gap-min ratio at k=12.
+theorem Q43_gap_min_ratio_drop_global :
+    Q43_gap_min_ratio < Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n := by
+  have hk : 12 <= Q43_gap_k := by
+    simp [Q43_gap_k]
+  have hdrop := Q43_gap_min_ratio_drop_nk (k := Q43_gap_k) hk
+  simpa [Q43_gap_min_ratio, Q43_gap_k, Q43_nk_eq_gap_n12, Q43_gap_n_succ_eq] using hdrop
 
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
