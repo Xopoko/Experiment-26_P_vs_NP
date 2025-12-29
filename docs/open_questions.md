@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S299-logn-remaining-scan
-  - `NextStepID:` Q43.S300-logn-nonimpact-check
+  - `LastStepID:` Q43.S300-logn-nonimpact-check
+  - `NextStepID:` Q43.S301-flat-eval-evaluation-statement
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -52,13 +52,14 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     (Q43_nk, Q43_log2_jump_nk, Q43_grid_ratio_drop_nk_of_ge, Q43_grid_ratio_drop_nk,
      Q43_gap_n_succ_eq, Q43_gap_min_ratio_drop_global,
      Q43_thm41_log2_threshold_c1_grid_param_of_log2,
+     Q43_thm41_regime_d_ok_param_of_log2,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Equivalence/translation (isolate the log2 N parameter).
+  - `Lens:` Invariant (log2 monotone bound).
   - `Artifact:` Proof.
-  - `Update:` isolated the remaining log2 N usage via a log2-bound parameter lemma.
-  - `Use:` next: check whether Thm. 4.1 is used in Thm. 4.3/Lemma 4.5 (logn-nonimpact-check).
+  - `Update:` lifted the log2 N bound to the full regime predicate via a dedicated lemma.
+  - `Use:` next: formalize the flat local-EF(s) evaluation statement (Q43.S200/Q43.S201 notes).
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

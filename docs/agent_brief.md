@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S299-logn-remaining-scan
-- `Do-not-repeat (next 2 runs):` Q43.S299-logn-remaining-scan, Q43.S298-gap-min-global-alias-cleanup
+- `LastStepID:` Q43.S300-logn-nonimpact-check
+- `Do-not-repeat (next 2 runs):` Q43.S300-logn-nonimpact-check, Q43.S299-logn-remaining-scan
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: isolated log2 N parameter; next check Thm. 4.1 dependency in Thm. 4.3/Lemma 4.5.
+Q43: log2 N bound lifted to regime predicate; next formalize flat local-EF(s) evaluation statement.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: isolated log2 N parameter; next check Thm. 4.1 dependency in Thm. 4.3/Lemma
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence/translation->Specification/definitions audit->Compression/canonization->Automation/tactic engineering->Compression/canonization
+Latest:Invariant->Equivalence/translation->Specification/definitions audit->Compression/canonization->Automation/tactic engineering
