@@ -2790,6 +2790,134 @@ theorem Q43_log2_jump_nk {k : Nat} (hk : 1 <= k) :
     (by simpa [Q43_grid_size, Nat.pow_two] using hhigh')
   simpa [Q43_grid_size, Nat.pow_two] using hlog
 
+-- Q43.S274-gap-drop-from-jump:
+-- connect the canonical log2 jump point `n_k` with the existing gap-drop counterexamples (k=12..25).
+theorem Q43_floorSqrt_eq_of_sq_bounds {n m : Nat}
+    (hlow : m ^ 2 <= n) (hhigh : n < (m + 1) ^ 2) : Q43_floorSqrt n = m := by
+  apply Nat.le_antisymm
+  ·
+    have hlt : Q43_floorSqrt n < m + 1 :=
+      Q43_floorSqrt_lt_of_lt_sq (n:=n) (b:=m + 1) (by simpa using hhigh)
+    exact (Nat.lt_succ_iff).1 hlt
+  · exact Q43_le_floorSqrt_of_sq_le (n:=n) (m:=m) hlow
+
+theorem Q43_nk_eq_gap_n12 : Q43_nk 12 = Q43_gap_n := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 12 + 1) - 1) (m:=Q43_gap_n) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n13 : Q43_nk 13 = Q43_gap_n13 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 13 + 1) - 1) (m:=Q43_gap_n13) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n14 : Q43_nk 14 = Q43_gap_n14 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 14 + 1) - 1) (m:=Q43_gap_n14) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n15 : Q43_nk 15 = Q43_gap_n15 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 15 + 1) - 1) (m:=Q43_gap_n15) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n16 : Q43_nk 16 = Q43_gap_n16 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 16 + 1) - 1) (m:=Q43_gap_n16) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n17 : Q43_nk 17 = Q43_gap_n17 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 17 + 1) - 1) (m:=Q43_gap_n17) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n18 : Q43_nk 18 = Q43_gap_n18 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 18 + 1) - 1) (m:=Q43_gap_n18) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n19 : Q43_nk 19 = Q43_gap_n19 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 19 + 1) - 1) (m:=Q43_gap_n19) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n20 : Q43_nk 20 = Q43_gap_n20 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 20 + 1) - 1) (m:=Q43_gap_n20) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n21 : Q43_nk 21 = Q43_gap_n21 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 21 + 1) - 1) (m:=Q43_gap_n21) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n22 : Q43_nk 22 = Q43_gap_n22 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 22 + 1) - 1) (m:=Q43_gap_n22) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n23 : Q43_nk 23 = Q43_gap_n23 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 23 + 1) - 1) (m:=Q43_gap_n23) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n24 : Q43_nk 24 = Q43_gap_n24 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 24 + 1) - 1) (m:=Q43_gap_n24) (by decide) (by decide)
+
+theorem Q43_nk_eq_gap_n25 : Q43_nk 25 = Q43_gap_n25 := by
+  unfold Q43_nk
+  refine
+    Q43_floorSqrt_eq_of_sq_bounds (n:=2 ^ (2 * 25 + 1) - 1) (m:=Q43_gap_n25) (by decide) (by decide)
+
+def Q43_gap_ks : List Nat := [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+
+theorem Q43_grid_ratio_drop_nk_of_mem {k : Nat} (hk : k ∈ Q43_gap_ks) :
+    Q43_grid_ratio (Q43_nk k + 1) < Q43_grid_ratio (Q43_nk k) := by
+  simp [Q43_gap_ks] at hk
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n12, Q43_gap_n, Q43_gap_n_succ] using Q43_grid_ratio_drop_gap
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n13, Q43_gap_n13, Q43_gap_n13_succ] using Q43_grid_ratio_drop_gap_k13
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n14, Q43_gap_n14, Q43_gap_n14_succ] using Q43_grid_ratio_drop_gap_k14
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n15, Q43_gap_n15, Q43_gap_n15_succ] using Q43_grid_ratio_drop_gap_k15
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n16, Q43_gap_n16, Q43_gap_n16_succ] using Q43_grid_ratio_drop_gap_k16
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n17, Q43_gap_n17, Q43_gap_n17_succ] using Q43_grid_ratio_drop_gap_k17
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n18, Q43_gap_n18, Q43_gap_n18_succ] using Q43_grid_ratio_drop_gap_k18
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n19, Q43_gap_n19, Q43_gap_n19_succ] using Q43_grid_ratio_drop_gap_k19
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n20, Q43_gap_n20, Q43_gap_n20_succ] using Q43_grid_ratio_drop_gap_k20
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n21, Q43_gap_n21, Q43_gap_n21_succ] using Q43_grid_ratio_drop_gap_k21
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n22, Q43_gap_n22, Q43_gap_n22_succ] using Q43_grid_ratio_drop_gap_k22
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n23, Q43_gap_n23, Q43_gap_n23_succ] using Q43_grid_ratio_drop_gap_k23
+  rcases hk with rfl | hk
+  ·
+    simpa [Q43_nk_eq_gap_n24, Q43_gap_n24, Q43_gap_n24_succ] using Q43_grid_ratio_drop_gap_k24
+  cases hk
+  simpa [Q43_nk_eq_gap_n25, Q43_gap_n25, Q43_gap_n25_succ] using Q43_grid_ratio_drop_gap_k25
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial

@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S273-log2-jump-nk
-- `Do-not-repeat (next 2 runs):` Q43.S273-log2-jump-nk, Q39.S142-toy-alt54-rank2-oracle
+- `LastStepID:` Q43.S274-gap-drop-from-jump
+- `Do-not-repeat (next 2 runs):` Q43.S274-gap-drop-from-jump, Q43.S273-log2-jump-nk
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: alt54 contiguous shift oracle in; next step is classify contiguous shifts or barrier.
-Q43: log2 jump at n_k^2 in Work.lean; next step is derive the gap-drop lemma from the jump.
+Q43: gap-drop counterexamples linked to n_k (k=12..25); next step extend to k=26..30 or prove uniform k≥12.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: log2 jump at n_k^2 in Work.lean; next step is derive the gap-drop lemma fro
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Compression/canonization->Communication/Rank->Invariant->Communication/Rank->Communication/Rank
+Latest:Invariant->Compression/canonization->Communication/Rank->Invariant->Communication/Rank
