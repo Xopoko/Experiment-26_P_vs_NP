@@ -18,7 +18,7 @@ with the result reduced to a **strictly verified kernel**.
     2) imported from the official standard library (mathlib/Coq stdlib/...).
 
 Markdown text (`docs/`) is **readable navigation and explanation**, but **the truth is in `formal/`**.
-Doc-comments in `formal/Notes/*.lean` - these are **notes**, not formal evidence.
+Doc-comments in `formal/Notes/*.lean` are notes, not formal proofs.
 
 ---
 
@@ -29,12 +29,12 @@ Doc-comments in `formal/Notes/*.lean` - these are **notes**, not formal evidence
   - `roadmap.md` -- selected tracks and "dependency tree".
   - `open_questions.md` -- active backlog of micro-issues (with NextStepID).
   - `agent_brief.md` -- project RAM (with Do-not-repeat).
-  - `sources.md` - exactly those sources that we actually rely on.
+  - `sources.md` -- exactly the sources we actually rely on.
 - `formal/`
-- `PvNP/Core/` -- definitions and evidence.
-  - `Notes/` - long research notes in Lean (doccomments, Lean-first).
+- `PvNP/Core/` -- definitions and proofs.
+  - `Notes/` -- long research notes in Lean (doc-comments, Lean-first).
 - `scripts/`
-  - `verify_notebook.py` -- checking the md structure (if any).
+  - `verify_notebook.py` -- checks markdown structure (if present).
   - `verify_all.sh` -- general CI gate: markdown + formalization.
 - `agent/logs/` -- run logs (optional).
 
@@ -42,21 +42,21 @@ Doc-comments in `formal/Notes/*.lean` - these are **notes**, not formal evidence
 
 ## Trust model
 
-Any artifact type `Proof` is considered "accepted" only if:
+Any artifact of type `Proof` is considered "accepted" only if:
 
-- there is a Lean-proof (formally compiled), or
-is a trivial step that can be checked by the compiler (like a definition refactor).
+- there is a Lean proof (formally compiled), or
+- it is a trivial step that can be checked by the compiler (like a definition refactor).
 
 External statements are captured **only** as exact references in `docs/sources.md`
-and/or in notes `formal/Notes/*.lean` (without adding axioms).
+and/or as notes in `formal/Notes/*.lean` (without adding axioms).
 
 ---
 
 ## Role: WORKER
 
-In every launch you are a WORKER.
-You take **exactly 1 research step** and get to the artifact you are checking
-(See "Artifacts").
+In each run you are a WORKER.
+You take **exactly 1 research step** and deliver a verifiable artifact
+(see "Artifacts").
 
 Required actions:
 
