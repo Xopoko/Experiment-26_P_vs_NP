@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S301-flat-eval-evaluation-statement
-- `Do-not-repeat (next 2 runs):` Q43.S301-flat-eval-evaluation-statement, Q43.S300-logn-nonimpact-check
+- `LastStepID:` Q43.S302-flat-eval-proofsize-to-linemax
+- `Do-not-repeat (next 2 runs):` Q43.S302-flat-eval-proofsize-to-linemax, Q43.S301-flat-eval-evaluation-statement
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: added log2 polynomial size bound; next instantiate the lineMax bound and quasi-poly case.
+Q43: pushed log2 bound to lineMax; next record quasi-poly lineMax bound.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: added log2 polynomial size bound; next instantiate the lineMax bound and qu
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Trade-off->Invariant->Equivalence/translation->Specification/definitions audit->Compression/canonization
+Latest:Invariant->Trade-off->Invariant->Equivalence/translation->Specification/definitions audit

@@ -576,6 +576,15 @@ theorem Q43_tParam_le_log2_poly_bound {n k M : Nat} (hn : 2 <= n) (hM : M <= n ^
     Q43_log2_poly_bound (n := n) (k := k) hn
   simpa [Q43_tParam] using (Nat.le_trans hlog hpoly)
 
+-- Q43.S302-flat-eval-proofsize-to-linemax:
+-- specialize the polynomial log2 bound to lineMax via proofSize.
+theorem Q43_tParam_lineMax_le_log2_poly_bound {α : Type} {proof : List (List α)} {n k : Nat}
+    (hn : 2 <= n) (hsize : Q43_proofSize proof <= n ^ k + 1) :
+    Q43_tParam (Q43_lineMax proof) <= (Nat.log2 n + 1) * k + 1 := by
+  have hline : Q43_lineMax proof <= Q43_proofSize proof := Q43_lineMax_le_proofSize proof
+  have hM : Q43_lineMax proof <= n ^ k + 1 := Nat.le_trans hline hsize
+  exact Q43_tParam_le_log2_poly_bound (n := n) (k := k) (M := Q43_lineMax proof) hn hM
+
 theorem Q43_polyNM_log2_bounds {n N C M K : Nat} (hn : 2 <= n) (h : Q43_polyNM n N C M K) :
     Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
     Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) ∧
