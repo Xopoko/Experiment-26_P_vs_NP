@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S284-gap-min-global-le-bridge
-- `Do-not-repeat (next 2 runs):` Q43.S284-gap-min-global-le-bridge, Q43.S283-gap-min-global-succ-use
+- `LastStepID:` Q43.S285-gap-min-global-route
+- `Do-not-repeat (next 2 runs):` Q43.S285-gap-min-global-route, Q43.S284-gap-min-global-le-bridge
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: succ-le now factors through a generic lt bridge; next route remaining uses through that bridge.
+Q43: gap-min global drop now routes via the grid_ratio bridge; next remove remaining k-list rewrites.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: succ-le now factors through a generic lt bridge; next route remaining uses 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Compression/canonization->Invariant->Trade-off->Invariant
+Latest:Compression/canonization->Invariant->Trade-off->Invariant->Equivalence/translation
