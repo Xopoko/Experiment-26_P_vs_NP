@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S303-flat-eval-quasipoly-linemax
-- `Do-not-repeat (next 2 runs):` Q43.S303-flat-eval-quasipoly-linemax, Q43.S302-flat-eval-proofsize-to-linemax
+- `LastStepID:` Q43.S304-flat-eval-quasipoly-bridge
+- `Do-not-repeat (next 2 runs):` Q43.S304-flat-eval-quasipoly-bridge, Q43.S303-flat-eval-quasipoly-linemax
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: added quasi-poly lineMax bound; next bridge it into the flat evaluation statement.
+Q43: specialized quasi-poly bound to grid size; next apply it in the evaluation statement.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: added quasi-poly lineMax bound; next bridge it into the flat evaluation sta
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Trade-off->Invariant->Trade-off->Invariant->Equivalence/translation
+Latest:Equivalence/translation->Trade-off->Invariant->Trade-off->Invariant

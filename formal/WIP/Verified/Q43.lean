@@ -602,6 +602,15 @@ theorem Q43_tParam_lineMax_le_polylog_of_quasipoly {α : Type} {proof : List (Li
   have hM : Q43_lineMax proof <= 2 ^ ((Nat.log2 n) ^ (c + 1)) := Nat.le_trans hline hsize
   exact Q43_tParam_le_polylog_of_quasipoly (n := n) (c := c) (M := Q43_lineMax proof) hM
 
+-- Q43.S304-flat-eval-quasipoly-bridge:
+-- specialize the quasi-poly lineMax bound to grid size |F| = n^2.
+@[simp] theorem Q43_tParam_lineMax_le_polylog_of_quasipoly_grid {α : Type}
+    {proof : List (List α)} {n c : Nat}
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1))) :
+    Q43_tParam (Q43_lineMax proof) <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
+  exact Q43_tParam_lineMax_le_polylog_of_quasipoly
+    (n := Q43_grid_size n) (c := c) (proof := proof) hsize
+
 theorem Q43_polyNM_log2_bounds {n N C M K : Nat} (hn : 2 <= n) (h : Q43_polyNM n N C M K) :
     Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
     Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) ∧

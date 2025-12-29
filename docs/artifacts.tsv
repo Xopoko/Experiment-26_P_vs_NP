@@ -29,3 +29,4 @@ Q43.S299-logn-remaining-scan	Proof	formal/WIP/Verified/Q43.lean	ffdfedb6688451e0
 Q43.S300-logn-nonimpact-check	Proof	formal/WIP/Verified/Q43.lean	cc45eb82e4b4ab0a1213f62dbf09715160e73ad4	lift log2 N regime
 Q43.S301-flat-eval-evaluation-statement	Proof	formal/WIP/Verified/Q43.lean	3f55f1de5844c2556bcd81bbbcd3e3715483344d	log2 polynomial t-parameter bound
 Q43.S302-flat-eval-proofsize-to-linemax	Proof	formal/WIP/Verified/Q43.lean	0ffe5a5c3e43bf6030066b5ea194db70f9f6a2c4	lineMax t-parameter bound
+Q43.S303-flat-eval-quasipoly-linemax	Proof	formal/WIP/Verified/Q43.lean	90fb543041827f081ff7709f547874fd28ffdf23	quasi-poly lineMax bound
