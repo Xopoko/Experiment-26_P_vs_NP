@@ -60,10 +60,10 @@ if [ -d formal ] && [ -f formal/lakefile.lean ]; then
       } 2>/dev/null | sort -u
     )"
     if printf '%s\n' "$changed" | grep -q '^formal/WIP/'; then
-      set_default BUILD_WIP 1
+      BUILD_WIP=1
     fi
     if printf '%s\n' "$changed" | grep -q '^formal/Notes/'; then
-      set_default BUILD_NOTES 1
+      BUILD_NOTES=1
     fi
   fi
   if [ "${REQUIRE_LEAN:-}" = "0" ] && [ -n "$changed" ]; then
@@ -76,6 +76,10 @@ if [ -d formal ] && [ -f formal/lakefile.lean ]; then
   fi
 
   if command -v lake >/dev/null 2>&1; then
+    if [ "${LEAN_FORCE_REBUILD:-1}" = "1" ]; then
+      echo "INFO: LEAN_FORCE_REBUILD=1 (running lake clean PvNP)"
+      (cd formal && lake clean PvNP)
+    fi
     scan_for_pattern() {
       local pattern="$1"
       local dir="$2"

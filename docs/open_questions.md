@@ -41,27 +41,26 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S276-gap-drop-nk-uniform-kge12
-  - `NextStepID:` Q43.S277-retire-gap-ks-list
+  - `LastStepID:` Q43.S278-simplify-gap-min-bridge
+  - `NextStepID:` Q43.S279-gap-min-global-bridge-apply
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0).
-  - `StopRule:` if removing `Q43_gap_ks` and the k=12..30 bridge breaks downstream, record the dependency and stop.
+  - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
     then derive a general gap-drop lemma from the jump.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Verified/Q43.lean`
-    (Q43_nk, Q43_log2_jump_nk, Q43_grid_ratio_drop_nk_of_ge,
+    (Q43_nk, Q43_log2_jump_nk, Q43_grid_ratio_drop_nk_of_ge, Q43_grid_ratio_drop_nk,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Compression/canonization (explicit bridge at `n_k`).
+  - `Lens:` Invariant (uniform `k ≥ 12` bridge at `n_k`).
   - `Artifact:` Proof.
-  - `Update:` proved a uniform lemma `Q43_grid_ratio_drop_nk_of_ge` for all `k ≥ 12`
-    (k=12 by `Q43_grid_ratio_drop_gap`, k≥13 via a cross-multiplication argument using the power-gap
-    bound `(a+1)^5 - a^5 ≥ 5*a^4`).
-  - `Use:` next: retire `Q43_gap_ks` and the k=12..30 bridge in favor of the uniform lemma.
-  - `BarrierCheck:` A) Relativization check: yes (Nat floor-sqrt + log2 bounds).
+  - `Update:` added `Q43_gap_min_ratio_drop_nk`, routing the gap-min ratio alias directly through
+    the uniform `Q43_grid_ratio_drop_nk` lemma (no k-list).
+  - `Use:` next: apply the bridge in the global gap-min statement (or remove obsolete k-list usages).
+  - `BarrierCheck:` A) Relativization check: yes (alias lemma over Nat inequalities).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
   Details (context and audit parameter): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.

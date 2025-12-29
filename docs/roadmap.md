@@ -28,6 +28,13 @@ Q43 log2 monotonicity in n (Q43.S239):
 - Supports lifting the regime-d threshold from n0 to larger n.
 - Lean anchor: `formal/WIP/Verified/Q43.lean` (Q43_log2_grid_size_mono).
 
+Q43 gap-min bridge simplification (Q43.S278):
+- Route the gap-min ratio alias through the uniform `n_k` drop lemma instead of k-lists.
+- This keeps the ratio-drop witness uniform for all `k ≥ 12`.
+- The bridge is now a one-line Lean proof that reuses `Q43_grid_ratio_drop_nk`.
+- Lean anchor: `formal/WIP/Verified/Q43.lean` (Q43_gap_min_ratio_drop_nk).
+- No new external sources required.
+
 Key dependencies:
 - HR'22 switching lemma framework and evaluation definitions.
 - Precise handling of parameters (A, c1, c2) and depth thresholds.

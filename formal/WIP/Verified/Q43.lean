@@ -1724,7 +1724,7 @@ theorem Q43_nk_lt_pow_succ (k : Nat) : Q43_nk k < 2 ^ (k + 1) := by
         symm
         exact hpow'
       _ = 2 ^ (2 * k + 2) := by
-        simp [Nat.add_mul, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc, Nat.mul_add, Nat.add_assoc]
+        simp [Nat.add_mul, Nat.mul_comm]
   have hlt : 2 ^ (2 * k + 1) - 1 < (2 ^ (k + 1)) ^ 2 := by
     simpa [hpow] using hlt'
   exact Q43_floorSqrt_lt_of_lt_sq (n := 2 ^ (2 * k + 1) - 1) (b := 2 ^ (k + 1)) hlt
@@ -1741,8 +1741,8 @@ theorem Q43_nk_sq_ge_pow_sub (k : Nat) :
   have hlow : 2 ^ (2 * k + 1) <= (Q43_nk k + 1) ^ 2 := Q43_nk_succ_sq_ge k
   have hle : 2 ^ (2 * k + 1) <= (Q43_nk k) ^ 2 + 2 ^ (k + 2) := by
     have hsq : (Q43_nk k + 1) ^ 2 = (Q43_nk k) ^ 2 + (2 * Q43_nk k + 1) := by
-      simp [Nat.pow_two, Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm,
-        Nat.add_assoc, Nat.add_left_comm, Nat.add_comm, Nat.two_mul]
+      simp [Nat.pow_two, Nat.mul_add, Nat.mul_comm, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm,
+        Nat.two_mul]
     have h2 : (Q43_nk k) ^ 2 + (2 * Q43_nk k + 1) <= (Q43_nk k) ^ 2 + 2 ^ (k + 2) :=
       Nat.add_le_add_left (Q43_two_nk_add_one_le_pow k) _
     have hstep : (Q43_nk k + 1) ^ 2 <= (Q43_nk k) ^ 2 + 2 ^ (k + 2) := by
@@ -1761,7 +1761,7 @@ theorem Q43_pow6_succ_le_mul4 (k : Nat) (hk : 4 <= k) :
     have h12 : 12 <= 2 * k + 5 := Nat.add_le_add_right h7 5
     have h' : 8 * k + 12 <= 8 * k + (2 * k + 5) := Nat.add_le_add_left h12 (8 * k)
     have h'' : 4 * (2 * k + 3) <= 8 * k + 12 := by
-      simp [Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm, Nat.add_assoc]
+      simp [Nat.add_mul, Nat.mul_assoc, Nat.mul_comm]
     have h''' : 8 * k + (2 * k + 5) = 5 * (2 * k + 1) := by
       omega
     exact Nat.le_trans h'' (by simpa [h'''] using h')
@@ -1777,9 +1777,9 @@ theorem Q43_pow6_succ_le_mul4 (k : Nat) (hk : 4 <= k) :
     have hconst : 16384 = 4096 * 4 := by decide
     calc
       16384 * (2 * k + 1) ^ 6 = (4096 * 4) * (2 * k + 1) ^ 6 := by
-        simpa [hconst]
+        simp [hconst]
       _ = 4096 * (4 * (2 * k + 1) ^ 6) := by
-        simpa using (Nat.mul_assoc 4096 4 ((2 * k + 1) ^ 6))
+        ac_rfl
   have hfinal : 4096 * (2 * k + 3) ^ 6 <= 4096 * (4 * (2 * k + 1) ^ 6) := by
     simpa [hpow4] using hpow''
   have : (2 * k + 3) ^ 6 <= 4 * (2 * k + 1) ^ 6 :=
@@ -1825,11 +1825,11 @@ theorem Q43_pow6_le_three_pow2_ge13 {k : Nat} (hk : 13 <= k) :
           calc
             4 * (3 * 2 ^ (2 * (13 + m) + 1))
                 = 3 * (2 ^ (2 * (13 + m) + 1) * 4) := by
-                    simp [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm]
+                    simp [Nat.mul_left_comm, Nat.mul_comm]
             _ = 3 * 2 ^ ((2 * (13 + m) + 1) + 2) := by
                     simp [hpow_mul]
             _ = 3 * 2 ^ (2 * ((13 + m) + 1) + 1) := by
-                    simpa [hexp]
+                    simp [hexp]
         have hpow_le :
             4 * (3 * 2 ^ (2 * (13 + m) + 1)) <= 3 * 2 ^ (2 * ((13 + m) + 1) + 1) :=
           Nat.le_of_eq hpow
@@ -1856,7 +1856,7 @@ theorem Q43_pow2_ge_two_mul_add_ge13 {k : Nat} (hk : 13 <= k) : 2 * k + 5 <= 2 ^
             _ = 2 ^ (13 + m) * 2 := by
               simpa using (Nat.pow_add_one 2 (13 + m))
             _ = 2 * 2 ^ (13 + m) := by
-              simp [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+              simp [Nat.mul_comm]
         have hmul : (2 * (13 + m) + 5) + 2 <= 2 * 2 ^ (13 + m) := by
           have hpos : 2 <= 2 * (13 + m) + 5 := by
             exact Nat.le_trans (by decide : 2 <= 5) (Nat.le_add_left 5 (2 * (13 + m)))
@@ -1877,7 +1877,7 @@ theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :
     a ^ (n + 1) + (n + 1) * a ^ n <= (a + 1) ^ (n + 1) := by
   induction n with
   | zero =>
-      simp [Nat.pow_succ, Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm]
+      simp [Nat.pow_succ, Nat.mul_add, Nat.mul_comm]
   | succ n ih =>
       have ih_mul :
           a * (a ^ (n + 1) + (n + 1) * a ^ n) <= a * (a + 1) ^ (n + 1) :=
@@ -1934,8 +1934,8 @@ theorem Q43_key_ineq_ge13 {k : Nat} (hk : 13 <= k) :
         (2 ^ k) * 2 ^ (k + 2) = 2 ^ (k + (k + 2)) := by
           simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using (Nat.pow_add 2 k (k + 2)).symm
         _ = 2 ^ (2 * k + 2) := by
-          simp [Nat.add_assoc, Nat.add_left_comm, Nat.add_comm, Nat.two_mul]
-    exact Nat.le_trans hmul (by simpa [hpow])
+          simp [Nat.add_assoc, Nat.two_mul]
+    exact Nat.le_trans hmul (by simp [hpow])
   have h5B : 5 * 2 ^ (k + 2) <= 2 ^ (2 * k + 2) := by
     have h5 : 5 <= 2 * k + 5 := Nat.le_add_left 5 (2 * k)
     have h5mul : 5 * 2 ^ (k + 2) <= (2 * k + 5) * 2 ^ (k + 2) :=
@@ -1954,7 +1954,7 @@ theorem Q43_key_ineq_ge13 {k : Nat} (hk : 13 <= k) :
         <= (2 ^ (2 * k + 2) - 5 * 2 ^ (k + 2)) + 3 * 2 ^ (2 * k + 1) := by
     have : (2 * k) * (2 ^ (k + 2) + (2 * k + 1) ^ 5)
         = (2 * k) * 2 ^ (k + 2) + (2 * k) * (2 * k + 1) ^ 5 := by
-      simp [Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm, Nat.add_assoc]
+      simp [Nat.mul_add, Nat.mul_assoc, Nat.mul_comm]
     rw [this]
     exact Nat.add_le_add hexp' hpoly
   have hpow : (2 ^ (2 * k + 2) - 5 * 2 ^ (k + 2)) + 3 * 2 ^ (2 * k + 1) =
@@ -1962,20 +1962,20 @@ theorem Q43_key_ineq_ge13 {k : Nat} (hk : 13 <= k) :
     let A : Nat := 2 ^ (2 * k + 1)
     let B : Nat := 2 ^ (k + 2)
     have hA : 2 ^ (2 * k + 2) = 2 * A := by
-      simp [A, Nat.pow_succ, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+      simp [A, Nat.pow_succ, Nat.mul_comm]
     have h5B' : 5 * B <= 2 * A := by
       simpa [A, B, hA] using h5B
     calc
       (2 ^ (2 * k + 2) - 5 * B) + 3 * A = (2 * A - 5 * B) + 3 * A := by
-        simpa [A, B, hA]
+        simp [A, B, hA]
       _ = 3 * A + (2 * A - 5 * B) := by
-        simpa [Nat.add_comm]
+        simp [Nat.add_comm]
       _ = 3 * A + 2 * A - 5 * B := by
         simpa [Nat.add_assoc] using (Nat.add_sub_assoc h5B' (n := 3 * A)).symm
       _ = (3 + 2) * A - 5 * B := by
         have h : 3 * A + 2 * A = (3 + 2) * A := by
           simpa [Nat.add_comm, Nat.add_left_comm, Nat.add_assoc] using (Nat.add_mul 3 2 A).symm
-        simpa [h]
+        simp [h]
       _ = 5 * A - 5 * B := by
         simp
       _ = 5 * (A - B) := by
@@ -2041,8 +2041,8 @@ theorem Q43_grid_ratio_drop_nk_of_ge {k : Nat} (hk : 12 <= k) :
     have hdiff : d0 * (2 * n + 1 + d1) <= Q43_grid_size n * (d1 - d0) :=
       Nat.le_trans hkey_pow hgap'
     have hgrid_succ : Q43_grid_size (n + 1) = Q43_grid_size n + (2 * n + 1) := by
-      simp [Q43_grid_size, Nat.pow_two, Nat.two_mul, Nat.mul_add, Nat.add_mul, Nat.mul_assoc,
-        Nat.mul_left_comm, Nat.mul_comm, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
+      simp [Q43_grid_size, Nat.two_mul, Nat.mul_add, Nat.mul_comm, Nat.add_assoc, Nat.add_left_comm,
+        Nat.add_comm]
     have hcross : d0 * (Q43_grid_size (n + 1) + d1) <= Q43_grid_size n * d1 := by
       have hplus :
           d0 * Q43_grid_size n + d0 * (2 * n + 1 + d1)
@@ -2067,12 +2067,12 @@ theorem Q43_grid_ratio_drop_nk_of_ge {k : Nat} (hk : 12 <= k) :
         calc
           d0 * Q43_grid_size n + Q43_grid_size n * (d1 - d0)
               = Q43_grid_size n * d0 + Q43_grid_size n * (d1 - d0) := by
-                  simpa [hfirst]
+                  simp [hfirst]
           _ = Q43_grid_size n * (d0 + (d1 - d0)) := by
                   symm
-                  simp [Nat.mul_add, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
+                  simp [Nat.mul_add]
           _ = Q43_grid_size n * (d1 - d0 + d0) := by
-                  simp [Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
+                  simp [Nat.add_comm]
           _ = Q43_grid_size n * d1 := by
                   simp [hadd]
       calc
@@ -2116,14 +2116,15 @@ theorem Q43_grid_ratio_drop_nk_of_ge {k : Nat} (hk : 12 <= k) :
     -- finish by rewriting n = Q43_nk k
     simpa [n, Nat.add_assoc] using this
 
-def Q43_gap_ks : List Nat := [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
-
-theorem Q43_grid_ratio_drop_nk_of_mem {k : Nat} (hk : k ∈ Q43_gap_ks) :
+theorem Q43_grid_ratio_drop_nk {k : Nat} (hk : 12 <= k) :
     Q43_grid_ratio (Q43_nk k + 1) < Q43_grid_ratio (Q43_nk k) := by
-  have hk12 : 12 <= k := by
-    have hall : ∀ x, x ∈ Q43_gap_ks → 12 <= x := by decide
-    exact hall k hk
-  exact Q43_grid_ratio_drop_nk_of_ge hk12
+  simpa using (Q43_grid_ratio_drop_nk_of_ge (k := k) hk)
+
+-- Q43.S278-simplify-gap-min-bridge:
+-- bridge the gap-min ratio alias directly to the uniform n_k drop.
+theorem Q43_gap_min_ratio_drop_nk {k : Nat} (hk : 12 <= k) :
+    Q43_gap_min_ratio_k k (Q43_nk k + 1) < Q43_gap_min_ratio_k k (Q43_nk k) := by
+  simpa [Q43_gap_min_ratio_k] using (Q43_grid_ratio_drop_nk (k := k) hk)
 
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by

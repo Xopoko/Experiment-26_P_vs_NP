@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S276-gap-drop-nk-uniform-kge12
-- `Do-not-repeat (next 2 runs):` Q43.S276-gap-drop-nk-uniform-kge12, Q43.S275-gap-drop-nk-k26-k30
+- `LastStepID:` Q43.S278-simplify-gap-min-bridge
+- `Do-not-repeat (next 2 runs):` Q43.S278-simplify-gap-min-bridge, Q43.S277-retire-gap-ks-list
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: alt54 contiguous shift oracle in; next step is classify contiguous shifts or barrier.
-Q43: uniform k≥12 ratio-drop lemma at `n_k` done; next step is retire the k-list bridge (`Q43_gap_ks`).
+Q43: gap-min bridge now points to the uniform n_k drop; next apply it in the global gap-min statement.
 
 ## What has already been done (do not repeat)
 
