@@ -29,6 +29,8 @@ Doc-comments in `formal/Notes/*.lean` are notes, not formal proofs.
   - `roadmap.md` -- selected tracks and "dependency tree".
   - `open_questions.md` -- active backlog of micro-issues (with NextStepID).
   - `agent_brief.md` -- project RAM (with Do-not-repeat).
+  - `planned.tsv` -- planned artifact queue (Commit = PENDING).
+  - `artifacts.tsv` -- completed artifact log (Commit = git hash).
   - `sources.md` -- exactly the sources we actually rely on.
 - `formal/`
 - `PvNP/Core/` -- definitions and proofs.
@@ -76,8 +78,12 @@ to link Proof steps to a specific Lean file.
 
 0) Read `docs/agent_brief.md` and check Do-not-repeat.
 1) Select 1 active item from `docs/open_questions.md`.
+   - If any ACTIVE P0 is not in cooldown, pick it.
+   - Pick P1 only if all P0 are BLOCKED/cooldown.
 2) Pick **one** lens (see below) - don't repeat a lens 2 runs in a row.
 3) Formulate a **formal statement** (definitions + quantifiers).
+   - Before a Lean proof attempt, run retrieval: `rg` in `formal/` and `resources/text_cache/`.
+   - If Lean tools are available, try `#find` / `simp?` / `aesop?` to locate lemmas.
 4) Do a toy test/limited case and try to **kill** the idea first:
    - counterexample,
    - reduction to the known,
@@ -94,6 +100,10 @@ Note: if you cannot add Lean code, choose an artifact **not Proof**.
 ## Artifacts (exactly one per launch)
 
 Choose one type and produce it completely.
+
+Artifact logs:
+- `docs/artifacts.tsv` records completed artifacts only (Commit = git hash).
+- `docs/planned.tsv` records queued/planned items only (Commit = PENDING).
 
 ### 1) Proof
 
@@ -148,6 +158,10 @@ Choose one type and produce it completely.
 ## Barrier protocol (mandatory, according to template)
 
 At the end of each step (in the step note in `formal/Notes/*.lean` or briefly in `docs/open_questions.md`) fill in:
+
+When the step touches separation/lower bounds, include canonical barrier citations
+(Baker-Gill-Solovay 1975, Razborov-Rudich 1997, Aaronson-Wigderson 2008) and ensure
+they are listed in `docs/sources.md`.
 
 ### A) Relativization check
 

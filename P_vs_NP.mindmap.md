@@ -35,7 +35,7 @@ flowchart TD
   A --> G[Tooling]
   G --> G1[verify all]
   G --> G2[verify notebook]
-  G --> G3[artifacts log]
+  G --> G3[artifacts log (done) + planned log]
   G --> G4[agent prompt]
 
   A --> H[Resources]

@@ -34,7 +34,7 @@ flowchart TD
   E --> E1["docs/open_questions.md"]
   E --> E2["Build 1 artifact"]
   E2 --> E3["Update docs/agent_brief.md"]
-  E2 --> E4["Append docs/artifacts.tsv"]
+  E2 --> E4["Append docs/artifacts.tsv (done)\nUpdate docs/planned.tsv (queue)"]
   E3 --> E5["scripts/verify_all.sh"]
   E4 --> E5
   E5 --> E6["Commit with StepID"]

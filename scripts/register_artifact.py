@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -21,14 +22,34 @@ def _parse_step_id(value: str) -> str:
     return token
 
 
-def _parse_commit(value: str) -> str:
+def _git_head() -> str:
+    try:
+        res = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except Exception as exc:  # noqa: BLE001 - pass through
+        raise ValueError(f"failed to resolve git HEAD: {exc}") from exc
+    token = res.stdout.strip()
+    if not token:
+        raise ValueError("git HEAD is empty")
+    return token
+
+
+def _parse_commit(value: str, *, allow_pending: bool, default_to_head: bool) -> str:
     token = value.strip()
+    if not token and default_to_head:
+        token = _git_head()
     if not token:
         raise ValueError("missing Commit")
     if token == "PENDING":
-        return token
+        if allow_pending:
+            return token
+        raise ValueError("Commit cannot be PENDING for done artifacts")
     if not re.fullmatch(r"[0-9a-fA-F]{7,40}", token):
-        raise ValueError(f"invalid Commit {token!r} (expected hex or PENDING)")
+        raise ValueError(f"invalid Commit {token!r} (expected hex)")
     return token
 
 
@@ -96,8 +117,10 @@ def main() -> int:
     parser.add_argument("--lean-target", required=True, help="Target Lean file")
     parser.add_argument("--info-gain", required=True, choices=["0", "1", "2"])
     parser.add_argument("--notes", default="", help="Optional notes")
-    parser.add_argument("--commit", default="PENDING", help="Commit hash or PENDING")
-    parser.add_argument("--artifacts", default="docs/artifacts.tsv", help="Path to artifacts log")
+    parser.add_argument("--commit", default="", help="Commit hash (defaults to HEAD for done log)")
+    parser.add_argument("--planned", action="store_true", help="Write to planned log with PENDING commit")
+    parser.add_argument("--artifacts", default="docs/artifacts.tsv", help="Path to done artifacts log")
+    parser.add_argument("--planned-log", default="docs/planned.tsv", help="Path to planned log")
     parser.add_argument("--agent-brief", default="docs/agent_brief.md", help="Path to agent brief")
     args = parser.parse_args()
 
@@ -106,13 +129,20 @@ def main() -> int:
     lean_target = args.lean_target.strip()
     info_gain = args.info_gain.strip()
     notes = args.notes.strip()
-    commit = _parse_commit(args.commit)
+    if args.planned:
+        if args.commit.strip() and args.commit.strip() != "PENDING":
+            print("error: planned log only accepts Commit=PENDING", file=sys.stderr)
+            return 2
+        commit = _parse_commit("PENDING", allow_pending=True, default_to_head=False)
+        artifacts_path = Path(args.planned_log)
+    else:
+        commit = _parse_commit(args.commit, allow_pending=False, default_to_head=True)
+        artifacts_path = Path(args.artifacts)
 
     if not lean_target:
         print("error: empty --lean-target", file=sys.stderr)
         return 2
 
-    artifacts_path = Path(args.artifacts)
     headers, rows = _load_artifacts(artifacts_path)
     if headers != ["StepID", "Type", "LeanTarget", "Commit", "Notes"]:
         print(f"error: unexpected header in {artifacts_path}: {headers}", file=sys.stderr)
@@ -133,7 +163,8 @@ def main() -> int:
     )
     _write_artifacts(artifacts_path, headers, rows)
 
-    _update_agent_brief(Path(args.agent_brief), step_id=step_id, info_gain=info_gain)
+    if not args.planned:
+        _update_agent_brief(Path(args.agent_brief), step_id=step_id, info_gain=info_gain)
 
     print(f"OK: registered {step_id} ({art_type})")
     return 0

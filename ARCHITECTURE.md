@@ -56,7 +56,8 @@ graph TD
 - `docs/` — structured written theory; kept short; history is in git.
   - `docs/open_questions.md` — active queue; each item has `StepID`, `NextStepID`, `LeanTarget`.
   - `docs/agent_brief.md` — bounded working memory to avoid loops.
-  - `docs/artifacts.tsv` — append-only artifact log (StepID/type/target/commit).
+  - `docs/artifacts.tsv` — append-only log of completed artifacts (Commit = git hash).
+  - `docs/planned.tsv` — queue/plans for artifacts (Commit = PENDING).
   - `docs/roadmap.md`, `docs/sources.md` — route and citations.
 - `formal/` — Lean 4 proof layer.
   - `formal/PvNP/Core/` — authoritative definitions/lemmas (no `sorry`/`axiom`).
@@ -153,6 +154,7 @@ Core inputs:
 Core outputs per run:
 - One artifact (Proof / Counterexample / Exact citation / Toy / Reduction / Barrier).
 - Updated `docs/open_questions.md`, `docs/agent_brief.md`, and `docs/artifacts.tsv` (see `scripts/register_artifact.py`).
+  Use `docs/planned.tsv` for queued steps with Commit = PENDING.
 - Passing `scripts/verify_all.sh`.
 - One commit with `StepID` in the message.
 

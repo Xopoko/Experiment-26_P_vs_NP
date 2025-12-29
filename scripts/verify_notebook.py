@@ -86,7 +86,7 @@ def _extract_backticked_meta(lines: list[str], *, key: str) -> str | None:
     return None
 
 
-def _verify_artifacts_log(*, path: Path) -> None:
+def _verify_artifacts_log(*, path: Path, allow_pending: bool) -> set[str]:
     if not path.exists():
         raise AssertionError(f"Missing required file: {path}")
 
@@ -119,12 +119,55 @@ def _verify_artifacts_log(*, path: Path) -> None:
 
             commit = (row.get("Commit") or "").strip()
             if not commit:
-                raise AssertionError(f"{path}:{idx}: missing Commit (use PENDING if needed)")
-            if commit != "PENDING":
+                raise AssertionError(f"{path}:{idx}: missing Commit")
+            if commit == "PENDING":
+                if not allow_pending:
+                    raise AssertionError(f"{path}:{idx}: Commit cannot be PENDING in done log")
+            else:
                 if not re.fullmatch(r"[0-9a-fA-F]{7,40}", commit):
                     raise AssertionError(f"{path}:{idx}: invalid Commit {commit!r}")
 
     print(f"OK: verified artifacts log in {path}")
+    return seen_steps
+
+
+def _verify_planned_log(*, path: Path) -> set[str]:
+    if not path.exists():
+        raise AssertionError(f"Missing required file: {path}")
+
+    with path.open("r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f, delimiter="\t")
+        if set(reader.fieldnames or []) != _ARTIFACT_HEADERS:
+            raise AssertionError(
+                f"Unexpected header in {path}. Expected: {sorted(_ARTIFACT_HEADERS)}; got: {reader.fieldnames}"
+            )
+
+        seen_steps: set[str] = set()
+        for idx, row in enumerate(reader, start=2):
+            step_id = (row.get("StepID") or "").strip()
+            if not step_id:
+                raise AssertionError(f"{path}:{idx}: missing StepID")
+            _parse_step_id(step_id, context=f"{path}:{idx}: StepID")
+            if step_id in seen_steps:
+                raise AssertionError(f"{path}:{idx}: duplicate StepID {step_id}")
+            seen_steps.add(step_id)
+
+            art_type = (row.get("Type") or "").strip()
+            if art_type not in _ARTIFACT_TYPES:
+                raise AssertionError(
+                    f"{path}:{idx}: invalid Type {art_type!r} (expected one of {sorted(_ARTIFACT_TYPES)})"
+                )
+
+            lean_target = (row.get("LeanTarget") or "").strip()
+            if not lean_target:
+                raise AssertionError(f"{path}:{idx}: missing LeanTarget")
+
+            commit = (row.get("Commit") or "").strip()
+            if commit != "PENDING":
+                raise AssertionError(f"{path}:{idx}: Commit must be PENDING in planned log")
+
+    print(f"OK: verified planned log in {path}")
+    return seen_steps
 
 
 def _verify_open_questions_structure(*, path: Path) -> None:
@@ -425,7 +468,12 @@ def main(argv: list[str]) -> int:
     )
     _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
     _verify_open_questions_structure(path=Path("docs/open_questions.md"))
-    _verify_artifacts_log(path=Path("docs/artifacts.tsv"))
+    artifacts_steps = _verify_artifacts_log(path=Path("docs/artifacts.tsv"), allow_pending=False)
+    planned_steps = _verify_planned_log(path=Path("docs/planned.tsv"))
+    overlap = artifacts_steps & planned_steps
+    if overlap:
+        dupes = ", ".join(sorted(overlap))
+        raise AssertionError(f"StepID present in both logs: {dupes}")
     _verify_prompt_files(paths=[Path("scripts/agent_prompt.txt")])
     return 0
 
