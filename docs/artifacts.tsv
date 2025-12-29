@@ -14,3 +14,4 @@ Q43.S284-gap-min-global-le-bridge	Proof	formal/WIP/Verified/Q43.lean	322594f9e71
 Q43.S285-gap-min-global-route	Proof	formal/WIP/Verified/Q43.lean	35f1bafe886722fec0a209f0458fb56bb996b144	route global gap-min drop through grid_ratio alias
 Q43.S286-gap-min-global-route-apply	Proof	formal/WIP/Verified/Q43.lean	35f1bafe886722fec0a209f0458fb56bb996b144	drop redundant k=12 gap-min lemma; keep alias-based gap scan
 Q43.S287-gap-min-global-prune-klist	Proof	formal/WIP/Verified/Q43.lean	de52b11ddfd22a59107ea9fe665702371da69c5b	prune k=13..20 gap-range/drop blocks and n_k=gap_n lemmas
+Q43.S288-gap-min-global-prune-klist-21-30	Proof	formal/WIP/Verified/Q43.lean	a8356cb604c40b0fbe9a55a2349d7ee5a8d5d26b	prune k=21..30 gap-range/drop blocks and n_k=gap_n lemmas
