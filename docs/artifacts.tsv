@@ -9,3 +9,4 @@ Q43.S280-gap-min-global-cleanup	Proof	formal/WIP/Verified/Q43.lean	3c8e6819e1323
 Q39.S143-contiguous-alt-rank2-k117	Counterexample	formal/WIP/Verified/Q39.lean	9ef222488dcb625ff2c5e5ffddcc6f756a8a7f19	extend contiguous alt-shift witnesses to alt117 (rank=2 by decide)
 Q43.S281-gap-drop-nk-k31-k104	Proof	formal/WIP/Verified/Q43.lean	9ef222488dcb625ff2c5e5ffddcc6f756a8a7f19	extend n_k-linked gap-drop counterexamples to k=31..104
 Q43.S282-gap-min-global-use	Proof	formal/WIP/Verified/Q43.lean	42a5a5fd1bcc79f5f68c169de4f044275755c205	succ-le bound derived from the global gap-min drop
+Q43.S283-gap-min-global-succ-use	Proof	formal/WIP/Verified/Q43.lean	c61b43e1cac8e5cf315338481f539645ec55508c	derive strict drop from the succ-le bound
