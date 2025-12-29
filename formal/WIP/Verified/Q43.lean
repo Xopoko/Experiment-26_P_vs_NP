@@ -2543,15 +2543,6 @@ theorem Q43_gap_min_ratio_le_all :
     ∀ n, n ∈ Q43_gap_range_list → Q43_gap_min_ratio <= Q43_grid_ratio n := by
   decide
 
--- Q43.S252-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
--- apply-params-poly-n0-ratio-lift-piecewise-gap-bound-generalize:
--- parameterized gap scan instantiated at k=12.
-set_option maxRecDepth 8000 in
-theorem Q43_gap_min_ratio_le_all_k12 :
-    ∀ n, n ∈ Q43_gap_range_list_k Q43_gap_k →
-      Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ <= Q43_grid_ratio n := by
-  decide
-
 -- Q43.S267-log2-jump-lemma:
 -- log2 jump from explicit bounds on n^2 and (n+1)^2.
 theorem Q43_log2_grid_size_eq_of_bounds {n k : Nat} (hn : 0 < n)
