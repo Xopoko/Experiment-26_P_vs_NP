@@ -611,6 +611,40 @@ theorem Q43_tParam_lineMax_le_polylog_of_quasipoly {α : Type} {proof : List (Li
   exact Q43_tParam_lineMax_le_polylog_of_quasipoly
     (n := Q43_grid_size n) (c := c) (proof := proof) hsize
 
+-- Q43.S305-flat-eval-quasipoly-eval-apply:
+-- apply grid-size quasi-poly bounds to N and lineMax for the evaluation regime.
+theorem Q43_quasipoly_grid_eval_bounds {α : Type} {proof : List (List α)} {n N c : Nat}
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1))) :
+    Nat.log2 N <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) ∧
+      Q43_tParam (Q43_lineMax proof) <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
+  have hlog : Nat.log2 N <= Nat.log2 (2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1))) :=
+    Q43_log2_mono hN
+  have hlogN : Nat.log2 N <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
+    simpa [Nat.log2_two_pow] using hlog
+  have hM : Q43_tParam (Q43_lineMax proof) <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) :=
+    Q43_tParam_lineMax_le_polylog_of_quasipoly_grid (proof := proof) (n := n) (c := c) hsize
+  exact ⟨hlogN, hM⟩
+
+@[simp] theorem Q43_tParam_lineMax_le_polylog_of_quasipoly_grid_twice {α : Type}
+    {proof : List (List α)} {n N c : Nat}
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1))) :
+    Q43_tParam (Q43_lineMax proof) <= (2 * Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
+  have h := (Q43_quasipoly_grid_eval_bounds (proof := proof) (n := n) (N := N) (c := c) hN hsize).2
+  have hle :
+      Nat.log2 (Q43_grid_size n) <= 2 * Nat.log2 (Q43_grid_size n) := by
+    calc
+      Nat.log2 (Q43_grid_size n)
+          <= Nat.log2 (Q43_grid_size n) + Nat.log2 (Q43_grid_size n) := Nat.le_add_left _ _
+      _ = 2 * Nat.log2 (Q43_grid_size n) := by
+        simp [Nat.two_mul]
+  have hpow :
+      (Nat.log2 (Q43_grid_size n)) ^ (c + 1)
+        <= (2 * Nat.log2 (Q43_grid_size n)) ^ (c + 1) :=
+    Q43_pow_le_pow_of_le hle
+  exact Nat.le_trans h hpow
+
 theorem Q43_polyNM_log2_bounds {n N C M K : Nat} (hn : 2 <= n) (h : Q43_polyNM n N C M K) :
     Nat.log2 N <= Nat.log2 ((Q43_grid_size n) ^ C) ∧
     Q43_tParam M <= Nat.log2 ((Q43_grid_size n) ^ K) ∧

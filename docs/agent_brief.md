@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S304-flat-eval-quasipoly-bridge
-- `Do-not-repeat (next 2 runs):` Q43.S304-flat-eval-quasipoly-bridge, Q43.S303-flat-eval-quasipoly-linemax
+- `LastStepID:` Q43.S305-flat-eval-quasipoly-eval-apply
+- `Do-not-repeat (next 2 runs):` Q43.S305-flat-eval-quasipoly-eval-apply, Q43.S304-flat-eval-quasipoly-bridge
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: specialized quasi-poly bound to grid size; next apply it in the evaluation statement.
+Q43: quasi-poly grid bounds now package N + lineMax; next connect to the HR threshold regime.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: specialized quasi-poly bound to grid size; next apply it in the evaluation 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence/translation->Trade-off->Invariant->Trade-off->Invariant
+Latest:Trade-off->Invariant->Trade-off->Invariant->Trade-off
