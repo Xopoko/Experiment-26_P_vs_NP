@@ -57,6 +57,20 @@ and/or as notes in `formal/Notes/*.lean` (without adding axioms).
 
 ---
 
+## Semantic gate (anti-noise)
+
+In `formal/PvNP/Core/` and `formal/WIP/Verified/`:
+
+- No placeholder declarations: `def X : Prop := True`, `theorem X : True := by ...`,
+  or other "annotation" lemmas. Put those in `formal/Notes/*.lean` or `docs/`.
+- Proof artifacts must be used: either referenced by a later lemma in the same file,
+  discharged against a `LeanTarget` goal in `WIP/Scratch`, or tagged `@[simp]`/`@[aesop]`
+  and demonstrably shorten a proof.
+- Limit homogeneous cases: if you are about to add >5 near-identical `def`/`theorem`
+  blocks (especially `by decide` on constants), stop and generalize into a parameterized lemma instead.
+
+---
+
 ## Role: WORKER
 
 In each run you are a WORKER.
@@ -97,6 +111,8 @@ to link Proof steps to a specific Lean file.
 8) `scripts/verify_all.sh` -> commit.
 
 Note: if you cannot add Lean code, choose an artifact **not Proof**.
+
+Diff budget: keep Proof artifacts within ~200 lines changed; otherwise split into multiple runs.
 
 ---
 

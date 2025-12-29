@@ -54,34 +54,10 @@ theorem Q43_largeM_threshold_def (n alpha : Nat) :
   rfl
 
 -- Q43.S175-exp2-quote-annotation: exp in source interpreted as base 2.
-def Q43_exp_source_base2 : Prop := True
-
-theorem Q43_exp_source_base2_trivial : Q43_exp_source_base2 := by
-  trivial
-
 -- Q43.S176-exp2-quote-sweep: record that exp quotes are annotated with base 2.
-def Q43_exp_quote_sweep : Prop := True
-
-theorem Q43_exp_quote_sweep_trivial : Q43_exp_quote_sweep := by
-  trivial
-
--- Q43.S177-exp2-quote-scan-core: record base-2 note in core citations.
-def Q43_exp_quote_scan_core : Prop := True
-
-theorem Q43_exp_quote_scan_core_trivial : Q43_exp_quote_scan_core := by
-  trivial
-
--- Q43.S178-exp2-quote-scan-remaining: record base-2 notes in core/summary.
-def Q43_exp_quote_scan_remaining : Prop := True
-
-theorem Q43_exp_quote_scan_remaining_trivial : Q43_exp_quote_scan_remaining := by
-  trivial
-
--- Q43.S179-exp2-quote-scan-analytic: record base-e notes in analytic steps.
-def Q43_exp_quote_scan_analytic : Prop := True
-
-theorem Q43_exp_quote_scan_analytic_trivial : Q43_exp_quote_scan_analytic := by
-  trivial
+-- Q43.S177-exp2-quote-scan-core: base-2 note in core citations.
+-- Q43.S178-exp2-quote-scan-remaining: base-2 notes in core/summary.
+-- Q43.S179-exp2-quote-scan-analytic: base-e notes in analytic steps.
 
 -- Q43.S196-flat-eval-size-metric-formalize: size metrics for line-based proofs.
 def Q43_lineSize {α : Type} (line : List α) : Nat :=
@@ -3401,8 +3377,6 @@ theorem Q43_gap_min_ratio_drop_global_grid :
     Q43_gap_min_ratio < Q43_grid_ratio Q43_gap_n := by
   simpa [Q43_gap_min_ratio_k] using Q43_gap_min_ratio_drop_global
 
--- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
-theorem Q43_placeholder : True := by
-  trivial
+-- TODO(Q43.S137-logn-remaining-scan): add the formal flat local-EF(s) evaluation statement.
 
 end PvNP

@@ -119,6 +119,33 @@ if [ -d formal ] && [ -f formal/lakefile.lean ]; then
       fi
     fi
 
+    scan_for_placeholders() {
+      local dir="$1"
+      if scan_for_pattern "^[[:space:]]*(def|theorem|lemma)[[:space:]]+[^[:space:]]+[[:space:]]*:[[:space:]]*Prop[[:space:]]*:=[[:space:]]*True([[:space:]]|$)" "$dir"; then
+        echo "FAIL: found placeholder Prop := True in $dir (move notes to formal/Notes or docs)" >&2
+        exit 1
+      fi
+      if scan_for_pattern "^[[:space:]]*@\\[[^]]+\\][[:space:]]*(def|theorem|lemma)[[:space:]]+[^[:space:]]+[[:space:]]*:[[:space:]]*Prop[[:space:]]*:=[[:space:]]*True([[:space:]]|$)" "$dir"; then
+        echo "FAIL: found placeholder Prop := True in $dir (move notes to formal/Notes or docs)" >&2
+        exit 1
+      fi
+      if scan_for_pattern "^[[:space:]]*(theorem|lemma)[[:space:]]+[^[:space:]]+[[:space:]]*:[[:space:]]*True[[:space:]]*:=[[:space:]]*by([[:space:]]|$)" "$dir"; then
+        echo "FAIL: found placeholder theorem : True := by in $dir (move notes to formal/Notes or docs)" >&2
+        exit 1
+      fi
+      if scan_for_pattern "^[[:space:]]*@\\[[^]]+\\][[:space:]]*(theorem|lemma)[[:space:]]+[^[:space:]]+[[:space:]]*:[[:space:]]*True[[:space:]]*:=[[:space:]]*by([[:space:]]|$)" "$dir"; then
+        echo "FAIL: found placeholder theorem : True := by in $dir (move notes to formal/Notes or docs)" >&2
+        exit 1
+      fi
+    }
+
+    if [ -d "$core_dir" ]; then
+      scan_for_placeholders "$core_dir"
+    fi
+    if [ -d "$wip_verified_dir" ]; then
+      scan_for_placeholders "$wip_verified_dir"
+    fi
+
     (cd formal && lake build PvNP)
     if [ "$BUILD_NOTES" = "1" ]; then
       (cd formal && lake build Notes)
