@@ -133,7 +133,7 @@ def _verify_open_questions_structure(*, path: Path) -> None:
 
     raw = path.read_text(encoding="utf-8")
     lines = raw.splitlines()
-    start, end = _find_markdown_section(lines, header="## Активные")
+    start, end = _find_markdown_section(lines, header="## Active")
     section = lines[start:end]
 
     items: list[list[str]] = []
@@ -150,7 +150,7 @@ def _verify_open_questions_structure(*, path: Path) -> None:
         items.append(current)
 
     if not items:
-        raise AssertionError(f"{path}: no active items found under '## Активные'")
+        raise AssertionError(f"{path}: no active items found under '## Active'")
 
     seen_ids: set[str] = set()
     for item in items:
@@ -229,7 +229,7 @@ def _verify_agent_brief_structure(*, path: Path) -> None:
 
     raw = path.read_text(encoding="utf-8")
     lines = raw.splitlines()
-    start, end = _find_markdown_section(lines, header="## Anti-loop (обновлять, не раздувать)")
+    start, end = _find_markdown_section(lines, header="## Anti-loop (update, don't bloat)")
     section = lines[start:end]
 
     last_step = _extract_backticked_meta(section, key="LastStepID")
@@ -416,16 +416,17 @@ def main(argv: list[str]) -> int:
             manifest_path=Path("resources/manifest.tsv"),
             downloads_dir=Path("resources/downloads"),
         )
-        _verify_agent_brief(
-            path=Path("docs/agent_brief.md"),
-            max_lines=200,
-            max_bytes=16_000,
-            max_experiments=12,
-        )
-        _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
-        _verify_open_questions_structure(path=Path("docs/open_questions.md"))
-        _verify_artifacts_log(path=Path("docs/artifacts.tsv"))
-        _verify_prompt_files(paths=[Path("scripts/agent_prompt.txt")])
+
+    _verify_agent_brief(
+        path=Path("docs/agent_brief.md"),
+        max_lines=200,
+        max_bytes=16_000,
+        max_experiments=12,
+    )
+    _verify_agent_brief_structure(path=Path("docs/agent_brief.md"))
+    _verify_open_questions_structure(path=Path("docs/open_questions.md"))
+    _verify_artifacts_log(path=Path("docs/artifacts.tsv"))
+    _verify_prompt_files(paths=[Path("scripts/agent_prompt.txt")])
     return 0
 
 

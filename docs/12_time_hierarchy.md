@@ -1,77 +1,77 @@
-## 12. Иерархия по времени: диагонализация (полное доказательство)
+## 12. Time hierarchy: diagonalization (complete proof)
 
-Этот раздел нужен как «калибровка»: мы докажем строгий результат о разделении
-классов по времени и явно увидим, что доказательство **релятивизирует**
-(барьер Baker–Gill–Solovay).
+This section is needed as a "calibration": we will prove a rigorous result on the separation
+classes in time and we will clearly see that the proof **relativizes**
+(Baker-Gill-Solovay barrier).
 
-**Определение (time-constructible).** Функция $t:\mathbb{N}\to\mathbb{N}$
-называется *времени‑конструируемой*, если существует детерминированная МТ $T$
-такая, что на входе $1^n$ она останавливается ровно через $t(n)$ шагов
-(или, эквивалентно, может выписать $t(n)$ в унарном виде за $O(t(n))$ времени).
+**Definition (time-constructible).** Function $t:\mathbb{N}\to\mathbb{N}$
+is called *time-constructible* if there is a deterministic MT $T$
+such that at input $1^n$ it stops exactly after $t(n)$ steps
+(or, equivalently, can write $t(n)$ in unary form in $O(t(n))$ time).
 
-**Лемма 12.1 (универсальная симуляция, цитируется).** Существует универсальная
-детерминированная многоленточная МТ $U$, которая по входу $(\langle M\rangle, x, 1^s)$
-симулирует работу детерминированной МТ $M$ на $x$ в течение $s$ шагов
-и останавливается за $O(s\log_2 s)$ шагов.
-См. `../resources/downloads/uw_hierarchy_2022_lecture5.pdf`.
+**Lemma 12.1 (universal simulation, cited).** There is a universal
+deterministic multi-tape MT $U$, which by input $(\langle M\rangle, x, 1^s)$
+simulates the operation of a deterministic MT $M$ for $x$ for $s$ steps
+and stops in $O(s\log_2 s)$ steps.
+See `../resources/downloads/uw_hierarchy_2022_lecture5.pdf`.
 
-*Комментарий.* Этот лог‑фактор — стандартная плата за универсальность
-(кодирование переходов, адресация лент и т.п.). Для целей иерархии он допустим.
+*Comment.* This log factor is the standard price to pay for versatility
+(transition coding, tape addressing, etc.). For hierarchy purposes it is acceptable.
 
-**Определение (диагональный язык).** Зафиксируем кодирование, которое каждому
-слову $y\in\{0,1\}^*$ сопоставляет детерминированную МТ $M_y$
-(если $y$ некорректен как код, считаем $M_y$ машиной, которая всегда отвергает).
+**Definition (diagonal language).** Let us fix the encoding that each
+the word $y\in\{0,1\}^*$ is associated with a deterministic MT $M_y$
+(if $y$ is incorrect as code, we consider $M_y$ to be a machine that always rejects).
 
-Для time-constructible $t$ определим язык
-$$L_t:=\{y:\ M_y(y)\ \text{не принимает за}\ \le t(|y|)\ \text{шагов}\}.$$
+For time-constructible $t$ we define a language
+$$L_t:=\{y:\ M_y(y)\ \text{does not take for}\ \le t(|y|)\ \text{steps}\}.$$
 
-**Теорема 12.2 (Deterministic Time Hierarchy).** Пусть $t(n)\ge n$ —
-time-constructible. Тогда
+**Theorem 12.2 (Deterministic Time Hierarchy).** Let $t(n)\ge n$ be
+time-constructible. Then
 $$\mathrm{TIME}(t(n))\subsetneq\mathrm{TIME}(t(n)\log_2 t(n)).$$
 
-*Доказательство.*
+*Proof.*
 
-1) Покажем, что $L_t\in\mathrm{TIME}(t(n)\log_2 t(n))$.
-Алгоритм $A$ на входе $y$ длины $n$:
+1) Let us show that $L_t\in\mathrm{TIME}(t(n)\log_2 t(n))$.
+Algorithm $A$ on input $y$ of length $n$:
 
-- с помощью машины‑«часов» (существует по time-constructible) получаем лимит $t(n)$;
-- запускаем универсальную симуляцию $U(\langle M_y\rangle, y, 1^{t(n)})$;
-- если симуляция обнаружила принятие за $\le t(n)$ шагов — отвергаем, иначе принимаем.
+- using a "clock" machine (which exists according to time-constructible) we obtain the limit $t(n)$;
+- launch the universal simulation $U(\langle M_y\rangle, y, 1^{t(n)})$;
+- if the simulation detects taking $\le t(n)$ steps, we reject, otherwise we accept.
 
-По Лемме 12.1 симуляция занимает $O(t(n)\log_2 t(n))$ времени;
-остальная работа доминируемо меньше, значит $A$ укладывается в
+By Lemma 12.1, the simulation takes $O(t(n)\log_2 t(n))$ time;
+the rest of the work is dominated by less, which means $A$ fits into
 $O(t(n)\log_2 t(n))$.
 
-2) Покажем, что $L_t\notin\mathrm{TIME}(t(n))$. Предположим противное:
-существует детерминированная МТ $D$, которая решает $L_t$ за $\le t(n)$ шагов
-на входах длины $n$.
+2) Let us show that $L_t\notin\mathrm{TIME}(t(n))$. Let's assume the opposite:
+there is a deterministic MT $D$ that solves $L_t$ in $\le t(n)$ steps
+on inputs of length $n$.
 
-Рассмотрим вход $y:=\langle D\rangle$ (код самой $D$).
-Так как $D$ решает $L_t$, имеем:
+Consider the input $y:=\langle D\rangle$ (the code of $D$ itself).
+Since $D$ solves $L_t$, we have:
 
-- если $D(y)$ принимает, то $y\in L_t$, то есть по определению
-  $M_y(y)=D(y)$ **не** принимает за $\le t(|y|)$ шагов — противоречие;
-- если $D(y)$ отвергает, то $y\notin L_t$, то есть $D(y)$ принимает
-  за $\le t(|y|)$ шагов — противоречие.
+- if $D(y)$ accepts, then $y\in L_t$, that is, by definition
+  $M_y(y)=D(y)$ **doesn't** take $\le t(|y|)$ steps - a contradiction;
+- if $D(y)$ rejects, then $y\notin L_t$, that is, $D(y)$ accepts
+  in $\le t(|y|)$ steps--a contradiction.
 
-Следовательно, такого $D$ не существует и $L_t\notin\mathrm{TIME}(t(n))$.
+Consequently, such $D$ does not exist and $L_t\notin\mathrm{TIME}(t(n))$.
 
-Из пункта (1) и (2) следует строгость включения. $\square$
+The rigor of inclusion follows from (1) and (2). $\square$
 
-**Замечание 12.3 (релятивизация).** Это доказательство переносится почти дословно
-в оракульный мир: для любого оракула $A$ верно
+**Remark 12.3 (relativization).** This proof carries over almost verbatim
+to the oracle world: for any oracle $A$ is true
 $\mathrm{TIME}^A(t)\subsetneq\mathrm{TIME}^A(t\log_2 t)$.
-Поэтому оно не может напрямую решить $\mathrm{P}$ vs $\mathrm{NP}$
-из-за существования оракулов $A,B$ с противоположными ответами.
+Therefore it cannot directly solve $\mathrm{P}$ vs $\mathrm{NP}$
+due to the existence of oracles $A,B$ with opposite answers.
 
-**Следствие 12.4.** $\mathrm{P}\subsetneq\mathrm{EXP}$.
+**Corollary 12.4.** $\mathrm{P}\subsetneq\mathrm{EXP}$.
 
-*Доказательство.* Сначала отметим, что $\mathrm{P}\subseteq\mathrm{TIME}(2^n)$:
-любая функция $n^k$ в конце концов не превосходит $2^n$, значит
+*Proof.* First note that $\mathrm{P}\subseteq\mathrm{TIME}(2^n)$:
+any function $n^k$ ultimately does not exceed $2^n$, which means
 $\bigcup_k\mathrm{TIME}(n^k)\subseteq\mathrm{TIME}(2^n)$.
 
-Применим Теорему 12.2 к $t(n)=2^n$ (она time-constructible).
-Получаем язык $L\in\mathrm{TIME}(2^n\cdot n)\setminus\mathrm{TIME}(2^n)$.
-Тогда $L\notin\mathrm{P}$, так как $\mathrm{P}\subseteq\mathrm{TIME}(2^n)$.
-При этом $\mathrm{TIME}(2^n\cdot n)\subseteq\mathrm{EXP}$.
-Значит $\mathrm{P}\subsetneq\mathrm{EXP}$. $\square$
+Let's apply Theorem 12.2 to $t(n)=2^n$ (it is time-constructible).
+We get the language $L\in\mathrm{TIME}(2^n\cdot n)\setminus\mathrm{TIME}(2^n)$.
+Then $L\notin\mathrm{P}$, since $\mathrm{P}\subseteq\mathrm{TIME}(2^n)$.
+In this case, $\mathrm{TIME}(2^n\cdot n)\subseteq\mathrm{EXP}$.
+So $\mathrm{P}\subsetneq\mathrm{EXP}$. $\square$

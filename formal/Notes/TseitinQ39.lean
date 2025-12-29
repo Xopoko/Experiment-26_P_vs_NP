@@ -2,2557 +2,2557 @@ import Paperproof
 
 /-!
 
-# P vs NP — исследовательские шаги 16.122–16.152 (Tseitin/Grid: Q39 — bounded‑depth Frege gap)
+# P vs NP - research steps 16.122-16.152 (Tseitin/Grid: Q39 - boundeddepth Frege gap)
 
-Главный индекс: `P_vs_NP.md`.
+Main index: `P_vs_NP.md`.
 
-### 16.122. Исследовательский шаг: «Gaussian elimination» как (пока) отсутствующий upper‑шаг для bounded‑depth Frege на grid
+### 16.122. Exploratory step: "Gaussian elimination" as the (yet) missing upper-step for bounded-depth Frege on the grid
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` В Håstad–Risse (2022/2025) §1.2 (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`)
-  явным образом выделен «потенциальный» путь к upper bound для Tseitin(Grid) в bounded‑depth Frege:
-  пытаться симулировать суммирование линейных уравнений (Gaussian elimination по модулю 2) в языке формул глубины $d$.
-  Авторы показывают, как **представлять** промежуточные паритетные уравнения в виде небольших depth‑$d$ формул,
-  но подчёркивают, что **не знают**, как синтаксически переводить один шаг Gaussian elimination в ограниченное число шагов доказательства,
-  т.е. получают «representation of partial results», а не proof.
-- `Доказательство/ссылка:` Håstad–Risse, §1.2 “Constructing small proofs” (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`):
+- `Lens:` Equivalence.
+- `Statement:` In Hastad-Risse (2022/2025) Section 1.2 (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`)
+  the "potential" path to the upper bound for Tseitin(Grid) in the boundeddepth Frege is explicitly highlighted:
+  try to simulate the summation of linear equations (Gaussian elimination modulo 2) in the language of formulas of depth $d$.
+  The authors show how to **represent** intermediate parity equations in the form of small depth-$d$ formulas,
+  but they emphasize that they **do not know** how to syntactically translate one Gaussian elimination step into a limited number of proof steps,
+  those. get "representation of partial results", not proof.
+- `Proof/link:` Håstad–Risse, §1.2 “Constructing small proofs” (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`):
   1) (p. 3; PDF p. 5) “If we are allowed to reason with linear equations modulo two then the Tseitin contradiction has efficient refutations.”
   2) (p. 4; PDF p. 6) “We do not know how to syntactically translate a Gaussian elimination step to some proof steps in this representation and thus we do not actually get a proof, only a representation of the partial results.”
-- `Toy‑тест:` пусть максимальный размер строки $M=n^{O(1)}$, тогда $\\log M=\\Theta(\\log n)$.
-  Если (как в эвристике HR §1.2) временно считать, что глубина‑$d$ **представление** паритета допускает блок
-  $m\\approx(\\log M)^{d-1}$, то
-  При $d=\\Theta(\\log n/\\log\\log n)$ имеем $m=\\exp(\\Theta(\\log n))=n^{\\Theta(1)}\\ge n$, т.е. представление паритета на $n$ переменных возможно при polynomial $M$;
-  остаётся ровно «нехватающий» шаг: вывести из таких представлений следующее XOR‑уравнение внутри Frege.
-  (Для растущей глубины и **формул** нужно аккуратно учитывать разницу «схемы vs формулы», см. §16.147–§16.152.)
-- `Статус:` известный факт (точная ссылка; формализует, где именно ломается наивный upper‑подход).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` формализовать как лемму‑цель: «в bounded‑depth Frege можно (p‑)выводить представление $L_1\\oplus L_2=b_1\\oplus b_2$ из представлений $L_1=b_1$ и $L_2=b_2$ с контролем по глубине/размеру», либо найти источник, где это уже сделано.
+- `Toy test:` let the maximum string size be $M=n^{O(1)}$, then $\\log M=\\Theta(\\log n)$.
+  If (as in the HR heuristic Section 1.2) we temporarily assume that the depth$d$ **representation** of parity admits a block
+  $m\\approx(\\log M)^{d-1}$, then
+  For $d=\\Theta(\\log n/\\log\\log n)$ we have $m=\\exp(\\Theta(\\log n))=n^{\\Theta(1)}\\ge n$, i.e. representation of parity on $n$ variables is possible with polynomial $M$;
+  There remains exactly the "missing" step: to derive from such representations the following XOR equation inside Frege.
+  (For increasing depth and **formulas**, care must be taken to consider the "scheme vs formula" difference, see Section 16.147-Section 16.152.)
+- `Status:` known fact (exact link; formalizes where exactly the naive upper approach breaks down).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` formalize as a lemma-goal: "in bounded-depth Frege you can (p-)derive the representation $L_1\\oplus L_2=b_1\\oplus b_2$ from the representations $L_1=b_1$ and $L_2=b_2$ with depth/size control," or find a source where this has already been done.
 
-### 16.123. Исследовательский шаг: исправление про «representation PARITY» — наивная DNF‑индукция даёт $M^{\\Theta(d)}$, а нужный факт явно заявлен в Håstad–Risse §1.2
+### 16.123. Exploratory step: correction about "representation PARITY" - naive DNF induction gives $M^{\\Theta(d)}$, and the desired fact is explicitly stated in Hastad-Risse Section 1.2
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Рассмотрим утверждение из §16.122: «формулы глубины $d$ размера $M$ могут представлять паритет на $m:=(\\log M)^{d-1}$ переменных» (для растущей $d$ см. caveat §16.147–§16.152).
-  1) Наивная конструкция через DNF‑разложение $\\mathrm{PARITY}_{\\lceil\\log_2 M\\rceil}$ и подстановку по глубине действительно даёт depth $O(d)$, но лишь размер $M^{\\Theta(d)}$,
-     поэтому **не** выводит polynomial‑size для $d=\\Theta(\\log n/\\log\\log n)$ при $M=\\mathrm{poly}(n)$ (получается quasi‑poly).
-  2) Сам «representation»‑факт в нужной (для Q39) форме **известен** и прямо сформулирован в Håstad–Risse (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, §1.2):
-     они утверждают, что при группировке по блокам размера $(\\log M)^{d-1}$ можно «write down formulas of depth $d$ and size $M$ that represent the parity and the negation of the parity».
-- `Доказательство/ссылка:`
-  1) (Почему DNF‑индукция не годится при растущей $d$.) Пусть $g:=\\lceil\\log_2 M\\rceil$ и $m:=g^{d-1}$.
-     База $d=2$: DNF для $\\mathrm{PARITY}_g$ имеет $2^{g-1}$ термов, т.е. размер $\\Theta(2^g\\cdot g)=\\Theta(M\\log M)$.
-     Шаг $d\\to d+1$: подстановка формулы размера $S_d$ в каждое вхождение переменной в этой DNF даёт
+- `Lens:` Trade-off.
+- `Statement:` Consider the statement from Section 16.122: "formulas of depth $d$ of size $M$ can represent parity on $m:=(\\log M)^{d-1}$ variables" (for growing $d$, see caveat Section 16.147-Section 16.152).
+  1) The naive construction through the DNF expansion $\\mathrm{PARITY}_{\\lceil\\log_2 M\\rceil}$ and substitution in depth actually gives depth $O(d)$, but only the size $M^{\\Theta(d)}$,
+     therefore **not** outputs polynomialsize for $d=\\Theta(\\log n/\\log\\log n)$ with $M=\\mathrm{poly}(n)$ (it turns out quasi-poly).
+  2) The "representation" fact itself in the required (for Q39) form is **known** and directly formulated in Hastad-Risse (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, §1.2):
+     they claim that when grouped into blocks of size $(\\log M)^{d-1}$, one can "write down formulas of depth $d$ and size $M$ that represent the parity and the negation of the parity."
+- `Proof/link:`
+  1) (Why DNF induction is not suitable for growing $d$.) Let $g:=\\lceil\\log_2 M\\rceil$ and $m:=g^{d-1}$.
+     Base $d=2$: DNF for $\\mathrm{PARITY}_g$ has $2^{g-1}$ terms, i.e. size $\\Theta(2^g\\cdot g)=\\Theta(M\\log M)$.
+     Step $d\\to d+1$: substituting a formula of size $S_d$ into each occurrence of a variable in this DNF gives
      $$S_{d+1}=\\Theta(2^g\\cdot g\\cdot S_d)=\\Theta(M\\log M\\cdot S_d),$$
-     откуда $S_d=(M\\log M)^{\\Theta(d)}=M^{\\Theta(d)}$ (лог‑факторы поглощаются в $M^{o(d)}$).
-     При $M=n^C$ и $d=\\Theta(\\log n/\\log\\log n)$ это даёт $S_d=n^{\\Theta(\\log n/\\log\\log n)}$ (quasi‑poly), а не $n^{O(1)}$.
-  2) (Корректный источник representation.) Håstad–Risse, §1.2, абзац начиная с “Let us consider proofs that contain formulas of depth d …”:
+     whence $S_d=(M\\log M)^{\\Theta(d)}=M^{\\Theta(d)}$ (log factors are absorbed into $M^{o(d)}$).
+     With $M=n^C$ and $d=\\Theta(\\log n/\\log\\log n)$ this gives $S_d=n^{\\Theta(\\log n/\\log\\log n)}$ (quasi-poly), not $n^{O(1)}$.
+  2) (Correct source representation.) Hastad-Risse, Section 1.2, paragraph starting with "Let us consider proofs that contain formulas of depth d...":
      “… divide the variables in to groups of size $(\\log M)^{d−1}$ and write down formulas of depth $d$ and size $M$ that represent the parity and the negation of the parity …”.
-- `Toy‑тест:` возьмём $M=n^{10}$ и $d=\\lfloor\\log n/\\log\\log n\\rfloor$. Тогда $m=(\\Theta(\\log n))^{\\Theta(\\log n/\\log\\log n)}=n^{\\Theta(1)}$,
-  и representation из Håstad–Risse допускает формулы размера $M=\\mathrm{poly}(n)$; но DNF‑индукция выше дала бы только quasi‑poly размер.
-- `Статус:` контрпример к прежнему выводу «DNF‑индукция ⇒ poly‑size при $d=\\Theta(\\log n/\\log\\log n)$»; representation‑лемма закрыта точной ссылкой (Håstad–Risse §1.2).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` теперь, когда representation опирается на источник, вернуть фокус на missing step из §16.122: найти/доказать (или барьерно опровергнуть) синтаксическую симуляцию одного шага $L_1=b_1,\\ L_2=b_2\\Rightarrow L_1\\oplus L_2=b_1\\oplus b_2$ в bounded‑depth Frege без экспоненциального blow‑up.
+- `Toy test:` take $M=n^{10}$ and $d=\\lfloor\\log n/\\log\\log n\\rfloor$. Then $m=(\\Theta(\\log n))^{\\Theta(\\log n/\\log\\log n)}=n^{\\Theta(1)}$,
+  and representation from Hastad-Risse allows formulas of size $M=\\mathrm{poly}(n)$; but DNF induction above would only give a quasi-poly size.
+- `Status:` counterexample to the previous conclusion "DNFinduction  polysize for $d=\\Theta(\\log n/\\log\\log n)$"; The representation lemma is closed by exact reference (Hastad-Risse Section 1.2).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` now that representation is based on the source, return focus to the missing step from Section 16.122: find/prove (or barrier disprove) syntactic simulation of one step $L_1=b_1,\\ L_2=b_2\\Rightarrow L_1\\oplus L_2=b_1\\oplus b_2$ in boundeddepth Frege without exponential blowup.
 
-### 16.124. Исследовательский шаг: на пороге $d\\approx\\log n/\\log\\log n$ representation XOR‑уравнения ширины $O(n)$ становится константной; Q39 сводится к 1‑шаговой XOR‑симуляции
+### 16.124. Exploratory step: at the threshold $d\\approx\\log n/\\log\\log n$ the representation of the XOR equation of width $O(n)$ becomes constant; Q39 reduces to 1-step XOR simulation
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $n\\to\\infty$, $M=n^{O(1)}$ и $d:=\\lceil\\log_2 n/\\log_2\\log_2 n\\rceil+1$.
-  Тогда $(\\log_2 M)^{d-1}\\ge n$, а значит (в терминах §16.122–§16.123) паритетное уравнение на $m=O(n)$ переменных можно представлять **как один блок**:
-  в bounded‑depth Frege линии «$\\sum x_i=b$» и «$\\neg(\\sum x_i=b)$» допускают depth‑$d$ формулы размера $\\mathrm{poly}(n)$, и representation‑overhead $2^{m/(\\log M)^{d-1}}$ становится $2^{O(1)}$.
-  Следовательно, потенциальный upper‑подход через Gaussian elimination на grid (ширина каждого промежуточного уравнения $O(n)$ и $O(n)$ шагов) упирается не в представимость уравнений, а только в возможность синтаксически симулировать **один** шаг $L_1=b_1,\\ L_2=b_2\\Rightarrow L_1\\oplus L_2=b_1\\oplus b_2$ в bounded‑depth Frege.
-- `Доказательство:` так как $M=n^{O(1)}$, существует константа $C\\ge 1$ такая, что $\\log_2 M\\ge C\\log_2 n\\ge \\log_2 n$ для больших $n$.
-  По определению $d$ имеем $d-1\\ge \\log_2 n/\\log_2\\log_2 n$.
-  Тогда
+- `Lens:` Trade-off.
+- `Statement:` Let $n\\to\\infty$, $M=n^{O(1)}$ and $d:=\\lceil\\log_2 n/\\log_2\\log_2 n\\rceil+1$.
+  Then $(\\log_2 M)^{d-1}\\ge n$, which means (in terms of Section 16.122-Section 16.123) the parity equation for $m=O(n)$ variables can be represented **as one block**:
+  in boundeddepth Frege the lines "$\\sum x_i=b$" and "$\\neg(\\sum x_i=b)$" admit depth$d$ formulas of size $\\mathrm{poly}(n)$, and representationoverhead $2^{m/(\\log M)^{d-1}}$ becomes $2^{O(1)}$.
+  Consequently, the potential upper-approach through Gaussian elimination on the grid (the width of each intermediate equation is $O(n)$ and $O(n)$ steps) does not rest on the representability of the equations, but only on the ability to syntactically simulate **one** step $L_1=b_1,\\ L_2=b_2\\Rightarrow L_1\\oplus L_2=b_1\\oplus b_2$ in boundeddepth Frege.
+- `Proof:` since $M=n^{O(1)}$, there is a constant $C\\ge 1$ such that $\\log_2 M\\ge C\\log_2 n\\ge \\log_2 n$ for large $n$.
+  By definition of $d$ we have $d-1\\ge \\log_2 n/\\log_2\\log_2 n$.
+  Then
   $$(\\log_2 M)^{d-1}\\ \\ge\\ (\\log_2 n)^{\\log_2 n/\\log_2\\log_2 n}\\ =\\ 2^{(\\log_2 n/\\log_2\\log_2 n)\\cdot\\log_2\\log_2 n}\\ =\\ 2^{\\log_2 n}\\ =\\ n.$$
-  Подстановка в счёт $2^{m/(\\log M)^{d-1}}$ даёт $2^{O(n)/\\Omega(n)}=2^{O(1)}$.
-- `Toy‑тест:` пусть $n=2^{16}$, $M=n^{10}$ и $d=\\lceil 16/4\\rceil+1=5$.
-  Тогда $\\log_2 M=160$ и $(\\log_2 M)^{d-1}=160^4>10^8\\gg n$, так что $m=n$ попадает в один блок.
-- `Статус:` доказано (количественная редукция Q39: на пороговой глубине representation‑стоимость константна).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` искать/формализовать либо (i) p‑выводимость правила XOR‑сложения двух уравнений в bounded‑depth Frege с контролем по глубине/размеру, либо (ii) известный lower‑bound/барьер, запрещающий такое правило при $d=\\Theta(\\log n/\\log\\log n)$.
+  Substituting into the score $2^{m/(\\log M)^{d-1}}$ gives $2^{O(n)/\\Omega(n)}=2^{O(1)}$.
+- `Toy test:` let $n=2^{16}$, $M=n^{10}$ and $d=\\lceil 16/4\\rceil+1=5$.
+  Then $\\log_2 M=160$ and $(\\log_2 M)^{d-1}=160^4>10^8\\gg n$, so $m=n$ falls into one block.
+- `Status:` proven (quantitative reduction Q39: at the threshold depth the representation-cost is constant).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` search/formalize either (i) p-derivability of the rule for XOR-addition of two equations in bounded-depth Frege with depth/size control, or (ii) a known lower-bound/barrier prohibiting such a rule at $d=\\Theta(\\log n/\\log\\log n)$.
 
-### 16.125. Исследовательский шаг: формальная редукция Q39 к p‑выводимости одного XOR‑шага (Gaussian elimination) в bounded‑depth Frege
+### 16.125. Exploratory step: formal reduction of Q39 to pderivability of a single XORstep (Gaussian elimination) in boundeddepth Frege
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Зафиксируем $n\\to\\infty$, пусть $G$ — $n\\times n$ grid, а $F_n=\\mathrm{TseitinCNF}(G,\\chi)$ (с $\\bigoplus_v\\chi(v)=1$) — 3‑CNF из §16.85.
-  Предположим, что для каждого $m=O(n)$ существует uniform family depth‑$d(n)$ Frege‑выводов полиномиального размера для следующего «XOR‑шага»:
-  из двух представлений линейных уравнений по модулю 2,
+- `Lens:` Equivalence.
+- `Statement:` Fix $n\\to\\infty$, let $G$ be a $n\\times n$ grid and $F_n=\\mathrm{TseitinCNF}(G,\\chi)$ (with $\\bigoplus_v\\chi(v)=1$) be the 3CNF from Section 16.85.
+  Suppose that for each $m=O(n)$ there is a uniform family depth-$d(n)$ Frege-outputs of polynomial size for the following "XOR-step":
+  from two representations of linear equations modulo 2,
   $$E(S_1,b_1),\\ E(S_2,b_2)\\ \\vdash\\ E(S_1\\triangle S_2,\\ b_1\\oplus b_2),$$
-  где $S_i$ — множества переменных $\\{x_e\\}$ размера $\\le m$, $\\triangle$ — симм. разность, а каждое $E(S,b)$ записано depth‑$d(n)$ формулой размера $\\mathrm{poly}(n)$ (representation из §16.123–§16.124).
-  Тогда существует polynomial‑size depth‑$O(d(n))$ Frege‑рефутация $F_n$.
-- `Доказательство:` возьмём линейно‑алгебраическую стратегию из Håstad–Risse §1.2:
-  (i) суммирование всех уравнений одной колонки даёт уравнение ширины $O(n)$; (ii) прибавление соседней колонки сохраняет ширину $O(n)$;
-  (iii) после прохода по всем колонкам получается противоречие $0=1$, и нигде не используется уравнение шире $O(n)$.
-  Стандартная 3‑CNF кодировка вершины (4 клаузы для степени 3/4) имеет константный Frege‑вывод эквивалентной XOR‑формулы
-  $(\\bigoplus_{e\\ni v} x_e)\\leftrightarrow\\chi(v)$ (см. схему в §16.88), так что мы можем начать с representation всех вершинных уравнений.
-  Далее каждый линейный шаг суммирования/сокращения общих переменных — это ровно применение указанного XOR‑правила к двум уравнениям ширины $O(n)$,
-  причём по §16.124 каждое промежуточное уравнение можно держать одним representation‑блоком (size $\\mathrm{poly}(n)$, depth $d(n)$).
-  Число линейных шагов полиномиально (можно суммировать вершины по очереди внутри колонки и затем колонки по очереди), а каждая подстановка XOR‑правила имеет размер $\\mathrm{poly}(n)$ по предположению,
-  значит суммарный размер Frege‑рефутации остаётся $\\mathrm{poly}(n)$ (а значит $\\mathrm{poly}(|F_n|)$).
-- `Toy‑тест:` при $n=4$ суммирование 4 вершин одной колонки убивает внутренние вертикальные рёбра (каждое появляется дважды) и оставляет только рёбра, пересекающие границу колонки;
-  ширина остаётся $O(n)$, и этот шаблон повторяется при добавлении следующей колонки.
-- `Статус:` доказано (условная редукция: закрытие Q39 эквивалентно наличию poly‑size bounded‑depth симуляции одного Gaussian‑elimination шага на XOR‑уравнениях ширины $O(n)$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` найти точный источник/результат про (не)существование такого XOR‑правила в bounded‑depth Frege (возможно через известные lower bounds для AC$^0$‑Frege на «линейно‑алгебраических» тавтологиях).
+  where $S_i$ are sets of variables $\\{x_e\\}$ of size $\\le m$, $\\triangle$ is symmetric. difference, and each $E(S,b)$ is written depth$d(n)$ by the size formula $\\mathrm{poly}(n)$ (representation from Section 16.123-Section 16.124).
+  Then there is a polynomial-size depth-$O(d(n))$ Frege-refutation $F_n$.
+- `Proof:` Let's take the linear-algebraic strategy from Hastad-Risse Section 1.2:
+  (i) summing all equations in one column gives the equation of width $O(n)$; (ii) adding an adjacent column preserves the width $O(n)$;
+  (iii) after going through all the columns, the contradiction $0=1$ is obtained, and nowhere is an equation wider than $O(n)$ used.
+  The standard 3CNF vertex encoding (4 clauses for degree 3/4) has a constant Frege output of an equivalent XOR formula
+  $(\\bigoplus_{e\\ni v} x_e)\\leftrightarrow\\chi(v)$ (see diagram in Section 16.88), so we can start with the representation of all vertex equations.
+  Further, each linear step of summing/reducing common variables is exactly the application of the specified XOR rule to two equations of width $O(n)$,
+  Moreover, according to Section 16.124, each intermediate equation can be contained in one representation block (size $\\mathrm{poly}(n)$, depth $d(n)$).
+  The number of linear steps is polynomial (you can sum the vertices one by one within a column and then the columns one by one), and each substitution of the XOR rule has a size of $\\mathrm{poly}(n)$ by assumption,
+  this means that the total size of the Frege-refutation remains $\\mathrm{poly}(n)$ (and therefore $\\mathrm{poly}(|F_n|)$).
+- `Toy test:` for $n=4$, summing 4 vertices of one column kills internal vertical edges (each appears twice) and leaves only edges that intersect the column boundary;
+  the width remains $O(n)$, and this pattern is repeated when the next column is added.
+- `Status:` proven (conditional reduction: closing Q39 is equivalent to having a polysize boundeddepth simulation of one Gaussianelimination step on XOR equations of width $O(n)$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` find the exact source/result about the (non)existence of such an XOR-rule in bounded-depth Frege (possibly through the known lower bounds for AC$^0$-Frege on "linear-algebraic" tautologies).
 
-### 16.126. Исследовательский шаг: «один XOR‑шаг» = Tseitin на 3‑вершинном (мульти)графе
+### 16.126. Exploratory step: "one XOR step" = Tseitin on a 3-vertex (multi)graph
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Зафиксируем множества переменных $S_1,S_2\\subseteq X$ и биты $b_1,b_2\\in\\{0,1\\}$.
-  Тогда правило из §16.125
+- `Lens:` Equivalence.
+- `Statement:` Let us fix the sets of variables $S_1,S_2\\subseteq X$ and bits $b_1,b_2\\in\\{0,1\\}$.
+  Then the rule from Section 16.125
   $$E(S_1,b_1),\\ E(S_2,b_2)\\ \\vdash\\ E(S_1\\triangle S_2,\\ b_1\\oplus b_2)$$
-  (где $E(S,b)$ — «XOR‑уравнение по модулю 2» над переменными из $S$) эквивалентно refutation’у Tseitin‑противоречия на графе из трёх вершин, в котором каждое ребро соответствует одной переменной из $X$.
-- `Доказательство:`
-  1) (**Граф.**) Построим мультиграф $H(S_1,S_2)$ с вершинами $A,B,C$ и рёбрами:
-     - для каждого $x\\in S_1\\cap S_2$ добавим ребро $(A,B)$, помеченное $x$;
-     - для каждого $x\\in S_1\\setminus S_2$ добавим ребро $(A,C)$, помеченное $x$;
-     - для каждого $x\\in S_2\\setminus S_1$ добавим ребро $(B,C)$, помеченное $x$.
-     Тогда инцидентные $A$ рёбра — ровно переменные из $S_1$, инцидентные $B$ — из $S_2$, а инцидентные $C$ — из $S_1\\triangle S_2$.
-  2) (**Tseitin‑система.**) Положим заряды $\\chi(A)=b_1$, $\\chi(B)=b_2$, $\\chi(C)=1\\oplus b_1\\oplus b_2$.
-     Тогда Tseitin($H,\\chi$) есть система трёх XOR‑уравнений
+  (where $E(S,b)$ is an "XOR equation modulo 2" over variables from $S$) is equivalent to refuting the Tseitin contradiction on a three-vertex graph in which each edge corresponds to one variable from $X$.
+- `Proof:`
+  1) (**Graph.**) Let's construct a multigraph $H(S_1,S_2)$ with vertices $A,B,C$ and edges:
+     - for each $x\\in S_1\\cap S_2$ add an edge $(A,B)$ labeled $x$;
+     - for each $x\\in S_1\\setminus S_2$ add an edge $(A,C)$ labeled $x$;
+     - for each $x\\in S_2\\setminus S_1$ we add an edge $(B,C)$ labeled $x$.
+     Then the incident $A$ edges are exactly variables from $S_1$, the incident $B$ edges are from $S_2$, and the incident $C$ edges are from $S_1\\triangle S_2$.
+  2) (**Tseitinsystem.**) Let us put charges $\\chi(A)=b_1$, $\\chi(B)=b_2$, $\\chi(C)=1\\oplus b_1\\oplus b_2$.
+     Then Tseitin($H,\\chi$) is a system of three XOR equations
      $$E(S_1,b_1),\\quad E(S_2,b_2),\\quad E(S_1\\triangle S_2,\\ 1\\oplus b_1\\oplus b_2).$$
-     Поскольку $b_1\\oplus b_2\\oplus(1\\oplus b_1\\oplus b_2)=1$, сумма зарядов нечётна, и по инварианту из §16.85 система невыполнима.
-  3) (**Импликация ↔ refutation.**) Невыполнимость тройки уравнений равносильна тавтологии
+     Since $b_1\\oplus b_2\\oplus(1\\oplus b_1\\oplus b_2)=1$, the sum of the charges is odd, and by the invariant from Section 16.85 the system is unsatisfiable.
+  3) (**Implication  refutation.**) The impossibility of a triple of equations is tantamount to a tautology
      $$E(S_1,b_1)\\wedge E(S_2,b_2)\\ \\to\\ \\neg E(S_1\\triangle S_2,\\ 1\\oplus b_1\\oplus b_2).$$
-     Но $\\neg E(S,1\\oplus b)$ тождественно $E(S,b)$, значит это ровно $E(S_1,b_1)\\wedge E(S_2,b_2)\\to E(S_1\\triangle S_2,b_1\\oplus b_2)$.
-     Поэтому polynomial‑size bounded‑depth Frege refutation Tseitin($H,\\chi$) (при фиксированном способе записи $E$) даёт polynomial‑size bounded‑depth доказательство XOR‑шага и наоборот (с точностью до $O(1)$ по глубине).
-- `Toy‑тест:` если $S_1=\\{x,y\\}$, $S_2=\\{y,z\\}$, то рёбра: $y$ между $(A,B)$, $x$ между $(A,C)$, $z$ между $(B,C)$.
-  Уравнения: $x\\oplus y=b_1$, $y\\oplus z=b_2$, $x\\oplus z=1\\oplus b_1\\oplus b_2$ — явное противоречие.
-- `Статус:` доказано (переформулировка «missing step» как частного Tseitin).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` искать (не)известные оценки на bounded‑depth Frege для этой 3‑вершинной Tseitin‑семьи при ширине $|S_1|,|S_2|=\\Theta(n)$ и глубине $d=\\Theta(\\log n/\\log\\log n)$ (это и есть «один Gaussian‑elimination шаг»).
+     But $\\neg E(S,1\\oplus b)$ is identical to $E(S,b)$, which means it is exactly $E(S_1,b_1)\\wedge E(S_2,b_2)\\to E(S_1\\triangle S_2,b_1\\oplus b_2)$.
+     Therefore, polynomialsize boundeddepth Frege refutation Tseitin($H,\\chi$) (with a fixed recording method $E$) gives polynomialsize boundeddepth proof of the XOR step and vice versa (with an accuracy of $O(1)$ in depth).
+- `Toy test:` if $S_1=\\{x,y\\}$, $S_2=\\{y,z\\}$, then the edges: $y$ between $(A,B)$, $x$ between $(A,C)$, $z$ between $(B,C)$.
+  The equations: $x\\oplus y=b_1$, $y\\oplus z=b_2$, $x\\oplus z=1\\oplus b_1\\oplus b_2$ are an obvious contradiction.
+- `Status:` proven (reformulation of "missing step" as private Tseitin).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` look for (un)known estimates on bounded-depth Frege for this 3-vertex Tseitin-family with width $|S_1|,|S_2|=\\Theta(n)$ and depth $d=\\Theta(\\log n/\\log\\log n)$ (this is "one Gaussian-elimination step").
 
-### 16.127. Исследовательский шаг: XOR‑сложение уравнений тривиально в EF, но перевод в bounded‑depth Frege даёт лишь $O(\\log n)$ по глубине
+### 16.127. Exploratory step: XOR-addition of equations is trivial in EF, but converting to bounded-depth Frege gives only $O(\\log n)$ in depth
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Семейство «одного XOR‑шага» (эквивалентное 3‑вершинному Tseitin из §16.126) имеет polynomial‑size refutation в Extended Frege (EF),
-  поскольку EF может вводить abbreviation‑переменные и симулировать Gaussian elimination. Однако стандартные приёмы перевода/балансировки дают
-  для обычного Frege только верхнюю оценку глубины $O(\\log n)$ (а не $O(\\log n/\\log\\log n)$), так что это не закрывает Q39.
-- `Доказательство/пояснение:`
-  1) EF‑верхняя оценка: см. §16.88 (каркас EF‑доказательства Tseitin через XOR‑переменные) и замечание «EF легко симулирует Gaussian elimination»
+- `Lens:` Trade-off.
+- `Statement:` The "one-step XOR" family (equivalent to the 3-vertex Tseitin from Section 16.126) has a polynomial-size refutation in Extended Frege (EF),
+  since EF can introduce abbreviation variables and simulate Gaussian elimination. However, standard translation/balancing techniques give
+  for ordinary Frege only the upper depth bound is $O(\\log n)$ (not $O(\\log n/\\log\\log n)$), so this does not close Q39.
+- `Proof/Explanation:`
+  1) EF upper bound: see Section 16.88 (skeleton of Tseitin's EF proof via XOR variables) and the note "EF easily simulates Gaussian elimination"
      (Bonet–Buss–Pitassi 2002, `../../resources/downloads/bonet_buss_pitassi_2002_hard_examples_frege.pdf`, p. 7).
-     Для 3‑вершинного Tseitin (и вообще для линейных систем над $\\mathbb F_2$) EF может хранить промежуточные XOR‑уравнения в extension‑переменных и выполнять шаги сложения строк.
-  2) Переход к bounded‑depth Frege: даже если есть polynomial‑size (E)Frege‑доказательство, известная универсальная балансировка формул (Spira/Brent) даёт глубину лишь
-     $O(\\log m)$ для формул размера $m$ (см. §16.94), а в нашем режиме $m=\\mathrm{poly}(n)$ это $O(\\log n)$.
-     Именно поэтому «есть EF‑доказательство Gaussian elimination» не означает «есть depth‑$\\Theta(\\log n/\\log\\log n)$ Frege‑доказательство одного XOR‑шага».
-- `Toy‑тест:` для паритета на $n$ переменных балансировка даёт глубину $O(\\log n)$ для явной XOR‑деревянной формулы, но Q39 требует глубину порядка $\\log n/\\log\\log n$.
-- `Статус:` доказано (локальный барьер: стандартный EF→Frege+балансировка не даёт нужной глубины).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` искать технику, которая уменьшает глубину вывода XOR‑шага ниже $O(\\log n)$ (например, через специальные depth‑$d$ представления паритета из Håstad–Risse и доказательства их линейности), либо источник, что такой сдвиг невозможен.
+     For 3-vertex Tseitin (and in general for linear systems over $\\mathbb F_2$), EF can store intermediate XOR equations in extension variables and perform string addition steps.
+  2) Transition to boundeddepth Frege: even if there is a polynomialsize (E)Fregeproof, the well-known universal balancing of formulas (Spira/Brent) gives depth only
+     $O(\\log m)$ for formulas of size $m$ (see Section 16.94), and in our regime $m=\\mathrm{poly}(n)$ is $O(\\log n)$.
+     This is why "there is an EFproof of Gaussian elimination" does not mean "there is a depth$\\Theta(\\log n/\\log\\log n)$ Fregeproof of one XORstep."
+- `Toy test:` for parity on $n$ variables, balancing gives a depth of $O(\\log n)$ for an explicit XOR tree formula, but Q39 requires a depth of the order of $\\log n/\\log\\log n$.
+- `Status:` proven (local barrier: standard EF->Frege+balancing does not provide the required depth).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` look for a technique that reduces the inference depth of the XOR step below $O(\\log n)$ (for example, through special depth-$d$ parity representations from Hastad-Risse and proof of their linearity), or a source that such a shift is impossible.
 
-### 16.128. Исследовательский шаг: Claim‑28 upper (GIRS’19) не сертифицирует polynomial‑size даже для «локального» 3‑вершинного Tseitin при $d\\approx\\log n/\\log\\log n$
+### 16.128. Research step: Claim-28 upper (GIRS'19) does not certify polynomial-size even for "local" 3-vertex Tseitin at $d\\approx\\log n/\\log\\log n$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Рассмотрим семейство 3‑вершинных Tseitin‑противоречий из §16.126, где $|S_1|,|S_2|=\\Theta(n)$ (значит число переменных $\\Theta(n)$).
-  Тогда общий upper bound из GIRS’19 (Claim 28 → Thm. 27; см. §16.115–§16.121) гарантирует polynomial‑size refutation лишь при глубине
+- `Lens:` Trade-off.
+- `Statement:` Consider the family of 3-vertex Tseitin contradictions from Section 16.126, where $|S_1|,|S_2|=\\Theta(n)$ (meaning the number of variables $\\Theta(n)$).
+  Then the general upper bound from GIRS'19 (Claim 28 -> Thm. 27; see Section 16.115-Section 16.121) guarantees polynomialsize refutation only at depth
   $$d=\\Omega(\\log n),$$
-  и потому не может закрыть Q39 в режиме $d=\\Theta(\\log n/\\log\\log n)$ даже на одном Gaussian‑elimination шаге.
-- `Доказательство:` пусть $H=H(S_1,S_2)$ — мультиграф на вершинах $A,B,C$ из §16.126.
+  and therefore cannot close Q39 in the $d=\\Theta(\\log n/\\log\\log n)$ mode even at one Gaussian-elimination step.
+- `Proof:` let $H=H(S_1,S_2)$ be the multigraph on vertices $A,B,C$ from Section 16.126.
   1) $\\Delta(H)=\\max\\{|S_1|,|S_2|,|S_1\\triangle S_2|\\}=\\Theta(n)$.
-  2) По определению tree‑partition width из GIRS’19 §4.3 можно взять одно множество $\\{A,B,C\\}$ как единственную часть tree‑partition, значит
+  2) By definition of treepartition width from GIRS'19 Section 4.3, we can take one set $\\{A,B,C\\}$ as the only part of the treepartition, which means
      $$\\mathrm{tpw}(H)\\le 3.$$
-     Следовательно, $X:=\\Delta(H)\\,\\mathrm{tpw}(H)=\\Theta(n)$.
-  3) Применяя явный unconditional upper из §16.120,
+     Therefore, $X:=\\Delta(H)\\,\\mathrm{tpw}(H)=\\Theta(n)$.
+  3) Using the explicit unconditional upper from Section 16.120,
      $$\\mathrm{size}\\le \\mathrm{poly}(|T|)\\cdot 2^{O\\bigl(d\\cdot X^{2/d}\\bigr)},$$
-     и лемму‑оптимизацию §16.121 (polynomial‑size возможно только при $d=\\Omega(\\log X)$), получаем требование $d=\\Omega(\\log n)$.
-- `Toy‑тест:` если $d=\\lfloor\\log n/\\log\\log n\\rfloor$, то $X^{2/d}=\\exp(2\\log n/d)=(\\log n)^{\\Theta(1)}$ и
+     and optimization lemma Section 16.121 (polynomial-size is possible only for $d=\\Omega(\\log X)$), we obtain the requirement $d=\\Omega(\\log n)$.
+- `Toy test:` if $d=\\lfloor\\log n/\\log\\log n\\rfloor$, then $X^{2/d}=\\exp(2\\log n/d)=(\\log n)^{\\Theta(1)}$ and
   $$2^{O(d\\cdot X^{2/d})}=2^{\\mathrm{polylog}(n)}=n^{\\mathrm{polylog}(n)}$$
-  (quasi‑poly), а не $n^{O(1)}$.
-- `Статус:` доказано (локальный «барьер техники»: tree‑partition upper из GIRS’19 не достигает пороговой глубины даже для 3‑вершинного шага).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` искать приём, который использует специальную структуру grid/representation (Håstad–Risse) и обходится без параметра $X=\\Delta\\,\\mathrm{tpw}$ (или доказать, что для 3‑вершинного Tseitin при $d=\\Theta(\\log n/\\log\\log n)$ неизбежна quasi‑poly нижняя оценка).
+  (quasi-poly), not $n^{O(1)}$.
+- `Status:` proven (local "technique barrier": tree-partition upper from GIRS'19 does not reach the threshold depth even for a 3-vertex step).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` look for a technique that uses a special grid/representation structure (Hastad-Risse) and dispenses with the parameter $X=\\Delta\\,\\mathrm{tpw}$ (or prove that for a 3-vertex Tseitin with $d=\\Theta(\\log n/\\log\\log n)$ a quasi-poly lower bound is inevitable).
 
-### 16.129. Исследовательский шаг: «компактное представление паритета» в GIRS’19 (Lemma 21) = DNF‑индукция и имеет размер $\\exp(\\Theta(d\\,n^{1/d}))$ ⇒ при $d\\approx\\log n/\\log\\log n$ это quasi‑poly
+### 16.129. Exploration step: "compact representation of parity" in GIRS'19 (Lemma 21) = DNFinduction and has size $\\exp(\\Theta(d\\,n^{1/d}))$  with $d\\approx\\log n/\\log\\log n$ it is quasipoly
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение:` В GIRS’19, §4.1 (Lemma 20–21) «компактное представление» $\\mathrm{PARITY}$ строится через $(t_1,\\dots,t_d)$‑refinement и даёт формулу глубины $\\le 3d+1$ и размера
+- `Lens:` Compression/canonization.
+- `Statement:` In GIRS'19, Section 4.1 (Lemma 20-21), the "compact representation" of $\\mathrm{PARITY}$ is constructed via $(t_1,\\dots,t_d)$refinement and gives the formula for depth $\\le 3d+1$ and size
   $$\\mathrm{size}=\\prod_{i=1}^d (2^{t_i+1}t_i).$$
-  При условии $\\prod_{i=1}^d t_i\\ge n$ (Lemma 20) лучшая возможная оценка для **этого** построения имеет вид
+  Given $\\prod_{i=1}^d t_i\\ge n$ (Lemma 20), the best possible estimate for **this** construction is
   $$2^{\\Omega(d\\,n^{1/d})}\\ \\le\\ \\mathrm{size}\\ \\le\\ 2^{O(d\\,n^{1/d})}\\cdot\\mathrm{poly}(n).$$
-  В частности, при $d=\\Theta(\\log n/\\log\\log n)$ получаем $\\mathrm{size}=n^{\\Theta(\\log n/\\log\\log n)}$ (quasi‑poly), т.е. ровно тот же «лишний множитель $d$ в экспоненте», что и в §16.123.
-- `Доказательство/ссылка:`
-  1) (Размер/глубина формулы.) GIRS’19, Lemma 21 (в `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`): при $(t_1,\\dots,t_d)$‑refinement формула для $\\mathrm{PARITY}$ имеет глубину $\\le 3d+1$ и размер $\\prod_{i=1}^d (2^{t_i+1}t_i)$.
-  2) (Нижняя оценка для этого построения.) Так как $\\prod_{i=1}^d (2^{t_i+1}t_i)\\ge \\prod_i 2^{t_i}=2^{\\sum_i t_i}$, достаточно оценить сумму.
-     По AM–GM: если $t_i\\ge 1$ и $\\prod_i t_i\\ge n$, то $\\frac1d\\sum_i t_i\\ge (\\prod_i t_i)^{1/d}\\ge n^{1/d}$, значит $\\sum_i t_i\\ge d\\,n^{1/d}$ и
+  In particular, for $d=\\Theta(\\log n/\\log\\log n)$ we obtain $\\mathrm{size}=n^{\\Theta(\\log n/\\log\\log n)}$ (quasi-poly), i.e. exactly the same "extra factor $d$ in the exponent" as in Section 16.123.
+- `Proof/link:`
+  1) (Formula size/depth.) GIRS'19, Lemma 21 (in `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`): for $(t_1,\\dots,t_d)$refinement, the formula for $\\mathrm{PARITY}$ has depth $\\le 3d+1$ and size $\\prod_{i=1}^d (2^{t_i+1}t_i)$.
+  2) (Lower bound for this construction.) Since $\\prod_{i=1}^d (2^{t_i+1}t_i)\\ge \\prod_i 2^{t_i}=2^{\\sum_i t_i}$, it is enough to estimate the sum.
+     According to AM-GM: if $t_i\\ge 1$ and $\\prod_i t_i\\ge n$, then $\\frac1d\\sum_i t_i\\ge (\\prod_i t_i)^{1/d}\\ge n^{1/d}$, then $\\sum_i t_i\\ge d\\,n^{1/d}$ and
      $$\\mathrm{size}\\ge 2^{\\sum_i t_i}\\ge 2^{d\\,n^{1/d}}.$$
-  3) (Верхняя оценка.) Возьмём $t_i:=\\lceil n^{1/d}\\rceil$. Тогда $\\prod_i t_i\\ge n$, и
+  3) (Upper bound.) Take $t_i:=\\lceil n^{1/d}\\rceil$. Then $\\prod_i t_i\\ge n$, and
      $$\\mathrm{size}=\\prod_i (2^{t_i+1}t_i)=2^{O(d\\,n^{1/d})}\\cdot (n^{1/d}+1)^d=2^{O(d\\,n^{1/d})}\\cdot\\mathrm{poly}(n).$$
-  4) (Порог $d\\approx\\log n/\\log\\log n$.) Тогда $n^{1/d}=2^{(\\log_2 n)/d}=2^{\\Theta(\\log\\log n)}=\\mathrm{polylog}(n)$, и экспонента
+  4) (Threshold $d\\approx\\log n/\\log\\log n$.) Then $n^{1/d}=2^{(\\log_2 n)/d}=2^{\\Theta(\\log\\log n)}=\\mathrm{polylog}(n)$, and the exponent
      $$d\\,n^{1/d}=\\Theta\\Bigl(\\frac{\\log n}{\\log\\log n}\\cdot\\log n\\Bigr)=\\Theta\\Bigl(\\frac{\\log^2 n}{\\log\\log n}\\Bigr),$$
-     т.е. $\\mathrm{size}=2^{\\Theta(\\log^2 n/\\log\\log n)}=n^{\\Theta(\\log n/\\log\\log n)}$ (quasi‑poly).
-- `Toy‑тест:` пусть $n=2^{256}$, $d=\\lfloor 256/8\\rfloor=32$. Тогда $n^{1/d}=2^8=256$ и нижняя оценка даёт $\\mathrm{size}\\ge 2^{32\\cdot 256}=2^{8192}$, тогда как любой $n^C$ имеет вид $2^{256C}$.
-- `Статус:` доказано (ограничение техники: GIRS’19 Lemma 21/Claim 28 используют parity‑представление размера $\\exp(\\Theta(d\\,n^{1/d}))$, что не достигает порога $d\\approx\\log n/\\log\\log n$ без новых идей).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` выяснить, существует ли в литературе «доказуемое в bounded‑depth Frege» представление паритета без множителя $d$ в экспоненте (в духе Håstad–Risse §1.2), или есть известный lower bound/барьер, запрещающий синтаксическую симуляцию XOR‑сложения на глубине $\\Theta(\\log n/\\log\\log n)$.
+     those. $\\mathrm{size}=2^{\\Theta(\\log^2 n/\\log\\log n)}=n^{\\Theta(\\log n/\\log\\log n)}$ (quasi-poly).
+- `Toy test:` let $n=2^{256}$, $d=\\lfloor 256/8\\rfloor=32$. Then $n^{1/d}=2^8=256$ and the lower bound gives $\\mathrm{size}\\ge 2^{32\\cdot 256}=2^{8192}$, while any $n^C$ has the form $2^{256C}$.
+- `Status:` proven (technique limitation: GIRS'19 Lemma 21/Claim 28 use parity representation of size $\\exp(\\Theta(d\\,n^{1/d}))$, which does not reach the threshold $d\\approx\\log n/\\log\\log n$ without new ideas).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` find out whether there exists in the literature a "provable in boundeddepth Frege" representation of parity without the factor $d$ in the exponential (in the spirit of Hastad-Risse Section 1.2), or whether there is a known lower bound/barrier that prohibits syntactic simulation of XORaddition at depth $\\Theta(\\log n/\\log\\log n)$.
 
-### 16.130. Исследовательский шаг: XOR‑сложение уравнений становится лёгким, если все уравнения записаны как паритет по $k$ «блок‑паритетам» одного фиксированного разбиения
+### 16.130. Exploratory step: XOR addition of equations becomes easy if all equations are written as parity over $k$ "block parities" of one fixed partition
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть множество переменных $X$ разбито на непересекающиеся блоки $X=\\biguplus_{i=1}^k B_i$.
-  Для каждого $i$ пусть $P_i(x_{B_i})$ — формула глубины $\\le d_0$ и размера $\\mathrm{poly}(n)$, вычисляющая паритет на $B_i$ (т.е. $P_i=1\\iff \\bigoplus_{x\\in B_i}x=1$).
-  Для $I\\subseteq[k]$ и $b\\in\\{0,1\\}$ обозначим
+- `Lens:` Equivalence.
+- `Statement:` Let the set of variables $X$ be divided into disjoint blocks $X=\\biguplus_{i=1}^k B_i$.
+  For each $i$, let $P_i(x_{B_i})$ be a formula for depth $\\le d_0$ and size $\\mathrm{poly}(n)$ that calculates parity on $B_i$ (i.e. $P_i=1\\iff \\bigoplus_{x\\in B_i}x=1$).
+  For $I\\subseteq[k]$ and $b\\in\\{0,1\\}$ we denote
   $$E^{\\mathrm{blk}}(I,b)\\ :=\\ \\Bigl(\\bigoplus_{i\\in I} y_i=b\\Bigr)$$
-  как **DNF‑формулу** на абстрактных переменных $y_1,\\dots,y_k$ (полная DNF паритета на $I$, размера $\\Theta(2^{|I|-1}|I|)$).
-  Тогда для любых $I_1,I_2\\subseteq[k]$ и $b_1,b_2\\in\\{0,1\\}$ существует bounded‑depth Frege‑вывод глубины $O(1)$ и размера $2^{O(k)}$, доказывающий
+  as a **DNF formula** on abstract variables $y_1,\\dots,y_k$ (complete DNF of parity on $I$, size $\\Theta(2^{|I|-1}|I|)$).
+  Then for any $I_1,I_2\\subseteq[k]$ and $b_1,b_2\\in\\{0,1\\}$ there is a boundeddepth Fregederivation of the depth $O(1)$ and size $2^{O(k)}$, proving
   $$E^{\\mathrm{blk}}(I_1,b_1)\\wedge E^{\\mathrm{blk}}(I_2,b_2)\\ \\to\\ \\ E^{\\mathrm{blk}}(I_1\\triangle I_2,\\ b_1\\oplus b_2).$$
-  Подстановкой $y_i\\mapsto P_i$ получаем polynomial‑size depth‑$O(d_0)$ Frege‑вывод XOR‑шага для уравнений, которые являются **объединениями блоков** одного и того же разбиения:
+  By substituting $y_i\\mapsto P_i$ we get the polynomialsize depth$O(d_0)$ Fregeoutput of the XORstep for equations that are **unions of blocks** of the same partition:
   $$E(S_{I_1},b_1),\\ E(S_{I_2},b_2)\\ \\vdash\\ E(S_{I_1\\triangle I_2},\\ b_1\\oplus b_2),\\qquad S_I:=\\bigcup_{i\\in I} B_i.$$
-  В частности, если $k=O(\\log n)$ и $|P_i|=\\mathrm{poly}(n)$, то один XOR‑шаг имеет polynomial‑size bounded‑depth Frege‑доказательство.
-- `Доказательство:`
-  1) На уровне $y$‑переменных импликация — тавтология (линейность паритета по $\\mathbb F_2$). По Lemma 4 (GIRS’19, `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`, p. 4),
-     если формула зависит от $k$ переменных, то из семантической импликации следует derivation размера $\\le 2^k\\bigl(|\\psi_1|^2+|\\psi_2|^2\\bigr)=2^{O(k)}$ при той же глубине.
-  2) Подстановка: в любой Frege‑системе, где аксиомы/правила заданы как схемы, подстановка $y_i\\mapsto P_i$ в каждую строку доказательства даёт доказательство подстановочной формулы.
-     Глубина увеличивается на $O(d_0)$, а суммарный размер — не более чем на множитель $O(\\max_i |P_i|)$ (каждое вхождение $y_i$ заменяется формулой $P_i$).
-- `Toy‑тест:` $k=3$, $I_1=\\{1,2\\}$, $I_2=\\{2,3\\}$: из $y_1\\oplus y_2=b_1$ и $y_2\\oplus y_3=b_2$ следует $y_1\\oplus y_3=b_1\\oplus b_2$ (cимм. разность убирает $y_2$).
-- `Статус:` доказано (условный «easy case»: XOR‑шаг тривиализуется при фиксированном блок‑разбиении и малом $k$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` понять, можно ли для column‑summing стратегии на grid держать все промежуточные уравнения в виде union‑of‑blocks одного разбиения с $k=\\mathrm{polylog}(n)$ (и при этом выводить сами блок‑паритеты без «скрытого» Gaussian elimination), или это ломается и требует переходов между разбиениями.
+  In particular, if $k=O(\\log n)$ and $|P_i|=\\mathrm{poly}(n)$, then one XOR step has a polynomial-size bounded-depth Frege-proof.
+- `Proof:`
+  1) At the level of $y$-variables, the implication is a tautology (linearity of parity in $\\mathbb F_2$). According to Lemma 4 (GIRS'19, `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`, p. 4),
+     if the formula depends on $k$ variables, then the semantic implication implies a derivation of size $\\le 2^k\\bigl(|\\psi_1|^2+|\\psi_2|^2\\bigr)=2^{O(k)}$ for the same depth.
+  2) Substitution: in any Frege system where axioms/rules are given as schemas, substituting $y_i\\mapsto P_i$ into each line of the proof gives a proof of the substitution formula.
+     The depth increases by $O(d_0)$, and the total size increases by no more than a factor of $O(\\max_i |P_i|)$ (each occurrence of $y_i$ is replaced by the formula $P_i$).
+- `Toy test:` $k=3$, $I_1=\\{1,2\\}$, $I_2=\\{2,3\\}$: from $y_1\\oplus y_2=b_1$ and $y_2\\oplus y_3=b_2$ it follows $y_1\\oplus y_3=b_1\\oplus b_2$ (the symmetric difference removes $y_2$).
+- `Status:` proven (conditional "easy case": the XOR step is trivialized for a fixed block partition and small $k$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` to understand whether for a column-summing strategy on a grid it is possible to keep all intermediate equations in the form of union-of-blocks of one partition with $k=\\mathrm{polylog}(n)$ (and at the same time output the block parities themselves without "hidden" Gaussian elimination), or whether this breaks down and requires transitions between partitions.
 
-### 16.131. Исследовательский шаг: фиксированный «block‑basis» не может покрыть column‑summing на grid при $k=\\mathrm{polylog}(n)$ (ранг $=\\Omega(n)$)
+### 16.131. Exploratory step: fixed "blockbasis" cannot cover columnsumming on grid at $k=\\mathrm{polylog}(n)$ (rank $=\\Omega(n)$)
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение:` Рассмотрим $n\\times n$ grid и пусть $H_j$ — множество из $n$ горизонтальных рёбер между колонками $j$ и $j+1$ (для $j=1,\\dots,n-1$).
-  Тогда множества $H_1,\\dots,H_{n-1}$ линейно независимы в $\\mathbb F_2^{E}$ (как характеристические векторы), и поэтому:
-  если фиксирован набор $k$ подмножеств рёбер $B_1,\\dots,B_k\\subseteq E$, то одновременно представить **все** $H_j$ как симметрические разности
+- `Lens:` Communication/Rank.
+- `Statement:` Consider a $n\\times n$ grid and let $H_j$ be the set of $n$ horizontal edges between columns $j$ and $j+1$ (for $j=1,\\dots,n-1$).
+  Then the sets $H_1,\\dots,H_{n-1}$ are linearly independent in $\\mathbb F_2^{E}$ (as characteristic vectors), and therefore:
+  if a set of $k$ subsets of edges $B_1,\\dots,B_k\\subseteq E$ is fixed, then simultaneously represent **all** $H_j$ as symmetric differences
   $$H_j=\\bigtriangleup_{i\\in I_j} B_i$$
-  возможно только при $k\\ge n-1$.
-  В частности, попытка применить §16.130 к column‑summing с одним фиксированным block‑representation требует $k=\\Omega(n)$ и потому не даёт polynomial‑size (так как $2^{O(k)}$ становится экспоненциальным).
-- `Доказательство:` так как множества $H_j$ попарно непересекаются, они независимы:
-  если $\\bigtriangleup_{j\\in J} H_j=\\varnothing$, то для любого $e\\in H_{j_0}$ (где $j_0\\in J$) этот $e$ встречается в симм. разности ровно один раз (только из $H_{j_0}$), противоречие. Значит $J=\\varnothing$ и $\\{H_j\\}$ независимы.
-  Следовательно, подпространство $\\langle H_1,\\dots,H_{n-1}\\rangle\\subseteq\\mathbb F_2^{E}$ имеет размерность $n-1$.
-  Если же каждый $H_j$ лежит в линейной оболочке $\\langle B_1,\\dots,B_k\\rangle$, то
+  possible only for $k\\ge n-1$.
+  In particular, trying to apply Section 16.130 to column-summing with one fixed block-representation requires $k=\\Omega(n)$ and therefore does not yield a polynomial-size (since $2^{O(k)}$ becomes exponential).
+- `Proof:` since the sets $H_j$ are pairwise disjoint, they are independent:
+  if $\\bigtriangleup_{j\\in J} H_j=\\varnothing$, then for any $e\\in H_{j_0}$ (where $j_0\\in J$) this $e$ occurs in symmetry. differences exactly once (only from $H_{j_0}$), a contradiction. This means $J=\\varnothing$ and $\\{H_j\\}$ are independent.
+  Therefore, the subspace $\\langle H_1,\\dots,H_{n-1}\\rangle\\subseteq\\mathbb F_2^{E}$ has dimension $n-1$.
+  If each $H_j$ lies in the linear hull $\\langle B_1,\\dots,B_k\\rangle$, then
   $$n-1=\\dim\\langle H_1,\\dots,H_{n-1}\\rangle\\le \\dim\\langle B_1,\\dots,B_k\\rangle\\le k,$$
-  откуда $k\\ge n-1$.
-- `Toy‑тест:` при $n=4$ есть три непересекающихся сета $H_1,H_2,H_3$; значит любой фиксированный набор $B_1,\\dots,B_k$, порождающий все $H_j$, должен иметь $k\\ge 3$.
-- `Статус:` контрпример к наивной идее «закрыть Q39 через один фиксированный block‑basis + §16.130» (нужны переходы между разбиениями/базисами).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` формализовать, какой именно «base‑change» требуется в стратегии Håstad–Risse, и свести его к синтаксической задаче: доказать/опровергнуть возможность эффективно переводить bounded‑depth представления паритета между двумя (существенно разными) разбиениями при глубине $\\Theta(\\log n/\\log\\log n)$.
+  whence $k\\ge n-1$.
+- `Toy test:` for $n=4$ there are three disjoint sets $H_1,H_2,H_3$; this means that any fixed set $B_1,\\dots,B_k$ generating all $H_j$ must have $k\\ge 3$.
+- `Status:` a counterexample to the naive idea "close Q39 through one fixed blockbasis + Section 16.130" (transitions between partitions/bases are needed).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` formalize what kind of "basechange" is required in the Hastad-Risse strategy, and reduce it to a syntactic problem: prove/disprove the ability to effectively translate boundeddepth representations of parity between two (significantly different) partitions at depth $\\Theta(\\log n/\\log\\log n)$.
 
-### 16.132. Исследовательский шаг: наивный base‑change через общее уточнение двух разбиений даёт blow‑up $k\\mapsto k^2$ ⇒ при $k=\\Theta(\\log n)$ получается quasi‑poly
+### 16.132. Exploratory step: a naive basechange through a general refinement of two partitions gives a blowup $k\\mapsto k^2$  with $k=\\Theta(\\log n)$ it turns out quasipoly
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $U$ — множество переменных (или рёбер), а $\\mathcal P,\\mathcal Q$ — разбиения $U$ на $k$ блоков каждое.
-  Рассмотрим «block‑representation» из §16.130: формулы для паритетов блоков и уравнения вида «паритет на объединении некоторых блоков равен $b$».
-  Тогда любой «перевод» между представлениями относительно $\\mathcal P$ и $\\mathcal Q$ можно свести к общему уточнению
+- `Lens:` Trade-off.
+- `Statement:` Let $U$ be a set of variables (or edges), and $\\mathcal P,\\mathcal Q$ be partitions of $U$ into $k$ blocks each.
+  Consider the "blockrepresentation" from Section 16.130: formulas for block parities and equations of the form "the parity on the union of some blocks is $b$."
+  Then any "translation" between representations with respect to $\\mathcal P$ and $\\mathcal Q$ can be reduced to a general refinement
   $$\\mathcal R:=\\{P\\cap Q:\\ P\\in\\mathcal P,\\ Q\\in\\mathcal Q,\\ P\\cap Q\\ne\\varnothing\\},$$
-  причём $|\\mathcal R|\\le k^2$ и каждое множество, являющееся объединением блоков $\\mathcal P$ (или $\\mathcal Q$), автоматически является объединением блоков $\\mathcal R$.
-  Следовательно, если пытаться реализовать base‑change исключительно через §16.130 (т.е. через «абстрактное» доказательство размера $2^{O(|\\mathcal R|)}$ на переменных $y_R$ и подстановку $y_R\\mapsto \\mathrm{PARITY}(R)$), то базовый верхний предел на стоимость такого шага имеет вид
+  moreover, $|\\mathcal R|\\le k^2$ and each set that is a union of blocks $\\mathcal P$ (or $\\mathcal Q$) is automatically a union of blocks $\\mathcal R$.
+  Therefore, if one tries to implement basechange solely through Section 16.130 (i.e., through an "abstract" proof of size $2^{O(|\\mathcal R|)}$ on variables $y_R$ and substitution $y_R\\mapsto \\mathrm{PARITY}(R)$), then the basic upper limit on the cost of such a step has the form
   $$2^{O(|\\mathcal R|)}\\le 2^{O(k^2)}.$$
-  В частности, при $k=\\Theta(\\log n)$ это уже $2^{\\Theta(\\log^2 n)}=n^{\\Theta(\\log n)}$ (quasi‑poly), так что «универсальный» base‑change через уточнение не сохраняет polynomial‑size.
-- `Доказательство:`
-  1) (Общее уточнение.) Для любых разбиений $\\mathcal P,\\mathcal Q$ семейство $\\mathcal R$ выше — разбиение $U$ (на непустые попарно непересекающиеся множества), и по определению каждый блок $P\\in\\mathcal P$ раскладывается в дизъюнктное объединение блоков $P\\cap Q$ при $Q\\in\\mathcal Q$; аналогично для каждого $Q\\in\\mathcal Q$.
-  2) (Оценка числа блоков.) Так как пар $P\\cap Q$ не больше, чем $k\\cdot k$, получаем $|\\mathcal R|\\le k^2$.
-  3) (Худший случай достигается.) Пусть $U=[k]\\times[k]$. Возьмём $\\mathcal P$ как разбиение по строкам $P_i:=\\{i\\}\\times[k]$ и $\\mathcal Q$ как разбиение по столбцам $Q_j:=[k]\\times\\{j\\}$. Тогда каждое пересечение $P_i\\cap Q_j$ — одноточечное множество, значит $|\\mathcal R|=k^2$.
-  4) (Стоимость «через §16.130».) В §16.130 абстрактный XOR‑вывод на $k$ блок‑переменных оценивается как $2^{O(k)}$ (по сути, перебор таблицы истинности). Если наивно привести две несовместимые block‑representations к общей $\\mathcal R$ и дальше работать абстрактно, то количество блок‑переменных становится $|\\mathcal R|$, и оценка превращается в $2^{O(|\\mathcal R|)}\\le 2^{O(k^2)}$.
-- `Toy‑тест:` если $k=\\lfloor\\log_2 n\\rfloor$, то $2^{O(k^2)}=2^{O(\\log^2 n)}=n^{O(\\log n)}$, т.е. даже один «универсальный» base‑change такого типа уже может уничтожить цель $n^{O(1)}$.
-- `Статус:` доказано (барьер метода: динамические разбиения действительно нужны, но «перевод через общее уточнение» в худшем случае квадратично раздувает число блоков и приводит к quasi‑poly при $k=\\Theta(\\log n)$).
-- `Барьер‑чек:` r — неприменимо (вопрос о синтаксической цене внутри Frege, не оракулы), NP — неприменимо (не про алгоритмы решения SAT), alg — неприменимо (не про арифметизацию/алгебраизацию моделей).
-- `Следующий шаг:` найти «структурный» base‑change, который для нужных промежуточных разбиений на grid избегает blow‑up $k\\to k^2$ (например, цепочка контролируемых refinement/coarsening, где каждое преобразование имеет поддержку $O(1)$ или $O(\\log n)$ на абстрактном уровне), или показать, что в стратегии Håstad–Risse неизбежно появляются пары разбиений с $|\\mathcal P\\wedge\\mathcal Q|=\\Omega(k^2)$.
+  In particular, for $k=\\Theta(\\log n)$ this is already $2^{\\Theta(\\log^2 n)}=n^{\\Theta(\\log n)}$ (quasi-poly), so the "universal" base-change through refinement does not preserve the polynomial-size.
+- `Proof:`
+  1) (General clarification.) For any partitions $\\mathcal P,\\mathcal Q$, the family $\\mathcal R$ above is a partition of $U$ (into non-empty pairwise disjoint sets), and by definition each block $P\\in\\mathcal P$ is decomposed into a disjoint union of blocks $P\\cap Q$ for $Q\\in\\mathcal Q$; similarly for each $Q\\in\\mathcal Q$.
+  2) (Estimate the number of blocks.) Since the pairs $P\\cap Q$ are not greater than $k\\cdot k$, we obtain $|\\mathcal R|\\le k^2$.
+  3) (The worst case is achieved.) Let $U=[k]\\times[k]$. Let us take $\\mathcal P$ as the row partition $P_i:=\\{i\\}\\times[k]$ and $\\mathcal Q$ as the column partition $Q_j:=[k]\\times\\{j\\}$. Then each intersection $P_i\\cap Q_j$ is a one-point set, which means $|\\mathcal R|=k^2$.
+  4) (Cost "through Section 16.130.") In Section 16.130, abstract XOR inference on $k$ block variables costs $2^{O(k)}$ (essentially a truth table search). If we naively reduce two incompatible block-representations to a common $\\mathcal R$ and then work abstractly, then the number of block-variables becomes $|\\mathcal R|$, and the estimate becomes $2^{O(|\\mathcal R|)}\\le 2^{O(k^2)}$.
+- `Toy test:` if $k=\\lfloor\\log_2 n\\rfloor$, then $2^{O(k^2)}=2^{O(\\log^2 n)}=n^{O(\\log n)}$, i.e. even one "universal" base-change of this type can already destroy the target $n^{O(1)}$.
+- `Status:` proven (method barrier: dynamic partitions are really needed, but "translation through general refinement" in the worst case quadratically inflates the number of blocks and leads to quasi-poly for $k=\\Theta(\\log n)$).
+- `Barrier check:` r - not applicable (question about syntactic price inside Frege, not oracles), NP - not applicable (not about algorithms for solving SAT), alg - not applicable (not about arithmetization/algebraization of models).
+- `Next step:` find a "structural" basechange that, for the desired intermediate partitions on the grid, avoids blowup $k\\to k^2$ (for example, a chain of controlled refinement/coarsening, where each transformation has $O(1)$ or $O(\\log n)$ support at the abstract level), or show that in the Hastad-Risse strategy inevitably pairs of partitions with $|\\mathcal appear P\\wedge\\mathcal Q|=\\Omega(k^2)$.
 
-### 16.133. Исследовательский шаг: для interval‑partition на $[m]$ общее уточнение имеет размер $\\le k_1+k_2-1$ (нет квадратичного blow‑up)
+### 16.133. Exploratory step: for interval-partition on $[m]$ the total refinement has size $\\le k_1+k_2-1$ (no quadratic blow-up)
 
-- `Линза:` Инвариант.
-- `Утверждение:` Пусть $U=[m]=\\{1,\\dots,m\\}$ с фиксированным порядком. Назовём разбиение $\\mathcal P$ **interval‑partition**, если каждый блок — отрезок $[a,b]\\cap\\mathbb Z$.
-  Тогда для любых двух interval‑partition $\\mathcal P,\\mathcal Q$ с $|\\mathcal P|=k_1$, $|\\mathcal Q|=k_2$ их общее уточнение удовлетворяет
+- `Lens:` Invariant.
+- `Statement:` Let $U=[m]=\\{1,\\dots,m\\}$ with a fixed order. Let's call a partition $\\mathcal P$ **intervalpartition** if each block is an interval $[a,b]\\cap\\mathbb Z$.
+  Then for any two intervalpartition $\\mathcal P,\\mathcal Q$ with $|\\mathcal P|=k_1$, $|\\mathcal Q|=k_2$ their general refinement satisfies
   $$|\\mathcal P\\wedge\\mathcal Q|\\le k_1+k_2-1.$$
-  Следовательно, «универсальный» base‑change из §16.132 через общее уточнение даёт лишь линейный рост числа блоков, если все разбиения совместимы с одним и тем же 1‑мерным порядком.
-- `Доказательство:` interval‑partition однозначно задаётся множеством разрезов
-  $$C(\\mathcal P)\\subseteq\\{1,\\dots,m-1\\},\\qquad i\\in C(\\mathcal P)\\iff i,i+1\\text{ лежат в разных блоках }\\mathcal P.$$
-  Тогда $|\\mathcal P|=|C(\\mathcal P)|+1$.
-  Для двух interval‑partition общее уточнение $\\mathcal P\\wedge\\mathcal Q$ имеет разрезы ровно в точках
+  Consequently, the "universal" basechange from Section 16.132 through a general refinement gives only a linear increase in the number of blocks if all partitions are compatible with the same 1dimensional order.
+- `Proof:` interval-partition is uniquely defined by a set of cuts
+  $$C(\\mathcal P)\\subseteq\\{1,\\dots,m-1\\},\\qquad i\\in C(\\mathcal P)\\iff i,i+1\\text{ lie in different blocks }\\mathcal P.$$
+  Then $|\\mathcal P|=|C(\\mathcal P)|+1$.
+  For two intervalpartitions, the general refinement $\\mathcal P\\wedge\\mathcal Q$ has cuts exactly at the points
   $$C(\\mathcal P\\wedge\\mathcal Q)=C(\\mathcal P)\\cup C(\\mathcal Q),$$
-  потому что новое разбиение должно резать везде, где режет хотя бы одно из исходных, и больше нигде (иначе нарушится максимальность блоков‑отрезков).
-  Значит
+  because the new partition must cut wherever at least one of the original ones cuts, and nowhere else (otherwise the maximality of block segments will be violated).
+  Means
   $$|\\mathcal P\\wedge\\mathcal Q|=|C(\\mathcal P)\\cup C(\\mathcal Q)|+1\\le |C(\\mathcal P)|+|C(\\mathcal Q)|+1=(k_1-1)+(k_2-1)+1=k_1+k_2-1.$$
-- `Toy‑тест:` пусть $m=6$, $\\mathcal P=(\\{1,2\\},\\{3,4\\},\\{5,6\\})$ ($k_1=3$) и $\\mathcal Q=(\\{1\\},\\{2,3\\},\\{4,5\\},\\{6\\})$ ($k_2=4$).
-  Тогда $|\\mathcal P\\wedge\\mathcal Q|=6=k_1+k_2-1$ (граница точна).
-- `Статус:` доказано (позитивный «structural case»: квадратичный blow‑up из §16.132 возникает только при «поперечных» разбиениях; для 1D‑совместимых разбиений уточнение линейно).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, можно ли в стратегии Håstad–Risse для grid выбрать все необходимые block‑representations так, чтобы разбиения были (приближённо) 1D‑совместимы с одним порядком на рёбрах/переменных; иначе найти место, где неизбежно требуется «поперечный» переход типа row↔column (и тогда §16.132 снова даёт quasi‑poly барьер).
+- `Toy test:` let $m=6$, $\\mathcal P=(\\{1,2\\},\\{3,4\\},\\{5,6\\})$ ($k_1=3$) and $\\mathcal Q=(\\{1\\},\\{2,3\\},\\{4,5\\},\\{6\\})$ ($k_2=4$).
+  Then $|\\mathcal P\\wedge\\mathcal Q|=6=k_1+k_2-1$ (the boundary is exact).
+- `Status:` proven (positive "structural case": the quadratic blow-up from Section 16.132 occurs only with "transverse" partitions; for 1D-compatible partitions the refinement is linear).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether in the Hastad-Risse strategy for grid it is possible to select all the necessary block representations so that the partitions are (approximately) 1D compatible with one order on the edges/variables; otherwise, find a place where a "transverse" transition of the rowcolumn type is inevitably required (and then Section 16.132 again gives a quasi-poly barrier).
 
-### 16.134. Исследовательский шаг: в column‑summing на grid промежуточные XOR‑уравнения соответствуют границе прямоугольника и разбиваются на $O(1)$ row‑interval сегментов (поэтому $k^2$‑барьер §16.132 локально не срабатывает)
+### 16.134. Exploratory step: in column-summing on a grid, the intermediate XOR-equations correspond to the boundary of the rectangle and are divided into $O(1)$ row-interval segments (so the $k^2$-barrier Section 16.132 does not work locally)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Рассмотрим $n\\times n$ grid с вершинами $(i,j)$, $1\\le i,j\\le n$, и переменными $x_e$ на рёбрах.
-  Зафиксируем внутреннюю колонку $2\\le j\\le n-1$ и для $t\\in[n]$ обозначим
+- `Lens:` Equivalence.
+- `Statement:` Consider a $n\\times n$ grid with vertices $(i,j)$, $1\\le i,j\\le n$, and variables $x_e$ on the edges.
+  We fix the inner column $2\\le j\\le n-1$ and for $t\\in[n]$ we denote
   $$R_{j,t}:=\\{(i,j):1\\le i\\le t\\}$$
-  (первые $t$ вершин колонки $j$) и $\\delta(R_{j,t})$ — множество рёбер, имеющих ровно один конец в $R_{j,t}$.
-  Тогда XOR‑сумма вершинных Tseitin‑уравнений по вершинам $R_{j,t}$ равна одному уравнению
+  (the first $t$ vertices of column $j$) and $\\delta(R_{j,t})$ is the set of edges that have exactly one end in $R_{j,t}$.
+  Then the XOR-sum of vertex Tseitin-equations over the vertices $R_{j,t}$ is equal to one equation
   $$E\\bigl(\\delta(R_{j,t}),\\ \\bigoplus_{v\\in R_{j,t}}\\chi(v)\\bigr).$$
-  Более того, $\\delta(R_{j,t})$ раскладывается в дизъюнктное объединение не более чем четырёх «row‑interval» сегментов:
-  - $L_{j,t}$: горизонтальные рёбра между колонками $j-1$ и $j$ на строках $1..t$,
-  - $H_{j,t}$: горизонтальные рёбра между колонками $j$ и $j+1$ на строках $1..t$,
-  - $T_{j}$: одно вертикальное ребро над $(1,j)$ (если $(1,j)$ не на верхней границе),
-  - $B_{j,t}$: одно вертикальное «фронтирное» ребро между $(t,j)$ и $(t+1,j)$ (если $t<n$).
-  Следовательно, в этой конкретной линейной стратегии все промежуточные уравнения имеют представление как паритет по $k=O(1)$ disjoint‑блокам, согласованным с одним 1D‑порядком по строкам.
-- `Доказательство:`
-  1) (Граница как XOR‑сумма.) При XOR‑суммировании вершинных уравнений по $R_{j,t}$ каждое внутреннее ребро (оба конца в $R_{j,t}$) входит в левую часть ровно два раза и сокращается по модулю 2, а каждое ребро с ровно одним концом в $R_{j,t}$ входит ровно один раз. Поэтому левая часть равна паритету по $\\delta(R_{j,t})$, а правая часть равна $\\bigoplus_{v\\in R_{j,t}}\\chi(v)$.
-  2) (Геометрия $\\delta(R_{j,t})$.) Для множества вершин «префикса колонки» возможные рёбра, выходящие из $R_{j,t}$, бывают трёх типов:
-     - горизонтальные влево/вправо из строк $1..t$ (дают два row‑interval сегмента $L_{j,t},H_{j,t}$);
-     - вертикальные вверх из вершины $(1,j)$ и вниз из вершины $(t,j)$ (дают $\\le 2$ отдельных ребра $T_j,B_{j,t}$).
-     Других рёбер, инцидентных вершинам $R_{j,t}$, нет.
-- `Toy‑тест:` $n=4$, $j=2$, $t=2$.
-  Тогда $\\delta(R_{2,2})$ состоит из двух горизонтальных сегментов длины 2 (между (i,1)-(i,2) и (i,2)-(i,3) для $i=1,2$) и одного вертикального ребра (2,2)-(3,2) (плюс верхнее, если считать внешнюю «рамку»).
-- `Статус:` доказано (уточнение: для самой column‑summing стратегии множества переменных не создают «поперечных» разбиений; технический узел — не combinatorial $k^2$‑blow‑up, а синтаксическая возможность переходить между формулами паритета для растущих сегментов).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` выделить минимальную «локальную» подзадачу: для row‑interval $I=[1..t]$ понять, можно ли в bounded‑depth Frege при $d=\\Theta(\\log n/\\log\\log n)$ полиномиально доказывать корректность склейки
+  Moreover, $\\delta(R_{j,t})$ is decomposed into a disjoint union of at most four "rowinterval" segments:
+  - $L_{j,t}$: horizontal edges between columns $j-1$ and $j$ on rows $1..t$,
+  - $H_{j,t}$: horizontal edges between columns $j$ and $j+1$ on lines $1..t$,
+  - $T_{j}$: one vertical edge over $(1,j)$ (if $(1,j)$ is not on the upper boundary),
+  - $B_{j,t}$: one vertical "front" edge between $(t,j)$ and $(t+1,j)$ (if $t<n$).
+  Therefore, in this particular linear strategy, all intermediate equations are represented as parity over $k=O(1)$ disjoint blocks, consistent with a single 1D row order.
+- `Proof:`
+  1) (Boundary as an XOR sum.) When XOR summing vertex equations over $R_{j,t}$, each internal edge (both ends in $R_{j,t}$) enters the left side exactly twice and cancels modulo 2, and each edge with exactly one end appears in $R_{j,t}$ exactly once. Therefore, the left side is equal to parity in $\\delta(R_{j,t})$, and the right side is equal to $\\bigoplus_{v\\in R_{j,t}}\\chi(v)$.
+  2) (Geometry $\\delta(R_{j,t})$.) For the set of "column prefix" vertices, the possible edges emanating from $R_{j,t}$ are of three types:
+     - horizontal left/right from lines $1..t$ (give two rowinterval segments $L_{j,t},H_{j,t}$);
+     - vertical upwards from vertex $(1,j)$ and downward from vertex $(t,j)$ (give $\\le 2$ separate edges $T_j,B_{j,t}$).
+     There are no other edges incident to the vertices $R_{j,t}$.
+- `Toy test:` $n=4$, $j=2$, $t=2$.
+  Then $\\delta(R_{2,2})$ consists of two horizontal segments of length 2 (between (i,1)-(i,2) and (i,2)-(i,3) for $i=1,2$) and one vertical edge (2,2)-(3,2) (plus the top one, if you count the outer "frame").
+- `Status:` proven (clarification: for the column-summing strategy itself, multiple variables do not create "transverse" partitions; the technical point is not the combinatorial $k^2$-blow-up, but the syntactic ability to move between parity formulas for growing segments).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` select a minimal "local" subtask: for rowinterval $I=[1..t]$, understand whether it is possible to polynomially prove the correctness of gluing in boundeddepth Frege with $d=\\Theta(\\log n/\\log\\log n)$
   $$\\mathrm{PARITY}(I\\cup\\{e\\})\\leftrightarrow \\bigl(\\mathrm{PARITY}(I)\\oplus x_e\\bigr)$$
-  (и аналогично для сдвига фронтира), т.е. base‑change между формулами паритета для соседних интервалов.
+  (and similarly for the frontier shift), i.e. basechange between parity formulas for adjacent intervals.
 
-### 16.135. Исследовательский шаг: даже для 1D‑префиксов фиксированный block‑basis требует $k=\\Omega(n)$ (ранг $n$)
+### 16.135. Exploratory step: even for 1D prefixes, a fixed block basis requires $k=\\Omega(n)$ (rank $n$)
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение:` Пусть $e_1,\\dots,e_n$ — попарно различные переменные (например, горизонтальные рёбра между фиксированными колонками $j$ и $j+1$ на строках $1..n$).
-  Для $t\\in[n]$ обозначим префиксное множество
+- `Lens:` Communication/Rank.
+- `Statement:` Let $e_1,\\dots,e_n$ be pairwise distinct variables (for example, horizontal edges between fixed columns $j$ and $j+1$ on rows $1..n$).
+  For $t\\in[n]$ we denote the prefix set
   $$L_t:=\\{e_1,\\dots,e_t\\}.$$
-  Тогда в $\\mathbb F_2^{\\{e_1,\\dots,e_n\\}}$ множества $L_1,\\dots,L_n$ линейно независимы, а значит:
-  если фиксирован набор $k$ подмножеств $B_1,\\dots,B_k$ и каждый $L_t$ представим как симметрическая разность
+  Then in $\\mathbb F_2^{\\{e_1,\\dots,e_n\\}}$ the sets $L_1,\\dots,L_n$ are linearly independent, which means:
+  if a set of $k$ subsets $B_1,\\dots,B_k$ is fixed and each $L_t$ is represented as a symmetric difference
   $$L_t=\\bigtriangleup_{i\\in I_t} B_i,$$
-  то обязательно $k\\ge n$.
-  В частности, любая попытка держать в column‑summing один фиксированный малый базис «segment blocks», покрывающий **все** префиксы $[1..t]$, обречена (даже в 1D), и base‑change/динамические разбиения неизбежны.
-- `Доказательство:` рассмотрим характеристические векторы $\\mathbf 1_{L_t}\\in\\mathbb F_2^n$ относительно базиса $e_1,\\dots,e_n$.
-  Имеем тождество
+  then necessarily $k\\ge n$.
+  In particular, any attempt to keep one fixed small basis "segment blocks" in column-summing, covering **all** $[1..t]$ prefixes, is doomed (even in 1D), and base-change/dynamic partitions are inevitable.
+- `Proof:` Consider the characteristic vectors $\\mathbf 1_{L_t}\\in\\mathbb F_2^n$ with respect to the basis $e_1,\\dots,e_n$.
+  We have the identity
   $$\\{e_t\\}=L_t\\triangle L_{t-1}\\qquad (t\\ge 2),$$
-  и $\\{e_1\\}=L_1$. Следовательно, линейная оболочка $\\langle L_1,\\dots,L_n\\rangle$ содержит все одноэлементные множества $\\{e_t\\}$, значит имеет размерность $n$.
-  Так как векторов $L_t$ ровно $n$, они линейно независимы.
-  Отсюда, если все $L_t$ лежат в $\\langle B_1,\\dots,B_k\\rangle$, то
+  and $\\{e_1\\}=L_1$. Consequently, the linear hull $\\langle L_1,\\dots,L_n\\rangle$ contains all single-element sets $\\{e_t\\}$, which means it has dimension $n$.
+  Since there are exactly $n$ vectors $L_t$, they are linearly independent.
+  Hence, if all $L_t$ lie in $\\langle B_1,\\dots,B_k\\rangle$, then
   $$n=\\dim\\langle L_1,\\dots,L_n\\rangle\\le \\dim\\langle B_1,\\dots,B_k\\rangle\\le k.$$
-- `Toy‑тест:` $n=3$: $L_1=(1,0,0)$, $L_2=(1,1,0)$, $L_3=(1,1,1)$ — независимы (матрица верхнетреугольная с единицами на диагонали).
-- `Статус:` доказано (барьер: «фиксированный малый базис для всех префиксов» невозможен уже в 1D; значит даже при структуре §16.134 узел остаётся в динамическом base‑change, а не в выборе единого базиса).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` разбирать base‑change не как «общий перевод между двумя произвольными разбиениями», а как локальные операции на границе (добавить/удалить один $e_t$) и искать, может ли bounded‑depth Frege реализовать такую локальную трансформацию на формулах паритета без накапливания глубины/квази‑поли blow‑up.
+- `Toy test:` $n=3$: $L_1=(1,0,0)$, $L_2=(1,1,0)$, $L_3=(1,1,1)$ are independent (upper triangular matrix with ones on the diagonal).
+- `Status:` proven (barrier: "a fixed small basis for all prefixes" is already impossible in 1D; this means that even with the structure of Section 16.134, the node remains in a dynamic basechange, and not in the choice of a single basis).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` parse base-change not as a "general translation between two arbitrary partitions", but as local operations on the boundary (add/remove one $e_t$) and look for whether bounded-depth Frege can implement such a local transformation on parity formulas without accumulating depth/quasi-poly blow-up.
 
-### 16.136. Исследовательский шаг: каноническая dyadic‑разбивка префикса $[t]$ даёт $\\le \\lfloor\\log_2 t\\rfloor+1$ блоков и обновляется за $O(\\log n)$ слияниями
+### 16.136. Exploratory step: canonical dyadic split of prefix $[t]$ produces $\\le \\lfloor\\log_2 t\\rfloor+1$ blocks and is updated with $O(\\log n)$ merges
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение:` Для каждого $t\\in[n]$ существует разбиение префикса $[t]=\\{1,\\dots,t\\}$ на попарно непересекающиеся интервалы
+- `Lens:` Compression/canonization.
+- `Statement:` For each $t\\in[n]$ there is a partition of the prefix $[t]=\\{1,\\dots,t\\}$ into pairwise disjoint intervals
   $$[t]=I_1\\uplus I_2\\uplus\\cdots\\uplus I_r,$$
-  где каждый $I_j$ имеет длину степень двойки, и
+  where each $I_j$ has length a power of two, and
   $$r\\le \\lfloor\\log_2 t\\rfloor+1.$$
-  Более того, можно выбрать **каноническую** такую разбивку (через двоичную запись $t$), обладающую свойством обновления:
-  переход $t\\mapsto t+1$ преобразует разбивку $[t]$ в разбивку $[t+1]$ последовательностью операций
-  «добавить singleton $[t+1,t+1]$» и затем $\\le \\lfloor\\log_2 n\\rfloor+1$ раз применить
+  Moreover, one can choose a **canonical** partition (via binary notation $t$) that has the updating property:
+  transition $t\\mapsto t+1$ converts partition $[t]$ into partition $[t+1]$ by a sequence of operations
+  "add singleton $[t+1,t+1]$" and then apply $\\le \\lfloor\\log_2 n\\rfloor+1$ times
   $$J\\uplus J'\\mapsto J\\cup J'$$
-  к двум соседним интервалам одинаковой длины (слияние в интервал вдвое большей длины).
-- `Доказательство:`
-  1) (Существование и оценка на $r$.) Запишем $t$ в двоичном виде
+  to two adjacent intervals of the same length (merging into an interval of twice the length).
+- `Proof:`
+  1) (Existence and estimate on $r$.) Let us write $t$ in binary form
      $$t=\\sum_{a\\in A}2^a,\\qquad A\\subseteq\\{0,1,\\dots,\\lfloor\\log_2 t\\rfloor\\}.$$
-     Переберём $a\\in A$ по убыванию и последовательно положим
+     Let's sort through $a\\in A$ in descending order and sequentially put
      $$I_1=[1,2^{a_1}],\\ I_2=[2^{a_1}+1,2^{a_1}+2^{a_2}],\\ \\dots$$
-     Тогда интервалы попарно не пересекаются, их объединение равно $[t]$, а $r=|A|\\le \\lfloor\\log_2 t\\rfloor+1$.
-  2) (Каноничность и обновление.) Добавление 1 к двоичному числу $t$ меняет суффикс вида $\\underbrace{11\\cdots 1}_{s}\\mapsto 0\\cdots 0$ и увеличивает следующий бит.
-     В терминах разбивки это означает: при переходе $t\\to t+1$ сначала добавляется новый интервал длины 1, а затем для каждого «переноса»
-     сливаются две соседние dyadic‑части одинаковой длины в одну часть удвоенной длины. Число переносов равно числу подряд идущих единиц в конце двоичной записи $t$,
-     поэтому не превосходит $\\lfloor\\log_2 n\\rfloor+1$.
-- `Toy‑тест:` $t=13=8+4+1$: $[13]=[1,8]\\uplus[9,12]\\uplus[13,13]$.
-  Тогда $t+1=14=8+4+2$: добавляем $[14,14]$ и сливаем $[13,13]$ с $[14,14]$ в $[13,14]$, получая
+     Then the intervals are pairwise disjoint, their union is equal to $[t]$, and $r=|A|\\le \\lfloor\\log_2 t\\rfloor+1$.
+  2) (Canonicity and update.) Adding 1 to the binary number $t$ changes the suffix of the form $\\underbrace{11\\cdots 1}_{s}\\mapsto 0\\cdots 0$ and increments the next bit.
+     In terms of partitioning, this means: on a transition $t\\to t+1$, a new interval of length 1 is first added, and then for each "carry"
+     two adjacent dyadic parts of the same length merge into one part of double length. The number of carries is equal to the number of consecutive ones at the end of the binary record $t$,
+     therefore does not exceed $\\lfloor\\log_2 n\\rfloor+1$.
+- `Toy test:` $t=13=8+4+1$: $[13]=[1,8]\\uplus[9,12]\\uplus[13,13]$.
+  Then $t+1=14=8+4+2$: add $[14,14]$ and merge $[13,13]$ with $[14,14]$ into $[13,14]$, getting
   $[14]=[1,8]\\uplus[9,12]\\uplus[13,14]$.
-- `Статус:` доказано (канонический способ держать префиксы с $O(\\log n)$ блоками и локальными merge‑операциями).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` свести «локальный base‑change» для row‑interval’ов к одному типу операции: показать/опровергнуть, что bounded‑depth Frege может полиномиально выводить корректность merge
+- `Status:` proven (canonical way to keep prefixes with $O(\\log n)$ blocks and local merge operations).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` reduce "local basechange" for rowintervals to one type of operation: show/refute that boundeddepth Frege can polynomially infer the correctness of merge
   $$\\mathrm{PARITY}(J)=b_1,\\ \\mathrm{PARITY}(J')=b_2\\ \\vdash\\ \\mathrm{PARITY}(J\\cup J')=b_1\\oplus b_2$$
-  для двух соседних дизъюнктных интервалов одинаковой длины (и затем итеративно поддерживать префиксную стратегию).
+  for two adjacent disjunct intervals of the same length (and then iteratively maintain the prefix strategy).
 
-### 16.137. Исследовательский шаг: merge‑правило для дизъюнктных блоков сводится к «easy case» §16.130, если принять representation паритета на каждом блоке как атом
+### 16.137. Exploratory step: the merge rule for disjunct blocks reduces to the "easy case" Section 16.130 if we take the parity representation on each block as an atom
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть множество переменных $X$ разбито на дизъюнктные блоки $B_1\\uplus\\cdots\\uplus B_k$.
-  Для каждого $i$ пусть $P_i(x_{B_i})$ — формула, вычисляющая паритет на $B_i$ (то есть $P_i=1\\iff\\bigoplus_{x\\in B_i}x=1$), и считаем, что обе полярности доступны как $P_i$ и $\\neg P_i$.
-  Тогда для любых дизъюнктных объединений блоков
+- `Lens:` Equivalence.
+- `Statement:` Let the set of variables $X$ be divided into disjoint blocks $B_1\\uplus\\cdots\\uplus B_k$.
+  For each $i$, let $P_i(x_{B_i})$ be the formula that calculates the parity on $B_i$ (that is, $P_i=1\\iff\\bigoplus_{x\\in B_i}x=1$), and assume that both polarities are available as $P_i$ and $\\neg P_i$.
+  Then for any disjoint block unions
   $$S_{I}:=\\bigcup_{i\\in I}B_i\\qquad (I\\subseteq[k])$$
-  и любых $I_1,I_2\\subseteq[k]$ имеем polynomial‑size bounded‑depth Frege‑вывод
+  and any $I_1,I_2\\subseteq[k]$ we have polynomialsize boundeddepth Fregeoutput
   $$E(S_{I_1},b_1),\\ E(S_{I_2},b_2)\\ \\vdash\\ E(S_{I_1\\triangle I_2},\\ b_1\\oplus b_2)$$
-  размера $2^{O(k)}$ и глубины $O(\\max_i\\depth(P_i))$.
-  В частности, для merge двух соседних интервалов одинаковой длины (dyadic‑merge из §16.136) достаточно взять $k=2$ и получить константный по $k$ вывод:
+  size $2^{O(k)}$ and depth $O(\\max_i\\depth(P_i))$.
+  In particular, to merge two adjacent intervals of the same length (dyadic-merge from Section 16.136), it is enough to take $k=2$ and get a constant output in $k$:
   $$\\mathrm{PARITY}(J)=b_1,\\ \\mathrm{PARITY}(J')=b_2\\ \\vdash\\ \\mathrm{PARITY}(J\\cup J')=b_1\\oplus b_2.$$
-- `Доказательство:` это прямое применение §16.130:
-  1) На абстрактных переменных $y_1,\\dots,y_k$, где $y_i$ означает «паритет блока $B_i$ равен 1», формулы $E^{\\mathrm{blk}}(I,b)$ (полная DNF на $y$) зависят только от $k$ переменных и семантически реализуют линейность XOR.
-     Поэтому тавтология
+- `Proof:` This is a direct application of Section 16.130:
+  1) On abstract variables $y_1,\\dots,y_k$, where $y_i$ means "the parity of block $B_i$ is 1", the formulas $E^{\\mathrm{blk}}(I,b)$ (full DNF on $y$) depend only on $k$ variables and semantically implement XOR linearity.
+     Therefore the tautology
      $$E^{\\mathrm{blk}}(I_1,b_1)\\wedge E^{\\mathrm{blk}}(I_2,b_2)\\to E^{\\mathrm{blk}}(I_1\\triangle I_2,b_1\\oplus b_2)$$
-     имеет bounded‑depth Frege‑вывод размера $2^{O(k)}$ (Lemma 4 из GIRS’19, как в §16.130).
-  2) Подстановкой $y_i\\mapsto P_i$ получаем вывод на исходных переменных. Так как блоки дизъюнктны, семантически
+     has a bounded-depth Frege derivation of size $2^{O(k)}$ (Lemma 4 from GIRS'19, as in §16.130).
+  2) By substituting $y_i\\mapsto P_i$ we get the output on the original variables. Since blocks are disjunctive, semantically
      $$\\bigoplus_{i\\in I} y_i\\ =\\ \\bigoplus_{x\\in S_I} x,$$
-     то подстановочная формула действительно представляет уравнение $E(S_I,b)$.
-- `Toy‑тест:` $k=2$: из $y_1=b_1$ и $y_2=b_2$ следует $y_1\\oplus y_2=b_1\\oplus b_2$; подстановка даёт merge для двух дизъюнктных блоков.
-- `Статус:` частично (локальная формализация: merge становится «лёгким», если **уже есть** формулы $P_i$ для паритетов блоков и мы разрешаем представлять уравнения как DNF по этим $P_i$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` закрыть разрыв «representation vs proof»: в стратегии Håstad–Risse паритеты блоков $P_i$ существуют (как small depth‑$d$ формулы), но нужен способ **переиспользовать** их в последовательности шагов без накопления базы/без роста числа блоков; формально: можно ли держать все промежуточные уравнения как $E^{\\mathrm{blk}}(I,b)$ над текущим набором блок‑паритетов так, чтобы каждый шаг менял $k$ лишь на $O(1)$ и сохранял $2^{O(k)}=\\mathrm{poly}(n)$?
+     then the substitution formula really represents the equation $E(S_I,b)$.
+- `Toy test:` $k=2$: from $y_1=b_1$ and $y_2=b_2$ it follows $y_1\\oplus y_2=b_1\\oplus b_2$; substitution gives merge for two disjunct blocks.
+- `Status:` partially (local formalization: merge becomes "easy" if **there are already** $P_i$ formulas for block parities and we allow the equations to be represented as DNF on these $P_i$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` close the "representation vs proof" gap: in the Hastad-Risse strategy, block parities $P_i$ exist (as small depth$d$ formulas), but a way is needed to **reuse** them in a sequence of steps without accumulating the base/without increasing the number of blocks; formally: is it possible to keep all intermediate equations as $E^{\\mathrm{blk}}(I,b)$ over the current set of block parities so that each step changes $k$ only by $O(1)$ and preserves $2^{O(k)}=\\mathrm{poly}(n)$?
 
-### 16.138. Исследовательский шаг: в Schoenfield‑Frege подстановка фиксирует отрицание синтаксически ($\\sigma(\\neg p)=\\neg\\sigma(p)$), поэтому «две отдельные OR‑формулы для паритета и его отрицания» не образуют пару литералов
+### 16.138. Exploratory step: in Schoenfield-Frege, substitution captures negation syntactically ($\\sigma(\\neg p)=\\neg\\sigma(p)$), so "two separate OR formulas for parity and its negation" do not form a pair of literals
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение:` В Schoenfield‑Frege (Håstad–Risse’25, §2.1; `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`) применение правила — это подстановка $\\sigma$ в схему вывода,
-  и для любой переменной $p$ выполняется тождество **синтаксической** подстановки
+- `Lens:` Compression/canonization.
+- `Statement:` In SchoenfieldFrege (Hastad-Risse'25, Section 2.1; `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`) application of the rule is the substitution of $\\sigma$ into the output scheme,
+  and for any variable $p$ the identity of **syntactic** substitution is satisfied
   $$\\sigma(\\neg p)=\\neg\\sigma(p).$$
-  Следовательно, нельзя «встроить» в одно применение правила пару формул $P(x),N(x)$ так, чтобы $P$ играла роль литерала $p$, а $N$ — роль литерала $\\neg p$, если только $N$ **буквально** не равна $\\neg P$ как формула.
-  Это проясняет разрыв в Håstad–Risse’25, §1.2: там «PARITY и $\\neg$PARITY» на блоке представлены **двумя** малыми depth‑$d$ формулами с выходным $\\vee$,
-  но сами правила Frege обращаются с отрицанием только как с *синтаксическим* $\\neg$ (а не как с «любым эквивалентным представителем отрицания»), поэтому такая пара не даёт автоматически Cut/резольвинг на уровне блоков без потери глубины.
-- `Доказательство:` по определению (Håstad–Risse’25, §2.1) если в схеме правила встречаются одновременно $p$ и $\\neg p$, то после подстановки получаем одновременно $\\sigma(p)$ и $\\sigma(\\neg p)=\\neg\\sigma(p)$.
-  Поэтому если хотим реализовать «$p\\mapsto P$ и $\\neg p\\mapsto N$», необходимо $N=\\neg P$ как формула. Для произвольной пары семантически противоположных формул это неверно.
-- `Toy‑тест:` для 1‑переменной $P(x)=x$ и $N(x)=\\neg x$ имеем $N=\\neg P$, и подстановка действительно согласует обе полярности.
-  Но уже для 2‑переменной паритетной пары можно взять
-  $P(x,y)=(x\\wedge\\neg y)\\vee(\\neg x\\wedge y)$ и $N(x,y)=(x\\wedge y)\\vee(\\neg x\\wedge\\neg y)$ (оба с выходным $\\vee$);
-  тогда $N\\not\\equiv_{\\text{synt}} \\neg P$, и одной подстановкой нельзя заставить $N$ играть роль «$\\neg P$» в экземплярах правил.
-- `Статус:` доказано (точная «синтаксическая» причина, почему representation «PARITY + $\\neg$PARITY как две OR‑формулы» не автоматически даёт возможность делать Cut‑шаги на этих представителях без выхода за глубину).
-- `Барьер‑чек:` r — неприменимо (это чисто синтаксическое свойство Frege‑правил), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, можно ли для конкретных HR‑представителей PARITY построить в bounded‑depth Frege **полиномиальные** доказательства эквивалентностей вида $N\\leftrightarrow\\neg P$ без выхода за глубину $d$ (или зафиксировать, что такой «negation‑normalization» сам стоит quasi‑poly и тем самым объясняет, почему §1.2 даёт лишь representation).
+  Therefore, it is impossible to "build" into one application of the rule a pair of formulas $P(x),N(x)$ so that $P$ plays the role of the literal $p$, and $N$ plays the role of the literal $\\neg p$, unless $N$ is **literally** equal to $\\neg P$ as a formula.
+  This clears up the gap in Hastad-Risse'25, Section 1.2: there "PARITY and $\\neg$PARITY" on the block are represented by **two** small depth$d$ formulas with output $\\vee$,
+  but the Frege rules themselves treat negation only as *syntactic* $\\neg$ (and not as "any equivalent representative of negation"), so such a pair does not automatically give block-level Cut/resolving without loss of depth.
+- `Proof:` by definition (Hastad-Risse'25, Section 2.1) if $p$ and $\\neg p$ occur simultaneously in a rule scheme, then after substitution we obtain simultaneously $\\sigma(p)$ and $\\sigma(\\neg p)=\\neg\\sigma(p)$.
+  Therefore, if we want to implement "$p\\mapsto P$ and $\\neg p\\mapsto N$", we need $N=\\neg P$ as a formula. For an arbitrary pair of semantically opposite formulas this is not true.
+- `Toy test:` for 1-variable $P(x)=x$ and $N(x)=\\neg x$ we have $N=\\neg P$, and the substitution actually reconciles both polarities.
+  But already for a 2-variable parity pair we can take
+  $P(x,y)=(x\\wedge\\neg y)\\vee(\\neg x\\wedge y)$ and $N(x,y)=(x\\wedge y)\\vee(\\neg x\\wedge\\neg y)$ (both with output $\\vee$);
+  then $N\\not\\equiv_{\\text{synt}} \\neg P$, and substitution alone cannot force $N$ to play the role of "$\\neg P$" in rule instances.
+- `Status:` proven (the exact "syntactic" reason why representation "PARITY + $\\neg$PARITY as two OR formulas" does not automatically make it possible to do Cut steps on these representatives without going beyond depth).
+- `Barrier check:` r - not applicable (this is a purely syntactic property of Frege rules), NP - not applicable, alg - not applicable.
+- `Next step:` check whether for specific HRrepresentatives of PARITY it is possible to construct in boundeddepth Frege **polynomial** proofs of equivalences of the form $N\\leftrightarrow\\neg P$ without going beyond the depth $d$ (or establish that such a "negationnormalization" itself costs quasipoly and thereby explains why Section 1.2 gives only representation).
 
-### 16.139. Исследовательский шаг: если для block‑паритетов доказуема «согласованность полярностей» $N_i\\leftrightarrow\\neg P_i$, то «representation» Håstad–Risse превращается в реальный подстановочный Frege‑шаг
+### 16.139. Research step: if for block parities the "consistency of polarities" $N_i\\leftrightarrow\\neg P_i$ is provable, then the "representation" Hastad-Risse turns into a real substitution Frege-step
 
-- `Линза:` Двойственность/комплементы.
-- `Утверждение:` Пусть $X=\\biguplus_{i=1}^k B_i$ — разбиение на дизъюнктные блоки, и заданы формулы $P_i(x_{B_i})$ и $N_i(x_{B_i})$ глубины $\\le d_0$, такие что семантически $N_i\\equiv\\neg P_i$.
-  Предположим, что в bounded‑depth Frege (глубины $O(d_0)$) существует polynomial‑size вывод **согласованности**
+- `Lens:` Duality/complements.
+- `Statement:` Let $X=\\biguplus_{i=1}^k B_i$ be a partition into disjoint blocks, and let formulas $P_i(x_{B_i})$ and $N_i(x_{B_i})$ of depth $\\le d_0$ be given, such that semantically $N_i\\equiv\\neg P_i$.
+  Suppose that in boundeddepth Frege (depth $O(d_0)$) there is a polynomialsize output **consistency**
   $$\\mathrm{Cons}_i:\\qquad N_i\\leftrightarrow\\neg P_i\\qquad (i\\in[k]).$$
-  Тогда любой «абстрактный» вывод на переменных $y_1,\\dots,y_k$ (где $y_i$ означает «паритет $B_i$ равен 1») можно реализовать на исходных переменных так, чтобы
-  положительная полярность $y_i$ интерпретировалась как $P_i$, а отрицательная $\\neg y_i$ — как $N_i$, с полиномиальным blow‑up по размеру и без выхода за глубину $O(d_0)$.
-  В частности, tautология из §16.130 (и «easy case» merge из §16.137) остаётся polynomial‑size выводимой при такой dual‑rail интерпретации.
-- `Доказательство:` берём bounded‑depth Frege‑вывод $\\pi$ tautологии на $y$‑переменных из §16.130:
+  Then any "abstract" inference on the variables $y_1,\\dots,y_k$ (where $y_i$ means "the parity of $B_i$ is 1") can be implemented on the original variables so that
+  the positive polarity $y_i$ was interpreted as $P_i$, and the negative polarity $\\neg y_i$ - as $N_i$, with a polynomial blow-up in size and without going beyond the depth $O(d_0)$.
+  In particular, the tautology from Section 16.130 (and the "easy case" merge from Section 16.137) remains polynomial-size inferable under this dual-rail interpretation.
+- `Proof:` take the boundeddepth Fregederivation of $\\pi$ tautology on $y$variables from Section 16.130:
   $$E^{\\mathrm{blk}}(I_1,b_1)\\wedge E^{\\mathrm{blk}}(I_2,b_2)\\to E^{\\mathrm{blk}}(I_1\\triangle I_2,b_1\\oplus b_2).$$
-  1) Подстановкой $y_i\\mapsto P_i$ получаем вывод $\\pi'$ той же импликации, но с отрицательными литералами в виде $\\neg P_i$ (см. §16.130).
-  2) Для каждого $i$ из $\\mathrm{Cons}_i$ и правила «замены эквивалентных» (локально: из $A\\leftrightarrow B$ выводимо $\\neg A\\leftrightarrow\\neg B$ и $(A\\vee C)\\leftrightarrow (B\\vee C)$; эти тавтологии зависят от $O(1)$ атомов и потому имеют константные bounded‑depth Frege‑выводы, как в §16.130) получаем, что можно **внутри любой формулы‑контекста** заменить каждое вхождение $\\neg P_i$ на $N_i$, сохраняя выводимость и увеличивая размер не более чем полиномиально от размера контекста.
-  Применяя это ко всем литералам в $E^{\\mathrm{blk}}$ (размер $2^{O(k)}$), получаем требуемый вывод с полярностями $(P_i,N_i)$.
-- `Toy‑тест:` $k=1$. Абстрактный шаг: из $y=0$ выводится $\\neg y=1$ (и наоборот) — это просто исключённое третье. После подстановки получаем $P_1=0\\vdash \\neg P_1=1$, а затем по $\\mathrm{Cons}_1$ можно заменить $\\neg P_1$ на $N_1$.
-- `Статус:` доказано (редукция: центральный узел — цена доказательства $N_i\\leftrightarrow\\neg P_i$; без неё «двухформульное» representation из HR §1.2 не становится подстановочной симуляцией).
-- `Барьер‑чек:` r — неприменимо (свойство синтаксической симуляции в фиксированном proof system), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для HR‑конструкции PARITY/$\\neg$PARITY на блоке попытаться либо (a) построить poly‑size bounded‑depth вывод $N\\leftrightarrow\\neg P$ (т.е. «consistency axiom»), либо (b) выявить место, где такой вывод должен стоить quasi‑poly и тем самым объясняет «representation, not proof» из §1.2.
+  1) By substituting $y_i\\mapsto P_i$ we obtain the output $\\pi'$ of the same implication, but with negative literals in the form $\\neg P_i$ (see Section 16.130).
+  2) For each $i$ from $\\mathrm{Cons}_i$ and the rule of "replacing equivalents" (locally: from $A\\leftrightarrow B$ we can derive $\\neg A\\leftrightarrow\\neg B$ and $(A\\vee C)\\leftrightarrow (B\\vee C)$; these tautologies depend on $O(1)$ atoms and therefore have constant boundeddepth Frege-derivations, as in Section 16.130) we find that it is possible **within any context-formula** to replace each occurrence of $\\neg P_i$ with $N_i$, maintaining derivability and increasing the size no more than polynomially of the size of the context.
+  Applying this to all literals in $E^{\\mathrm{blk}}$ (size $2^{O(k)}$), we obtain the required output with polarities $(P_i,N_i)$.
+- `Toy test:` $k=1$. Abstract step: $\\neg y=1$ is derived from $y=0$ (and vice versa) - this is simply an excluded third. After substitution we get $P_1=0\\vdash \\neg P_1=1$, and then using $\\mathrm{Cons}_1$ we can replace $\\neg P_1$ with $N_1$.
+- `Status:` proven (reduction: the central node is the cost of proof $N_i\\leftrightarrow\\neg P_i$; without it, the "two-formula" representation from HR Section 1.2 does not become a substitution simulation).
+- `Barrier check:` r - not applicable (property of syntactic simulation in a fixed proof system), NP - not applicable, alg - not applicable.
+- `Next step:` for the HR-construction PARITY/$\\neg$PARITY on a block, try to either (a) construct a poly-size bounded-depth output $N\\leftrightarrow\\neg P$ (i.e. "consistency axiom"), or (b) identify the place where such an output should cost quasi-poly and thereby explain the "representation, not proof" from Section 1.2.
 
-### 16.140. Исследовательский шаг: «запас по глубине» убирает нужду в отдельной OR‑формуле для $\\neg\\mathrm{PARITY}$ — можно использовать синтаксическое $\\neg P$ (и при желании OR‑выход через добавление $\\bot$)
+### 16.140. Exploratory step: "depth margin" removes the need for a separate OR formula for $\\neg\\mathrm{PARITY}$ - you can use the syntactic $\\neg P$ (and optionally OR output by adding $\\bot$)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` В Schoenfield‑языке $\\{\\vee,\\neg\\}$ (Håstad–Risse’25, §2.1) глубина формулы — число чередований $\\vee/\\neg$ на пути.
-  Тогда для любой формулы $A$ выполняется
+- `Lens:` Trade-off.
+- `Statement:` In the Schoenfield language $\\{\\vee,\\neg\\}$ (Hastad-Risse'25, Section 2.1), the depth of a formula is the number of alternations $\\vee/\\neg$ on the path.
+  Then for any formula $A$ we have
   $$\\depth(\\neg A)\\le \\depth(A)+1.$$
-  Следовательно, если в bounded‑depth Frege мы умеем представлять block‑паритет формулой $P$ глубины $\\le d-1$, то обе полярности доступны **синтаксически** в глубине $\\le d$ как $P$ и $\\neg P$, и подстановочные шаги типа §16.130–§16.137 не требуют отдельной формулы $N$ и отдельного вывода $N\\leftrightarrow\\neg P$.
-  Если же для конкретного «клауза‑стиля» нужно, чтобы литерал имел выход $\\vee$, можно заменить $\\neg P$ на
+  Therefore, if in boundeddepth Frege we can represent blockparity by the formula $P$ of depth $\\le d-1$, then both polarities are available **syntactically** in depth $\\le d$ as $P$ and $\\neg P$, and substitution steps like Section 16.130-Section 16.137 do not require a separate formula $N$ and a separate output $N\\leftrightarrow\\neg P$.
+  If for a particular "clause-style" you need the literal to have the output $\\vee$, you can replace $\\neg P$ with
   $$N:=\\neg P\\vee\\bot,$$
-  и тогда $N$ имеет выход $\\vee$, а тавтология $N\\leftrightarrow\\neg P$ имеет константный Frege‑вывод (по подстановке в схему $(\\neg p\\vee\\bot)\\leftrightarrow\\neg p$).
-  Цена по глубине при таком «OR‑обёртывании» — $\\depth(N)\\le \\depth(P)+2$.
-- `Доказательство:` добавление одного верхнего $\\neg$ к формуле либо добавляет один новый блок чередования (если корень $A$ — $\\vee$), либо не меняет число чередований (если корень $A$ — $\\neg$), поэтому $\\depth(\\neg A)\\le\\depth(A)+1$.
-  Для $N:=\\neg P\\vee\\bot$ глубина увеличивается ещё максимум на 1 из‑за верхнего $\\vee$.
-  Эквивалентность $N\\leftrightarrow\\neg P$ — экземпляр фиксированной тавтологии на одном атоме, значит имеет bounded‑depth Frege‑вывод размера $O(1)$, а подстановка даёт вывод для произвольного $P$.
-- `Toy‑тест:` $A=p\\vee q$ имеет $\\depth(A)=1$, а $\\neg A$ имеет $\\depth=2$.
-  Если $A=\\neg p$, то $\\neg A=\\neg\\neg p$ и число чередований не растёт.
-- `Статус:` доказано (формально: «негативная полярность» не требует отдельной HR‑формулы, если можно позволить себе константный запас по глубине для явного $\\neg$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, позволяет ли HR‑representability для PARITY на одном блоке ($n$ переменных) с глубиной $d\\approx\\log n/\\log\\log n$ «съесть» константный запас (например, строить $P$ глубины $d-2$ размера $\\mathrm{poly}(n)$), чтобы отрицательные литералы в §16.130–§16.137 реализовывались как $\\neg P$ (или $\\neg P\\vee\\bot$) без выхода за целевую глубину.
+  and then $N$ has an output $\\vee$, and the tautology $N\\leftrightarrow\\neg P$ has a constant Frege output (by substitution into the circuit $(\\neg p\\vee\\bot)\\leftrightarrow\\neg p$).
+  The price for depth with this "OR-wrapping" is $\\depth(N)\\le \\depth(P)+2$.
+- `Proof:` adding one top $\\neg$ to the formula either adds one new stripe block (if the root of $A$ is $\\vee$) or does not change the number of stripes (if the root of $A$ is $\\neg$), so $\\depth(\\neg A)\\le\\depth(A)+1$.
+  For $N:=\\neg P\\vee\\bot$ the depth increases by a maximum of 1 more due to the upper $\\vee$.
+  The equivalence $N\\leftrightarrow\\neg P$ is an instance of a fixed tautology on one atom, which means it has a bounded depth Frege output of size $O(1)$, and the substitution gives an output for an arbitrary $P$.
+- `Toy test:` $A=p\\vee q$ has $\\depth(A)=1$ and $\\neg A$ has $\\depth=2$.
+  If $A=\\neg p$, then $\\neg A=\\neg\\neg p$ and the number of alternations does not increase.
+- `Status:` proven (formally: "negative polarity" does not require a separate HR formula if one can afford a constant depth margin for explicit $\\neg$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` test whether HRrepresentability for PARITY on one block ($n$ variables) with depth $d\\approx\\log n/\\log\\log n$ allows you to "eat" the constant margin (for example, build $P$ of depth $d-2$ of size $\\mathrm{poly}(n)$), so that negative literals in Section 16.130-Section 16.137 are implemented as $\\neg P$ (or $\\neg P\\vee\\bot$) without going beyond the target depth.
 
-### 16.141. Исследовательский шаг: константный «запас по глубине» совместим с порогом $d\\approx\\log n/\\log\\log n$ для representability PARITY при $M=\\mathrm{poly}(n)$
+### 16.141. Exploratory step: constant "depth margin" is compatible with the $d\\approx\\log n/\\log\\log n$ threshold for representability PARITY at $M=\\mathrm{poly}(n)$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть выполнен representation‑факт Håstad–Risse’25, §1.2: при ограничении «каждая строка имеет depth $d$ и size $M$» можно выписать формулу,
-  представляющую $\\mathrm{PARITY}$ на блоке из
+- `Lens:` Trade-off.
+- `Statement:` Let the representation fact Hastad-Risse'25, Section 1.2 hold: given the constraint "each row has depth $d$ and size $M$," we can write the formula
+  representing $\\mathrm{PARITY}$ on a block of
   $$m=(\\log M)^{d-1}$$
-  переменных (и аналогично для отрицания).
-  Тогда при $d=\\Theta(\\log n/\\log\\log n)$ константная потеря глубины не мешает покрыть блок ширины $n$ при polynomial $M$:
-  существует константа $C>1$ такая, что при $M:=n^C$ и $d:=\\left\\lceil\\frac{\\log n}{\\log\\log n}\\right\\rceil+2$ выполняется
+  variables (and similarly for negation).
+  Then, for $d=\\Theta(\\log n/\\log\\log n)$, the constant loss of depth does not prevent us from covering a block of width $n$ with polynomial $M$:
+  there is a constant $C>1$ such that for $M:=n^C$ and $d:=\\left\\lceil\\frac{\\log n}{\\log\\log n}\\right\\rceil+2$
   $$(\\log M)^{(d-1)-1}=(\\log M)^{d-2}\\ge n.$$
-  В частности, можно выбрать представителя паритета $P$ глубины $\\le d-1$ и размера $\\mathrm{poly}(n)$, а его отрицание брать как синтаксическое $\\neg P$ глубины $\\le d$ (см. §16.140).
-- `Доказательство:` положим $M=n^C$, тогда $\\log M=C\\log n$ и нужно доказать $(C\\log n)^{d-2}\\ge n$, т.е.
+  In particular, one can choose a parity representative $P$ of depth $\\le d-1$ and size $\\mathrm{poly}(n)$, and take its negation as syntactic $\\neg P$ of depth $\\le d$ (see Section 16.140).
+- `Proof:` let us put $M=n^C$, then $\\log M=C\\log n$ and we need to prove $(C\\log n)^{d-2}\\ge n$, i.e.
   $$ (d-2)\\,\\log(C\\log n)\\ \\ge\\ \\log n.$$
-  При $d=\\left\\lceil\\frac{\\log n}{\\log\\log n}\\right\\rceil+2$ имеем $d-2\\ge \\frac{\\log n}{\\log\\log n}$, поэтому
+  For $d=\\left\\lceil\\frac{\\log n}{\\log\\log n}\\right\\rceil+2$ we have $d-2\\ge \\frac{\\log n}{\\log\\log n}$, therefore
   $$(d-2)\\log(C\\log n)\\ \\ge\\ \\frac{\\log n}{\\log\\log n}\\cdot\\bigl(\\log\\log n+\\log C\\bigr)\\ =\\ \\log n+\\frac{\\log C}{\\log\\log n}\\,\\log n\\ \\ge\\ \\log n.$$
-  Отсюда $(C\\log n)^{d-2}\\ge 2^{\\log n}=n$.
-- `Toy‑тест:` $n=2^{64}$, $C=4$, $d=\\lceil 64/6\\rceil+2=13$.
-  Тогда $\\log M=4\\log n=256$ и $(\\log M)^{d-2}=256^{11}=2^{88}>2^{64}=n$.
-- `Статус:` доказано (арифметика параметров: использование $\\neg P$ в §16.140 требует лишь $O(1)$ запаса по глубине, и этот запас совместим с порогом $d\\approx\\log n/\\log\\log n$ при $M=\\mathrm{poly}(n)$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` зафиксировать точную формулировку representation‑факта из HR’25 §1.2 как отдельную «известную лемму» (какие именно глубина/база/выходной символ допускаются), чтобы не было скрытого +O(1) к глубине; затем вернуться к основному узлу: синтаксическая симуляция XOR‑сложения (Gaussian elimination step) внутри bounded‑depth Frege.
+  Hence $(C\\log n)^{d-2}\\ge 2^{\\log n}=n$.
+- `Toy test:` $n=2^{64}$, $C=4$, $d=\\lceil 64/6\\rceil+2=13$.
+  Then $\\log M=4\\log n=256$ and $(\\log M)^{d-2}=256^{11}=2^{88}>2^{64}=n$.
+- `Status:` proven (parameter arithmetic: using $\\neg P$ in Section 16.140 requires only $O(1)$ depth margin, and this margin is compatible with the threshold $d\\approx\\log n/\\log\\log n$ for $M=\\mathrm{poly}(n)$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` fix the exact formulation of the representation fact from HR'25 Section 1.2 as a separate "known lemma" (which depth/base/output symbol is allowed) so that there is no hidden +O(1) to the depth; then return to the main node: syntactic simulation of XOR-addition (Gaussian elimination step) inside bounded-depth Frege.
 
-### 16.142. Исследовательский шаг: точная формулировка HR’25 §1.2 “representing parity” и стандартный upper bound для PARITY (Håstad’86, Remark 6)
+### 16.142. Research step: exact formulation of HR'25 Section 1.2 "representing parity" and standard upper bound for PARITY (Hastad'86, Remark 6)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` В Håstad–Risse’25, §1.2 (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`) representation‑шаг формулируется в модели Schoenfield‑Frege (§2.1: база $\\{\\vee,\\neg\\}$, глубина = число чередований $\\vee/\\neg$), и содержит конкретную параметрику:
-  для уравнения паритета на $m$ переменных и ограничения «line size $\\le M$, line depth $\\le d$» авторы пишут:
+- `Lens:` Equivalence.
+- `Statement:` In Hastad-Risse'25, Section 1.2 (`../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`) representation step is formulated in the Schoenfield-Frege model (Section 2.1: base $\\{\\vee,\\neg\\}$, depth = number of alternations $\\vee/\\neg$), and contains specific parameters:
+  for the parity equation on $m$ variables and the constraint "line size $\\le M$, line depth $\\le d$" the authors write:
   «divide the variables into groups of size $(\\log M)^{d-1}$ and write down formulas of depth $d$ and size $M$ that represent the parity and the negation of the parity of each group… assume output gate is an or»
-  (см. §1.2, абзац начиная с “Let us consider proofs that contain formulas of depth d…”).
-  Это согласуется со стандартным (известным) upper bound для схем PARITY: Håstad’86, Remark 6 (`../../resources/downloads/hastad_1986.pdf`, p. 10) отмечает, что PARITY имеет depth‑$k$ схемы размера вида
+  (see Section 1.2, paragraph starting with "Let us consider proofs that contain formulas of depth d...").
+  This is consistent with the standard (known) upper bound for PARITY schemes: Hastad'86, Remark 6 (`../../resources/downloads/hastad_1986.pdf`, p. 10) notes that PARITY has a depth$k$ scheme of view size
   $$\\mathrm{size}\\ \\le\\ n\\cdot 2^{\\,O\\bigl(n^{1/(k-1)}\\bigr)}\\ =\\ 2^{O(n^{1/(k-1)})}.$$
-  Инверсия даёт именно блок‑размер $n=\\Theta((\\log M)^{k-1})$ при заданном лимите $M$ (с точностью до констант в $O(\\cdot)$), то есть HR‑параметрика $(\\log M)^{d-1}$ — стандартная “solve $M=2^{O(n^{1/(d-1)})}$” (база $2$; смена базы даёт лишь константный множитель в показателе).
-- `Доказательство:` из Håstad’86 Remark 6 берём existence upper bound $\\mathrm{size}\\le 2^{C\\,n^{1/(k-1)}}$ для некоторой константы $C$ (при фиксированной глубине $k$).
-  Положим $n:=\\bigl(\\tfrac{\\log M}{2C}\\bigr)^{k-1}$. Тогда $C\\,n^{1/(k-1)}=\\tfrac12\\log M$, и размер удовлетворяет
+  The inversion gives exactly the block size $n=\\Theta((\\log M)^{k-1})$ for a given limit $M$ (up to constants in $O(\\cdot)$), that is, the HR parameter $(\\log M)^{d-1}$ is the standard "solve $M=2^{O(n^{1/(d-1)})}$" (base $2$; changing the base gives only a constant multiplier in the indicator).
+- `Proof:` from Hastad'86 Remark 6 we take existence upper bound $\\mathrm{size}\\le 2^{C\\,n^{1/(k-1)}}$ for some constant $C$ (for a fixed depth $k$).
+  Let us set $n:=\\bigl(\\tfrac{\\log M}{2C}\\bigr)^{k-1}$. Then $C\\,n^{1/(k-1)}=\\tfrac12\\log M$, and the size satisfies
   $$\\mathrm{size}\\le 2^{C\\,n^{1/(k-1)}}\\le 2^{\\tfrac12\\log_2 M}=\\sqrt M\\le M.$$
-  Следовательно, существует depth‑$k$ формула размера $\\le M$, вычисляющая PARITY на $\\Omega((\\log M)^{k-1})$ переменных. Для HR‑потребности «выход $\\vee$» можно применить OR‑обёртку $A\\mapsto A\\vee\\bot$ (см. §16.140) с константным overhead по глубине/размеру.
-- `Toy‑тест:` если $k=3$, то bound имеет вид $2^{O(\\sqrt n)}$; инверсия даёт $n=\\Theta((\\log M)^2)$, что совпадает с HR‑формулой $(\\log M)^{d-1}$ при $d=3$.
-- `Статус:` известно/зафиксировано (точная ссылка + формальный вывод параметрики; теперь «representability PARITY на $(\\log M)^{d-1}$» не висит на неформальном “write down formulas”).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` вернуться к ядру Q39: даже при доступности формул $P$ для промежуточных уравнений нужен poly‑size bounded‑depth Frege‑вывод шага XOR‑сложения (Gaussian elimination) **между** такими представлениями; попытаться формализовать/убить toy‑случай «одна общая переменная пересечения» по аналогии с резолюцией из HR §1.2.
+  Therefore, there is a depth-$k$ formula of size $\\le M$ that calculates PARITY on $\\Omega((\\log M)^{k-1})$ variables. For the HR need "output $\\vee$" you can use the OR wrapper $A\\mapsto A\\vee\\bot$ (see Section 16.140) with a constant overhead in depth/size.
+- `Toy test:` if $k=3$, then bound has the form $2^{O(\\sqrt n)}$; the inversion gives $n=\\Theta((\\log M)^2)$, which coincides with the HR formula $(\\log M)^{d-1}$ for $d=3$.
+- `Status:` known/fixed (exact link + formal derivation of parametrics; now "representability PARITY on $(\\log M)^{d-1}$" does not hang on the informal "write down formulas").
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` return to core Q39: even if $P$ formulas are available for intermediate equations, polysize boundeddepth Fregederivation of XORaddition step (Gaussian elimination) **between** such representations is needed; try to formalize/kill the toy case of "one common intersection variable" by analogy with the resolution from HR Section 1.2.
 
-### 16.143. Исследовательский шаг: toy‑случай XOR‑шага при пересечении в одной переменной редуцируется к §16.130 с $k\\le k_1+k_2+1$ (если обе строки уже записаны как паритет по блокам)
+### 16.143. Exploratory step: the toy case of the XOR step when crossing in one variable is reduced to Section 16.130 with $k\\le k_1+k_2+1$ (if both lines are already written as block parity)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение:` Пусть есть два XOR‑уравнения на множествах переменных $S_1,S_2\\subseteq X$ с
+- `Lens:` Compression/canonization.
+- `Statement:` Let there be two XOR equations on sets of variables $S_1,S_2\\subseteq X$ with
   $$S_1\\cap S_2=\\{x\\}.$$
-  Предположим, что каждое уравнение уже записано в «block‑форме» из §16.130:
-  существуют разбиения на непересекающиеся блоки
+  Let's assume that each equation is already written in the "block form" of Section 16.130:
+  there are partitions into disjoint blocks
   $$S_1=\\biguplus_{i=1}^{k_1}B_i,\\qquad S_2=\\biguplus_{j=1}^{k_2}C_j,$$
-  и для каждого блока есть формулы, представляющие его паритет (и отрицание), так что строки $E(S_1,b_1)$ и $E(S_2,b_2)$ реализуются как XOR по блок‑паритетам.
-  Тогда существует разбиение $S_1\\cup S_2=\\biguplus_{t=1}^k D_t$ с
+  and for each block there are formulas representing its parity (and negation), so that the strings $E(S_1,b_1)$ and $E(S_2,b_2)$ are implemented as XOR by block parities.
+  Then there is a partition $S_1\\cup S_2=\\biguplus_{t=1}^k D_t$ with
   $$k\\le k_1+k_2+1,$$
-  относительно которого **обе** строки становятся объединениями блоков одного и того же разбиения, и потому один XOR‑шаг
+  relative to which **both** rows become unions of blocks of the same partition, and therefore one XOR step
   $$E(S_1,b_1),\\ E(S_2,b_2)\\ \\vdash\\ E(S_1\\triangle S_2,\\ b_1\\oplus b_2)$$
-  имеет bounded‑depth Frege‑вывод размера $2^{O(k)}$ (и, в частности, polynomial‑size при $k_1,k_2=O(\\log n)$).
-- `Доказательство:`
-  1) Обозначим через $B_{i^*}$ и $C_{j^*}$ единственные блоки, содержащие $x$ (существуют и единственны по непересечаемости разбиений).
-  2) Построим совместное разбиение $\\mathcal D$ множества $S_1\\cup S_2$ так: оставим все блоки $B_i$ при $i\\ne i^*$ и все блоки $C_j$ при $j\\ne j^*$, а пересекающиеся в $x$ блоки «разрежем»:
+  has a boundeddepth Fregeoutput of size $2^{O(k)}$ (and, in particular, polynomialsize for $k_1,k_2=O(\\log n)$).
+- `Proof:`
+  1) Let $B_{i^*}$ and $C_{j^*}$ denote the only blocks containing $x$ (they exist and are unique in terms of disjoint partitions).
+  2) Let us construct a joint partition $\\mathcal D$ of the set $S_1\\cup S_2$ as follows: let us leave all the blocks $B_i$ for $i\\ne i^*$ and all the blocks $C_j$ for $j\\ne j^*$, and "cut" the blocks intersecting at $x$:
      $$B_{i^*}=\\{x\\}\\uplus (B_{i^*}\\setminus\\{x\\}),\\qquad C_{j^*}=\\{x\\}\\uplus (C_{j^*}\\setminus\\{x\\}).$$
-     Тогда семейство блоков
+     Then the block family
      $$\\mathcal D:=\\{\\{x\\},\\ B_{i^*}\\setminus\\{x\\},\\ C_{j^*}\\setminus\\{x\\}\\}\\ \\cup\\ \\{B_i:i\\ne i^*\\}\\ \\cup\\ \\{C_j:j\\ne j^*\\}$$
-     (выкидывая пустые множества) состоит из попарно непересекающихся подмножеств и покрывает $S_1\\cup S_2$.
-     По счёту блоков получаем $k\\le (k_1-1)+(k_2-1)+3=k_1+k_2+1$.
-  3) Каждое из $S_1,S_2$ является объединением блоков из $\\mathcal D$ (блоки вне соответствующего множества просто не берутся), поэтому оба уравнения можно рассматривать как XOR по одному фиксированному набору блок‑паритетов $\\{P_{D_t}\\}_{t\\in[k]}$.
-     Тогда требуемый XOR‑шаг — тавтология на $k$ «атомах» (блок‑паритетах), и именно этот случай покрывает §16.130.
-- `Toy‑тест:` $S_1=\\{x,a,b,c\\}$, $S_2=\\{x,d,e\\}$.
-  Пусть $S_1$ разбито как $B_1=\\{x,a,b\\}$, $B_2=\\{c\\}$ ($k_1=2$), а $S_2$ как $C_1=\\{x,d\\}$, $C_2=\\{e\\}$ ($k_2=2$).
-  Тогда $\\mathcal D=\\{\\{x\\},\\{a,b\\},\\{c\\},\\{d\\},\\{e\\}\\}$ и $k=5=k_1+k_2+1$, после чего XOR‑шаг сводится к §16.130 с $k=5$.
-- `Статус:` частично (toy‑случай «пересечение = 1 переменная» не создаёт $k^2$‑взрыва при приведении двух block‑записей к общему разбиению; оставшаяся трудность Q39 — обеспечить саму block‑форму и её поддержание при динамическом base‑change).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить на реальной стратегии для grid, можно ли устроить вывод так, чтобы *каждый* локальный шаг обновления границы (добавление вершины/малого уравнения) имел пересечение $O(1)$ и при этом обе строки были записаны как XOR по $O(\\log n)$ блокам одного «текущего» разбиения; если нет — найти минимальное место, где неизбежно возникает пересечение по многим переменным или «поперечный» переход между несовместимыми разбиениями (и тогда снова включается барьер §16.132).
+     (throwing out empty sets) consists of pairwise disjoint subsets and covers $S_1\\cup S_2$.
+     By counting the blocks we get $k\\le (k_1-1)+(k_2-1)+3=k_1+k_2+1$.
+  3) Each of $S_1,S_2$ is a union of blocks from $\\mathcal D$ (blocks outside the corresponding set are simply not taken), therefore both equations can be considered as XOR over one fixed set of block parities $\\{P_{D_t}\\}_{t\\in[k]}$.
+     Then the required XOR step is a tautology on $k$ "atoms" (block parities), and it is this case that Section 16.130 covers.
+- `Toy test:` $S_1=\\{x,a,b,c\\}$, $S_2=\\{x,d,e\\}$.
+  Let $S_1$ be divided as $B_1=\\{x,a,b\\}$, $B_2=\\{c\\}$ ($k_1=2$), and $S_2$ as $C_1=\\{x,d\\}$, $C_2=\\{e\\}$ ($k_2=2$).
+  Then $\\mathcal D=\\{\\{x\\},\\{a,b\\},\\{c\\},\\{d\\},\\{e\\}\\}$ and $k=5=k_1+k_2+1$, after which the XOR step is reduced to Section 16.130 with $k=5$.
+- `Status:` partially (the toy case "intersection = 1 variable" does not create a $k^2$ explosion when bringing two block records to a common partition; the remaining difficulty Q39 is to ensure the block form itself and its maintenance during dynamic base changes).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` test on a real grid strategy whether it is possible to arrange the output so that *each* local boundary update step (adding a vertex/small equation) has an $O(1)$ intersection and both rows are written as XOR over $O(\\log n)$ blocks of the same "current" partition; if not, find the minimum place where an intersection of many variables or a "transverse" transition between incompatible partitions inevitably occurs (and then the barrier of Section 16.132 is turned on again).
 
-### 16.144. Исследовательский шаг: в column‑summing каждый локальный переход $t\\to t+1$ — XOR‑шаг с пересечением ровно в одном ребре (вершинное уравнение пересекает границу по одному ребру)
+### 16.144. Exploratory step: in column-summing, each local transition $t\\to t+1$ is an XOR-step with intersection at exactly one edge (the vertex equation intersects the boundary at one edge)
 
-- `Линза:` Инвариант.
-- `Утверждение:` Пусть $G$ — граф, $A\\subseteq V(G)$ и $v\\notin A$.
-  Обозначим $E(v)$ — множество рёбер, инцидентных $v$, и $\\delta(A)$ — рёбра, имеющие ровно один конец в $A$.
-  Тогда
+- `Lens:` Invariant.
+- `Statement:` Let $G$ be a graph, $A\\subseteq V(G)$ and $v\\notin A$.
+  Let $E(v)$ be the set of edges incident to $v$, and $\\delta(A)$ be the edges that have exactly one end in $A$.
+  Then
   $$\\delta(A\\cup\\{v\\})\\ =\\ \\delta(A)\\triangle E(v).$$
-  Более того, если у $v$ ровно один сосед в $A$, то $\\delta(A)\\cap E(v)$ состоит ровно из одного ребра.
-  В частности, для стратегии из §16.134 на grid, где $A=R_{j,t}$ и $v=(t+1,j)$, имеем
+  Moreover, if $v$ has exactly one neighbor in $A$, then $\\delta(A)\\cap E(v)$ consists of exactly one edge.
+  In particular, for the strategy from Section 16.134 on grid, where $A=R_{j,t}$ and $v=(t+1,j)$, we have
   $$\\delta(R_{j,t+1})=\\delta(R_{j,t})\\triangle E(v),\\qquad |\\delta(R_{j,t})\\cap E(v)|=1,$$
-  поэтому переход $t\\to t+1$ в «Gaussian elimination по модулю 2» реализуется как XOR‑шаг между одним промежуточным уравнением ширины $\\Theta(n)$ и одним вершинным уравнением постоянной ширины.
-- `Доказательство:`
-  1) Для любого ребра $e=uw$ неинцидентного $v$ принадлежность $e$ множеству $\\delta(A)$ и $\\delta(A\\cup\\{v\\})$ совпадает, так как статусы принадлежности концов к $A$ не меняются.
-  2) Пусть $e$ инцидентно $v$, т.е. $e=vu$.
-     Тогда $e\\in\\delta(A)$ эквивалентно условию $u\\in A$ (поскольку $v\\notin A$), а $e\\in\\delta(A\\cup\\{v\\})$ эквивалентно $u\\notin A\\cup\\{v\\}$, т.е. $u\\notin A$.
-     Следовательно, для рёбер из $E(v)$ принадлежность к границе **инвертируется** при добавлении $v$, то есть именно рёбра $E(v)$ переключают членство в $\\delta$.
-     Это и означает $\\delta(A\\cup\\{v\\})=\\delta(A)\\triangle E(v)$.
-  3) Если у $v$ ровно один сосед $u\\in A$, то ровно одно ребро $vu$ из $E(v)$ имеет другой конец в $A$, и именно оно лежит в $\\delta(A)$.
-     Значит $|\\delta(A)\\cap E(v)|=1$.
-  4) Для grid и $A=R_{j,t}$ из §16.134 вершина $v=(t+1,j)$ имеет ровно одного соседа в $A$ (вершина $(t,j)$), поэтому применимы пункты 1–3.
-  5) На уровне XOR‑уравнений это ровно правило сложения строк по модулю 2:
-     XOR‑сумма уравнения по $\\delta(R_{j,t})$ и вершинного уравнения по $E(v)$ даёт уравнение по $\\delta(R_{j,t+1})$, а правая часть обновляется как $b_{t+1}=b_t\\oplus \\chi(v)$.
-- `Toy‑тест:` $n=4$, $j=2$, $t=1$. Тогда $A=\\{(1,2)\\}$, $v=(2,2)$.
-  Граница $\\delta(A)$ содержит ребро $(1,2)-(2,2)$, а остальные рёбра из $E(v)$ выходят наружу, поэтому $\\delta(A)\\cap E(v)=\\{(1,2)-(2,2)\\}$ и $\\delta(A\\cup\\{v\\})=\\delta(A)\\triangle E(v)$.
-- `Статус:` доказано (геометрический факт: «локальные» шаги column‑summing всегда имеют пересечение $O(1)$, причём в простейшем варианте — ровно 1 ребро).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` совместить это с §16.143 и dyadic‑обновлением §16.136: выписать явную схему, как держать уравнения $\\delta(R_{j,t})$ в block‑форме с $k=O(\\log n)$ так, чтобы каждый локальный шаг $t\\to t+1$ требовал только (i) XOR‑шаг «пересечение=1» и (ii) $O(\\log n)$ disjoint‑merge операций; затем найти, где в стратегии для **всего** grid неизбежно появляется «поперечный» переход (и включается барьер §16.132), либо подтвердить, что можно обойтись одним 1D‑порядком.
+  therefore, the transition $t\\to t+1$ to "Gaussian elimination modulo 2" is implemented as an XOR step between one intermediate equation of width $\\Theta(n)$ and one vertex equation of constant width.
+- `Proof:`
+  1) For any edge $e=uw$ non-incident $v$, the membership of $e$ in the set $\\delta(A)$ and $\\delta(A\\cup\\{v\\})$ coincides, since the membership statuses of the ends in $A$ do not change.
+  2) Let $e$ be incident to $v$, i.e. $e=vu$.
+     Then $e\\in\\delta(A)$ is equivalent to the condition $u\\in A$ (since $v\\notin A$), and $e\\in\\delta(A\\cup\\{v\\})$ is equivalent to $u\\notin A\\cup\\{v\\}$, i.e. $u\\notin A$.
+     Therefore, for edges in $E(v)$, the boundary membership is **inverted** when $v$ is added, that is, it is the edges of $E(v)$ that switch the membership in $\\delta$.
+     This means $\\delta(A\\cup\\{v\\})=\\delta(A)\\triangle E(v)$.
+  3) If $v$ has exactly one neighbor $u\\in A$, then exactly one edge $vu$ from $E(v)$ has another end in $A$, and it is this edge that lies in $\\delta(A)$.
+     So $|\\delta(A)\\cap E(v)|=1$.
+  4) For grid and $A=R_{j,t}$ from Section 16.134, vertex $v=(t+1,j)$ has exactly one neighbor in $A$ (vertex $(t,j)$), so points 1-3 apply.
+  5) At the level of XOR equations, this is exactly the rule for adding rows modulo 2:
+     The XOR sum of the equation over $\\delta(R_{j,t})$ and the vertex equation over $E(v)$ gives the equation over $\\delta(R_{j,t+1})$, and the right-hand side is updated as $b_{t+1}=b_t\\oplus \\chi(v)$.
+- `Toy test:` $n=4$, $j=2$, $t=1$. Then $A=\\{(1,2)\\}$, $v=(2,2)$.
+  The boundary of $\\delta(A)$ contains the edge $(1,2)-(2,2)$, and the remaining edges from $E(v)$ go out, so $\\delta(A)\\cap E(v)=\\{(1,2)-(2,2)\\}$ and $\\delta(A\\cup\\{v\\})=\\delta(A)\\triangle E(v)$.
+- `Status:` proven (geometric fact: "local" column-summing steps always have an intersection of $O(1)$, and in the simplest version - exactly 1 edge).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` combine this with Section 16.143 and the dyadic update of Section 16.136: write out an explicit diagram of how to keep the equations $\\delta(R_{j,t})$ in block form with $k=O(\\log n)$ so that each local step $t\\to t+1$ requires only (i) an XOR step "intersection=1" and (ii) $O(\\log n)$ disjointmerge operations; then find where in the strategy for the **entire** grid the "transverse" transition inevitably appears (and the Section 16.132 barrier turns on), or confirm that you can get by with just 1D order.
 
-### 16.145. Исследовательский шаг: «протокол» поддержания block‑формы для $\\delta(R_{j,t})$ с $k=O(\\log n)$ в column‑summing (локальный XOR‑шаг + $O(\\log n)$ dyadic‑merge)
+### 16.145. Exploratory step: "protocol" for maintaining block-form for $\\delta(R_{j,t})$ with $k=O(\\log n)$ in column-summing (local XOR-step + $O(\\log n)$ dyadic-merge)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение:` Зафиксируем внутреннюю колонку $2\\le j\\le n-1$ и множества $R_{j,t}$ из §16.134.
-  Обозначим через $L_{j,t}$ и $H_{j,t}$ два горизонтальных сегмента границы (слева/справа) и через $B_{j,t}$ вертикальное «фронтирное» ребро (если $t<n$), так что
+- `Lens:` Compression/canonization.
+- `Statement:` Let us fix the inner column $2\\le j\\le n-1$ and the sets $R_{j,t}$ from Section 16.134.
+  Let us denote by $L_{j,t}$ and $H_{j,t}$ two horizontal segments of the border (left/right) and by $B_{j,t}$ the vertical "front" edge (if $t<n$), so that
   $$\\delta(R_{j,t})\\ =\\ L_{j,t}\\uplus H_{j,t}\\uplus \\{B_{j,t}\\}\\qquad (t<n)$$
-  (см. §16.134; верхнего ребра нет для обычного $n\\times n$ grid).
-  Тогда существует каноническое разбиение $\\mathcal P_{j,t}$ множества $\\delta(R_{j,t})$ на
+  (see Section 16.134; there is no top edge for a regular $n\\times n$ grid).
+  Then there is a canonical partition $\\mathcal P_{j,t}$ of the set $\\delta(R_{j,t})$ into
   $$k_t\\le 2\\lfloor\\log_2 n\\rfloor+3$$
-  дизъюнктных блоков (dyadic‑интервалы по строкам внутри $L_{j,t}$ и $H_{j,t}$ из §16.136, плюс singleton $\\{B_{j,t}\\}$),
-  и переход $t\\to t+1$ можно реализовать без $k^2$‑взрыва:
-  1) (XOR‑шаг.) По §16.144 имеем $\\delta(R_{j,t+1})=\\delta(R_{j,t})\\triangle E(v)$ для $v=(t+1,j)$ и $|\\delta(R_{j,t})\\cap E(v)|=1$.
-     Если $E(\\delta(R_{j,t}),b_t)$ и $E(E(v),\\chi(v))$ записаны в block‑форме относительно разбиений $\\mathcal P_{j,t}$ и singleton‑разбиения $E(v)$,
-     то по §16.143 XOR‑шаг выводит $E(\\delta(R_{j,t+1}),b_t\\oplus\\chi(v))$ в polynomial‑size при $k_t=O(\\log n)$.
-  2) (Dyadic‑merge.) Чтобы поддерживать канонический вид $\\mathcal P_{j,t+1}$, достаточно отдельно для $L$ и $H$ выполнить dyadic‑обновление префикса $t\\mapsto t+1$ из §16.136:
-     «добавить singleton новой строки» и затем сделать $O(\\log n)$ слияний соседних равных интервалов.
-     Каждое такое слияние — disjoint‑merge и потому сводится к «easy case» §16.137 (то есть к §16.130 с $k=2$).
-  Следовательно, в column‑summing поддержание block‑формы для всех $t$ сводится к $n$ локальным XOR‑шагам с пересечением 1 и $O(n\\log n)$ disjoint‑merge операциям,
-  причём на каждом шаге число блоков остаётся $O(\\log n)$ (и base‑change происходит только между interval‑partition, где refinement линейный по §16.133).
-- `Доказательство:`
-  1) (Канонические блоки.) Отождествим рёбра $L_{j,t}$ с позициями $[t]$ по строковому порядку (аналогично для $H_{j,t}$).
-     Применим §16.136 к каждому из двух префиксов длины $t$, получая dyadic‑разбиения на $\\le\\lfloor\\log_2 t\\rfloor+1\\le\\lfloor\\log_2 n\\rfloor+1$ интервалов.
-     Добавив singleton $\\{B_{j,t}\\}$, получаем разбиение $\\mathcal P_{j,t}$ и оценку $k_t\\le 2(\\lfloor\\log_2 n\\rfloor+1)+1$.
-  2) (XOR‑обновление границы.) По §16.144
+  disjunct blocks (dyadic intervals along lines inside $L_{j,t}$ and $H_{j,t}$ from Section 16.136, plus singleton $\\{B_{j,t}\\}$),
+  and the $t\\to t+1$ transition can be realized without a $k^2$explosion:
+  1) (XOR step.) By Section 16.144 we have $\\delta(R_{j,t+1})=\\delta(R_{j,t})\\triangle E(v)$ for $v=(t+1,j)$ and $|\\delta(R_{j,t})\\cap E(v)|=1$.
+     If $E(\\delta(R_{j,t}),b_t)$ and $E(E(v),\\chi(v))$ are written in block form with respect to the partitions $\\mathcal P_{j,t}$ and the singleton partition $E(v)$,
+     then by Section 16.143 the XOR step outputs $E(\\delta(R_{j,t+1}),b_t\\oplus\\chi(v))$ to polynomial-size with $k_t=O(\\log n)$.
+  2) (Dyadic-merge.) To maintain the canonical form of $\\mathcal P_{j,t+1}$, it is sufficient to separately perform the dyadic update of the prefix $t\\mapsto t+1$ from Section 16.136 for $L$ and $H$:
+     "add singleton newline" and then do $O(\\log n)$ merges of adjacent equal intervals.
+     Each such merger is a disjoint-merge and therefore reduces to the "easy case" of Section 16.137 (that is, to Section 16.130 with $k=2$).
+  Therefore, in column-summing, maintaining the block form for all $t$ reduces to $n$ local XOR steps with intersection 1 and $O(n\\log n)$ disjoint-merge operations,
+  Moreover, at each step the number of blocks remains $O(\\log n)$ (and the basechange occurs only between intervalpartition, where refinement is linear according to Section 16.133).
+- `Proof:`
+  1) (Canonical blocks.) Let us identify the edges $L_{j,t}$ with the positions of $[t]$ in row order (similarly for $H_{j,t}$).
+     We apply Section 16.136 to each of the two prefixes of length $t$, obtaining dyadic partitions into $\\le\\lfloor\\log_2 t\\rfloor+1\\le\\lfloor\\log_2 n\\rfloor+1$ intervals.
+     Adding singleton $\\{B_{j,t}\\}$, we obtain the partition $\\mathcal P_{j,t}$ and the estimate $k_t\\le 2(\\lfloor\\log_2 n\\rfloor+1)+1$.
+  2) (XOR update of the boundary.) According to Section 16.144
      $$\\delta(R_{j,t+1})=\\delta(R_{j,t})\\triangle E(v),\\qquad |\\delta(R_{j,t})\\cap E(v)|=1,$$
-     где $v=(t+1,j)$, а общим ребром является $B_{j,t}$.
-     Так как $B_{j,t}$ в $\\mathcal P_{j,t}$ — singleton, а $E(v)$ можно разбить на singleton‑блоки (их $\\le 4$), XOR‑шаг попадает в условия §16.143
-     с общим refinement‑разбиением размера $\\le k_t+O(1)=O(\\log n)$.
-  3) (Dyadic‑нормализация.) После XOR‑шага в множествах $L,H$ появляется по одному новому ребру (строка $t+1$), то есть их префиксы увеличиваются на 1.
-     Каноническое dyadic‑разбиение $[t+1]$ получается из разбиения $[t]$ добавлением singleton и затем $O(\\log n)$ merge‑операциями (§16.136).
-     Каждая merge‑операция склеивает два дизъюнктных интервала и потому имеет polynomial‑size bounded‑depth Frege‑симуляцию по §16.137.
-     Так как все разбиения — interval‑partition одного порядка, их уточнения не дают $k^2$‑взрыва (§16.133).
-- `Toy‑тест:` $n=8$, $t=5$.
-  Dyadic‑разбиение $[5]=[1,4]\\uplus[5,5]$, а $[6]=[1,4]\\uplus[5,6]$ получается добавлением singleton $[6,6]$ и merge $[5,5]\\uplus[6,6]\\mapsto[5,6]$.
-  Для $\\delta(R_{j,5})$ это означает: на каждой из двух сторон добавляется одно ребро и делается один disjoint‑merge; затем XOR с вершиной $v=(6,j)$ меняет $B_{j,5}$ на $B_{j,6}$, имея пересечение ровно в $B_{j,5}$.
-- `Статус:` доказано (редукция: внутри column‑summing нет необходимости в «поперечном» base‑change; поддержание $k=O(\\log n)$ сводится к пересечению‑1 XOR и dyadic‑merge).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` перейти от одного столбца к «суммированию столбцов» как у Håstad–Risse §1.2: понять, можно ли выбрать block‑формы для граничных уравнений двух соседних столбцов так, чтобы их большая общая часть (полоса из $n$ рёбер) уже была синхронизирована теми же dyadic‑блоками, и тогда XOR‑сложение столбцов станет прямым «easy case» §16.130 (без k^2); либо зафиксировать место, где неизбежна несогласованность разбиений (row↔column) и снова включается барьер §16.132.
+     where $v=(t+1,j)$ and the common edge is $B_{j,t}$.
+     Since $B_{j,t}$ in $\\mathcal P_{j,t}$ is a singleton, and $E(v)$ can be divided into singleton blocks (there are $\\le 4$ of them), the XOR step falls into the conditions of Section 16.143
+     with a general refinement partition of size $\\le k_t+O(1)=O(\\log n)$.
+  3) (Dyadic normalization.) After the XOR step, one new edge appears in the sets $L,H$ (line $t+1$), that is, their prefixes increase by 1.
+     The canonical dyadic partition $[t+1]$ is obtained from the partition $[t]$ by adding a singleton and then $O(\\log n)$ merge operations (Section 16.136).
+     Each merge operation glues two disjunct intervals and therefore has a polynomial-size bounded depth Frege simulation according to Section 16.137.
+     Since all partitions are interval-partitions of the same order, their refinements do not produce a $k^2$-explosion (Section 16.133).
+- `Toy test:` $n=8$, $t=5$.
+  Dyadic partition $[5]=[1,4]\\uplus[5,5]$, and $[6]=[1,4]\\uplus[5,6]$ is obtained by adding singleton $[6,6]$ and merge $[5,5]\\uplus[6,6]\\mapsto[5,6]$.
+  For $\\delta(R_{j,5})$ this means: on each of the two sides one edge is added and one disjoint-merge is made; then XOR with vertex $v=(6,j)$ changes $B_{j,5}$ to $B_{j,6}$, having an intersection at exactly $B_{j,5}$.
+- `Status:` proven (reduction: inside column-summing there is no need for "transverse" base-change; maintaining $k=O(\\log n)$ reduces to intersection-1 XOR and dyadic-merge).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` move from one column to "column summation" as in Hastad-Risse Section 1.2: see if it is possible to choose block forms for the boundary equations of two adjacent columns so that their most common part (a strip of $n$ edges) is already synchronized by the same dyadic blocks, and then XOR addition of columns becomes a direct "easy case" Section 16.130 (without k^2); or fix the place where inconsistency of partitions is inevitable (rowcolumn) and the Section 16.132 barrier is turned on again.
 
-### 16.146. Исследовательский шаг: сложение соседних столбцов в HR‑стратегии сводится к «easy case» §16.130 при фиксированном dyadic‑разбиении полос $S_j$
+### 16.146. Research step: adding adjacent columns in HR strategy reduces to an "easy case" Section 16.130 with a fixed dyadic partition of stripes $S_j$
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Для $1\\le j\\le n-1$ обозначим через $S_j$ множество из $n$ горизонтальных рёбер между колонками $j$ и $j+1$ (упорядоченных по строкам).
-  Пусть для каждой полосы $S_j$ фиксировано dyadic‑разбиение на $r=O(\\log n)$ дизъюнктных row‑interval блоков (каноническое из §16.136 для $[n]$),
-  и доступно block‑представление (в смысле §16.130) уравнений вида $E(S_j,b)$ как XOR по блок‑паритетам этих $r$ блоков.
-  Тогда «добавление соседнего столбца» в схеме Håstad–Risse §1.2 реализуется одним XOR‑шагом в «easy case»:
-  если
-  $$E(S_j,\\,b)\\qquad\\text{и}\\qquad E(S_j\\uplus S_{j+1},\\,c)$$
-  записаны как XOR по блокам одного общего разбиения $S_j\\uplus S_{j+1}$ (объединение dyadic‑блоков на $S_j$ и на $S_{j+1}$), то bounded‑depth Frege выводит
+- `Lens:` Equivalence.
+- `Statement:` For $1\\le j\\le n-1$, let $S_j$ denote the set of $n$ horizontal edges between columns $j$ and $j+1$ (ordered by rows).
+  Let for each stripe $S_j$ be fixed a dyadic partition into $r=O(\\log n)$ of disjoint row-interval blocks (canonical from Section 16.136 for $[n]$),
+  and a block representation (in the sense of Section 16.130) of equations of the form $E(S_j,b)$ is available as XOR over the block parities of these $r$ blocks.
+  Then "adding an adjacent column" in the Hastad-Risse scheme Section 1.2 is implemented with one XOR step in the "easy case":
+  If
+  $$E(S_j,\\,b)\\qquad\\text{and}\\qquad E(S_j\\uplus S_{j+1},\\,c)$$
+  written as XOR over blocks of one common partition $S_j\\uplus S_{j+1}$ (combination of dyadic blocks on $S_j$ and $S_{j+1}$), then the boundeddepth Frege outputs
   $$E(S_{j+1},\\,b\\oplus c)$$
-  polynomial‑size (при глубине, контролируемой глубинами блок‑паритетов), поскольку
+  polynomialsize (with a depth controlled by block parity depths), since
   $$(S_j)\\triangle(S_j\\uplus S_{j+1})=S_{j+1}.$$
-  То есть большое пересечение размера $|S_j|=n$ не приводит к $k^2$‑base‑change: оно «схлопывается» на уровне общих блок‑атомов.
-- `Доказательство:`
-  1) (Симметрическая разность.) Так как $S_j\\cap S_{j+1}=\\varnothing$, имеем
+  That is, a large intersection of size $|S_j|=n$ does not lead to $k^2$basechange: it "collapses" at the level of common block atoms.
+- `Proof:`
+  1) (Symmetric difference.) Since $S_j\\cap S_{j+1}=\\varnothing$, we have
      $$(S_j)\\triangle(S_j\\uplus S_{j+1})=((S_j\\triangle S_j)\\triangle S_{j+1})=\\varnothing\\triangle S_{j+1}=S_{j+1}.$$
-  2) (Общее разбиение и параметр $k$.) Полосы $S_j$ и $S_{j+1}$ дизъюнктны, поэтому объединение их dyadic‑разбиений даёт разбиение
+  2) (General partition and parameter $k$.) The stripes $S_j$ and $S_{j+1}$ are disjoint, therefore the union of their dyadic partitions gives the partition
      $$S_j\\uplus S_{j+1}=\\biguplus_{t=1}^{k} D_t$$
-     с $k\\le 2r=O(\\log n)$.
-     Тогда оба уравнения $E(S_j,b)$ и $E(S_j\\uplus S_{j+1},c)$ являются объединениями блоков одного и того же разбиения $\\{D_t\\}$.
-  3) (XOR‑шаг как «easy case».) По §16.130 для такого фиксированного block‑базиса существует bounded‑depth Frege‑вывод размера $2^{O(k)}=\\mathrm{poly}(n)$,
-     доказывающий
+     with $k\\le 2r=O(\\log n)$.
+     Then both equations $E(S_j,b)$ and $E(S_j\\uplus S_{j+1},c)$ are unions of blocks of the same partition $\\{D_t\\}$.
+  3) (XOR step as an "easy case".) According to Section 16.130, for such a fixed block basis there is a bounded depth Frege output of size $2^{O(k)}=\\mathrm{poly}(n)$,
+     proving
      $$E(S_j,b)\\wedge E(S_j\\uplus S_{j+1},c)\\to E(S_{j+1},b\\oplus c).$$
-  4) (Связь с HR §1.2.) Уравнение $E(S_j\\uplus S_{j+1},c)$ — это «уравнение столбца $j+1$» (граница полного столбца; частный случай §16.134 при $t=n$),
-     а $E(S_j,b)$ — «уравнение полосы из первых $j$ столбцов» (граница вертикальной полосы).
-     Следовательно, шаг «прибавить следующий столбец» в линейном рассуждении по модулю 2 редуцируется к одному XOR‑шагу в режиме §16.130.
-- `Toy‑тест:` $n=6$.
-  Каноническая dyadic‑разбивка $[6]=[1,4]\\uplus[5,6]$ задаёт по два блока на каждой полосе $S_j$.
-  Тогда $E(S_j,b)$ использует два блока полосы $S_j$, а $E(S_j\\uplus S_{j+1},c)$ использует четыре блока на $S_j\\uplus S_{j+1}$.
-  Их XOR‑сложение отменяет оба блока на $S_j$ и оставляет ровно два блока на $S_{j+1}$.
-- `Статус:` доказано (соседние столбцы не требуют «поперечного» base‑change: достаточно фиксировать одинаковые dyadic‑блоки на общей полосе $S_j$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` уточнить оставшийся узел Q39: в §16.145–§16.146 базисная часть Gaussian elimination на grid редуцировалась к «easy case» на $k=O(\\log n)$ блок‑атомах;
-  теперь надо либо (a) формально контролировать глубину блок‑паритетов при всех необходимых dyadic‑merge (чтобы не вылезти в $O(\\log n)$), либо (b) выделить место в полном HR‑выводе, где всё же требуется base‑change между несовместимыми разбиениями (и тогда возвращается барьер §16.132).
+  4) (Relation to HR Section 1.2.) The equation $E(S_j\\uplus S_{j+1},c)$ is the "equation of the column $j+1$" (the boundary of the full column; a special case of Section 16.134 for $t=n$),
+     and $E(S_j,b)$ is "the equation of the strip from the first $j$ columns" (the boundary of the vertical strip).
+     Therefore, the "add next column" step in linear modulo 2 reasoning is reduced to one XOR step in the mode of Section 16.130.
+- `Toy test:` $n=6$.
+  The canonical dyadic partition $[6]=[1,4]\\uplus[5,6]$ defines two blocks on each stripe $S_j$.
+  Then $E(S_j,b)$ uses two stripe blocks on $S_j$, and $E(S_j\\uplus S_{j+1},c)$ uses four stripe blocks on $S_j\\uplus S_{j+1}$.
+  Their XOR addition cancels both blocks on $S_j$ and leaves exactly two blocks on $S_{j+1}$.
+- `Status:` proven (adjacent columns do not require a "transverse" basechange: it is enough to fix identical dyadicblocks on the common stripe $S_j$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` clarify the remaining node Q39: in Section 16.145-Section 16.146 the basis part of Gaussian elimination on the grid was reduced to the "easy case" on $k=O(\\log n)$ block atoms;
+  now we need to either (a) formally control the depth of block parities for all necessary dyadic-merges (so as not to get into $O(\\log n)$), or (b) allocate a place in the full HR output, where a base-change between incompatible partitions is still required (and then the barrier Section 16.132 is returned).
 
-### 16.147. Исследовательский шаг: caveat — Håstad’86, Remark 6 говорит про **схемы**, а для Frege‑линий нужны **формулы**; наивная «развёртка» схемы в формулу даёт blow‑up $M^{\\Theta(d)}$
+### 16.147. Research step: caveat - Hastad'86, Remark 6 talks about **schemes**, and Frege lines require **formulas**; naive "unfolding" of the circuit into a formula gives a blow-up $M^{\\Theta(d)}$
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение:` Ссылка Håstad’86, Remark 6 (`../../resources/downloads/hastad_1986.pdf`) даёт upper bound для PARITY в модели **depth‑$d$ схем**.
-  Но в Schoenfield‑Frege строки — это **формулы** (деревья), и общий перевод «схема → эквивалентная формула той же глубины» может раздувать размер до $M^{O(d)}$.
-  В частности, если единственное обоснование representability‑параметрики $(\\log M)^{d-1}$ опирается на Remark 6, то на пороговой глубине $d\\approx \\log n/\\log\\log n$ при $M=\\mathrm{poly}(n)$ развёртка даёт лишь quasi‑poly размер и не закрывает нужный режим.
-- `Доказательство:`
-  Пусть $C$ — булева схема размера $S$ и глубины $d$ (один выход).
-  Построим эквивалентную формулу $F$ «развёрткой DAG в дерево»: корень — выход схемы; для узла‑вхождения гейта $g$ добавляем в формулу соответствующий символ и рекурсивно разворачиваем его входы, **копируя** подформулы при каждом новом использовании $g$.
-  Тогда глубина $F$ равна глубине $C$.
-  Оценим размер: каждое вхождение гейта в развёртке соответствует некоторому пути в схеме, идущему от этого гейта к выходу.
-  Длина пути $\\le d$, и на каждом шаге можно перейти не более чем в один из $\\le S$ гейтов следующего уровня, значит число различных путей от любого гейта к выходу грубо ограничено $S^{d}$.
-  Следовательно, каждый из $S$ гейтов может появиться в развёртке не более чем $S^{d}$ раз, и
+- `Lens:` Model stress test.
+- `Statement:` Link Hastad'86, Remark 6 (`../../resources/downloads/hastad_1986.pdf`) gives the upper bound for PARITY in the model of **depth-$d$ circuits**.
+  But in Schoenfield-Frege, strings are **formulas** (trees), and the general translation "scheme -> equivalent formula of the same depth" can inflate the size to $M^{O(d)}$.
+  In particular, if the only justification of the representability parameter $(\\log M)^{d-1}$ relies on Remark 6, then at the threshold depth $d\\approx \\log n/\\log\\log n$ with $M=\\mathrm{poly}(n)$ the unfolding yields only quasi-poly size and does not cover the needed regime.
+- `Proof:`
+  Let $C$ be a Boolean circuit of size $S$ and depth $d$ (single output).
+  Let's construct an equivalent formula $F$ "by expanding DAG into a tree": root is the output of the circuit; For the entry node of the gate $g$, we add the corresponding symbol to the formula and recursively expand its inputs, **copying** the subformulas with each new use of $g$.
+  Then the depth of $F$ is equal to the depth of $C$.
+  Let's estimate the size: each entry of a gate in the scan corresponds to a certain path in the circuit going from this gate to the output.
+  The length of the path is $\\le d$, and at each step you can go to at most one of the $\\le S$ gates of the next level, which means the number of different paths from any gate to the output is roughly limited by $S^{d}$.
+  Therefore, each of the $S$ gates can appear in the scan no more than $S^{d}$ times, and
   $$|F|\\ \\le\\ S\\cdot S^{d}\\ =\\ S^{d+1}\\ =\\ S^{O(d)}.$$
-  Подстановка $S:=M=n^C$ и $d:=\\Theta(\\log n/\\log\\log n)$ даёт
+  Substituting $S:=M=n^C$ and $d:=\\Theta(\\log n/\\log\\log n)$ gives
   $$|F|\\ \\le\\ n^{C(d+1)}\\ =\\ 2^{\\Theta(\\log^2 n/\\log\\log n)},$$
-  то есть quasi‑poly, а не polynomial.
-- `Toy‑тест:` $n=2^{64}$, $M=n^4=2^{256}$, $d=13$.
-  Тогда даже грубая оценка развёртки даёт $|F|\\le M^{14}=2^{3584}$.
-- `Статус:` выявлен точный провал: Remark 6 сам по себе не обосновывает «формульную» representability‑часть в режиме $d\\approx\\log n/\\log\\log n$ (развёртка даёт именно тот $M^{\\Theta(d)}$, который HR отмечают как недостаточный).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` найти (или вывести) **формульный** upper bound для PARITY в нужной модели (глубина как у HR, база $\\{\\vee,\\neg\\}$, OR‑выход), дающий размер $M$ на блоке $(\\log M)^{d-1}$; затем вернуться к узлу Q39 про контроль глубины при dyadic‑merge без накопления $O(\\log n)$.
+  that is, quasi-poly, not polynomial.
+- `Toy test:` $n=2^{64}$, $M=n^4=2^{256}$, $d=13$.
+  Then even a rough estimate of the development gives $|F|\\le M^{14}=2^{3584}$.
+- `Status:` an exact failure has been identified: Remark 6 itself does not justify the "formular" representability part in the $d\\approx\\log n/\\log\\log n$ mode (the sweep gives exactly that $M^{\\Theta(d)}$ that HR marks as insufficient).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` find (or derive) **formula** upper bound for PARITY in the desired model (depth as in HR, base $\\{\\vee,\\neg\\}$, ORoutput), giving size $M$ on block $(\\log M)^{d-1}$; then return to node Q39 about depth control during dyadic-merge without accumulating $O(\\log n)$.
 
-### 16.148. Исследовательский шаг: явный конструктивный upper bound для $\\mathrm{PARITY}$ формулами глубины $d$ даёт лишь $\\log \\mathrm{size}=O((d-1)\\,m^{1/(d-1)})$ (DNF‑композиция) — этого недостаточно на пороге
+### 16.148. Research step: an explicit constructive upper bound for $\\mathrm{PARITY}$ by depth formulas $d$ gives only $\\log \\mathrm{size}=O((d-1)\\,m^{1/(d-1)})$ (DNFcomposition) - this is not enough at the threshold
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Для целых $d\\ge 2$ и $t\\ge 2$ положим $m:=t^{d-1}$.
-  Тогда существуют формулы (в De Morgan виде, с OR‑выходом) глубины $d$ и размера
+- `Lens:` Trade-off.
+- `Statement:` For integers $d\\ge 2$ and $t\\ge 2$ we set $m:=t^{d-1}$.
+  Then there are formulas (in De Morgan form, with OR output) for depth $d$ and size
   $$\\mathrm{size}\\ \\le\\ \\mathrm{poly}(m)\\cdot 2^{\\,O((d-1)\\,t)}\\ =\\ \\exp\\bigl(O((d-1)\\,m^{1/(d-1)})\\bigr),$$
-  вычисляющие $\\mathrm{PARITY}_m$ и $\\neg\\mathrm{PARITY}_m$.
-  Инверсия даёт: чтобы уложиться в размер $\\le M$, из этого конструктивного bound’а следует лишь
+  calculating $\\mathrm{PARITY}_m$ and $\\neg\\mathrm{PARITY}_m$.
+  Inversion gives: to keep within the size $\\le M$, from this constructive bound it follows only
   $$m\\ \\le\\ \\left(\\Theta\\!\\left(\\frac{\\log M}{d-1}\\right)\\right)^{d-1},$$
-  то есть на пороге $d\\approx\\log n/\\log\\log n$ при $M=\\mathrm{poly}(n)$ такой подход покрывает только $n^{o(1)}$ переменных и не оправдывает целевой блок $(\\log M)^{d-1}\\ge n$.
-- `Доказательство:`
-  1) (Композиция блоков.) Для $m=t^{d-1}$ разобьём переменные на $t$ блоков по $t^{d-2}$ переменных.
-     Пусть $P_{d-1}$ и $N_{d-1}$ — формулы глубины $d-1$, вычисляющие паритет/непаритет на $t^{d-2}$ переменных.
-     Тогда $\\mathrm{PARITY}_m$ можно выписать как DNF по $t$ «литералам‑блокам»:
+  that is, at the threshold $d\\approx\\log n/\\log\\log n$ for $M=\\mathrm{poly}(n)$, this approach covers only $n^{o(1)}$ variables and does not justify the target block $(\\log M)^{d-1}\\ge n$.
+- `Proof:`
+  1) (Composition of blocks.) For $m=t^{d-1}$, we divide the variables into $t$ blocks of $t^{d-2}$ variables.
+     Let $P_{d-1}$ and $N_{d-1}$ be formulas of depth $d-1$ that calculate parity/nonparity on $t^{d-2}$ variables.
+     Then $\\mathrm{PARITY}_m$ can be written as DNF over $t$ "literal blocks":
      $$\\bigvee_{a\\in\\{0,1\\}^t:\\ \\oplus_i a_i=1}\\ \\bigwedge_{i=1}^t L_i(a),\\qquad L_i(a):=\\begin{cases}P_{d-1}(\\text{block }i),&a_i=1\\\\N_{d-1}(\\text{block }i),&a_i=0.\\end{cases}$$
-     Аналогично для $\\neg\\mathrm{PARITY}_m$ (берём $\\oplus_i a_i=0$). OR‑выход сохранён.
-  2) (Рекурсия на размере.) Обозначим через $S(d,m)$ размер такого построения.
-     Тогда при $m=t^{d-1}$ имеем
+     Similarly for $\\neg\\mathrm{PARITY}_m$ (take $\\oplus_i a_i=0$). OR output saved.
+  2) (Recursion on size.) Let $S(d,m)$ denote the size of such a construction.
+     Then for $m=t^{d-1}$ we have
      $$S(d,\\,t^{d-1})\\ \\le\\ 2^{t}\\cdot O(t)\\cdot S(d-1,\\,t^{d-2}).$$
-     База $d=2$: DNF для паритета на $t$ переменных имеет $2^{t-1}$ термов и размер $S(2,t)\\le 2^{t}\\cdot O(t)$.
-     Индукцией получаем $S(d,t^{d-1})\\le 2^{(d-1)t}\\cdot \\mathrm{poly}(t)\\le \\mathrm{poly}(m)\\cdot 2^{O((d-1)t)}$.
-  3) (Инверсия.) Если $S(d,m)\\le M$, то из $\\log M\\ge \\Omega((d-1)\\,m^{1/(d-1)})$ следует
+     Base $d=2$: DNF for parity on $t$ variables has $2^{t-1}$ terms and size $S(2,t)\\le 2^{t}\\cdot O(t)$.
+     By induction we obtain $S(d,t^{d-1})\\le 2^{(d-1)t}\\cdot \\mathrm{poly}(t)\\le \\mathrm{poly}(m)\\cdot 2^{O((d-1)t)}$.
+  3) (Inversion.) If $S(d,m)\\le M$, then from $\\log M\\ge \\Omega((d-1)\\,m^{1/(d-1)})$ it follows
      $m\\le (\\Theta((\\log M)/(d-1)))^{d-1}$.
-     При $d=\\Theta(\\log n/\\log\\log n)$ и $M=n^{O(1)}$ имеем $(\\log M)/(d-1)=\\Theta(\\log\\log n)$, значит
+     For $d=\\Theta(\\log n/\\log\\log n)$ and $M=n^{O(1)}$ we have $(\\log M)/(d-1)=\\Theta(\\log\\log n)$, which means
      $$m\\ \\le\\ (\\Theta(\\log\\log n))^{\\Theta(\\log n/\\log\\log n)}\\ =\\ n^{o(1)}\\ll n.$$
-- `Toy‑тест:` $n=2^{64}$, $M=n^4$ (так что $\\log M=256$), $d=13$ (то есть $d-1=12$).
-  Тогда оценка даёт максимум
+- `Toy test:` $n=2^{64}$, $M=n^4$ (so $\\log M=256$), $d=13$ (so $d-1=12$).
+  Then the estimate gives the maximum
   $$m\\ \\lesssim\\ (256/12)^{12}\\ \\approx\\ 21^{12}\\ \\approx\\ 2^{53}\\ <\\ 2^{64}=n.$$
-- `Статус:` получен честный «слишком слабый» формульный upper bound: DNF‑композиция действительно даёт ровно тот тип blow‑up по $d$, который делает representability на пороге недоказанной.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` найти (или опровергнуть) существенно более сильный **формульный** upper bound для $\\mathrm{PARITY}$ глубины $d\\approx\\log n/\\log\\log n$ (в духе схемного bound Håstad’86 без множителя $(d-1)$ в показателе); иначе representation‑редукция Q39 может быть заблокирована уже на уровне «PARITY в одном блоке».
+- `Status:` an honest "too weak" formulaic upper bound is obtained: the DNFcomposition really gives exactly the type of blowup on $d$, which makes representability on the verge of unproven.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` find (or refute) a significantly stronger **formula** upper bound for $\\mathrm{PARITY}$ of depth $d\\approx\\log n/\\log\\log n$ (in the spirit of the Hastad'86 circuit bound without the factor $(d-1)$ in the exponent); otherwise, representation-reduction Q39 may be blocked already at the "PARITY in one block" level.
 
-### 16.149. Исследовательский шаг: множитель $d$ в экспоненте для PARITY‑формул **неустраним** (Rossman’16) ⇒ блок $(\\log M)^{d-1}$ при size $M$ невозможен для формул при растущем $d$
+### 16.149. Research step: the factor $d$ in the exponent for PARITY formulas is **irremovable** (Rossman'16)  block $(\\log M)^{d-1}$ with size $M$ is impossible for formulas with growing $d$
 
-- `Линза:` Ссылка/барьер (закрыть «фольклор» точным фактом).
-- `Утверждение:` Для unbounded fan-in De Morgan‑формул (деревьев) глубины $D\\ge 2$ функция $\\mathrm{PARITY}_n$ требует размера
+- `Lens:` Link/barrier (close "folklore" with an accurate fact).
+- `Statement:` For unbounded fan-in De Morgan formulas (trees) of depth $D\\ge 2$, the function $\\mathrm{PARITY}_n$ requires size
   $$\\mathrm{size}\\ \\ge\\ 2^{\\,\\Omega\\bigl((D-1)\\,(n^{1/(D-1)}-1)\\bigr)}$$
-  (Rossman’16, Thm. 3; см. `../../resources/downloads/rossman_2016_average_sensitivity_bounded_depth_formulas.pdf`).
-  Следовательно, если формула глубины $D$ имеет размер $\\le M$ и вычисляет $\\mathrm{PARITY}_n$, то неизбежно
+  (Rossman'16, Thm. 3; see `../../resources/downloads/rossman_2016_average_sensitivity_bounded_depth_formulas.pdf`).
+  Therefore, if the depth formula $D$ has size $\\le M$ and evaluates $\\mathrm{PARITY}_n$, then inevitably
   $$n\\ \\le\\ \\left(\\Theta\\!\\left(\\frac{\\log M}{D-1}\\right)\\right)^{D-1}.$$
-  В частности, при растущем $D$ нельзя иметь «representability‑блок» размера $(\\log M)^{D-1}$ при размере $M$ (как в эвристике HR §1.2): такой блок требует размера $\\ge M^{\\Omega(D)}$.
-- `Доказательство:`
-  1) (Lower bound.) Rossman’16, Thm. 3 утверждает для глубины $d+1$:
+  In particular, as $D$ grows, it is impossible to have a "representability block" of size $(\\log M)^{D-1}$ with size $M$ (as in the HR heuristic Section 1.2): such a block requires size $\\ge M^{\\Omega(D)}$.
+- `Proof:`
+  1) (Lower bound.) Rossman'16, Thm. 3 states for depth $d+1$:
      $$\\mathrm{size}\\ge 2^{\\Omega(d(n^{1/d}-1))}.$$
-     Положив $D:=d+1$, получаем stated bound $2^{\\Omega((D-1)(n^{1/(D-1)}-1))}$.
-  2) (Инверсия.) Из $M\\ge 2^{\\Omega((D-1)(n^{1/(D-1)}-1))}$ следует
-     $n^{1/(D-1)}\\le O((\\log M)/(D-1))+1$, то есть $n\\le (\\Theta((\\log M)/(D-1)))^{D-1}$ (для $n$ сверх констант).
-  3) (Сопоставление с §16.148.) Верхняя оценка §16.148 даёт
+     Putting $D:=d+1$, we obtain the stated bound $2^{\\Omega((D-1)(n^{1/(D-1)}-1))}$.
+  2) (Inversion.) From $M\\ge 2^{\\Omega((D-1)(n^{1/(D-1)}-1))}$ it follows
+     $n^{1/(D-1)}\\le O((\\log M)/(D-1))+1$, that is, $n\\le (\\Theta((\\log M)/(D-1)))^{D-1}$ (for $n$ over constants).
+  3) (Comparison with Section 16.148.) The upper bound of Section 16.148 gives
      $$\\log\\mathrm{size}=O\\bigl((D-1)\\,n^{1/(D-1)}\\bigr),$$
-     т.е. вместе с Rossman’16 множитель $(D-1)$ в показателе получается tight (с точностью до констант).
-  4) (Провал блока $(\\log M)^{D-1}$.) Если взять $n:=(\\log M)^{D-1}$, то $n^{1/(D-1)}=\\log M$ и lower bound даёт
+     those. together with Rossman'16, the factor $(D-1)$ in the indicator turns out to be tight (up to constants).
+  4) (Failure of block $(\\log M)^{D-1}$.) If we take $n:=(\\log M)^{D-1}$, then $n^{1/(D-1)}=\\log M$ and lower bound gives
      $$\\mathrm{size}\\ge 2^{\\Omega((D-1)\\log M)}=M^{\\Omega(D-1)},$$
-     что при растущем $D$ существенно больше $M$.
-- `Toy‑тест:` $M=n^4$, $D=13$.
-  Тогда «желанный» блок $n=(\\log M)^{12}=256^{12}=2^{96}$ потребовал бы по Rossman’16 размера $\\ge 2^{\\Omega(12\\cdot 256)}=2^{\\Omega(3072)}\\gg M=2^{256}$.
-- `Статус:` закрыто как известный факт: для формул (fan-out 1) сильный upper bound без множителя $(D-1)$ невозможен; representability‑узел Q39 действительно «ломается» уже на уровне PARITY‑блоков при пороговой глубине.
-- `Барьер‑чек:` r — неприменимо (без оракулов), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` пересобрать формулировку Q39: либо (a) HR §1.2 должен трактовать «size» не как tree‑size формулы (а как DAG/схема, что в Frege не строки), либо (b) для bounded‑depth Frege представление промежуточных XOR‑уравнений действительно требует quasi‑poly размера уже из-за PARITY‑формул, и тогда «gap по глубине» не сводится к одному XOR‑шагу.
+     which, as $D$ grows, is significantly greater than $M$.
+- `Toy test:` $M=n^4$, $D=13$.
+  Then the "desired" block $n=(\\log M)^{12}=256^{12}=2^{96}$ would require, according to Rossman'16, size $\\ge 2^{\\Omega(12\\cdot 256)}=2^{\\Omega(3072)}\\gg M=2^{256}$.
+- `Status:` closed as a known fact: for formulas (fan-out 1) a strong upper bound without the multiplier $(D-1)$ is impossible; The representability node Q39 really "breaks" already at the level of PARITY blocks at the threshold depth.
+- `Barrier check:` r - not applicable (no oracles), NP - not applicable, alg - not applicable.
+- `Next step:` rebuild the formulation of Q39: either (a) HR Section 1.2 should treat "size" not as a tree-size formula (but as a DAG/scheme, which in Frege is not a string), or (b) for bounded-depth Frege, the representation of intermediate XOR equations really requires a quasi-poly size already because of the PARITY formulas, and then the "depth gap" is not reduced to one XOR step.
 
-### 16.150. Исследовательский шаг: глубина HR (= чередования $\\vee/\\neg$) сводится к De Morgan‑глубине $\\Theta(d)$ без потери размера ⇒ оценка Rossman’16 применима к строкам bounded‑depth Frege
+### 16.150. Exploratory step: HR depth (= alternation $\\vee/\\neg$) reduces to De Morgan depth $\\Theta(d)$ without loss of size  Rossman'16 estimate applies to bounded-depth Frege strings
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` В HR’22 (Schoenfield‑Frege) формулы строятся над базой $\\{\\vee,\\neg\\}$; размер = число связок, глубина = число чередований $\\vee/\\neg$ на пути (см. `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, §2.1, определения после строки “The size of a formula…”).
-  Для любой такой формулы $A$ существует эквивалентная De Morgan‑формула $A^{\\mathrm{NNF}}$ (внутренние гейты $\\vee/\\wedge$, отрицания только на листьях) такая, что
-  1) $|A^{\\mathrm{NNF}}|\\le |A|$ (с точностью до констант в выборе метрики размера),
-  2) $\\mathrm{depth}_{\\wedge/\\vee}(A^{\\mathrm{NNF}})\\le \\lfloor d/2\\rfloor+1$, где $d:=\\mathrm{altdepth}_{\\vee/\\neg}(A)$.
-  Следовательно, нижняя оценка Rossman’16 для PARITY‑**формул** по глубине (см. `../../resources/downloads/rossman_2016_average_sensitivity_bounded_depth_formulas.pdf`, Thm. 3) напрямую ограничивает representability в bounded‑depth Frege: при фиксированном $d$ и размере строки $\\le M$ паритет нельзя покрыть на блоке размера $(\\log M)^{d-1}$; максимум лишь $\\bigl(\\Theta((\\log M)/d)\\bigr)^{\\Theta(d)}$ (совпадает с §16.148–§16.149).
-- `Доказательство:`
-  1) (NNF‑перевод без blow‑up.) Определим $A^{\\mathrm{NNF}}$ рекурсией “push‑negation”:
+- `Lens:` Equivalence.
+- `Statement:` In HR'22 (SchoenfieldFrege), formulas are built over the base $\\{\\vee,\\neg\\}$; size = number of ligaments, depth = number of $\\vee/\\neg$ alternations on the path (see. `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, Section 2.1, definitions after the line "The size of a formula...").
+  For any such formula $A$ there is an equivalent De Morgan formula $A^{\\mathrm{NNF}}$ (internal gates $\\vee/\\wedge$, negations only at leaves) such that
+  1) $|A^{\\mathrm{NNF}}|\\le |A|$ (up to constants in the choice of size metric),
+  2) $\\mathrm{depth}_{\\wedge/\\vee}(A^{\\mathrm{NNF}})\\le \\lfloor d/2\\rfloor+1$, where $d:=\\mathrm{altdepth}_{\\vee/\\neg}(A)$.
+  Therefore, the Rossman'16 lower estimate for PARITY-**formulas** in depth (see. `../../resources/downloads/rossman_2016_average_sensitivity_bounded_depth_formulas.pdf`, Thm. 3) directly limits representability in boundeddepth Frege: with a fixed $d$ and a row size $\\le M$, parity cannot be covered on a block of size $(\\log M)^{d-1}$; the maximum is only $\\bigl(\\Theta((\\log M)/d)\\bigr)^{\\Theta(d)}$ (coincident with Section 16.148-Section 16.149).
+- `Proof:`
+  1) (NNF translation without blow-up.) Define $A^{\\mathrm{NNF}}$ by "push-negation" recursion:
      $$(\\neg B)^{\\mathrm{NNF}}:=\\mathrm{push}(\\neg,B),\\qquad (B_1\\vee\\cdots\\vee B_k)^{\\mathrm{NNF}}:=B_1^{\\mathrm{NNF}}\\vee\\cdots\\vee B_k^{\\mathrm{NNF}},$$
-     а функция $\\mathrm{push}(s,\\cdot)$ для полярности $s\\in\\{+,-\\}$ задаётся правилами
+     and the function $\\mathrm{push}(s,\\cdot)$ for the polarity $s\\in\\{+,-\\}$ is given by the rules
      $$\\mathrm{push}(+,x)=x,\\ \\mathrm{push}(-,x)=\\neg x,$$
      $$\\mathrm{push}(+,\\neg C)=\\mathrm{push}(-,C),\\ \\mathrm{push}(-,\\neg C)=\\mathrm{push}(+,C),$$
      $$\\mathrm{push}(+,C_1\\vee\\cdots\\vee C_k)=\\bigvee_i \\mathrm{push}(+,C_i),\\qquad \\mathrm{push}(-,C_1\\vee\\cdots\\vee C_k)=\\bigwedge_i \\mathrm{push}(-,C_i).$$
-     Это стандартный перевод в negation normal form: отрицания уходят на листья, а $\\vee$ под нечётной полярностью становится $\\wedge$. Размер при этом не растёт (каждый исходный узел $\\vee$ остаётся одним узлом $\\vee$ или $\\wedge$; двойные отрицания сокращаются).
-  2) (Связь глубин.) Рассмотрим любой путь в $A$.
-     Каждый новый внутренний гейт ($\\vee$ в $A^{\\mathrm{NNF}}$ или $\\wedge$) на этом пути соответствует некоторому исходному $\\vee$‑узлу на пути в $A$.
-     Между двумя различными $\\vee$‑узлами на пути в $A$ должен встречаться хотя бы один $\\neg$ (иначе их можно слить ассоциативностью $\\vee$ без увеличения alternation depth).
-     Поэтому число $\\vee$‑узлов на любом пути $\\le \\lfloor d/2\\rfloor+1$.
-     Так как $\\mathrm{depth}_{\\wedge/\\vee}(A^{\\mathrm{NNF}})$ — это максимум числа $\\vee/\\wedge$‑узлов на пути, получаем заявленную оценку.
-  3) (Применение Rossman’16.) Если строка bounded‑depth Frege имеет alternation depth $\\le d$ и size $\\le M$, то $A^{\\mathrm{NNF}}$ имеет De Morgan‑глубину $D\\le \\lfloor d/2\\rfloor+1$ и size $\\le O(M)$.
-     Тогда по §16.149 (Rossman’16, Thm. 3 в терминах De Morgan‑глубины $D$) паритет на $n$ переменных требует
+     This is the standard translation in negation normal form: the negations go to the leaves, and $\\vee$ under odd polarity becomes $\\wedge$. The size does not grow (each original node $\\vee$ remains one node $\\vee$ or $\\wedge$; double negatives are canceled).
+  2) (Relationship of depths.) Consider any path in $A$.
+     Each new internal gate ($\\vee$ in $A^{\\mathrm{NNF}}$ or $\\wedge$) on this path corresponds to some original $\\vee$ node on the path in $A$.
+     Between two different $\\vee$nodes on the path to $A$ there must be at least one $\\neg$ (otherwise they can be merged by $\\vee$ associativity without increasing the alternation depth).
+     Therefore, the number of $\\vee$-nodes on any path is $\\le \\lfloor d/2\\rfloor+1$.
+     Since $\\mathrm{depth}_{\\wedge/\\vee}(A^{\\mathrm{NNF}})$ is the maximum number of $\\vee/\\wedge$ nodes on the path, we obtain the stated estimate.
+  3) (Applying Rossman'16.) If the string bounded-depth Frege has alternation depth $\\le d$ and size $\\le M$, then $A^{\\mathrm{NNF}}$ has De Morgan-depth $D\\le \\lfloor d/2\\rfloor+1$ and size $\\le O(M)$.
+     Then by Section 16.149 (Rossman'16, Thm. 3 in terms of De Morgan depth $D$) parity on $n$ variables requires
      $$M\\ \\ge\\ 2^{\\Omega\\bigl((D-1)(n^{1/(D-1)}-1)\\bigr)},$$
-     что при инверсии даёт $n\\le (\\Theta((\\log M)/(D-1)))^{D-1}$, то есть $n\\le (\\Theta((\\log M)/d))^{\\Theta(d)}$.
-- `Toy‑тест:` пусть $M=n^4$ и $d:=\\lceil\\log n/\\log\\log n\\rceil$.
-  Тогда $(\\log M)/d=\\Theta(\\log\\log n)$ и bound $n\\le (\\Theta((\\log M)/d))^{\\Theta(d)}$ даёт лишь $n^{o(1)}$ переменных в одном PARITY‑блоке, в то время как $(\\log M)^{d-1}\\ge n$ — чисто арифметически; значит именно representability‑предпосылка ломается.
-- `Статус:` доказано (сведение HR‑глубины к De Morgan‑глубине делает применение Rossman’16 к bounded‑depth Frege строкам формально корректным).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` перечитать HR §1.2 в исходном PDF: не используют ли они неявно **схемы**/DAG вместо tree‑формул при слове “formulas of size $M$”; если нет, то в Q39 следует считать representability‑часть закрытым препятствием и искать другой upper‑подход (не через широкие паритеты).
+     which, when inverted, gives $n\\le (\\Theta((\\log M)/(D-1)))^{D-1}$, that is, $n\\le (\\Theta((\\log M)/d))^{\\Theta(d)}$.
+- `Toy test:` let $M=n^4$ and $d:=\\lceil\\log n/\\log\\log n\\rceil$.
+  Then $(\\log M)/d=\\Theta(\\log\\log n)$ and bound $n\\le (\\Theta((\\log M)/d))^{\\Theta(d)}$ gives only $n^{o(1)}$ variables in one PARITY block, while $(\\log M)^{d-1}\\ge n$ is purely arithmetically; This means that the representability premise is broken.
+- `Status:` proven (reducing HR-depth to De Morgan-depth makes the application of Rossman'16 to bounded-depth Frege strings formally correct).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` re-read HR Section 1.2 in the original PDF: are they not implicitly using **schemas**/DAGs instead of tree formulas when they say "formulas of size $M$"; if not, then in Q39 the representability part should be considered a closed obstacle and look for another upper approach (not through broad parities).
 
-### 16.151. Исследовательский шаг: HR §1.2 “группы размера $(\\log M)^{d-1}$ и формулы размера $M$” — это лишь константно‑глубинная эвристика (с подавленным множителем $d$); при tree‑размере корректный блок $\\le \\bigl(\\Theta((\\log M)/(d-1))\\bigr)^{d-1}$, иначе нужен размер $\\ge M^{\\Omega(d)}$
+### 16.151. Research step: HR Section 1.2 "groups of size $(\\log M)^{d-1}$ and formulas of size $M$" is just a constant-depth heuristic (with suppressed factor $d$); with a tree size, the correct block is $\\le \\bigl(\\Theta((\\log M)/(d-1))\\bigr)^{d-1}$, otherwise the size needed is $\\ge M^{\\Omega(d)}$
 
-- `Линза:` Уточнение формулировки (параметры/модель).
-- `Утверждение:` В HR’22 формулы — **деревья**: “The size of a formula is the number of connectives … when A is viewed as a tree” (см. `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, §2.1).
-  В §1.2 они пишут: разбить переменные на группы размера $(\\log M)^{d-1}$ и “write down formulas of depth $d$ and size $M$ that represent the parity and the negation of the parity of each group” (там же, §1.2, абзац начиная с “Let us consider proofs…”).
-  При этом в терминах их же меры (tree‑size + alternation depth) такая фраза совместима с известными bounds только если понимать “size $M$” с полиномиальной оговоркой (напр. $M^{\\Theta(d)}$) или считать $d$ константой и подавлять множитель $(d-1)$: для size $\\le M$ максимальный блок
+- `Lens:` Clarification of the formulation (parameters/model).
+- `Statement:` In HR'22, formulas are **trees**: "The size of a formula is the number of connectives ... when A is viewed as a tree" (see. `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, §2.1).
+  In Section 1.2 they write: break the variables into groups of size $(\\log M)^{d-1}$ and "write down formulas of depth $d$ and size $M$ that represent the parity and the negation of the parity of each group" (ibid., Section 1.2, paragraph starting with "Let us consider proofs...").
+  Moreover, in terms of their own measure (treesize + alternation depth), such a phrase is compatible with known bounds only if one understands "size $M$" with a polynomial clause (e.g. $M^{\\Theta(d)}$) or considers $d$ a constant and suppresses the factor $(d-1)$: for size $\\le M$ the maximum block
   $$m\\ \\le\\ \\bigl(\\Theta((\\log M)/(d-1))\\bigr)^{d-1}$$
-  (см. §16.148–§16.150), а для $m=(\\log M)^{d-1}$ требуется size $\\ge M^{\\Omega(d)}$ (см. §16.149).
-- `Доказательство:`
-  1) HR’22 фиксируют tree‑размер и глубину как alternations $\\vee/\\neg$ (§2.1), т.е. это именно формулы fan‑out 1.
-  2) По §16.150 любую такую формулу глубины $d$ можно перевести в De Morgan‑формулу глубины $\\Theta(d)$ без увеличения размера, поэтому к строкам HR‑Frege применим lower bound Rossman’16 (Thm. 3), см. §16.149.
-  3) Инверсия Rossman’16 даёт: если строка имеет size $\\le M$, то паритет можно покрыть лишь на $m\\le \\bigl(\\Theta((\\log M)/(d-1))\\bigr)^{d-1}$ переменных; подстановка $m=(\\log M)^{d-1}$ в §16.149 даёт необходимый размер $\\ge M^{\\Omega(d)}$.
-- `Toy‑тест:` $M=n^4$, $d=13$ (так что $\\log M=256$).
-  Тогда корректный блок $m\\lesssim(256/12)^{12}\\approx 2^{53}$, а “$(\\log M)^{12}$” дал бы $m=2^{96}$ и потребовал бы размера $\\ge M^{\\Omega(12)}$.
-- `Статус:` уточнено: в HR §1.2 не скрыт DAG‑шэринг (они сами определяют tree‑формулы); “$(\\log M)^{d-1}$ при size $M$” следует читать как константно‑глубинную эвристику/подавление полиномиального фактора и не использовать при растущем $d$ в Q39.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` переформулировать Q39 как проблему **формул vs схем**: проверить, где именно в Håstad’20/HR’22 нижняя оценка опирается на fan‑out 1 (формулы), и даёт ли она тот же порог для “circuit‑Frege” (строки‑схемы).
+  (see Section 16.148-Section 16.150), and $m=(\\log M)^{d-1}$ requires size $\\ge M^{\\Omega(d)}$ (see Section 16.149).
+- `Proof:`
+  1) HR'22 fix the tree size and depth as alternations $\\vee/\\neg$ (Section 2.1), i.e. These are exactly the fan-out 1 formulas.
+  2) By Section 16.150, any such depth formula $d$ can be translated into a De Morgan depth formula $\\Theta(d)$ without increasing the size, so we apply lower bound Rossman'16 (Thm. 3) to HR-Frege strings, see Section 16.149.
+  3) Rossman'16 inversion gives: if a string has size $\\le M$, then parity can be covered only on $m\\le \\bigl(\\Theta((\\log M)/(d-1))\\bigr)^{d-1}$ variables; substituting $m=(\\log M)^{d-1}$ into Section 16.149 gives the required size $\\ge M^{\\Omega(d)}$.
+- `Toy test:` $M=n^4$, $d=13$ (so $\\log M=256$).
+  Then the correct block would be $m\\lesssim(256/12)^{12}\\approx 2^{53}$, and "$(\\log M)^{12}$" would give $m=2^{96}$ and require size $\\ge M^{\\Omega(12)}$.
+- `Status:` clarified: HR Section 1.2 does not hide DAG sharing (they themselves define tree formulas); "$(\\log M)^{d-1}$ for size $M$" should be read as a constant-depth heuristic/polynomial factor suppression and should not be used when $d$ is growing in Q39.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` reformulate Q39 as a **formulas vs circuits** problem: check where exactly in Hastad'20/HR'22 the lower bound relies on fanout 1 (formulas), and whether it gives the same threshold for "circuitFrege" (circuitlines).
 
-### 16.152. Исследовательский шаг: блок $(\\log M)^{d-1}$ естественен для **схем** (fan‑out $>1$) из‑за sharing; для **формул** множитель $(d-1)$ в экспоненте неизбежен
+### 16.152. Research step: block $(\\log M)^{d-1}$ is natural for **schemes** (fan-out $>1$) due to sharing; for **formulas** the factor $(d-1)$ in the exponential is inevitable
 
-- `Линза:` Трейд‑офф (size vs depth; формулы vs схемы).
-- `Утверждение:` Пусть $d\\ge 2$, $t\\in\\mathbb N$, $m:=t^{d-1}$.
-  Тогда существует unbounded fan-in De Morgan‑**схема** глубины $d$ размера $\\le \\mathrm{poly}(t)\\cdot 2^{O(t)}$, вычисляющая $\\mathrm{PARITY}_m$ (и аналогично $\\neg\\mathrm{PARITY}_m$).
-  Следовательно, при размере $\\le M$ можно покрыть блок $m=(\\Theta(\\log M))^{d-1}$ — это ровно та зависимость, что стоит в HR §1.2.
-  Для De Morgan‑**формул** же (fan‑out $=1$) та же “DNF‑композиция” даёт $\\mathrm{size}\\le 2^{\\Theta((d-1)t)}\\cdot\\mathrm{poly}(t)$ (см. §16.148), и Rossman’16 показывает, что множитель $(d-1)$ в экспоненте tight (§16.149).
-- `Доказательство:`
-  1) (База $d=2$.) $\\mathrm{PARITY}_t$ и $\\neg\\mathrm{PARITY}_t$ имеют DNF/CNF с $2^{t-1}$ термами/клауза́ми (полный перебор по значениям с нужным паритетом), т.е. схема глубины 2 размера $2^{O(t)}$.
-  2) (Индукция по $d$; ключ: sharing.) Разобьём $m=t^{d-1}$ переменных на $t$ блоков по $t^{d-2}$.
-     Пусть $P_{d-1}$ и $N_{d-1}$ — схемы глубины $d-1$, вычисляющие паритет/непаритет блока, размера $S_{d-1}$.
-     Возьмём depth‑2 DNF для $\\mathrm{PARITY}$ на $t$ “литералах” $y_1,\\dots,y_t$:
+- `Lens:` Trade-off (size vs depth; formulas vs schemes).
+- `Statement:` Let $d\\ge 2$, $t\\in\\mathbb N$, $m:=t^{d-1}$.
+  Then there is an unbounded fan-in De Morgan-**circuit** of depth $d$ of size $\\le \\mathrm{poly}(t)\\cdot 2^{O(t)}$, computing $\\mathrm{PARITY}_m$ (and similarly $\\neg\\mathrm{PARITY}_m$).
+  Consequently, with size $\\le M$ it is possible to cover the block $m=(\\Theta(\\log M))^{d-1}$ - this is exactly the dependence that appears in HR Section 1.2.
+  For De Morgan-**formulas** (fan-out $=1$) the same "DNF-composition" gives $\\mathrm{size}\\le 2^{\\Theta((d-1)t)}\\cdot\\mathrm{poly}(t)$ (see Section 16.148), and Rossman'16 shows that the factor $(d-1)$ in exponent tight (Section 16.149).
+- `Proof:`
+  1) (Base $d=2$.) $\\mathrm{PARITY}_t$ and $\\neg\\mathrm{PARITY}_t$ have DNF/CNF with $2^{t-1}$ terms/clauses (exhaustive search over values with the required parity), i.e. depth 2 scheme of size $2^{O(t)}$.
+  2) (Induction on $d$; key: sharing.) Let's divide $m=t^{d-1}$ variables into $t$ blocks of $t^{d-2}$ each.
+     Let $P_{d-1}$ and $N_{d-1}$ be circuits of depth $d-1$ that calculate the parity/non-parity of a block of size $S_{d-1}$.
+     Let's take depth-2 DNF for $\\mathrm{PARITY}$ on $t$ "literals" $y_1,\\dots,y_t$:
      $$\\bigvee_{a\\in\\{0,1\\}^t:\\ \\oplus a=1}\\ \\bigwedge_{i=1}^t \\ell_i(a),\\qquad \\ell_i(a):=\\begin{cases}y_i,&a_i=1\\\\ \\neg y_i,&a_i=0.\\end{cases}$$
-     и подставим $y_i:=P_{d-1}(\\text{block }i)$, $\\neg y_i:=N_{d-1}(\\text{block }i)$.
-     В **схеме** каждый $P_{d-1}(\\text{block }i)$ и $N_{d-1}(\\text{block }i)$ вычисляется один раз и fan‑out’ится во все $2^{t-1}$ термов, поэтому
+     and substitute $y_i:=P_{d-1}(\\text{block }i)$, $\\neg y_i:=N_{d-1}(\\text{block }i)$.
+     In the **scheme** each $P_{d-1}(\\text{block }i)$ and $N_{d-1}(\\text{block }i)$ is calculated once and fan-out's in all $2^{t-1}$ terms, so
      $$S_d\\ \\le\\ t\\cdot( S_{d-1}+S_{d-1})\\ +\\ 2^{O(t)}\\cdot\\mathrm{poly}(t)\\ =\\ O(t)\\,S_{d-1}+2^{O(t)}\\mathrm{poly}(t).$$
-     Индукцией из $S_2=2^{O(t)}$ получаем $S_d\\le 2^{O(t)}\\mathrm{poly}(t)$ (доминирует верхний уровень).
-  3) (Следствие для блок‑размера.) Из $S_d\\le M$ следует $t=O(\\log M)$, значит $m=t^{d-1}=(\\Theta(\\log M))^{d-1}$.
-  4) (Контраст с формулами.) В формуле тот же шаг требует копировать подформулу блока внутри каждого терма, давая множитель $2^{t}$ на каждом уровне и итог $2^{\\Theta((d-1)t)}$ (§16.148); это и есть «потерянный» множитель $(d-1)$ по сравнению со схемами.
-- `Toy‑тест:` $M=n^4$, $d=13$ (так что $\\log M=256$, $t=\\Theta(256)$).
-  Схемный bound допускает блок $m=t^{12}\\approx (256)^{12}=2^{96}$ при размере $\\approx 2^{O(256)}=n^{O(1)}$, тогда как для формул такой блок требует размера $\\ge M^{\\Omega(12)}$ (§16.149).
-- `Статус:` доказано: HR‑зависимость $m=(\\log M)^{d-1}$ объясняется именно **sharing** (fan‑out) и соответствует схемному, а не формульному режиму.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` зафиксировать, какому proof system соответствует “circuit‑Frege” (строки‑схемы) и p‑эквивалентно ли оно EF; затем проверить, распространяется ли lower bound Håstad’20 на такой усиленный режим.
+     By induction from $S_2=2^{O(t)}$ we obtain $S_d\\le 2^{O(t)}\\mathrm{poly}(t)$ (the upper level dominates).
+  3) (Corollary for the block size.) From $S_d\\le M$ it follows $t=O(\\log M)$, which means $m=t^{d-1}=(\\Theta(\\log M))^{d-1}$.
+  4) (Contrast with formulas.) In a formula, the same step requires copying the block subformula within each term, giving a factor of $2^{t}$ at each level and a total of $2^{\\Theta((d-1)t)}$ (Section 16.148); this is the "lost" factor $(d-1)$ compared to the circuits.
+- `Toy test:` $M=n^4$, $d=13$ (so $\\log M=256$, $t=\\Theta(256)$).
+  The circuit bound allows a block $m=t^{12}\\approx (256)^{12}=2^{96}$ with size $\\approx 2^{O(256)}=n^{O(1)}$, whereas for formulas such a block requires size $\\ge M^{\\Omega(12)}$ (Section 16.149).
+- `Status:` it has been proven: the HR dependence $m=(\\log M)^{d-1}$ is explained precisely by **sharing** (fan-out) and corresponds to the schematic rather than formulaic mode.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` record which proof system "circuit-Frege" corresponds to and whether it is p-equivalent to EF; then check whether the lower bound Hastad'20 applies to such a strengthened mode.
 
-### 16.153. Исследовательский шаг (toy computation): фиксированное 2×2 row‑разбиение блокирует одношаговый column‑summing
+### 16.153. Exploratory step (toy computation): fixed 2x2 row partition blocks single-step column summing
 
-- `Линза:` Инвариант.
-- `Утверждение:` Рассмотрим $4\\times 4$ grid и колонку $j=2$. Пусть
+- `Lens:` Invariant.
+- `Statement:` Consider $4\\times 4$ grid and column $j=2$. Let
   $$S_2:=\\{e_i:=((i,2),(i,3))\\mid i=1,2,3,4\\}$$
-  — горизонтальные рёбра между колонками $2$ и $3$.
-  Зафиксируем row‑блоки $B_{\\mathrm{top}}:=\\{e_1,e_2\\}$ и $B_{\\mathrm{bot}}:=\\{e_3,e_4\\}$,
-  а все остальные рёбра считаем singleton‑блоками. Назовём XOR‑уравнение **совместимым** с этим
-  разбиением, если его поддержка — объединение целых блоков. Тогда любое совместимое уравнение
-  пересекает $S_2$ в $0$, $2$ или $4$ ребра (чётность $|S_2\\cap \\mathrm{supp}|$ равна $0$ и
-  сохраняется под XOR). Но промежуточное уравнение $E(\\delta(R_{2,1}),b)$ из column‑summing
-  имеет $|S_2\\cap \\delta(R_{2,1})|=1$, значит оно несовместимо. Следовательно, последовательность
-  Gaussian‑elimination шагов $t\\to t+1$ не может оставаться совместимой с фиксированным 2×2
-  row‑разбиением; требуется base‑change (уточнение блоков хотя бы до синглтонов на $S_2$).
-- `Toy‑тест:` $R_{2,1}=\\{(1,2)\\}$, поэтому
+  -- horizontal edges between columns $2$ and $3$.
+  Let us fix the row blocks $B_{\\mathrm{top}}:=\\{e_1,e_2\\}$ and $B_{\\mathrm{bot}}:=\\{e_3,e_4\\}$,
+  and we consider all other edges to be singleton blocks. Let's call the XOR equation **compatible** with this
+  partitioning, if its support is the union of entire blocks. Then any compatible equation
+  intersects $S_2$ at $0$, $2$ or $4$ edges (the parity of $|S_2\\cap \\mathrm{supp}|$ is $0$ and
+  saved under XOR). But the intermediate equation $E(\\delta(R_{2,1}),b)$ from column-summing
+  has $|S_2\\cap \\delta(R_{2,1})|=1$, which means it is incompatible. Therefore the sequence
+  Gaussian-elimination of steps $t\\to t+1$ cannot remain compatible with fixed 22
+  row partitioning; a basechange is required (refinement of blocks to at least $S_2$ singletons).
+- `Toy test:` $R_{2,1}=\\{(1,2)\\}$, therefore
   $$\\delta(R_{2,1})=\\{(1,2)-(1,1),\\ (1,2)-(1,3),\\ (1,2)-(2,2)\\}.$$
-  Пересечение с $S_2$ равно $\\{(1,2)-(1,3)\\}=\\{e_1\\}$, то есть это **половина** блока $B_{\\mathrm{top}}$.
-- `Статус:` частично (toy computation: локальный инвариант показывает вынужденный base‑change на 4×4).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` обобщить инвариант: для $n\\times n$ и разбиения по 2‑строчным блокам
-  показать, что все префиксы нечётной длины $R_{j,t}$ несовместимы с фиксированным разбиением;
-  далее проверить, может ли «батчинг» по чётным $t$ обойти эту обструкцию без смены разбиений.
+  The intersection with $S_2$ is equal to $\\{(1,2)-(1,3)\\}=\\{e_1\\}$, that is, it is **half** of the block $B_{\\mathrm{top}}$.
+- `Status:` partially (toy computation: local invariant shows forced basechange by 44).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` generalize the invariant: for $n\\times n$ and partitioning into 2-line blocks
+  show that all prefixes of odd length $R_{j,t}$ are incompatible with a fixed partition;
+  Next, check whether "batching" for even $t$ can bypass this obstruction without changing partitions.
 
-### 16.154. Исследовательский шаг (proof): нечётный префикс несовместим с фиксированным 2‑строчным разбиением
+### 16.154. Probe step: odd prefix is incompatible with fixed 2-line partitioning
 
-- `Линза:` Инвариант.
-- `Утверждение:` Пусть $G$ — $n\\times n$ grid, $1\\le j\\le n-1$, $S_j$ — горизонтальные рёбра между
-  колонками $j$ и $j+1$, и $R_{j,t}=\\{(i,j):1\\le i\\le t\\}$ (как в §16.134). Зафиксируем разбиение
-  $\\mathcal P$ рёбер, в котором каждое пересечение блока с $S_j$ имеет чётный размер (в частности,
-  разбиение $S_j$ на пары по строкам $\\{e_{2r-1},e_{2r}\\}$ и синглтоны вне $S_j$). Тогда для любого
-  нечётного $t$ множество $\\delta(R_{j,t})$ не является объединением блоков $\\mathcal P$.
-  Следовательно, при column‑summing нельзя оставаться совместимым с фиксированным 2‑строчным
-  разбиением для всех шагов $t\\to t+1$; нужен base‑change (или уточнение до синглтонов на $S_j$).
-- `Доказательство:` Для каждого $1\\le i\\le t$ ребро $((i,j),(i,j+1))\\in S_j$ имеет ровно один конец
-  в $R_{j,t}$, значит $S_j\\cap\\delta(R_{j,t})=\\{((i,j),(i,j+1)):1\\le i\\le t\\}$ и
-  $|S_j\\cap\\delta(R_{j,t})|=t$. Если $\\delta(R_{j,t})$ было бы объединением блоков $\\mathcal P$,
-  то $|S_j\\cap\\delta(R_{j,t})|$ был бы чётным, поскольку каждый блок пересекает $S_j$ по чётному
-  числу рёбер. При нечётном $t$ получаем противоречие, значит совместимость невозможна.
-- `Toy‑тест:` $n=6$, $t=3$ или $t=5$: пересечение с $S_j$ равно 3 или 5 рёбер, т.е. нечётно.
-- `Статус:` доказано (общий инвариант по чётности пересечения с $S_j$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, может ли «батчинг» по чётным $t$ (Q39.S9) обойти эту обструкцию.
+- `Lens:` Invariant.
+- `Statement:` Let $G$ be a $n\\times n$ grid, $1\\le j\\le n-1$, $S_j$ be the horizontal edges between
+  columns $j$ and $j+1$, and $R_{j,t}=\\{(i,j):1\\le i\\le t\\}$ (as in Section 16.134). Let's fix the partition
+  $\\mathcal P$ edges in which each intersection of a block with $S_j$ is of even size (in particular,
+  splitting $S_j$ into pairs along the lines $\\{e_{2r-1},e_{2r}\\}$ and singletons outside $S_j$). Then for anyone
+  of odd $t$, the set $\\delta(R_{j,t})$ is not a union of blocks $\\mathcal P$.
+  Therefore, column summing cannot remain compatible with the fixed 2-line
+  partition for all steps $t\\to t+1$; a basechange is needed (or refinement to singletons on $S_j$).
+- `Proof:` For each $1\\le i\\le t$ the edge $((i,j),(i,j+1))\\in S_j$ has exactly one end
+  in $R_{j,t}$, then $S_j\\cap\\delta(R_{j,t})=\\{((i,j),(i,j+1)):1\\le i\\le t\\}$ and
+  $|S_j\\cap\\delta(R_{j,t})|=t$. If $\\delta(R_{j,t})$ were the union of $\\mathcal P$ blocks,
+  then $|S_j\\cap\\delta(R_{j,t})|$ would be even, since each block intersects $S_j$ along an even
+  number of ribs. If $t$ is odd, we get a contradiction, which means compatibility is impossible.
+- `Toy test:` $n=6$, $t=3$ or $t=5$: the intersection with $S_j$ is 3 or 5 edges, i.e. odd.
+- `Status:` proven (general parity invariant of intersection with $S_j$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether batching on even $t$ (Q39.S9) can bypass this obstruction.
 - `StepID:` Q39.S8-generalize-block-invariant.
 - `InfoGain:` 1.
 
-### 16.155. Исследовательский шаг (counterexample): even‑batching не избегает несовместимой строки при фиксированном 2‑строчном разбиении
+### 16.155. Exploratory step (counterexample): even-batching does not avoid inconsistent row when fixed 2-line partitioning
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Рассмотрим «батчинг» $t\\to t+2$ через двухстрочную полосу
+- `Lens:` Equivalence.
+- `Statement:` Consider "batching" $t\\to t+2$ through a two-line strip
   $$B_{t+1,t+2}:=\\{(t+1,j),(t+2,j)\\}.$$
-  Если фиксировать 2‑строчное разбиение полосы $S_j$ на пары $\\{e_{2r-1},e_{2r}\\}$ (и синглтоны вне $S_j$),
-  то можно надеяться, что уравнение $E(\\delta(B_{t+1,t+2}),\\chi_{t+1}\\oplus\\chi_{t+2})$ совместимо и
-  позволяет обойти нечётные префиксы $R_{j,t+1}$. Toy‑проверка ниже показывает, что это **не** устраняет
-  несовместимые строки: чтобы получить $\\delta(B_{t+1,t+2})$, нужно использовать по отдельности
-  два вершинных уравнения, каждое из которых нарушает фиксированное разбиение.
-- `Toy‑тест:` $n=4$, $j=2$. Пусть
+  If we fix a 2-line partition of the strip $S_j$ into pairs $\\{e_{2r-1},e_{2r}\\}$ (and singletons outside $S_j$),
+  then we can hope that the equation $E(\\delta(B_{t+1,t+2}),\\chi_{t+1}\\oplus\\chi_{t+2})$ is compatible and
+  allows you to bypass odd prefixes $R_{j,t+1}$. Toy check below shows that this **doesn't** fix
+  incompatible strings: to get $\\delta(B_{t+1,t+2})$, you need to use them separately
+  two vertex equations, each of which violates a fixed partition.
+- `Toy test:` $n=4$, $j=2$. Let
   $$S_2=\\{e_i:=((i,2),(i,3))\\mid i=1,2,3,4\\},\\qquad
   B_{\\mathrm{top}}=\\{e_1,e_2\\},\\ B_{\\mathrm{bot}}=\\{e_3,e_4\\}.$$
-  Рассмотрим вершины $v_1=(1,2)$ и $v_2=(2,2)$.
-  Вершинные уравнения $E(E(v_1),\\chi(v_1))$ и $E(E(v_2),\\chi(v_2))$ имеют пересечение с $S_2$
-  ровно в $\\{e_1\\}$ и $\\{e_2\\}$ соответственно, то есть **не** являются объединениями блоков
+  Consider the vertices $v_1=(1,2)$ and $v_2=(2,2)$.
+  The vertex equations $E(E(v_1),\\chi(v_1))$ and $E(E(v_2),\\chi(v_2))$ intersect with $S_2$
+  exactly in $\\{e_1\\}$ and $\\{e_2\\}$ respectively, that is, **not** they are unions of blocks
   $\\{B_{\\mathrm{top}},B_{\\mathrm{bot}}\\}$.
-  Их XOR‑сумма равна
+  Their XOR sum is equal to
   $$E(E(v_1)\\triangle E(v_2),\\chi(v_1)\\oplus\\chi(v_2))
     =E(\\delta(B_{1,2}),\\chi(v_1)\\oplus\\chi(v_2)),$$
-  и здесь $S_2\\cap\\delta(B_{1,2})=\\{e_1,e_2\\}=B_{\\mathrm{top}}$, то есть итоговая строка совместима.
-  Однако любой вывод через XOR использует **обе** исходные строки, а уже первая «частичная сумма»
-  (одна из вершинных строк) несовместима с фиксированным 2‑строчным разбиением.
-- `Статус:` контрпример (toy): even‑batching $t\\to t+2$ не позволяет обходить несовместимые строки без
-  base‑change, поскольку сами вершинные уравнения разрезают 2‑строчные блоки.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить в общий инвариант: при фиксированном 2‑строчном разбиении любая линейная
-  комбинация вершинных уравнений, добавляющая две строки за раз, всё равно требует промежуточной строки,
-  нарушающей разбиение (Q39.S10).
+  and here $S_2\\cap\\delta(B_{1,2})=\\{e_1,e_2\\}=B_{\\mathrm{top}}$, that is, the resulting string is compatible.
+  However, any output via XOR uses **both** source strings, and the first "partial sum"
+  (one of the vertex rows) is incompatible with the fixed 2-line partition.
+- `Status:` counterexample (toy): evenbatching $t\\to t+2$ does not allow incompatible strings to be bypassed without
+  base-change, since the vertex equations themselves cut 2-line blocks.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen into a general invariant: with a fixed 2-line partition, any linear
+  a combination of vertex equations that adds two rows at a time still requires an intermediate row,
+  violating partition (Q39.S10).
 - `StepID:` Q39.S9-even-batching-construct.
 - `InfoGain:` 1.
 
-### 16.156. Исследовательский шаг (toy computation): XOR‑дерево для $\\delta(B_{1,2})$ содержит несовместимую вершину
+### 16.156. Exploratory step (toy computation): XOR tree for $\\delta(B_{1,2})$ contains an incompatible vertex
 
-- `Линза:` Инвариант.
-- `Утверждение:` Зафиксируем $n=4$, $j=2$ и 2‑строчное разбиение $S_2$ на блоки
-  $B_{\\mathrm{top}}=\\{e_1,e_2\\}$, $B_{\\mathrm{bot}}=\\{e_3,e_4\\}$ (синглтоны вне $S_2$).
-  Пусть XOR‑дерево выводит строку $\\delta(B_{1,2})$ из вершинных уравнений.
-  Тогда в дереве существует вершина, чья поддержка пересекает $S_2$ по одному ребру
-  (то есть строка несовместима с фиксированным разбиением).
-- `Toy‑тест:` Рассмотрим проекцию на $B_{\\mathrm{top}}$ (две переменные $e_1,e_2$),
-  кодируя её как вектор из $\\{00,10,01,11\\}\\subset\\mathbb F_2^2$.
-  Для вершинных уравнений возможны только $00$ (вершины вне $S_2$) и $10$ или $01$
-  (вершины, инцидентные одному из $e_1,e_2$), а корень равен $11$, поскольку
-  $S_2\\cap\\delta(B_{1,2})=\\{e_1,e_2\\}$. В бинарном XOR‑дереве с корнем $11$
-  рассмотрим детей корня: их XOR даёт $11$, значит либо пара $(10,01)$ (и нужная
-  вершина найдена), либо $(11,00)$ (или $(00,11)$). В последнем случае спускаемся
-  к ребёнку с меткой $11$. Поскольку листья не могут быть $11$, процесс
-  останавливается на вершине с меткой $10$ или $01$, что и означает
+- `Lens:` Invariant.
+- `Statement:` Let us fix $n=4$, $j=2$ and a 2-line partition of $S_2$ into blocks
+  $B_{\\mathrm{top}}=\\{e_1,e_2\\}$, $B_{\\mathrm{bot}}=\\{e_3,e_4\\}$ (singletons outside $S_2$).
+  Let the XOR tree output the string $\\delta(B_{1,2})$ from the vertex equations.
+  Then there is a vertex in the tree whose support intersects $S_2$ along one edge
+  (that is, the string is not compatible with fixed partitioning).
+- `Toy test:` Consider the projection onto $B_{\\mathrm{top}}$ (two variables $e_1,e_2$),
+  encoding it as a vector of $\\{00,10,01,11\\}\\subset\\mathbb F_2^2$.
+  For vertex equations only $00$ (vertices outside $S_2$) and $10$ or $01$ are possible
+  (vertices incident to one of $e_1,e_2$), and the root is $11$, since
+  $S_2\\cap\\delta(B_{1,2})=\\{e_1,e_2\\}$. In a binary XOR tree rooted at $11$
+  consider the children of the root: their XOR gives $11$, which means either the pair $(10,01)$ (and the required
+  vertex found), or $(11,00)$ (or $(00,11)$). In the latter case, we go down
+  to the child labeled $11$. Since leaves cannot be $11$, the process
+  stops at the top marked $10$ or $01$, which means
   $|S_2\\cap\\mathrm{supp}|=1$.
-- `Статус:` частично (toy computation на $4\\times4$: несовместимая строка неизбежна).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` обобщить дерево‑аргумент на произвольные $t,j$ и доказать, что
-  при фиксированном 2‑строчном разбиении любой XOR‑вывод $\\delta(B_{t+1,t+2})$
-  из вершинных уравнений обязан проходить через строку с нечётным пересечением
-  с некоторым 2‑строчным блоком (формальный инвариант base‑change).
+- `Status:` partially (toy computation on $4\\times4$: incompatible string is inevitable).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` generalize the argument tree to arbitrary $t,j$ and prove that
+  with a fixed 2-line partition any XOR output $\\delta(B_{t+1,t+2})$
+  of vertex equations must pass through a row with an odd intersection
+  with some 2-line block (formal base-change invariant).
 - `StepID:` Q39.S10-block-parity-invariant.
 - `InfoGain:` 1.
 
-### 16.157. Исследовательский шаг (proof): XOR‑дерево для $\\delta(B_{t+1,t+2})$ разрезает 2‑строчный блок
+### 16.157. Exploratory step (proof): XOR tree for $\\delta(B_{t+1,t+2})$ cuts a 2-line block
 
-- `Линза:` Инвариант.
-- `Утверждение:` Пусть $G$ — $n\\times n$ grid, $1\\le j\\le n-1$, $1\\le t\\le n-2$,
-  $S_j=\\{e_i:=((i,j),(i,j+1))\\mid 1\\le i\\le n\\}$, и фиксирован 2‑строчный блок
-  $B_{t+1,t+2}=\\{e_{t+1},e_{t+2}\\}\\subset S_j$. Рассмотрим XOR‑дерево, выводящее строку
-  $E(\\delta(B_{t+1,t+2}),\\chi_{t+1}\\oplus\\chi_{t+2})$ из вершинных уравнений $E(E(v),\\chi(v))$.
-  Тогда в дереве существует вершина, чья поддержка пересекает $B_{t+1,t+2}$ ровно в одном ребре
-  (то есть строка несовместима с фиксированным 2‑строчным разбиением).
-- `Доказательство:` Рассмотрим проекцию $\\pi$ на координаты $e_{t+1},e_{t+2}$, т.е. векторы из
-  $\\mathbb F_2^2$ с кодировкой $00,10,01,11$. Каждый вершинный лист пересекает $S_j$ не более чем в одном
-  ребре, поэтому $\\pi$‑метки листьев лежат в $\\{00,10,01\\}$ (метка $11$ невозможна).
-  Для корня имеем $S_j\\cap\\delta(B_{t+1,t+2})=\\{e_{t+1},e_{t+2}\\}$, значит $\\pi(\\text{root})=11$.
-  Возьмём вершину $u$ с меткой $11$, ближайшую к корню. Её дети $u_1,u_2$ удовлетворяют
-  $\\pi(u_1)\\oplus\\pi(u_2)=11$. По выбору $u$ ни один ребёнок не имеет метки $11$, поэтому
-  $\\{\\pi(u_1),\\pi(u_2)\\}=\\{10,01\\}$. Следовательно, один из узлов $u_1,u_2$ имеет метку $10$ или $01$,
-  что и означает пересечение поддержки с $B_{t+1,t+2}$ ровно в одном ребре.
-- `Toy‑тест:` $n=6$, $j=2$, $t=3$. Проекция на $\\{e_3,e_4\\}$ даёт корень $11$, листья в
-  $\\{00,10,01\\}$, поэтому внутри дерева неизбежен узел с меткой $10$ или $01$.
-- `Статус:` доказано (общий XOR‑инвариант для любого $t,j$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, сохраняется ли обструкция при even‑batching по $2k$ строкам
+- `Lens:` Invariant.
+- `Statement:` Let $G$ be $n\\times n$ grid, $1\\le j\\le n-1$, $1\\le t\\le n-2$,
+  $S_j=\\{e_i:=((i,j),(i,j+1))\\mid 1\\le i\\le n\\}$, and a 2line block is fixed
+  $B_{t+1,t+2}=\\{e_{t+1},e_{t+2}\\}\\subset S_j$. Consider an XOR tree that outputs the string
+  $E(\\delta(B_{t+1,t+2}),\\chi_{t+1}\\oplus\\chi_{t+2})$ from the vertex equations $E(E(v),\\chi(v))$.
+  Then there is a vertex in the tree whose support intersects $B_{t+1,t+2}$ in exactly one edge
+  (that is, the string is not compatible with the fixed 2-line split).
+- `Proof:` Let's consider the projection of $\\pi$ onto the coordinates $e_{t+1},e_{t+2}$, i.e. vectors from
+  $\\mathbb F_2^2$ with encoding $00,10,01,11$. Each vertex leaf intersects $S_j$ in at most one
+  edge, so the $\\pi$-labels of the leaves lie in $\\{00,10,01\\}$ (label $11$ is impossible).
+  For the root we have $S_j\\cap\\delta(B_{t+1,t+2})=\\{e_{t+1},e_{t+2}\\}$, which means $\\pi(\\text{root})=11$.
+  Let's take vertex $u$ with label $11$, closest to the root. Her children $u_1,u_2$ satisfy
+  $\\pi(u_1)\\oplus\\pi(u_2)=11$. By choice $u$, no child has the label $11$, so
+  $\\{\\pi(u_1),\\pi(u_2)\\}=\\{10.01\\}$. Therefore, one of the nodes $u_1,u_2$ has the label $10$ or $01$,
+  which means the intersection of support with $B_{t+1,t+2}$ in exactly one edge.
+- `Toy test:` $n=6$, $j=2$, $t=3$. The projection onto $\\{e_3,e_4\\}$ gives the root $11$, leaves in
+  $\\{00,10,01\\}$, so a node labeled $10$ or $01$ is inevitable inside the tree.
+- `Status:` proven (general XOR invariant for any $t,j$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether obstruction persists during even-batching on $2k$ lines
   (Q39.S11b).
 - `StepID:` Q39.S11-xortree-projection-general.
 - `InfoGain:` 1.
 
-### 16.158. Исследовательский шаг (counterexample): even‑batching по $2k$ строкам не даёт XOR‑дерево только из $\\pi$‑совместимых линий (toy $k=2$)
+### 16.158. Exploratory step (counterexample): evenbatching on $2k$ lines does not give an XORtree of only $\\pi$compatible lines (toy $k=2$)
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение:` Возьмём $n=6$, фиксируем внутреннюю колонку $j$ и полосу
+- `Lens:` Model stress test.
+- `Statement:` Take $n=6$, fix the inner column $j$ and the stripe
   $$S_j=\\{e_i:=((i,j),(i,j+1))\\mid i=1,\\dots,6\\}.$$
-  Пусть $\\pi$ — разбиение, где $S_j$ разбито на пары
-  $\\{e_1,e_2\\}$, $\\{e_3,e_4\\}$, $\\{e_5,e_6\\}$ (все прочие рёбра — синглтоны).
-  Рассмотрим полосу из $2k=4$ строк
+  Let $\\pi$ be a partition where $S_j$ is divided into pairs
+  $\\{e_1,e_2\\}$, $\\{e_3,e_4\\}$, $\\{e_5,e_6\\}$ (all other edges are singletons).
+  Consider a strip of $2k=4$ lines
   $$B_{3..6}:=\\{(i,j):i=3,4,5,6\\}.$$
-  Тогда строка $E(\\delta(B_{3..6}),\\bigoplus_{i=3}^6\\chi(i,j))$ $\\pi$‑совместима
-  (пересечение с $S_j$ равно $\\{e_3,e_4,e_5,e_6\\}$ — объединение двух блоков),
-  но в любом XOR‑дереве, выводящем её из вершинных уравнений, присутствует несовместимая линия:
-  каждое вершинное уравнение $E(E((i,j)),\\chi(i,j))$ при $i\\in\\{3,4,5,6\\}$
-  пересекает $S_j$ ровно в одном ребре $e_i$, а значит не является объединением блоков $\\pi$.
-- `Toy‑тест:` Проекция на координаты $e_3,e_4,e_5,e_6$ даёт у корня вектор $1111$.
-  Единственные аксиомы с единицей в координате $e_i$ — вершинные уравнения в вершинах $(i,j)$,
-  поэтому каждое из них должно входить в XOR‑дерево нечётное число раз; значит в дереве неизбежно
-  есть несовместимые листья.
-- `Статус:` контрпример (toy, $k=2$): требование «все линии $\\pi$‑совместимы» невыполнимо,
-  несовместимость появляется уже на листьях.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить до внутреннего узла: проверить, может ли существовать XOR‑дерево,
-  где все *внутренние* узлы $\\pi$‑совместимы (листья нет), и если да — искать ранговую/проекционную
-  обструкцию для $2k$.
+  Then the string $E(\\delta(B_{3..6}),\\bigoplus_{i=3}^6\\chi(i,j))$ $\\pi$-compatible
+  (the intersection with $S_j$ is equal to $\\{e_3,e_4,e_5,e_6\\}$ - the union of two blocks),
+  but in any XOR tree that derives it from the vertex equations, there is an incompatible line:
+  each vertex equation $E(E((i,j)),\\chi(i,j))$ for $i\\in\\{3,4,5,6\\}$
+  intersects $S_j$ in exactly one edge $e_i$, and therefore is not a union of blocks $\\pi$.
+- `Toy test:` The projection onto the coordinates $e_3,e_4,e_5,e_6$ gives the vector $1111$ at the root.
+  The only axioms with unity in the $e_i$ coordinate are vertex equations at the vertices $(i,j)$,
+  therefore, each of them must appear in the XOR tree an odd number of times; it means it's inevitable in a tree
+  there are incompatible leaves.
+- `Status:` counterexample (toy, $k=2$): the requirement "all lines are $\\pi$compatible" is impossible,
+  the incompatibility already appears at the leaves.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen to internal node: check if XOR tree can exist,
+  where all *internal* nodes are $\\pi$compatible (no leaves), and if so, look for rank/projection
+  obstruction for $2k$.
 - `StepID:` Q39.S12-evenbatch-2k-counterexample.
 - `InfoGain:` 1.
 
-### 16.159. Исследовательский шаг (counterexample): внутренние узлы могут быть $\\pi$‑совместимы при $k=2$
+### 16.159. Exploratory step (counterexample): internal nodes can be $\\pi$compatible for $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение:` В toy‑режиме $k=2$ можно потребовать, чтобы **все внутренние узлы** XOR‑дерева,
-  выводящего $\\delta(B_{3..6})$, были $\\pi$‑совместимы (т.е. пересекали $S_j$ по объединению блоков
-  $\\{e_3,e_4\\}$ и $\\{e_5,e_6\\}$). Следовательно, инвариант «в дереве обязательно есть внутренний узел
-  с нечётностью в блоке» неверен уже на $k=2$.
-- `Контрпример:` Возьмём листьями четыре вершинных уравнения
+- `Lens:` Invariant.
+- `Statement:` In toy mode, $k=2$ can require that **all internal nodes** of the XOR tree,
+  outputting $\\delta(B_{3..6})$ were $\\pi$-compatible (i.e., crossed $S_j$ by block union
+  $\\{e_3,e_4\\}$ and $\\{e_5,e_6\\}$). Therefore, the invariant "a tree must have an internal node
+  with odd parity in the block" is already incorrect by $k=2$.
+- `Counterexample:` Let us take the leaves of the four vertex equations
   $$E(E((3,j)),\\chi(3,j)),\\ E(E((4,j)),\\chi(4,j)),\\ E(E((5,j)),\\chi(5,j)),\\ E(E((6,j)),\\chi(6,j)),$$
-  и соберём бинарное дерево как
+  and assemble a binary tree like
   $$\\big(E(E((3,j)),\\chi(3,j))\\oplus E(E((4,j)),\\chi(4,j))\\big)
     \\oplus\\big(E(E((5,j)),\\chi(5,j))\\oplus E(E((6,j)),\\chi(6,j))\\big).$$
-  Внутренние узлы отвечают множествам вершин $U_1=\\{(3,j),(4,j)\\}$ и $U_2=\\{(5,j),(6,j)\\}$.
-  Их границы удовлетворяют
+  Internal nodes correspond to the vertex sets $U_1=\\{(3,j),(4,j)\\}$ and $U_2=\\{(5,j),(6,j)\\}$.
+  Their boundaries satisfy
   $$S_j\\cap\\delta(U_1)=\\{e_3,e_4\\},\\qquad S_j\\cap\\delta(U_2)=\\{e_5,e_6\\},$$
-  то есть обе линии $\\pi$‑совместимы (пересечение с $S_j$ — ровно блок). Корень даёт
-  $\\delta(U_1\\triangle U_2)=\\delta(B_{3..6})$ и тоже $\\pi$‑совместим. Следовательно,
-  все внутренние узлы могут быть $\\pi$‑совместимыми, несмотря на несовместимые листья.
-- `Статус:` контрпример (toy, $k=2$): блок‑cut‑инвариант для внутренних узлов не работает.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` перейти к более сильному ограничению (например, ранговой/проекционной обструкции
-  или геометрическому ограничению на допустимые подмножества вершин в внутренних узлах).
+  that is, both lines are $\\pi$compatible (the intersection with $S_j$ is exactly a block). The root gives
+  $\\delta(U_1\\triangle U_2)=\\delta(B_{3..6})$ and also $\\pi$-compatible. Hence,
+  all internal nodes can be $\\pi$compatible despite incompatible leaves.
+- `Status:` counterexample (toy, $k=2$): block-cut-invariant for internal nodes does not work.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` move to a stronger constraint (e.g. rank/projection obstruction
+  or a geometric constraint on the allowed subsets of vertices at internal nodes).
 - `StepID:` Q39.S13-2k-block-cut-invariant.
 - `InfoGain:` 1.
 
-### 16.160. Исследовательский шаг (counterexample): проекционный ранг внутренних $\\pi$‑совместимых линий уже равен 2 при $k=2$
+### 16.160. Exploratory step (counterexample): the projection rank of internal $\\pi$compatible lines is already equal to 2 at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть $\\pi$ разбивает $S_j$ на блоки $B_1=\\{e_3,e_4\\}$ и
-  $B_2=\\{e_5,e_6\\}$ (прочие рёбра — синглтоны). Для XOR‑дерева, где все внутренние узлы
-  $\\pi$‑совместимы, проекция пространства внутренних линий на $B_1\\sqcup B_2$
-  должна иметь ранг $\\le 1$; тогда дерево для $\\delta(B_{3..6})$ невозможно.
-- `Контрпример:` Возьмём дерево из Q39.S13 с внутренними узлами
-  $U_1=\\{(3,j),(4,j)\\}$ и $U_2=\\{(5,j),(6,j)\\}$.
-  Их границы дают проекции на $(B_1,B_2)$:
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let $\\pi$ split $S_j$ into blocks $B_1=\\{e_3,e_4\\}$ and
+  $B_2=\\{e_5,e_6\\}$ (other edges are singletons). For an XOR tree where all internal nodes
+  $\\pi$compatible, projection of the space of internal lines onto $B_1\\sqcup B_2$
+  must have rank $\\le 1$; then the tree for $\\delta(B_{3..6})$ is impossible.
+- `Counterexample:` Let's take a tree from Q39.S13 with internal nodes
+  $U_1=\\{(3,j),(4,j)\\}$ and $U_2=\\{(5,j),(6,j)\\}$.
+  Their boundaries give projections onto $(B_1,B_2)$:
   $$p(\\delta(U_1))=(11,00),\\qquad p(\\delta(U_2))=(00,11),$$
-  а корень $\\delta(U_1\\triangle U_2)=\\delta(B_{3..6})$ даёт $p=(11,11)$.
-  Векторы $(11,00)$ и $(00,11)$ линейно независимы в $\\mathbb F_2^{B_1}\\oplus\\mathbb F_2^{B_2}$,
-  поэтому проекционный ранг внутренних узлов равен 2, хотя все они $\\pi$‑совместимы.
-- `Статус:` контрпример (toy, $k=2$): наивная ранговая обструкция «rank$\\le 1$»
-  не работает даже при полном $\\pi$‑совпадении внутренних узлов.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить инвариант, добавив геометрию подмножеств (например, требование,
-  что внутренние узлы соответствуют объединению интервалов по строкам), и проверить,
-  даёт ли это реальную ранговую обструкцию на $k=2$.
+  and the root $\\delta(U_1\\triangle U_2)=\\delta(B_{3..6})$ gives $p=(11,11)$.
+  Vectors $(11,00)$ and $(00,11)$ are linearly independent in $\\mathbb F_2^{B_1}\\oplus\\mathbb F_2^{B_2}$,
+  therefore the projection rank of the internal nodes is 2, although they are all $\\pi$-compatible.
+- `Status:` counterexample (toy, $k=2$): naive rank obstruction "rank$\\le 1$"
+  does not work even with complete $\\pi$match of internal nodes.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the invariant by adding subset geometry (for example, the requirement
+  that the internal nodes correspond to the union of intervals across rows), and check that
+  does this give real rank obstruction at $k=2$.
 - `StepID:` Q39.S14-2k-projection-rank-obstruction.
 - `InfoGain:` 1.
 
-### 16.161. Исследовательский шаг (counterexample): interval‑геометрия не снижает проекционный ранг при $k=2$
+### 16.161. Exploratory step (counterexample): interval geometry does not reduce projection rank for $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Если потребовать от внутренних узлов XOR‑дерева, чтобы пересечение
-  $S_j\\cap\\delta(U)$ было одним row‑interval (непрерывный по строкам сегмент),
-  то проекция внутренних линий на блоки $B_1=\\{e_3,e_4\\}$ и $B_2=\\{e_5,e_6\\}$ должна иметь ранг $\\le 1$.
-- `Контрпример:` Возьмём дерево из Q39.S13 с внутренними узлами
-  $U_1=\\{(3,j),(4,j)\\}$ и $U_2=\\{(5,j),(6,j)\\}$.
-  Тогда
+- `Lens:` Invariant.
+- `Assertion (attempt):` If you require the internal nodes of an XOR tree to intersect
+  $S_j\\cap\\delta(U)$ was one rowinterval (line-continuous segment),
+  then the projection of internal lines onto blocks $B_1=\\{e_3,e_4\\}$ and $B_2=\\{e_5,e_6\\}$ must have rank $\\le 1$.
+- `Counterexample:` Let's take a tree from Q39.S13 with internal nodes
+  $U_1=\\{(3,j),(4,j)\\}$ and $U_2=\\{(5,j),(6,j)\\}$.
+  Then
   $$S_j\\cap\\delta(U_1)=\\{e_3,e_4\\},\\qquad S_j\\cap\\delta(U_2)=\\{e_5,e_6\\},$$
-  и оба пересечения — row‑interval’ы (по строковому порядку на $S_j$). Тем не менее проекции на
-  $(B_1,B_2)$ равны
+  and both intersections are row-intervals (in row order on $S_j$). However, projections on
+  $(B_1,B_2)$ are equal
   $$p(\\delta(U_1))=(11,00),\\qquad p(\\delta(U_2))=(00,11),$$
-  а значит ранг проекции внутренних узлов равен 2.
-- `Toy‑тест:` $n=6$, любая внутренняя колонка $j$, $S_j=\\{e_1,\\dots,e_6\\}$ по строкам.
-  Интервалы $\\{e_3,e_4\\}$ и $\\{e_5,e_6\\}$ непрерывны, но дают независимые проекции на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): даже при условии «row‑interval» проекционный ранг внутренних узлов равен 2.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` уточнить геометрическое ограничение: например, требовать, чтобы внутренние узлы
-  соответствовали связным областям с монотонной границей в обеих координатах (а не только интервалы на $S_j$),
-  и проверить, даёт ли это реальную ранговую обструкцию при $k=2$.
+  which means the rank of the projection of internal nodes is 2.
+- `Toy test:` $n=6$, any internal column $j$, $S_j=\\{e_1,\\dots,e_6\\}$ by row.
+  The intervals $\\{e_3,e_4\\}$ and $\\{e_5,e_6\\}$ are continuous, but give independent projections onto $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): even with the "row-interval" condition, the projection rank of internal nodes is 2.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` clarify the geometric constraint: for example, require that internal nodes
+  corresponded to connected regions with a monotonic boundary in both coordinates (and not just intervals on $S_j$),
+  and check whether this gives real rank obstruction for $k=2$.
 - `StepID:` Q39.S15-2k-interval-rank-obstruction.
 - `InfoGain:` 1.
 
-### 16.162. Исследовательский шаг (counterexample): монотонная (prefix/suffix) геометрия не снижает проекционный ранг при $k=2$
+### 16.162. Exploratory step (counterexample): monotonic (prefix/suffix) geometry does not reduce projection rank for $k=2$
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (попытка):` Если потребовать от внутренних узлов XOR‑дерева, чтобы пересечение
-  $S_j\\cap\\delta(U)$ было **монотонным** по строкам (то есть префиксом или суффиксом в порядке
-  $e_1,\\dots,e_m$), то проекция внутренних линий на блоки $B_1,B_2$ должна иметь ранг $\\le 1$.
-- `Контрпример:` Возьмём $n=4$ и внутреннюю колонку $j$. Пусть
+- `Lens:` Model stress test.
+- `Assertion (attempt):` If you require the internal nodes of an XOR tree to intersect
+  $S_j\\cap\\delta(U)$ was **monotonic** across lines (that is, prefix or suffix in order
+  $e_1,\\dots,e_m$), then the projection of internal lines onto blocks $B_1,B_2$ must have rank $\\le 1$.
+- `Counterexample:` Let's take $n=4$ and the inner column $j$. Let
   $$S_j=\\{e_1,e_2,e_3,e_4\\}$$
-  — горизонтальные рёбра между колонками $j$ и $j+1$ (в порядке строк), а разбиение $\\pi$ задаётся
-  блоками $B_1=\\{e_1,e_2\\}$ (верхний префикс) и $B_2=\\{e_3,e_4\\}$ (нижний суффикс).
-  Рассмотрим внутренние узлы
+  are horizontal edges between columns $j$ and $j+1$ (in row order), and the partition $\\pi$ is given by
+  blocks $B_1=\\{e_1,e_2\\}$ (upper prefix) and $B_2=\\{e_3,e_4\\}$ (lower suffix).
+  Let's look at the internal nodes
   $$U_1=\\{(1,j),(2,j)\\},\\qquad U_2=\\{(3,j),(4,j)\\}.$$
-  Тогда
+  Then
   $$S_j\\cap\\delta(U_1)=B_1,\\qquad S_j\\cap\\delta(U_2)=B_2,$$
-  и оба пересечения монотонны (префикс/суффикс). Однако их проекции на $(B_1,B_2)$ равны
+  and both intersections are monotonic (prefix/suffix). However, their projections onto $(B_1,B_2)$ are equal
   $$p(\\delta(U_1))=(11,00),\\qquad p(\\delta(U_2))=(00,11),$$
-  то есть линейно независимы; ранг проекции внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$; корень $\\delta(U_1\\triangle U_2)$ имеет пересечение $S_j\\cap\\delta(U_1\\triangle U_2)=B_1\\cup B_2$,
-  а внутренние узлы $U_1,U_2$ дают монотонные префикс/суффикс.
-- `Статус:` контрпример (toy, $k=2$): даже при монотонной (prefix/suffix) геометрии
-  проекционный ранг внутренних узлов равен 2.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить геометрию: требовать, чтобы внутренние узлы соответствовали связным областям
-  с монотонной границей **в обеих координатах** (например, прямоугольники/ступенчатые области),
-  и проверить, даёт ли это реальную ранговую обструкцию при $k=2$.
+  that is, linearly independent; The rank of the projection of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$; the root $\\delta(U_1\\triangle U_2)$ has the intersection $S_j\\cap\\delta(U_1\\triangle U_2)=B_1\\cup B_2$,
+  and internal nodes $U_1,U_2$ give monotonic prefix/suffix.
+- `Status:` counterexample (toy, $k=2$): even with monotonic (prefix/suffix) geometry
+  the projection rank of internal nodes is 2.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen geometry: require internal nodes to correspond to connected regions
+  with a monotone boundary **in both coordinates** (for example, rectangles/step-shaped regions),
+  and check whether this gives real rank obstruction for $k=2$.
 - `StepID:` Q39.S16-2k-monotone-geometry-obstruction.
 - `InfoGain:` 1.
 
-### 16.163. Исследовательский шаг (counterexample): прямоугольная геометрия не снижает проекционный ранг при $k=2$
+### 16.163. Exploratory step (counterexample): rectangular geometry does not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Если потребовать от внутренних узлов XOR‑дерева, чтобы они
-  соответствовали осево‑параллельным прямоугольникам в grid (связным областям с монотонной
-  границей в обеих координатах), то проекция внутренних линий на блоки $B_1,B_2$ должна иметь
-  ранг $\\le 1$.
-- `Контрпример:` Возьмём $n=4$ и внутреннюю колонку $j$. Пусть
+- `Lens:` Invariant.
+- `Assertion (attempt):` If you require internal nodes of an XOR tree to
+  corresponded to axially parallel rectangles in the grid (connected areas with monotonic
+  boundary in both coordinates), then the projection of internal lines onto blocks $B_1,B_2$ must have
+  rank $\\le 1$.
+- `Counterexample:` Let's take $n=4$ and the inner column $j$. Let
   $$S_j=\\{e_1,e_2,e_3,e_4\\}$$
-  — горизонтальные рёбра между колонками $j$ и $j+1$ (в порядке строк), а разбиение $\\pi$ задаётся
-  блоками $B_1=\\{e_1,e_2\\}$ (верхний прямоугольник) и $B_2=\\{e_3,e_4\\}$ (нижний прямоугольник).
-  Рассмотрим внутренние узлы
+  are horizontal edges between columns $j$ and $j+1$ (in row order), and the partition $\\pi$ is given by
+  blocks $B_1=\\{e_1,e_2\\}$ (upper rectangle) and $B_2=\\{e_3,e_4\\}$ (lower rectangle).
+  Let's look at the internal nodes
   $$U_1=\\{(1,j),(2,j)\\},\\qquad U_2=\\{(3,j),(4,j)\\}.$$
-  Тогда $U_1,U_2$ и корень $U_1\\triangle U_2$ — осевые прямоугольники (1×2 и 1×4),
-  а пересечения с $S_j$ равны $B_1$ и $B_2$. Их проекции на $(B_1,B_2)$:
+  Then $U_1,U_2$ and the root $U_1\\triangle U_2$ are axial rectangles (12 and 14),
+  and the intersections with $S_j$ are $B_1$ and $B_2$. Their projections onto $(B_1,B_2)$:
   $$p(\\delta(U_1))=(11,00),\\qquad p(\\delta(U_2))=(00,11),$$
-  линейно независимы, так что проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: корень соответствует прямоугольнику $\\{(1,j),\\dots,(4,j)\\}$, а внутренние
-  узлы — двум прямоугольникам по две строки; все пересечения с $S_j$ — прямоугольные блоки.
-- `Статус:` контрпример (toy, $k=2$): даже при прямоугольной геометрии проекционный ранг = 2.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить геометрию: требовать «anchored»/ступенчатые области
-  (монотонные в обеих координатах и привязанные к границе), и проверить, даёт ли это реальную
-  ранговую обструкцию при $k=2$.
+  are linearly independent, so the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: the root corresponds to the rectangle $\\{(1,j),\\dots,(4,j)\\}$, and the internal
+  nodes - two rectangles with two lines each; all intersections with $S_j$ are rectangular blocks.
+- `Status:` counterexample (toy, $k=2$): even with rectangular geometry, projection rank = 2.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen geometry: require "anchored"/stepped areas
+  (monotonic in both coordinates and bound to the boundary), and check whether this gives a real
+  rank obstruction for $k=2$.
 - `StepID:` Q39.S17-2k-rectangular-geometry-obstruction.
 - `InfoGain:` 1.
 
-### 16.164. Исследовательский шаг (counterexample): anchored‑staircase геометрия не снижает проекционный ранг при $k=2$
+### 16.164. Exploratory step (counterexample): anchoredstaircase geometry does not reduce projection rank at $k=2$
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (попытка):` Если потребовать от внутренних узлов XOR‑дерева, чтобы они были
-  «anchored‑staircase» областями (например, в каждой колонке множество строк — префикс от верхней границы),
-  то проекция внутренних линий на блоки $B_1,B_2$ должна иметь ранг $\\le 1$.
-- `Контрпример:` Возьмём $n=4$ и внутреннюю колонку $j$. Пусть
+- `Lens:` Model stress test.
+- `Assertion (attempt):` If you require the internal nodes of an XOR tree to be
+  "anchored-staircase" areas (for example, in each column there are many lines - a prefix from the upper border),
+  then the projection of internal lines onto blocks $B_1,B_2$ must have rank $\\le 1$.
+- `Counterexample:` Let's take $n=4$ and the inner column $j$. Let
   $$S_j=\\{e_1,e_2,e_3,e_4\\}$$
-  — горизонтальные рёбра между колонками $j$ и $j+1$ (в порядке строк), а разбиение $\\pi$ задаётся
-  блоками $B_1=\\{e_1,e_2\\}$ и $B_2=\\{e_3,e_4\\}$.
-  Рассмотрим XOR‑дерево, суммирующее вершины колонки сверху вниз:
+  are horizontal edges between columns $j$ and $j+1$ (in row order), and the partition $\\pi$ is given by
+  blocks $B_1=\\{e_1,e_2\\}$ and $B_2=\\{e_3,e_4\\}$.
+  Consider an XOR tree that sums the vertices of a column from top to bottom:
   $$((v_1\\oplus v_2)\\oplus v_3)\\oplus v_4,$$
-  где $v_i=(i,j)$. Его внутренние узлы отвечают множествам
+  where $v_i=(i,j)$. Its internal nodes correspond to the sets
   $$U_1=\\{(1,j),(2,j)\\},\\qquad U_2=\\{(1,j),(2,j),(3,j)\\},\\qquad U_3=\\{(1,j),\\dots,(4,j)\\}.$$
-  Все $U_1,U_2,U_3$ — anchored‑staircase (префиксы по строкам). При этом
+  All $U_1,U_2,U_3$ are anchoredstaircase (line prefixes). At the same time
   $$S_j\\cap\\delta(U_1)=\\{e_1,e_2\\},\\qquad S_j\\cap\\delta(U_2)=\\{e_1,e_2,e_3\\},$$
-  и их проекции на $(B_1,B_2)$ равны
+  and their projections onto $(B_1,B_2)$ are equal
   $$p(\\delta(U_1))=(11,00),\\qquad p(\\delta(U_2))=(11,10),$$
-  что линейно независимо. Следовательно, проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$; дерево «сверху вниз» имеет внутренние узлы‑префиксы $\\{1,2\\}$ и $\\{1,2,3\\}$,
-  дающие независимые проекции на два блока.
-- `Статус:` контрпример (toy, $k=2$): anchored‑staircase (префикс‑по‑строкам) не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить ограничение: требовать, чтобы внутренние узлы были anchored‑staircase
-  **и** имели “одноступенчатую” границу (например, без длинных префиксных фронтов),
-  и проверить, даёт ли это реальную ранговую обструкцию при $k=2$.
+  which is linearly independent. Therefore, the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$; the top-down tree has internal prefix nodes $\\{1,2\\}$ and $\\{1,2,3\\}$,
+  giving independent projections onto two blocks.
+- `Status:` counterexample (toy, $k=2$): anchored-staircase (prefix-by-row) does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen constraint: require internal nodes to be anchoredstaircase
+  **and** had a "single-stage" boundary (for example, without long prefix fronts),
+  and check whether this gives real rank obstruction for $k=2$.
 - `StepID:` Q39.S18-2k-staircase-geometry-obstruction.
 - `InfoGain:` 1.
 
-### 16.165. Исследовательский шаг (counterexample): «короткий фронтир» на $S_j$ не снижает проекционный ранг при $k=2$
+### 16.165. Exploratory step (counterexample): "short frontier" on $S_j$ does not reduce projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Если потребовать от внутренних узлов XOR‑дерева, чтобы
-  пересечение $S_j\\cap\\delta(U)$ имело размер $\\le 2$ (короткий фронтир на полосе $S_j$),
-  то проекция внутренних линий на блоки $B_1,B_2$ должна иметь ранг $\\le 1$.
-- `Контрпример:` Возьмём $n=4$ и внутреннюю колонку $j$. Пусть
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` If you require the internal nodes of an XOR tree to
+  the intersection $S_j\\cap\\delta(U)$ had size $\\le 2$ (short frontier on the strip $S_j$),
+  then the projection of internal lines onto blocks $B_1,B_2$ must have rank $\\le 1$.
+- `Counterexample:` Let's take $n=4$ and the inner column $j$. Let
   $$S_j=\\{e_1,e_2,e_3,e_4\\}$$
-  — горизонтальные рёбра между колонками $j$ и $j+1$ (в порядке строк), а разбиение $\\pi$ задаётся
-  блоками $B_1=\\{e_1,e_2\\}$ и $B_2=\\{e_3,e_4\\}$.
-  Рассмотрим внутренние узлы
+  are horizontal edges between columns $j$ and $j+1$ (in row order), and the partition $\\pi$ is given by
+  blocks $B_1=\\{e_1,e_2\\}$ and $B_2=\\{e_3,e_4\\}$.
+  Let's look at the internal nodes
   $$U_1=\\{(1,j),(2,j)\\},\\qquad U_2=\\{(3,j),(4,j)\\}.$$
-  Тогда $|S_j\\cap\\delta(U_1)|=|S_j\\cap\\delta(U_2)|=2$, т.е. фронтир короткий, а
+  Then $|S_j\\cap\\delta(U_1)|=|S_j\\cap\\delta(U_2)|=2$, i.e. the frontier is short, and
   $$p(\\delta(U_1))=(11,00),\\qquad p(\\delta(U_2))=(00,11)$$
-  линейно независимы. Следовательно, проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: узлы $U_1,U_2$ имеют фронтир из 2 рёбер на $S_j$, но дают независимые
-  проекции на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): ограничение «короткий фронтир» на $S_j$ не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы внутренние узлы имели **единичный** фронтир на $S_j$
-  (|$S_j\\cap\\delta(U)$|=1) или аналогичное ограничение по обеим полосам, и проверить,
-  даёт ли это реальную ранговую обструкцию при $k=2$.
+  linearly independent. Therefore, the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: nodes $U_1,U_2$ have a frontier of 2 edges on $S_j$, but give independent
+  projections onto $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): the "short frontier" restriction on $S_j$ does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require that internal nodes have a **unit** frontier on $S_j$
+  (|$S_j\\cap\\delta(U)$|=1) or similar limit on both bands, and check
+  does this give real rank obstruction for $k=2$.
 - `StepID:` Q39.S19-2k-short-frontier-obstruction.
 - `InfoGain:` 1.
 
-### 16.166. Исследовательский шаг (proof): единичный фронтир невозможен для цели с $\\ge 3$ рёбрами на $S_j$
+### 16.166. Exploratory step (proof): unit frontier is impossible for a target with $\\ge 3$ edges on $S_j$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Можно ли навязать инвариант: все **внутренние** узлы XOR‑дерева
-  имеют $|S_j\\cap\\delta(U)|\\le 1$ (единичный фронтир на полосе $S_j$), чтобы контролировать ранг?
-- `Доказательство (обструкция):` Пусть XOR‑дерево выводит строку с
+- `Lens:` Invariant.
+- `Assertion (attempt):` Is it possible to impose an invariant: all **internal** nodes of the XOR tree
+  have $|S_j\\cap\\delta(U)|\\le 1$ (unit frontier on strip $S_j$) to control rank?
+- `Evidence (obstruction):` Let the XOR tree output the string with
   $$|S_j\\cap\\delta(U_{\\mathrm{root}})|\\ge 3,$$
-  например $U_{\\mathrm{root}}=B_{3..6}$ (тогда пересечение с $S_j$ имеет 4 ребра).
-  Листья — вершинные уравнения, и каждый лист пересекает $S_j$ не более чем в одном ребре.
-  Рассмотрим любой внутренний узел $w$ с детьми $w_1,w_2$. Тогда
+  for example $U_{\\mathrm{root}}=B_{3..6}$ (then the intersection with $S_j$ has 4 edges).
+  The leaves are vertex equations, and each leaf intersects $S_j$ in at most one edge.
+  Consider any internal node $w$ with children $w_1,w_2$. Then
   $$S_j\\cap\\delta(w)=\\bigl(S_j\\cap\\delta(w_1)\\bigr)\\triangle\\bigl(S_j\\cap\\delta(w_2)\\bigr),$$
-  поэтому
+  That's why
   $$|S_j\\cap\\delta(w)|\\le |S_j\\cap\\delta(w_1)|+|S_j\\cap\\delta(w_2)|.$$
-  Если бы все внутренние узлы удовлетворяли $|S_j\\cap\\delta(\\cdot)|\\le 1$, то для корня получилось бы
-  $|S_j\\cap\\delta(U_{\\mathrm{root}})|\\le 2$ — противоречие.
-  Более того, из $|S_j\\cap\\delta(U_{\\mathrm{root}})|\\ge 3$ следует, что хотя бы один из двух детей
-  корня имеет пересечение размера $\\ge 2$, а значит существует **не‑корневой** внутренний узел с
-  фронтиром $\\ge 2$. Поэтому инвариант «единичный фронтир для всех внутренних узлов (кроме корня)»
-  невозможен уже для цели $|S_j\\cap\\delta(U_{\\mathrm{root}})|\\ge 3$.
-- `Toy‑тест:` $n=6$, $U_{\\mathrm{root}}=B_{3..6}$: $|S_j\\cap\\delta(U_{\\mathrm{root}})|=4$,
-  значит в любом XOR‑дереве есть внутренний узел с пересечением $\\ge 2$.
-- `Статус:` доказано (обструкция: «единичный фронтир» несовместим с целевой строкой ширины $\\ge 3$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если нужен контроль фронтира, то ослаблять инвариант: разрешить пересечение
-  $\\le 2$ на одном из детей корня, либо вводить ограничение по **двум** полосам одновременно
-  (например, на $S_j$ и $S_{j+1}$), и проверить, даёт ли это ранговую обструкцию при $k=2$.
+  If all internal nodes satisfied $|S_j\\cap\\delta(\\cdot)|\\le 1$, then for the root it would be
+  $|S_j\\cap\\delta(U_{\\mathrm{root}})|\\le 2$ is a contradiction.
+  Moreover, from $|S_j\\cap\\delta(U_{\\mathrm{root}})|\\ge 3$ it follows that at least one of the two children
+  root has an intersection of size $\\ge 2$, which means there is a **non-root** internal node with
+  frontier $\\ge 2$. Therefore, the invariant is "unit frontier for all internal nodes (except the root)"
+  is no longer possible for the goal $|S_j\\cap\\delta(U_{\\mathrm{root}})|\\ge 3$.
+- `Toy test:` $n=6$, $U_{\\mathrm{root}}=B_{3..6}$: $|S_j\\cap\\delta(U_{\\mathrm{root}})|=4$,
+  This means that any XOR tree has an internal node with the intersection $\\ge 2$.
+- `Status:` proven (obstruction: "unit frontier" is incompatible with target string of width $\\ge 3$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if frontier control is needed, then weaken the invariant: allow intersection
+  $\\le 2$ on one of the children of the root, or introduce a limit on **two** lanes at the same time
+  (for example, on $S_j$ and $S_{j+1}$), and check whether this gives rank obstruction for $k=2$.
 - `StepID:` Q39.S20-2k-single-frontier-obstruction.
 - `InfoGain:` 1.
 
 -/
 
 /-!
-### 16.167. Исследовательский шаг (toy): двухполосный фронтир ≤2 не снижает проекционный ранг при $k=2$
+### 16.167. Research step (toy): two-lane frontier <=2 does not reduce projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Если требовать, чтобы для каждого внутреннего узла XOR‑дерева
-  выполнялось $|S_j\\cap\\delta(U)|\\le 2$ и $|S_{j+1}\\cap\\delta(U)|\\le 2$, то проекционный ранг
-  на разбиение $\\pi$ с двумя блоками падает до $\\le 1$.
-- `Контрпример (toy):` Пусть $n=4$ и $j=1$. Обозначим горизонтальные рёбра между колонками
-  $j$ и $j+1$ через $S_j=\\{e_1,\\dots,e_4\\}$ (в порядке строк), а между $j+1$ и $j+2$ —
-  $S_{j+1}=\\{f_1,\\dots,f_4\\}$. Возьмём разбиение
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` If we require that for each internal node of the XOR tree
+  if $|S_j\\cap\\delta(U)|\\le 2$ and $|S_{j+1}\\cap\\delta(U)|\\le 2$ were satisfied, then the projection rank
+  on a partition $\\pi$ with two blocks drops to $\\le 1$.
+- `Counterexample (toy):` Let $n=4$ and $j=1$. Let us denote the horizontal edges between the columns
+  $j$ and $j+1$ through $S_j=\\{e_1,\\dots,e_4\\}$ (in row order), and between $j+1$ and $j+2$ -
+  $S_{j+1}=\\{f_1,\\dots,f_4\\}$. Let's take a partition
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Рассмотрим внутренние узлы
+  Let's look at the internal nodes
   $$U_1=\\{(1,j+1),(2,j+1)\\},\\qquad U_2=\\{(3,j+1),(4,j+1)\\}.$$
-  Тогда $|S_j\\cap\\delta(U_i)|=|S_{j+1}\\cap\\delta(U_i)|=2$ для $i\\in\\{1,2\\}$, но
+  Then $|S_j\\cap\\delta(U_i)|=|S_{j+1}\\cap\\delta(U_i)|=2$ for $i\\in\\{1,2\\}$, but
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(0000,1111),$$
-  что линейно независимо. Следовательно, проекционный ранг равен 2.
-- `Toy‑тест:` $n=4$, $j=1$: узлы $U_1,U_2$ имеют фронтир по 2 ребра на каждой из двух полос,
-  но дают независимые проекции на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): двухполосное ограничение по размеру фронтира не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать интервальности фронтира на обеих полосах
-  или ограничить совместную структуру фронтира на $S_j$ и $S_{j+1}$ (например, одинаковые строки),
-  и проверить, даёт ли это реальную ранговую обструкцию при $k=2$.
+  which is linearly independent. Therefore, the projection rank is 2.
+- `Toy test:` $n=4$, $j=1$: nodes $U_1,U_2$ have a frontier of 2 edges on each of the two stripes,
+  but give independent projections onto $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): a two-lane frontier size limit does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require frontier intervals on both lanes
+  or restrict the joint structure of the frontier to $S_j$ and $S_{j+1}$ (for example, identical rows),
+  and check whether this gives real rank obstruction for $k=2$.
 - `StepID:` Q39.S23-2k-two-strip-rank-toy.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.188. Исследовательский шаг (counterexample): глобальный порядок блоков по колонкам не снижает проекционный ранг при $k=2$
+### 16.188. Exploratory step (counterexample): global ordering of blocks by columns does not reduce projection rank when $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть фиксирован глобальный порядок dyadic‑блоков
-  $B_1\\to B_2\\to\\dots\\to B_r$, и для каждой пары соседних колонок изменения
-  полос допускаются только в этом порядке (каждый шаг toggles один блок, без возвратов).
-  Ожидание: глобальная синхронизация порядка по всем колонкам должна снижать
-  проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$ (например, $j=2$),
-  с блоками
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let the global order of dyadic blocks be fixed
+  $B_1\\to B_2\\to\\dots\\to B_r$, and for each pair of adjacent columns changes
+  stripes are only allowed in this order (each step toggles one block, no backtracking).
+  Expectation: Global order synchronization across all columns should reduce
+  projection rank on two stripes.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$),
+  with blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Возьмём глобальный порядок $B_1\\to B_2\\to B_1$ (для остальных колонок оставим
-  полосы неизменными). Тогда цепочка
+  Let's take the global order $B_1\\to B_2\\to B_1$ (for the remaining columns we will leave
+  stripes unchanged). Then the chain
   $$U_1=R_{1,2},\\qquad U_2=R_{3,4},\\qquad U_3=U_1$$
-  следует глобальному порядку по выбранной паре колонок и не нарушает его на остальных.
-  В порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  follows the global order for the selected pair of columns and does not violate it for the rest.
+  In order $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(0000,1111),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy-тест:` $n=4$, $j=2$: глобальный порядок $B_1\\to B_2\\to B_1$ всё ещё даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): глобальная синхронизация порядка блоков не снижает ранг.
-- `Барьер-чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить ограничение до **синхронного** исполнения глобального шага
-  на всех колонках одновременно (или связать порядок строк/колонок), и проверить,
-  остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: global order $B_1\\to B_2\\to B_1$ still gives rank 2.
+- `Status:` counterexample (toy, $k=2$): global block order synchronization does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the restriction to **synchronous** execution of the global step
+  on all columns at the same time (or link the order of rows/columns), and check if
+  whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S47-2k-two-strip-chain-strip-support-global-schedule.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.190. Исследовательский шаг (counterexample): row/column lock‑step не снижает проекционный ранг при $k=2$
+### 16.190. Exploratory step (counterexample): row/column lockstep does not reduce projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть каждый узел имеет форму **row/column lock‑step**:
-  существует глобальный шаблон $U=R\\times C$ (одни и те же множества строк $R$
-  и колонок $C$ для всех полос), так что на каждом шаге все полосы меняются
-  синхронно одним и тем же блоком по строкам и колонкам. Ожидание: такая
-  синхронизация должна снижать проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times m$ при $m\\ge 4$ и пару колонок $j=2$, $j+1=3$.
-  Пусть
-  $$R_1=\\{1,2\\},\\quad R_2=\\{3,4\\},\\quad C=\\{\\text{нечётные колонки}\\}.$$
-  Определим
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let each node have the form **row/column lockstep**:
+  there is a global pattern $U=R\\times C$ (the same sets of strings $R$
+  and columns $C$ for all stripes), so that at each step all stripes change
+  synchronously in the same block across rows and columns. Expectation: like this
+  synchronization should reduce the projection rank on the two bands.
+- `Counterexample (toy):` Let's take grid $4\\times m$ for $m\\ge 4$ and a pair of columns $j=2$, $j+1=3$.
+  Let
+  $$R_1=\\{1,2\\},\\quad R_2=\\{3,4\\},\\quad C=\\{\\text{odd columns}\\}.$$
+  Let's define
   $$U_1:=R_1\\times C,\\qquad U_2:=R_2\\times C.$$
-  Тогда для любой полосы $S_j$ пересечение $S_j\\cap\\delta(U_t)$ состоит ровно
-  из рёбер строк $R_t$ (поскольку ровно одна из двух инцидентных колонок — нечётная),
-  то есть глобальный шаг синхронен по всем колонкам и строкам.
-  Обозначим рёбра на $S_{j-1}$ через $e_1,\\dots,e_4$ и на $S_{j+1}$ через $f_1,\\dots,f_4$,
-  и блоки
+  Then for any strip $S_j$ the intersection $S_j\\cap\\delta(U_t)$ consists exactly
+  from the edges of the rows $R_t$ (since exactly one of the two incident columns is odd),
+  that is, the global step is synchronous across all columns and rows.
+  Let us denote the edges on $S_{j-1}$ by $e_1,\\dots,e_4$ and on $S_{j+1}$ by $f_1,\\dots,f_4$,
+  and blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Тогда
+  Then
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(0000,1111),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: row/column lock‑step $R_1\\times C\\to R_2\\times C$ даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): row/column lock‑step не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать **континуума** (contiguous) и по строкам,
-  и по колонкам (один прямоугольник), и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: row/column lockstep $R_1\\times C\\to R_2\\times C$ gives rank 2.
+- `Status:` counterexample (toy, $k=2$): row/column lockstep does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require **continuum** (contiguous) and along the lines,
+  and by columns (one rectangle), and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S49-2k-two-strip-chain-strip-support-rowcol-lockstep.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.191. Исследовательский шаг (counterexample): row/column contiguous прямоугольник не снижает проекционный ранг при $k=2$
+### 16.191. Exploratory step (counterexample): row/column contiguous rectangle does not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть каждый узел — **один прямоугольник**
-  $U=R\\times C$ с $R$ и $C$ как непрерывными интервалами строк/колонок
-  (row/column contiguous). Ожидание: такой режим должен снижать проекционный ранг
-  на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$ и пару колонок $j=2$, $j+1=3$,
-  так что полосы $S_{j-1}$ и $S_{j+1}$ — границы прямоугольника $C=\\{2,3\\}$.
-  Пусть
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let each node be **one rectangle**
+  $U=R\\times C$ with $R$ and $C$ as continuous row/column intervals
+  (row/column contiguous). Expectation: this mode should reduce the projection rank
+  on two lanes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$ and a pair of columns $j=2$, $j+1=3$,
+  so the stripes $S_{j-1}$ and $S_{j+1}$ are the boundaries of the rectangle $C=\\{2,3\\}$.
+  Let
   $$R_1=\\{1,2\\},\\quad R_2=\\{3,4\\},\\quad C=\\{2,3\\}.$$
-  Определим прямоугольники
+  Define rectangles
   $$U_1:=R_1\\times C,\\qquad U_2:=R_2\\times C.$$
-  Обозначим рёбра на $S_{j-1}$ через $e_1,\\dots,e_4$ и на $S_{j+1}$ через $f_1,\\dots,f_4$,
-  и блоки
+  Let us denote the edges on $S_{j-1}$ by $e_1,\\dots,e_4$ and on $S_{j+1}$ by $f_1,\\dots,f_4$,
+  and blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Тогда
+  Then
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(0000,1111),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: два row/column contiguous прямоугольника дают ранг 2.
-- `Статус:` контрпример (toy, $k=2$): row/column contiguous прямоугольники не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать **монотонной цепочки** прямоугольников
-  (вложенность по строкам и колонкам одновременно) и проверить,
-  остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: two row/column contiguous rectangles give rank 2.
+- `Status:` counterexample (toy, $k=2$): row/column contiguous rectangles do not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require a **monotonic chain** of rectangles
+  (nesting in rows and columns at the same time) and check if
+  whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S50-2k-two-strip-chain-strip-support-rowcol-contiguous.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.192. Исследовательский шаг (counterexample): вложенная цепочка прямоугольников не снижает проекционный ранг при $k=2$
+### 16.192. Exploratory step (counterexample): nested chain of rectangles does not reduce projection rank for $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть цепочка состоит из **вложенных** прямоугольников
-  $U_1\\subset U_2\\subset\\cdots$ с непрерывными $R_t$ и $C_t$ (rows/columns contiguous),
-  то есть $U_t=R_t\\times C_t$, где и строки, и колонки растут монотонно. Ожидание:
-  такая 2D‑монотонность должна снижать проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$ и пару колонок $j=2$, $j+1=3$,
-  так что полосы $S_{j-1}$ и $S_{j+1}$ — границы прямоугольника $C=\\{2,3\\}$.
-  Пусть
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let the chain consist of **nested** rectangles
+  $U_1\\subset U_2\\subset\\cdots$ with continuous $R_t$ and $C_t$ (rows/columns contiguous),
+  that is, $U_t=R_t\\times C_t$, where both rows and columns grow monotonically. Expectation:
+  This 2D monotonicity should reduce the projection rank on the two stripes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$ and a pair of columns $j=2$, $j+1=3$,
+  so the stripes $S_{j-1}$ and $S_{j+1}$ are the boundaries of the rectangle $C=\\{2,3\\}$.
+  Let
   $$R_1=\\{1,2\\},\\quad R_2=\\{1,2,3,4\\},\\quad C=\\{2,3\\}.$$
-  Определим вложенные прямоугольники
+  Define nested rectangles
   $$U_1:=R_1\\times C,\\qquad U_2:=R_2\\times C.$$
-  Обозначим рёбра на $S_{j-1}$ через $e_1,\\dots,e_4$ и на $S_{j+1}$ через $f_1,\\dots,f_4$,
-  и блоки
+  Let us denote the edges on $S_{j-1}$ by $e_1,\\dots,e_4$ and on $S_{j+1}$ by $f_1,\\dots,f_4$,
+  and blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Тогда
+  Then
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(1111,1111),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: вложенная цепочка прямоугольников даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): вложенность прямоугольников не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать **по‑шаговое** расширение прямоугольника
-  одновременно по строкам и колонкам (2D‑prefix‑цепочка) и проверить,
-  остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: a nested chain of rectangles gives rank 2.
+- `Status:` counterexample (toy, $k=2$): nesting rectangles does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require **step-by-step** expansion of the rectangle
+  simultaneously by rows and columns (2Dprefixchain) and check whether
+  whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S51-2k-two-strip-chain-strip-support-rowcol-nested.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.193. Исследовательский шаг (counterexample): 2D‑prefix цепочка прямоугольников не снижает проекционный ранг при $k=2$
+### 16.193. Exploratory step (counterexample): 2Dprefix chain of rectangles does not reduce projection rank for $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть цепочка состоит из **2D‑prefix** прямоугольников
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let the chain consist of **2Dprefix** rectangles
   $$U_t=[1..t]\\times[1..t],\\quad t=1,2,\\dots,$$
-  то есть строки и колонки расширяются синхронно по одному. Ожидание: такая
-  строго синхронная 2D‑монотонность должна снижать проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$ и пару колонок $j=2$, $j+1=3$.
-  Пусть
+  that is, rows and columns are expanded synchronously one at a time. Expectation: like this
+  strictly synchronous 2D monotonicity should reduce the projection rank on the two stripes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$ and a pair of columns $j=2$, $j+1=3$.
+  Let
   $$U_2=[1,2]\\times[1,2],\\qquad U_4=[1,4]\\times[1,4].$$
-  Обозначим рёбра на полосах $S_{j-1}$ и $S_{j+1}$ через
+  Let us denote the edges on the stripes $S_{j-1}$ and $S_{j+1}$ by
   $$S_{j-1}=\\{e_1,\\dots,e_4\\},\\qquad S_{j+1}=\\{f_1,\\dots,f_4\\}.$$
-  Тогда $U_2$ пересекает эти полосы только в верхних двух строках,
-  а $U_4$ — во всех четырёх строках. Для блоков
+  Then $U_2$ intersects these stripes only in the top two rows,
+  and $U_4$ is in all four lines. For blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}$$
-  получаем
+  we get
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: 2D‑prefix цепочка $U_1\\subset U_2\\subset U_3\\subset U_4$ даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): 2D‑prefix цепочка не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: потребовать 2D‑prefix **и** запрет на пропуски
-  (требовать учёта всех микрошагов) и проверить, появляется ли ранговая обструкция.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: 2Dprefix chain $U_1\\subset U_2\\subset U_3\\subset U_4$ gives rank 2.
+- `Status:` counterexample (toy, $k=2$): 2Dprefix chain does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require a 2Dprefix **and** ban on omissions
+  (require all microsteps to be taken into account) and check whether rank obstruction appears.
 - `StepID:` Q39.S52-2k-two-strip-chain-strip-support-rowcol-2d-prefix.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.194. Исследовательский шаг (counterexample): 2D‑prefix микрошаги не снижают проекционный ранг при $k=2$
+### 16.194. Exploratory step (counterexample): 2Dprefix microsteps do not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть цепочка состоит из **всех** 2D‑prefix микрошагов
-  $U_t=[1..t]\\times[1..t]$ для каждого $t$ (без пропусков). Ожидание: учёт всех
-  микрошагов должен подавлять независимость на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$ и пару колонок $j=2$, $j+1=3$.
-  Рассмотрим цепочку
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let the chain consist of **all** 2Dprefix microsteps
+  $U_t=[1..t]\\times[1..t]$ for each $t$ (without gaps). Expectation: everyone is taken into account
+  microstepping should suppress independence on two lanes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$ and a pair of columns $j=2$, $j+1=3$.
+  Consider the chain
   $$U_1\\subset U_2\\subset U_3\\subset U_4,\\qquad U_t=[1..t]\\times[1..t].$$
-  Обозначим рёбра на полосах $S_{j-1}$ и $S_{j+1}$ через
+  Let us denote the edges on the stripes $S_{j-1}$ and $S_{j+1}$ by
   $$S_{j-1}=\\{e_1,\\dots,e_4\\},\\qquad S_{j+1}=\\{f_1,\\dots,f_4\\},$$
-  и блоки $B_1=\\{e_1,e_2,f_1,f_2\\}$, $B_2=\\{e_3,e_4,f_3,f_4\\}$.
-  Тогда
+  and blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$, $B_2=\\{e_3,e_4,f_3,f_4\\}$.
+  Then
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2
-  даже при включении всех микрошагов.
-- `Toy‑тест:` $n=4$, $j=2$: полная 2D‑prefix цепочка даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): 2D‑prefix микрошаги не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать дополнительную синхронизацию
-  (например, фиксированный порядок по столбцам и строкам одновременно) или
-  искать место, где требуется глобальное “base‑change”.
+  which is linearly independent, therefore the projection rank of internal nodes is 2
+  even with all microsteps enabled.
+- `Toy test:` $n=4$, $j=2$: the complete 2Dprefix chain gives rank 2.
+- `Status:` counterexample (toy, $k=2$): 2Dprefix microsteps do not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen condition: require additional synchronization
+  (for example, fixed order across columns and rows at the same time) or
+  look for a place where a global "basechange" is required.
 - `StepID:` Q39.S53-2k-two-strip-chain-strip-support-rowcol-2d-prefix-microsteps.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.195. Исследовательский шаг (counterexample): глобальный row/column 2D‑prefix lock‑step не снижает проекционный ранг при $k=2$
+### 16.195. Exploratory step (counterexample): global row/column 2Dprefix lockstep does not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть каждый узел — **глобальный** 2D‑prefix прямоугольник
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let each node be a **global** 2Dprefix rectangle
   $$U_t=[1..t]\\times[1..t]$$
-  во всём grid, т.е. строки и колонки расширяются синхронно **одним и тем же** $t$
-  на всех полосах (row/column lock‑step). Ожидание: такая глобальная синхронизация
-  должна снижать проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$ и пару колонок $j=2$, $j+1=3$.
-  Пусть
+  throughout the grid, i.e. rows and columns are expanded synchronously with **the same** $t$
+  on all stripes (row/column lockstep). Expectation: such global synchronization
+  should reduce the projection rank on two stripes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$ and a pair of columns $j=2$, $j+1=3$.
+  Let
   $$U_2=[1,2]\\times[1,2],\\qquad U_4=[1,4]\\times[1,4].$$
-  Это именно глобальные 2D‑prefix прямоугольники, поэтому требование lock‑step выполнено
-  на всех полосах. Для рёбер $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$
-  и блоков $B_1=\\{e_1,e_2,f_1,f_2\\}$, $B_2=\\{e_3,e_4,f_3,f_4\\}$ имеем
+  These are global 2Dprefix rectangles, so the lockstep requirement is met
+  on all lanes. For edges $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$
+  and blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$, $B_2=\\{e_3,e_4,f_3,f_4\\}$ we have
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: глобальная 2D‑prefix lock‑step цепочка $U_1\\subset\\cdots\\subset U_4$ даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): глобальный 2D‑prefix lock‑step не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` потребовать фиксированный **глобальный** порядок блоков строк и колонок
-  (без возвратов) и синхронное следование этому порядку на всех полосах;
-  проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: global 2Dprefix lockstep chain $U_1\\subset\\cdots\\subset U_4$ gives rank 2.
+- `Status:` counterexample (toy, $k=2$): global 2Dprefix lockstep does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` require a fixed **global** order of row and column blocks
+  (no returns) and simultaneous adherence to this order on all lanes;
+  check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S54-2k-two-strip-chain-strip-support-rowcol-2d-prefix-lockstep.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.196. Исследовательский шаг (counterexample): глобальный порядок блоков строк/колонок не снижает проекционный ранг при $k=2$
+### 16.196. Exploratory step (counterexample): global row/column block order does not reduce projection rank when $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть строки и колонки разбиты на блоки с фиксированным
-  **глобальным порядком**, и каждый узел — прямоугольник вида $R_{\\le i}\\times C_{\\le j}$,
-  где $R_{\\le i}$ и $C_{\\le j}$ — префиксы по блокам (без возвратов; допускаются «скачки»).
-  Ожидание: такая глобальная блок‑упорядоченность должна ограничивать проекционный ранг
-  на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, блоки строк
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Suppose rows and columns are split into blocks with a fixed
+  **global order**, and each node is a rectangle of the form $R_{\\le i}\\times C_{\\le j}$,
+  where $R_{\\le i}$ and $C_{\\le j}$ are block prefixes (no returns; "jumps" are allowed).
+  Expectation: This global block ordering should constrain the projection rank
+  on two lanes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, blocks of rows
   $$R_1=\\{1,2\\},\\quad R_2=\\{3,4\\},$$
-  блоки колонок
+  column blocks
   $$C_1=\\{1,2\\},\\quad C_2=\\{3,4\\},$$
-  и порядок $R_1\\prec R_2$, $C_1\\prec C_2$. Рассмотрим
+  and order $R_1\\prec R_2$, $C_1\\prec C_2$. Let's consider
   $$U_1:=R_1\\times C_1,\\qquad U_2:=(R_1\\cup R_2)\\times(C_1\\cup C_2).$$
-  Это глобальные префиксы по блокам. Для пары колонок $j=2$, $j+1=3$ и рёбер
-  $S_{j-1}=\\{e_1,\\dots,e_4\\}$, $S_{j+1}=\\{f_1,\\dots,f_4\\}$ получаем
+  These are global block prefixes. For a pair of columns $j=2$, $j+1=3$ and edges
+  $S_{j-1}=\\{e_1,\\dots,e_4\\}$, $S_{j+1}=\\{f_1,\\dots,f_4\\}$ we get
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(1111,1111),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: глобальный порядок блоков $R_1\\prec R_2$, $C_1\\prec C_2$
-  всё ещё даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): глобальный порядок блоков не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` запретить «скачки» и потребовать **по‑шаговое** добавление
-  одного блока строк или колонок (включить промежуточные прямоугольники
-  $R_{\\le2}\\times C_{\\le1}$ и $R_{\\le1}\\times C_{\\le2}$), и проверить,
-  остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: global block order $R_1\\prec R_2$, $C_1\\prec C_2$
+  still gives rank 2.
+- `Status:` counterexample (toy, $k=2$): global block order does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` prohibit "horses" and require **step-by-step** addition
+  one block of rows or columns (include intermediate rectangles
+  $R_{\\le2}\\times C_{\\le1}$ and $R_{\\le1}\\times C_{\\le2}$), and check
+  whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S55-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.197. Исследовательский шаг (counterexample): глобальный порядок блоков c микрошагами не снижает проекционный ранг при $k=2$
+### 16.197. Exploratory step (counterexample): global block order with microsteps does not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть глобальный порядок блоков строк/колонок фиксирован,
-  а цепочка прямоугольников **включает все микрошаги**, то есть на каждом шаге
-  добавляется ровно один блок строк или колонок (без «скачков»).
-  Ожидание: микрошаговый режим должен снизить проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, блоки строк
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let the global order of row/column blocks be fixed,
+  and the chain of rectangles **includes all microsteps**, that is, at each step
+  exactly one block of rows or columns is added (without "jumps").
+  Expectation: Microstepping should reduce the projection rank on two bars.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, blocks of rows
   $$R_1=\\{1,2\\},\\quad R_2=\\{3,4\\},$$
-  блоки колонок
+  column blocks
   $$C_1=\\{1,2\\},\\quad C_2=\\{3,4\\},$$
-  и порядок $R_1\\prec R_2$, $C_1\\prec C_2$. Рассмотрим микрошаговую цепочку
+  and order $R_1\\prec R_2$, $C_1\\prec C_2$. Consider a microstepping chain
   $$U_1:=R_1\\times C_1,\\qquad U_2:=R_1\\times(C_1\\cup C_2),\\qquad
     U_3:=(R_1\\cup R_2)\\times(C_1\\cup C_2).$$
-  Это цепочка префиксов по блокам без скачков. Для пары колонок $j=2$, $j+1=3$ и рёбер
-  $S_{j-1}=\\{e_1,\\dots,e_4\\}$, $S_{j+1}=\\{f_1,\\dots,f_4\\}$ получаем
+  This is a chain of prefixes across blocks without jumps. For a pair of columns $j=2$, $j+1=3$ and edges
+  $S_{j-1}=\\{e_1,\\dots,e_4\\}$, $S_{j+1}=\\{f_1,\\dots,f_4\\}$ we get
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_3))=(1111,1111),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: микрошаговая цепочка глобальных блок‑префиксов даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): микрошаги глобального порядка блоков не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить ограничение: требовать **строгого чередования**
-  row/column микрошагов (например, R‑шаг всегда следует за C‑шагом) и проверить,
-  остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: microstepping chain of global block prefixes gives rank 2.
+- `Status:` counterexample (toy, $k=2$): microsteps of the global block order do not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the restriction: require **strict rotation**
+  row/column microsteps (for example, the R-step always follows the C-step) and check whether
+  whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S56-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.198. Исследовательский шаг (counterexample): строгая альтернация row/column микрошагов не снижает проекционный ранг при $k=2$
+### 16.198. Exploratory step (counterexample): strict alternation of row/column microsteps does not reduce the projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть глобальный порядок блоков фиксирован, и цепочка микрошагов
-  **строго** чередует тип шага: row‑шаг всегда следует за column‑шагом (и наоборот).
-  Ожидание: жёсткая альтернация типов шагов должна снизить проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, блоки строк
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let the global order of blocks be fixed, and the chain of microsteps
+  **strictly** alternates step type: a row step always follows a column step (and vice versa).
+  Expectation: Strict alternation of step types should reduce the projection rank on the two lanes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, blocks of rows
   $$R_1=\\{1,2\\},\\quad R_2=\\{3,4\\},$$
-  и блоки колонок (глобальный порядок)
+  and column blocks (global order)
   $$C_1=\\{2,3\\}\\prec C_2=\\{1\\}.$$
-  Рассмотрим чередующуюся цепочку
+  Consider an alternating chain
   $$U_1:=R_1\\times C_1,\\qquad
     U_2:=R_1\\times(C_1\\cup C_2),\\qquad
     U_3:=(R_1\\cup R_2)\\times(C_1\\cup C_2).$$
-  Здесь $U_1\\to U_2$ — column‑шаг, $U_2\\to U_3$ — row‑шаг (строгая альтернация).
-  Для пары колонок $j=2$, $j+1=3$ и рёбер
-  $S_{j-1}=\\{e_1,\\dots,e_4\\}$, $S_{j+1}=\\{f_1,\\dots,f_4\\}$ получаем
+  Here $U_1\\to U_2$ is a column step, $U_2\\to U_3$ is a row step (strict alternation).
+  For a pair of columns $j=2$, $j+1=3$ and edges
+  $S_{j-1}=\\{e_1,\\dots,e_4\\}$, $S_{j+1}=\\{f_1,\\dots,f_4\\}$ we get
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_3))=(0011,0011),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: чередование column‑шаг/row‑шаг всё ещё даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): строгая альтернация микрошагов не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы **оба** strips $S_{j-1}$ и $S_{j+1}$
-  оставались активными на каждом микрошаге (нет “обнуления” одной полосы), и проверить,
-  остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: column-step/row-step alternation still gives rank 2.
+- `Status:` counterexample (toy, $k=2$): strict alternation of microsteps does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require that **both** strips $S_{j-1}$ and $S_{j+1}$
+  remained active at each microstep (no "zeroing" of one band), and check that
+  whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S57-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.199. Исследовательский шаг (counterexample): обе полосы активны на каждом микрошаге, но ранг остаётся 2
+### 16.199. Exploratory step (counterexample): both bars are active on each microstep, but the rank remains 2
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` В глобальном порядке блоков и при строгой альтернации
-  row/column микрошагов требуем, чтобы **на каждом микрошаге обе полосы были активны**,
-  т.е. $S_{j-1}\\cap\\delta(U)$ и $S_{j+1}\\cap\\delta(U)$ непусты.
-  Ожидание: это должно ограничить проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$ и пару колонок $j=2$, $j+1=3$.
-  Зафиксируем колонковый блок $C=\\{2,3\\}$, так что границы слэба дают активность
-  на обеих полосах для любой непустой строки $R$. Пусть
+- `Lens:` Invariant.
+- `Assertion (attempt):` In global block order and with strict alternation
+  row/column microsteps we require that **at each microstep both bars be active**,
+  those. $S_{j-1}\\cap\\delta(U)$ and $S_{j+1}\\cap\\delta(U)$ are non-empty.
+  Expectation: This should limit the projection rank on two lanes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$ and a pair of columns $j=2$, $j+1=3$.
+  Let us fix the core block $C=\\{2,3\\}$, so that the boundaries of the slab give activity
+  on both stripes for any non-empty string $R$. Let
   $$R_1=\\{1,2\\},\\quad R_2=\\{1,2,3,4\\},\\qquad
     U_1:=R_1\\times C,\\quad U_2:=R_2\\times C.$$
-  Тогда на каждом шаге обе полосы активны, но
+  Then at each step both bands are active, but
   $$p(\\delta(U_1))=(1100,1100),\\qquad p(\\delta(U_2))=(1111,1111),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: обе полосы активны на каждом шаге, но ранг остаётся 2.
-- `Статус:` контрпример (toy, $k=2$): условие «обе полосы активны» не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: запретить **совпадающие** поддержки на полосах
-  (требовать различие $S_{j-1}\\cap\\delta(U)$ и $S_{j+1}\\cap\\delta(U)$ на каждом шаге)
-  и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: both bands are active at each step, but the rank remains 2.
+- `Status:` counterexample (toy, $k=2$): the condition "both lanes are active" does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen condition: prohibit **matching** supports on lanes
+  (require difference between $S_{j-1}\\cap\\delta(U)$ and $S_{j+1}\\cap\\delta(U)$ at each step)
+  and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S58-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.200. Исследовательский шаг (counterexample): различие поддержек полос не снижает проекционный ранг при $k=2$
+### 16.200. Exploratory step (counterexample): difference in band supports does not reduce projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` В глобальном порядке блоков и при строгой альтернации
-  row/column микрошагов требуем, чтобы на каждом шаге
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` In global block order and with strict alternation
+  row/column microsteps we require that at each step
   $$S_{j-1}\\cap\\delta(U)\\ne S_{j+1}\\cap\\delta(U).$$
-  Ожидание: различие поддержек полос должно снизить проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, пару колонок $j=2$, $j+1=3$,
-  блоки строк $R_1=\\{1,2\\}\\prec R_2=\\{3,4\\}$ и блоки колонок
+  Expectation: The difference in band support should reduce the projection rank on the two bands.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, a pair of columns $j=2$, $j+1=3$,
+  row blocks $R_1=\\{1,2\\}\\prec R_2=\\{3,4\\}$ and column blocks
   $$C_1=\\{2\\}\\prec C_2=\\{3,4\\}.$$
-  Рассмотрим чередующуюся цепочку
+  Consider an alternating chain
   $$U_1:=R_1\\times C_1,\\qquad
     U_2:=R_1\\times(C_1\\cup C_2),\\qquad
     U_3:=(R_1\\cup R_2)\\times(C_1\\cup C_2).$$
-  Здесь $U_1\\to U_2$ — column‑шаг, $U_2\\to U_3$ — row‑шаг. Для каждого $U_t$
-  полоса $S_{j-1}$ активна (колонка $2$ внутри, $1$ снаружи), а $S_{j+1}$ не активна
-  (колонки $3$ и $4$ оба внутри), поэтому поддержки полос различаются на каждом шаге.
-  Обозначим $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$. Тогда
+  Here $U_1\\to U_2$ is a column step, $U_2\\to U_3$ is a row step. For each $U_t$
+  lane $S_{j-1}$ is active (column $2$ inside, $1$ outside) and $S_{j+1}$ is not active
+  (columns $3$ and $4$ are both inside), so the band supports are different at each step.
+  Let us denote $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$. Then
   $$p(\\delta(U_1))=(1100,0000),\\qquad p(\\delta(U_3))=(1111,0000),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: различие поддержек полос не снижает ранг.
-- `Статус:` контрпример (toy, $k=2$): distinct strip supports не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать **обе** полосы активны и их поддержки
-  различны на каждом микрошаге, и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: difference in lane support does not reduce the rank.
+- `Status:` counterexample (toy, $k=2$): distinct strip supports do not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require **both** bands to be active and their support
+  are different at each microstep, and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S59-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-distinct-strips.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.201. Исследовательский шаг (counterexample): обе полосы активны и различны, но ранг остаётся 2
+### 16.201. Exploratory step (counterexample): both bars are active and different, but the rank remains 2
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` В глобальном порядке блоков и при строгой альтернации
-  row/column микрошагов требуем, чтобы на каждом шаге
-  (i) обе полосы активны и (ii) их поддержки различны.
-  Ожидание: это должно ограничить проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, пару колонок $j=2$, $j+1=3$,
-  и зафиксируем колонки $C=\\{2,3\\}$. Пусть
+- `Lens:` Invariant.
+- `Assertion (attempt):` In global block order and with strict alternation
+  row/column microsteps we require that at each step
+  (i) both bands are active and (ii) their supports are different.
+  Expectation: This should limit the projection rank on two lanes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, a pair of columns $j=2$, $j+1=3$,
+  and fix the columns $C=\\{2,3\\}$. Let
   $$R_1=\\{1,2\\},\\quad R_2=\\{1,2,3,4\\},\\qquad
     U_1:=R_1\\times C,\\quad U_2:=R_2\\times C.$$
-  Тогда обе полосы активны на каждом шаге, а поддержки различны:
-  $S_{j-1}\\cap\\delta(U_1)=\\{e_1,e_2\\}$ и $S_{j+1}\\cap\\delta(U_1)=\\{f_1,f_2\\}$
-  (разные множества рёбер), аналогично для $U_2$.
-  В порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  Then both bands are active at each step, and the supports are different:
+  $S_{j-1}\\cap\\delta(U_1)=\\{e_1,e_2\\}$ and $S_{j+1}\\cap\\delta(U_1)=\\{f_1,f_2\\}$
+  (different sets of edges), similarly for $U_2$.
+  In order $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_1))=(1100,1100),\\qquad p(\\delta(U_2))=(0011,1100),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: обе полосы активны и различны, но ранг остаётся 2.
-- `Статус:` контрпример (toy, $k=2$): условие “both strips active + distinct” не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы **обе** полосы активны и
-  каждая из них меняется на каждом микрошаге (distinct strip support per step),
-  и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: both bands are active and different, but the rank remains 2.
+- `Status:` counterexample (toy, $k=2$): the condition "both strips active + distinct" does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require that **both** bars are active and
+  each of them changes at each microstep (distinct strip support per step),
+  and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S60-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.202. Исследовательский шаг (counterexample): обе полосы меняются на каждом шаге, но ранг остаётся 2
+### 16.202. Exploratory step (counterexample): both bars change on each step, but the rank remains 2
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` В глобальном порядке блоков (row/column) потребуем, чтобы
-  на каждом микрошаге **обе** полосы менялись:
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` In the global block order (row/column), we require that
+  at each microstep, **both** stripes changed:
   $$S_{j-1}\\cap\\delta(U_t)\\ne S_{j-1}\\cap\\delta(U_{t-1}),\\qquad
     S_{j+1}\\cap\\delta(U_t)\\ne S_{j+1}\\cap\\delta(U_{t-1}).$$
-  Ожидание: если на каждом шаге меняются обе полосы, то проекционный ранг на двух полосах
-  должен быть $\\le 1$.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, пару колонок $j=2$, $j+1=3$ и фиксируем
-  $C=\\{2,3\\}$. Пусть
+  Expectation: if both stripes change at each step, then the projected rank on the two stripes
+  should be $\\le 1$.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, a pair of columns $j=2$, $j+1=3$ and fix
+  $C=\\{2,3\\}$. Let
   $$R_1=\\{1,2\\},\\quad R_2=\\{3,4\\},\\quad R_3=\\{1,2,3,4\\},$$
-  и цепочка
+  and chain
   $$U_1:=R_1\\times C,\\qquad U_2:=R_2\\times C,\\qquad U_3:=R_3\\times C.$$
-  Тогда на каждом шаге меняются обе полосы (ряды на $S_{j-1}$ и $S_{j+1}$ меняются вместе).
-  В порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  Then at each step both stripes change (the rows on $S_{j-1}$ and $S_{j+1}$ change together).
+  In order $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_1))=(1100,1100),\\qquad p(\\delta(U_2))=(0011,0011),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: обе полосы меняются на каждом шаге, но ранг остаётся 2.
-- `Статус:` контрпример (toy, $k=2$): “both strips change per step” не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать чередования row/column микрошагов,
-  при котором **оба** strip‑support меняются на каждом шаге (column‑шаги должны
-  также изменять $S_{j-1}$ и $S_{j+1}$), и проверить, остаётся ли ранг $\\ge 2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: both bands change at each step, but the rank remains 2.
+- `Status:` counterexample (toy, $k=2$): "both strips change per step" does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require alternating row/column microsteps,
+  in which **both** strip-supports change at each step (column-steps must
+  also change $S_{j-1}$ and $S_{j+1}$), and check whether the rank $\\ge 2$ remains.
 - `StepID:` Q39.S61-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct-support-per-step.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.203. Исследовательский шаг (counterexample): строгая альтернация row/column при изменении обеих полос не снижает ранг
+### 16.203. Exploratory step (counterexample): strict row/column alternation when changing both stripes does not reduce the rank
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` В глобальном порядке блоков требуем строгого чередования
-  row/column микрошагов и изменения **обеих** полос на каждом шаге. Ожидание:
-  такая комбинация должна ограничить проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, пару колонок $j=2$, $j+1=3$,
-  блоки строк $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$ и колонки
+- `Lens:` Invariant.
+- `Assertion (attempt):` We require strict interleaving in the global order of blocks
+  row/column microsteps and changing **both** bars at each step. Expectation:
+  such a combination should limit the projection rank on the two stripes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, a pair of columns $j=2$, $j+1=3$,
+  blocks of rows $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$ and columns
   $$C_0=\\{1,2,3,4\\},\\qquad C_1=\\{2,3\\}.$$
-  Рассмотрим чередующуюся цепочку
+  Consider an alternating chain
   $$U_1:=R_1\\times C_0,\\qquad U_2:=R_1\\times C_1,\\qquad U_3:=R_2\\times C_1.$$
-  Здесь $U_1\\to U_2$ — column‑шаг (оба стрипа меняются: пустые $\\to$ строки $R_1$),
-  а $U_2\\to U_3$ — row‑шаг (строки $R_1\\to R_2$), то есть строгая альтернация
-  с изменением обеих полос на каждом шаге. В порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$
-  получаем
+  Here $U_1\\to U_2$ is a column step (both strips change: empty $\\to$ rows $R_1$),
+  and $U_2\\to U_3$ is the row step (rows $R_1\\to R_2$), that is, strict alternation
+  with both bands changing at each step. OK $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$
+  we get
   $$p(\\delta(U_2))=(1100,1100),\\qquad p(\\delta(U_3))=(0011,0011),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: строгая альтернация + обе полосы меняются ⇒ ранг 2.
-- `Статус:` контрпример (toy, $k=2$): alternating + both‑change не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы **каждый** column‑шаг сохранял
-  активность обеих полос (без пустых полос) и одновременно менял их поддержки,
-  и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: strict alternation + both bands change  rank 2.
+- `Status:` counterexample (toy, $k=2$): alternating + bothchange does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require that **each** column step save
+  activity of both bands (without empty bands) and simultaneously changed their support,
+  and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S62-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-change-per-step.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.204. Исследовательский шаг (counterexample): column‑шаги активны на обеих полосах, но ранг остаётся 2
+### 16.204. Exploratory step (counterexample): column steps are active in both lanes, but the rank remains 2
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Требуем строгого чередования row/column микрошагов, причём
-  каждый column‑шаг сохраняет **активность обеих полос** и меняет их поддержки.
-  Ожидание: эта версия чередования должна ограничить проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, пару колонок $j=2$, $j+1=3$,
-  строки $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$ и колонки
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` We require strict alternation of row/column microsteps, and
+  Each column step keeps **the activity of both bands** and changes their support.
+  Expectation: This version of interleaving should limit the projection rank on two lanes.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, a pair of columns $j=2$, $j+1=3$,
+  rows $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$ and columns
   $$C_1=\\{1,2,3,4\\},\\qquad C_2=\\{2,3\\},\\qquad C_3=\\{1,4\\}.$$
-  Рассмотрим чередующуюся цепочку
+  Consider an alternating chain
   $$U_1:=R_1\\times C_1,\\qquad U_2:=R_1\\times C_2,\\qquad U_3:=R_2\\times C_2,$$
   $$U_4:=R_2\\times C_3.$$
-  Column‑шаги $U_1\\to U_2$ и $U_3\\to U_4$ сохраняют активность обеих полос
-  (колонки $2$ и $3$ по разные стороны) и меняют их поддержки. В порядке
-  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  Column steps $U_1\\to U_2$ and $U_3\\to U_4$ keep both stripes active
+  (columns $2$ and $3$ on opposite sides) and change their supports. In order
+  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_2))=(1100,1100),\\qquad p(\\delta(U_3))=(0011,0011),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: активные column‑шаги при чередовании всё ещё дают ранг 2.
-- `Статус:` контрпример (toy, $k=2$): “active column‑steps” не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: потребовать, чтобы и row‑шаги, и column‑шаги
-  меняли поддержки **по одному блоку** на обеих полосах (локальный размер шага),
-  и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: active column steps when alternating still give rank 2.
+- `Status:` counterexample (toy, $k=2$): "active columnsteps" do not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require that both row steps and column steps
+  changed supports **one block at a time** on both lanes (local step size),
+  and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S63-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-active-columnstep.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.205. Исследовательский шаг (counterexample): локальный блок на обеих полосах не снижает ранг
+### 16.205. Exploratory step (counterexample): local block in both lanes does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Усилим условие: на каждом row/column‑шаге поддержки
-  на полосах $S_{j-1}$ и $S_{j+1}$ меняются **на один блок** (локальный размер шага)
-  и обе полосы остаются активными. Ожидание: это ограничит проекционный ранг до 1.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, пару колонок $j=2$, $j+1=3$ и
-  блоки строк $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$. На полосах обозначим блоки
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let's strengthen the condition: at each row/column support step
+  on the stripes $S_{j-1}$ and $S_{j+1}$ change **by one block** (local step size)
+  and both bands remain active. Expectation: This will limit the projection rank to 1.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, a pair of columns $j=2$, $j+1=3$ and
+  blocks of lines $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$. Let's mark the blocks on the stripes
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Рассмотрим цепочку
+  Consider the chain
   $$U_1:=R_1\\times C_1,\\qquad U_2:=R_1\\times C_2,\\qquad U_3:=R_2\\times C_2,$$
-  где $C_1=\\{1,2,3,4\\}$, $C_2=\\{2,3\\}$. В узлах $U_2,U_3$ поддержка на
-  каждой полосе — ровно один блок ($B_1$ и $B_2$ соответственно), т.е. локальный размер шага.
-  В порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ получаем
+  where $C_1=\\{1,2,3,4\\}$, $C_2=\\{2,3\\}$. In nodes $U_2,U_3$ support for
+  Each lane has exactly one block ($B_1$ and $B_2$, respectively), i.e. local step size.
+  In order $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we get
   $$p(\\delta(U_2))=(1100,1100),\\qquad p(\\delta(U_3))=(0011,0011),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: локальные блоки на обеих полосах ⇒ ранг 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_local_block).
-- `Статус:` контрпример (toy, $k=2$): локальный блок на обеих полосах не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать **монотонного порядка** блоков
-  (без возвратов по строкам/колонкам) и проверить, остаётся ли ранг $\\ge 2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: local blocks on both lanes  rank 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_local_block).
+- `Status:` counterexample (toy, $k=2$): a local block on both lanes does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen condition: require **monotonic order** of blocks
+  (without row/column returns) and check if the rank remains $\\ge 2$.
 - `StepID:` Q39.S64-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.206. Исследовательский шаг (counterexample): монотонный порядок блоков не снижает ранг
+### 16.206. Exploratory step (counterexample): monotonic block order does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Усилим условие: блоки на полосах меняются
-  в **монотонном порядке** (без возвратов по строкам/колонкам), при этом
-  каждый шаг затрагивает один блок на обеих полосах. Ожидание: такой порядок
-  ограничит проекционный ранг до 1.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, $j=2$ и блоки строк
-  $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$, колонки $C_1=\\{1,2,3,4\\}$ и $C_2=\\{2,3\\}$.
-  Рассмотрим цепочку
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let's strengthen the condition: the blocks on the stripes change
+  in **monotonic order** (without row/column returns), while
+  each step affects one block in both lanes. Expectation: this order
+  will limit the projection rank to 1.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, $j=2$ and blocks of rows
+  $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$, columns $C_1=\\{1,2,3,4\\}$ and $C_2=\\{2,3\\}$.
+  Consider the chain
   $$U_1:=R_1\\times C_1,\\qquad U_2:=R_1\\times C_2,\\qquad U_3:=R_2\\times C_2.$$
-  Переход $U_1\\to U_2$ — column‑шаг, $U_2\\to U_3$ — row‑шаг; порядок блоков
-  монотонен (верхний блок $B_1$ сменяется на нижний $B_2$ без возвратов).
-  В порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  Transition $U_1\\to U_2$ is a column step, $U_2\\to U_3$ is a row step; block order
+  monotonic (the upper block $B_1$ is replaced by the lower block $B_2$ without returning).
+  In order $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_2))=(1100,1100),\\qquad p(\\delta(U_3))=(0011,0011),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: монотонный порядок блоков ⇒ ранг 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_monotone_block).
-- `Статус:` контрпример (toy, $k=2$): монотонный порядок блоков не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать **строго возрастающих** блоков
-  одновременно по строкам и колонкам (двумерная монотонность) и проверить,
-  сохраняется ли ранг $\\ge 2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: monotonic block order  rank 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_monotone_block).
+- `Status:` counterexample (toy, $k=2$): monotonic block order does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen condition: require **strictly increasing** blocks
+  simultaneously in rows and columns (two-dimensional monotonicity) and check whether
+  whether the rank $\\ge 2$ is preserved.
 - `StepID:` Q39.S65-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.207. Исследовательский шаг (counterexample): двумерная монотонность блоков не снижает ранг
+### 16.207. Exploratory step (counterexample): 2D monotonicity of blocks does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Усилим условие: блоки растут **монотонно по строкам и по
-  колонкам** (двумерная монотонность), и каждый шаг меняет по одному блоку на
-  обеих полосах. Ожидание: это ограничит проекционный ранг до 1.
-- `Контрпример (toy):` Возьмём grid $4\\times 4$, $j=2$ и блоки строк
-  $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$, а также блоки колонок
-  $C_1=\\{1,2\\}$, $C_2=\\{3,4\\}$ (монотонный рост по индексу блока).
-  Рассмотрим цепочку
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let's strengthen the condition: blocks grow **monotonically along lines and across
+  columns** (two-dimensional monotonicity), and each step changes one block per
+  both lanes. Expectation: This will limit the projection rank to 1.
+- `Counterexample (toy):` Let's take grid $4\\times 4$, $j=2$ and blocks of rows
+  $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$, as well as column blocks
+  $C_1=\\{1,2\\}$, $C_2=\\{3,4\\}$ (monotonic growth with respect to the block index).
+  Consider the chain
   $$U_1:=R_1\\times C_1,\\qquad U_2:=R_1\\times C_2,\\qquad U_3:=R_2\\times C_2.$$
-  Здесь и строковый, и колонковый блок‑индексы не убывают. В порядке
-  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  Here, both the row and column block indexes do not decrease. In order
+  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_2))=(1100,1100),\\qquad p(\\delta(U_3))=(0011,0011),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: двумерная монотонность ⇒ ранг 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_monotone2d).
-- `Статус:` контрпример (toy, $k=2$): двумерная монотонность не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать **строго возрастающих** блоков
-  одновременно по строкам и колонкам на каждом шаге, и проверить, остаётся ли
-  ранг $\\ge 2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: two-dimensional monotonicity  rank 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_monotone2d).
+- `Status:` counterexample (toy, $k=2$): two-dimensional monotonicity does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen condition: require **strictly increasing** blocks
+  simultaneously along rows and columns at each step, and check whether
+  rank $\\ge 2$.
 - `StepID:` Q39.S66-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.208. Исследовательский шаг (counterexample): строгая 2D‑монотонность не снижает ранг
+### 16.208. Exploratory step (counterexample): strict 2D monotonicity does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Усилим условие: на каждом шаге блоки по строкам **и**
-  по колонкам строго возрастают (2D‑монотонность на каждом шаге), при этом обе
-  полосы активны и меняются на один блок. Ожидание: это ограничит проекционный
-  ранг до 1.
-- `Контрпример (toy):` Возьмём grid $6\\times 6$, $j=3$ и разбиение строк на
-  блоки $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$, $R_3=\\{5,6\\}$, а колонок на
-  $C_1=\\{1,2\\}$, $C_2=\\{3,4\\}$, $C_3=\\{5,6\\}$. Рассмотрим цепочку
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let's strengthen the condition: at each step, blocks by lines ** and **
+  along the columns strictly increase (2D monotonicity at each step), while both
+  the stripes are active and change for one block. Expectation: This will limit the projection
+  rank up to 1.
+- `Counterexample (toy):` Let's take grid $6\\times 6$, $j=3$ and split the rows into
+  blocks $R_1=\\{1,2\\}$, $R_2=\\{3,4\\}$, $R_3=\\{5,6\\}$, and columns on
+  $C_1=\\{1,2\\}$, $C_2=\\{3,4\\}$, $C_3=\\{5,6\\}$. Consider the chain
   $$U_1:=R_1\\times C_1,\\qquad U_2:=R_2\\times C_2,\\qquad U_3:=R_3\\times C_3.$$
-  Здесь и строковые, и колонковые блок‑индексы строго растут на каждом шаге.
-  В порядке $(e_1,\\dots,e_6,f_1,\\dots,f_6)$ имеем
+  Here, both row and column block indexes grow strictly at every step.
+  In order $(e_1,\\dots,e_6,f_1,\\dots,f_6)$ we have
   $$p(\\delta(U_2))=(001100,001100),\\qquad p(\\delta(U_3))=(000011,000011),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=6$, $j=3$: строгая 2D‑монотонность ⇒ ранг 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_monotone2d_strict).
-- `Статус:` контрпример (toy, $k=2$): строгая 2D‑монотонность не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы блоки были **строго возрастающими**
-  и при этом оставались префиксами (2D‑prefix), и проверить, остаётся ли ранг $\\ge 2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=6$, $j=3$: strict 2D monotonicity  rank 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_monotone2d_strict).
+- `Status:` counterexample (toy, $k=2$): strict 2D monotonicity does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require blocks to be **strictly increasing**
+  and at the same time remained prefixes (2Dprefix), and check whether the rank $\\ge 2$ remains.
 - `StepID:` Q39.S67-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.209. Исследовательский шаг (counterexample): строгая 2D‑prefix‑монотонность не снижает ранг
+### 16.209. Exploratory step (counterexample): strict 2Dprefixmonotonicity does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Усилим условие: на каждом шаге прямоугольники —
-  **2D‑prefix** и при этом оба префикса строго растут; обе полосы активны.
-  Ожидание: такая строгая 2D‑prefix‑монотонность должна снижать проекционный ранг до 1.
-- `Контрпример (toy):` Возьмём grid $6\\times 6$, $j=3$ и префиксы
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let's strengthen the condition: at each step the rectangles -
+  **2Dprefix** and both prefixes are strictly increasing; both bands are active.
+  Expectation: This strict 2Dprefixmonotonicity should reduce the projection rank to 1.
+- `Counterexample (toy):` Let's take grid $6\\times 6$, $j=3$ and prefixes
   $$U_1=[1,2]\\times[1,2],\\qquad U_2=[1,4]\\times[1,4],\\qquad U_3=[1,5]\\times[1,5].$$
-  На каждой паре шагов строки и колонки строго растут, и прямоугольники остаются
-  2D‑prefix. Обозначим рёбра на полосах $S_{j-1}$ и $S_{j+1}$ через
+  At each pair of steps, the rows and columns grow strictly, and the rectangles remain
+  2Dprefix. Let us denote the edges on the stripes $S_{j-1}$ and $S_{j+1}$ by
   $$S_{j-1}=\\{e_1,\\dots,e_6\\},\\qquad S_{j+1}=\\{f_1,\\dots,f_6\\}.$$
-  Тогда для внутренних узлов имеем
+  Then for internal nodes we have
   $$p(\\delta(U_2))=(111100,111100),\\qquad p(\\delta(U_3))=(111110,111110),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=6$, $j=3$: строгая 2D‑prefix‑цепочка даёт ранг 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_monotone2d_strict_prefix).
-- `Статус:` контрпример (toy, $k=2$): строгая 2D‑prefix‑монотонность не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы пересечения с полосами
-  были **фронтирным блоком** (а не всем префиксом), и проверить, остаётся ли
-  ранг $\\ge 2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=6$, $j=3$: strict 2D prefix chain gives rank 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_monotone2d_strict_prefix).
+- `Status:` counterexample (toy, $k=2$): strict 2Dprefixmonotonicity does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require that intersections with stripes
+  were **front block** (not the entire prefix), and check if the
+  rank $\\ge 2$.
 - `StepID:` Q39.S68-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.210. Исследовательский шаг (counterexample): frontier‑блоки в строгой 2D‑prefix цепочке не снижают ранг
+### 16.210. Research step (counterexample): frontier blocks in a strict 2D prefix chain do not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Усилим условие: цепочка строгая 2D‑prefix,
-  и на каждом шаге пересечения с полосами — **только frontier‑блок** (новые строки/колонки),
-  т.е. один непрерывный блок на каждой полосе. Ожидание: это ограничит проекционный ранг до 1.
-- `Контрпример (toy):` Возьмём grid $6\\times 6$, $j=3$ и строгую 2D‑prefix цепочку
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let's strengthen the condition: the chain is strict 2Dprefix,
+  and at each step of intersection with stripes - **only frontier block** (new lines/columns),
+  those. one continuous block on each lane. Expectation: This will limit the projection rank to 1.
+- `Counterexample (toy):` Let's take grid $6\\times 6$, $j=3$ and a strict 2Dprefix chain
   $$U_1=[1,1]\\times[1,1],\\qquad U_2=[1,3]\\times[1,3],\\qquad U_3=[1,6]\\times[1,6].$$
-  Frontier‑блок для шага $U_1\\to U_2$ — строки $\\{2,3\\}$, а для $U_2\\to U_3$ — строки
-  $\\{4,5,6\\}$. На полосах $S_{j-1}$ и $S_{j+1}$ это даёт
+  Frontier block for step $U_1\\to U_2$ - lines $\\{2,3\\}$, and for $U_2\\to U_3$ - lines
+  $\\{4,5,6\\}$. On the stripes $S_{j-1}$ and $S_{j+1}$ this gives
   $$p_{\\mathrm{fr}}(U_2)=(011000,011000),\\qquad p_{\\mathrm{fr}}(U_3)=(000111,000111),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=6$, $j=3$: frontier‑блоки дают ранг 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_frontier_block).
-- `Статус:` контрпример (toy, $k=2$): frontier‑блоки не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы frontier‑блок имел **длину 1**
-  (рост на одну строку/колонку), и проверить, исчезает ли ранг 2.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=6$, $j=3$: frontier blocks give rank 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_frontier_block).
+- `Status:` counterexample (toy, $k=2$): frontier blocks do not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen condition: require frontier block to have **length 1**
+  (growth by one row/column), and check if rank 2 disappears.
 - `StepID:` Q39.S69-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.211. Исследовательский шаг (counterexample): unit‑frontier в строгой 2D‑prefix цепочке не снижает ранг
+### 16.211. Research step (counterexample): unitfrontier in a strict 2Dprefix chain does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Усилим условие: в строгой 2D‑prefix цепочке
-  frontier‑блок на каждом шаге имеет **длину 1** (рост ровно на одну строку/колонку),
-  и обе полосы активны. Ожидание: это ограничит проекционный ранг до 1.
-- `Контрпример (toy):` Возьмём grid $6\\times 6$, $j=3$ и цепочку
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let's strengthen the condition: in a strict 2Dprefix chain
+  The frontier block at each step has **length 1** (growth by exactly one line/column),
+  and both bands are active. Expectation: This will limit the projection rank to 1.
+- `Counterexample (toy):` Let's take grid $6\\times 6$, $j=3$ and chain
   $$U_1=[1,2]\\times[1,2],\\qquad U_2=[1,3]\\times[1,3],\\qquad U_3=[1,4]\\times[1,4].$$
-  Frontier‑блоки имеют длину 1: строки $\\{3\\}$ и $\\{4\\}$.
-  В порядке $(e_1,\\dots,e_6,f_1,\\dots,f_6)$ получаем
+  Frontier blocks have length 1: lines $\\{3\\}$ and $\\{4\\}$.
+  In order $(e_1,\\dots,e_6,f_1,\\dots,f_6)$ we get
   $$p_{\\mathrm{fr}}(U_2)=(001000,001000),\\qquad p_{\\mathrm{fr}}(U_3)=(000100,000100),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=6$, $j=3$: unit‑frontier даёт ранг 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_unit_frontier).
-- `Статус:` контрпример (toy, $k=2$): unit‑frontier не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: разрешить unit‑frontier лишь на **одной** полосе
-  за шаг (one‑strip), и проверить, исчезает ли ранг 2.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=6$, $j=3$: unitfrontier gives rank 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_unit_frontier).
+- `Status:` counterexample (toy, $k=2$): unitfrontier does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: allow unitfrontier only on **one** lane
+  per step (onestrip), and check whether rank 2 disappears.
 - `StepID:` Q39.S70-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.212. Исследовательский шаг (counterexample): one‑strip unit‑frontier не снижает ранг
+### 16.212. Research step (counterexample): onestrip unitfrontier does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Усилим условие: в строгой 2D‑prefix цепочке
-  unit‑frontier разрешён **только на одной полосе** на шаге (one‑strip),
-  другая полоса пустая. Ожидание: это снизит проекционный ранг до 1.
-- `Контрпример (toy):` Возьмём grid $6\\times 6$, $j=3$ и цепочку
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let's strengthen the condition: in a strict 2Dprefix chain
+  unitfrontier is allowed **only on one strip** at a step (onestrip),
+  the other lane is empty. Expectation: This will reduce the projection rank to 1.
+- `Counterexample (toy):` Let's take grid $6\\times 6$, $j=3$ and chain
   $$U_1=[1,2]\\times[1,2],\\qquad U_2=[1,3]\\times[1,2],\\qquad U_3=[1,4]\\times[1,2].$$
-  Тогда frontier на полосе $S_{j-1}$ — единичные строки $\\{3\\}$ и $\\{4\\}$,
-  а на $S_{j+1}$ фронтир пуст. В порядке $(e_1,\\dots,e_6,f_1,\\dots,f_6)$:
+  Then the frontier on the strip $S_{j-1}$ are the unit rows $\\{3\\}$ and $\\{4\\}$,
+  and on $S_{j+1}$ the frontier is empty. In order $(e_1,\\dots,e_6,f_1,\\dots,f_6)$:
   $$p_{\\mathrm{fr}}(U_2)=(001000,000000),\\qquad p_{\\mathrm{fr}}(U_3)=(000100,000000),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=6$, $j=3$: one‑strip unit‑frontier даёт ранг 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_onestrip).
-- `Статус:` контрпример (toy, $k=2$): one‑strip unit‑frontier не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать **чередование полос**
-  (unit‑frontier переключается между $S_{j-1}$ и $S_{j+1}$), и проверить, остаётся ли ранг 2.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=6$, $j=3$: onestrip unitfrontier gives rank 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_onestrip).
+- `Status:` counterexample (toy, $k=2$): onestrip unitfrontier does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require **alternation of lanes**
+  (unit-frontier switches between $S_{j-1}$ and $S_{j+1}$), and check if rank 2 remains.
 - `StepID:` Q39.S71-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.213. Исследовательский шаг (counterexample): alternating unit‑frontier не снижает ранг
+### 16.213. Research step (counterexample): alternating unitfrontier does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Усилим условие: в строгой 2D‑prefix цепочке
-  unit‑frontier чередуется между полосами $S_{j-1}$ и $S_{j+1}$ на каждом шаге.
-  Ожидание: такое чередование снизит проекционный ранг до 1.
-- `Контрпример (toy):` Возьмём grid $6\\times 6$, $j=3$ и цепочку
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let's strengthen the condition: in a strict 2Dprefix chain
+  unit-frontier alternates between stripes $S_{j-1}$ and $S_{j+1}$ at each step.
+  Expectation: This alternation will reduce the projection rank to 1.
+- `Counterexample (toy):` Let's take grid $6\\times 6$, $j=3$ and chain
   $$U_1=[1,3]\\times[1,2],\\qquad U_2=[1,4]\\times[1,2],\\qquad U_3=[1,4]\\times[1,3].$$
-  Тогда frontier на $S_{j-1}$ — единичная строка $\\{4\\}$ для $U_2$,
-  а для $U_3$ frontier переключается на $S_{j+1}$ (единичная строка $\\{3\\}$).
-  В порядке $(e_1,\\dots,e_6,f_1,\\dots,f_6)$:
+  Then frontier on $S_{j-1}$ is the unit row $\\{4\\}$ for $U_2$,
+  and for $U_3$ frontier switches to $S_{j+1}$ (unit row $\\{3\\}$).
+  In order $(e_1,\\dots,e_6,f_1,\\dots,f_6)$:
   $$p_{\\mathrm{fr}}(U_2)=(000100,000000),\\qquad p_{\\mathrm{fr}}(U_3)=(000000,001000),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=6$, $j=3$: alternating unit‑frontier даёт ранг 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_alternating).
-- `Статус:` контрпример (toy, $k=2$): alternating unit‑frontier не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы frontier чередовался **и**
-  оставался в фиксированном порядке по строкам (global order), и проверить ранг.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=6$, $j=3$: alternating unitfrontier gives rank 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_alternating).
+- `Status:` counterexample (toy, $k=2$): alternating unitfrontier does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen condition: require frontier to alternate **and**
+  remained in a fixed order by row (global order), and check the rank.
 - `StepID:` Q39.S72-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.214. Исследовательский шаг (counterexample): balanced anchored blocks не снижают ранг
+### 16.214. Research step (counterexample): balanced anchored blocks do not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` если в anchored‑шаге блоки «сбалансированы» между полосами,
-  то проекционный ранг может упасть до 1.
-- `Контрпример (toy):` две сбалансированные 12‑битные проекции остаются различимыми и ненулевыми,
-  поэтому ранг внутренних узлов равен 2 (см. `formal/WIP/Work.lean`,
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` if in the anchored step the blocks are "balanced" between the stripes,
+  then the projection rank can drop to 1.
+- `Counterexample (toy):` two balanced 12bit projections remain distinguishable and non-zero,
+  therefore the rank of internal nodes is 2 (see. `formal/WIP/Work.lean`,
   Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced).
-- `Статус:` контрпример (toy, $k=2$).
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: да (toy‑ранг, чистая комбинаторика).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` потребовать симметрии между полосами на каждом шаге (row/column swap)
-  и проверить, сохраняется ли ранг 2.
+- `Status:` counterexample (toy, $k=2$).
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (toy-rank, pure combinatorics).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` require symmetry between stripes at each step (row/column swap)
+  and check if rank 2 is maintained.
 - `StepID:` Q39.S80-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.215. Исследовательский шаг (counterexample): row/column swap symmetry не снижает ранг
+### 16.215. Exploratory step (counterexample): row/column swap symmetry does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` если каждый шаг симметричен по полосам
-  (row/column swap), то проекционный ранг может упасть до 1.
-- `Контрпример (toy):` две strip‑симметричные 12‑битные проекции остаются различимыми
-  и ненулевыми, поэтому ранг внутренних узлов равен 2 (см. `formal/WIP/Work.lean`,
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` if each step is symmetrical along the stripes
+  (row/column swap), then the projection rank can drop to 1.
+- `Counterexample (toy):` two strip-symmetric 12-bit projections remain distinguishable
+  and non-zero, so the rank of internal nodes is 2 (see. `formal/WIP/Work.lean`,
   Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap).
-- `Статус:` контрпример (toy, $k=2$).
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: да (toy‑ранг, комбинаторика).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` требовать фиксированную пару строк/колонок на каждом шаге
-  (row/column swap + fixed‑pair) и проверить, остаётся ли ранг 2.
+- `Status:` counterexample (toy, $k=2$).
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (toy-rank, combinatorics).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` require a fixed pair of rows/columns at each step
+  (row/column swap + fixedpair) and check if rank 2 remains.
 - `StepID:` Q39.S81-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.216. Исследовательский шаг (counterexample): fixed‑pair row/column swap не снижает ранг
+### 16.216. Exploratory step (counterexample): fixedpair row/column swap does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` если разрешить только одну фиксированную пару строк/колонок
-  (fixed‑pair) и требовать row/column swap на каждом шаге, то проекционный ранг может упасть до 1.
-- `Контрпример (toy):` две фикс‑парные strip‑симметричные 12‑битные проекции остаются
-  различимыми и ненулевыми, значит ранг внутренних узлов равен 2
-  (см. `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair).
-- `Статус:` контрпример (toy, $k=2$).
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: да (toy‑ранг, комбинаторика).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` потребовать фиксированную пару **и** одинаковый порядок
-  в обеих полосах (fixed‑pair + same‑order) и проверить, сохраняется ли ранг 2.
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` if only allow one fixed pair of rows/columns
+  (fixedpair) and require row/column swap at each step, then the projection rank can drop to 1.
+- `Counterexample (toy):` two fixed-pair strip-symmetric 12-bit projections remain
+  distinguishable and non-zero, which means the rank of internal nodes is 2
+  (see `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair).
+- `Status:` counterexample (toy, $k=2$).
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (toy-rank, combinatorics).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` require a fixed pair of **and** same order
+  in both bands (fixedpair + sameorder) and check if rank 2 is preserved.
 - `StepID:` Q39.S82-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.217. Исследовательский шаг (counterexample): fixed‑pair + same‑order не снижает ранг
+### 16.217. Research step (counterexample): fixedpair + sameorder does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` если зафиксировать пару строк/колонок и требовать одинаковый порядок
-  в обеих полосах (same‑order), то проекционный ранг может упасть до 1.
-- `Контрпример (toy):` две same‑order 12‑битные проекции остаются различимыми и ненулевыми,
-  значит ранг внутренних узлов равен 2 (см. `formal/WIP/Work.lean`,
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` if you fix a pair of rows/columns and require the same order
+  in both stripes (same-order), then the projection rank can drop to 1.
+- `Counterexample (toy):` two sameorder 12bit projections remain distinguishable and non-zero,
+  This means that the rank of internal nodes is 2 (see `formal/WIP/Work.lean`,
   Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder).
-- `Статус:` контрпример (toy, $k=2$).
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: да (toy‑ранг, комбинаторика).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` усилить условие: fixed‑pair + same‑order + запрет смены пары
-  на всей цепочке (global fixed‑pair), и проверить, остаётся ли ранг 2.
+- `Status:` counterexample (toy, $k=2$).
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (toy-rank, combinatorics).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` strengthen the condition: fixedpair + sameorder + prohibition of pair change
+  on the entire chain (global fixed-pair), and check whether rank 2 remains.
 - `StepID:` Q39.S83-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair-sameorder.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.218. Исследовательский шаг (counterexample): global fixed‑pair не снижает ранг
+### 16.218. Exploratory step (counterexample): global fixedpair does not reduce rank
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` если фиксировать одну и ту же пару строк/колонок
-  на всей цепочке (global fixed‑pair), то проекционный ранг может упасть до 1.
-- `Контрпример (toy):` две global‑fixed‑pair 12‑битные проекции остаются различимыми
-  и ненулевыми, значит ранг внутренних узлов равен 2 (см. `formal/WIP/Work.lean`,
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` if you fix the same pair of rows/columns
+  on the entire chain (global fixed-pair), then the projection rank can drop to 1.
+- `Counterexample (toy):` two globalfixedpair 12bit projections remain distinguishable
+  and non-zero, which means the rank of internal nodes is 2 (see. `formal/WIP/Work.lean`,
   Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder_globalfixedpair).
-- `Статус:` контрпример (toy, $k=2$).
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: да (toy‑ранг, комбинаторика).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` требовать global fixed‑pair и запретить смену ориентации
-  (fixed‑pair + fixed‑orientation), и проверить, сохраняется ли ранг 2.
+- `Status:` counterexample (toy, $k=2$).
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (toy-rank, combinatorics).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` require global fixedpair and prohibit orientation change
+  (fixedpair + fixedorientation), and check if rank 2 is preserved.
 - `StepID:` Q39.S84-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair-sameorder-globalfixedpair.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.189. Исследовательский шаг (counterexample): синхронный глобальный шаг по всем колонкам не снижает проекционный ранг при $k=2$
+### 16.189. Exploratory step (counterexample): synchronous global step across all columns does not reduce projection rank for $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть на каждом шаге глобального протокола **все** полосы $S_j$
-  меняются синхронно: существует общий dyadic‑блок $B$ такой, что для каждого $j$
-  пересечение $S_j\\cap\\delta(U)$ равно $B$ (один и тот же шаблон по всем колонкам).
-  Ожидание: такая синхронность должна снижать проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём grid $4\\times m$ при $m\\ge 4$ и пару колонок $j=2$, $j+1=3$.
-  Обозначим полосы $S_{j-1}$ и $S_{j+1}$ рёбрами
+- `Lens:` Invariant.
+- `Assertion (attempt):` Suppose at each step of the global protocol **all** stripes $S_j$
+  change synchronously: there is a common dyadic block $B$ such that for each $j$
+  the intersection of $S_j\\cap\\delta(U)$ is equal to $B$ (same pattern across all columns).
+  Expectation: This synchrony should reduce the projection rank on the two stripes.
+- `Counterexample (toy):` Let's take grid $4\\times m$ for $m\\ge 4$ and a pair of columns $j=2$, $j+1=3$.
+  Let us denote the stripes $S_{j-1}$ and $S_{j+1}$ by edges
   $$S_{j-1}=\\{e_1,\\dots,e_4\\},\\qquad S_{j+1}=\\{f_1,\\dots,f_4\\}$$
-  по строкам, и dyadic‑блоки
+  by lines, and dyadic blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Пусть
-  $$U_1:=\\{(r,c): r\\in\\{1,2\\},\\ c\\ \\text{нечётное}\\},\\qquad
-    U_2:=\\{(r,c): r\\in\\{3,4\\},\\ c\\ \\text{нечётное}\\}.$$
-  Тогда для **каждой** полосы $S_j$ ровно одно из двух инцидентных столбцов нечётно,
-  поэтому $S_j\\cap\\delta(U_1)$ состоит ровно из рёбер верхних двух строк, а
-  $S_j\\cap\\delta(U_2)$ — из рёбер нижних двух строк. То есть глобальный шаг
-  синхронизирован на всех колонках: $B_1\\to B_2$.
-  В частности, на $S_{j-1}\\sqcup S_{j+1}$ имеем
+  Let
+  $$U_1:=\\{(r,c): r\\in\\{1,2\\},\\ c\\ \\text{odd}\\},\\qquad
+    U_2:=\\{(r,c): r\\in\\{3,4\\},\\ c\\ \\text{odd}\\}.$$
+  Then for **each** stripe $S_j$ exactly one of the two incident columns is odd,
+  therefore $S_j\\cap\\delta(U_1)$ consists of exactly the edges of the top two rows, and
+  $S_j\\cap\\delta(U_2)$ -- from the edges of the bottom two lines. That is a global step
+  synchronized on all speakers: $B_1\\to B_2$.
+  In particular, on $S_{j-1}\\sqcup S_{j+1}$ we have
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(0000,1111),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: синхронный глобальный шаг $B_1\\to B_2$ даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): синхронность по всем колонкам не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: потребовать **row/column lock‑step** (одновременное
-  согласование по полосам и по строковым разбиениям) и проверить,
-  остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: synchronous global step $B_1\\to B_2$ gives rank 2.
+- `Status:` counterexample (toy, $k=2$): synchronicity across all columns does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require **row/column lockstep** (simultaneous
+  matching by stripes and by line partitions) and check whether
+  whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S48-2k-two-strip-chain-strip-support-global-synchronous.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.168. Исследовательский шаг (counterexample): двухполосные row-interval пересечения не снижают проекционный ранг при $k=2$
+### 16.168. Exploratory step (counterexample): two-lane row-interval intersections do not reduce projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Если требовать, чтобы для каждого внутреннего узла XOR-дерева
-  пересечения $S_j\\cap\\delta(U)$ и $S_{j+1}\\cap\\delta(U)$ были row-interval'ами
-  (непрерывные по строкам сегменты), то проекционный ранг на разбиение $\\pi$
-  с двумя блоками падает до $\\le 1$.
-- `Контрпример (toy):` Возьмём конструкцию из §16.167 с $n=4$, $j=1$ и блоками
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` If we require that for each internal node of the XOR tree
+  the intersections of $S_j\\cap\\delta(U)$ and $S_{j+1}\\cap\\delta(U)$ were row-intervals
+  (line-continuous segments), then the projection rank on the partition $\\pi$
+  with two blocks drops to $\\le 1$.
+- `Counterexample (toy):` Let's take the construction from Section 16.167 with $n=4$, $j=1$ and blocks
   $B_1=\\{e_1,e_2,f_1,f_2\\}$, $B_2=\\{e_3,e_4,f_3,f_4\\}$.
-  Для внутренних узлов $U_1=\\{(1,j+1),(2,j+1)\\}$ и $U_2=\\{(3,j+1),(4,j+1)\\}$
-  пересечения с $S_j$ и $S_{j+1}$ — это row-interval'ы
-  ($\\{e_1,e_2\\}$, $\\{f_1,f_2\\}$ и $\\{e_3,e_4\\}$, $\\{f_3,f_4\\}$), но
+  For internal nodes $U_1=\\{(1,j+1),(2,j+1)\\}$ and $U_2=\\{(3,j+1),(4,j+1)\\}$
+  intersections with $S_j$ and $S_{j+1}$ are row-intervals
+  ($\\{e_1,e_2\\}$, $\\{f_1,f_2\\}$ and $\\{e_3,e_4\\}$, $\\{f_3,f_4\\}$), but
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(0000,1111),$$
-  что линейно независимо.
-- `Toy‑тест:` $n=4$, $j=1$: оба пересечения на двух полосах — непрерывные сегменты,
-  но проекционный ранг внутренних узлов равен 2.
-- `Статус:` контрпример (toy, $k=2$): двухполосная row-interval геометрия не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие связности: требовать согласованности интервалов
-  между $S_j$ и $S_{j+1}$ (например, одинаковые множества строк), и проверить,
-  даёт ли это ранговую обструкцию при $k=2$.
+  which is linearly independent.
+- `Toy test:` $n=4$, $j=1$: both intersections on two lanes are continuous segments,
+  but the projection rank of internal nodes is 2.
+- `Status:` counterexample (toy, $k=2$): two-lane row-interval geometry does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition of connectivity: require consistency of intervals
+  between $S_j$ and $S_{j+1}$ (for example, identical sets of strings), and check whether
+  does this give rank obstruction for $k=2$.
 - `StepID:` Q39.S27-2k-two-strip-interval-rank-bound.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.169. Исследовательский шаг (counterexample): linked row-intervals на двух полосах не снижают проекционный ранг при $k=2$
+### 16.169. Exploratory step (counterexample): linked row-intervals on two lanes do not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Если требовать, чтобы для каждого внутреннего узла XOR-дерева
-  пересечения $S_j\\cap\\delta(U)$ и $S_{j+1}\\cap\\delta(U)$ были row-interval'ами
-  **и** соответствовали одним и тем же строкам (linked intervals),
-  то проекционный ранг на разбиение $\\pi$ с двумя блоками падает до $\\le 1$.
-- `Контрпример (toy):` Возьмём ту же конструкцию, что в §16.167–§16.168:
-  $n=4$, $j=1$, блоки $B_1=\\{e_1,e_2,f_1,f_2\\}$ и $B_2=\\{e_3,e_4,f_3,f_4\\}$,
-  внутренние узлы $U_1=\\{(1,j+1),(2,j+1)\\}$ и $U_2=\\{(3,j+1),(4,j+1)\\}$.
-  Тогда
+- `Lens:` Invariant.
+- `Assertion (attempt):` If we require that for each internal node of the XOR tree
+  the intersections of $S_j\\cap\\delta(U)$ and $S_{j+1}\\cap\\delta(U)$ were row-intervals
+  **and** matched the same strings (linked intervals),
+  then the projection rank on the partition $\\pi$ with two blocks drops to $\\le 1$.
+- `Counterexample (toy):` Let's take the same construction as in Section 16.167-Section 16.168:
+  $n=4$, $j=1$, blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$ and $B_2=\\{e_3,e_4,f_3,f_4\\}$,
+  internal nodes $U_1=\\{(1,j+1),(2,j+1)\\}$ and $U_2=\\{(3,j+1),(4,j+1)\\}$.
+  Then
   $$S_j\\cap\\delta(U_1)=\\{e_1,e_2\\},\\quad S_{j+1}\\cap\\delta(U_1)=\\{f_1,f_2\\},$$
   $$S_j\\cap\\delta(U_2)=\\{e_3,e_4\\},\\quad S_{j+1}\\cap\\delta(U_2)=\\{f_3,f_4\\},$$
-  то есть на каждой полосе интервалы и они связаны одинаковыми строками.
-  Но проекции
+  that is, each strip has intervals and they are connected by the same lines.
+  But projections
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(0000,1111)$$
-  линейно независимы.
-- `Toy‑тест:` $n=4$, $j=1$: linked row-interval'ы на обеих полосах, но проекционный ранг внутренних узлов равен 2.
-- `Статус:` контрпример (toy, $k=2$): linked-условие по строкам не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить геометрию: требовать, чтобы $U$ на двухколоночной полосе
-  был **прямоугольным** набором вершин (оба столбца, один row-interval),
-  и проверить, даёт ли это ранговую обструкцию при $k=2$.
+  linearly independent.
+- `Toy test:` $n=4$, $j=1$: linked row-intervals on both stripes, but the projection rank of internal nodes is 2.
+- `Status:` counterexample (toy, $k=2$): the linked condition on rows does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen geometry: require $U$ on a two-column strip
+  was a **rectangular** set of vertices (both columns, one row-interval),
+  and check whether this gives rank obstruction for $k=2$.
 - `StepID:` Q39.S28-2k-two-strip-linked-intervals.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.170. Исследовательский шаг (counterexample): двухполосная прямоугольная геометрия (двухколоночная полоса) не снижает проекционный ранг при $k=2$
+### 16.170. Exploratory step (counterexample): two-lane rectangular geometry (two-column stripe) does not reduce projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Если требовать, чтобы каждый внутренний узел XOR-дерева соответствовал
-  прямоугольнику в двухколоночной полосе (две соседние колонки, один row-interval по строкам),
-  то проекционный ранг на двух внешних полосах должен быть $\\le 1$.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы как $S_{\\mathrm{left}}$ (между колонками $j-1$ и $j$)
-  и $S_{\\mathrm{right}}$ (между колонками $j+1$ и $j+2$).
-  Разбиение $\\pi$ зададим блоками
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` If we require that each internal node of the XOR tree correspond to
+  a rectangle in a two-column strip (two adjacent columns, one row-interval along the lines),
+  then the projection rank on the two outer strips must be $\\le 1$.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer stripes as $S_{\\mathrm{left}}$ (between columns $j-1$ and $j$)
+  and $S_{\\mathrm{right}}$ (between columns $j+1$ and $j+2$).
+  We define the partition $\\pi$ in blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\},$$
-  где $e_i$ — рёбра на $S_{\\mathrm{left}}$, $f_i$ — рёбра на $S_{\\mathrm{right}}$ (в порядке строк).
-  Возьмём внутренние узлы
+  where $e_i$ are edges on $S_{\\mathrm{left}}$, $f_i$ are edges on $S_{\\mathrm{right}}$ (in row order).
+  Let's take the internal nodes
   $$U_1=\\{(1,j),(2,j),(1,j+1),(2,j+1)\\},\\qquad
     U_2=\\{(3,j),(4,j),(3,j+1),(4,j+1)\\}.$$
-  Тогда $U_1,U_2$ — прямоугольники $2\\times 2$ в двухколоночной полосе, а пересечения
-  с $S_{\\mathrm{left}}$ и $S_{\\mathrm{right}}$ — linked row-interval'ы по тем же строкам.
-  Однако
+  Then $U_1,U_2$ are $2\\times 2$ rectangles in a two-column strip, and the intersections
+  with $S_{\\mathrm{left}}$ and $S_{\\mathrm{right}}$ - linked row-intervals on the same lines.
+  However
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(0000,1111),$$
-  что линейно независимо.
-- `Toy‑тест:` $n=4$, $j=2$: две прямоугольные области в двухколоночной полосе дают ранг 2 на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): прямоугольники на двухколоночной полосе не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать anchored-прямоугольники (например, строки $[1..t]$)
-  в двухколоночной полосе или явную замкнутость относительно XOR, и проверить,
-  даёт ли это ранговую обструкцию при $k=2$.
+  which is linearly independent.
+- `Toy test:` $n=4$, $j=2$: two rectangular areas in a two-column strip give rank 2 on $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): rectangles on a two-column strip do not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require anchored-rectangles (e.g. strings $[1..t]$)
+  in a two-column strip or obvious closure with respect to XOR, and check whether
+  does this give rank obstruction for $k=2$.
 - `StepID:` Q39.S29-2k-two-strip-rectangular-geometry.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.171. Исследовательский шаг (counterexample): anchored-прямоугольники в двухколоночной полосе не снижают проекционный ранг при $k=2$
+### 16.171. Exploratory step (counterexample): anchored rectangles in a two-column strip do not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Если требовать, чтобы каждый внутренний узел XOR-дерева
-  соответствовал anchored-прямоугольнику в двухколоночной полосе (две соседние колонки,
-  строки $[1..t]$ для некоторого $t$), то проекционный ранг на двух внешних полосах
-  должен быть $\\le 1$.
-- `Контрпример (toy):` Пусть $n=4$ и рассмотрим две соседние колонки $j$ и $j+1$.
-  Обозначим внешние полосы $S_{j-1}$ (между $j-1$ и $j$) и $S_{j+1}$ (между $j+1$ и $j+2$),
-  а их рёбра по строкам как $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$.
-  Разбиение $\\pi$ зададим блоками
+- `Lens:` Invariant.
+- `Assertion (attempt):` If we require that each internal node of the XOR tree
+  corresponded to an anchored rectangle in a two-column strip (two adjacent columns,
+  strings $[1..t]$ for some $t$), then the projection rank on the two outer strips
+  should be $\\le 1$.
+- `Counterexample (toy):` Let $n=4$ and consider two adjacent columns $j$ and $j+1$.
+  Let us denote the outer bands $S_{j-1}$ (between $j-1$ and $j$) and $S_{j+1}$ (between $j+1$ and $j+2$),
+  and their edges in rows are as $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$.
+  We define the partition $\\pi$ in blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Возьмём внутренние узлы
+  Let's take the internal nodes
   $$U_1=\\{(1,j),(2,j),(1,j+1),(2,j+1)\\},\\qquad
     U_2=\\{(1,j),\\dots,(4,j),(1,j+1),\\dots,(4,j+1)\\}.$$
-  Тогда $U_1$ и $U_2$ — anchored-прямоугольники (строки $[1..2]$ и $[1..4]$),
-  а проекции дают
+  Then $U_1$ and $U_2$ are anchored rectangles (lines $[1..2]$ and $[1..4]$),
+  and the projections give
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(1111,1111),$$
-  что линейно независимо.
-- `Toy‑тест:` $n=4$, $j=2$: два anchored-прямоугольника в двухколоночной полосе дают ранг 2 на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): anchored-прямоугольники не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы дерево было **prefix-цепочкой**
-  (каждый внутренний узел добавляет ровно одну строку) и проверить,
-  остаётся ли ранг $\\ge 2$ в этом режиме.
+  which is linearly independent.
+- `Toy test:` $n=4$, $j=2$: two anchored rectangles in a two-column strip give rank 2 on $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): anchored rectangles do not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require the tree to be a **prefix-chain**
+  (each internal node adds exactly one row) and check if
+  whether the rank $\\ge 2$ remains in this mode.
 - `StepID:` Q39.S30-2k-two-strip-anchored-rectangles.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.172. Исследовательский шаг (counterexample): prefix-цепочка anchored-прямоугольников не снижает проекционный ранг при $k=2$
+### 16.172. Exploratory step (counterexample): prefix chain of anchored rectangles does not reduce projection rank for $k=2$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (попытка):` Если ограничить XOR-дерево режимом **prefix-цепочки**:
-  каждый внутренний узел получается добавлением ровно одной новой строки (anchored-прямоугольники
-  с рядами $[1..t]$), то проекционный ранг на двух внешних полосах должен быть $\\le 1$.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$.
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (по строкам).
-  Разбиение $\\pi$ зададим блоками $B_1=\\{e_1,e_2,f_1,f_2\\}$ и $B_2=\\{e_3,e_4,f_3,f_4\\}$.
-  Рассмотрим prefix-цепочку прямоугольников
+- `Lens:` Trade-off.
+- `Assertion (attempt):` If you restrict the XOR tree to **prefix-chains** mode:
+  each internal node is obtained by adding exactly one new line (anchored rectangles
+  with series $[1..t]$), then the projection rank on the two outer strips must be $\\le 1$.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$.
+  Let us denote the outer stripes $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (by rows).
+  We define the partition $\\pi$ by blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$ and $B_2=\\{e_3,e_4,f_3,f_4\\}$.
+  Consider a prefix chain of rectangles
   $$U_t=\\{(1,j),\\dots,(t,j),(1,j+1),\\dots,(t,j+1)\\},\\qquad t=1,2,3,4.$$
-  Тогда каждое $U_t$ — anchored-прямоугольник, а переход $U_t\\to U_{t+1}$ добавляет ровно одну строку.
-  При этом проекции:
+  Then each $U_t$ is an anchored rectangle, and the transition $U_t\\to U_{t+1}$ adds exactly one row.
+  In this case, the projections:
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111)$$
-  линейно независимы. Следовательно, ранг внутренних узлов цепочки равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: цепочка $U_1\\subset U_2\\subset U_3\\subset U_4$ даёт ранг 2 на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): prefix-цепочка anchored-прямоугольников не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` попробовать ограничение на **чередование полос**: требовать, чтобы
-  каждое добавление строки меняло только одну из двух полос (левую или правую), и проверить,
-  появляется ли ранговая обструкция при $k=2$.
+  linearly independent. Therefore, the rank of the internal nodes of the chain is 2.
+- `Toy test:` $n=4$, $j=2$: chain $U_1\\subset U_2\\subset U_3\\subset U_4$ gives rank 2 on $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): a prefix chain of anchored rectangles does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` try a restriction on **alternation of lanes**: require that
+  each row addition changed only one of the two stripes (left or right), and check if
+  whether rank obstruction appears at $k=2$.
 - `StepID:` Q39.S31-2k-two-strip-prefix-chain.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.173. Исследовательский шаг (counterexample): чередование полос в XOR‑шаге не снижает проекционный ранг при $k=2$
+### 16.173. Exploratory step (counterexample): alternating stripes in the XOR step does not reduce the projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть для каждого XOR‑шага выполняется условие **чередования полос**:
-  для родителя $U$ и его детей $U',U''$ пересечения с двумя внешними полосами
-  удовлетворяют
-  $$S_{j-1}\\cap\\delta(U)=S_{j-1}\\cap\\delta(U')\\quad\\text{и}\\quad
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let the condition **alternation of stripes** be satisfied for each XOR step:
+  for parent $U$ and its children $U',U''$ intersections with two outer stripes
+  satisfy
+  $$S_{j-1}\\cap\\delta(U)=S_{j-1}\\cap\\delta(U')\\quad\\text{and}\\quad
     S_{j+1}\\cap\\delta(U)=S_{j+1}\\cap\\delta(U'').$$
-  То есть при переходе от $U$ к каждому ребёнку изменяется только **одна** полоса.
-  Кажется, что такой режим должен подавлять независимость на двух полосах.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (по строкам),
-  а блоки $B_1=\\{e_1,e_2,f_1,f_2\\}$ и $B_2=\\{e_3,e_4,f_3,f_4\\}$.
-  Рассмотрим два узла:
-  $$U_L=\\{(1,j),(2,j)\\}\\quad\\text{(левая колонка, строки 1–2)},$$
-  $$U_R=\\{(1,j+1),(2,j+1)\\}\\quad\\text{(правая колонка, строки 1–2)}.$$
-  Тогда $S_{j-1}\\cap\\delta(U_L)=\\{e_1,e_2\\}$ и $S_{j+1}\\cap\\delta(U_L)=\\varnothing$,
-  а $S_{j-1}\\cap\\delta(U_R)=\\varnothing$ и $S_{j+1}\\cap\\delta(U_R)=\\{f_1,f_2\\}$.
-  Для родителя $U=U_L\\triangle U_R$ получаем
+  That is, when moving from $U$ to each child, only **one** band changes.
+  It seems that such a regime should suppress independence in two lanes.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer stripes $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (by rows),
+  and blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$ and $B_2=\\{e_3,e_4,f_3,f_4\\}$.
+  Let's consider two nodes:
+  $$U_L=\\{(1,j),(2,j)\\}\\quad\\text{(left column, lines 1-2)},$$
+  $$U_R=\\{(1,j+1),(2,j+1)\\}\\quad\\text{(right column, lines 1-2)}.$$
+  Then $S_{j-1}\\cap\\delta(U_L)=\\{e_1,e_2\\}$ and $S_{j+1}\\cap\\delta(U_L)=\\varnothing$,
+  and $S_{j-1}\\cap\\delta(U_R)=\\varnothing$ and $S_{j+1}\\cap\\delta(U_R)=\\{f_1,f_2\\}$.
+  For the parent $U=U_L\\triangle U_R$ we get
   $$S_{j-1}\\cap\\delta(U)=\\{e_1,e_2\\},\\qquad S_{j+1}\\cap\\delta(U)=\\{f_1,f_2\\},$$
-  то есть условие «чередования полос» выполнено (левая полоса совпадает с $U_L$, правая — с $U_R$).
-  Но проекции
+  that is, the condition of "alternating stripes" is satisfied (the left stripe coincides with $U_L$, the right one with $U_R$).
+  But projections
   $$p(\\delta(U_L))=(1100,0000),\\qquad p(\\delta(U_R))=(0011,0000)$$
-  линейно независимы, и ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: XOR‑шаг с чередованием полос оставляет два независимых вектора на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): чередование полос на XOR‑шаге не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы каждый ребёнок совпадал с родителем
-  на **обеих** полосах, кроме ровно одной строки (строгое «одно‑строчное» изменение),
-  и проверить, удаётся ли тогда получить ранговую обструкцию при $k=2$.
+  are linearly independent, and the rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: The XOR step with alternating stripes leaves two independent vectors on $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): alternating stripes at the XOR step does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require that each child matches the parent
+  on **both** stripes, except for exactly one line (strict "one-line" change),
+  and check whether it is then possible to obtain rank obstruction for $k=2$.
 - `StepID:` Q39.S32-2k-two-strip-alternating-strip.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.174. Исследовательский шаг (counterexample): одно‑строчное изменение на обеих полосах не снижает проекционный ранг при $k=2$
+### 16.174. Exploratory step (counterexample): a one-line change on both stripes does not reduce the projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть для каждого XOR‑шага и каждого ребёнка $U'$
-  симметрическая разность на каждой полосе имеет размер $\\le 1$:
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let for each XOR step and each child $U'$
+  the symmetric difference on each strip has size $\\le 1$:
   $$\\bigl|(S_{j-1}\\cap\\delta(U))\\triangle(S_{j-1}\\cap\\delta(U'))\\bigr|\\le 1,\\quad
     \\bigl|(S_{j+1}\\cap\\delta(U))\\triangle(S_{j+1}\\cap\\delta(U'))\\bigr|\\le 1.$$
-  (одно‑строчное изменение на обеих полосах). Ожидание: такой режим должен убивать ранг.
-- `Контрпример (toy):` Пусть $n=4$ и рассмотрим две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (по строкам),
-  а блоки $B_1=\\{e_1,e_2,f_1,f_2\\}$ и $B_2=\\{e_3,e_4,f_3,f_4\\}$.
-  Возьмём два узла‑прямоугольника (по одной строке в двухколоночной полосе):
+  (one-line change on both stripes). Expectation: This mode should kill rank.
+- `Counterexample (toy):` Let $n=4$ and consider two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer stripes $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (by rows),
+  and blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$ and $B_2=\\{e_3,e_4,f_3,f_4\\}$.
+  Let's take two rectangle nodes (one line in a two-column strip):
   $$U_1=\\{(1,j),(1,j+1)\\},\\qquad U_2=\\{(2,j),(2,j+1)\\}.$$
-  Тогда $S_{j-1}\\cap\\delta(U_1)=\\{e_1\\}$ и $S_{j+1}\\cap\\delta(U_1)=\\{f_1\\}$,
-  а $S_{j-1}\\cap\\delta(U_2)=\\{e_2\\}$ и $S_{j+1}\\cap\\delta(U_2)=\\{f_2\\}$.
-  Для родителя $U=U_1\\triangle U_2$ выполняется
+  Then $S_{j-1}\\cap\\delta(U_1)=\\{e_1\\}$ and $S_{j+1}\\cap\\delta(U_1)=\\{f_1\\}$,
+  and $S_{j-1}\\cap\\delta(U_2)=\\{e_2\\}$ and $S_{j+1}\\cap\\delta(U_2)=\\{f_2\\}$.
+  For the parent $U=U_1\\triangle U_2$ the following is true:
   $$\\delta(U)=\\delta(U_1)\\triangle\\delta(U_2),$$
-  поэтому переходы $U\\leftrightarrow U_1$ и $U\\leftrightarrow U_2$ меняют **ровно одну** строку
-  на каждой полосе (условие одно‑строчного изменения выполнено).
-  Однако проекции
+  so the transitions $U\\leftrightarrow U_1$ and $U\\leftrightarrow U_2$ change **exactly one** line
+  on each strip (the condition of a one-line change is met).
+  However, projections
   $$p(\\delta(U_1))=(1010,0000),\\qquad p(\\delta(U_2))=(0101,0000)$$
-  линейно независимы.
-- `Toy‑тест:` $n=4$, $j=2$: одно‑строчные изменения на обеих полосах допускают два независимых вектора на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): одно‑строчное изменение не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` добавить ламинарность по строкам: требовать, чтобы у любых двух внутренних узлов
-  строки пересечений были вложены (например, один набор строк — подмножество другого),
-  и проверить, появляется ли ранговая обструкция при $k=2$.
+  linearly independent.
+- `Toy test:` $n=4$, $j=2$: single-line changes on both stripes allow two independent vectors on $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): a one-line change does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` add row laminarity: require that any two internal nodes
+  the intersection rows were nested (for example, one set of rows is a subset of another),
+  and check whether rank obstruction appears at $k=2$.
 - `StepID:` Q39.S33-2k-two-strip-single-row-change.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.175. Исследовательский шаг (counterexample): ламинарность по строкам не снижает проекционный ранг при $k=2$
+### 16.175. Exploratory step (counterexample): row laminarity does not reduce projection rank for $k=2$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (попытка):` Пусть для любых двух внутренних узлов $U,V$ множества строк,
-  пересечений $S_{j-1}\\cap\\delta(U)$ и $S_{j-1}\\cap\\delta(V)$ (и аналогично на $S_{j+1}$),
-  **ламинарны**: одно из множеств строк включено в другое.
-  Ожидание: ламинарность должна подавлять независимость по двум полосам.
-- `Контрпример (toy):` Пусть $n=4$ и возьмём две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (по строкам),
-  а блоки $B_1=\\{e_1,e_2,f_1,f_2\\}$ и $B_2=\\{e_3,e_4,f_3,f_4\\}$.
-  Рассмотрим два anchored-прямоугольника:
+- `Lens:` Trade-off.
+- `Assertion (attempt):` Let for any two internal nodes $U,V$ of the set of strings,
+  intersections of $S_{j-1}\\cap\\delta(U)$ and $S_{j-1}\\cap\\delta(V)$ (and similarly for $S_{j+1}$),
+  **laminar**: one of the sets of rows is included in another.
+  Expectation: Laminarity should suppress bilane independence.
+- `Counterexample (toy):` Let $n=4$ and take two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer stripes $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (by rows),
+  and blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$ and $B_2=\\{e_3,e_4,f_3,f_4\\}$.
+  Consider two anchored rectangles:
   $$U_2=\\{(1,j),(2,j),(1,j+1),(2,j+1)\\},\\qquad
     U_4=\\{(1,j),\\dots,(4,j),(1,j+1),\\dots,(4,j+1)\\}.$$
-  Тогда множества строк пересечений на каждой полосе — это $\\{1,2\\}\\subseteq\\{1,2,3,4\\}$,
-  то есть ламинарность выполнена.
-  Однако проекции
+  Then the sets of intersection lines on each strip are $\\{1,2\\}\\subseteq\\{1,2,3,4\\}$,
+  that is, laminarity is achieved.
+  However, projections
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111)$$
-  линейно независимы, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: два laminar‑узла $U_2\\subset U_4$ дают ранг 2 на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): ламинарность по строкам не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать ламинарность **и** одинаковые границы на обеих полосах
-  (например, пересечения должны совпадать как множества строк), и проверить,
-  появляется ли ранговая обструкция при $k=2$.
+  are linearly independent, which means the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: two laminar nodes $U_2\\subset U_4$ give rank 2 on $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): row laminarity does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the condition: require laminarity **and** identical boundaries on both stripes
+  (for example, intersections must match as sets of lines), and check if
+  whether rank obstruction appears at $k=2$.
 - `StepID:` Q39.S34-2k-two-strip-laminar-rows.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.176. Исследовательский шаг (counterexample): равенство строк на двух полосах не снижает проекционный ранг при $k=2$
+### 16.176. Exploratory step (counterexample): equality of rows on two stripes does not reduce the projection rank for $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть для каждого внутреннего узла $U$ множества строк пересечений
-  на двух внешних полосах совпадают:
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let for each internal node $U$ of the set of intersection lines
+  on the two outer stripes coincide:
   $$\\mathrm{rows}(S_{j-1}\\cap\\delta(U))=\\mathrm{rows}(S_{j+1}\\cap\\delta(U)).$$
-  Ожидание: это должно подавлять независимость на двух полосах.
-- `Контрпример (toy):` Пусть $n=4$ и возьмём две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (по строкам),
-  а блоки $B_1=\\{e_1,e_2,f_1,f_2\\}$ и $B_2=\\{e_3,e_4,f_3,f_4\\}$.
-  Рассмотрим anchored-прямоугольники
+  Expectation: This should suppress independence on two lanes.
+- `Counterexample (toy):` Let $n=4$ and take two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer stripes $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (by rows),
+  and blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$ and $B_2=\\{e_3,e_4,f_3,f_4\\}$.
+  Consider anchored rectangles
   $$U_2=\\{(1,j),(2,j),(1,j+1),(2,j+1)\\},\\qquad
     U_4=\\{(1,j),\\dots,(4,j),(1,j+1),\\dots,(4,j+1)\\}.$$
-  Тогда строки на $S_{j-1}$ и $S_{j+1}$ совпадают для каждого узла:
-  $$\\{1,2\\}\\ \text{для }U_2\\quad\\text{и}\\quad\\{1,2,3,4\\}\\ \text{для }U_4.$$
-  Но проекции
+  Then the strings on $S_{j-1}$ and $S_{j+1}$ are the same for each node:
+  $$\\{1,2\\}\\ \text{for }U_2\\quad\\text{and}\\quad\\{1,2,3,4\\}\\ \text{for }U_4.$$
+  But projections
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111)$$
-  линейно независимы, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: узлы $U_2\\subset U_4$ имеют равные строки на обеих полосах,
-  но дают ранг 2 на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): равенство строк на двух полосах не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать равенство строк **и** одно‑строчное изменение
-  в каждом XOR‑шаге, и проверить, появляется ли ранговая обструкция при $k=2$.
+  are linearly independent, which means the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: nodes $U_2\\subset U_4$ have equal rows on both stripes,
+  but they give rank 2 at $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): equality of lines on two stripes does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen condition: require string equality **and** single-line change
+  at each XOR step, and check whether rank obstruction appears at $k=2$.
 - `StepID:` Q39.S35-2k-two-strip-equal-rows.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.177. Исследовательский шаг (counterexample): равные строки + одно‑строчное изменение не снижают проекционный ранг при $k=2$
+### 16.177. Exploratory step (counterexample): equal lines + one-line change do not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть для каждого внутреннего узла $U$ выполняется
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let for each internal node $U$ be satisfied
   $$\\mathrm{rows}(S_{j-1}\\cap\\delta(U))=\\mathrm{rows}(S_{j+1}\\cap\\delta(U)),$$
-  и каждый XOR‑шаг меняет на каждой полосе не более одной строки.
-  Ожидание: это должно подавлять независимость на двух полосах.
-- `Контрпример (toy):` Пусть $n=4$ и возьмём две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (по строкам),
-  а блоки $B_1=\\{e_1,e_2,f_1,f_2\\}$ и $B_2=\\{e_3,e_4,f_3,f_4\\}$.
-  Рассмотрим узлы
+  and each XOR step changes at most one line on each stripe.
+  Expectation: This should suppress independence on two lanes.
+- `Counterexample (toy):` Let $n=4$ and take two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer stripes $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (by rows),
+  and blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$ and $B_2=\\{e_3,e_4,f_3,f_4\\}$.
+  Let's look at the nodes
   $$U_1=\\{(1,j),(1,j+1)\\},\\qquad U_2=\\{(1,j),(2,j),(1,j+1),(2,j+1)\\},$$
-  и узел $U=U_1\\triangle U_2$ (это строка 2 на обеих колонках).
-  Тогда строки пересечений совпадают на обеих полосах у каждого из $U_1,U,U_2$,
-  а XOR‑шаг $U_1\\oplus U=U_2$ меняет ровно одну строку на каждой полосе.
-  При этом проекции
+  and node $U=U_1\\triangle U_2$ (this is line 2 on both columns).
+  Then the intersection lines coincide on both stripes for each of $U_1,U,U_2$,
+  and the XOR step $U_1\\oplus U=U_2$ changes exactly one row on each stripe.
+  In this case, the projections
   $$p(\\delta(U_1))=(1010,0000),\\qquad p(\\delta(U_2))=(1111,0000)$$
-  линейно независимы.
-- `Toy‑тест:` $n=4$, $j=2$: равные строки + одно‑строчное изменение допускают два независимых вектора на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): равные строки и одно‑строчное изменение не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` добавить цепочечность: требовать, чтобы внутренние узлы образовывали
-  линейную цепочку по включению строк, и проверить, появляется ли ранговая обструкция при $k=2$.
+  linearly independent.
+- `Toy test:` $n=4$, $j=2$: equal lines + one-line change allow two independent vectors on $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): equal lines and one-line changes do not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` add chainability: require internal nodes to form
+  linear chain by including rows, and check whether rank obstruction appears at $k=2$.
 - `StepID:` Q39.S36-2k-two-strip-equal-rows-single-change.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.178. Исследовательский шаг (counterexample): цепочка XOR‑шагов с равными строками и одно‑строчными изменениями не снижает проекционный ранг при $k=2$
+### 16.178. Exploratory step (counterexample): a chain of XOR steps with equal rows and one-row changes does not reduce the projection rank for $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть внутренние узлы образуют **цепочку по включению строк**,
-  строки на двух полосах совпадают, и каждый XOR‑шаг меняет не более одной строки на каждой полосе.
-  Ожидание: в таком режиме проекционный ранг на двух полосах должен быть $\\le 1$.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (по строкам),
-  а блоки $B_1=\\{e_1,e_2,f_1,f_2\\}$ и $B_2=\\{e_3,e_4,f_3,f_4\\}$.
-  Пусть $R_t=\\{(t,j),(t,j+1)\\}$ — «одна строка» на обеих полосах, и определим цепочку XOR‑шагов
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let the internal nodes form a **chain by including rows**,
+  the rows on the two stripes are the same, and each XOR step changes at most one row on each stripe.
+  Expectation: In this mode, the projection rank on the two stripes should be $\\le 1$.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer stripes $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (by rows),
+  and blocks $B_1=\\{e_1,e_2,f_1,f_2\\}$ and $B_2=\\{e_3,e_4,f_3,f_4\\}$.
+  Let $R_t=\\{(t,j),(t,j+1)\\}$ be "one row" on both stripes, and define a chain of XOR steps
   $$U_1=R_1,\\quad U_2=U_1\\oplus R_2,\\quad U_3=U_2\\oplus R_3,\\quad U_4=U_3\\oplus R_4.$$
-  Тогда строки на $S_{j-1}$ и $S_{j+1}$ совпадают для каждого $U_t$, а каждый шаг добавляет ровно одну строку,
-  так что узлы образуют цепочку по включению $U_1\\subset U_2\\subset U_3\\subset U_4$.
-  Однако проекции
+  Then the rows on $S_{j-1}$ and $S_{j+1}$ are the same for each $U_t$, and each step adds exactly one row,
+  so the nodes form a chain by including $U_1\\subset U_2\\subset U_3\\subset U_4$.
+  However, projections
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111)$$
-  линейно независимы, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: цепочка XOR‑шагов $U_1\\subset U_2\\subset U_3\\subset U_4$
-  сохраняет равенство строк на обеих полосах и одно‑строчные изменения, но даёт ранг 2 на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): цепочечность + равные строки + одно‑строчное изменение не снижают ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить условие: требовать, чтобы цепочка была совместима с фиксированным разбиением строк
-  (например, каждая новая строка не пересекает границу блоков), и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  are linearly independent, which means the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: chain of XOR steps $U_1\\subset U_2\\subset U_3\\subset U_4$
+  preserves line equality on both stripes and single-line changes, but gives rank 2 on $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): chaining + equal rows + one-line change does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen condition: require chain to be compatible with fixed line splitting
+  (for example, each new line does not cross a block boundary), and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S37-2k-two-strip-equal-rows-single-change-chain.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.179. Исследовательский шаг (counterexample): цепочка, согласованная с блоками разбиения, не снижает проекционный ранг при $k=2$
+### 16.179. Exploratory step (counterexample): chain consistent with partitioning blocks does not reduce projection rank when $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть внутренние узлы образуют цепочку,
-  строки на двух полосах совпадают, и каждый узел пересекает полосы как **объединение целых блоков**
-  разбиения $\\pi$ (например, по строкам). Ожидание: блок‑согласованная цепочка должна
-  ограничивать проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (по строкам),
-  а разбиение $\\pi$ зададим блоками
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let the internal nodes form a chain,
+  the rows on the two stripes are the same, and each node crosses the stripes as a **union of entire blocks**
+  splitting $\\pi$ (for example, by lines). Expectation: The blockchain must
+  limit the projection rank on two stripes.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer stripes $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (by rows),
+  and define the partition $\\pi$ in blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Рассмотрим узлы
+  Let's look at the nodes
   $$U_2=\\{(1,j),(2,j),(1,j+1),(2,j+1)\\},\\qquad
     U_4=\\{(1,j),\\dots,(4,j),(1,j+1),\\dots,(4,j+1)\\}.$$
-  Тогда пересечения с полосами равны по строкам и являются объединениями целых блоков:
-  $U_2$ использует $B_1$, а $U_4$ — $B_1\\cup B_2$.
-  Переход $U_2\\oplus R_{3,4}=U_4$ (где $R_{3,4}$ — «две нижние строки» на обеих колонках)
-  меняет ровно один блок. Однако проекции
+  Then intersections with stripes are equal in rows and are unions of entire blocks:
+  $U_2$ uses $B_1$ and $U_4$ uses $B_1\\cup B_2$.
+  Transition $U_2\\oplus R_{3,4}=U_4$ (where $R_{3,4}$ are the "bottom two rows" on both columns)
+  changes exactly one block. However, projections
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111)$$
-  линейно независимы, значит проекционный ранг внутренних узлов равен 2.
-- `Toy‑тест:` $n=4$, $j=2$: блок‑согласованная цепочка $U_2\\subset U_4$ даёт ранг 2 на $B_1\\sqcup B_2$.
-- `Статус:` контрпример (toy, $k=2$): блок‑согласованная цепочка не снижает ранг.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить ограничение: требовать, чтобы каждое XOR‑изменение было совместимо
-  с фиксированным разбиением **и** не пересекало границы блоков на обеих полосах одновременно,
-  и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  are linearly independent, which means the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: block-consistent chain $U_2\\subset U_4$ gives rank 2 on $B_1\\sqcup B_2$.
+- `Status:` counterexample (toy, $k=2$): a block-consistent chain does not reduce its rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the constraint: require every XOR change to be compatible
+  with a fixed partition **and** did not cross block boundaries on both lanes at the same time,
+  and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S38-2k-two-strip-chain-block-alignment.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.180. Исследовательский шаг (counterexample): block-consistent one-strip XOR-обновления не снижают проекционный ранг при $k=2$
+### 16.180. Exploratory step (counterexample): block-consistent one-strip XOR updates do not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть есть фиксированное разбиение строк на блоки $\\pi$, и в цепочке XOR-шагов
-  каждое пересечение с полосами является объединением целых блоков, а каждый XOR-шаг изменяет **только одну**
-  полосу (вторая остаётся неизменной), причём изменение на этой полосе — объединение целых блоков.
-  Ожидание: в таком block-consistent one-strip режиме проекционный ранг на двух полосах $\\le 1$.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (по строкам),
-  а разбиение $\\pi$ зададим блоками
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let there be a fixed partition of strings into blocks $\\pi$, and in the chain of XOR steps
+  each stripe intersection is a union of entire blocks, and each XOR step changes **only one**
+  strip (the second remains unchanged), and the change in this strip is the union of entire blocks.
+  Expectation: in such a block-consistent one-strip mode, the projection rank on two strips is $\\le 1$.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer stripes $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$ (by rows),
+  and define the partition $\\pi$ in blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Рассмотрим цепочку
+  Consider the chain
   $$U_1=\\{(1,j),(2,j),(1,j+1),(2,j+1)\\},$$
   $$U_2=\\{(1,j),(2,j)\\}\\cup\\{(1,j+1),(2,j+1),(3,j+1),(4,j+1)\\},$$
   $$U_3=\\{(1,j),\\dots,(4,j),(1,j+1),\\dots,(4,j+1)\\}.$$
-  Переход $U_1\\oplus R^R_{3,4}=U_2$ (где $R^R_{3,4}$ — нижние две строки в правой колонке)
-  меняет только правую полосу (блок $B_2$), а $U_2\\oplus R^L_{3,4}=U_3$
-  (где $R^L_{3,4}$ — нижние две строки в левой колонке) меняет только левую полосу;
-  оба изменения блок-согласованы.
-  Однако в порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$
+  Transition $U_1\\oplus R^R_{3,4}=U_2$ (where $R^R_{3,4}$ are the bottom two lines in the right column)
+  changes only the right lane (block $B_2$), and $U_2\\oplus R^L_{3,4}=U_3$
+  (where $R^L_{3,4}$ are the bottom two lines in the left column) changes only the left stripe;
+  both changes are block-consistent.
+  However, the order is $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(1111,0011),$$
-  что линейно независимо, поэтому проекционный ранг внутренних узлов равен 2.
-- `Toy-тест:` $n=4$, $j=2$: цепочка с одно-полосными block-обновлениями даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): даже block-consistency + one-strip updates не снижает ранг.
-- `Барьер-чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` ужесточить режим: требовать lock-step обновлений (обе полосы меняются синхронно теми же блоками)
-  и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, so the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: a chain with single-lane block updates gives rank 2.
+- `Status:` counterexample (toy, $k=2$): even block-consistency + one-strip updates does not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` tighten the regime: require lock-step updates (both bands change synchronously with the same blocks)
+  and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S39-2k-two-strip-chain-block-consistency.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.181. Исследовательский шаг (counterexample): lock-step block-updates не снижают проекционный ранг при $k=2$
+### 16.181. Exploratory step (counterexample): lock-step block-updates do not reduce projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть есть фиксированное разбиение строк на блоки $\\pi$, и в цепочке XOR-шагов
-  каждый шаг является **lock-step** обновлением: обе полосы меняются синхронно на одном и том же наборе блоков,
-  а пересечения каждого узла с полосами остаются объединениями целых блоков. Ожидание: в таком режиме
-  проекционный ранг на двух полосах $\\le 1$.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$,
-  а разбиение $\\pi$ зададим блоками
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let there be a fixed partition of strings into blocks $\\pi$, and in the chain of XOR steps
+  each step is a **lock-step** update: both bars change synchronously on the same set of blocks,
+  and the intersections of each node with stripes remain unions of entire blocks. Waiting: in this mode
+  projection rank on two strips $\\le 1$.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer bands $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$,
+  and define the partition $\\pi$ in blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Пусть $R_{1,2}$ и $R_{3,4}$ — верхние/нижние две строки на обеих колонках, и рассмотрим цепочку
+  Let $R_{1,2}$ and $R_{3,4}$ be the top/bottom two rows on both columns, and consider the chain
   $$U_1=R_{1,2},\\qquad U_2=U_1\\oplus R_{3,4},\\qquad U_3=U_2\\oplus R_{1,2}=R_{3,4}.$$
-  Каждый шаг — lock-step обновление (меняется один и тот же блок на обеих полосах),
-  и каждый $U_t$ пересекает полосы как объединение целых блоков. Однако в порядке
-  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  Each step is a lock-step update (the same block changes on both stripes),
+  and each $U_t$ crosses the stripes as a union of entire blocks. However ok
+  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_3))=(0000,1111),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy-тест:` $n=4$, $j=2$: lock-step обновления по блокам не снижают ранг.
-- `Статус:` контрпример (toy, $k=2$): lock-step block-updates не снижают ранг.
-- `Барьер-чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить геометрию: требовать lock-step обновлений по dyadic/ламинарным блокам
-  в фиксированном порядке (без возвращений), и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: lock-step block updates do not reduce rank.
+- `Status:` counterexample (toy, $k=2$): lock-step block-updates do not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen geometry: require lock-step updates on dyadic/laminar blocks
+  in a fixed order (no returns), and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S40-2k-two-strip-chain-lockstep-blocks.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.182. Исследовательский шаг (counterexample): lock-step dyadic-цепочка без возвратов не снижает проекционный ранг при $k=2$
+### 16.182. Exploratory step (counterexample): lock-step dyadic chain without backtracking does not reduce projection rank for $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть зафиксировано dyadic-разбиение строк и цепочка XOR-шагов
-  обновляет обе полосы синхронно **только** по dyadic-блокам в фиксированном порядке (без возвратов),
-  а каждый узел пересекает полосы как объединение целых dyadic-блоков. Ожидание: в таком режиме
-  проекционный ранг на двух полосах $\\le 1$.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_4\\}$ и $S_{j+1}=\\{f_1,\\dots,f_4\\}$,
-  а dyadic-блоки по строкам зададим как
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let a dyadic row split and a chain of XOR steps be fixed
+  updates both bands synchronously **only** by dyadic blocks in a fixed order (no returns),
+  and each node crosses the stripes as a union of entire dyadic blocks. Waiting: in this mode
+  projection rank on two strips $\\le 1$.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer bands $S_{j-1}=\\{e_1,\\dots,e_4\\}$ and $S_{j+1}=\\{f_1,\\dots,f_4\\}$,
+  and define dyadic blocks by row as
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Рассмотрим цепочку
+  Consider the chain
   $$U_1=R_{1,2},\\qquad U_2=U_1\\oplus R_{3,4}=R_{1,4}.$$
-  Это lock-step обновление по dyadic-блокам в фиксированном порядке $B_1\\to B_2$ без возвратов,
-  и каждый $U_t$ пересекает полосы как объединение целых dyadic-блоков. Однако в порядке
-  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  This is a lock-step update over dyadic blocks in a fixed order $B_1\\to B_2$ without backtracking,
+  and each $U_t$ crosses the stripes as a union of entire dyadic blocks. However ok
+  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(1111,1111),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy-тест:` $n=4$, $j=2$: dyadic lock-step цепочка $U_1\\subset U_2$ даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): dyadic/ламинарный lock-step порядок не снижает ранг.
-- `Барьер-чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить ограничение: требовать **по-шаговых** обновлений префикса $t\\to t+1$
-  с dyadic-carry (без «прыжков» $t\\to t'$, $t'-t>1$) и проверить, остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: dyadic lock-step chain $U_1\\subset U_2$ gives rank 2.
+- `Status:` counterexample (toy, $k=2$): dyadic/laminar lock-step order does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the restriction: require **step by step** prefix updates $t\\to t+1$
+  with dyadic-carry (without "jumps" $t\\to t'$, $t'-t>1$) and check whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S41-2k-two-strip-chain-lockstep-dyadic-blocks.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.183. Исследовательский шаг (counterexample): по-шаговые dyadic-prefix обновления $t\\to t+1$ не снижают проекционный ранг при $k=2$
+### 16.183. Exploratory step (counterexample): step-by-step dyadic-prefix updates $t\\to t+1$ do not reduce projection rank at $k=2$
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (попытка):` Пусть цепочка XOR-шагов обновляет префикс по строкам **по-шагово**,
-  т.е. $t\\to t+1$ (dyadic-carry без прыжков), и каждый узел пересекает полосы как объединение
-  dyadic-блоков префикса $[t]$. Ожидание: такой режим должен ограничивать проекционный ранг на двух полосах.
-- `Контрпример (toy):` Возьмём $n=4$ и две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Пусть $U_t$ — anchored-прямоугольник высоты $t$ на обеих колонках:
+- `Lens:` Communication/Rank.
+- `Assertion (attempt):` Let the chain of XOR steps update the prefix row by row **step by step**,
+  those. $t\\to t+1$ (dyadic-carry without jumping), and each node crosses the stripes as a union
+  dyadic blocks of the prefix $[t]$. Expectation: This mode should limit the projection rank on two lanes.
+- `Counterexample (toy):` Let's take $n=4$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let $U_t$ be an anchored rectangle of height $t$ on both columns:
   $$U_t=\\{(1,j),\\dots,(t,j),(1,j+1),\\dots,(t,j+1)\\},\\quad t=1,2,3,4.$$
-  Тогда переходы $U_t\\to U_{t+1}$ добавляют ровно одну строку, а пересечения с полосами
-  совпадают с dyadic-разбиением префикса $[t]$ (для $t=1,2,3,4$ это $[1]$, $[1,2]$, $[1,2]\\uplus[3]$, $[1,4]$).
-  Однако в порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  Then transitions $U_t\\to U_{t+1}$ add exactly one row, and intersections with stripes
+  coincide with the dyadic partition of the prefix $[t]$ (for $t=1,2,3,4$ these are $[1]$, $[1,2]$, $[1,2]\\uplus[3]$, $[1,4]$).
+  However, in the order $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy-тест:` $n=4$, $j=2$: цепочка $U_1\\subset U_2\\subset U_3\\subset U_4$ с dyadic-carry шагами даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): по-шаговые dyadic-prefix обновления не снижают ранг.
-- `Барьер-чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить ограничение: требовать, чтобы цепочка включала **все** промежуточные
-  dyadic-merge состояния (после добавления строки и каждого переноса), и проверить, остаётся ли ранг $\\ge 2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: chain $U_1\\subset U_2\\subset U_3\\subset U_4$ with dyadic-carry steps gives rank 2.
+- `Status:` counterexample (toy, $k=2$): step-by-step dyadic-prefix updates do not reduce the rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the constraint: require the chain to include **all** intermediate
+  dyadic-merge state (after adding a line and each move), and check if the rank remains $\\ge 2$.
 - `StepID:` Q39.S42-2k-two-strip-chain-dyadic-prefix-stepwise.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.184. Исследовательский шаг (counterexample): dyadic-carry microsteps не снижают проекционный ранг при $k=2$
+### 16.184. Exploratory step (counterexample): dyadic-carry microsteps do not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть цепочка включает **все** dyadic-carry микрошаги:
-  после добавления строки $t+1$ фиксируются все промежуточные состояния разбиения
-  (после каждого переноса), а каждый узел пересекает полосы как объединение целых dyadic-блоков.
-  Ожидание: такой усиленный режим должен снижать проекционный ранг.
-- `Контрпример (toy):` Возьмём $n=4$ и цепочку anchored-прямоугольников $U_t$ как в §16.183.
-  Dyadic-carry микрошаги при $t=3\\to4$ изменяют **только представление разбиения**,
-  но не множество строк: все промежуточные состояния соответствуют тому же множеству
-  $\\{1,2,3,4\\}$, поэтому в XOR-дереве их можно вставить как повторения узла $U_4$.
-  Тогда в цепочке по-прежнему присутствуют $U_2$ и $U_4$, и в порядке
-  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let the chain include **all** dyadic-carry microsteps:
+  after adding the line $t+1$, all intermediate states of the partition are fixed
+  (after each transfer), and each node crosses the stripes as a union of entire dyadic blocks.
+  Expectation: This enhanced mode should reduce the projection rank.
+- `Counterexample (toy):` Let's take $n=4$ and a chain of anchored rectangles $U_t$ as in Section 16.183.
+  Dyadic-carry microsteps at $t=3\\to4$ change **only the representation of the partition**,
+  but not a set of strings: all intermediate states correspond to the same set
+  $\\{1,2,3,4\\}$, so in the XOR tree they can be inserted as repetitions of node $U_4$.
+  Then there are still $U_2$ and $U_4$ in the chain, and ok
+  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111),$$
-  что линейно независимо. Следовательно, добавление dyadic-carry микрошагов
-  не снижает проекционный ранг внутренних узлов.
-- `Toy-тест:` $n=4$, $j=2$: цепочка $U_1\\subset U_2\\subset U_3\\subset U_4$ с вставленными dyadic-carry
-  микрошагами (повторения $U_4$) даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): dyadic-carry микрошаги не снижают ранг.
-- `Барьер-чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` требовать не только dyadic-обновления разбиения, но и **разные** support-наборы
-  на каждом микрошаге (например, фиксировать представление через дополнительные рёбра),
-  и проверить, даёт ли это ранговую обструкцию при $k=2$.
+  which is linearly independent. Hence adding dyadic-carry microsteps
+  does not reduce the projection rank of internal nodes.
+- `Toy test:` $n=4$, $j=2$: chain $U_1\\subset U_2\\subset U_3\\subset U_4$ with inserted dyadic-carry
+  microsteps (repetitions $U_4$) gives rank 2.
+- `Status:` counterexample (toy, $k=2$): dyadic-carry microsteps do not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` require not only dyadic partition updates, but also **different** support sets
+  at each microstep (for example, fix the representation through additional edges),
+  and check whether this gives rank obstruction for $k=2$.
 - `StepID:` Q39.S43-2k-two-strip-chain-dyadic-carry-microsteps.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.185. Исследовательский шаг (counterexample): distinct-support микрошаги не снижают проекционный ранг при $k=2$
+### 16.185. Exploratory step (counterexample): distinct-support microsteps do not reduce projection rank at $k=2$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (попытка):` Пусть в цепочке dyadic-carry микрошагов **все** узлы имеют
-  разные множества поддержек (distinct support), но пересечения с полосами остаются
-  объединением dyadic-блоков. Ожидание: это должно подавлять независимость на двух полосах.
-- `Контрпример (toy):` Возьмём $n=6$ и две соседние колонки $j$ и $j+1$ (например, $j=2$).
-  Обозначим внешние полосы $S_{j-1}=\\{e_1,\\dots,e_6\\}$ и $S_{j+1}=\\{f_1,\\dots,f_6\\}$,
-  а блоки для двух полос возьмём как
+- `Lens:` Trade-off.
+- `Assertion (attempt):` Let **all** nodes in the chain of dyadic-carry microsteps have
+  different sets of supports (distinct support), but intersections with stripes remain
+  combining dyadic blocks. Expectation: This should suppress independence on two lanes.
+- `Counterexample (toy):` Let's take $n=6$ and two adjacent columns $j$ and $j+1$ (for example, $j=2$).
+  Let us denote the outer bands $S_{j-1}=\\{e_1,\\dots,e_6\\}$ and $S_{j+1}=\\{f_1,\\dots,f_6\\}$,
+  and take the blocks for two lanes as
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Пусть $U_t$ — anchored-прямоугольник высоты $t$ на обеих колонках ($t=1,2,3,4$) и
-  возьмём вершину $w=(1,j+3)$, не инцидентную полосам $S_{j-1},S_{j+1}$.
-  Тогда узлы $U'_t:=U_t\\cup\\{w\\}$ все различны, но их пересечения с полосами
-  совпадают с $U_t$ и остаются объединением dyadic-блоков.
-  В порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  Let $U_t$ be an anchored rectangle of height $t$ on both columns ($t=1,2,3,4$) and
+  take a vertex $w=(1,j+3)$ that is not incident to the stripes $S_{j-1},S_{j+1}$.
+  Then the nodes $U'_t:=U_t\\cup\\{w\\}$ are all distinct, but their intersections with the stripes
+  coincide with $U_t$ and remain a union of dyadic blocks.
+  In order $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U'_2))=(1111,0000),\\qquad p(\\delta(U'_4))=(1111,1111),$$
-  что линейно независимо. Следовательно, distinct-support микрошаги не снижают ранг.
-- `Toy-тест:` $n=6$, $j=2$: цепочка $U'_1\\subset U'_2\\subset U'_3\\subset U'_4$ даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): distinct-support не помогает.
-- `Барьер-чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить ограничение: требовать distinct support **на полосах** (т.е. менять
-  сами $S_{j-1}\\cap\\delta(U)$ и $S_{j+1}\\cap\\delta(U)$ на каждом микрошаге) и проверить,
-  остаётся ли ранг $\\ge 2$ при $k=2$.
+  which is linearly independent. Therefore, distinct-support microsteps do not reduce rank.
+- `Toy test:` $n=6$, $j=2$: chain $U'_1\\subset U'_2\\subset U'_3\\subset U'_4$ gives rank 2.
+- `Status:` counterexample (toy, $k=2$): distinct-support does not help.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the restriction: require distinct support **on lanes** (i.e. change
+  $S_{j-1}\\cap\\delta(U)$ and $S_{j+1}\\cap\\delta(U)$ themselves at each microstep) and check whether
+  whether the rank $\\ge 2$ remains at $k=2$.
 - `StepID:` Q39.S44-2k-two-strip-chain-dyadic-microsteps-distinct-support.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.186. Исследовательский шаг (counterexample): distinct strip support на микрошаге не снижает проекционный ранг при $k=2$
+### 16.186. Exploratory step (counterexample): distinct strip support at microstep does not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Пусть в цепочке dyadic-модели каждый микрошаг меняет
-  **пересечения с полосами** (distinct strip support), то есть оба множества
-  $S_{j-1}\\cap\\delta(U)$ и $S_{j+1}\\cap\\delta(U)$ отличаются от предыдущего узла,
-  оставаясь объединением dyadic-блоков. Ожидание: это должно подавлять независимость на двух полосах.
-- `Контрпример (toy):` Возьмём $n=4$, две соседние колонки $j$ и $j+1$ (например, $j=2$),
-  и цепочку anchored-прямоугольников
+- `Lens:` Invariant.
+- `Assertion (attempt):` Let each microstep in the dyadic model chain change
+  **intersections with stripes** (distinct strip support), that is, both sets
+  $S_{j-1}\\cap\\delta(U)$ and $S_{j+1}\\cap\\delta(U)$ are different from the previous node,
+  remaining a union of dyadic blocks. Expectation: This should suppress independence on two lanes.
+- `Counterexample (toy):` Let's take $n=4$, two adjacent columns $j$ and $j+1$ (for example, $j=2$),
+  and a chain of anchored rectangles
   $$U_t=\\{(1,j),\\dots,(t,j),(1,j+1),\\dots,(t,j+1)\\},\\quad t=1,2,3,4.$$
-  На каждом шаге множества строк на обеих полосах меняются (prefix-цепочка),
-  и пересечения с полосами — объединения dyadic-блоков префикса $[t]$.
-  Однако в порядке $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  At each step, the sets of lines on both stripes change (prefix chain),
+  and intersections with stripes - unions of dyadic blocks of the prefix $[t]$.
+  However, in the order $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_2))=(1111,0000),\\qquad p(\\delta(U_4))=(1111,1111),$$
-  что линейно независимо, значит проекционный ранг внутренних узлов равен 2.
-- `Toy-тест:` $n=4$, $j=2$: chain $U_1\\subset U_2\\subset U_3\\subset U_4$ с distinct strip support даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): distinct strip support не снижает ранг.
-- `Барьер-чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` усилить ограничение: требовать **синхронного** изменения полос
-  по фиксированному шаблону (например, одинаковые dyadic-блоки на обеих полосах
-  и запрет на монотонную prefix-цепочку), и проверить, остаётся ли ранг $\\ge 2$.
+  which is linearly independent, which means the projection rank of the internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: chain $U_1\\subset U_2\\subset U_3\\subset U_4$ with distinct strip support gives rank 2.
+- `Status:` counterexample (toy, $k=2$): distinct strip support does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` strengthen the restriction: require **synchronous** band changes
+  according to a fixed pattern (for example, identical dyadic blocks on both lanes
+  and a ban on a monotonic prefix chain), and check whether the rank $\\ge 2$ remains.
 - `StepID:` Q39.S45-2k-two-strip-chain-dyadic-microsteps-strip-support.
 - `InfoGain:` 1.
 -/
 
 /-!
-### 16.187. Исследовательский шаг (counterexample): синхронный фиксированный шаблон полос не снижает проекционный ранг при $k=2$
+### 16.187. Exploratory step (counterexample): synchronous fixed stripe pattern does not reduce projection rank at $k=2$
 
-- `Линза:` Инвариант.
-- `Утверждение (попытка):` Если в цепочке пересечения с полосами синхронизированы и
-  следуют фиксированному шаблону (например, на каждом шаге обе полосы совпадают и
-  равны одному dyadic-блоку из фиксированного разбиения; монотонная prefix-цепочка запрещена),
-  то проекционный ранг на двух полосах должен быть $\\le 1$.
-- `Контрпример (toy):` Возьмём $n=4$, две соседние колонки $j$ и $j+1$ (например, $j=2$),
-  и dyadic-блоки
+- `Lens:` Invariant.
+- `Assertion (attempt):` If in the chain the intersections with the stripes are synchronized and
+  follow a fixed pattern (for example, at each step both stripes coincide and
+  equal to one dyadic block from a fixed partition; monotonic prefix chain is prohibited),
+  then the projection rank on the two strips must be $\\le 1$.
+- `Counterexample (toy):` Let's take $n=4$, two adjacent columns $j$ and $j+1$ (for example, $j=2$),
+  and dyadic blocks
   $$B_1=\\{e_1,e_2,f_1,f_2\\},\\qquad B_2=\\{e_3,e_4,f_3,f_4\\}.$$
-  Пусть
+  Let
   $$U_1=R_{1,2},\\qquad U_2=R_{3,4},\\qquad U_3=U_1$$
-  (шаблон $B_1\\to B_2\\to B_1$). Тогда на каждом шаге пересечения с полосами
-  синхронизированы и равны одному блоку, а монотонной prefix-цепочки нет. В порядке
-  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ имеем
+  (pattern $B_1\\to B_2\\to B_1$). Then at each step of intersection with stripes
+  are synchronized and equal to one block, but there is no monotonic prefix chain. In order
+  $(e_1,e_2,f_1,f_2,e_3,e_4,f_3,f_4)$ we have
   $$p(\\delta(U_1))=(1111,0000),\\qquad p(\\delta(U_2))=(0000,1111),$$
-  что линейно независимо, следовательно проекционный ранг внутренних узлов равен 2.
-- `Toy-тест:` $n=4$, $j=2$: синхронный шаблон $B_1\\to B_2\\to B_1$ даёт ранг 2.
-- `Статус:` контрпример (toy, $k=2$): фиксированный синхронный шаблон не снижает ранг.
-- `Барьер-чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` потребовать глобальную синхронизацию по столбцам (единый порядок блоков
-  для всех пар полос) и проверить, допускает ли это ещё ранг $\\ge 2$.
+  which is linearly independent, therefore the projection rank of internal nodes is 2.
+- `Toy test:` $n=4$, $j=2$: synchronous pattern $B_1\\to B_2\\to B_1$ gives rank 2.
+- `Status:` counterexample (toy, $k=2$): a fixed synchronous pattern does not reduce rank.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` require global synchronization across columns (single block order
+  for all pairs of stripes) and check whether rank $\\ge 2$ still allows this.
 - `StepID:` Q39.S46-2k-two-strip-chain-strip-support-synchronized.
 - `InfoGain:` 1.
 -/

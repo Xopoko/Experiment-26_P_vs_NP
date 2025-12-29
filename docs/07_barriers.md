@@ -1,98 +1,98 @@
-## 7. Три барьера: где «простые» идеи ломаются
+## 7. Three barriers: where "simple" ideas break down
 
-Эти результаты не доказывают $\mathrm{P}\neq\mathrm{NP}$, но являются фильтром:
-они объясняют, почему многие правдоподобные идеи *не могут* решить задачу
-в общем виде.
+These results do not prove $\mathrm{P}\neq\mathrm{NP}$, but are a filter:
+they explain why many plausible ideas *cannot* solve the problem
+in general terms.
 
-Важно: эти барьеры сформулированы для схемных нижних оценок/алгоритмических техник и не дают прямых ограничений для proof systems.
-В рамках протокола AGENTS этот файл служит **Barrier certificate**: каждый барьер должен быть подтверждён точной ссылкой (author/year/теорема/страница).
+Important: these barriers are formulated for circuit lower bounds/algorithmic techniques and do not provide direct restrictions for proof systems.
+Within the AGENTS protocol, this file serves as a **Barrier certificate**: each barrier must be confirmed by an exact link (author/year/theorem/page).
 
-### 7.1. Релятивизация (oracles)
+### 7.1. Relativization (oracles)
 
-**Определение (оракульная МТ).** Машина $M^A$ (с оракулом $A\subseteq\Sigma^*$)
-имеет дополнительную *оракульную ленту* и *оракульное состояние*.
-Записав строку $q$ на ленту и войдя в это состояние, машина за один шаг
-получает ответ, верно ли $q\in A$.
+**Definition (oracle MT).** Machine $M^A$ (with oracle $A\subseteq\Sigma^*$)
+has an additional *oracle tape* and *oracle state*.
+By writing the string $q$ to tape and entering this state, the machine in one step
+gets the answer whether $q\in A$ is true.
 
-Классы $\mathrm{P}^A,\mathrm{NP}^A$ определяются так же, как $\mathrm{P},\mathrm{NP}$, но для машин с доступом к $A$.
+The classes $\mathrm{P}^A,\mathrm{NP}^A$ are defined in the same way as $\mathrm{P},\mathrm{NP}$, but for machines with access to $A$.
 
-**Теорема (Baker–Gill–Solovay, 1975; Katz lecture p.1, `../resources/downloads/jkatz_relativization_2005.pdf`).**
-Существуют оракулы $A,B$ такие, что $\mathrm{P}^A=\mathrm{NP}^A$ и
+**Theorem (Baker-Gill-Solovay, 1975; Katz lecture p.1, `../resources/downloads/jkatz_relativization_2005.pdf`).**
+There are oracles $A,B$ such that $\mathrm{P}^A=\mathrm{NP}^A$ and
 $\mathrm{P}^B\ne\mathrm{NP}^B$.
 
-**Следствие (барьер).** Если бы существовало доказательство, которое одинаково работает
-при добавлении произвольного оракула (т.е. *релятивизирует*), то оно давало бы
-один и тот же ответ для всех $A$. Это невозможно из-за существования $A,B$ выше.
+**Consequence (barrier).** If there was a proof that works the same
+when adding an arbitrary oracle (i.e. *relativizes*), then it would give
+same answer for all $A$. This is not possible due to the existence of $A,B$ above.
 
-**Пример релятивизирующей техники.** «Голая» диагонализация и теоремы иерархий
-по времени/памяти обычно переносятся на оракульный мир почти без изменений:
-строится язык, который на диагонали «обманывает» все машины из класса,
-даже если у них есть доступ к $A$ (Arora–Impagliazzo–Vazirani 1992,
+**An example of a relativizing technique.** "Naked" diagonalization and hierarchy theorems
+in time/memory are usually transferred to the oracle world almost unchanged:
+a language is constructed that diagonally "deceives" all the machines in the class,
+even if they have access to $A$ (Arora-Impagliazzo-Vazirani 1992,
 `../resources/downloads/arora_impagliazzo_vazirani_1992.pdf`).
 
-**Что значит обойти.** Нужен нерелятивизирующий аргумент: такой, который использует
-структуру вычислений, исчезающую/ломающуюся при добавлении произвольного оракула
-(типичный пример идей — аритметизация и интерактивные протоколы).
+**What does it mean to bypass.** What is needed is a non-relativizing argument: one that uses
+calculation structure that disappears/breaks when adding an arbitrary oracle
+(a typical example of ideas is arrhythmization and interactive protocols).
 
 
 ### 7.2. Natural proofs
 
-Барьер Razborov–Rudich формализует, почему «типичные» методы нижних оценок на схемы не расширяются до общего случая.
+The Razborov-Rudich barrier formalizes why "typical" lower bound methods on circuits do not extend to the general case.
 
-Рассматривается неравномерная модель схем: $\mathrm{P/poly}$ — языки, распознаваемые семейством булевых схем полиномиального размера.
+A non-uniform circuit model is considered: $\mathrm{P/poly}$ are languages recognized by a family of polynomial-sized Boolean circuits.
 
-**Определение (natural property, грубо).** Свойство $\mathcal{P}$ булевых функций
-(по их таблице истинности) называется *естественным* против класса схем
-$\mathcal{C}$, если оно удовлетворяет трём условиям:
+**Definition (natural property, roughly).** Property $\mathcal{P}$ of Boolean functions
+(according to their truth table) is called *natural* against the class of circuits
+$\mathcal{C}$ if it satisfies three conditions:
 
-1) *(Конструктивность)* по таблице истинности функции на $n$ битах
-   можно проверить принадлежность $\mathcal{P}$ за время $\mathrm{poly}(2^n)$;
-2) *(Большинство / largeness)* случайная булева функция удовлетворяет $\mathcal{P}$ с заметной вероятностью (обычно $\ge 2^{-O(n)}$);
-3) *(Полезность / usefulness)* если функция удовлетворяет $\mathcal{P}$,
-   то она не вычисляется схемами из $\mathcal{C}$ (например, размера $n^k$).
+1) *(Constructiveness)* according to the truth table of a function on $n$ bits
+   one can check the membership of $\mathcal{P}$ in time $\mathrm{poly}(2^n)$;
+2) *(Majority / largeness)* random Boolean function satisfies $\mathcal{P}$ with noticeable probability (usually $\ge 2^{-O(n)}$);
+3) *(Utility / usefulness)* if the function satisfies $\mathcal{P}$,
+   then it is not calculated by circuits from $\mathcal{C}$ (for example, of size $n^k$).
 
-**Теорема (Razborov–Rudich, 1997, Thm. 4.1 p.3; `../resources/downloads/razborov_rudich_1997.pdf`).**
-Если существуют псевдослучайные функции (PRF) полиномиального размера схем,
-то не существует естественного свойства, полезного против $\mathrm{P/poly}$.
-Условность: барьер опирается на существование PRF (стандартное криптодопущение); без PRF ограничение не следует.
+**Theorem (Razborov-Rudich, 1997, Thm. 4.1 p.3; `../resources/downloads/razborov_rudich_1997.pdf`).**
+If there are pseudo-random functions (PRFs) of polynomial size circuits,
+then there is no natural property useful against $\mathrm{P/poly}$.
+Convention: the barrier relies on the existence of a PRF (standard cryptographic assumption); without PRF there is no restriction.
 
 
-**Интуиция.** Естественное свойство, которое отделяет «случайные» функции от функций
-из $\mathrm{P/poly}$, можно превратить в различитель PRF от истинного рандома —
-что противоречит псевдослучайности.
+**Intuition.** Natural property that separates "random" functions from functions
+from $\mathrm{P/poly}$, can be turned into a PRF distinguisher from true randomness -
+which contradicts pseudorandomness.
 
-**Пример «естественности».** Многие известные нижние оценки для ограниченных классов
-(AC⁰, монотонные схемы и т.п.) задают свойства, которые
-(a) проверяются по таблице истинности и (b) выполняются для большой доли функций.
-Барьер говорит, что такой шаблон не должен дать сильных нижних оценок
-для общего $\mathrm{P/poly}$ при стандартных криптодопущениях.
+**Example of "naturalness".** Many known lower bounds for limited classes
+(AC0, monotonic schemes, etc.) define properties that
+(a) are checked against the truth table and (b) are executed for a large fraction of the functions.
+Barrier says such a pattern should not produce strong lower bounds
+for general $\mathrm{P/poly}$ under standard cryptographic assumptions.
 
-**Что значит обойти.** Нужно нарушить хотя бы одно из условий: строить
-«ненатуральное» свойство (небольшое множество функций), или отказаться
-от конструктивности, или использовать допущения/структуру, которые не приводят
-к различению PRF.
+**What does it mean to bypass.** You need to violate at least one of the conditions: build
+"unnatural" property (small set of functions), or refuse
+constructiveness, or use assumptions/structure that do not lead
+to PRF discrimination.
 
 ### 7.3. Algebrization
 
-Aaronson–Wigderson (2008/2009) предложили усиление релятивизации (Thm. 5.3 p.23; `../resources/downloads/aaronson_wigderson_2008.pdf`).
+Aaronson-Wigderson (2008/2009) proposed increased relativization (Thm. 5.3 p.23; `../resources/downloads/aaronson_wigderson_2008.pdf`).
 
-**Идея.** В ряде нерелятивизирующих доказательств (например, через *аритметизацию*)
-мы заменяем булеву функцию её полиномиальным продолжением над полем и работаем
-с многочленами. Algebrization формализует класс методов, которые остаются
-корректными даже если машинам дать доступ не только к булевому оракулу $A$,
-но и к его «алгебраическому» (низкостепенному) расширению.
+**Idea.** In a number of non-relativizing evidence (for example, through *arrhythmetization*)
+we replace the Boolean function with its polynomial extension over the field and work
+with polynomials. Algebrization formalizes a class of methods that remain
+correct even if the machines are given access not only to the Boolean oracle $A$,
+but also to its "algebraic" (low-grade) extension.
 
-**Результат (барьер, неформально).** Существуют алгебризующие оракулы, при которых
-ключевые разделения и включения принимают противоположные значения (аналогично BGS),
-поэтому методы, которые *алгебризируют*, не способны решить ряд центральных вопросов
-(в частности, тех, где одних «оракульных» рассуждений недостаточно).
+**Result (barrier, informally).** There are algebrizing oracles in which
+key splits and inclusions take opposite values (similar to BGS),
+therefore, methods that *algebraize* are unable to solve a number of central issues
+(in particular, those where "oracle" reasoning alone is not enough).
 
-Замечание: барьер опирается на специальные оракульные конструкции (как и в релятивизации).
+Note: the barrier relies on special oracle constructions (as in relativization).
 
-**Что значит обойти.** Нужны техники, которые не сохраняются при переходе
-к алгебраическому расширению оракула; грубо говоря, требуется ещё более
-«структурный» аргумент, чем просто нерелятивизирующий.
+**What does it mean to bypass.** You need techniques that are not saved during the transition
+to the algebraic extension of the oracle; roughly speaking, even more is required
+a "structural" argument rather than a simply non-relativizing one.
 
-**Свежий пример барьера.** Chen–Hu–Ren (2025, arXiv:2511.14038) усиливают
-алгебризационные барьеры для схемных нижних оценок через коммуникационную
-сложность XOR-Missing-String (`../resources/downloads/chen_hu_ren_2025_algebrization_barriers.pdf`).
+**Fresh example of a barrier.** Chen-Hu-Ren (2025, arXiv:2511.14038) enhance
+algebraization barriers for circuit lower bounds via communication
+complexity XOR-Missing-String (`../resources/downloads/chen_hu_ren_2025_algebrization_barriers.pdf`).

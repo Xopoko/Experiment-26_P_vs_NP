@@ -1,21 +1,21 @@
-## 1. Формальная постановка
+## 1. Formal setting
 
-Пусть $\Sigma$ — конечный алфавит, $\Sigma^\*$ — множество всех конечных строк над $\Sigma$.
+Let $\Sigma$ be a finite alphabet, $\Sigma^\*$ the set of all finite strings over $\Sigma$.
 
-**Язык** — это множество $L\subseteq\Sigma^\*$.
+**A language** is a set $L\subseteq\Sigma^\*$.
 
-Фиксируем стандартную модель: детерминированные/недетерминированные многоленточные МТ.
-Временная сложность — число шагов как функция длины входа $n=|x|$.
+We fix the standard model: deterministic/non-deterministic multi-tape MT.
+Time complexity is the number of steps as a function of input length $n=|x|$.
 
-**Определение (класс $\mathrm{P}$).** $L\in\mathrm{P}$, если существует детерминированная МТ $M$ и константа $k$.
-Для всех $x\in\Sigma^\*$ машина $M$ останавливается за $O(|x|^k)$ шагов и принимает тогда и только тогда, когда $x\in L$.
+**Definition (class $\mathrm{P}$).** $L\in\mathrm{P}$ if there is a deterministic MT $M$ and a constant $k$.
+For all $x\in\Sigma^\*$ machine $M$ stops in $O(|x|^k)$ steps and accepts if and only if $x\in L$.
 
-**Определение (класс $\mathrm{NP}$).** $L\in\mathrm{NP}$, если существует недетерминированная МТ $N$ и константа $k$.
-$N$ останавливается за $O(|x|^k)$ шагов на всех ветвях, и $x\in L$ тогда и только тогда, когда существует принимающая ветвь $N(x)$.
+**Definition (class $\mathrm{NP}$).** $L\in\mathrm{NP}$ if there is a nondeterministic MT $N$ and a constant $k$.
+$N$ stops in $O(|x|^k)$ steps on all branches, and $x\in L$ if and only if a receiving branch $N(x)$ exists.
 
-**Замечание (робастность).** Выбор модели и кодирования влияет лишь на полиномиальные множители.
-Достаточно оценивать время редукций по длине естественного описания (формулы/графа).
+**Note (robustness).** The choice of model and encoding affects only the polynomial factors.
+It is enough to estimate the reduction time by the length of the natural description (formula/graph).
 
-**Гипотеза $\mathrm{P}\neq\mathrm{NP}$.** Существует язык $L\in\mathrm{NP}$, такой что $L\notin\mathrm{P}$.
+**Conjecture $\mathrm{P}\neq\mathrm{NP}$.** There is a language $L\in\mathrm{NP}$ such that $L\notin\mathrm{P}$.
 
-**Lean‑скелет:** определения языка/классов $P,NP$ заведены в `formal/PvNP/Core/Defs.lean`.
+**Lean-skeleton:** definitions of the language/classes $P,NP$ are included in `formal/PvNP/Core/Defs.lean`.

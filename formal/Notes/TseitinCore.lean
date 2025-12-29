@@ -2,915 +2,915 @@ import Paperproof
 
 /-!
 
-# P vs NP — исследовательские шаги 16.85–16.121 (Tseitin: базовые факты и границы)
+#P vs NP - Research Steps 16.85-16.121 (Tseitin: Basic Facts and Boundaries)
 
-Главный индекс: `P_vs_NP.md`.
+Main index: `P_vs_NP.md`.
 
-### 16.85. Исследовательский шаг: Tseitin($G,\chi$) и паритетный сертификат невыполнимости
+### 16.85. Exploratory step: Tseitin($G,\chi$) and parity certificate of insatisfiability
 
-- `Линза:` Инвариант.
-- `Определение:` Пусть $G=(V,E)$ — неориентированный граф и $\chi:V\to\{0,1\}$
-  («заряды»). Каждому ребру $e\in E$ сопоставим булеву переменную $x_e$.
-  XOR‑система Tseitin задаётся уравнениями по модулю 2:
-  $$\bigoplus_{e\ni v} x_e\ =\ \chi(v)\qquad\text{для всех }v\in V.$$
-- `Утверждение:` Если для некоторой связной компоненты $H\subseteq G$ выполнено
-  $\bigoplus_{v\in V(H)}\chi(v)=1$, то система (а значит и любая CNF/3‑CNF
-  кодировка этих XOR‑ограничений) невыполнима.
-- `Доказательство:` Возьмём XOR по всем вершинам $v\in V(H)$ от левых частей.
-  Каждая переменная $x_e$ (для ребра $e$ внутри $H$) входит ровно дважды — по
-  концам ребра — и потому сокращается: $\bigoplus_{v\in V(H)}\bigoplus_{e\ni v}x_e=0$.
-  Тогда из уравнений следует $0=\bigoplus_{v\in V(H)}\chi(v)=1$, противоречие.
-- `3‑CNF кодировка для 3‑регулярного $G$:` если $\deg(v)=3$ и инцидентные ребра
-  имеют переменные $a,b,c$, то ограничение $a\oplus b\oplus c=\chi(v)$ эквивалентно
-  3‑CNF из 4 клауз (запрещаем 4 несовпадающих по паритету тройки). Поэтому при
-  3‑регулярном $G$ получаем 3‑CNF размера $4|V|$, и каждая переменная $x_e$ входит
-  ровно в $8$ клауз (по $4$ у каждого конца ребра).
-- `Toy‑тест:` одно ребро $e=\{u,v\}$ и $\chi(u)=1,\chi(v)=0$ даёт систему
-  $x_e=1$ и $x_e=0$ (явная невыполнимость); паритетный аргумент выше ровно это
-  фиксирует как $\chi(u)\oplus\chi(v)=1$.
-- `Статус:` доказано (паритетный инвариант) + явная 3‑CNF для $\Delta=3$.
-- `Барьер‑чек:` r — применимо (тривиально релятивизируется), NP — неприменимо
-  (нет «natural property»), alg — неприменимо.
-- `Следующий шаг:` зафиксировать в основном тексте, что это даёт семейство
-  невыполнимых 3‑CNF с bounded‑occ на 3‑регулярных экспандерах, и привязать
-  к известным резолюционным нижним оценкам (через экспансию/ширину).
+- `Lens:` Invariant.
+- `Definition:` Let $G=(V,E)$ be an undirected graph and $\chi:V\to\{0,1\}$
+  ("charges"). Each edge $e\in E$ is associated with a Boolean variable $x_e$.
+  The Tseitin XOR system is given by modulo 2 equations:
+  $$\bigoplus_{e\ni v} x_e\ =\ \chi(v)\qquad\text{for all }v\in V.$$
+- `Statement:` If for some connected component $H\subseteq G$ we have
+  $\bigoplus_{v\in V(H)}\chi(v)=1$, then the system (and hence any CNF/3CNF
+  encoding these XOR constraints) is not feasible.
+- `Proof:` Let us take XOR over all vertices $v\in V(H)$ from the left sides.
+  Each variable $x_e$ (for an edge $e$ inside $H$) appears exactly twice - each
+  ends of the edge - and therefore cancels: $\bigoplus_{v\in V(H)}\bigoplus_{e\ni v}x_e=0$.
+  Then the equations imply $0=\bigoplus_{v\in V(H)}\chi(v)=1$, a contradiction.
+- `3CNF encoding for 3regular $G$:` if $\deg(v)=3$ and incident edges
+  have variables $a,b,c$, then the constraint $a\oplus b\oplus c=\chi(v)$ is equivalent
+  3CNF of 4 clauses (we prohibit 4 triples that do not match in parity). Therefore, when
+  3regular $G$ we obtain a 3CNF of size $4|V|$, and each variable $x_e$ is included
+  exactly $8$ clauses ($4$ at each end of the edge).
+- `Toy test:` one edge $e=\{u,v\}$ and $\chi(u)=1,\chi(v)=0$ gives the system
+  $x_e=1$ and $x_e=0$ (obvious impossibility); parity argument above is exactly this
+  fixes as $\chi(u)\oplus\chi(v)=1$.
+- `Status:` proven (parity invariant) + explicit 3CNF for $\Delta=3$.
+- `Barrier check:` r -- applicable (trivially relativized), NP -- not applicable
+  (no "natural property"), alg - not applicable.
+- `Next step:` state in the main text what the family provides
+  infeasible 3CNF with boundedocc on 3regular expanders, and bind
+  to known resolution lower bounds (via expansion/width).
 
-### 16.86. Исследовательский шаг: экспансия ⇒ ширина/размер резолюции для Tseitin на bounded‑degree графах
+### 16.86. Exploratory step: expansion  resolution width/size for Tseitin on boundeddegree graphs
 
-- `Линза:` Трейд-офф.
-- `Утверждение:` Пусть $G=(V,E)$ — связный граф максимальной степени $\le k$, а
-  $e(G):=\min_{A\subseteq V,\ |V|/3\le |A|\le 2|V|/3}|E(A,\bar A)|$ — его экспансия
-  (Itsykson–Oparin 2013, Def. 2). Если Tseitin($G,\chi$) невыполнима, то ширина
-  резолюционного опровержения удовлетворяет $W(\mathrm{Tseitin}(G,\chi)\vdash 0)\ge e(G)-1$
-  (Itsykson–Oparin 2013, Cor. 1). Тогда по trade‑off “width ⇒ size”
-  (Ben‑Sasson–Wigderson 2001; также сформулировано как Thm. 1 в Itsykson–Oparin 2013)
-  получаем для числа переменных $n:=|E|$ (где $S$ — размер dag‑resolution, а $ST$ — размер tree‑like resolution):
+- `Lens:` Trade-off.
+- `Statement:` Let $G=(V,E)$ be a connected graph of maximum degree $\le k$, and
+  $e(G):=\min_{A\subseteq V,\ |V|/3\le |A|\le 2|V|/3}|E(A,\bar A)|$ is its expansion
+  (Itsykson-Oparin 2013, Def. 2). If Tseitin($G,\chi$) is not satisfiable, then the width
+  resolution refutation is satisfied by $W(\mathrm{Tseitin}(G,\chi)\vdash 0)\ge e(G)-1$
+  (Itsykson-Oparin 2013, Cor. 1). Then by tradeoff "width  size"
+  (Ben-Sasson-Wigderson 2001; also formulated as Thm. 1 in Itsykson-Oparin 2013)
+  we obtain for the number of variables $n:=|E|$ (where $S$ is the size of the dagresolution, and $ST$ is the size of the treelike resolution):
   $$S(\mathrm{Tseitin}(G,\chi))\ \ge\ 2^{\Omega\!\left(\frac{(e(G)-k-1)^2}{n}\right)},\qquad
     ST(\mathrm{Tseitin}(G,\chi))\ \ge\ 2^{\,e(G)-k-1}.$$
-  В частности, для семейства графов степени $O(1)$ с $e(G)=\Omega(|V|)$ (экспандеры)
-  имеем $n=\Theta(|V|)$ и потому $S\ge 2^{\Omega(|V|)}$.
-- `Toy‑тест:` цикл $C_n$ имеет $e(C_n)=2$, значит оценка даёт лишь константную
-  нижнюю границу на ширину/размер; это согласуется с тем, что “плохая” экспансия
-  не должна давать сильных нижних оценок.
-- `Статус:` доказано (цитата Cor. 1 + стандартный width–size trade‑off).
-- `Барьер‑чек:` r — неприменимо (модель‑специфическая нижняя оценка),
-  NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` применить к 3‑регулярным экспандерам и 3‑CNF кодировке из §16.85,
-  чтобы получить явное семейство bounded‑occ 3‑CNF с экспоненциальной резолюцией.
+  In particular, for a family of graphs of degree $O(1)$ with $e(G)=\Omega(|V|)$ (expanders)
+  we have $n=\Theta(|V|)$ and therefore $S\ge 2^{\Omega(|V|)}$.
+- `Toy test:` cycle $C_n$ has $e(C_n)=2$, which means the estimate gives only a constant
+  bottom border on width/size; this is consistent with the fact that "bad" expansion
+  should not give strong lower marks.
+- `Status:` proven (quote Cor. 1 + standard width-size tradeoff).
+- `Barrier check:` r--not applicable (model-specific lower bound),
+  NP - not applicable, alg - not applicable.
+- `Next step:` apply to 3regular expanders and 3CNF encoding from Section 16.85,
+  to obtain an explicit bounded-occ 3-CNF family with exponential resolution.
 
-### 16.87. Исследовательский шаг: явное bounded‑occ Tseitin‑семейство на 3‑регулярных экспандерах
+### 16.87. Exploratory step: explicit bounded-occ Tseitin-family on 3-regular expanders
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Существует сильно‑явное семейство 3‑регулярных экспандеров
-  $\{G_n\}$ с $\lambda(G_n)\le \lambda_0<1$ (например, семейство Ramanujan‑графов;
-  см. обсуждение в `../../resources/downloads/arora_barak.pdf`, §16.3, Remark 16.10).
-  Тогда по связи спектральной и комбинаторной экспансии (Arora–Barak, Thm. 16.18)
-  имеем $|E(A,\bar A)|\ge \rho d|A|$ для всех $|A|\le |V|/2$ и некоторой константы
-  $\rho>0$, откуда $e(G_n)=\Omega(|V_n|)$ в смысле Def. 2 из Itsykson–Oparin.
-  Пусть $\chi_n$
-  имеет нечётную сумму зарядов, и $F_n$ — 3‑CNF кодировка Tseitin($G_n,\chi_n$) из §16.85.
-  Тогда:
-  (i) $F_n$ невыполнима; (ii) $|F_n|=\Theta(|V_n|)$; (iii) bounded‑occ = 8;
-  (iv) размер резолюционного опровержения $S(F_n)=2^{\Omega(|V_n|)}$ (по §16.86).
-- `Toy‑тест:` если $G$ — цикл, то $e(G)=2$ и §16.86 даёт лишь константные границы;
-  на экспандере $e(G)=\Omega(|V|)$ и при $|E|=\Theta(|V|)$ получаем экспоненту
-  $\Omega(|V|)$ в нижней оценке на $S(F)$.
-- `Статус:` доказано (композиция 16.85 + 16.86 + существование expander family).
-- `Барьер‑чек:` r — неприменимо (модель‑специфическая нижняя оценка),
-  NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` уточнить/зафиксировать конкретную ссылку на выбранную явную
-  3‑регулярную expander family (по необходимости) и отметить, какие системы
-  доказательств (PC/EF) остаются открытыми на этих формулах.
+- `Lens:` Equivalence.
+- `Statement:` There is a strongly explicit family of 3-regular expanders
+  $\{G_n\}$ with $\lambda(G_n)\le \lambda_0<1$ (for example, a family of Ramanujan graphs;
+  see discussion in `../../resources/downloads/arora_barak.pdf`, §16.3, Remark 16.10).
+  Then, according to the connection between spectral and combinatorial expansion (Arora-Barak, Thm. 16.18)
+  we have $|E(A,\bar A)|\ge \rho d|A|$ for all $|A|\le |V|/2$ and some constant
+  $\rho>0$, whence $e(G_n)=\Omega(|V_n|)$ in the sense of Def. 2 from Itsykson-Oparin.
+  Let $\chi_n$
+  has an odd sum of charges, and $F_n$ is the 3CNF encoding of Tseitin($G_n,\chi_n$) from Section 16.85.
+  Then:
+  (i) $F_n$ is unsatisfiable; (ii) $|F_n|=\Theta(|V_n|)$; (iii) boundedocc = 8;
+  (iv) the size of the resolution refutation $S(F_n)=2^{\Omega(|V_n|)}$ (according to Section 16.86).
+- `Toy test:` if $G$ is a cycle, then $e(G)=2$ and Section 16.86 gives only constant bounds;
+  on the expander $e(G)=\Omega(|V|)$ and for $|E|=\Theta(|V|)$ we obtain the exponential
+  $\Omega(|V|)$ in the lower bound on $S(F)$.
+- `Status:` proven (composition 16.85 + 16.86 + existence of expander family).
+- `Barrier check:` r--not applicable (model-specific lower bound),
+  NP - not applicable, alg - not applicable.
+- `Next step:` clarify/fix a specific link to the selected explicit
+  3regular expander family (if necessary) and note which systems
+  evidence (PC/EF) remains open on these formulas.
 
-### 16.88. Исследовательский шаг: Tseitin легко в EF; PC зависит от поля/базиса
+### 16.88. Research step: Tseitin is easy in EF; PC depends on field/basis
 
-- `Линза:` Алгебраизация.
-- `Утверждение:` Пусть $G$ связен и $\bigoplus_{v\in V}\chi(v)=1$. Тогда 3‑CNF
-  кодировка $F=\mathrm{TseitinCNF}(G,\chi)$ из §16.85 имеет полиномиальное
-  опровержение в Extended Frege (EF), так как
-  противоречие даёт суммирование XOR‑уравнений по модулю 2. Для Polynomial
-  Calculus: над полем характеристики 2 соответствующая линейная система
-  опровергается в степени 1; над $\mathrm{char}(F)\ne 2$ в Fourier‑базисе известны
-  линейные degree‑нижние оценки (Beame–Sabharwal 2000, Thm. 2.18).
-- `Доказательство (EF‑каркас):`
-  Обозначим $a\oplus b := (a\wedge\neg b)\vee(\neg a\wedge b)$.
-  Тождества ассоциативности/коммутативности и сокращения
+- `Lens:` Algebraization.
+- `Statement:` Let $G$ be connected and $\bigoplus_{v\in V}\chi(v)=1$. Then 3CNF
+  the encoding $F=\mathrm{TseitinCNF}(G,\chi)$ from Section 16.85 has a polynomial
+  refutation in Extended Frege (EF), since
+  a contradiction gives the summation of XOR equations modulo 2. For Polynomial
+  Calculus: above characteristic field 2 the corresponding linear system
+  refuted to the degree of 1; over $\mathrm{char}(F)\ne 2$ in the Fourier basis are known
+  linear degree lower bounds (Beame-Sabharwal 2000, Thm. 2.18).
+- `Proof (EF framework):`
+  Let us denote $a\oplus b := (a\wedge\neg b)\vee(\neg a\wedge b)$.
+  Associativity/commutativity identities and reductions
   $a\oplus(a\oplus b)\leftrightarrow b$, $a\oplus a\leftrightarrow 0$
-  имеют константный размер (3 переменные) ⇒ константные Frege‑выводы.
-  Для каждой вершины $v$ степени 3, с инцидентными рёбрами $e_1,e_2,e_3$,
-  4 клаузы из §16.85 эквивалентны формуле
+  have a constant size (3 variables)  constant Frege pins.
+  For each vertex $v$ of degree 3, with incident edges $e_1,e_2,e_3$,
+  The 4 clauses in Section 16.85 are equivalent to the formula
   $$(x_{e_1}\oplus x_{e_2}\oplus x_{e_3})\leftrightarrow \chi(v)$$
-  (проверка 8 значений; константный вывод).
-  В EF введём extension‑переменные $p_v\leftrightarrow (x_{e_1}\oplus x_{e_2}\oplus x_{e_3})$
-  и $P\leftrightarrow\bigoplus_{v\in V} p_v$ (цепочка/дерево XOR, размер $O(|V|)$).
-  Из предыдущего получаем $P\leftrightarrow\bigoplus_v\chi(v)$, а значит $P$.
-  С другой стороны, подставляя определения $p_v$ и используя локальные
-  перестановки/скобки XOR (полиномиально много шагов), получаем
+  (check 8 values; constant output).
+  In EF we introduce extension variables $p_v\leftrightarrow (x_{e_1}\oplus x_{e_2}\oplus x_{e_3})$
+  and $P\leftrightarrow\bigoplus_{v\in V} p_v$ (XOR chain/tree, size $O(|V|)$).
+  From the previous we obtain $P\leftrightarrow\bigoplus_v\chi(v)$, which means $P$.
+  On the other hand, substituting the definitions of $p_v$ and using local
+  permutations/XOR brackets (polynomial many steps), we get
   $$P\leftrightarrow\bigoplus_{v\in V}\ \bigoplus_{e\ni v} x_e\ \leftrightarrow\ \bigoplus_{e\in E}(x_e\oplus x_e)\ \leftrightarrow\ 0,$$
-  противоречие.
-- `Ссылка (EF ⊢ XOR/Gauss):` отмечено, что EF «легко симулирует Gaussian elimination»
-  (и потому полиномиально доказывает линейно‑алгебраические утверждения),
-  см. Bonet–Buss–Pitassi 2002, `../../resources/downloads/bonet_buss_pitassi_2002_hard_examples_frege.pdf` (p. 7).
-- `PC‑заметка:` Если рассматривать Tseitin как линейную систему над $\mathbb F_2$,
+  contradiction.
+- `Link (EF  XOR/Gauss):` noted that EF "easily simulates Gaussian elimination"
+  (and therefore proves linear-algebraic statements polynomially),
+  see Bonet-Buss-Pitassi 2002, `../../resources/downloads/bonet_buss_pitassi_2002_hard_examples_frege.pdf` (p. 7).
+- `PC note:` If we consider Tseitin as a linear system over $\mathbb F_2$,
   $$\sum_{e\ni v} x_e = \chi(v)\quad(\bmod 2),$$
-  то в PC над $\mathbb F_2$ опровержение получается в степени 1: суммируем
-  уравнения по $v\in V$, получаем $0=\bigoplus_v\chi(v)=1$.
-- `Известный факт (PC, $\mathrm{char}(F)\ne 2$):` для любой последовательности bounded‑degree
-  графов $\{G_n\}$ с $c(G_n)=\Omega(1)$ (экспандеры) любая PC‑рефутация
-  $\mathrm{Tseitin}(G_n)$ над полем нечётной или нулевой характеристики имеет степень
-  $\Omega(|V_n|)$, а по связи degree→size также размер $2^{\Omega(|V_n|)}$
-  (Razborov 2023, Thm. 6.8 + абзац после Thm. 6.9).
-- `Toy‑тест:` $G=C_3$ и $\chi\equiv 1$. Сумма трёх уравнений даёт
+  then in PC over $\mathbb F_2$ the refutation is obtained to the power of 1: we sum
+  equations in $v\in V$, we obtain $0=\bigoplus_v\chi(v)=1$.
+- `Known fact (PC, $\mathrm{char}(F)\ne 2$):` for any sequence boundeddegree
+  graphs $\{G_n\}$ with $c(G_n)=\Omega(1)$ (expanders) any PC-refutation
+  $\mathrm{Tseitin}(G_n)$ over a field of odd or zero characteristic has degree
+  $\Omega(|V_n|)$, and according to the degree->size connection the size is also $2^{\Omega(|V_n|)}$
+  (Razborov 2023, Thm. 6.8 + paragraph after Thm. 6.9).
+- `Toy test:` $G=C_3$ and $\chi\equiv 1$. The sum of the three equations gives
   $(x_{12}\oplus x_{12})\oplus(x_{23}\oplus x_{23})\oplus(x_{31}\oplus x_{31})=1$,
-  то есть $0=1$.
-- `Статус:` EF‑верхняя оценка — доказано как схема; для PC над $\mathbb F_2$ — доказано;
-  для $\mathrm{char}(F)\ne 2$ степень и размер — известные нижние оценки (см. факт выше).
-- `Барьер‑чек:` r — неприменимо (утверждение про конкретные proof‑системы),
-  NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` см. §16.89 (клаузная форма TseitinCNF легко в PC над $\mathbb F_2$);
-  дальше — понять, переносится ли (и как) degree‑LB для $\mathrm{char}(F)\ne 2$ с XOR‑системы
-  на 3‑CNF кодировку.
+  that is, $0=1$.
+- `Status:` EFupper bound - proven as a scheme; for PC over $\mathbb F_2$ - proven;
+  for $\mathrm{char}(F)\ne 2$ the degree and size are known lower bounds (see the fact above).
+- `Barrier check:` r - not applicable (statement about specific proof systems),
+  NP - not applicable, alg - not applicable.
+- `Next step:` see Section 16.89 (clause form TseitinCNF is easy in PC over $\mathbb F_2$);
+  Next - understand whether (and how) degree-LB for $\mathrm{char}(F)\ne 2$ is transferred from the XOR-system
+  to 3CNF encoding.
 
-### 16.89. Исследовательский шаг: TseitinCNF легко в PC над $\mathbb F_2$ (степень 3)
+### 16.89. Exploratory step: TseitinCNF easy in PC over $\mathbb F_2$ (degree 3)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $G$ — 3‑регулярный граф, $\chi:V\to\{0,1\}$ и
-  $\bigoplus_{v\in V}\chi(v)=1$. Пусть $F=\mathrm{TseitinCNF}(G,\chi)$ — 3‑CNF из §16.85.
-  Тогда над полем $\mathbb F_2$ существует Polynomial Calculus‑рефутация $F$ степени $\le 3$
-  и размера $O(|V|)$.
-- `Доказательство (локальная линейная форма):`
-  Переводим клаузу $(\ell_1\vee \ell_2\vee \ell_3)$ в полиномиальное уравнение
+- `Lens:` Equivalence.
+- `Statement:` Let $G$ be a 3regular graph, $\chi:V\to\{0,1\}$ and
+  $\bigoplus_{v\in V}\chi(v)=1$. Let $F=\mathrm{TseitinCNF}(G,\chi)$ be the 3CNF from Section 16.85.
+  Then over the field $\mathbb F_2$ there exists a Polynomial Calculus-refutation $F$ of degree $\le 3$
+  and size $O(|V|)$.
+- `Proof (local linear form):`
+  We translate the clause $(\ell_1\vee \ell_2\vee \ell_3)$ into a polynomial equation
   $$(1-\ell_1)(1-\ell_2)(1-\ell_3)=0,$$
-  где литерал $\neg x$ интерпретируется как $1-x$ (булевы аксиомы $x^2-x=0$ не нужны).
-  Зафиксируем вершину $v$ степени 3 с инцидентными рёбрами $e_1,e_2,e_3$ и обозначим
+  where the literal $\neg x$ is interpreted as $1-x$ (the Boolean axioms $x^2-x=0$ are not needed).
+  Let us fix a vertex $v$ of degree 3 with incident edges $e_1,e_2,e_3$ and denote
   $x_i:=x_{e_i}$.
-  - Если $\chi(v)=1$, то 4 клаузы из §16.85 дают 4 аксиомы:
+  - If $\chi(v)=1$, then 4 clauses from Section 16.85 give 4 axioms:
     $$(1-x_1)(1-x_2)(1-x_3)=0,\ (1-x_1)x_2x_3=0,\ x_1(1-x_2)x_3=0,\ x_1x_2(1-x_3)=0.$$
-    Складывая их в $\mathbb F_2$, получаем $1+x_1+x_2+x_3=0$, то есть $x_1+x_2+x_3+\chi(v)=0$.
-  - Если $\chi(v)=0$, то аналогично из 4 клауз получаем аксиомы:
+    Adding them into $\mathbb F_2$, we get $1+x_1+x_2+x_3=0$, that is, $x_1+x_2+x_3+\chi(v)=0$.
+  - If $\chi(v)=0$, then similarly from 4 clauses we obtain the axioms:
     $$(1-x_1)(1-x_2)x_3=0,\ (1-x_1)x_2(1-x_3)=0,\ x_1(1-x_2)(1-x_3)=0,\ x_1x_2x_3=0,$$
-    и их сумма равна $x_1+x_2+x_3=0$, то есть снова $x_1+x_2+x_3+\chi(v)=0$.
+    and their sum is $x_1+x_2+x_3=0$, that is, again $x_1+x_2+x_3+\chi(v)=0$.
 
-  Итак, для каждого $v$ выводится линейное уравнение
-  $$\sum_{e\ni v} x_e\ +\ \chi(v)\ =\ 0\quad(\text{в }\mathbb F_2).$$
-  Складывая эти уравнения по всем $v\in V$, получаем
+  So, for each $v$ the linear equation is derived
+  $$\sum_{e\ni v} x_e\ +\ \chi(v)\ =\ 0\quad(\text{in }\mathbb F_2).$$
+  Adding these equations over all $v\in V$, we obtain
   $$\sum_{v\in V}\sum_{e\ni v}x_e\ +\ \sum_{v\in V}\chi(v)=0.$$
-  Каждая переменная $x_e$ входит в левую часть ровно дважды (по концам ребра), значит
-  в $\mathbb F_2$ сокращается, и остаётся $\sum_v\chi(v)=0$, то есть $1=0$ — противоречие.
-  Степень доказательства $\le 3$ (все клаузные аксиомы степени 3), число строк $O(|V|)$.
-- `Toy‑тест:` $G=C_3$ и $\chi\equiv 1$. Для каждой вершины выводится линейное уравнение
-  по трём рёбрам, сумма трёх уравнений даёт $1=0$.
-- `Статус:` доказано (явный локальный вывод + суммирование по графу).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` сформулировать такой же «локальный перевод» для $\mathrm{char}(F)\ne 2$
-  (или найти ссылку), чтобы связать TseitinCNF с известными degree‑LB для PC.
+  Each variable $x_e$ appears on the left side exactly twice (at the ends of the edge), which means
+  in $\mathbb F_2$ cancels, and $\sum_v\chi(v)=0$ remains, that is, $1=0$--a contradiction.
+  Degree of proof $\le 3$ (all clause axioms are degree 3), number of lines $O(|V|)$.
+- `Toy test:` $G=C_3$ and $\chi\equiv 1$. For each vertex a linear equation is derived
+  along three edges, the sum of the three equations gives $1=0$.
+- `Status:` proven (explicit local derivation + summation over the graph).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` formulate the same "local translation" for $\mathrm{char}(F)\ne 2$
+  (or find a link) to link TseitinCNF with well-known degreeLB for PC.
 
-### 16.90. Исследовательский шаг: TseitinCNF $\leftrightarrow$ биномиальная Tseitin в PC при $\mathrm{char}(F)\ne 2$
+### 16.90. Exploratory step: TseitinCNF $\leftrightarrow$ binomial Tseitin in PC for $\mathrm{char}(F)\ne 2$
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $F$ — поле, $\mathrm{char}(F)\ne 2$, и $v$ — вершина степени 3
-  с инцидентными переменными $x_1,x_2,x_3\in\{0,1\}$ и зарядом $\chi\in\{0,1\}$.
-  Пусть 4 клаузы TseitinCNF($v$) — стандартная 3‑CNF кодировка ограничения
-  $x_1\oplus x_2\oplus x_3=\chi$ (как в §16.85), переведённая в PC‑аксиомы вида
-  $(1-\ell_1)(1-\ell_2)(1-\ell_3)=0$. Тогда:
-  1) из этих 4 клауз в PC выводится одно уравнение степени 3
+- `Lens:` Equivalence.
+- `Statement:` Let $F$ be a field, $\mathrm{char}(F)\ne 2$, and $v$ a degree 3 vertex
+  with incident variables $x_1,x_2,x_3\in\{0,1\}$ and charge $\chi\in\{0,1\}$.
+  Let 4 clauses TseitinCNF($v$) be a standard 3CNF constraint encoding
+  $x_1\oplus x_2\oplus x_3=\chi$ (as in Section 16.85), translated into PC axioms of the form
+  $(1-\ell_1)(1-\ell_2)(1-\ell_3)=0$. Then:
+  1) from these 4 clauses in PC one equation of degree 3 is derived
      $$X(x_1,x_2,x_3)-\chi=0,$$
-     где
+     Where
      $$X(x_1,x_2,x_3):=x_1+x_2+x_3-2(x_1x_2+x_1x_3+x_2x_3)+4x_1x_2x_3;$$
-  2) при линейной замене $y_i:=1-2x_i$ это эквивалентно биномиальному уравнению
-     $$y_1y_2y_3-(1-2\chi)=0\quad(\text{и }y_i^2-1=0);$$
-  3) наоборот, из $X-\chi=0$ в PC выводятся все 4 клаузные аксиомы с константной
-     потерей степени (≤6). Следовательно, для 3‑регулярных графов TseitinCNF и
-     «биномиальная» Tseitin (Fourier/±1‑база) p‑эквивалентны по степени в PC.
-     В частности, degree/size‑нижние оценки для биномиальной Tseitin при $\mathrm{char}(F)\ne 2$
-     (Razborov 2023, Thm. 6.8; см. также Beame–Sabharwal 2000, Thm. 2.18) переносятся на TseitinCNF.
+  2) with linear replacement $y_i:=1-2x_i$ this is equivalent to the binomial equation
+     $$y_1y_2y_3-(1-2\chi)=0\quad(\text{and }y_i^2-1=0);$$
+  3) on the contrary, from $X-\chi=0$ in PC all 4 clause axioms with constant
+     loss of degree (<=6). Therefore, for 3regular graphs TseitinCNF and
+     "binomial" Tseitin (Fourier/1base) pequivalent in degree in PC.
+     In particular, degree/size lower bounds for the binomial Tseitin for $\mathrm{char}(F)\ne 2$
+     (Razborov 2023, Thm. 6.8; see also Beame-Sabharwal 2000, Thm. 2.18) are carried over to TseitinCNF.
 
-- `Доказательство (1, локально):`
-  В $\mathbb F[x_1,x_2,x_3]/(x_i^2-x_i)$ каждая клаузная аксиома для вершины степени 3 —
-  это индикатор запрещённого присваивания (моном степени 3 в литералах $x_i$ и $(1-x_i)$).
-  Для $\chi=0$ запрещены 4 нечётные тройки, и сумма 4 индикаторов равна ровно $X$.
-  Для $\chi=1$ запрещены 4 чётные тройки, и сумма индикаторов равна $1-X$.
-  В обоих случаях из 4 равенств “индикатор = 0” выводится $X-\chi=0$
-  (для $\chi=1$ умножением на $-1$).
+- `Proof (1, locally):`
+  In $\mathbb F[x_1,x_2,x_3]/(x_i^2-x_i)$ each clause axiom for a vertex of degree 3 is
+  this is an indicator of a forbidden assignment (a monomial of degree 3 in the literals $x_i$ and $(1-x_i)$).
+  For $\chi=0$ 4 odd triplets are prohibited, and the sum of 4 indicators is equal to exactly $X$.
+  For $\chi=1$ 4 even triplets are prohibited, and the sum of the indicators is $1-X$.
+  In both cases, from the 4 equalities "indicator = 0" the output is $X-\chi=0$
+  (for $\chi=1$ by multiplying by $-1$).
 
-- `Доказательство (2):`
-  Раскрывая скобки,
+- `Proof (2):`
+  Opening the brackets
   $$(1-2x_1)(1-2x_2)(1-2x_3)=1-2X(x_1,x_2,x_3).$$
-  Поэтому
+  That's why
   $$y_1y_2y_3-(1-2\chi)=(1-2X)-(1-2\chi)=-2(X-\chi),$$
-  то есть уравнения отличаются на ненулевой скаляр.
+  that is, the equations differ by a nonzero scalar.
 
-- `Доказательство (3, локально):`
-  Пусть $m_{a_1a_2a_3}:=\prod_i (x_i)^{a_i}(1-x_i)^{1-a_i}$ — индикатор присваивания $(a_1,a_2,a_3)$.
-  Если $(a_1\oplus a_2\oplus a_3)\ne\chi$, то на этом присваивании $X-\chi=\pm 1$, а на остальных
-  $m_{a_1a_2a_3}=0$, значит в фактор‑алгебре тождественно
+- `Proof (3, locally):`
+  Let $m_{a_1a_2a_3}:=\prod_i (x_i)^{a_i}(1-x_i)^{1-a_i}$ be an assignment indicator to $(a_1,a_2,a_3)$.
+  If $(a_1\oplus a_2\oplus a_3)\ne\chi$, then on this assignment $X-\chi=\pm 1$, and on the rest
+  $m_{a_1a_2a_3}=0$, which means that in the factor algebra it is identical
   $$(X-\chi)\,m_{a_1a_2a_3}=\pm m_{a_1a_2a_3}.$$
-  Из $X-\chi=0$ по правилу умножения получаем $(X-\chi)m_{a_1a_2a_3}=0$, откуда $m_{a_1a_2a_3}=0$.
-  Это ровно одна из 4 клауз TseitinCNF($v$). Степень: $\deg(X-\chi)\le 3$, $\deg(m)\le 3$, итого ≤6.
+  From $X-\chi=0$, according to the multiplication rule, we obtain $(X-\chi)m_{a_1a_2a_3}=0$, whence $m_{a_1a_2a_3}=0$.
+  This is exactly one of the 4 TseitinCNF($v$) clauses. Degree: $\deg(X-\chi)\le 3$, $\deg(m)\le 3$, total <=6.
 
-- `Toy‑тест:` $\chi=1$. Сумма 4 «чётных» индикаторов (000,011,101,110) равна $1-X$,
-  значит из них следует $X-1=0$, а затем и $y_1y_2y_3+1=0$.
-- `Статус:` доказано (локальная p‑эквивалентность по степени при $\mathrm{char}(F)\ne 2$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если нужно для основного текста, добавить 1‑строчную ремарку в 15.x:
-  «при $\mathrm{char}(F)\ne 2$ TseitinCNF наследует PC degree/size‑LB через 16.90».
+- `Toy test:` $\chi=1$. The sum of 4 "even" indicators (000,011,101,110) is equal to $1-X$,
+  that means they imply $X-1=0$, and then $y_1y_2y_3+1=0$.
+- `Status:` proven (local p-equivalence in degree for $\mathrm{char}(F)\ne 2$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if necessary for the main text, add a 1-line remark in 15.x:
+  "at $\mathrm{char}(F)\ne 2$ TseitinCNF inherits PC degree/sizeLB through 16.90."
 
-### 16.91. Исследовательский шаг: Tseitin имеет полиномиальные Frege‑опровержения (Urquhart 1987)
+### 16.91. Exploratory step: Tseitin has polynomial Frege refutations (Urquhart 1987)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $G$ связен и $\bigoplus_{v\in V}\chi(v)=1$; пусть $\mathrm{TseitinCNF}(G,\chi)$ — клаузная
-  форма уравнений по модулю 2 (как в §16.85 для $\deg(G)=3$, или в общем виде через $2^{\deg(v)-1}$ клауз на вершину).
-  Тогда $\mathrm{TseitinCNF}(G,\chi)$ имеет полиномиальное опровержение в обычном Frege (в частности,
-  в «Kleene’s axiomatic system», т.е. Hilbert‑style propositional calculus): Urquhart (1987) даёт
-  явный вывод длины $O(n^4)$ (где $n=\Theta(|V|)$ при bounded‑degree).
-- `Доказательство (идея из Urquhart 1987, Lemma 6.1):`
-  1) для каждой вершины $v$ из клаузы‑кодировки восстанавливается соответствующее XOR‑уравнение
-     (у Urquhart — «biconditional»/эквивалентность, фиксирующая чётность литералов у вершины);
-  2) эти эквивалентности «склеиваются» в одно большое выражение; затем с помощью
-     ассоциативности/коммутативности «всплывают» парные вхождения переменных и сокращаются;
-  3) остаётся противоречие, так как левая часть сокращается в $0$, а правая даёт
+- `Lens:` Equivalence.
+- `Statement:` Let $G$ be connected and $\bigoplus_{v\in V}\chi(v)=1$; let $\mathrm{TseitinCNF}(G,\chi)$ be a clause
+  form of equations modulo 2 (as in Section 16.85 for $\deg(G)=3$, or in general form via $2^{\deg(v)-1}$ clause to the vertex).
+  Then $\mathrm{TseitinCNF}(G,\chi)$ has a polynomial refutation in the usual Frege (in particular,
+  in "Kleene's axiomatic system", i.e. Hilbertstyle propositional calculus): Urquhart (1987) gives
+  explicit derivation of length $O(n^4)$ (where $n=\Theta(|V|)$ for boundeddegree).
+- `Proof (idea from Urquhart 1987, Lemma 6.1):`
+  1) for each vertex $v$ the corresponding XOR equation is restored from the encoding clause
+     (Urquhart has "biconditional"/equivalence that fixes the parity of literals at the top);
+  2) these equivalences are "glued together" into one large expression; then using
+     associativity/commutativity, paired occurrences of variables "pop up" and are reduced;
+  3) a contradiction remains, since the left side cancels to $0$, and the right side gives
      $\bigoplus_v\chi(v)=1$.
-  Подробности: Urquhart 1987, §6, Lemma 6.1, `../../resources/downloads/urquhart_1987_hard_examples_resolution.pdf`.
-- `Toy‑тест:` $G=C_3$, $\chi\equiv 1$: три локальные XOR‑уравнения суммируются в $0=1$
-  (см. также toy‑тест в §16.88).
-- `Статус:` доказано (верхняя оценка/ссылка).
-- `Барьер‑чек:` r — неприменимо (это верхняя оценка в фиксированной модели доказательств),
-  NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` уточнить «минимальную глубину» полиномиальных Frege‑опровержений Tseitin:
-  зафиксировать лучшую известную depth‑vs‑size оценку (ссылка на работу уровня Håstad’17/18 и/или последующие усиления).
+  Details: Urquhart 1987, Section 6, Lemma 6.1, `../../resources/downloads/urquhart_1987_hard_examples_resolution.pdf`.
+- `Toy test:` $G=C_3$, $\chi\equiv 1$: three local XOR equations sum to $0=1$
+  (See also toy test in Section 16.88).
+- `Status:` proven (top score/link).
+- `Barrier check:` r - not applicable (this is the upper bound in the fixed proof model),
+  NP - not applicable, alg - not applicable.
+- `Next step:` clarify the "minimum depth" of polynomial Frege refutations of Tseitin:
+  fix the best known depthvssize estimate (reference to the work of the Hastad'17/18 level and/or subsequent enhancements).
 
-### 16.92. Исследовательский шаг: depth‑vs‑size для Tseitin(Grid) в bounded‑depth Frege (Håstad 2020)
+### 16.92. Exploratory step: depthvssize for Tseitin(Grid) in boundeddepth Frege (Hastad 2020)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Рассмотрим Tseitin‑противоречие на $n\times n$ решётке (grid).
-  Если $d\le \frac{\log n}{59\log\log n}$, то любая depth‑$d$ Frege‑рефутация имеет размер
+- `Lens:` Trade-off.
+- `Statement:` Let us consider the Tseitin contradiction on a $n\times n$ grid.
+  If $d\le \frac{\log n}{59\log\log n}$, then any depth$d$ Fregerefutation has the size
   $2^{\Omega(n^{1/(58(d+1))})}$ (Håstad 2020, Thm. 6.5; `../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`,
-  `exp` в источнике = $2^x$).
-  В частности, любая полиномиальная
-  по $n$ (а значит и по числу переменных $N=\Theta(n^2)$) Frege‑рефутация требует формул глубины
+  `exp` in source = $2^x$).
+  In particular, any polynomial
+  by $n$ (and therefore by the number of variables $N=\Theta(n^2)$) Frege-refutation requires depth formulas
   $\Omega(\log n/\log\log n)$ (Håstad 2020, Cor. 6.6).
-- `Toy‑тест:` при константной глубине $d=O(1)$ получаем superpolynomial нижнюю оценку
-  $2^{\Omega(n^{\Omega(1)})}=2^{\Omega(N^{\Omega(1)})}$ для Tseitin(Grid$_{n,n}$).
-- `Статус:` известный факт (точная ссылка).
-- `Барьер‑чек:` r — неприменимо (нижняя оценка для ограниченной модели доказательств),
-  NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` сопоставить с «верхней» оценкой $O(\log n)$ глубины для poly‑size Frege‑рефутаций Tseitin
-  (Buss‑style счёт/паритет) и зафиксировать, насколько tight остаётся разрыв $O(\log\log n)$.
+- `Toy test:` with constant depth $d=O(1)$ we obtain a superpolynomial lower bound
+  $2^{\Omega(n^{\Omega(1)})}=2^{\Omega(N^{\Omega(1)})}$ for Tseitin(Grid$_{n,n}$).
+- `Status:` known fact (exact link).
+- `Barrier check:` r - not applicable (lower estimate for a limited evidence model),
+  NP - not applicable, alg - not applicable.
+- `Next step:` compare with the "upper" estimate $O(\log n)$ of depth for polysize Fregerefutations Tseitin
+  (Buss-style score/parity) and record how tight the gap $O(\log\log n)$ remains.
 
-### 16.93. Исследовательский шаг: верхняя оценка $O(\log n)$ глубины для poly‑size Frege на Tseitin (bounded‑degree)
+### 16.93. Exploratory step: $O(\log n)$ depth upper bound for polysize Frege on Tseitin (boundeddegree)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение:` Для Tseitin‑противоречия на любом bounded‑degree графе (клаузная форма паритетных уравнений)
-  существует полиномиальный по $n$ Frege‑вывод, использующий формулы глубины $O(\log n)$ в стандартном языке
+- `Lens:` Compression/canonization.
+- `Statement:` For Tseitin-contradiction on any bounded-degree graph (clause form of parity equations)
+  there is a polynomial in $n$ Frege inference using $O(\log n)$ depth formulas in the standard language
   $L_\\in=\\{\\wedge,\\vee,\\neg\\}$.
-- `Доказательство:` берём polynomial‑size Frege‑опровержение $\\pi$ из Urquhart (1987) (см. §16.91).
-  Затем применяем к каждой линии $A$ из $\\pi$ Spira‑балансировку (Bonet–Buss 2002, Thm. 2; см. §16.94),
-  получая эквивалентную формулу $A'$ глубины $O(\\log|A|)$ и размера $\\mathrm{poly}(|A|)$.
-  По §16.114 для этой балансировки существуют polynomial‑size Frege‑доказательства тавтологий $A\\leftrightarrow A'$,
-  а по §16.113 из $A$ и $A\\leftrightarrow A'$ выводится $A'$ с $O(1)$ дополнительными строками.
-  Заменяя линии по индукции, получаем Frege‑опровержение $\\pi'$ той же CNF, где все линии имеют глубину $O(\\log n)$,
-  а общий blow‑up остаётся полиномиальным (так как исходный размер $\\pi$ полиномиален по $n=\\Theta(|\\mathrm{TseitinCNF}(G,\\chi)|)$ при bounded‑degree).
-- `Toy‑тест:` на цикле можно выписать balanced‑формулу для XOR всех уравнений и сократить парные вхождения рёбер,
-  получая $0=1$ при нечётной сумме зарядов.
-- `Статус:` доказано (через §16.91+§16.94+§16.113–§16.114).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, даёт ли верхняя оценка из 16.97 (GIRS’19, Thm. 19) polynomial‑size уже при глубине
-  $\\Theta(\\log n/\\log\\log n)$ на решётках/экспандерах, и тем самым закрывает разрыв с 16.92.
+- `Proof:` we take the polynomialsize Fregerefutation $\\pi$ from Urquhart (1987) (see Section 16.91).
+  Then we apply Spira balancing to each line $A$ of $\\pi$ (Bonet-Buss 2002, Thm. 2; see Section 16.94),
+  obtaining the equivalent formula $A'$ of depth $O(\\log|A|)$ and size $\\mathrm{poly}(|A|)$.
+  According to Section 16.114, for this balancing there are polynomialsize Fregeproofs of the tautologies $A\\leftrightarrow A'$,
+  and by Section 16.113, from $A$ and $A\\leftrightarrow A'$ one derives $A'$ with $O(1)$ additional lines.
+  Replacing the lines by induction, we obtain a Frege refutation $\\pi'$ of the same CNF, where all lines have depth $O(\\log n)$,
+  and the overall blow-up remains polynomial (since the original size $\\pi$ is polynomial in $n=\\Theta(|\\mathrm{TseitinCNF}(G,\\chi)|)$ for bounded-degree).
+- `Toy test:` on the loop you can write a balanced formula for XOR of all equations and reduce paired occurrences of edges,
+  getting $0=1$ for an odd sum of charges.
+- `Status:` proven (via Section 16.91+Section 16.94+Section 16.113-Section 16.114).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether the upper estimate from 16.97 (GIRS'19, Thm. 19) gives a polynomialsize already at depth
+  $\\Theta(\\log n/\\log\\log n)$ on the lattices/expanders, thereby closing the gap from 16.92.
 
-### 16.94. Исследовательский шаг: балансовка формул ⇒ можно требовать глубину $O(\log n)$ в Frege
+### 16.94. Exploratory step: balancing formulas  you can require $O(\log n)$ depth in Frege
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Любая булева формула размера $m$ эквивалентна формуле глубины $O(\log m)$
-  (Brent/Spira restructuring). Точная ссылка: Bonet–Buss (2002), Theorem 2 (Spira),
+- `Lens:` Trade-off.
+- `Statement:` Any Boolean formula of size $m$ is equivalent to a formula of depth $O(\log m)$
+  (Brent/Spira restructuring). Exact link: Bonet-Buss (2002), Theorem 2 (Spira),
   `../../resources/downloads/bonet_buss_2002_size_depth_tradeoffs_boolean_formulae.pdf`.
-  Следовательно, если $\mathrm{TseitinCNF}(G,\chi)$ имеет polynomial‑size Frege‑рефутацию
-  (16.91, Urquhart 1987), то можно считать, что все большие промежуточные формулы
-  в этой рефутации сбалансированы до глубины $O(\log n)$ (с полиномиальным blow‑up),
-  т.е. верхняя оценка $O(\log n)$ по глубине не требует отдельной «счётной» конструкции.
-- `Toy‑тест:` длинная цепочка дизъюнкций/биимпликаций длины $m$ имеет глубину $\Theta(m)$,
-  но после балансировки становится глубины $O(\log m)$.
-- `Статус:` доказано (замена линий: §16.113; p‑доказательства эквивалентности для Spira‑балансировки: §16.114).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` использовать 16.94+16.95 как «чистую» верхнюю оценку по глубине и возвращаться к нижним оценкам (16.92, 16.97).
+  Therefore, if $\mathrm{TseitinCNF}(G,\chi)$ has a polynomial-size Frege-refutation
+  (16.91, Urquhart 1987), then we can assume that all large intermediate formulas
+  in this refutation are balanced to a depth of $O(\log n)$ (with polynomial blow-up),
+  those. the upper bound $O(\log n)$ in depth does not require a separate "countable" construction.
+- `Toy test:` a long chain of disjunctions/biimplications of length $m$ has depth $\Theta(m)$,
+  but after balancing the depth becomes $O(\log m)$.
+- `Status:` proven (line replacement: Section 16.113; p-equivalence proofs for Spira balancing: Section 16.114).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` use 16.94+16.95 as a "pure" upper estimate for depth and return to the lower estimates (16.92, 16.97).
 
-### 16.95. Исследовательский шаг: Urquhart‑Tseitin + Spira‑перевод ⇒ $O(\log n)$‑depth Frege (строго)
+### 16.95. Research step: UrquhartTseitin + Spiratranslation  $O(\log n)$depth Frege (strictly)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть есть Frege‑опровержение формулы $\Phi$ в языке $L_\infty$, где в частности разрешены
-  $\{\wedge,\oplus,\neg\}$ или $\{\equiv,\oplus\}$ (как в Urquhart 1987 для «biconditionals»).
-  Тогда существует полиномиально по размеру доказательства Frege‑опровержение $\Phi'$ в стандартном языке
-  $L_\in=\{\wedge,\vee,\neg\}$, причём перевод $\phi\mapsto\phi'$ устроен так, что:
-  (i) $\phi'$ эквивалентна $\phi$ (по смыслу); (ii) глубина $\phi'$ равна $O(\log|\phi|)$ (Spira‑rebalancing);
-  (iii) размер $\phi'$ полиномиален в $|\phi|$. Ссылка: Buss (1997), Theorem 3 + доказательство‑эскиз
+- `Lens:` Equivalence.
+- `Statement:` Let there be a Frege refutation of the formula $\Phi$ in the language $L_\infty$, where, in particular,
+  $\{\wedge,\oplus,\neg\}$ or $\{\equiv,\oplus\}$ (as in Urquhart 1987 for "biconditionals").
+  Then there is a polynomial-in-size Frege refutation of $\Phi'$ in the standard language
+  $L_\in=\{\wedge,\vee,\neg\}$, and the translation $\phi\mapsto\phi'$ is arranged in such a way that:
+  (i) $\phi'$ is equivalent to $\phi$ (in meaning); (ii) the depth $\phi'$ is $O(\log|\phi|)$ (Spirarebalancing);
+  (iii) the size of $\phi'$ is polynomial in $|\phi|$. Reference: Buss (1997), Theorem 3 + proof-sketch
   «indirect translation via Spira», `../../resources/downloads/buss_1997_proof_complexity_intro.pdf`.
-  Следствие: для bounded‑degree $\mathrm{TseitinCNF}(G,\chi)$ (нечётная сумма зарядов) существует
-  polynomial‑size Frege‑опровержение, использующее формулы глубины $O(\log n)$: берём
-  Urquhart (1987) (16.91) и применяем перевод Buss’97/Spira.
-- `Toy‑тест:` если делать «прямой перевод» $\phi_1\oplus\phi_2\mapsto(\phi_1\wedge\neg\phi_2)\vee(\neg\phi_1\wedge\phi_2)$
-  рекурсивно по линейной глубине, то размер может стать экспоненциальным; Spira‑перевод
-  «ре‑балансирует» дерево и держит размер полиномиальным (Buss’97, Proof sketch к Thm. 3).
-- `Статус:` известный факт (закрыта техническая часть для 16.94/вопроса Q14).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` использовать это как «чистое» обоснование верхней оценки $O(\log n)$ по глубине и
-  дальше улучшать нижние оценки (сужать разрыв с 16.92).
+  Corollary: for boundeddegree $\mathrm{TseitinCNF}(G,\chi)$ (odd sum of charges) there exists
+  polynomialsize Fregerefutation using depth formulas $O(\log n)$: take
+  Urquhart (1987) (16.91) and use the Buss'97/Spira translation.
+- `Toy test:` if you do a "direct translation" $\phi_1\oplus\phi_2\mapsto(\phi_1\wedge\neg\phi_2)\vee(\neg\phi_1\wedge\phi_2)$
+  recursively along linear depth, then the size can become exponential; Spira translation
+  "re-balances" the tree and keeps the size polynomial (Buss'97, Proof sketch for Thm. 3).
+- `Status:` known fact (technical part for 16.94/question Q14 is closed).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` use this as a "pure" justification for the $O(\log n)$ upper bound on depth and
+  further improve the lower estimates (narrow the gap from 16.92).
 
-### 16.96. Исследовательский шаг: Tseitin на экспандерах — depth‑vs‑size (Pitassi–Rossman–Servedio–Tan 2016)
+### 16.96. Exploratory step: Tseitin on expanders - depthvssize (Pitassi-Rossman-Servedio-Tan 2016)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Существует линейного размера 3‑CNF‑противоречие $\mathrm{Tseitin}(G_n[\alpha])$
-  на 3‑регулярном $n$‑вершинном экспандере, такое что для любого $d$ любая depth‑$d$ Frege‑рефутация
-  имеет размер $n^{\Omega((\log_2 n)/d^2)}$ (Pitassi–Rossman–Servedio–Tan 2016, Thm. 1,
+- `Lens:` Trade-off.
+- `Statement:` There is a linear size 3CNFcontradiction $\mathrm{Tseitin}(G_n[\alpha])$
+  on a 3regular $n$vertex expander such that for any $d$ any depth$d$ Fregerefutation
+  has size $n^{\Omega((\log_2 n)/d^2)}$ (Pitassi-Rossman-Servedio-Tan 2016, Thm. 1,
   `../../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf`).
-  Следовательно, любая polynomial‑size Frege‑рефутация требует глубины $d=\Omega(\sqrt{\log_2 n})$.
-- `Toy‑тест:` если $d=O(1)$, то нижняя оценка даёт размер $2^{\Omega((\log_2 n)^2)}=n^{\Omega(\log_2 n)}$ (quasi‑poly),
-  а если $d=\Theta(\sqrt{\log_2 n})$, то показатель $(\log_2 n)/d^2=\Theta(1)$ и оценка перестаёт быть superpolynomial.
-- `Статус:` известный факт (точная ссылка).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` сопоставить 16.96 (экспандер: $\sqrt{\log n}$) с 16.92 (grid: $\log n/\log\log n$)
-  и понять, где именно “теряется” $\sqrt{\log n}\to\log n/\log\log n$ в технике ограничений.
+  Consequently, any polynomial-size Frege-refutation requires a depth of $d=\Omega(\sqrt{\log_2 n})$.
+- `Toy test:` if $d=O(1)$, then the lower bound gives the size $2^{\Omega((\log_2 n)^2)}=n^{\Omega(\log_2 n)}$ (quasi-poly),
+  and if $d=\Theta(\sqrt{\log_2 n})$, then the exponent $(\log_2 n)/d^2=\Theta(1)$ and the estimate ceases to be superpolynomial.
+- `Status:` known fact (exact link).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` match 16.96 (expander: $\sqrt{\log n}$) with 16.92 (grid: $\log n/\log\log n$)
+  and understand where exactly $\sqrt{\log n}\to\log n/\log\log n$ is "lost" in the constraint technique.
 
-### 16.97. Исследовательский шаг: treewidth даёт tight depth‑vs‑size для Tseitin в bounded‑depth Frege (Galesi–Itsykson–Riazanov–Sofronova 2019)
+### 16.97. Exploratory step: treewidth gives tight depthvssize for Tseitin in boundeddepth Frege (Galesi-Itsykson-Riazanov-Sofronova 2019)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $G$ — связный неориентированный граф на $n$ вершинах, $t=\mathrm{tw}(G)$, и $\mathrm{Tseitin}(G,f)$ невыполнима.
-  Тогда существуют константы $K,C>0$ такие, что для любого $d\le K\log n/\log\log n - C$ любая depth‑$d$ Frege‑рефутация
-  имеет размер $\ge 2^{t^{\Omega(1/d)}}$ (Galesi–Itsykson–Riazanov–Sofronova 2019, Thm. 18,
+- `Lens:` Trade-off.
+- `Statement:` Let $G$ be a connected undirected graph on $n$ vertices, $t=\mathrm{tw}(G)$, and $\mathrm{Tseitin}(G,f)$ is unsatisfiable.
+  Then there exist constants $K,C>0$ such that for any $d\le K\log n/\log\log n - C$ any depth$d$ Fregerefutation
+  has size $\ge 2^{t^{\Omega(1/d)}}$ (Galesi-Itsykson-Riazanov-Sofronova 2019, Thm. 18,
   `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`).
-  Более того, для всех достаточно больших $d$ существует depth‑$d$ Frege‑рефутация размера $\le 2^{t^{O(1/d)}}\cdot\mathrm{poly}(|\mathrm{Tseitin}(G,f)|)$
-  (там же, Thm. 19).
-- `Toy‑тест:` если $\mathrm{tw}(G)=\Omega(n)$ (в частности, для bounded‑degree экспандеров, как отмечено в той же работе),
-  то polynomial‑size ($n^{O(1)}$) возможно только при $d=\Omega(\log n/\log\log n)$ (по Thm. 18).
-  При этом upper Thm. 19 записан в виде $2^{t^{O(1/d)}}\\cdot\\mathrm{poly}(|\\mathrm{Tseitin}(G,f)|)$ и корректен/информативен для фиксированного $d$.
-  Если же $d$ растёт с $n$ (как в «пороговом» режиме $d\\approx\\log n/\\log\\log n$), то нужно отслеживать зависимость от $d$ в big‑O:
-  явный unpack через Claim 28 даёт оценку $\\mathrm{poly}(|T|)\\cdot 2^{O(d\\cdot X^{2/d})}$ и на grid/экспандерах сертифицирует polynomial‑size
-  лишь при глубине $d=\\Theta(\\log n)$ (см. §16.115–§16.121).
-- `Статус:` известный факт (точная ссылка + уточнение про режим растущей глубины; обновляет вывод для Q15).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если понадобится связать с «поиском доказательств», извлечь Cor. 34 из той же работы:
-  bounded‑depth Frege размера $S$ ⇒ tree‑like Resolution размера $2^{\mathrm{poly}(\log_2 S)}$.
+  Moreover, for all sufficiently large $d$ there is a depth$d$ Fregerefutation of size $\le 2^{t^{O(1/d)}}\cdot\mathrm{poly}(|\mathrm{Tseitin}(G,f)|)$
+  (ibid., Thm. 19).
+- `Toy test:` if $\mathrm{tw}(G)=\Omega(n)$ (in particular, for boundeddegree expanders, as noted in the same work),
+  then polynomialsize ($n^{O(1)}$) is possible only for $d=\Omega(\log n/\log\log n)$ (according to Thm. 18).
+  At the same time upper Thm. 19 is written as $2^{t^{O(1/d)}}\\cdot\\mathrm{poly}(|\\mathrm{Tseitin}(G,f)|)$ and is correct/informative for fixed $d$.
+  If $d$ grows with $n$ (as in the "threshold" mode $d\\approx\\log n/\\log\\log n$), then you need to track the dependence on $d$ in big-O:
+  explicit unpack via Claim 28 gives an estimate of $\\mathrm{poly}(|T|)\\cdot 2^{O(d\\cdot X^{2/d})}$ and certifies polynomialsize on grids/expanders
+  only at depth $d=\\Theta(\\log n)$ (see Section 16.115-Section 16.121).
+- `Status:` known fact (exact link + clarification about the increasing depth mode; updates the output for Q15).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if you need to connect it with the "search for evidence", extract Cor. 34 from the same work:
+  bounded-depth Frege of size $S$  tree-like Resolution of size $2^{\mathrm{poly}(\log_2 S)}$.
 
-### 16.98. Исследовательский шаг: bounded‑depth Frege ⇒ tree‑like Resolution (quasi‑poly) для Tseitin (GIRS 2019, Cor. 34)
+### 16.98. Research step: boundeddepth Frege  treelike Resolution (quasipoly) for Tseitin (GIRS 2019, Cor. 34)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Для любой невыполнимой Tseitin‑CNF $\mathrm{Tseitin}(G,f)$: если она имеет доказательство размера $S$
-  в bounded‑depth Frege (в смысле статьи; ниже упоминается «constant‑depth Frege»), то она имеет tree‑like Resolution‑опровержение
-  размера $\le 2^{\mathrm{poly}(\log_2 S)}$ (Galesi–Itsykson–Riazanov–Sofronova 2019, Cor. 34,
+- `Lens:` Equivalence.
+- `Statement:` For any unsatisfiable Tseitin-CNF $\mathrm{Tseitin}(G,f)$: if it has a proof of size $S$
+  in bounded-depth Frege (in the sense of the article; "constant-depth Frege" is mentioned below), then it has a tree-like Resolution refutation
+  size $\le 2^{\mathrm{poly}(\log_2 S)}$ (Galesi-Itsykson-Riazanov-Sofronova 2019, Cor. 34,
   `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`).
-- `Доказательство (эскиз из §5 той же работы):` там используется (i) верхняя оценка на tree‑like Resolution через ширину:
-  по §16.99 (Beame–Beck–Impagliazzo 2016, Lemma 61) имеем $\mathrm{size}_{\mathrm{TL\text{-}Res}}\le n^{O(\mathrm{cw}(G))}$;
-  по §16.100–16.101 (и определению $w(G):=W(T(G,\\varphi)\\vdash\\bot)-1$) получаем $\mathrm{cw}(G)\le w(G)+2$, значит
+- `Proof (sketch from Section 5 of the same work):` there they use (i) an upper bound on the treelike Resolution in terms of width:
+  by Section 16.99 (Beame-Beck-Impagliazzo 2016, Lemma 61) we have $\mathrm{size}_{\mathrm{TL\text{-}Res}}\le n^{O(\mathrm{cw}(G))}$;
+  according to Section 16.100-16.101 (and the definition of $w(G):=W(T(G,\\varphi)\\vdash\\bot)-1$) we obtain $\mathrm{cw}(G)\le w(G)+2$, which means
   $\mathrm{size}_{\mathrm{TL\text{-}Res}}(T(G,\\varphi))\le n^{O(w(G))}=2^{O(\mathrm{tw}(G)\,\Delta(G)\,\log_2 n)}$
-  (Harvey–Wood 2014, (2); см. §16.102); (ii) нижняя оценка из главной теоремы для bounded‑depth Frege: $S\ge 2^{\mathrm{tw}(G)^{\varepsilon}}$
-  для некоторой константы $\varepsilon>0$ (глубина фиксирована); (iii) тривиально $S\ge|\mathrm{Tseitin}(G,f)|\ge 2^{\Delta(G)-1}$ и $S\ge n$.
-  Отсюда $\mathrm{tw}(G)\le (\log_2 S)^{1/\varepsilon}$, $\Delta(G)\le O(\log_2 S)$ и $\log_2 n\le O(\log_2 S)$, и подстановка в (i)
-  даёт $2^{O((\log_2 S)^{1/\varepsilon+2})}=2^{\mathrm{poly}(\log_2 S)}$.
-- `Toy‑тест:` если $S=n^{O(1)}$, то получаем tree‑like Resolution размера $\le 2^{\mathrm{poly}(\log_2 n)}=n^{\mathrm{polylog}\,n}$ (quasi‑poly).
-- `Статус:` известный факт (точная формулировка + минимальный вывод «откуда берётся» $2^{\mathrm{poly}(\log_2 S)}$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` при необходимости перенести цепочку §16.99–16.102 (определение $w(G)$ и $n^{O(w(G))}$) в основной текст
-  рядом с формулировкой Cor. 34, чтобы не ссылаться на «см. обсуждение».
+  (Harvey-Wood 2014, (2); see Section 16.102); (ii) lower bound from the main theorem for boundeddepth Frege: $S\ge 2^{\mathrm{tw}(G)^{\varepsilon}}$
+  for some constant $\varepsilon>0$ (depth is fixed); (iii) $S\ge|\mathrm{Tseitin}(G,f)|\ge 2^{\Delta(G)-1}$ and $S\ge n$ are trivial.
+  Hence $\mathrm{tw}(G)\le (\log_2 S)^{1/\varepsilon}$, $\Delta(G)\le O(\log_2 S)$ and $\log_2 n\le O(\log_2 S)$, and substitution in (i)
+  gives $2^{O((\log_2 S)^{1/\varepsilon+2})}=2^{\mathrm{poly}(\log_2 S)}$.
+- `Toy test:` if $S=n^{O(1)}$, then we obtain a tree-like Resolution of size $\le 2^{\mathrm{poly}(\log_2 n)}=n^{\mathrm{polylog}\,n}$ (quasi-poly).
+- `Status:` known fact (exact formulation + minimal conclusion "where does $2^{\mathrm{poly}(\log_2 S)}$ come from).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if necessary, move the chain Section 16.99-16.102 (definition of $w(G)$ and $n^{O(w(G))}$) to the main text
+  next to the wording Cor. 34, so as not to refer to "see. discussion".
 
-### 16.99. Исследовательский шаг: tree‑like Resolution‑upper bound для Tseitin через carving width (Beame–Beck–Impagliazzo 2016)
+### 16.99. Exploratory step: treelike Resolutionupper bound for Tseitin via carving width (Beame-Beck-Impagliazzo 2016)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $G$ — граф на $n$ вершинах с carving width $W$ (Definition 58). Тогда соответствующая
-  Tseitin‑таутология $\tau(G)$ имеет tree‑like resolution‑рефутацию ранга $\le W\log_{3/2} n$; в частности,
-  существует tree‑like resolution‑рефутация размера $\le n^{O(W)}$ и clause space $\le W\log_{3/2} n+1$
+- `Lens:` Trade-off.
+- `Statement:` Let $G$ be a graph on $n$ vertices with carving width $W$ (Definition 58). Then the corresponding
+  The Tseitin tautology $\tau(G)$ has a tree-like resolution representation of rank $\le W\log_{3/2} n$; in particular,
+  there is a tree-like resolution-refutation of size $\le n^{O(W)}$ and clause space $\le W\log_{3/2} n+1$
   (Beame–Beck–Impagliazzo 2016, Lemma 61,
   `../../resources/downloads/beame_beck_impagliazzo_2016_time_space_tradeoffs_resolution.pdf`).
-- `Toy‑тест:` при $W=O(1)$ получаем polynomial‑size tree‑like resolution для $\tau(G)$ (и глубину дерева $O(\log n)$);
-  при каждом рекурсивном разрезе по (1/3,2/3)-лемме ранг увеличивается на $\le W$, а высота рекурсии равна $\log_{3/2} n$.
-- `Статус:` известный факт (точная ссылка; закрывает «где именно берётся» tree‑like upper bound, т.е. компонент [3] в GIRS’19 Cor. 34).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` связать параметр $W$ (carving width) с $w(G)$ из GIRS’19 (минимальная resolution‑width для Tseitin)
-  и выписать минимальную цепочку неравенств, нужную для $n^{O(w(G))}$.
+- `Toy test:` for $W=O(1)$ we obtain polynomialsize treelike resolution for $\tau(G)$ (and tree depth $O(\log n)$);
+  for each recursive cut according to the (1/3,2/3)-lemma, the rank increases by $\le W$, and the recursion height is equal to $\log_{3/2} n$.
+- `Status:` known fact (exact link; covers "where exactly" tree-like upper bound comes from, i.e. component [3] in GIRS'19 Cor. 34).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` link the parameter $W$ (carving width) with $w(G)$ from GIRS'19 (minimum resolutionwidth for Tseitin)
+  and write down the minimal chain of inequalities needed for $n^{O(w(G))}$.
 
-### 16.100. Исследовательский шаг: carving width $\le \mathrm{tw}(L(G))+1$ (и значит $n^{O(W)}=n^{O(w(G))}$)
+### 16.100. Research step: carving width $\le \mathrm{tw}(L(G))+1$ (and therefore $n^{O(W)}=n^{O(w(G))}$)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Для любого графа $G$ выполнено $\mathrm{cw}(G)\le \mathrm{tw}(L(G))+1$, где $\mathrm{cw}$ — carving width,
-  а $L(G)$ — line graph. Следовательно, используя формулу для Tseitin‑width
+- `Lens:` Equivalence.
+- `Statement:` For any graph $G$, $\mathrm{cw}(G)\le \mathrm{tw}(L(G))+1$ holds, where $\mathrm{cw}$ is the carving width,
+  and $L(G)$ is a line graph. Therefore, using the formula for Tseitinwidth
   $w(G)=\max\{\Delta(G),\mathrm{tw}(L(G))\}-1$ (Galesi–Talebanfard–Torán 2018, Cor. 8+16,
-  `../../resources/downloads/galesi_talebanfard_toran_2018_cops_robber_tseitin.pdf`), получаем $\mathrm{cw}(G)\le w(G)+2$, и верхняя оценка
-  из §16.99 вида $n^{O(\mathrm{cw}(G))}$ эквивалентна $n^{O(w(G))}$.
-- `Доказательство:` Пусть $(T,\{B_t\})$ — tree decomposition графа $L(G)$ ширины $k=\mathrm{tw}(L(G))$,
-  т.е. $|B_t|\le k+1$.
-  Для вершины $v\in V(G)$ множество рёбер $E(v)$ образует клику в $L(G)$, значит (по свойству Helly для поддеревьев в $T$)
-  существует узел $t_v\in V(T)$ такой, что $E(v)\subseteq B_{t_v}$.
-  Добавим к $T$ лист $\ell_v$ с ребром $\ell_v t_v$ и положим $\chi(\ell_v)=v$; получаем carving‑дерево
-  (при необходимости его можно сделать бинарным стандартным «раздвоением» узлов копиями того же bag — ширина не растёт).
-  Рассмотрим ребро $xy$ этого дерева и индуцированный разрез $V(G)=A\sqcup B$ по листьям.
-  Если $xy=\ell_v t_v$, то $|E(A,B)|=\deg(v)\le |B_{t_v}|\le k+1$.
-  Иначе $xy$ соединяет два bag‑узла: если $uv\in E(A,B)$, то в $L(G)$ вершина $e=\{u,v\}$ лежит и в $B_{t_u}$, и в $B_{t_v}$,
-  значит её множество появлений в tree decomposition — связное поддерево, содержащее путь $t_u\leadsto t_v$ и, в частности, ребро $xy$.
-  Следовательно, $e\in B_x\cap B_y$, то есть $E(A,B)\subseteq B_x\cap B_y$ и $|E(A,B)|\le |B_x\cap B_y|\le k+1$.
-  Значит ширина построенной carving‑декомпозиции $\le k+1$, т.е. $\mathrm{cw}(G)\le \mathrm{tw}(L(G))+1$.
-- `Toy‑тест:` для цикла $C_n$: $\mathrm{tw}(L(C_n))=2$, поэтому $\mathrm{cw}(C_n)\le 3$ (на деле $\mathrm{cw}(C_n)=2$);
-  для звезды $K_{1,n}$: $\mathrm{tw}(L)=n-1$ и $\mathrm{cw}(K_{1,n})=n=\mathrm{tw}(L)+1$.
-- `Статус:` доказано.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` теперь, когда первоисточник $w(G)=\max\{\Delta(G),\mathrm{tw}(L(G))\}-1$ зафиксирован (16.101),
-  обновить цепочку в §16.98/Cor. 34: tree‑like upper bound $n^{O(\mathrm{cw}(G))}$ можно заменить на $n^{O(w(G))}$ без ссылочных дыр.
+  `../../resources/downloads/galesi_talebanfard_toran_2018_cops_robber_tseitin.pdf`), we obtain $\mathrm{cw}(G)\le w(G)+2$, and the upper bound
+  from Section 16.99 of the form $n^{O(\mathrm{cw}(G))}$ is equivalent to $n^{O(w(G))}$.
+- `Proof:` Let $(T,\{B_t\})$ be a tree decomposition of the graph $L(G)$ of width $k=\mathrm{tw}(L(G))$,
+  those. $|B_t|\le k+1$.
+  For a vertex $v\in V(G)$, the set of edges $E(v)$ forms a clique in $L(G)$, which means (by the Helly property for subtrees in $T$)
+  there is a node $t_v\in V(T)$ such that $E(v)\subseteq B_{t_v}$.
+  Add to $T$ a sheet $\ell_v$ with an edge $\ell_v t_v$ and set $\chi(\ell_v)=v$; we get a carving tree
+  (if necessary, it can be made into a binary standard "split" of nodes with copies of the same bag - the width does not increase).
+  Consider the edge $xy$ of this tree and the induced cut $V(G)=A\sqcup B$ along the leaves.
+  If $xy=\ell_v t_v$, then $|E(A,B)|=\deg(v)\le |B_{t_v}|\le k+1$.
+  Otherwise, $xy$ connects two bag nodes: if $uv\in E(A,B)$, then in $L(G)$ the vertex $e=\{u,v\}$ lies in both $B_{t_u}$ and $B_{t_v}$,
+  this means its set of appearances in tree decomposition is a connected subtree containing the path $t_u\leadsto t_v$ and, in particular, the edge $xy$.
+  Therefore, $e\in B_x\cap B_y$, that is, $E(A,B)\subseteq B_x\cap B_y$ and $|E(A,B)|\le |B_x\cap B_y|\le k+1$.
+  This means that the width of the constructed carving decomposition is $\le k+1$, i.e. $\mathrm{cw}(G)\le \mathrm{tw}(L(G))+1$.
+- `Toy test:` for cycle $C_n$: $\mathrm{tw}(L(C_n))=2$, so $\mathrm{cw}(C_n)\le 3$ (in fact $\mathrm{cw}(C_n)=2$);
+  for the star $K_{1,n}$: $\mathrm{tw}(L)=n-1$ and $\mathrm{cw}(K_{1,n})=n=\mathrm{tw}(L)+1$.
+- `Status:` proven.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` now that the original source $w(G)=\max\{\Delta(G),\mathrm{tw}(L(G))\}-1$ is fixed (16.101),
+  update chain in Section 16.98/Cor. 34: tree-like upper bound $n^{O(\mathrm{cw}(G))}$ can be replaced by $n^{O(w(G))}$ without reference holes.
 
-### 16.101. Исследовательский шаг: точная ссылка на $w(G)=\max\{\\Delta(G),\\mathrm{tw}(L(G))\\}-1$ для Tseitin‑width
+### 16.101. Exploratory step: exact reference to $w(G)=\max\{\\Delta(G),\\mathrm{tw}(L(G))\\}-1$ for Tseitinwidth
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $G$ — связный граф, а $\\varphi$ — нечётная разметка (odd marking), так что Tseitin‑CNF $T(G,\\varphi)$ невыполнима.
-  Тогда минимальная ширина резолюционного опровержения удовлетворяет
+- `Lens:` Equivalence.
+- `Statement:` Let $G$ be a connected graph and $\\varphi$ be an odd marking, so Tseitin-CNF $T(G,\\varphi)$ is unsatisfiable.
+  Then the minimum width of the resolution refutation satisfies
   $$W(T(G,\\varphi)\\vdash\\bot)=\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\},$$
-  где $\\Delta(G)$ — максимальная степень, $L(G)$ — line graph. В обозначениях GIRS’19 (Cor. 33),
-  где $w(G)=W(T(G,\\varphi)\\vdash\\bot)-1$, получаем
+  where $\\Delta(G)$ is the maximum degree, $L(G)$ is the line graph. In GIRS'19 notation (Cor. 33),
+  where $w(G)=W(T(G,\\varphi)\\vdash\\bot)-1$, we get
   $$w(G)=\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}-1.$$
-- `Доказательство (по источнику):` Galesi–Talebanfard–Torán (2018) доказывают (i) Cor. 8:
-  $W(T(G,\\varphi)\\vdash\\bot)=\\max\\{\\Delta(G),\\mathrm{ec}(G)-1\\}$, и (ii) Cor. 16:
-  $\\mathrm{ec}(G)=\\mathrm{tw}(L(G))+1$; подстановка даёт требуемую формулу.
-  См. `../../resources/downloads/galesi_talebanfard_toran_2018_cops_robber_tseitin.pdf`.
-- `Toy‑тест:` для звезды $K_{1,n}$ имеем $\\Delta=n$ и $L(G)=K_n$ с $\\mathrm{tw}(K_n)=n-1$,
-  значит $W=\\max\\{n,n-1\\}=n$ (и $w=n-1$), что согласуется с тем, что начальные клаузы имеют ширину $n$.
-  Для цикла $C_n$: $\\Delta=2$ и $L(C_n)=C_n$ с $\\mathrm{tw}=2$, поэтому $W=2$ (и $w=1$).
-- `Статус:` известный факт (точная ссылка; закрывает Q19).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` сопоставить эту treewidth‑формулу с альтернативной параметризацией Tseitin‑width через branch‑width
-  из Alekhnovich–Razborov (2011) (возможная замена $\\mathrm{tw}(L(G))$ на эквивалентную «ширину»).
+- `Proof (by source):` Galesi-Talebanfard-Toran (2018) prove (i) Cor. 8:
+  $W(T(G,\\varphi)\\vdash\\bot)=\\max\\{\\Delta(G),\\mathrm{ec}(G)-1\\}$, and (ii) Cor. 16:
+  $\\mathrm{ec}(G)=\\mathrm{tw}(L(G))+1$; substitution gives the required formula.
+  See `../../resources/downloads/galesi_talebanfard_toran_2018_cops_robber_tseitin.pdf`.
+- `Toy test:` for the star $K_{1,n}$ we have $\\Delta=n$ and $L(G)=K_n$ with $\\mathrm{tw}(K_n)=n-1$,
+  means $W=\\max\\{n,n-1\\}=n$ (and $w=n-1$), which is consistent with the fact that initial clauses have width $n$.
+  For cycle $C_n$: $\\Delta=2$ and $L(C_n)=C_n$ with $\\mathrm{tw}=2$, so $W=2$ (and $w=1$).
+- `Status:` known fact (exact link; closes Q19).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` compare this treewidth formula with an alternative parameterization of Tseitin-width via branch-width
+  from Alekhnovich-Razborov (2011) (possible replacement of $\\mathrm{tw}(L(G))$ with an equivalent "width").
 
-### 16.102. Исследовательский шаг: $n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log_2 n)}$ (через оценки на $\\mathrm{tw}(L(G))$)
+### 16.102. Research step: $n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log_2 n)}$ (via estimates on $\\mathrm{tw}(L(G))$)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $G$ — связный граф на $n$ вершинах и $\\varphi$ — нечётная разметка, так что Tseitin‑CNF $T(G,\\varphi)$ невыполнима.
-  Обозначим $w(G):=W(T(G,\\varphi)\\vdash\\bot)-1$. Тогда
+- `Lens:` Trade-off.
+- `Statement:` Let $G$ be a connected graph on $n$ vertices and $\\varphi$ an odd labeling, so that Tseitin-CNF $T(G,\\varphi)$ is unsatisfiable.
+  Let us denote $w(G):=W(T(G,\\varphi)\\vdash\\bot)-1$. Then
   $$n^{O(w(G))}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log_2 n)}.$$
-- `Доказательство:` По §16.101 имеем $w(G)+1=\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}$.
-  По Harvey–Wood (2014), неравенство (2), $\\mathrm{tw}(L(G))\\le (\\mathrm{tw}(G)+1)\\Delta(G)-1$
+- `Proof:` By Section 16.101 we have $w(G)+1=\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}$.
+  According to Harvey-Wood (2014), inequality (2), $\\mathrm{tw}(L(G))\\le (\\mathrm{tw}(G)+1)\\Delta(G)-1$
   (`../../resources/downloads/harvey_wood_2014_treewidth_line_graphs.pdf`).
-  Следовательно $w(G)=O(\\mathrm{tw}(G)\\,\\Delta(G))$ и потому
+  Therefore $w(G)=O(\\mathrm{tw}(G)\\,\\Delta(G))$ and therefore
   $$n^{O(w(G))}=2^{O(w(G)\\log_2 n)}=2^{O(\\mathrm{tw}(G)\\,\\Delta(G)\\log_2 n)}.$$
-- `Toy‑тест:` для звезды $K_{1,n}$: $\\mathrm{tw}(G)=1$, $\\Delta(G)=n$, и формула даёт $2^{O(n\\log_2 n)}$, что согласуется с $n^{O(w)}$ при $w=n-1$ (16.101).
-- `Статус:` доказано (вывод из известных фактов).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` обновить формулировку в §16.98/Cor. 34, чтобы $2^{O(\\mathrm{tw}(G)\\Delta(G)\\log n)}$ появлялось с явной ссылкой (закрыть Q20).
+- `Toy test:` for the star $K_{1,n}$: $\\mathrm{tw}(G)=1$, $\\Delta(G)=n$, and the formula gives $2^{O(n\\log_2 n)}$, which agrees with $n^{O(w)}$ for $w=n-1$ (16.101).
+- `Status:` proven (inference from known facts).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` update the language in Section 16.98/Cor. 34 so that $2^{O(\\mathrm{tw}(G)\\Delta(G)\\log n)}$ appears with an explicit link (close Q20).
 
-### 16.103. Исследовательский шаг: Tseitin‑width через branch‑width гиперграфа (Alekhnovich–Razborov 2011)
+### 16.103. Research step: Tseitinwidth through branchwidth of a hypergraph (Alekhnovich-Razborov 2011)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Для любого связного графа $G$ и нечётной разметки $\sigma$ (так что Tseitin‑CNF $T(G,\sigma)$ невыполнима)
-  branch‑width $\\mathrm{wb}(T(G,\\sigma))$ её «подлежащего гиперграфа» $H_{T(G,\\sigma)}$ удовлетворяет
+- `Lens:` Equivalence.
+- `Statement:` For any connected graph $G$ and odd labeling $\sigma$ (so TseitinCNF $T(G,\sigma)$ is unsatisfiable)
+  branchwidth $\\mathrm{wb}(T(G,\\sigma))$ of its "subject hypergraph" $H_{T(G,\\sigma)}$ satisfies
   $$\\mathrm{wb}(T(G,\\sigma))=\\Theta\\bigl(W(T(G,\\sigma)\\vdash\\bot)\\bigr),$$
-  где $W(F\\vdash\\bot)$ — минимальная resolution‑width (Alekhnovich–Razborov 2011, Thm. 2.12,
+  where $W(F\\vdash\\bot)$ is the minimum resolutionwidth (Alekhnovich-Razborov 2011, Thm. 2.12,
   `../../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`).
-  При этом $H_{T(G,\\sigma)}$ совпадает с двойственным гиперграфом $G^*$ (с повторениями гиперрёбер), см. Remark 2.11 там же.
-  Повторы гиперрёбер не меняют $\\mathrm{wb}$ для этого случая, см. §16.106.
-  В частности, вместе с точной формулой §16.101 получаем сравнение
+  Moreover, $H_{T(G,\\sigma)}$ coincides with the dual hypergraph $G^*$ (with repetitions of hyperedges), see Remark 2.11 there.
+  Hyperedge repetitions do not change $\\mathrm{wb}$ for this case, see Section 16.106.
+  In particular, together with the exact formula of Section 16.101 we obtain the comparison
   $$\\mathrm{wb}(T(G,\\sigma))=\\Theta\\bigl(\\max\\{\\Delta(G),\\mathrm{tw}(L(G))\\}\\bigr).$$
-- `Toy‑тест:` для $K_{1,n}$ имеем $W=n$ (16.101) и $\\mathrm{wb}=\\Theta(n)$ по Thm. 2.12; для $C_n$ имеем $W=2$ и $\\mathrm{wb}=\\Theta(1)$.
-- `Статус:` известный факт (точная ссылка; закрывает Q21).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если нужно использовать без $\\Theta(\\cdot)$, извлечь из доказательства Thm. 2.12 явные константы в обе стороны (см. Q22).
+- `Toy test:` for $K_{1,n}$ we have $W=n$ (16.101) and $\\mathrm{wb}=\\Theta(n)$ by Thm. 2.12; for $C_n$ we have $W=2$ and $\\mathrm{wb}=\\Theta(1)$.
+- `Status:` known fact (exact link; closes Q21).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if you need to use without $\\Theta(\\cdot)$, extract Thm from the proof. 2.12 explicit constants in both directions (see Q22).
 
-### 16.104. Исследовательский шаг: явные константы в $\\mathrm{wb}(T(G,\\sigma))=\\Theta(W(T(G,\\sigma)\\vdash\\bot))$
+### 16.104. Exploratory step: explicit constants in $\\mathrm{wb}(T(G,\\sigma))=\\Theta(W(T(G,\\sigma)\\vdash\\bot))$
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $G$ — связный граф и $T(G,\\sigma)$ — соответствующая невыполнимая Tseitin‑CNF. Обозначим
+- `Lens:` Equivalence.
+- `Statement:` Let $G$ be a connected graph and $T(G,\\sigma)$ the corresponding unsatisfiable Tseitin-CNF. Let's denote
   $$W:=W(T(G,\\sigma)\\vdash\\bot),\\qquad B:=\\mathrm{wb}(T(G,\\sigma)),$$
-  где $W$ — минимальная resolution‑width, $B$ — branch‑width подлежащего гиперграфа (AR’11 Remark 2.11). Тогда выполнены явные неравенства
+  where $W$ is the minimum resolution-width, $B$ is the branch-width of the underlying hypergraph (AR'11 Remark 2.11). Then the explicit inequalities are satisfied
   $$\\frac{1}{8}B\\ \\le\\ W\\ \\le\\ 2B.$$
-- `Доказательство (из AR’11, §4):`
-  1) (Gaussian width) Пусть $w_g(G,\\sigma)$ — минимальная ширина Gaussian‑рефутации (Def. 4.2). Тогда по Prop. 4.3
+- `Proof (from AR'11, Section 4):`
+  1) (Gaussian width) Let $w_g(G,\\sigma)$ be the minimum width of the Gaussian representation (Def. 4.2). Then according to Prop. 4.3
      $$\\tfrac12 W\\le w_g(G,\\sigma)\\le W.$$
-  2) (Branch‑width vs Gaussian width) В доказательстве Lemma 4.4 показано, что $B\\ge w_g(G,\\sigma)$ (tree‑like restriction),
-     а «алгоритм Figure 3.1 + obstacle‑аргумент» даёт $B\\le 8\\,w_g(G,\\sigma)$ (повторяется оценка из доказательства Lemma 3.1).
-     Следовательно $w_g(G,\\sigma)\\le B\\le 8w_g(G,\\sigma)$.
-  3) Комбинируя 1)–2), получаем $W\\le 2w_g\\le 2B$ и $B\\le 8w_g\\le 8W$, т.е. $B/8\\le W\\le 2B$.
-  Ссылки: `../../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`.
-- `Toy‑тест:` для $K_{1,n}$ (16.101) $W=n$ и $B\\ge r(H)=n$, поэтому $B/8\\le W\\le 2B$ выполняется; для $C_n$ имеем $W=2$ и $B=\\Theta(1)$.
-- `Статус:` доказано (из явных констант в AR’11).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если хочется убрать константу 8, проверить, можно ли в Lemma 4.4 получить $B\\le c\\,w_g$ с меньшим $c$ (или равенство) для $G^*$.
+  2) (Branch-width vs Gaussian width) The proof of Lemma 4.4 shows that $B\\ge w_g(G,\\sigma)$ (tree-like restriction),
+     and "algorithm Figure 3.1 + obstacle argument" gives $B\\le 8\\,w_g(G,\\sigma)$ (the estimate from the proof of Lemma 3.1 is repeated).
+     Therefore $w_g(G,\\sigma)\\le B\\le 8w_g(G,\\sigma)$.
+  3) Combining 1)-2), we obtain $W\\le 2w_g\\le 2B$ and $B\\le 8w_g\\le 8W$, i.e. $B/8\\le W\\le 2B$.
+  Links: `../../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`.
+- `Toy test:` for $K_{1,n}$ (16.101) $W=n$ and $B\\ge r(H)=n$, so $B/8\\le W\\le 2B$ holds; for $C_n$ we have $W=2$ and $B=\\Theta(1)$.
+- `Status:` proven (from explicit constants in AR'11).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if you want to remove the constant 8, check whether in Lemma 4.4 you can get $B\\le c\\,w_g$ with a smaller $c$ (or equality) for $G^*$.
 
-### 16.105. Исследовательский шаг: $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$ (branch‑width двойственного гиперграфа = carving width)
+### 16.105. Exploratory step: $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$ (branchwidth of the dual hypergraph = carving width)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $G=(V,E)$ — связный граф, а $G^*$ — его двойственный гиперграф с множеством вершин $E$ и гиперрёбрами
-  $E(v)=\\{e\\in E: e\\text{ инцидентно }v\\}$ для $v\\in V$. Тогда
+- `Lens:` Equivalence.
+- `Statement:` Let $G=(V,E)$ be a connected graph, and $G^*$ its dual hypergraph with the set of vertices $E$ and hyperedges
+  $E(v)=\\{e\\in E: e\\text{ incident }v\\}$ for $v\\in V$. Then
   $$\\mathrm{wb}(G^*)=\\mathrm{cw}(G),$$
-  где $\\mathrm{wb}$ — branch‑width гиперграфа (AR’11, Def. 2.1), а $\\mathrm{cw}$ — carving width графа $G$ (как в §16.99–16.100).
-- `Доказательство:` В branch‑decomposition гиперграфа $G^*$ листья соответствуют гиперрёбрам $E(v)$, то есть вершинам $v\\in V$.
-  Пусть $(T,\\theta)$ — branch‑decomposition $G^*$. Определим разметку листьев $\\chi: \\mathrm{Leaves}(T)\\to V$ как $\\chi(\\theta(E(v)))=v$.
-  Рассмотрим любой ненулевой узел $t$ дерева (т.е. $t\\ne\\mathrm{root}$) и пусть $S_t\\subseteq V$ — множество вершин, чьи листья лежат в поддереве $t$.
-  Тогда по определению AR’11 (Def. 2.1) имеем
+  where $\\mathrm{wb}$ is the branch-width of the hypergraph (AR'11, Def. 2.1), and $\\mathrm{cw}$ is the carving width of the graph $G$ (as in Section 16.99-16.100).
+- `Proof:` In the branch-decomposition of the hypergraph $G^*$, the leaves correspond to the hyperedges $E(v)$, that is, the vertices $v\\in V$.
+  Let $(T,\\theta)$ be a branch-decomposition of $G^*$. Let us define the marking of leaves $\\chi: \\mathrm{Leaves}(T)\\to V$ as $\\chi(\\theta(E(v)))=v$.
+  Consider any nonzero node $t$ of the tree (i.e., $t\\ne\\mathrm{root}$) and let $S_t\\subseteq V$ be the set of vertices whose leaves lie in the subtree $t$.
+  Then, by definition of AR'11 (Def. 2.1) we have
   $$\\mathrm{Cut}(t)=\\Bigl(\\bigcup_{v\\in S_t}E(v)\\Bigr)\\cap\\Bigl(\\bigcup_{v\\notin S_t}E(v)\\Bigr)=\\delta_G(S_t),$$
-  то есть множество рёбер графа $G$, пересекающих разрез $S_t\\sqcup(V\\setminus S_t)$.
-  Поэтому порядок узла $t$ равен $|\\delta_G(S_t)|$.
-  Замечая, что каждому узлу $t\\ne\\mathrm{root}$ соответствует ребро $t\\text{--parent}(t)$, получаем carving‑декомпозицию $G$ на том же дереве $T$
-  (игнорируя ориентацию): ширина разреза на ребре $t\\text{--parent}(t)$ равна $|\\delta_G(S_t)|=|\\mathrm{Cut}(t)|$.
-  Отсюда $\\mathrm{cw}(G)\\le \\mathrm{wb}(G^*)$.
+  that is, the set of edges of the graph $G$ intersecting the cut $S_t\\sqcup(V\\setminus S_t)$.
+  Therefore, the order of node $t$ is $|\\delta_G(S_t)|$.
+  Noting that each node $t\\ne\\mathrm{root}$ corresponds to an edge $t\\text{--parent}(t)$, we obtain a carving decomposition of $G$ on the same tree $T$
+  (ignoring orientation): the cut width at edge $t\\text{--parent}(t)$ is equal to $|\\delta_G(S_t)|=|\\mathrm{Cut}(t)|$.
+  Hence $\\mathrm{cw}(G)\\le \\mathrm{wb}(G^*)$.
 
-  В обратную сторону: из любой carving‑декомпозиции $(T,\\chi)$ графа $G$ (листья помечены вершинами) строим branch‑decomposition $G^*$,
-  положив $\\theta(E(v)):=\\chi^{-1}(v)$. Для узла $t\\ne\\mathrm{root}$ множество $S_t$ листьев в поддереве снова задаёт разрез вершин,
-  и та же формула показывает $\\mathrm{Cut}(t)=\\delta_G(S_t)$. Значит ширины совпадают на каждом соответствующем разрезе, и
+  In the opposite direction: from any carving-decomposition $(T,\\chi)$ of the graph $G$ (leaves are marked by vertices) we construct a branch-decomposition $G^*$,
+  putting $\\theta(E(v)):=\\chi^{-1}(v)$. For node $t\\ne\\mathrm{root}$, the set of $S_t$ leaves in the subtree again defines the cut of vertices,
+  and the same formula shows $\\mathrm{Cut}(t)=\\delta_G(S_t)$. This means that the widths coincide on each corresponding cut, and
   $\\mathrm{wb}(G^*)\\le \\mathrm{cw}(G)$.
-  Совместно: $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$.
-- `Toy‑тест:` для звезды $K_{1,n}$: $\\mathrm{cw}(K_{1,n})=n$ (любой разрез, отделяющий центр от листа, режет $n$ рёбер) и $G^*$ имеет гиперрёбра
-  размеров $n$ и $1$, так что $\\mathrm{wb}(G^*)=n$; для цикла $C_n$: $\\mathrm{cw}(C_n)=2$ и $\\mathrm{wb}(C_n^*)=2$.
-- `Статус:` доказано (закрывает Q23).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` использовать $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$, чтобы переписать AR‑параметры для Tseitin (Remark 2.11) напрямую через carving width,
-  и сравнить с treewidth‑формулой §16.101.
+  Jointly: $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$.
+- `Toy test:` for a star $K_{1,n}$: $\\mathrm{cw}(K_{1,n})=n$ (any cut separating the center from the leaf cuts $n$ edges) and $G^*$ has hyperedges
+  sizes $n$ and $1$, so $\\mathrm{wb}(G^*)=n$; for cycle $C_n$: $\\mathrm{cw}(C_n)=2$ and $\\mathrm{wb}(C_n^*)=2$.
+- `Status:` proven (closes Q23).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` use $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$ to rewrite AR parameters for Tseitin (Remark 2.11) directly via carving width,
+  and compare with the treewidth formula Section 16.101.
 
-### 16.106. Исследовательский шаг: повторы гиперрёбер в $G^*$ не меняют $\\mathrm{wb}$ (для применения Remark 2.11)
+### 16.106. Exploratory step: repetitions of hyperedges in $G^*$ do not change $\\mathrm{wb}$ (to apply Remark 2.11)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $G=(V,E)$ — связный граф без петель. Обозначим двойственный гиперграф
-  $$G^* := \\bigl(E,\\ \\{E(v): v\\in V\\}\\bigr),\\qquad E(v):=\\{e\\in E: e\\text{ инцидентно }v\\}.$$
-  Пусть $\\widetilde G^*$ — мультигиперграф на том же множестве вершин $E$, в котором каждое гиперребро $E(v)$ повторено $m_v\\ge 1$ раз.
-  Тогда
+- `Lens:` Equivalence.
+- `Statement:` Let $G=(V,E)$ be a connected graph without loops. Let us denote the dual hypergraph
+  $$G^* := \\bigl(E,\\ \\{E(v): v\\in V\\}\\bigr),\\qquad E(v):=\\{e\\in E: e\\text{ incident }v\\}.$$
+  Let $\\widetilde G^*$ be a multihypergraph on the same vertex set $E$ in which each hyperedge $E(v)$ is repeated $m_v\\ge 1$ times.
+  Then
   $$\\mathrm{wb}(\\widetilde G^*)=\\mathrm{wb}(G^*).$$
-  В частности, по AR’11 Remark 2.11 подлежащий гиперграф Tseitin‑CNF $T(G,\\sigma)$ — это ровно $\\widetilde G^*$ при $m_v=2^{\\deg_G(v)-1}$, и потому
+  In particular, by AR'11 Remark 2.11 the underlying hypergraph TseitinCNF $T(G,\\sigma)$ is exactly $\\widetilde G^*$ for $m_v=2^{\\deg_G(v)-1}$, and therefore
   $$\\mathrm{wb}(T(G,\\sigma))=\\mathrm{wb}(H_{T(G,\\sigma)})=\\mathrm{wb}(G^*).$$
-- `Доказательство:`
-  1) (**Монотонность по удалению гиперрёбер.**) Если $H'=(V,E')$ получается из $H=(V,E)$ удалением гиперрёбер (подмультисет $E'\\subseteq E$),
-     то $\\mathrm{wb}(H')\\le \\mathrm{wb}(H)$.
-     Действительно, возьмём branch‑decomposition $(T,\\theta)$ для $H$.
-     Рассмотрим минимальное поддерево $T'\\subseteq T$, натянутое на листья $\\theta(E')$,
-     и подавим в нём все вершины степени 2 (получая снова бинарное корневое дерево) — это даёт branch‑decomposition для $H'$.
-     Для каждого узла $t$ в новом дереве множества гиперрёбер‑потомков на обеих сторонах разреза — подмножества соответствующих множеств в $T$,
-     поэтому $V(t)$ и $V^\\perp(t)$ только уменьшаются, а значит $|\\mathrm{Cut}(t)|=|V(t)\\cap V^\\perp(t)|$ не растёт.
-  2) (**Нижняя оценка $\\mathrm{wb}(G^*)\\ge \\Delta(G)$.**) Для любого $v\\in V$ и любого branch‑decomposition $(T,\\theta)$ гиперграфа $G^*$
-     лист $t_v:=\\theta(E(v))$ имеет
+- `Proof:`
+  1) (**Monotonicity in removing hyperedges.**) If $H'=(V,E')$ is obtained from $H=(V,E)$ by removing hyperedges (submultiset $E'\\subseteq E$),
+     then $\\mathrm{wb}(H')\\le \\mathrm{wb}(H)$.
+     Indeed, let us take branchdecomposition $(T,\\theta)$ for $H$.
+     Consider the minimal subtree $T'\\subseteq T$ spanned by the leaves $\\theta(E')$,
+     and suppress all vertices of degree 2 in it (receiving a binary rooted tree again) - this gives branch-decomposition for $H'$.
+     For each node $t$ in the new tree, the sets of descendant hyperedges on both sides of the cut are subsets of the corresponding sets in $T$,
+     therefore $V(t)$ and $V^\\perp(t)$ only decrease, which means $|\\mathrm{Cut}(t)|=|V(t)\\cap V^\\perp(t)|$ does not increase.
+  2) (**Lower bound $\\mathrm{wb}(G^*)\\ge \\Delta(G)$.**) For any $v\\in V$ and any branch-decomposition $(T,\\theta)$ of the hypergraph $G^*$
+     the sheet $t_v:=\\theta(E(v))$ has
      $$\\mathrm{Cut}(t_v)=E(v)\\cap\\bigcup_{u\\ne v}E(u)=E(v),$$
-     поскольку каждое ребро $e\\in E(v)$ также инцидентно некоторому $u\\ne v$ (нет петель).
-     Следовательно, порядок листа равен $|E(v)|=\\deg_G(v)$, и потому $\\mathrm{wb}(G^*)\\ge \\max_v \\deg_G(v)=\\Delta(G)$.
-  3) (**Строим декомпозицию для $\\widetilde G^*$.**) Пусть $(T,\\theta)$ — оптимальная branch‑decomposition $G^*$ ширины $w:=\\mathrm{wb}(G^*)$.
-     Для каждого $v\\in V$ заменим лист $\\theta(E(v))$ на бинарное поддерево с $m_v$ листьями,
-     помеченными $m_v$ копиями гиперребра $E(v)$ (корень поддерева занимает место старого листа).
-     Получим branch‑decomposition $(\\widetilde T,\\widetilde\\theta)$ гиперграфа $\\widetilde G^*$.
-     Для узлов вне добавленных поддеревьев разрезы не меняются: на каждой стороне теперь стоит либо ноль, либо все копии $E(v)$,
-     и объединение по копиям равно $E(v)$.
-     Для узла $t$ внутри поддерева, соответствующего $v$, на обеих сторонах разреза есть хотя бы одна копия $E(v)$,
-     поэтому $V(t)=V^\\perp(t)=E(v)$ и $|\\mathrm{Cut}(t)|=|E(v)|=\\deg_G(v)\\le \\Delta(G)\\le w$ (по п. 2).
-     Следовательно, ширина $(\\widetilde T,\\widetilde\\theta)$ не превосходит $w$, то есть $\\mathrm{wb}(\\widetilde G^*)\\le \\mathrm{wb}(G^*)$.
-  4) В обратную сторону, $G^*$ получается из $\\widetilde G^*$ удалением копий гиперрёбер, поэтому по п. 1
+     since every edge $e\\in E(v)$ is also incident to some $u\\ne v$ (no loops).
+     Therefore, the leaf order is $|E(v)|=\\deg_G(v)$, and therefore $\\mathrm{wb}(G^*)\\ge \\max_v \\deg_G(v)=\\Delta(G)$.
+  3) (**Construct a decomposition for $\\widetilde G^*$.**) Let $(T,\\theta)$ be the optimal branch-decomposition $G^*$ of width $w:=\\mathrm{wb}(G^*)$.
+     For each $v\\in V$ we replace the leaf $\\theta(E(v))$ with a binary subtree with $m_v$ leaves,
+     copies of the hyperedge $E(v)$ labeled with $m_v$ (the root of the subtree takes the place of the old leaf).
+     We obtain branchdecomposition $(\\widetilde T,\\widetilde\\theta)$ of the hypergraph $\\widetilde G^*$.
+     For nodes outside the added subtrees, the cuts do not change: each side now has either zero or all copies of $E(v)$,
+     and the union over copies is equal to $E(v)$.
+     For a node $t$ inside the subtree corresponding to $v$, there is at least one copy of $E(v)$ on both sides of the cut,
+     therefore $V(t)=V^\\perp(t)=E(v)$ and $|\\mathrm{Cut}(t)|=|E(v)|=\\deg_G(v)\\le \\Delta(G)\\le w$ (by item 2).
+     Consequently, the width of $(\\widetilde T,\\widetilde\\theta)$ does not exceed $w$, that is, $\\mathrm{wb}(\\widetilde G^*)\\le \\mathrm{wb}(G^*)$.
+  4) In the opposite direction, $G^*$ is obtained from $\\widetilde G^*$ by removing copies of hyperedges, therefore, by item 1
      $\\mathrm{wb}(G^*)\\le \\mathrm{wb}(\\widetilde G^*)$.
-     Совместно: $\\mathrm{wb}(\\widetilde G^*)=\\mathrm{wb}(G^*)$.
-- `Toy‑тест:`
-  1) Для $K_{1,n}$ гиперребро $E(\\text{центр})$ повторяется $2^{n-1}$ раз, но оба значения $\\mathrm{wb}(G^*)$ и $\\mathrm{wb}(\\widetilde G^*)$ равны $n$ (см. §16.105).
-  2) (Почему утверждение нельзя обобщать.) Если $H$ имеет два непересекающихся гиперребра $A,B$ размера $r$, то $\\mathrm{wb}(H)=0$,
-     но при добавлении второй копии $A$ получаем $\\mathrm{wb}\\ge |A|=r$ (лист, соответствующий одной копии).
-- `Статус:` доказано (закрывает Q24).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` в основном тексте (или итоговой ремарке для §16.103–16.105) можно свести цепочку AR’11 к краткой формуле
-  $W(T(G,\\sigma)\\vdash\\bot)=\\Theta(\\mathrm{cw}(G))$ через $\\mathrm{wb}(T)=\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$.
+     Together: $\\mathrm{wb}(\\widetilde G^*)=\\mathrm{wb}(G^*)$.
+- `Toy test:`
+  1) For $K_{1,n}$, the hyperedge $E(\\text{center})$ is repeated $2^{n-1}$ times, but both values of $\\mathrm{wb}(G^*)$ and $\\mathrm{wb}(\\widetilde G^*)$ are equal to $n$ (see Section 16.105).
+  2) (Why the statement cannot be generalized.) If $H$ has two disjoint hyperedges $A,B$ of size $r$, then $\\mathrm{wb}(H)=0$,
+     but when adding a second copy of $A$ we get $\\mathrm{wb}\\ge |A|=r$ (leaf corresponding to one copy).
+- `Status:` proven (closes Q24).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` in the main text (or the final remark for Section 16.103-16.105), you can reduce the AR'11 chain to a short formula
+  $W(T(G,\\sigma)\\vdash\\bot)=\\Theta(\\mathrm{cw}(G))$ via $\\mathrm{wb}(T)=\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$.
 
-### 16.107. Исследовательский шаг: $W(T(G,\\sigma)\\vdash\\bot)=\\Theta(\\mathrm{cw}(G))$ (явные константы)
+### 16.107. Exploratory step: $W(T(G,\\sigma)\\vdash\\bot)=\\Theta(\\mathrm{cw}(G))$ (explicit constants)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $G$ — связный граф без петель, а $\\sigma:V(G)\\to\\{0,1\\}$ такова, что Tseitin‑CNF $T(G,\\sigma)$ невыполнима.
-  Обозначим $W:=W(T(G,\\sigma)\\vdash\\bot)$ минимальную resolution‑width. Тогда
+- `Lens:` Equivalence.
+- `Statement:` Let $G$ be a connected graph without loops, and let $\\sigma:V(G)\\to\\{0,1\\}$ be such that Tseitin-CNF $T(G,\\sigma)$ is unsatisfiable.
+  Let $W:=W(T(G,\\sigma)\\vdash\\bot)$ denote the minimum resolutionwidth. Then
   $$\\frac{1}{8}\\,\\mathrm{cw}(G)\\ \\le\\ W\\ \\le\\ 2\\,\\mathrm{cw}(G).$$
-  В частности, $W(T(G,\\sigma)\\vdash\\bot)=\\Theta(\\mathrm{cw}(G))$.
-- `Доказательство:` По §16.104 имеем $\\tfrac18\\,\\mathrm{wb}(H_{T(G,\\sigma)})\\le W\\le 2\\,\\mathrm{wb}(H_{T(G,\\sigma)})$ (AR’11, Thm. 2.12 + §4).
-  По AR’11 Remark 2.11, $H_{T(G,\\sigma)}$ — это мульти‑$G^*$, а по §16.106 повторения гиперрёбер не меняют $\\mathrm{wb}$, значит
+  In particular, $W(T(G,\\sigma)\\vdash\\bot)=\\Theta(\\mathrm{cw}(G))$.
+- `Proof:` By Section 16.104 we have $\\tfrac18\\,\\mathrm{wb}(H_{T(G,\\sigma)})\\le W\\le 2\\,\\mathrm{wb}(H_{T(G,\\sigma)})$ (AR'11, Thm. 2.12 + Section 4).
+  By AR'11 Remark 2.11, $H_{T(G,\\sigma)}$ is a multi-$G^*$, and by Section 16.106, repetitions of hyperedges do not change $\\mathrm{wb}$, which means
   $\\mathrm{wb}(H_{T(G,\\sigma)})=\\mathrm{wb}(G^*)$.
-  По §16.105, $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$. Подстановка даёт требуемое неравенство.
-- `Toy‑тест:` для $K_{1,n}$ имеем $\\mathrm{cw}(K_{1,n})=n$ и $W=n$ (по формуле §16.101); для цикла $C_n$ имеем $\\mathrm{cw}(C_n)=2$ и $W=2$.
-- `Статус:` доказано (закрывает Q25).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить «планарные графы с ограниченной степенью граней ⇒ ограниченная cyclicity $\\ell(G)$» из AR’11 (абзац после Thm. 2.16),
-  чтобы понимать, когда $W\\le \\ell(G)^{O(1)}\\log S$ реально даёт автоматизируемость.
+  By Section 16.105, $\\mathrm{wb}(G^*)=\\mathrm{cw}(G)$. Substitution gives the required inequality.
+- `Toy test:` for $K_{1,n}$ we have $\\mathrm{cw}(K_{1,n})=n$ and $W=n$ (by formula Section 16.101); for the cycle $C_n$ we have $\\mathrm{cw}(C_n)=2$ and $W=2$.
+- `Status:` proven (closes Q25).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check "planar graphs with bounded degree of faces  bounded cyclicity $\\ell(G)$" from AR'11 (paragraph after Thm. 2.16),
+  to understand when $W\\le \\ell(G)^{O(1)}\\log S$ actually gives automatability.
 
-### 16.108. Исследовательский шаг: bounded face degree (planar) ⇒ bounded cyclicity $\\ell(G)$ (уточнение ремарки AR’11 после Thm. 2.16)
+### 16.108. Research step: bounded face degree (planar)  bounded cyclicity $\\ell(G)$ (clarification of AR'11 remark after Thm. 2.16)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $G$ — связный планарный граф, который допускает вложение в плоскость, в котором каждая грань имеет степень $\\le d$
-  (длина граничного обхода, считая кратности), и пусть $G$ 2‑реберно‑связен (нет мостов).
-  Тогда cyclicity $\\ell(G)$ из AR’11 Def. 2.14 удовлетворяет
+- `Lens:` Equivalence.
+- `Statement:` Let $G$ be a connected planar graph that admits a plane embedding in which each face has degree $\\le d$
+  (the length of the boundary tour, counting multiplicities), and let $G$ be 2-edge-connected (no bridges).
+  Then cyclicity $\\ell(G)$ from AR'11 Def. 2.14 satisfies
   $$\\ell(G)\\le \\max\\{d,2\\}.$$
-- `Доказательство:`
-  Рассмотрим фиксированное плоское вложение. Для каждой грани $f$ возьмём её граничный замкнутый обход $W_f$ длины $\\deg(f)\\le d$.
-  Так как у $G$ нет мостов, каждое ребро инцидентно двум различным граням и потому встречается в каждом из двух обходов ровно по одному разу
-  (эквивалентно: ребро входит в границу одной и той же грани дважды тогда и только тогда, когда это мост).
-  Следовательно, $W_f$ — замкнутый обход без повторений рёбер.
+- `Proof:`
+  Consider a fixed flat embedding. For each face $f$ we take its boundary closed walk $W_f$ of length $\\deg(f)\\le d$.
+  Since $G$ has no bridges, each edge is incident to two different faces and therefore occurs exactly once in each of the two traversals
+  (equivalent to: an edge enters the boundary of the same face twice if and only if it is a bridge).
+  Therefore, $W_f$ is a closed traversal without edge repetitions.
 
-  Любой такой обход раскладывается на попарно непересекающиеся по рёбрам простые циклы (индукция по длине: если в $W_f$ повторяется вершина,
-  то разрежем обход в месте повтора на два более коротких замкнутых обхода; иначе это уже простой цикл).
-  В частности, все циклы в разложении имеют длину $\\le |W_f|\\le d$, и каждое ребро, лежащее на границе $f$, принадлежит ровно одному циклу из этого разложения.
+  Any such traversal can be decomposed into pairwise edge-disjoint simple cycles (induction on length: if a vertex is repeated in $W_f$,
+  then we cut the traversal at the repetition point into two shorter closed traversals; otherwise it's a simple loop).
+  In particular, all cycles in the decomposition have length $\\le |W_f|\\le d$, and each edge lying on the boundary of $f$ belongs to exactly one cycle from this decomposition.
 
-  Возьмём объединение циклов по всем граням. Тогда каждый ребро $e$ принадлежит ровно двум граням, значит попадает не более чем в два цикла (по одному «со стороны» каждой грани),
-  и все циклы имеют длину $\\le d$. Это и есть покрытие рёбер циклами, удовлетворяющее определению cyclicity с параметром $\\max\\{d,2\\}$.
-- `Toy‑тест:` треугольник с «хвостом» (подвешенным ребром‑мостом) имеет вложение с $d=5$, но покрытие рёбер циклами невозможно (мост не лежит ни в одном цикле),
-  так что условие «нет мостов» действительно нужно.
-- `Статус:` доказано (закрывает Q26; объясняет ремарку AR’11 после Thm. 2.16,
+  Let's take the union of cycles along all faces. Then each edge $e$ belongs to exactly two faces, which means it falls into at most two cycles (one "from the side" of each face),
+  and all cycles have length $\\le d$. This is the coverage of edges by cycles, satisfying the definition of cyclicity with the parameter $\\max\\{d,2\\}$.
+- `Toy test:` a triangle with a "tail" (a suspended edge-bridge) has an embedding with $d=5$, but covering the edges with cycles is impossible (the bridge does not lie in any cycle),
+  so the "no bridges" condition is really necessary.
+- `Status:` proven (closes Q26; explains AR'11 remark after Thm. 2.16,
   `../../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если нужно использовать Theorem 2.15 количественно, извлечь из доказательства AR’11 явную степень в $\\ell(G)^{O(1)}$ (вместо $O(1)$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if you want to use Theorem 2.15 quantitatively, extract the explicit power in $\\ell(G)^{O(1)}$ from the AR'11 proof (instead of $O(1)$).
 
-### 16.109. Исследовательский шаг: явная степень в AR’11 Thm. 2.15 (получается $\\ell^7$)
+### 16.109. Research Step: Explicit Degree in AR'11 Thm. 2.15 (comes out to $\\ell^7$)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $G$ — связный граф, для которого cyclicity $\\ell(G)<\\infty$, и $\\sigma$ — нечётная разметка (так что $T(G,\\sigma)$ невыполнима).
-  Обозначим $\\ell:=\\ell(G)$, $W:=W(T(G,\\sigma)\\vdash\\bot)$ минимальную resolution‑width и $S:=S(T(G,\\sigma)\\vdash\\bot)$ минимальный размер резолюционного опровержения.
-  Тогда существует абсолютная константа $C>0$ такая, что
+- `Lens:` Trade-off.
+- `Statement:` Let $G$ be a connected graph for which cyclicity $\\ell(G)<\\infty$ and $\\sigma$ be an odd labeling (so $T(G,\\sigma)$ is unsatisfiable).
+  Let $\\ell:=\\ell(G)$, $W:=W(T(G,\\sigma)\\vdash\\bot)$ denote the minimum resolution-width and $S:=S(T(G,\\sigma)\\vdash\\bot)$ the minimum size of the resolution refutation.
+  Then there is an absolute constant $C>0$ such that
   $$W\\le C\\,\\ell^7\\,\\log S.$$
-  В частности, это делает явной степень в записи AR’11 $W\\le \\ell(G)^{O(1)}\\log S$.
-- `Доказательство:` В доказательстве AR’11 Thm. 2.15 (раздел 5) получены две оценки:
-  (i) по (5.4) $W(T(G,\\sigma)\\vdash\\bot)\\le O(\\ell\\cdot W(T(G,\\sigma)|\\rho\\vdash\\bot))$ для построенной случайной рестрикции $\\rho$;
-  (ii) по (5.6) с «overwhelming probability» выполняется $W(T(G,\\sigma)|\\rho\\vdash\\bot)\\le O(\\ell^6\\log S)$.
-  Перемножая, получаем $W\\le O(\\ell^7\\log S)$.
-  Ссылка: `../../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`, §5 (уравнения (5.4) и (5.6)).
-- `Toy‑тест:` если $\\ell$ ограничена абсолютной константой, то $W=O(\\log S)$ (smoothness).
-  Совместно с §16.108: для 2‑реберно‑связных плоских графов с $\\max\\deg(\\text{face})\\le d$ получаем $W\\le O(d^7\\log S)$.
-- `Статус:` известный факт (явное извлечение степени; закрывает Q27).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` аналогично попытаться сделать явной зависимость в AR’11 Thm. 2.17 (квази‑smoothness через $\\tilde\\ell(G)$).
+  In particular, this makes explicit the degree in AR'11 notation $W\\le \\ell(G)^{O(1)}\\log S$.
+- `Proof:` In evidence AR'11 Thm. 2.15 (section 5) two estimates were obtained:
+  (i) by (5.4) $W(T(G,\\sigma)\\vdash\\bot)\\le O(\\ell\\cdot W(T(G,\\sigma)|\\rho\\vdash\\bot))$ for the constructed random restriction $\\rho$;
+  (ii) by (5.6) with "overwhelming probability" $W(T(G,\\sigma)|\\rho\\vdash\\bot)\\le O(\\ell^6\\log S)$ is satisfied.
+  Multiplying, we get $W\\le O(\\ell^7\\log S)$.
+  Link: `../../resources/downloads/alekhnovich_razborov_2011_satisfiability_branchwidth_tseitin.pdf`, Section 5 (equations (5.4) and (5.6)).
+- `Toy test:` if $\\ell$ is bounded by an absolute constant, then $W=O(\\log S)$ (smoothness).
+  Together with Section 16.108: for 2-edge-connected planar graphs with $\\max\\deg(\\text{face})\\le d$ we obtain $W\\le O(d^7\\log S)$.
+- `Status:` known fact (explicit degree extraction; closes Q27).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` similarly try to make the dependence explicit in AR'11 Thm. 2.17 (quasi-smoothness via $\\tilde\\ell(G)$).
 
-### 16.110. Исследовательский шаг: явная константа в Thm. 2.17 (можно взять $c=6$)
+### 16.110. Exploratory step: explicit constant in Thm. 2.17 (you can take $c=6$)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $G$ — связный граф, $\\tilde\\ell:=\\tilde\\ell(G)<\\infty$ — параметр AR’11 (после Thm. 2.16),
-  $\\sigma$ — нечётная разметка (так что $T(G,\\sigma)$ невыполнима), $W:=W(T(G,\\sigma)\\vdash\\bot)$ — минимальная resolution‑width,
-  $S:=S(T(G,\\sigma)\\vdash\\bot)$ — минимальный размер резолюционного опровержения. Тогда для некоторой абсолютной константы $C>0$ верно
+- `Lens:` Trade-off.
+- `Statement:` Let $G$ be a connected graph, $\\tilde\\ell:=\\tilde\\ell(G)<\\infty$ be an AR'11 parameter (after Thm. 2.16),
+  $\\sigma$ - odd marking (so $T(G,\\sigma)$ is impossible), $W:=W(T(G,\\sigma)\\vdash\\bot)$ - minimum resolutionwidth,
+  $S:=S(T(G,\\sigma)\\vdash\\bot)$ is the minimum size of a resolution refutation. Then for some absolute constant $C>0$ it is true
   $$W\\le (C\\,\\tilde\\ell\\,\\log S)^{6\\tilde\\ell^2}.$$
-  Это делает явной зависимость в AR’11 Thm. 2.17: $W\\le (\\tilde\\ell\\log S)^{O(\\tilde\\ell^2)}$.
-- `Доказательство:` В доказательстве AR’11 Thm. 2.17 (раздел 5) фиксируют $\\ell:=\\tilde\\ell(G)$ и получают:
-  1) по (5.12) существует (с вероятностью $1-O(S^{-1})$) ограничение $\\rho$ такое, что
+  This makes the dependence in AR'11 Thm clear. 2.17: $W\\le (\\tilde\\ell\\log S)^{O(\\tilde\\ell^2)}$.
+- `Proof:` In evidence AR'11 Thm. 2.17 (section 5) fix $\\ell:=\\tilde\\ell(G)$ and get:
+  1) by (5.12) there exists (with probability $1-O(S^{-1})$) a constraint $\\rho$ such that
      $$W(T(G,\\sigma)|\\rho\\vdash\\bot)\\le w:=\\bigl(K\\ell^2\\log S\\bigr)^{\\ell}.$$
-  2) по Claim 5.17, при условии регулярности $E_p$ (Claim 5.16) из $W(T|\\rho)\\le w$ следует
+  2) by Claim 5.17, provided that $E_p$ is regular (Claim 5.16) from $W(T|\\rho)\\le w$ it follows
      $$\\mathrm{wb}(T(G,\\sigma)\\vdash\\bot)\\le w^2 + R,$$
-     где $R$ — число «relevant edges» для некоторой пары $(V_0,V_1)$ с $|V_0|,|V_1|\\le w$.
-  3) Делаем оценку $R$ явной: в определении $P_{V_0,V_1}$ все пути имеют длину $\\le 2\\ell-1$, значит каждое множество рёбер в семье имеет размер $\\le 2\\ell$.
-     После plucking‑процедуры в $F_{V_0,V_1}$ нет sunflower‑семейства размера $r$ среди минимальных элементов, где $r=C_0 w\\log n$ (см. (5.15)), $n:=|V(G)|$.
-     Поэтому по Erdős–Rado (Prop. 5.8) получаем явную оценку
+     where $R$ is the number of "relevant edges" for some pair $(V_0,V_1)$ with $|V_0|,|V_1|\\le w$.
+  3) We make the estimate of $R$ explicit: in the definition of $P_{V_0,V_1}$ all paths have length $\\le 2\\ell-1$, which means each set of edges in the family has size $\\le 2\\ell$.
+     After the plucking procedure in $F_{V_0,V_1}$ there is no sunflower family of size $r$ among the minimal elements, where $r=C_0 w\\log n$ (see (5.15)), $n:=|V(G)|$.
+     Therefore, by Erdos-Rado (Prop. 5.8) we obtain the explicit estimate
      $$|F_{V_0,V_1}|\\le (2\\ell)!\\,(r-1)^{2\\ell}\\le (2\\ell)!\\,r^{2\\ell},$$
-     а значит число relevant edges удовлетворяет
+     which means the number of relevant edges satisfies
      $$R\\le (2\\ell)\\,|F_{V_0,V_1}|\\le 2\\ell\\,(2\\ell)!\\,r^{2\\ell}.$$
-  4) Подстановка $r=C_0 w\\log n$ даёт
+  4) Substitution $r=C_0 w\\log n$ gives
      $$R\\le 2\\ell\\,(2\\ell)!\\,(C_0\\log n)^{2\\ell}\\,w^{2\\ell}.$$
-     По §16.112 имеем $S\\ge n$, значит $\\log n\\le \\log S$.
-     Также $(2\\ell)!\\le (2\\ell)^{2\\ell}$, поэтому
+     By Section 16.112 we have $S\\ge n$, which means $\\log n\\le \\log S$.
+     Also $(2\\ell)!\\le (2\\ell)^{2\\ell}$, so
      $$2\\ell\\,(2\\ell)!\\,(C_0\\log n)^{2\\ell}\\le (C_1\\,\\ell\\,\\log S)^{4\\ell}.$$
-     Следовательно,
+     Hence,
      $$\\mathrm{wb}(T(G,\\sigma)\\vdash\\bot)\\le w^2 + (C_1\\ell\\log S)^{4\\ell}\\,w^{2\\ell}.$$
-  5) Так как $w=(K\\ell^2\\log S)^{\\ell}$, имеем $w^{2\\ell}=(K\\ell^2\\log S)^{2\\ell^2}$, а множитель $(C_1\\ell\\log S)^{4\\ell}$
-     увеличивает степень не более чем на $4\\ell\\le 4\\ell^2$.
-     Поэтому (поглощая константы и переходя от branch‑width к width через AR’11 Thm. 2.12 + Remark 2.11 + §16.106) получаем
+  5) Since $w=(K\\ell^2\\log S)^{\\ell}$, we have $w^{2\\ell}=(K\\ell^2\\log S)^{2\\ell^2}$, and the factor is $(C_1\\ell\\log S)^{4\\ell}$
+     increases the degree by no more than $4\\ell\\le 4\\ell^2$.
+     Therefore (absorbing constants and passing from branchwidth to width via AR'11 Thm. 2.12 + Remark 2.11 + Section 16.106) we get
      $$W\\le (C\\,\\ell\\,\\log S)^{6\\ell^2}.$$
-- `Toy‑тест:` если $\\ell=O(1)$, то $W\\le (\\log S)^{O(1)}$ (quasi‑smoothness) согласуется с формулировкой AR’11.
-- `Статус:` доказано (грубая явная константа; закрывает Q28).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если нужно, улучшить грубую константу 6 (уточнить оценки на $|F_{V_0,V_1}|$ / relevant edges).
+- `Toy test:` if $\\ell=O(1)$, then $W\\le (\\log S)^{O(1)}$ (quasi-smoothness) is consistent with the AR'11 formulation.
+- `Status:` proven (rough explicit constant; closes Q28).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if necessary, improve the rough constant 6 (refine the estimates by $|F_{V_0,V_1}|$ / relevant edges).
 
-### 16.111. Исследовательский шаг: итог AR’11 (Thm. 2.15/2.17/2.18) в «употребимом» виде
+### 16.111. Research step: summary of AR'11 (Thm. 2.15/2.17/2.18) in "usable" form
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $G$ — связный граф, $\\sigma$ — нечётная разметка (так что Tseitin‑CNF $T(G,\\sigma)$ невыполнима), и
+- `Lens:` Equivalence.
+- `Statement:` Let $G$ be a connected graph, $\\sigma$ an odd labeling (so Tseitin-CNF $T(G,\\sigma)$ is unsatisfiable), and
   $W:=W(T(G,\\sigma)\\vdash\\bot)$, $S:=S(T(G,\\sigma)\\vdash\\bot)$.
-  Тогда:
-  1) (**Smoothness через cyclicity.**) Если $\\ell:=\\ell(G)$ конечна, то
+  Then:
+  1) (**Smoothness via cyclicity.**) If $\\ell:=\\ell(G)$ is finite, then
      $$W\\le O(\\ell^7\\log S)$$
-     (AR’11, (5.4)+(5.6); явная степень выписана в §16.109).
-     В частности, если $G$ 2‑реберно‑связен, планарен и $\\max\\deg(\\text{face})\\le d$, то $\\ell(G)\\le\\max\\{d,2\\}$ (§16.108) и потому
+     (AR'11, (5.4)+(5.6); explicit degree written in Section 16.109).
+     In particular, if $G$ is 2-edge-connected, planar, and $\\max\\deg(\\text{face})\\le d$, then $\\ell(G)\\le\\max\\{d,2\\}$ (Section 16.108) and therefore
      $$W\\le O(d^7\\log S).$$
-  2) (**Quasi‑smoothness через $\\tilde\\ell$.**) Если $\\tilde\\ell:=\\tilde\\ell(G)$ конечна, то
+  2) (**Quasi-smoothness via $\\tilde\\ell$.**) If $\\tilde\\ell:=\\tilde\\ell(G)$ is finite, then
      $$W\\le (C\\,\\tilde\\ell\\,\\log S)^{6\\tilde\\ell^2}$$
-     (AR’11, Claim 5.17/(5.18); явная константа $6$ выписана в §16.110).
-  3) (**Без параметров.**) Для любого $G$ выполняется
+     (AR'11, Claim 5.17/(5.18); the explicit constant $6$ is written out in Section 16.110).
+  3) (**No parameters.**) For any $G$ the following holds:
      $$W\\le O(\\log S + |V(G)|)$$
      (AR’11, Thm. 2.18).
-- `Toy‑тест:` при фиксированном $d$ в (1) получаем $W=O(\\log S)$ (smoothness), а при фиксированном $\\tilde\\ell$ в (2) получаем $W\\le (\\log S)^{O(1)}$ (quasi‑smoothness).
-- `Статус:` доказано (сводка; закрывает Q29).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` по необходимости перенести этот итог в основной текст (не таща доказательства) как 3–6 строк с ссылкой на AR’11 и §16.108–16.110.
+- `Toy test:` for fixed $d$ in (1) we obtain $W=O(\\log S)$ (smoothness), and for fixed $\\tilde\\ell$ in (2) we obtain $W\\le (\\log S)^{O(1)}$ (quasi-smoothness).
+- `Status:` proven (summary; closes Q29).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if necessary, transfer this summary to the main text (without dragging evidence) as 3-6 lines with reference to AR'11 and Section 16.108-16.110.
 
-### 16.112. Исследовательский шаг: для Tseitin $S(T(G,\\sigma)\\vdash\\bot)\\ge |V(G)|$ (и потому $\\log n\\le\\log S$)
+### 16.112. Exploratory step: for Tseitin $S(T(G,\\sigma)\\vdash\\bot)\\ge |V(G)|$ (and therefore $\\log n\\le\\log S$)
 
-- `Линза:` Инвариант.
-- `Утверждение:` Пусть $G$ — связный граф без петель, $\\sigma:V(G)\\to\\{0,1\\}$ нечётна (так что Tseitin‑CNF $T(G,\\sigma)$ невыполнима).
-  Для вершины $v\\in V(G)$ обозначим через $B_v$ множество клауз в блоке $\\mathrm{PARITY}_{v,\\sigma(v)}$ (см. AR’11, (2.9)).
-  Тогда CNF $T(G,\\sigma)\\setminus B_v$ выполнима. В частности, любая резолюционная рефутация $T(G,\\sigma)$ должна использовать
-  хотя бы одну исходную клаузу из каждого блока $B_v$, и потому
+- `Lens:` Invariant.
+- `Statement:` Let $G$ be a connected graph without loops, $\\sigma:V(G)\\to\\{0,1\\}$ is odd (so Tseitin-CNF $T(G,\\sigma)$ is unsatisfiable).
+  For a vertex $v\\in V(G)$, let $B_v$ denote the set of clauses in the block $\\mathrm{PARITY}_{v,\\sigma(v)}$ (see AR'11, (2.9)).
+  Then CNF $T(G,\\sigma)\\setminus B_v$ is satisfiable. In particular, any resolution refutation $T(G,\\sigma)$ must use
+  at least one initial clause from each block $B_v$, and therefore
   $$S(T(G,\\sigma)\\vdash\\bot)\\ge |V(G)|.$$
-- `Доказательство:`
-  1) (**Выполнимость после удаления одного блока.**) Зафиксируем вершину $r$ и построим удовлетворяющее присваивание для всех вершин $v\\ne r$.
-     Возьмём остовное дерево $T$ графа $G$ с корнем $r$. Положим $x_e:=0$ для всех рёбер $e\\notin E(T)$.
-     Обойдём вершины $T$ снизу вверх. Для каждой $v\\ne r$ пусть $p(v)$ — родитель, $e_v:=(v,p(v))$ — ребро к родителю.
-     Когда значения $x_f$ уже заданы для всех рёбер $f$ инцидентных $v$, кроме $e_v$, положим
+- `Proof:`
+  1) (**Satisfiability after removing one block.**) Fix a vertex $r$ and construct a satisfying assignment for all vertices $v\\ne r$.
+     Take a spanning tree $T$ of a graph $G$ with root $r$. Let us set $x_e:=0$ for all edges $e\\notin E(T)$.
+     Let's go around the vertices of $T$ from bottom to top. For each $v\\ne r$, let $p(v)$ be the parent, $e_v:=(v,p(v))$ be the edge to the parent.
+     When the values of $x_f$ are already given for all edges $f$ incident to $v$, except $e_v$, we set
      $$x_{e_v}:=\\sigma(v)\\oplus \\bigoplus_{f\\ni v,\\ f\\ne e_v} x_f.$$
-     Тогда у вершины $v$ выполняется требуемое уравнение $\\bigoplus_{f\\ni v}x_f=\\sigma(v)$.
-     Значит присваивание удовлетворяет всем XOR‑ограничениям для $v\\ne r$ и, следовательно, удовлетворяет всем клаузам из блоков $B_v$ при $v\\ne r$.
-     Так как блок $B_r$ удалён, получаем выполнимость $T(G,\\sigma)\\setminus B_r$.
-  2) (**Отсюда нижняя оценка на размер.**) Если резолюционная рефутация $\\pi$ не использует ни одной исходной клаузы из блока $B_v$,
-     то она является резолюционной рефутацией выполнимой CNF $T(G,\\sigma)\\setminus B_v$, что невозможно по корректности резолюции.
-     Следовательно, $\\pi$ использует хотя бы одну исходную клауза из каждого блока, и число клауз в $\\pi$ не меньше $|V(G)|$,
-     то есть $S(T(G,\\sigma)\\vdash\\bot)\\ge |V(G)|$.
-- `Toy‑тест:` для цикла $C_3$ с нечётной $\\sigma$ (ровно одна вершина с зарядом 1) удаление блока этой вершины делает систему из двух XOR‑уравнений
-  совместной; дерево‑конструкция выше явно находит решение.
-- `Статус:` доказано (закрывает Q30).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` использовать как подстановку $\\log|V(G)|\\le\\log S$ в местах, где $n$ появляется внутри $\\log$ (например, в оценках из AR’11 §5).
+     Then the vertex $v$ satisfies the required equation $\\bigoplus_{f\\ni v}x_f=\\sigma(v)$.
+     This means that the assignment satisfies all XOR constraints for $v\\ne r$ and, therefore, satisfies all clauses from the blocks $B_v$ for $v\\ne r$.
+     Since the block $B_r$ has been removed, we obtain the satisfiability of $T(G,\\sigma)\\setminus B_r$.
+  2) (**Hence the lower bound on the size.**) If the resolution refutation $\\pi$ does not use any original clause from the block $B_v$,
+     then it is a resolution refutation of a satisfiable CNF $T(G,\\sigma)\\setminus B_v$, which is impossible due to the correctness of the resolution.
+     Consequently, $\\pi$ uses at least one initial clause from each block, and the number of clauses in $\\pi$ is at least $|V(G)|$,
+     that is, $S(T(G,\\sigma)\\vdash\\bot)\\ge |V(G)|$.
+- `Toy test:` for a cycle $C_3$ with odd $\\sigma$ (exactly one vertex with charge 1), removing the block of this vertex makes a system of two XOR equations
+  joint; the tree structure above clearly has a solution.
+- `Status:` proven (closes Q30).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` use as a substitution $\\log|V(G)|\\le\\log S$ in places where $n$ appears inside $\\log$ (for example, in the estimates from AR'11 Section 5).
 
-### 16.113. Исследовательский шаг: Frege‑«line replacement» по эквивалентности $A\\leftrightarrow A'$
+### 16.113. Research step: Frege"line replacement" by equivalence $A\\leftrightarrow A'$
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение:` Пусть $\\Gamma$ — множество формул, и в Frege‑выводе из $\\Gamma$ уже получена формула $A$.
-  Если также есть Frege‑вывод (без гипотез) тавтологии $A\\leftrightarrow A'$, то из $\\Gamma$ выводится $A'$.
-  Более того, $A'$ можно вставить в вывод сразу после $A$ с $O(1)$ дополнительными строками (плюс вывод $A\\leftrightarrow A'$).
-- `Доказательство:` Пишем $A\\leftrightarrow A'$ как $(A\\to A')\\wedge(A'\\to A)$.
-  В любой Frege‑системе есть короткие (константные) выводы тавтологий
-  $((X\\wedge Y)\\to X)$ и $((X\\wedge Y)\\to Y)$.
-  Применяя modus ponens к строке $(A\\to A')\\wedge(A'\\to A)$, получаем строку $A\\to A'$,
-  а затем modus ponens к строкам $A$ и $A\\to A'$ даёт $A'$.
-  (Аналогично из $A'$ и $A\\leftrightarrow A'$ выводится $A$.)
-- `Оценка blow-up:` одна замена линии добавляет константное число строк сверх вывода эквивалентности $A\\leftrightarrow A'$,
-  т.е. если $|\\pi|$ — длина исходного вывода и $E$ — суммарная длина добавленных выводов эквивалентностей, то новый вывод имеет длину $O(|\\pi|+E)$.
-- `Toy‑тест:` для $A=(p\\vee q)\\vee r$ и $A'=p\\vee(q\\vee r)$: из $A$ и ассоциативности $\\vee$ (как $A\\leftrightarrow A'$) выводим $A'$.
-- `Статус:` доказано (закрывает Q32).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если нужно для строгой «log‑depth» интерпретации, зафиксировать (ссылкой), что выбранная схема балансировки даёт
-  полиномиальный Frege‑вывод эквивалентности $A\\leftrightarrow A'$ для каждой линии (иначе пользоваться переводом Buss’97 из §16.95).
+- `Lens:` Compression/canonization.
+- `Statement:` Let $\\Gamma$ be a set of formulas, and let the Frege derivation from $\\Gamma$ already yield formula $A$.
+  If there is also a Frege derivation (without hypotheses) of the tautology $A\\leftrightarrow A'$, then $A'$ is deduced from $\\Gamma$.
+  Moreover, $A'$ can be inserted into the output immediately after $A$ with $O(1)$ additional lines (plus the output of $A\\leftrightarrow A'$).
+- `Proof:` We write $A\\leftrightarrow A'$ as $(A\\to A')\\wedge(A'\\to A)$.
+  Any Frege system has short (constant) tautology outputs
+  $((X\\wedge Y)\\to X)$ and $((X\\wedge Y)\\to Y)$.
+  Applying modus ponens to the string $(A\\to A')\\wedge(A'\\to A)$, we get the string $A\\to A'$,
+  and then modus ponens to the strings $A$ and $A\\to A'$ gives $A'$.
+  (Similarly, $A$ is derived from $A'$ and $A\\leftrightarrow A'$.)
+- `Blow-up rating:` one line replacement adds a constant number of lines beyond the equivalence output of $A\\leftrightarrow A'$,
+  those. if $|\\pi|$ is the length of the original output and $E$ is the total length of the added equivalence outputs, then the new output has length $O(|\\pi|+E)$.
+- `Toy test:` for $A=(p\\vee q)\\vee r$ and $A'=p\\vee(q\\vee r)$: from $A$ and the associativity of $\\vee$ (as $A\\leftrightarrow A'$) we derive $A'$.
+- `Status:` proven (closes Q32).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if necessary for a strict "logdepth" interpretation, record (with a link) what the selected balancing scheme gives
+  polynomial Frege-derivation of the equivalence $A\\leftrightarrow A'$ for each line (otherwise, use the Buss'97 translation from Section 16.95).
 
-### 16.114. Исследовательский шаг: Spira‑балансировка даёт p‑размерные Frege‑доказательства $A\\leftrightarrow A'$
+### 16.114. Exploratory step: Spira balancing produces p-dimensional Frege-proofs $A\\leftrightarrow A'$
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Существует стандартная Spira‑схема балансировки формул $A\\mapsto A'$ глубины $O(\\log|A|)$ и размера $\\mathrm{poly}(|A|)$, для которой
-  тавтологии $A\\leftrightarrow A'$ имеют полиномиальные Frege‑доказательства. Следовательно, аргумент 16.94 «балансировать каждую линию» можно
-  проводить строго через §16.113.
-- `Обоснование/ссылка:` в Buss (1997), Proof (Sketch) к Theorem 3 (p. 8),
+- `Lens:` Equivalence.
+- `Statement:` There is a standard Spira scheme for balancing formulas $A\\mapsto A'$ of depth $O(\\log|A|)$ and size $\\mathrm{poly}(|A|)$, for which
+  tautologies $A\\leftrightarrow A'$ have polynomial Frege-proofs. Therefore, argument 16.94 "balance each line" can be
+  conduct strictly through Section 16.113.
+- `Rationale/link:` in Buss (1997), Proof (Sketch) to Theorem 3 (p. 8),
   `../../resources/downloads/buss_1997_proof_complexity_intro.pdf`,
-  прямо отмечено, что в доказательстве p‑симуляции Frege‑систем по Rekhow/Spira
+  It is explicitly noted that in the proof of p-simulation of Frege-systems by Rekhow/Spira
   «must prove that there are polynomial size proofs that the Spira translation of a conjunction $A\\wedge B$ is equivalent to the conjunction of the Spira translations of $A$ and $B$»,
-  т.е. корректность Spira‑перевода (и, в частности, эквивалентность исходной формулы и её балансировки) верифицируется внутри Frege с полиномиальным blow‑up.
-- `Toy‑тест:` для $A=(p\\vee q)\\vee r$ и $A'=p\\vee(q\\vee r)$ эквивалентность $A\\leftrightarrow A'$ выводится из ассоциативности $\\vee$ константным числом строк (см. §16.113).
-- `Статус:` известный факт (точная ссылка; закрывает Q33).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` вернуться к 16.93: либо найти источник с явной конструкцией $O(\\log n)$‑depth Frege‑рефутации Tseitin, либо оставлять только «перевод Buss’97/Spira» как строгую верхнюю оценку по глубине (16.95).
+  those. the correctness of the Spira translation (and, in particular, the equivalence of the original formula and its balancing) is verified inside Frege with a polynomial blow-up.
+- `Toy test:` for $A=(p\\vee q)\\vee r$ and $A'=p\\vee(q\\vee r)$ the equivalence of $A\\leftrightarrow A'$ is derived from the associativity of $\\vee$ by a constant number of rows (see Section 16.113).
+- `Status:` known fact (exact link; closes Q33).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` return to 16.93: either find a source with an explicit construction of the $O(\\log n)$depth Fregerefutation of Tseitin, or leave only the "Buss'97/Spira translation" as a strict upper bound on depth (16.95).
 
-### 16.115. Исследовательский шаг: когда верхняя оценка GIRS’19 Thm. 19 становится polynomial‑size?
+### 16.115. Research step: when the upper estimate of GIRS'19 Thm. 19 becomes polynomialsize?
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $t:=\\mathrm{tw}(G)$ и $\\Delta:=\\Delta(G)$.
-  Из доказательства GIRS’19 Thm. 27/Claim 28 (разд. 4.3; см. также §16.119–§16.120) получается **нециркулярная** явная форма верхней оценки:
-  для любого $d\\ge 1$ существует bounded‑depth Frege‑рефутация глубины $O(d)$ и размера
+- `Lens:` Trade-off.
+- `Statement:` Let $t:=\\mathrm{tw}(G)$ and $\\Delta:=\\Delta(G)$.
+  From the GIRS'19 Thm proof. 27/Claim 28 (Section 4.3; see also Section 16.119-Section 16.120) produces a **non-circular** explicit form of the upper bound:
+  for any $d\\ge 1$ there is a boundeddepth Fregerefutation of the depth $O(d)$ and size
   $$\\mathrm{poly}(|\\mathrm{Tseitin}(G,f)|)\\cdot 2^{\\,O\\bigl(d\\cdot X^{2/d}\\bigr)},\\qquad X:=\\Delta\\,\\mathrm{tpw}(G).$$
-  Подставляя $\\mathrm{tpw}(G)\\le 10\\Delta\\,t$ (GIRS’19 Thm. 26), получаем
+  Substituting $\\mathrm{tpw}(G)\\le 10\\Delta\\,t$ (GIRS'19 Thm. 26), we get
   $$\\mathrm{poly}(|\\mathrm{Tseitin}(G,f)|)\\cdot 2^{\\,O\\bigl(d\\cdot (10\\Delta^2 t)^{2/d}\\bigr)}.$$
-  В частности, гарантированно polynomial‑size следует уже при $d=\\Theta(\\log(10\\Delta^2 t))$ (тогда $(10\\Delta^2 t)^{2/d}=2^{O(1)}$ и экспонента становится $O(\\log t)$).
-- `Доказательство:` по Claim 28 (GIRS’19, p. 13) размер game tree ограничен $\\mathrm{poly}(|T|)$ и доминирующими слагаемыми вида
-  $2^{O(\\sum_{i=1}^d t_i)}$, где в доказательстве Thm. 27 выбирают $t_i=(\\Delta\\,\\mathrm{tpw}(G))^{2/d}$ для всех $i$ (p. 14),
-  так что $\\sum_i t_i=d\\cdot X^{2/d}$. Константы в переходе Lemma 24/25 фиксируются в §16.118, и потому итоговый размер
-  имеет вид $\\mathrm{poly}(|T|)\\cdot 2^{O(d\\cdot X^{2/d})}$. Подстановка Thm. 26 даёт формулу через $t$.
-- `Toy‑тест:` если $d=\\Theta(\\log t)$, то $X^{2/d}=2^{O(1)}$, и оценка становится $2^{O(\\log t)}=\\mathrm{poly}(t)$.
-- `Статус:` доказано (исправляет 16.115: из GIRS’19 **не следует** polynomial‑size при $d=\\Theta(\\log t/\\log\\log t)$ без доп. идей; см. §16.120).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для grid переписать итог в терминах $N$ и сопоставить с Håstad’20 Cor. 6.6 (см. §16.116 и §16.120).
+  In particular, polynomial-size is guaranteed already for $d=\\Theta(\\log(10\\Delta^2 t))$ (then $(10\\Delta^2 t)^{2/d}=2^{O(1)}$ and the exponent becomes $O(\\log t)$).
+- `Proof:` according to Claim 28 (GIRS'19, p. 13), the size of the game tree is limited by $\\mathrm{poly}(|T|)$ and dominant terms of the form
+  $2^{O(\\sum_{i=1}^d t_i)}$, where in the proof Thm. 27 choose $t_i=(\\Delta\\,\\mathrm{tpw}(G))^{2/d}$ for all $i$ (p. 14),
+  so $\\sum_i t_i=d\\cdot X^{2/d}$. The constants in the Lemma 24/25 transition are fixed in Section 16.118, and therefore the final size
+  has the form $\\mathrm{poly}(|T|)\\cdot 2^{O(d\\cdot X^{2/d})}$. Substitution Thm. 26 gives the formula in terms of $t$.
+- `Toy test:` if $d=\\Theta(\\log t)$ then $X^{2/d}=2^{O(1)}$ and the estimate becomes $2^{O(\\log t)}=\\mathrm{poly}(t)$.
+- `Status:` proven (corrects 16.115: from GIRS'19 it **does not follow** polynomialsize for $d=\\Theta(\\log t/\\log\\log t)$ without additional ideas; see Section 16.120).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` for grid, rewrite the total in terms of $N$ and compare it with Hastad'20 Cor. 6.6 (see Section 16.116 and Section 16.120).
 
-### 16.116. Исследовательский шаг: Tseitin(Grid) — порог глубины polynomial‑size в терминах $N$
+### 16.116. Exploratory step: Tseitin(Grid) -- polynomialsize depth threshold in terms of $N$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $G$ — $n\\times n$ grid и $T:=\\mathrm{Tseitin}(G,f)$ — соответствующая Tseitin‑CNF.
-  Обозначим через $N$ число переменных в $T$ (для стандартного кодирования $N=\\Theta(|E(G)|)=\\Theta(n^2)$).
-  Тогда:
-  1) (**Нижняя оценка.**) Любая polynomial‑size Frege‑рефутация в depth‑$d$ требует
+- `Lens:` Trade-off.
+- `Statement:` Let $G$ be a $n\\times n$ grid and $T:=\\mathrm{Tseitin}(G,f)$ be the corresponding Tseitin-CNF.
+  Let us denote by $N$ the number of variables in $T$ (for standard coding $N=\\Theta(|E(G)|)=\\Theta(n^2)$).
+  Then:
+  1) (**Lower estimate.**) Any polynomialsize Fregerefutation in depth$d$ requires
      $$d\\ =\\ \\Omega\\!\\left(\\frac{\\log N}{\\log\\log N}\\right)$$
-     (Håstad’20, Cor. 6.6; см. §16.92).
-  2) (**Верхняя оценка.**) Polynomial‑size Frege‑рефутации существуют при глубине
+     (Hastad'20, Cor. 6.6; see Section 16.92).
+  2) (**Upper estimate.**) Polynomialsize Fregerefutations exist at depth
      $$d\\ =\\ O(\\log N)$$
-     (например, из GIRS’19: polynomial‑size уже при $d=\\Theta(\\log\\mathrm{tw}(G))=\\Theta(\\log n)=\\Theta(\\log N)$; см. §16.115 и §16.120).
-  Следовательно, известная зона для минимальной глубины polynomial‑size на grid:
+     (for example, from GIRS'19: polynomialsize already for $d=\\Theta(\\log\\mathrm{tw}(G))=\\Theta(\\log n)=\\Theta(\\log N)$; see Section 16.115 and Section 16.120).
+  Therefore, the known zone for the minimum polynomialsize depth on the grid is:
   $$\\Omega\\!\\left(\\frac{\\log N}{\\log\\log N}\\right)\\ \\le\\ d_{\\mathrm{poly}}(N)\\ \\le\\ O(\\log N).$$
-- `Доказательство:`
-  1) (**Нижняя оценка.**) Это Cor. 6.6 из Håstad (2020) (см. §16.92), переписанная через $N=\\Theta(n^2)$.
-  2) (**Верхняя оценка.**) Из §16.115 имеем polynomial‑size при глубине $d=\\Theta(\\log(\\Delta^2\\mathrm{tw}(G)))$.
-     Для grid $\\Delta=4$ и $\\mathrm{tw}(G)=\\Theta(n)$, значит $d=\\Theta(\\log n)=\\Theta(\\log N)$.
-- `Toy‑тест:` $N=n^2$ даёт $\\log N=2\\log n$ и $\\log\\log N=\\log(\\log n+\\log 2)=\\log\\log n+O(1)$, так что масштабы
-  $\\log n/\\log\\log n$ и $\\log N/\\log\\log N$ совпадают по порядку.
-- `Статус:` доказано (исправляет 16.116: порядок для $d_{\\mathrm{poly}}$ на grid **не** зафиксирован; известны только $\\Omega(\\log N/\\log\\log N)$ и $O(\\log N)$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если нужно для «главного текста», заменить «tight» на двусторонние границы $\\Omega(\\log N/\\log\\log N)$ и $O(\\log N)$ (см. `docs/15_proof_complexity.md`).
+- `Proof:`
+  1) (**Lower estimate.**) This is Cor. 6.6 from Hastad (2020) (see Section 16.92), rewritten as $N=\\Theta(n^2)$.
+  2) (**Upper estimate.**) From Section 16.115 we have polynomialsize at depth $d=\\Theta(\\log(\\Delta^2\\mathrm{tw}(G)))$.
+     For grid $\\Delta=4$ and $\\mathrm{tw}(G)=\\Theta(n)$, then $d=\\Theta(\\log n)=\\Theta(\\log N)$.
+- `Toy test:` $N=n^2$ gives $\\log N=2\\log n$ and $\\log\\log N=\\log(\\log n+\\log 2)=\\log\\log n+O(1)$, so the scales
+  $\\log n/\\log\\log n$ and $\\log N/\\log\\log N$ are the same in order.
+- `Status:` proven (corrects 16.116: the order for $d_{\\mathrm{poly}}$ on the grid is **not** fixed; only $\\Omega(\\log N/\\log\\log N)$ and $O(\\log N)$ are known).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if necessary for the "main text", replace "tight" with two-sided borders $\\Omega(\\log N/\\log\\log N)$ and $O(\\log N)$ (see. `docs/15_proof_complexity.md`).
 
-### 16.117. Исследовательский шаг: константы в пороге глубины для Tseitin(Grid) (Håstad’20 vs GIRS’19)
+### 16.117. Exploratory step: constants in the depth threshold for Tseitin(Grid) (Hastad'20 vs GIRS'19)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Для Tseitin(Grid$_{n,n}$) в bounded‑depth Frege:
-  1) (**Явная нижняя константа.**) Из Håstad (2020), Cor. 6.6 (см. §16.92) следует, что polynomial‑size невозможен при
+- `Lens:` Trade-off.
+- `Statement:` For Tseitin(Grid$_{n,n}$) in boundeddepth Frege:
+  1) (**Explicit lower constant.**) From Hastad (2020), Cor. 6.6 (see Section 16.92) it follows that polynomialsize is impossible when
      $$\\mathrm{depth}\\le \\frac{\\log n}{59\\,\\log\\log n}.$$
-  2) (**Известный upper.**) Из §16.115 (на базе GIRS’19 Thm. 27/26) следует polynomial‑size при глубине $\\mathrm{depth}=O(\\log n)=O(\\log N)$.
-  Следовательно, «константное» сравнение вида $1/59$ vs “$9c$” невалидно: известная верхняя оценка для polynomial‑size находится на другом масштабе
-  (между $\\Omega(\\log n/\\log\\log n)$ и $O(\\log n)$; см. §16.116), и задача — закрыть этот зазор (или объяснить барьер).
-- `Доказательство:`
-  1) Пункт (1) — это ровно Cor. 6.6 из Håstad (2020), как записано в §16.92.
-  2) Для grid $\\Delta=4$, $\\mathrm{tw}(G)=\\Theta(n)$, и по §16.115 polynomial‑size получается при глубине $\\Theta(\\log n)$.
-- `Toy‑тест:` при $d=\\alpha\\,\\log n/\\log\\log n$ из §16.115 получаем экспоненту $\\Theta(d\\cdot n^{2/d})=\\Theta\\bigl((\\log n)^{1+2/\\alpha}/\\log\\log n\\bigr)$,
-  то есть гарантированно **не** polynomial‑size; чтобы сделать экспоненту $O(\\log n)$, нужен $d=\\Theta(\\log n)$.
-- `Статус:` доказано (уточнён масштаб: известный upper для polynomial‑size — $O(\\log n)$, а не $\\Theta(\\log n/\\log\\log n)$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` найти/построить upper на polynomial‑size при глубине $O(\\log n/\\log\\log n)$ (или аргумент, почему подход через “компактный parity” этого не даёт).
+  2) (**Known upper.**) From Section 16.115 (based on GIRS'19 Thm. 27/26) it follows polynomialsize at depth $\\mathrm{depth}=O(\\log n)=O(\\log N)$.
+  Therefore, a "constant" comparison of the form $1/59$ vs "$9c$" is invalid: the known upper bound for polynomialsize is on a different scale
+  (between $\\Omega(\\log n/\\log\\log n)$ and $O(\\log n)$; see Section 16.116), and the task is to close this gap (or explain the barrier).
+- `Proof:`
+  1) Point (1) is exactly Cor. 6.6 from Hastad (2020), as recorded in Section 16.92.
+  2) For grid $\\Delta=4$, $\\mathrm{tw}(G)=\\Theta(n)$, and according to Section 16.115, the polynomialsize is obtained at depth $\\Theta(\\log n)$.
+- `Toy test:` for $d=\\alpha\\,\\log n/\\log\\log n$ from Section 16.115 we obtain the exponent $\\Theta(d\\cdot n^{2/d})=\\Theta\\bigl((\\log n)^{1+2/\\alpha}/\\log\\log n\\bigr)$,
+  that is, it is guaranteed **not** polynomialsize; to make the exponent $O(\\log n)$, you need $d=\\Theta(\\log n)$.
+- `Status:` proven (the scale has been clarified: the known upper for polynomialsize is $O(\\log n)$, and not $\\Theta(\\log n/\\log\\log n)$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` find/construct upper on polynomialsize with depth $O(\\log n/\\log\\log n)$ (or an argument why the "compact parity" approach does not give this).
 
-### 16.118. Исследовательский шаг: в GIRS’19 Lemma 24/25 можно взять явную константу $c=21$
+### 16.118. Research step: in GIRS'19 Lemma 24/25 you can take an explicit constant $c=21$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` В Galesi–Itsykson–Riazanov–Sofronova (2019) (GIRS’19) в Lemma 24 и Lemma 25
-  (раздел 4.2, “Summation of linear equations”) можно выбрать константу $c=21$:
-  для любого $d$ и любого $p(t_1,\\dots,t_d)$‑refinement $U$ существует вывод, заявленный в Lemma 24, размера
-  $\\le 21\\cdot|\\Phi_1(\\varnothing,U)|^6$, и, следовательно, в Lemma 25 можно взять ту же константу (размер $\\le 21k\\cdot|\\Phi_1(\\varnothing,U)|^6$).
-- `Доказательство:` в доказательстве Lemma 24 (GIRS’19, p. 10–11 в PDF‑нумерации) получена оценка
+- `Lens:` Trade-off.
+- `Statement:` In Galesi-Itsykson-Riazanov-Sofronova (2019) (GIRS'19) in Lemma 24 and Lemma 25
+  (Section 4.2, "Summation of linear equations") you can choose the constant $c=21$:
+  for any $d$ and any $p(t_1,\\dots,t_d)$refinement $U$ there is a derivation stated in Lemma 24 of size
+  $\\le 21\\cdot|\\Phi_1(\\varnothing,U)|^6$, and therefore in Lemma 25 we can take the same constant (size $\\le 21k\\cdot|\\Phi_1(\\varnothing,U)|^6$).
+- `Proof:` in the proof of Lemma 24 (GIRS'19, p. 10-11 in PDF numbering) the estimate was obtained
   $$\\text{size}\\ \\le\\ 2^{3t_1}\\,c\\,|\\Phi_1(\\varnothing,V^1)|^6\\ +\\ 20\\,|\\Phi_1(\\varnothing,U)|^6,$$
-  и далее используется тождество (там же)
+  and further the identity is used (ibid.)
   $$|\\Phi_1(\\varnothing,U)|=2^{t_1+1}t_1\\,|\\Phi_1(\\varnothing,V^1)|.$$
-  Подставляя, получаем
+  Substituting, we get
   $$2^{3t_1}c|\\Phi_1(\\varnothing,V^1)|^6
     =c\\,\\frac{2^{3t_1}}{2^{6(t_1+1)}t_1^6}\\,|\\Phi_1(\\varnothing,U)|^6
     \\le \\frac{c}{512}\\,|\\Phi_1(\\varnothing,U)|^6,$$
-  так как $t_1\\ge 1$. Поэтому при $c=21$ имеем
+  since $t_1\\ge 1$. Therefore, for $c=21$ we have
   $$\\frac{c}{512}+20<21,$$
-  и индуктивный шаг в Lemma 24 проходит с той же константой $c=21$ (база $d=0$ даёт константный размер и тем более укладывается в $21\\cdot|\\Phi_1(\\varnothing,U)|^6$).
-  В Lemma 25 (p. 11) пункт (1) — это $(k-1)$ последовательных применений Lemma 24 с композицией по Lemma 2, поэтому размер
+  and the inductive step in Lemma 24 takes place with the same constant $c=21$ (the base $d=0$ gives a constant size and, moreover, fits into $21\\cdot|\\Phi_1(\\varnothing,U)|^6$).
+  In Lemma 25 (p. 11), item (1) is $(k-1)$ of successive applications of Lemma 24 with composition by Lemma 2, so the size
   $\\le k\\cdot 21\\cdot|\\Phi_1(\\varnothing,U)|^6$.
-- `Toy‑тест:` при $t_1=1$ худший множитель в первом слагаемом равен $2^{3}/2^{12}=1/512$, и запас $21-20=1$ ещё остаётся.
-- `Статус:` доказано (явная константа; полезно для Q39).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` распаковать оставшиеся “существует $c$”/big‑O в верхней оценке GIRS’19 Thm. 19 (p. 14):
-  теперь единственные неявные константы сидят в переходе от Claim 28/Theorem 27 к форме $2^{(10\\Delta^2\\mathrm{tw})^{c/d}}$.
+- `Toy test:` for $t_1=1$, the worst factor in the first term is $2^{3}/2^{12}=1/512$, and there is still a margin of $21-20=1$.
+- `Status:` proven (explicit constant; useful for Q39).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` unpack the remaining "there is $c$"/bigO in the upper estimate of GIRS'19 Thm. 19 (p. 14):
+  now the only implicit constants sit in the transition from Claim 28/Theorem 27 to the form $2^{(10\\Delta^2\\mathrm{tw})^{c/d}}$.
 
-### 16.119. Исследовательский шаг: в GIRS’19 Thm. 19 можно взять явную константу $c=4$ (распаковка Claim 28 → Thm. 27)
+### 16.119. Research step: in GIRS'19 Thm. 19 you can take the explicit constant $c=4$ (unpacking Claim 28 -> Thm. 27)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $G$ — связный граф, $T:=\\mathrm{Tseitin}(G,f)$ невыполнима и $d\\ge 1$.
-  Обозначим $X:=\\Delta(G)\\,\\mathrm{tpw}(G)$. Если $X^{1/d}\\ge \\max(2d,6)$, то в конструкции GIRS’19 (разд. 4.3)
-  можно взять **явную** константу $c=4$ в экспоненте:
-  существует derivation глубины $3d+O(1)$ размера
+- `Lens:` Trade-off.
+- `Statement:` Let $G$ be a connected graph, $T:=\\mathrm{Tseitin}(G,f)$ is unsatisfiable, and $d\\ge 1$.
+  Let us denote $X:=\\Delta(G)\\,\\mathrm{tpw}(G)$. If $X^{1/d}\\ge \\max(2d,6)$, then in the GIRS'19 construction (Section 4.3)
+  you can take the **explicit** constant $c=4$ in the exponent:
+  there is a derivation of depth $3d+O(1)$ of size
   $$\\mathrm{poly}(|T|)\\cdot 2^{X^{4/d}}.$$
-  Следовательно, по Theorem 26 (GIRS’19) можно взять ту же константу $c=4$ в форме Thm. 19:
+  Therefore, by Theorem 26 (GIRS'19) we can take the same constant $c=4$ in the form Thm. 19:
   $$\\mathrm{poly}(|T|)\\cdot 2^{(10\\Delta(G)^2\\mathrm{tw}(G))^{4/d}}.$$
-- `Доказательство:` фиксируем явные константы, скрытые в Claim 28 (GIRS’19, p. 13–14).
-  Пусть $t_1=\\dots=t_d:=\\lceil X^{2/d}\\rceil$ и $Q$ — $(3,t_1,\\dots,t_d)$‑refinement, как в доказательстве Thm. 27.
-  Положим $M:=|\\Phi^1(\\varnothing,Q)|$ (компактное представление паритета).
-  1) По Lemma 21 (GIRS’19) имеем
+- `Proof:` we fix explicit constants hidden in Claim 28 (GIRS'19, p. 13-14).
+  Let $t_1=\\dots=t_d:=\\lceil X^{2/d}\\rceil$ and $Q$ - $(3,t_1,\\dots,t_d)$refinement, as in the proof of Thm. 27.
+  Let $M:=|\\Phi^1(\\varnothing,Q)|$ (compact representation of parity).
+  1) By Lemma 21 (GIRS'19) we have
      $$M\\le 48\\cdot\\prod_{i=1}^d 2^{t_i+1}t_i.$$
-  2) В Claim 28 крупнейшие поддеривации — это применения Lemma 25; после фиксации константы $21$ в Lemma 24/25 (см. §16.118)
-     получаем размер $\\le 21k\\,M^6$ (для $k\\le (\\Delta+1)\\mathrm{tpw}$), а вклад Lemma 22 ($\\le 4M^3$) и Lemma 4
-     (для перехода CNF‑паритетов к $\\Phi$‑представлениям) полиномиален в $|T|$ и $M^6$.
-     Поэтому вся конструкция Thm. 27 даёт оценку вида
+  2) In Claim 28, the largest sub-derivations are applications of Lemma 25; after fixing the constant $21$ in Lemma 24/25 (see Section 16.118)
+     we obtain the size $\\le 21k\\,M^6$ (for $k\\le (\\Delta+1)\\mathrm{tpw}$), and the contribution of Lemma 22 ($\\le 4M^3$) and Lemma 4
+     (for the transition of CNF parities to $\\Phi$ representations) is polynomial in $|T|$ and $M^6$.
+     Therefore, the entire design of Thm. 27 gives an estimate of the form
      $$\\mathrm{size}\\le \\mathrm{poly}(|T|)\\cdot M^6.$$
-  3) Так как $t_i\\ge 1$, множители $t_i^6$ можно поглотить в $\\mathrm{poly}(|T|)$ (при наших $t_i$ это $\\le (2^dX^2)^{O(1)}$,
-     а из $X^{1/d}\\ge 2d$ следует $X\\ge 2^d$). Отсюда
+  3) Since $t_i\\ge 1$, the factors of $t_i^6$ can be absorbed into $\\mathrm{poly}(|T|)$ (for our $t_i$ this is $\\le (2^dX^2)^{O(1)}$,
+     and from $X^{1/d}\\ge 2d$ it follows $X\\ge 2^d$). From here
      $$M^6\\le \\mathrm{poly}(|T|)\\cdot 2^{6\\sum_{i=1}^d t_i}.$$
-  4) При $t_i=\\lceil X^{2/d}\\rceil$ имеем $\\sum_i t_i\\le d(X^{2/d}+1)\\le 2dX^{2/d}$.
-     Из условия $X^{1/d}\\ge 2d$ получаем $2dX^{2/d}\\le X^{3/d}$, значит
+  4) For $t_i=\\lceil X^{2/d}\\rceil$ we have $\\sum_i t_i\\le d(X^{2/d}+1)\\le 2dX^{2/d}$.
+     From the condition $X^{1/d}\\ge 2d$ we obtain $2dX^{2/d}\\le X^{3/d}$, which means
      $$6\\sum_i t_i\\le 6X^{3/d}.$$
-     Наконец, из $X^{1/d}\\ge 6$ следует $6X^{3/d}\\le X^{4/d}$, то есть $M^6\\le \\mathrm{poly}(|T|)\\cdot 2^{X^{4/d}}$.
-  Комбинируя (2)–(4), получаем требуемую явную форму для Thm. 27; подстановка $\\mathrm{tpw}(G)\\le 10\\Delta(G)\\mathrm{tw}(G)$
-  (Theorem 26) даёт явную форму Thm. 19.
-- `Toy‑тест:` для grid $n\\times n$ имеем $X=\\Delta\\,\\mathrm{tpw}=\\Theta(n)$.
-  Если пытаться получить polynomial‑size из формулы $2^{X^{4/d}}$, то естественно взять $d\\asymp 4\\log_2 n/\\log_2\\log_2 n$, чтобы $X^{4/d}=\\Theta(\\log_2 n)$.
-  Но при таком $d$ условие леммы **не выполняется**:
+     Finally, $X^{1/d}\\ge 6$ implies $6X^{3/d}\\le X^{4/d}$, that is, $M^6\\le \\mathrm{poly}(|T|)\\cdot 2^{X^{4/d}}$.
+  Combining (2)-(4), we obtain the required explicit form for Thm. 27; substitution $\\mathrm{tpw}(G)\\le 10\\Delta(G)\\mathrm{tw}(G)$
+  (Theorem 26) gives an explicit form of Thm. 19.
+- `Toy test:` for grid $n\\times n$ we have $X=\\Delta\\,\\mathrm{tpw}=\\Theta(n)$.
+  If you try to get the polynomial-size from the formula $2^{X^{4/d}}$, then it is natural to take $d\\asymp 4\\log_2 n/\\log_2\\log_2 n$ so that $X^{4/d}=\\Theta(\\log_2 n)$.
+  But with such $d$ the condition of the lemma **is not satisfied**:
   $$X^{1/d}=2^{\\tfrac{\\log_2 X}{d}}=2^{\\tfrac14\\log_2\\log_2 n+o(1)}=(\\log_2 n)^{1/4+o(1)}\\ll 2d=\\Theta(\\tfrac{\\log_2 n}{\\log_2\\log_2 n}).$$
-  Следовательно, §16.119 фиксирует явную константу лишь в режиме $d$ “не слишком большой” (когда $X^{1/d}\\ge 2d$), но не даёт polynomial‑size при $d=\\Theta(\\log_2 n/\\log_2\\log_2 n)$.
-- `Статус:` доказано (условная явная константа; **не** закрывает Q39 без снятия условия).
-- `Барьер‑чек:` r — неприменимо (верхняя оценка в ограниченной модели доказательств), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` см. §16.120: записать unconditional upper из Claim 28 и оценить, какой глубины он реально требует для polynomial‑size.
+  Consequently, Section 16.119 fixes an explicit constant only in the $d$ "not too large" regime (when $X^{1/d}\\ge 2d$), but does not give a polynomialsize for $d=\\Theta(\\log_2 n/\\log_2\\log_2 n)$.
+- `Status:` proven (conditional explicit constant; **not** closes Q39 without removing the condition).
+- `Barrier check:` r--not applicable (upper bound in the restricted proof model), NP--not applicable, alg--not applicable.
+- `Next step:` see Section 16.120: write down the unconditional upper from Claim 28 and estimate how much depth it actually requires for the polynomialsize.
 
-### 16.120. Исследовательский шаг: GIRS’19 upper bound даёт polynomial‑size лишь при глубине $\\Theta(\\log_2 n)$ (а при $\\Theta(\\log_2 n/\\log_2\\log_2 n)$ — только quasi‑poly)
+### 16.120. Research step: GIRS'19 upper bound gives polynomial-size only at depth $\\Theta(\\log_2 n)$ (and at $\\Theta(\\log_2 n/\\log_2\\log_2 n)$ - only quasi-poly)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $G$ — связный граф, $T:=\\mathrm{Tseitin}(G,f)$ невыполнима, $d\\ge 1$ и $X:=\\Delta(G)\\,\\mathrm{tpw}(G)$.
-  Тогда из доказательства GIRS’19 Thm. 27/Claim 28 следует upper
+- `Lens:` Trade-off.
+- `Statement:` Let $G$ be a connected graph, $T:=\\mathrm{Tseitin}(G,f)$ unsatisfiable, $d\\ge 1$ and $X:=\\Delta(G)\\,\\mathrm{tpw}(G)$.
+  Then from the proof of GIRS'19 Thm. 27/Claim 28 follows upper
   $$\\mathrm{size}(T\\vdash\\bot)\\ \\le\\ \\mathrm{poly}(|T|)\\cdot 2^{\\,O\\bigl(d\\cdot X^{2/d}\\bigr)}.$$
-  Для grid $n\\times n$ (где $X=\\Theta(n)$ и число переменных $N=\\Theta(n^2)$) это означает:
-  1) при глубине $d=\\Theta(\\log_2 n/\\log_2\\log_2 n)$ гарантируется лишь $\\mathrm{size}=2^{(\\log_2 n)^{\\omega(1)}}$ (quasi‑poly), а
-  2) чтобы из этой оценки получить polynomial‑size, достаточно и по сути необходимо взять $d=\\Theta(\\log_2 n)=\\Theta(\\log_2 N)$.
-- `Доказательство:`
-  1) Формула $\\mathrm{poly}(|T|)\\cdot 2^{O(d\\cdot X^{2/d})}$ — это §16.115 (полученная непосредственно из Claim 28 и выбора $t_i=X^{2/d}$).
-  2) Пусть $L:=\\ln X$ и положим $f(d):=d\\cdot X^{2/d}=d\\,e^{2L/d}$.
-     Если $d=\\alpha\\,L/\\ln L$, то $X^{2/d}=e^{2L/d}=e^{2\\ln L/\\alpha}=L^{2/\\alpha}$ и потому
+  For grid $n\\times n$ (where $X=\\Theta(n)$ and number of variables $N=\\Theta(n^2)$) this means:
+  1) at depth $d=\\Theta(\\log_2 n/\\log_2\\log_2 n)$ only $\\mathrm{size}=2^{(\\log_2 n)^{\\omega(1)}}$ (quasi-poly) is guaranteed, and
+  2) in order to obtain the polynomialsize from this estimate, it is sufficient and essentially necessary to take $d=\\Theta(\\log_2 n)=\\Theta(\\log_2 N)$.
+- `Proof:`
+  1) The formula $\\mathrm{poly}(|T|)\\cdot 2^{O(d\\cdot X^{2/d})}$ is Section 16.115 (derived directly from Claim 28 and the choice $t_i=X^{2/d}$).
+  2) Let $L:=\\ln X$ and set $f(d):=d\\cdot X^{2/d}=d\\,e^{2L/d}$.
+     If $d=\\alpha\\,L/\\ln L$, then $X^{2/d}=e^{2L/d}=e^{2\\ln L/\\alpha}=L^{2/\\alpha}$ and therefore
      $$f(d)=\\Theta\\!\\left(\\frac{L}{\\ln L}\\cdot L^{2/\\alpha}\\right)=\\Theta\\!\\left(\\frac{L^{1+2/\\alpha}}{\\ln L}\\right)=\\omega(L).$$
-     Значит экспонента в $2^{O(f(d))}$ строго больше $\\Theta(\\ln X)$, и гарантированно polynomial‑size не следует.
-  3) Если $d=\\Theta(L)$, то $X^{2/d}=e^{\\Theta(1)}=\\Theta(1)$ и потому $f(d)=\\Theta(L)$; следовательно
+     This means that the exponent in $2^{O(f(d))}$ is strictly greater than $\\Theta(\\ln X)$, and the polynomial-size is not guaranteed.
+  3) If $d=\\Theta(L)$, then $X^{2/d}=e^{\\Theta(1)}=\\Theta(1)$ and therefore $f(d)=\\Theta(L)$; hence
      $2^{O(f(d))}=2^{\\Theta(\\ln X)}=\\mathrm{poly}(X)$.
-     Для grid $X=\\Theta(n)$ это даёт polynomial‑size при $d=\\Theta(\\ln n)=\\Theta(\\ln N)$.
-- `Toy‑тест:` при $d=\\ln X$ имеем $X^{2/d}=X^{2/\\ln X}=e^2$ и экспонента $\\asymp e^2\\ln X$; при $d=\\ln X/\\ln\\ln X$
-  имеем $X^{2/d}=(\\ln X)^2$ и экспонента $\\asymp (\\ln X)^3/\\ln\\ln X$.
-- `Статус:` доказано (объясняет, почему «59 vs $c$» из Q39 не закрывается через текущий GIRS‑upper).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` искать другой upper‑аргумент (не через “refinement‑parity” в стиле §16.115), который даёт polynomial‑size уже при глубине $O(\\log_2 n/\\log_2\\log_2 n)$, или явный барьер для такого улучшения в Frege без XOR‑гейтов.
+     For grid $X=\\Theta(n)$ this gives a polynomialsize with $d=\\Theta(\\ln n)=\\Theta(\\ln N)$.
+- `Toy test:` for $d=\\ln X$ we have $X^{2/d}=X^{2/\\ln X}=e^2$ and the exponent $\\asymp e^2\\ln X$; for $d=\\ln X/\\ln\\ln X$
+  we have $X^{2/d}=(\\ln X)^2$ and the exponent $\\asymp (\\ln X)^3/\\ln\\ln X$.
+- `Status:` proven (explains why "59 vs $c$" from Q39 does not close through the current GIRSupper).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` look for another upper-argument (not through "refinement-parity" in the style of Section 16.115), which gives a polynomial-size already at a depth of $O(\\log_2 n/\\log_2\\log_2 n)$, or an obvious barrier to such an improvement in Frege without XOR gates.
 
-### 16.121. Исследовательский шаг: оптимизация $f(d)=d\\,X^{2/d}$ (в рамках Claim 28) ⇒ сертификат polynomial‑size требует $d=\\Omega(\\ln X)$
+### 16.121. Research step: optimization $f(d)=d\\,X^{2/d}$ (within Claim 28)  polynomialsize certificate requires $d=\\Omega(\\ln X)$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение:` Пусть $X\\ge 2$ и $f(d):=d\\,X^{2/d}$ для $d>0$ (реальное).
-  Тогда:
-  1) (**Нижняя граница для сертификата polynomial‑size.**) Если $d=o(\\ln X)$, то $f(d)=\\omega(\\ln X)$, а значит из upper вида
-     $\\mathrm{poly}(|T|)\\cdot 2^{O(f(d))}$ нельзя вывести polynomial‑size.
-  2) (**Оптимальный выбор внутри этой оценки.**) $f$ минимальна при $d=2\\ln X$, и $\\min f(d)=2e\\ln X=\\Theta(\\ln X)$.
-     В частности, bound из Claim 28 действительно даёт polynomial‑size при глубине $d=\\Theta(\\ln X)$ (но не при $o(\\ln X)$).
-- `Доказательство:`
-  Запишем $X^{2/d}=e^{2\\ln X/d}$ и положим $t:=2\\ln X/d$ (так что $d=2\\ln X/t$). Тогда
+- `Lens:` Trade-off.
+- `Statement:` Let $X\\ge 2$ and $f(d):=d\\,X^{2/d}$ for $d>0$ (real).
+  Then:
+  1) (**Lower bound for a polynomialsize certificate.**) If $d=o(\\ln X)$, then $f(d)=\\omega(\\ln X)$, and therefore from the upper form
+     $\\mathrm{poly}(|T|)\\cdot 2^{O(f(d))}$ cannot be printed polynomialsize.
+  2) (**Optimal choice within this estimate.**) $f$ is minimal for $d=2\\ln X$, and $\\min f(d)=2e\\ln X=\\Theta(\\ln X)$.
+     In particular, bound from Claim 28 does give a polynomialsize at depth $d=\\Theta(\\ln X)$ (but not at $o(\\ln X)$).
+- `Proof:`
+  We write $X^{2/d}=e^{2\\ln X/d}$ and set $t:=2\\ln X/d$ (so $d=2\\ln X/t$). Then
   $$\\frac{f(d)}{\\ln X}=\\frac{2e^{t}}{t}.$$
-  1) Если $d=o(\\ln X)$, то $t=2\\ln X/d\\to\\infty$, а потому $e^{t}/t\\to\\infty$, то есть $f(d)/\\ln X\\to\\infty$ и $f(d)=\\omega(\\ln X)$.
-  2) Производная $f'(d)=e^{2\\ln X/d}\\cdot(1-2\\ln X/d)$, поэтому минимум достигается при $d=2\\ln X$ и равен
+  1) If $d=o(\\ln X)$, then $t=2\\ln X/d\\to\\infty$, and therefore $e^{t}/t\\to\\infty$, that is, $f(d)/\\ln X\\to\\infty$ and $f(d)=\\omega(\\ln X)$.
+  2) The derivative $f'(d)=e^{2\\ln X/d}\\cdot(1-2\\ln X/d)$, therefore the minimum is achieved at $d=2\\ln X$ and is equal to
      $f(2\\ln X)=2\\ln X\\cdot e=2e\\ln X$.
-- `Toy‑тест:` если $X=2^{64}$, то $\\ln X\\approx 44.36$ и оптимум при $d\\approx 88.7$, где $f(d)\\approx 2e\\ln X\\approx 241$ (экспонента $2^{O(241)}$ — полином от $X$).
-- `Статус:` доказано (локальный «барьер техники»: Claim‑28‑upper сам по себе не даёт polynomial‑size при $d=o(\\ln X)$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q39 искать upper‑источник/приём, где верхняя оценка имеет вид $2^{O(X^{c/d})}$ без дополнительного множителя $d$ в экспоненте (или объяснить, почему такой приём невозможен в Frege без XOR‑гейтов).
+- `Toy test:` if $X=2^{64}$, then $\\ln X\\approx 44.36$ and the optimum is at $d\\approx 88.7$, where $f(d)\\approx 2e\\ln X\\approx 241$ (the exponent $2^{O(241)}$ is a polynomial in $X$).
+- `Status:` proven (local "technique barrier": Claim28upper by itself does not give a polynomialsize for $d=o(\\ln X)$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` for Q39, look for an upper source/receiver, where the upper estimate is $2^{O(X^{c/d})}$ without the additional factor $d$ in the exponent (or explain why such a technique is not possible in Frege without XOR gates).
 
 
 -/

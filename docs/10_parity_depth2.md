@@ -1,50 +1,50 @@
-## 10. Полная нижняя оценка в глубине 2: PARITY
+## 10. Full lower estimate in depth 2: PARITY
 
-Определим $\mathrm{PARITY}_n(x_1,\dots,x_n)=x_1\oplus\cdots\oplus x_n$.
-Значение 1 тогда и только тогда, когда число единиц нечётно.
+Let us define $\mathrm{PARITY}_n(x_1,\dots,x_n)=x_1\oplus\cdots\oplus x_n$.
+The value is 1 if and only if the number of ones is odd.
 
-**Определение (терм).** Терм $T$ — конъюнкция литералов, в которой каждая
-переменная встречается не более одного раза: $T=\bigwedge_{i\in S} \ell_i$,
-где $\ell_i\in\{x_i,\neg x_i\}$.
-Множество входов, удовлетворяющих $T$, — подкуб, полученный фиксацией
-переменных из $S$.
+**Definition (term).** Term $T$ is a conjunction of literals in which each
+the variable occurs no more than once: $T=\bigwedge_{i\in S} \ell_i$,
+where $\ell_i\in\{x_i,\neg x_i\}$.
+The set of inputs satisfying $T$ is the subcube obtained by committing
+variables from $S$.
 
-**Лемма 10.1.** Если терм $T$ не фиксирует хотя бы одну переменную
-(то есть $S\ne\{1,\dots,n\}$), то на множестве входов, удовлетворяющих $T$,
-функция $\mathrm{PARITY}_n$ не является константой.
+**Lemma 10.1.** If the term $T$ does not fix at least one variable
+(that is, $S\ne\{1,\dots,n\}$), then on the set of inputs satisfying $T$,
+the function $\mathrm{PARITY}_n$ is not a constant.
 
-*Доказательство.* Пусть $j\notin S$ — свободная переменная.
-Возьмём любой вход $a$, удовлетворяющий $T$, и вход $a'$, полученный из $a$
-инверсией только $x_j$. Тогда $a'$ тоже удовлетворяет $T$,
-но $\mathrm{PARITY}_n(a')=1-\mathrm{PARITY}_n(a)$ (меняется ровно один бит).
-Значит, на $T^{-1}(1)$ значения паритета не константны. $\square$
+*Proof.* Let $j\notin S$ be a free variable.
+Take any input $a$ satisfying $T$ and the input $a'$ obtained from $a$
+inversion of only $x_j$. Then $a'$ also satisfies $T$,
+but $\mathrm{PARITY}_n(a')=1-\mathrm{PARITY}_n(a)$ (exactly one bit changes).
+This means that on $T^{-1}(1)$ the parity values are not constant. $\square$
 
-**Лемма 10.2.** Для $n\ge 1$ множество $\mathrm{PARITY}_n^{-1}(1)$ имеет размер $2^{n-1}$.
+**Lemma 10.2.** For $n\ge 1$, the set $\mathrm{PARITY}_n^{-1}(1)$ has size $2^{n-1}$.
 
-*Доказательство.* Отображение $\phi(x_1,\dots,x_n)=(1-x_1,x_2,\dots,x_n)$ —
-биекция на $\{0,1\}^n$, которая меняет паритет (переворачивает ровно один бит).
-Значит она взаимно-однозначно сопоставляет входы с паритетом 0 и 1;
-а всего входов $2^n$, следовательно, каждого вида ровно $2^{n-1}$. $\square$
+*Proof.* Mapping $\phi(x_1,\dots,x_n)=(1-x_1,x_2,\dots,x_n)$ --
+a bijection on $\{0,1\}^n$, which changes the parity (flips exactly one bit).
+This means it matches inputs with parity 0 and 1 one-to-one;
+and the total inputs are $2^n$, therefore, of each type exactly $2^{n-1}$. $\square$
 
-**Теорема 10.3.** Любая DNF‑формула, вычисляющая $\mathrm{PARITY}_n$, содержит
-как минимум $2^{n-1}$ термов. Аналогично, любая CNF‑формула для
-$\mathrm{PARITY}_n$ содержит как минимум $2^{n-1}$ клауз.
+**Theorem 10.3.** Any DNF formula that evaluates $\mathrm{PARITY}_n$ contains
+at least $2^{n-1}$ terms. Similarly, any CNF formula for
+$\mathrm{PARITY}_n$ contains at least $2^{n-1}$ clauses.
 
-*Доказательство (DNF).* Пусть $F=\bigvee_{r=1}^m T_r$ — DNF, вычисляющая
-$\mathrm{PARITY}_n$. Для любого $r$ множество $T_r^{-1}(1)$ должно лежать внутри
-$\mathrm{PARITY}_n^{-1}(1)$, иначе существовал бы вход, где $T_r=1$ но паритет 0,
-и тогда $F$ ошибается.
+*Proof (DNF).* Let $F=\bigvee_{r=1}^m T_r$ be a DNF computing
+$\mathrm{PARITY}_n$. For any $r$ the set $T_r^{-1}(1)$ must lie inside
+$\mathrm{PARITY}_n^{-1}(1)$, otherwise there would be an input where $T_r=1$ but parity 0,
+and then $F$ is wrong.
 
-По Лемме 10.1 это возможно лишь если каждый $T_r$ фиксирует все переменные,
-то есть $T_r^{-1}(1)$ состоит ровно из одного входа (минтерм).
+By Lemma 10.1, this is only possible if each $T_r$ fixes all variables,
+that is, $T_r^{-1}(1)$ consists of exactly one input (minterm).
 
-Значит каждый терм покрывает не более одного входа из $\mathrm{PARITY}_n^{-1}(1)$.
-По Лемме 10.2 таких входов $2^{n-1}$, следовательно $m\ge 2^{n-1}$.
+This means that each term covers at most one input from $\mathrm{PARITY}_n^{-1}(1)$.
+By Lemma 10.2 there are $2^{n-1}$ such inputs, hence $m\ge 2^{n-1}$.
 
-*Доказательство (CNF).* Если $G$ — CNF для $\mathrm{PARITY}_n$, то $\neg G$ —
-DNF для $\neg\mathrm{PARITY}_n$ (проталкиваем отрицания и применяем де Моргана).
-Поскольку $\neg\mathrm{PARITY}_n$ также имеет ровно $2^{n-1}$ единиц, применяем
-DNF‑часть к $\neg\mathrm{PARITY}_n$ и получаем, что $\neg G$ имеет $\ge 2^{n-1}$
-термов, а значит $G$ имеет $\ge 2^{n-1}$ клауз.
+*Proof (CNF).* If $G$ is a CNF for $\mathrm{PARITY}_n$, then $\neg G$ is
+DNF for $\neg\mathrm{PARITY}_n$ (pushing negations and applying de Morgan).
+Since $\neg\mathrm{PARITY}_n$ also has exactly $2^{n-1}$ units, we use
+DNF part to $\neg\mathrm{PARITY}_n$ and we get that $\neg G$ has $\ge 2^{n-1}$
+terms, which means $G$ has $\ge 2^{n-1}$ clauses.
 
 $\square$

@@ -1,54 +1,54 @@
-## 16. IP = PSPACE и PCP (цитируется)
+## 16. IP = PSPACE and PCP (quoted)
 
-Эти теоремы не доказывают $\mathrm{P}\neq\mathrm{NP}$, но важны как:
-- флагманские примеры **нерелятивизирующих** методов (через аритметизацию),
-- источник центральных следствий (например, hardness of approximation).
+These theorems do not prove $\mathrm{P}\neq\mathrm{NP}$, but are important as:
+- flagship examples of **non-relativizing** methods (through arrhythmetization),
+- source of central consequences (for example, hardness of approximation).
 
 ### 16.1. Interactive proofs: IP
 
-**Определение.** Язык $L$ принадлежит $\mathrm{IP}$, если существует
-вероятностный полиномиальный верификатор $V$ и интерактивный протокол
-с доказывающим $P$ (неограниченным), такой что:
-- *(Полнота)* если $x\in L$, то существует стратегия $P$, при которой $V$ принимает с вероятностью $\ge 2/3$;
-- *(Звуковость)* если $x\notin L$, то для любой стратегии $P$ верификатор принимает с вероятностью $\le 1/3$.
+**Definition.** A language $L$ belongs to $\mathrm{IP}$ if it exists
+probabilistic polynomial verifier $V$ and interactive protocol
+with proving $P$ (unbounded) such that:
+- *(Completeness)* if $x\in L$, then there is a strategy $P$ under which $V$ accepts with probability $\ge 2/3$;
+- *(Soundness)* if $x\notin L$, then for any strategy $P$ the verifier accepts with probability $\le 1/3$.
 
-**Лемма 16.1 (легкая сторона).** $\mathrm{IP}\subseteq\mathrm{PSPACE}$.
+**Lemma 16.1 (easy side).** $\mathrm{IP}\subseteq\mathrm{PSPACE}$.
 
-*Доказательство.* Рассмотрим дерево всех возможных транскриптов протокола
-(число раундов и длины сообщений полиномиальны).
-Листы помечены 0/1 (reject/accept).
-В узлах верификатора берём среднее по его случайным битам,
-в узлах доказывающего — максимум по сообщению.
-Значение корня равно оптимальной вероятности принятия.
-Это значение вычисляется обходом в глубину, храня только текущий транскрипт
-и счётчики; память $\mathrm{poly}(|x|)$ (время может быть экспоненциальным).
+*Proof.* Consider the tree of all possible protocol transcripts
+(the number of rounds and message lengths are polynomial).
+The sheets are marked 0/1 (reject/accept).
+At the verifier nodes we take the average of its random bits,
+in the nodes of the prover - maximum according to the message.
+The value of the root is equal to the optimal probability of acceptance.
+This value is calculated by depth-first traversal, storing only the current transcript
+and counters; memory $\mathrm{poly}(|x|)$ (time can be exponential).
 $\square$
 
-**Теорема (Shamir, 1992; цитируется).** $\mathrm{PSPACE}\subseteq\mathrm{IP}$, поэтому $\mathrm{IP}=\mathrm{PSPACE}$.
+**Theorem (Shamir, 1992; cited).** $\mathrm{PSPACE}\subseteq\mathrm{IP}$, so $\mathrm{IP}=\mathrm{PSPACE}$.
 
 ### 16.2. Probabilistically Checkable Proofs: PCP
 
-**Определение.** Класс $\mathrm{PCP}(r(n),q(n))$ состоит из языков, для которых
-существует вероятностный полиномиальный верификатор, который использует
-$r(n)$ случайных бит и запрашивает $q(n)$ битов «доказательства» (oracle access),
-с полнотой/звуковостью как выше.
+**Definition.** The class $\mathrm{PCP}(r(n),q(n))$ consists of languages for which
+there is a probabilistic polynomial verifier that uses
+$r(n)$ random bits and requests $q(n)$ "evidence" bits (oracle access),
+with fullness/sonority as above.
 
-**Лемма 16.2 (легкая сторона).** $\mathrm{PCP}(O(\log_2 n), O(1))\subseteq\mathrm{NP}$.
+**Lemma 16.2 (easy side).** $\mathrm{PCP}(O(\log_2 n), O(1))\subseteq\mathrm{NP}$.
 
-*Доказательство.* Пусть $L\in\mathrm{PCP}(r(n),q(n))$ при $r(n)=O(\log_2 n)$
-и $q(n)=O(1)$. NP‑верификатор угадывает строку доказательства $\pi$
-(полиномиальной длины) и перебирает все $2^{r(|x|)}=\mathrm{poly}(|x|)$
-случайные строки, симулируя верификатор $V$ с oracle‑доступом к $\pi$.
-Принимаем, если доля принятий $\ge 2/3$. $\square$
+*Proof.* Let $L\in\mathrm{PCP}(r(n),q(n))$ for $r(n)=O(\log_2 n)$
+and $q(n)=O(1)$. The NP verifier guesses the proof string $\pi$
+(polynomial length) and iterates over all $2^{r(|x|)}=\mathrm{poly}(|x|)$
+random strings, simulating a verifier $V$ with oracle access to $\pi$.
+We accept if the acceptance rate is $\ge 2/3$. $\square$
 
-**Теорема (PCP, Arora–Safra; ALMSS; Dinur; цитируется).**
-\mathrm{NP}\subseteq\mathrm{PCP}(O(\log_2 n), O(1)), поэтому \mathrm{NP}=\mathrm{PCP}(O(\log_2 n), O(1)).
+**Theorem (PCP, Arora-Safra; ALMSS; Dinur; cited).**
+\mathrm{NP}\subseteq\mathrm{PCP}(O(\log_2 n), O(1)), so \mathrm{NP}=\mathrm{PCP}(O(\log_2 n), O(1)).
 
-**Типовое следствие (формулировка‑шаблон).** Существует константа
-$\varepsilon>0$, такая что задача отличить выполнимые 3CNF
-от формул, у которых нельзя удовлетворить более чем $(1-\varepsilon)$ долю клауз,
-NP‑трудна.
+**Typical consequence (template formulation).** There is a constant
+$\varepsilon>0$, such that the task is to distinguish feasible 3CNFs
+from formulas for which it is impossible to satisfy more than $(1-\varepsilon)$ fraction of clauses,
+NP-hard.
 
-### 16.3–16.36. Исследовательские шаги (вынесены)
+### 16.3-16.36. Research steps (outlined)
 
-[Открыть файл](research/16_complexity.md)
+[Open file](research/16_complexity.md)

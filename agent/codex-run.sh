@@ -4,9 +4,9 @@ set -euo pipefail
 usage() {
   cat <<'EOF'
 Usage:
-  ./codex-run.sh "Сделай X"
+  ./codex-run.sh "Do X"
   ./codex-run.sh --file prompt.txt
-  echo "Сделай X" | ./codex-run.sh
+  echo "Do X" | ./codex-run.sh
 
 Options:
   -f, --file FILE              Read prompt from file

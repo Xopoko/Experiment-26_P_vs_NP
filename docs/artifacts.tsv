@@ -59,7 +59,32 @@ Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criteri
 Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bridge	Counterexample	formal/WIP/Work.lean	PENDING	ratio drops at n=5792->5793 inside gap [5*2^(k-2), 3*2^(k-1)) for k=12
 Q39.S118-globalfixedpair-fixedorientation-contiguous-shift-alt31	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt31-shift still give rank 2
 Q39.S120-globalfixedpair-fixedorientation-contiguous-shift-alt33	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt33-shift still give rank 2
+Q39.S121-globalfixedpair-fixedorientation-contiguous-shift-alt34	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt34-shift still give rank 2
+Q39.S122-globalfixedpair-fixedorientation-contiguous-shift-alt35	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt35-shift still give rank 2
+Q39.S123-globalfixedpair-fixedorientation-contiguous-shift-alt36	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt36-shift still give rank 2
+Q39.S124-globalfixedpair-fixedorientation-contiguous-shift-alt37	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt37-shift still give rank 2
+Q39.S125-globalfixedpair-fixedorientation-contiguous-shift-alt38	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt38-shift still give rank 2
+Q39.S126-globalfixedpair-fixedorientation-contiguous-shift-alt39	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt39-shift still give rank 2
+Q39.S127-globalfixedpair-fixedorientation-contiguous-shift-alt40	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt40-shift still give rank 2
+Q39.S128-globalfixedpair-fixedorientation-contiguous-shift-alt41	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt41-shift still give rank 2
+Q39.S129-globalfixedpair-fixedorientation-contiguous-shift-alt42	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt42-shift still give rank 2
+Q39.S130-globalfixedpair-fixedorientation-contiguous-shift-alt43	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt43-shift still give rank 2
+Q39.S131-globalfixedpair-fixedorientation-contiguous-shift-alt44	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt44-shift still give rank 2
+Q39.S132-globalfixedpair-fixedorientation-contiguous-shift-alt45	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt45-shift still give rank 2
+Q39.S133-globalfixedpair-fixedorientation-contiguous-shift-alt46	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt46-shift still give rank 2
 Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-alternative	Toy	formal/WIP/Work.lean	PENDING	gap endpoint check: ratio at 5*2^(k-2) <= ratio at 3*2^(k-1) for k=12
+Q43.S251-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bound	Toy	formal/WIP/Work.lean	PENDING	gap scan k=12: lower bound across [5*2^(k-2), 3*2^(k-1)) via n=5793
+Q43.S252-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bound-generalize	Toy	formal/WIP/Work.lean	PENDING	parameterized gap scan instantiated at k=12
+Q43.S253-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k13	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=13: n=11585->11586
+Q43.S254-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k14	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=14: n=23170->23171
+Q43.S255-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k15	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=15: n=46340->46341
+Q43.S256-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k16	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=16: n=92681->92682
+Q43.S257-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k17	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=17: n=185363->185364
+Q43.S258-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k18	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=18: n=370727->370728
+Q43.S259-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k19	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=19: n=741455->741456
+Q43.S260-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k20	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=20: n=1482910->1482911
+Q43.S261-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k21	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=21: n=2965820->2965821
+Q43.S262-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k22	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=22: n=5931641->5931642
 Q39.S98-globalfixedpair-fixedorientation-contiguous-shift-alt11	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt11-shift still give rank 2
 Q39.S99-globalfixedpair-fixedorientation-contiguous-shift-alt12	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt12-shift still give rank 2
 Q39.S100-globalfixedpair-fixedorientation-contiguous-shift-alt13	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt13-shift still give rank 2

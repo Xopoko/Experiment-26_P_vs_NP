@@ -1,599 +1,599 @@
-## 15. Proof complexity: резолюция и PHP
+## 15. Proof complexity: resolution and PHP
 
-В proof complexity изучают **длины доказательств**.
-Сильные нижние оценки возможны в слабых системах, но перенос на сильные
-связан с $\mathrm{NP}$ vs $\mathrm{coNP}$.
+In proof complexity, **lengths of proofs** are studied.
+Strong lower bounds are possible in weak systems, but transfer to strong ones
+associated with $\mathrm{NP}$ vs $\mathrm{coNP}$.
 
-**Определение (proof system, Cook–Reckhow; грубо).** Для языка $L\subseteq\Sigma^\*$ это полиномиальный верификатор $V(x,\pi)$, где:
-- *(звук)* $V(x,\pi)=1 \Rightarrow x\in L$;
-- *(полнота)* $x\in L \Rightarrow \exists \pi,\ |\pi|\le \mathrm{poly}(|x|):\ V(x,\pi)=1$.
+**Definition (proof system, Cook-Reckhow; roughly).** For the $L\subseteq\Sigma^\*$ language this is a polynomial verifier $V(x,\pi)$, where:
+- *(sound)* $V(x,\pi)=1 \Rightarrow x\in L$;
+- *(completeness)* $x\in L \Rightarrow \exists \pi,\ |\pi|\le \mathrm{poly}(|x|):\ V(x,\pi)=1$.
 
-**Лемма 15.1 (Cook–Reckhow, 1979).** $\mathrm{NP}=\mathrm{coNP}$ тогда
-и только тогда, когда существует полиномиально ограниченная proof system
-для $\mathrm{TAUT}$.
+**Lemma 15.1 (Cook-Reckhow, 1979).** $\mathrm{NP}=\mathrm{coNP}$ then
+and only if there is a polynomially bounded proof system
+for $\mathrm{TAUT}$.
 
-*Доказательство.* Если $\mathrm{TAUT}$ имеет p‑bounded proof system,
-то $\mathrm{TAUT}\in\mathrm{NP}$ и $\mathrm{coNP}\subseteq\mathrm{NP}$,
-значит $\mathrm{NP}=\mathrm{coNP}$.
-Обратно, если $\mathrm{NP}=\mathrm{coNP}$, то $\mathrm{TAUT}\in\mathrm{NP}$ и есть p‑bounded proof system. $\square$
+*Proof.* If $\mathrm{TAUT}$ has a pbounded proof system,
+then $\mathrm{TAUT}\in\mathrm{NP}$ and $\mathrm{coNP}\subseteq\mathrm{NP}$,
+means $\mathrm{NP}=\mathrm{coNP}$.
+Conversely, if $\mathrm{NP}=\mathrm{coNP}$, then $\mathrm{TAUT}\in\mathrm{NP}$ is a pbounded proof system. $\square$
 
-**Следствие (переформулировка).** Существование p‑bounded proof system
-для $\mathrm{TAUT}$ $\Rightarrow$ $\mathrm{NP}=\mathrm{coNP}$ (по Лемме 15.1).
+**Corollary (reformulation).** Existence of a pbounded proof system
+for $\mathrm{TAUT}$ $\Rightarrow$ $\mathrm{NP}=\mathrm{coNP}$ (by Lemma 15.1).
 
-**Резолюция (Resolution).** Работаем с CNF. Правило: из $(A\lor x)$
-и $(B\lor\neg x)$ выводим $(A\lor B)$.
-*Рефутация* $F$ — вывод пустой клаузы из клауз $F$.
+**Resolution.** We work with CNF. Rule: from $(A\lor x)$
+and $(B\lor\neg x)$ we output $(A\lor B)$.
+*Refutation* $F$ - derivation of an empty clause from clauses $F$.
 
-**CNF‑формулировка принципа Дирихле (PHP):** Пусть переменная $x_{i,j}$
-означает «голубь $i$ сидит в норке $j$». CNF $\mathrm{PHP}^{n}_{m}$ состоит из:
-- *(птица где‑то сидит)* $\forall i$: $x_{i,1}\lor\cdots\lor x_{i,n}$;
-- *(не вместе)* $\forall j,\ i\ne i'$: $(\neg x_{i,j}\lor\neg x_{i',j})$; при $m=n+1$ формула невыполнима.
+**CNF formulation of the Dirichlet principle (PHP):** Let the variable $x_{i,j}$
+means "pigeon $i$ is sitting in hole $j$." CNF $\mathrm{PHP}^{n}_{m}$ consists of:
+- *(the bird is sitting somewhere)* $\forall i$: $x_{i,1}\lor\cdots\lor x_{i,n}$;
+- *(not together)* $\forall j,\ i\ne i'$: $(\neg x_{i,j}\lor\neg x_{i',j})$; for $m=n+1$ the formula is impossible.
 
-**Теорема 15.2 (Haken, 1985).** Существует константа $c>1$ такая, что любая
-резолюционная рефутация $\mathrm{PHP}^{n}_{n+1}$ имеет размер $\ge c^n$
-(то есть $2^{\Omega(n)}$).
+**Theorem 15.2 (Haken, 1985).** There is a constant $c>1$ such that any
+resolution refutation $\mathrm{PHP}^{n}_{n+1}$ has size $\ge c^n$
+(that is, $2^{\Omega(n)}$).
 
-*Комментарий.* Полное доказательство по схеме «критические присваивания → положительная версия → ограничения» (TSS).
-См. `../resources/downloads/tss_proof_complexity_notes.pdf`, Thm 2 (Hak85), Sec. 3.
+*Comment.* Complete proof using the "critical assignments -> positive version -> constraints" (TSS) scheme.
+See `../resources/downloads/tss_proof_complexity_notes.pdf`, Thm 2 (Hak85), Sec. 3.
 
-Современная «упаковка» таких результатов: связь размера с *шириной*
-(Ben‑Sasson–Wigderson, 2001). Она особенно полезна для 3‑CNF
-(где начальная ширина константна).
+Modern "packaging" of such results: the connection between size and *width*
+(Ben-Sasson-Wigderson, 2001). It is especially useful for 3CNF
+(where the initial width is constant).
 
-**Определение (ширина резолюции).** Ширина вывода — максимум числа литералов в клаузе, встретившейся в резолюционном выводе.
+**Definition (resolution width).** Output width is the maximum number of literals in a clause found in the resolution output.
 
-**Теорема 15.3 (Ben‑Sasson–Wigderson, 2001).** Пусть $F$ — CNF на $N$ переменных,
-$w_0$ — максимальная ширина исходных клауз, $W$ — минимальная ширина
-резолюционной рефутации.
-Тогда размер любой рефутации $\ge 2^{\Omega((W-w_0)^2/N)}$.
+**Theorem 15.3 (BenSasson-Wigderson, 2001).** Let $F$ be a CNF on $N$ variables,
+$w_0$ is the maximum width of the original clauses, $W$ is the minimum width
+resolution refutation.
+Then the size of any refutation is $\ge 2^{\Omega((W-w_0)^2/N)}$.
 
-**Замечание.** Size–width требует малой $w_0$ и контроля числа переменных; см. Ben‑Sasson–Wigderson, Sec. 4, и TSS/de Wolf.
+**Note.** Size-width requires small $w_0$ and control of the number of variables; see Ben-Sasson-Wigderson, Sec. 4, and TSS/de Wolf.
 
-### 15.4. Критические присваивания и «положительная версия» (полное доказательство)
+### 15.4. Critical assignments and the "positive version" (complete proof)
 
-Дальше полезно фиксировать подмножество присваиваний, на которых отрицания можно заменить «положительными» дизъюнкциями.
+Next, it is useful to fix a subset of assignments in which negations can be replaced by "positive" disjunctions.
 
-**Определение (критическое присваивание).** Для $\mathrm{PHP}^{n}_{n+1}$
-присваивание $\alpha$ *критическое*, если существует индекс
-$i_0\in\{1,\dots,n+1\}$ такой, что:
-- для каждого $j\in\{1,\dots,n\}$ существует **ровно один** $i\ne i_0$ с $x_{i,j}(\alpha)=1$ (каждая норка занята ровно одним голубем);
-- для каждого $i\ne i_0$ существует **ровно один** $j$ с $x_{i,j}(\alpha)=1$ (каждый из остальных голубей сидит ровно в одной норке);
-- для $i=i_0$ верно $x_{i_0,j}(\alpha)=0$ для всех $j$ (один «лишний» голубь не сидит нигде).
+**Definition (critical assignment).** For $\mathrm{PHP}^{n}_{n+1}$
+assignment $\alpha$ *critical* if index exists
+$i_0\in\{1,\dots,n+1\}$ such that:
+- for each $j\in\{1,\dots,n\}$ there is **exactly one** $i\ne i_0$ with $x_{i,j}(\alpha)=1$ (each hole is occupied by exactly one pigeon);
+- for each $i\ne i_0$ there is **exactly one** $j$ with $x_{i,j}(\alpha)=1$ (each of the other pigeons sits in exactly one hole);
+- for $i=i_0$, $x_{i_0,j}(\alpha)=0$ is true for all $j$ (one "extra" pigeon does not sit anywhere).
 
-**Определение (положительная замена отрицания).** Определим
+**Definition (positive replacement of negation).** Define
 $$X_{i,j}:=\bigvee_{i'\ne i} x_{i',j}.$$
-Для клаузы $C$ над $x_{i,j},\neg x_{i,j}$ определим $C^+$ как замену
-каждого $\neg x_{i,j}$ на $X_{i,j}$ с раскрытием; $C^+$ — положительная клауза.
+For a clause $C$ over $x_{i,j},\neg x_{i,j}$ we define $C^+$ as a replacement
+each $\neg x_{i,j}$ on $X_{i,j}$ with opening; $C^+$ is a positive clause.
 
-**Лемма 15.4.** Для любого критического $\alpha$ и любой клаузы $C$ верно $C(\alpha)=C^+(\alpha)$.
+**Lemma 15.4.** For any critical $\alpha$ and any clause $C$, $C(\alpha)=C^+(\alpha)$ is true.
 
-*Доказательство.* На критическом $\alpha$ в каждом столбце $j$ стоит ровно одна единица. Поэтому для любых $i,j$:
+*Proof.* At critical $\alpha$, each column of $j$ contains exactly one unit. Therefore, for any $i,j$:
 
-- если $x_{i,j}(\alpha)=1$, то все $x_{i',j}(\alpha)=0$ при $i'\ne i$, значит $X_{i,j}(\alpha)=0$ и также $(\neg x_{i,j})(\alpha)=0$;
-- если $x_{i,j}(\alpha)=0$, то единица в столбце $j$ стоит
-  в некоторой строке $i'\ne i$, значит $X_{i,j}(\alpha)=1$
-  и также $(\neg x_{i,j})(\alpha)=1$.
+- if $x_{i,j}(\alpha)=1$, then all $x_{i',j}(\alpha)=0$ for $i'\ne i$, which means $X_{i,j}(\alpha)=0$ and also $(\neg x_{i,j})(\alpha)=0$;
+- if $x_{i,j}(\alpha)=0$, then the unit in the column $j$ is
+  in some line $i'\ne i$, then $X_{i,j}(\alpha)=1$
+  and also $(\neg x_{i,j})(\alpha)=1$.
 
-Итак, на критических присваиваниях $\neg x_{i,j}$ эквивалентно $X_{i,j}$,
-а значит и любая клауза сохраняет значение при такой замене. $\square$
+So, on critical assignments $\neg x_{i,j}$ is equivalent to $X_{i,j}$,
+which means that any clause retains its meaning with such a replacement. $\square$
 
-(Код‑проверка Леммы 15.4 на малых $n$ — в следующей ячейке.)
+(The code for checking Lemma 15.4 for small $n$ is in the next cell.)
 
-### 15.5. «Широкая клауза» в положительной версии (полное доказательство)
+### 15.5. "Broad clause" in the positive version (full proof)
 
-Зафиксируем $\mathrm{PHP}^{n}_{n+1}$ и критические присваивания из раздел 15.4.
+Let's fix $\mathrm{PHP}^{n}_{n+1}$ and critical assignments from section 15.4.
 
-**Определение.** $\mathrm{Pigeon}(C)$ — индексы $i$, для которых существует
-$i$‑критическое $\alpha$ с $C(\alpha)=0$; $\mu(C):=|\mathrm{Pigeon}(C)|$.
+**Definition.** $\mathrm{Pigeon}(C)$ are the indices $i$ for which there is
+$i$-critical $\alpha$ with $C(\alpha)=0$; $\mu(C):=|\mathrm{Pigeon}(C)|$.
 
-**Лемма 15.5 (wide clause).** Для любой резолюционной рефутации $\mathrm{PHP}^{n}_{n+1}$ существует клауза $C$ из вывода такая, что
+**Lemma 15.5 (wide clause).** For any resolution refutation $\mathrm{PHP}^{n}_{n+1}$ there is a clause $C$ from the derivation such that
 $$\mathrm{width}(C^+)\ \ge\ \frac{2(n+1)^2}{9}\ =\ \Omega(n^2).$$
 
-*Доказательство.*
+*Proof.*
 
-1) Для каждого $i$ клауза $P_i:=(x_{i,1}\lor\cdots\lor x_{i,n})$ имеет $\mu(P_i)=1$: она ложна ровно на $i$‑критических.
+1) For each $i$, the clause $P_i:=(x_{i,1}\lor\cdots\lor x_{i,n})$ has $\mu(P_i)=1$: it is false exactly at $i$-critical ones.
 
-2) Для пустой клаузы $\emptyset$ имеем $\mu(\emptyset)=n+1$, так как $\emptyset(\alpha)=0$ на любом присваивании.
+2) For an empty clause $\emptyset$ we have $\mu(\emptyset)=n+1$, since $\emptyset(\alpha)=0$ on any assignment.
 
-3) Если $C$ — резольвента $A,B$, то $\mu(C)\le\mu(A)+\mu(B)$:
-на критическом $\alpha$ с $C(\alpha)=0$ ложна $A$ или $B$,
-значит индекс учтён в $\mathrm{Pigeon}(A)$ или $\mathrm{Pigeon}(B)$.
+3) If $C$ is the resolvent of $A,B$, then $\mu(C)\le\mu(A)+\mu(B)$:
+at critical $\alpha$ with $C(\alpha)=0$ $A$ or $B$ is false,
+this means the index is taken into account in $\mathrm{Pigeon}(A)$ or $\mathrm{Pigeon}(B)$.
 
-Возьмём первую в выводе клаузу $C$ с $\mu(C)>(n+1)/3$.
-Она существует, так как $\mu(P_i)=1$ и $\mu(\emptyset)=n+1$.
-По (3) такая $C$ удовлетворяет $\mu(C)\le 2(n+1)/3$.
+Let's take the first clause $C$ in the derivation with $\mu(C)>(n+1)/3$.
+It exists since $\mu(P_i)=1$ and $\mu(\emptyset)=n+1$.
+By (3) such a $C$ satisfies $\mu(C)\le 2(n+1)/3$.
 
-Положим $s:=\mu(C)$, так что $(n+1)/3 < s\le 2(n+1)/3$.
+Let us set $s:=\mu(C)$, so that $(n+1)/3 < s\le 2(n+1)/3$.
 
-Теперь покажем, что $\mathrm{width}(C^+)\ge s((n+1)-s)$. Возьмём $i\in\mathrm{Pigeon}(C)$ и $i$‑критическое $\alpha$ с $C(\alpha)=0$.
-Для любого $j\notin\mathrm{Pigeon}(C)$ строим $j$‑критическое $\alpha'$ перестановкой строк $i$ и $j$ (голубь $i$ садится в норку $j$).
+Now we will show that $\mathrm{width}(C^+)\ge s((n+1)-s)$. Let us take $i\in\mathrm{Pigeon}(C)$ and $i$-critical $\alpha$ with $C(\alpha)=0$.
+For any $j\notin\mathrm{Pigeon}(C)$ we construct a $j$-critical $\alpha'$ by permuting the strings $i$ and $j$ (the pigeon $i$ lands in the hole $j$).
 
-Так как $j\notin\mathrm{Pigeon}(C)$, имеем $C(\alpha')=1$. По Лемме 15.4 получаем $C^+(\alpha)=0$ и $C^+(\alpha')=1$.
+Since $j\notin\mathrm{Pigeon}(C)$, we have $C(\alpha')=1$. By Lemma 15.4 we obtain $C^+(\alpha)=0$ and $C^+(\alpha')=1$.
 
-Клауза $C^+$ положительна. Переход $\alpha\to\alpha'$ меняет единственный $x_{i,k}$ (норка $j$), значит $x_{i,k}$ входит в $C^+$.
+The clause $C^+$ is positive. The transition $\alpha\to\alpha'$ changes the only $x_{i,k}$ (hole $j$), which means $x_{i,k}$ is included in $C^+$.
 
-Для фиксированного $i$ разные $j$ дают разные $k$, значит из строки $i$ получаем $\ge(n+1)-s$ литералов в $C^+$.
-Суммируя по всем $i\in\mathrm{Pigeon}(C)$, имеем $\mathrm{width}(C^+)\ge s((n+1)-s)$.
+For a fixed $i$, different $j$ give different $k$, which means that from the string $i$ we get $\ge(n+1)-s$ literals in $C^+$.
+Summing over all $i\in\mathrm{Pigeon}(C)$, we have $\mathrm{width}(C^+)\ge s((n+1)-s)$.
 
-Так как функция $s((n+1)-s)$ на интервале $(n+1)/3 < s\le 2(n+1)/3$ минимальна на концах, имеем $s((n+1)-s)\ge 2(n+1)^2/9$. $\square$
+Since the function $s((n+1)-s)$ on the interval $(n+1)/3 < s\le 2(n+1)/3$ is minimal at the ends, we have $s((n+1)-s)\ge 2(n+1)^2/9$. $\square$
 
-### 15.6. Ограничения $\Rightarrow$ экспонента (полное доказательство)
+### 15.6. Constraints on $\Rightarrow$ exponent (full proof)
 
-Пусть $R$ — резолюционная рефутация $\mathrm{PHP}^{n}_{n+1}$.
-Положим $m:=n+1$ (число голубей) и $N:=n(n+1)=m(m-1)$
-(число переменных $x_{i,j}$).
+Let $R$ be the resolution refutation of $\mathrm{PHP}^{n}_{n+1}$.
+Let's put $m:=n+1$ (number of pigeons) and $N:=n(n+1)=m(m-1)$
+(number of variables $x_{i,j}$).
 
-Зафиксируем $\varepsilon\in(0,1)$ и назовём клаузу $C\in R$
-*$\varepsilon$‑широкой*, если $\mathrm{width}(C^+)\ge \varepsilon N$.
-Пусть $S$ — число таких клауз.
+Let us fix $\varepsilon\in(0,1)$ and call the clause $C\in R$
+*$\varepsilon$wide* if $\mathrm{width}(C^+)\ge \varepsilon N$.
+Let $S$ be the number of such clauses.
 
-**Лемма 15.6.1.** Существует переменная $x_{i,j}$, которая входит
-хотя бы в $\varepsilon S$ $\varepsilon$‑широких клауз
-(в их положительных версиях).
+**Lemma 15.6.1.** There is a variable $x_{i,j}$, which is included
+at least in $\varepsilon S$ $\varepsilon$broad clauses
+(in their positive versions).
 
-*Доказательство.* Каждая $\varepsilon$‑широкая клауза содержит
-$\ge \varepsilon N$ литералов, значит всего $\ge \varepsilon N\cdot S$ вхождений.
-По Дирихле найдётся переменная, входящая хотя бы в
-$(\varepsilon N\cdot S)/N=\varepsilon S$ таких клауз. $\square$
-По Дирихле найдётся переменная, входящая хотя бы в $(\varepsilon N\cdot S)/N=\varepsilon S$ таких клауз. $\square$
+*Proof.* Every $\varepsilon$broad clause contains
+$\ge \varepsilon N$ literals, meaning a total of $\ge \varepsilon N\cdot S$ occurrences.
+According to Dirichlet, there is a variable included in at least
+$(\varepsilon N\cdot S)/N=\varepsilon S$ of such clauses. $\square$
+According to Dirichlet, there is a variable included in at least $(\varepsilon N\cdot S)/N=\varepsilon S$ of such clauses. $\square$
 
-Выберем такую переменную $x_{i,j}$ и рассмотрим ограничение $\rho$,
-которое «сажает» голубя $i$ в норку $j$:
+Let us choose such a variable $x_{i,j}$ and consider the constraint $\rho$,
+which "puts" pigeon $i$ into hole $j$:
 $$x_{i,j}=1,\quad x_{i',j}=0\ (i'\ne i),\quad x_{i,j'}=0\ (j'\ne j).$$
-После этого ограничения исходная CNF естественно превращается
-в $\mathrm{PHP}^{n-1}_{n}$ (убираем строку $i$ и столбец $j$).
+After this limitation, the original CNF naturally turns
+in $\mathrm{PHP}^{n-1}_{n}$ (remove row $i$ and column $j$).
 
-**Лемма 15.6.2.** Если применить $\rho$ ко всем клаузам вывода $R$
-(удаляя истинные клаузы и ложные литералы), получится рефутация
+**Lemma 15.6.2.** If we apply $\rho$ to all clauses of the derivation of $R$
+(removing true clauses and false literals), we get a refutation
 $\mathrm{PHP}^{n-1}_{n}$.
 
-*Доказательство.* Ограничение — это подстановка и упрощение.
-Резолюция замкнута: если $C$ — резольвента $A,B$, то
-$C\upharpoonright\rho$ — резольвента $A\upharpoonright\rho,B\upharpoonright\rho$
-или следует тривиально.
-Пустая клауза сохраняется, значит образ — корректный вывод. $\square$
+*Proof.* A constraint is a substitution and a simplification.
+The resolution is closed: if $C$ is the resolvent of $A,B$, then
+$C\upharpoonright\rho$ is the resolvent of $A\upharpoonright\rho,B\upharpoonright\rho$
+or should be trivial.
+An empty clause is preserved, which means the image is a correct conclusion. $\square$
 
-**Лемма 15.6.3.** После применения $\rho$ число $\varepsilon$‑широких клауз в $R$ уменьшается как минимум в $(1-\varepsilon)$ раз.
+**Lemma 15.6.3.** After applying $\rho$, the number of $\varepsilon$-wide clauses in $R$ decreases by at least $(1-\varepsilon)$ times.
 
-*Доказательство.* Все $\varepsilon S$ широких клауз с $x_{i,j}$
-становятся истинными и исчезают. Остальные лишь теряют литералы,
-новые $\varepsilon$‑широкие не появляются. $\square$
+*Proof.* All $\varepsilon S$ wide clauses with $x_{i,j}$
+become true and disappear. The rest just lose literals,
+new $\varepsilon$wide ones do not appear. $\square$
 
-После одного шага: рефутация $\mathrm{PHP}^{n-1}_{n}$, число широких клауз
+After one step: refutation $\mathrm{PHP}^{n-1}_{n}$, number of wide clauses
 $\le (1-\varepsilon)S$.
-После $k$ шагов: рефутация $\mathrm{PHP}^{n-k}_{n+1-k}$,
-число широких клауз $\le S(1-\varepsilon)^k$.
+After $k$ steps: refutation $\mathrm{PHP}^{n-k}_{n+1-k}$,
+number of wide clauses $\le S(1-\varepsilon)^k$.
 
-Выберем $k:=\left\lceil\frac{\ln S}{\varepsilon}\right\rceil+1$.
-Так как $1-\varepsilon\le e^{-\varepsilon}$,
+Let's choose $k:=\left\lceil\frac{\ln S}{\varepsilon}\right\rceil+1$.
+Since $1-\varepsilon\le e^{-\varepsilon}$,
 $$S(1-\varepsilon)^k\le S e^{-\varepsilon k}<1.$$ 
-Значит после $k$ шагов нет $\varepsilon$‑широких клауз: для любой $D$
-получаем $\mathrm{width}(D^+)<\varepsilon N\le \varepsilon m^2$.
+This means that after $k$ steps there are no $\varepsilon$wide clauses: for any $D$
+we get $\mathrm{width}(D^+)<\varepsilon N\le \varepsilon m^2$.
 
-С другой стороны, применим Лемму 15.5 к $\mathrm{PHP}^{n-k}_{n+1-k}$: существует клауза $D$, такая что
+On the other hand, apply Lemma 15.5 to $\mathrm{PHP}^{n-k}_{n+1-k}$: there is a clause $D$ such that
 $$\mathrm{width}(D^+)\ge \frac{2(n+1-k)^2}{9} = \frac{2(m-k)^2}{9}.$$ 
-Значит обязательно
+So definitely
 $$\frac{2(m-k)^2}{9}<\varepsilon m^2,$$
-то есть $m-k<\frac{3}{\sqrt2}\sqrt\varepsilon\,m$ и
+that is, $m-k<\frac{3}{\sqrt2}\sqrt\varepsilon\,m$ and
 $$k>\Bigl(1-\tfrac{3}{\sqrt2}\sqrt\varepsilon\Bigr)m.$$ 
 
-Но по определению $k\le \frac{\ln S}{\varepsilon}+2$, поэтому
+But by definition $k\le \frac{\ln S}{\varepsilon}+2$, therefore
 $$\ln S\ \ge\ \varepsilon\Bigl(1-\tfrac{3}{\sqrt2}\sqrt\varepsilon\Bigr)m\ -\ 2\varepsilon.$$
-Берём $\varepsilon=1/100$, тогда $\ln S=\Omega(m)=\Omega(n)$,
-то есть $S\ge 2^{\Omega(n)}$. Так как $S\le |R|$, это экспоненциальная
-нижняя оценка. Теорема 15.2 доказана. $\square$
+We take $\varepsilon=1/100$, then $\ln S=\Omega(m)=\Omega(n)$,
+that is, $S\ge 2^{\Omega(n)}$. Since $S\le |R|$, this is an exponential
+lower estimate. Theorem 15.2 is proven. $\square$
 
-### 15.7. За пределами резолюции: что известно и что открыто
+### 15.7. Beyond Resolution: What is Known and What is Open
 
-Резолюция — слабая система. Эти нижние оценки не приближают $\mathrm{NP}$ vs $\mathrm{coNP}$.
-Нужны оценки для **существенно более сильных** proof systems (Cook–Reckhow).
+Resolution is a weak system. These lower bounds do not approximate $\mathrm{NP}$ vs $\mathrm{coNP}$.
+We need estimates for **significantly stronger** proof systems (Cook-Reckhow).
 
-**Определение (p-bounded).** Proof system $P$ — p-bounded, если для любой
-тавтологии $\varphi$ существует $P$-доказательство размера
+**Definition (p-bounded).** Proof system $P$ -- p-bounded if for any
+tautology $\varphi$ there is a $P$-proof of size
 $\mathrm{poly}(|\varphi|)$.
 
-**Определение (p-симуляция).** $P$ p-симулирует $Q$, если полиномиальная
-функция переводит $Q$‑доказательство $\pi$ в $P$‑доказательство той же
-тавтологии.
-Размер — $\mathrm{poly}(|\pi|)$.
+**Definition (p-simulation).** $P$ p-simulates $Q$ if the polynomial
+function transforms $Q$-proof $\pi$ into $P$-proof of the same
+tautologies.
+Size is $\mathrm{poly}(|\pi|)$.
 
-**Определение (p-оптимальная система).** $P$ p-оптимальна, если
-p-симулирует все системы. Вопрос о существовании открыт.
+**Definition (p-optimal system).** $P$ is p-optimal if
+p-simulates all systems. The question of existence is open.
 
-Карта систем и обзор нижних оценок: Urquhart 1996
+Map of systems and overview of lower estimates: Urquhart 1996
 (`../resources/downloads/urquhart_1996_complexity_of_propositional_proofs.pdf`).
 
-**Следствие (ориентир).** Если p-оптимальная система существует и для неё
-доказаны суперполиномиальные нижние оценки, то $\mathrm{NP}\ne\mathrm{coNP}$
-(а значит $\mathrm{P}\ne\mathrm{NP}$).
+**Corollary (guideline).** If a p-optimal system exists for it
+superpolynomial lower bounds have been proven, then $\mathrm{NP}\ne\mathrm{coNP}$
+(and therefore $\mathrm{P}\ne\mathrm{NP}$).
 
-**Контраст на примере PHP.**
-- *(Frege легко)* Полиномиальные доказательства $\mathrm{PHP}$: Buss (1987), `../resources/downloads/buss_1987_php_frege.pdf`.
-- *(bounded‑depth Frege трудно)* Экспоненциальные нижние оценки для $\mathrm{PHP}$:
+**Contrast using PHP as an example.**
+- *(Frege easy)* Polynomial proofs $\mathrm{PHP}$: Buss (1987), `../resources/downloads/buss_1987_php_frege.pdf`.
+- *(boundeddepth Frege hard)* Exponential lower bounds for $\mathrm{PHP}$:
   Beame et al. (1992), `../resources/downloads/beame_et_al_1992_php_bounded_depth_frege.pdf`.
-- *(Cutting Planes легко)* Полиномиальные опровержения $\neg\mathrm{PHP}$:
+- *(Cutting Planes easy)* Polynomial refutations $\neg\mathrm{PHP}$:
   Buss–Clote (2002), `../resources/downloads/buss_cutting_planes_notes.pdf`.
 
-**Открытая цель линии proof complexity.** Суперполиномиальные нижние оценки для сильных систем на явных тавтологиях.
-Если для p‑оптимальной (если есть) или для всех, то $\mathrm{NP}\ne\mathrm{coNP}$
-(и $\mathrm{P}\ne\mathrm{NP}$), но одной EF недостаточно.
-Условная связка: Pich–Santhanam (2023) дают $\mathrm{P}\ne\mathrm{NP}$
-из EF‑нижних оценок при допущениях: $\mathrm{S}^1_2$‑формализуемые редукции
-и средняя сложность.
+**Open goal of the proof complexity line.** Superpolynomial lower bounds for strong systems on explicit tautologies.
+If for p-optimal (if any) or for all, then $\mathrm{NP}\ne\mathrm{coNP}$
+(and $\mathrm{P}\ne\mathrm{NP}$), but EF alone is not enough.
+Conditional connective: Pich-Santhanam (2023) gives $\mathrm{P}\ne\mathrm{NP}$
+from EF-lower bounds under the assumptions: $\mathrm{S}^1_2$-formalizable reductions
+and medium difficulty.
 Thm 1, 7–9: `../resources/downloads/pich_santhanam_2023_ef_lower_bounds.pdf`.
 
-**Определение (Pich–Santhanam, введение).** Для $k\ge 1$ и p‑time функции $f$
-вводится формула‑шаблон
+**Definition (Pich-Santhanam, introduction).** For $k\ge 1$ and ptime function $f$
+enter a template formula
 $$w_{n,k}(f) := [\mathrm{SAT}_n(x,y)\to \mathrm{SAT}_n(x,C(x))]\ \lor
 [\mathrm{SAT}_n(f_1(C),f_2(C))\wedge \neg\mathrm{SAT}_n(f_1(C),C(f_1(C)))].$$
-Здесь $C$ — код схемы размера $n^k$; $\mathrm{SAT}_n(x,y)$: $y$ удовлетворяет
-формулу $x$ размера $n$; $f(C)=\langle f_1(C),f_2(C)\rangle$.
-Интуиция: $w_{n,k}(f)$ — тавтология $\iff$ $f$ **свидетельствует ошибку**
-любой схемы $C$, не решающей search‑SAT на длине $n$.
-**Определение (Pich–Santhanam, введение/Sec. 2.2).** $W_{n,k}(f)$:
-«естественная» $\forall\Pi^b_1$‑формулировка $\exists n_0\,\forall n>n_0$
-формулы $w_{n,k}(f)$ — тавтологии.
+Here $C$ is the circuit code of size $n^k$; $\mathrm{SAT}_n(x,y)$: $y$ satisfies
+formula $x$ of size $n$; $f(C)=\langle f_1(C),f_2(C)\rangle$.
+Intuition: $w_{n,k}(f)$ is a tautology $\iff$ $f$ **indicates an error**
+any circuit $C$ that does not solve searchSAT on length $n$.
+**Definition (Pich-Santhanam, introduction/Sec. 2.2).** $W_{n,k}(f)$:
+"natural" $\forall\Pi^b_1$-formulation $\exists n_0\,\forall n>n_0$
+formulas $w_{n,k}(f)$ are tautologies.
 
-**Определение (S$^1_2$).** $\mathrm{S}^1_2$ — теория Бусса ограниченной
-арифметики в $L_{BA}$; ограниченные кванторы и $\Sigma^b_1$‑индукция по $|x|$.
-Используется для формализации p‑time рассуждений (Buss 1995; Krajíček 1995; Cook–Nguyen 2010).
+**Definition (S$^1_2$).** $\mathrm{S}^1_2$ - Buss theory of limited
+arithmetic in $L_{BA}$; bounded quantifiers and $\Sigma^b_1$induction on $|x|$.
+Used to formalize ptime reasoning (Buss 1995; Krajicek 1995; Cook-Nguyen 2010).
 
-**Напоминание (ограниченные кванторы).** В $L_{BA}$: $\forall x\le t$, $\exists x\le t$
-(аббревиатуры $\forall x(x\le t\to\varphi)$, $\exists x(x\le t\wedge\varphi)$).
-$|x|$ — длина двоичной записи.
+**Reminder (restricted quantifiers).** In $L_{BA}$: $\forall x\le t$, $\exists x\le t$
+(abbreviations $\forall x(x\le t\to\varphi)$, $\exists x(x\le t\wedge\varphi)$).
+$|x|$ is the length of the binary record.
 (Buss 1995; Krajíček 1995; Cook–Nguyen 2010).
 
-**Напоминание ($\Sigma^b_1$‑формулы).** Ведущий блок ограниченных существований
-(напр., $\exists y\le t(x)\,\psi$), матрица $\psi$ — bounded ($\Delta^b_0$).
+**Reminder ($\Sigma^b_1$formulas).** Leading block of limited existences
+(e.g. $\exists y\le t(x)\,\psi$), matrix $\psi$ is bounded ($\Delta^b_0$).
 (Buss 1995; Krajíček 1995; Cook–Nguyen 2010).
 
-**Лемма-мост (S$^1_2$ → EF; цитируется).** Если $\Pi^b_1$‑формула $\varphi$
-доказуема в $\mathrm{S}^1_2$, то переводы $\lVert\varphi\rVert_n$ имеют
-полиномиальные EF‑доказательства.
+**Lemma-bridge (S$^1_2$ -> EF; quoted).** If $\Pi^b_1$formula $\varphi$
+is provable in $\mathrm{S}^1_2$, then the translations of $\lVert\varphi\rVert_n$ have
+polynomial EF proofs.
 (Pich–Santhanam, Sec. 2.2; Buss 1995; Krajíček 1995; Cook–Nguyen 2010.)
 
-**Теорема (Pich–Santhanam, Theorem 1; цитируется).** Существует универсальная константа $\varepsilon>0$ такая, что для любого $k\ge 1$:
-- если $w_{n,k}(f)$ — тавтологии для всех больших $n$ и система
-  $\mathrm{EF}+w_k(f)$ не полиномиально ограничена, то
-  $\mathrm{SAT}\notin\mathrm{SIZE}(n^{\varepsilon k})$ бесконечно часто;
-- если $\mathrm{S}^1_2\vdash W_{n,k}(f)$ и EF не полиномиально ограничена, то то же заключение.
+**Theorem (Pich-Santhanam, Theorem 1; cited).** There is a universal constant $\varepsilon>0$ such that for any $k\ge 1$:
+- if $w_{n,k}(f)$ are tautologies for all large $n$ and the system
+  $\mathrm{EF}+w_k(f)$ is not polynomially bounded, then
+  $\mathrm{SAT}\notin\mathrm{SIZE}(n^{\varepsilon k})$ infinitely often;
+- if $\mathrm{S}^1_2\vdash W_{n,k}(f)$ and EF is not polynomial bounded, then the same conclusion.
 
-**Ориентир (Pich–Santhanam, Abstract).** При двух предпосылках
-о доказуемости в $\mathrm{S}^1_2$ (hardness в $\mathrm{E}$
-и «learning from $\neg\exists$OWF»)
-и при явном семействе функций, для которого EF *не* имеет полиномиальных
-доказательств корректных схем‑нижних оценок, следует $\mathrm{P}\ne\mathrm{NP}$.
-В формулировке аннотации (кратко):
-Пусть далее $t(n):=1/2-1/2^{n/4}$.
-1) (I) $\mathrm{S}^1_2$ доказывает для явной $h_0\in\mathrm{E}$:
-   $tt(h_{0,n},2^{n/4},t(n))$ — тавтологии при больших $n$
-   (hardness аппроксимации; Thm 8/9).
-   *(Формализация $h_0\in\mathrm{E}$):* $h_0$ вычислима за $2^{O(n)}$ (bounded‑проверка машины в $\mathrm{S}^1_2$).
+**Landmark (Pich-Santhanam, Abstract).** Subject to two prerequisites
+on provability in $\mathrm{S}^1_2$ (hardness in $\mathrm{E}$
+and "learning from $\neg\exists$OWF")
+and given an explicit family of functions for which EF *doesn't* have polynomial
+proofs of correct lower bound schemes follows $\mathrm{P}\ne\mathrm{NP}$.
+In the wording of the annotation (briefly):
+Let further $t(n):=1/2-1/2^{n/4}$.
+1) (I) $\mathrm{S}^1_2$ proves for explicit $h_0\in\mathrm{E}$:
+   $tt(h_{0,n},2^{n/4},t(n))$ -- tautologies for large $n$
+   (hardness of approximation; Thm 8/9).
+   *(Formalization $h_0\in\mathrm{E}$):* $h_0$ is computable in $2^{O(n)}$ (bounded-check machine in $\mathrm{S}^1_2$).
 2) (II) $\mathrm{S}^1_2\vdash \forall n\,\forall C\,\exists y\le\mathrm{poly}(n)$
-   $\mathrm{RedCorr}(n,C,y)$ для редукции «$\neg\exists$OWF → learning» (Thm 9).
-   $\mathrm{RedCorr}(n,C,y)$: «$y$ — корректный выход на $(n,C)$ и ошибка $< t(n)$» (bounded‑формулировка).
-3) (IIa) «$\neg\exists$OWF»: для любого p-time $f$ существует p-time инвертор
-   $A$ и полином $p$ с $\Pr[A(f(x))=x]\ge 1/p(n)$ бесконечно часто.
-Кодируется в $\mathrm{S}^1_2$ через bounded‑кванторы (Cook–Nguyen 2010, гл. 11).
+   $\mathrm{RedCorr}(n,C,y)$ for the reduction "$\neg\exists$OWF -> learning" (Thm 9).
+   $\mathrm{RedCorr}(n,C,y)$: "$y$ is a correct output to $(n,C)$ and error $< t(n)$" (bounded formulation).
+3) (IIa) "$\neg\exists$OWF": for any p-time $f$ there is a p-time inverter
+   $A$ and a polynomial $p$ with $\Pr[A(f(x))=x]\ge 1/p(n)$ infinitely often.
+It is encoded in $\mathrm{S}^1_2$ through bounded quantifiers (Cook-Nguyen 2010, ch. 11).
 
-Чек‑лист — в «Открытые шаги» ниже.
-См. также (альтернативная ветка): алгебраические proof systems (IPS)
-и связь с PIT/VP vs VNP (Grochow–Pitassi 2014;
+The checklist is in the "Open Steps" below.
+See also (alternative thread): algebraic proof systems (IPS)
+and the connection with PIT/VP vs VNP (Grochow-Pitassi 2014;
 `../resources/downloads/grochow_pitassi_2014_pit.pdf`).
-Краткая карта VP/VNP+IPS: раздел 8, пункт 4 (IPS — алгебраический и не эквивалентен EF).
-Суперполиномиальные нижние оценки IPS ⇒ VP≠VNP; обзор/техники:
+VP/VNP+IPS Brief Map: Section 8, Point 4 (IPS is algebraic and not equivalent to EF).
+Superpolynomial lower bounds IPS  VP=VNP; review/techniques:
 Forbes–Shpilka–Tzameret–Wigderson 2021
 (`../resources/downloads/forbes_shpilka_tzameret_wigderson_2021_ips.pdf`).
 
-**Санити‑чек (слишком сильная канонизация ⇒ коллапс).** Зафиксируем поле $\mathbb F_p$.
-Для литерала положим $\llbracket x_i\rrbracket:=x_i$, $\llbracket\neg x_i\rrbracket:=1-x_i$.
-Для клаузы $C=(\ell_1\lor\cdots\lor\ell_k)$ положим $S_C(x):=1-\prod_{t=1}^k(1-\llbracket\ell_t\rrbracket)$, а для CNF $\varphi=\bigwedge_j C_j$ — $P_\varphi(x):=\prod_j S_{C_j}(x)$.
-Обозначим $\mathrm{ML}(P)$ редукцию $P\bmod(x_1^2-x_1,\dots,x_n^2-x_n)$ (единственный multilinear‑полином, совпадающий с $P$ на $\{0,1\}^n$).
-Тогда $\varphi$ невыполнима $\iff \mathrm{ML}(P_\varphi)\equiv 0$ (на кубе $P_\varphi$ — индикатор, а для multilinear ноль на $\{0,1\}^n$ означает ноль как полином).
-Следовательно, если существует p‑time алгоритм $\mathcal A$, который по $\varphi$ строит ROABP полиномиального размера для $\mathrm{ML}(P_\varphi)$, то $\mathrm{UNSAT}\in\mathrm{P}$ через детерминированный PIT для ROABP, а значит $\mathrm{P}=\mathrm{NP}$.
-Ссылка на PIT: Raz–Shpilka (2005), `../resources/downloads/raz_shpilka_2005_pit_noncommutative.pdf` (детерминированный PIT для ABP в noncommutative модели; ROABP — частный случай).
+**Sanitary check (too strong canonization  collapse).** Let's fix the field $\mathbb F_p$.
+For a literal we put $\llbracket x_i\rrbracket:=x_i$, $\llbracket\neg x_i\rrbracket:=1-x_i$.
+For the clause $C=(\ell_1\lor\cdots\lor\ell_k)$ we put $S_C(x):=1-\prod_{t=1}^k(1-\llbracket\ell_t\rrbracket)$, and for CNF $\varphi=\bigwedge_j C_j$ - $P_\varphi(x):=\prod_j S_{C_j}(x)$.
+Let $\mathrm{ML}(P)$ denote the reduction of $P\bmod(x_1^2-x_1,\dots,x_n^2-x_n)$ (the only multilinear polynomial coinciding with $P$ on $\{0,1\}^n$).
+Then $\varphi$ is unsatisfiable $\iff \mathrm{ML}(P_\varphi)\equiv 0$ (on a cube $P_\varphi$ is an indicator, and for multilinear zero at $\{0,1\}^n$ means zero as a polynomial).
+Therefore, if there is a ptime algorithm $\mathcal A$, which from $\varphi$ constructs a ROABP of polynomial size for $\mathrm{ML}(P_\varphi)$, then $\mathrm{UNSAT}\in\mathrm{P}$ through a deterministic PIT for ROABP, and hence $\mathrm{P}=\mathrm{NP}$.
+PIT reference: Raz-Shpilka (2005), `../resources/downloads/raz_shpilka_2005_pit_noncommutative.pdf` (deterministic PIT for ABP in the noncommutative model; ROABP is a special case).
 
-**Определение (IPS, грубо).** IPS (Ideal Proof System) опровергает невыполнимую CNF как алгебраический сертификат.
-После перевода клауз в многочлены $f_i$ над полем даётся схема,
-вычисляющая $g_i$ с $\sum_i g_i f_i = 1$; это и есть опровержение
+**Definition (IPS, rough).** IPS (Ideal Proof System) refutes the unsatisfiable CNF as an algebraic certificate.
+After converting the clauses into polynomials $f_i$ over the field, a diagram is given,
+calculating $g_i$ with $\sum_i g_i f_i = 1$; this is a refutation
 (Grochow–Pitassi 2014).
-Полнота IPS следует из Nullstellensatz (`../resources/downloads/allcock_nullstellensatz_2005.pdf`).
-Контраст: EF‑нижние оценки ⇒ $\mathrm{NP}\ne\mathrm{coNP}$, IPS‑нижние оценки ⇒ $\mathrm{VP}\ne\mathrm{VNP}$.
-Статус (IPS): общие суперполиномиальные нижние оценки остаются открыты;
-известны результаты лишь для ограниченных подсистем
-(ссылки: Grochow–Pitassi 2014; FSTW 2021, Sec. 1.3).
+The completeness of IPS follows from Nullstellensatz (`../resources/downloads/allcock_nullstellensatz_2005.pdf`).
+Contrast: EF lower bounds  $\mathrm{NP}\ne\mathrm{coNP}$, IPS lower bounds  $\mathrm{VP}\ne\mathrm{VNP}$.
+Status (IPS): General superpolynomial lower bounds remain open;
+results are known only for limited subsystems
+(refs: Grochow-Pitassi 2014; FSTW 2021, Sec. 1.3).
 
-**Определение (PIT-аксиомы; Grochow–Pitassi 2014, Def. 1.7).** Фиксируем стандартное кодирование constant-free алгебраических схем. Пусть $K=\{K_{m,n}\}$ — семейство булевых схем, решающих PIT для схем размера $m$ над $n$ переменными полиномиальной степени. PIT-аксиомы для $K$ (для всех кодов $[C],[G]$) таковы:
-1) $K([C(x)])\to K([C(p)])$ (нулевой полином равен нулю на всех булевых входах).
-2) $K([C(x)])\to \neg K([1-C(x)])$ (если $C\equiv 0$, то $1-C\not\equiv 0$).
-3) $K([G(x)])\wedge K([C(x,0)])\to K([C(x,G(x))])$ (подстановка нулевого полинома).
-4) $K([C(x)])\to K([C(\pi(x))])$ (перестановка переменных).
+**Definition (PIT axioms; Grochow-Pitassi 2014, Def. 1.7).** We fix the standard coding of constant-free algebraic schemes. Let $K=\{K_{m,n}\}$ be a family of Boolean circuits that solve PIT for circuits of size $m$ over $n$ variables of polynomial degree. The PIT axioms for $K$ (for all codes $[C],[G]$) are:
+1) $K([C(x)])\to K([C(p)])$ (the zero polynomial is equal to zero on all Boolean inputs).
+2) $K([C(x)])\to \neg K([1-C(x)])$ (if $C\equiv 0$, then $1-C\not\equiv 0$).
+3) $K([G(x)])\wedge K([C(x,0)])\to K([C(x,G(x))])$ (substitution of the zero polynomial).
+4) $K([C(x)])\to K([C(\pi(x))])$ (permutation of variables).
 
-**Лемма 15.7.3 (PIT-аксиомы ⇒ EF p-симулирует IPS).** Если существует семейство $K$ полиномиального размера, вычисляющее PIT для constant-free схем полиномиальной степени, и EF имеет полиномиальные доказательства PIT-аксиом для $K$, то EF p-симулирует (и фактически p-эквивалентна) VP-IPS (Grochow–Pitassi 2014, Thm. 4.1). Здесь класс PIT-схем включает IPS-сертификаты (полиномиальный размер и степень).
+**Lemma 15.7.3 (PIT axioms  EF p-simulates IPS).** If there is a family $K$ of polynomial size computing PIT for constant-free circuits of polynomial degree, and EF has polynomial proofs of the PIT axioms for $K$, then EF p-simulates (and is in fact p-equivalent to) VP-IPS (Grochow-Pitassi 2014, Thm. 4.1). Here, the class of PIT circuits includes IPS certificates (polynomial size and degree).
 
-*Доказательство (эскиз).* IPS-опровержение задано схемой $C(x,y)$ с тождествами
-$C(x,0)\equiv 0$ и $C(x,f(x))\equiv 1$ (то есть $1-C(x,f(x))\equiv 0$). PIT-аксиомы
-дают EF возможность доказывать эти тождества и их следствия на булевом кубе:
-из $K([C(x,0)])$ по (1) получаем $C(a,0)=0$ для любого булевого $a$, а из
-$K([1-C(x,f(x))])$ по (1) получаем $C(a,f(a))=1$. Если $a$ удовлетворяет всем
-клаузам, то $f(a)=0$ и по (3) $C(a,f(a))=C(a,0)=0$, противоречие. Формализуя
-SoundnessIPS, EF получает p-симуляцию IPS. $\square$
+*Proof (sketch).* IPS refutation is given by the circuit $C(x,y)$ with identities
+$C(x,0)\equiv 0$ and $C(x,f(x))\equiv 1$ (that is, $1-C(x,f(x))\equiv 0$). PIT axioms
+give EF the ability to prove these identities and their consequences on the Boolean cube:
+from $K([C(x,0)])$ by (1) we obtain $C(a,0)=0$ for any Boolean $a$, and from
+$K([1-C(x,f(x))])$ by (1) we obtain $C(a,f(a))=1$. If $a$ satisfies all
+clauses, then $f(a)=0$ and by (3) $C(a,f(a))=C(a,0)=0$, a contradiction. Formalizing
+SoundnessIPS, EF receives p-simulation IPS. $\square$
 
-**Лемма 15.7.3a (SoundnessIPS; Grochow–Pitassi 2014, Sec. 4.1).** Пусть $\varphi=\kappa_1\wedge\cdots\wedge\kappa_m$ — 3-CNF над $p_1,\dots,p_n$, а $Q_i^\varphi(x)$ — клаузные полиномы степени $\le 3$ (и добавлены уравнения $x_i^2-x_i=0$). IPS-опровержение — схема $C(x,y)$ с $C(x,0)\equiv 0$ и $C(x,Q^\varphi(x))\equiv 1$. Определим
+**Lemma 15.7.3a (SoundnessIPS; Grochow-Pitassi 2014, Sec. 4.1).** Let $\varphi=\kappa_1\wedge\cdots\wedge\kappa_m$ be a 3-CNF over $p_1,\dots,p_n$ and $Q_i^\varphi(x)$ be clauses polynomials of degree $\le 3$ (and added equations $x_i^2-x_i=0$). IPS refutation is a circuit $C(x,y)$ with $C(x,0)\equiv 0$ and $C(x,Q^\varphi(x))\equiv 1$. Let's define
 $$\mathrm{ProofIPS}([C],[\varphi])\ :=\ K([C(x,0)])\ \wedge\ K([1-C(x,Q^\varphi(x))]),$$
-а
+A
 $$\mathrm{SoundnessIPS}_{m,n}([C],[\varphi],p)\ :=\ \mathrm{ProofIPS}([C],[\varphi])\ \to\ \neg\mathrm{Truthbool}([\varphi],p).$$
-Если EF имеет полиномиальные доказательства PIT-аксиом для $K$, то EF имеет полиномиальные доказательства $\mathrm{SoundnessIPS}$ (Lemma 4.4).
+If EF has polynomial proofs of the PIT axioms for $K$, then EF has polynomial proofs of $\mathrm{SoundnessIPS}$ (Lemma 4.4).
 
-*Доказательство (эскиз).* Из $\mathrm{Truthbool}([\varphi],p)$ выводим $K([Q_i^\varphi(p)])$ для всех $i$ (клаузный полином обнуляется на истинной клаузе). Далее аксиомами (1),(3),(4) переносим подстановки $p$ и $Q_i^\varphi$ внутрь $C$, получая $K([C(p,Q^\varphi(p))])$, а из $K([C(x,0)])$ — $K([C(p,0)])$. Тогда $K([1-C(x,Q^\varphi(x))])$ по (1) даёт $K([1-C(p,Q^\varphi(p))])$, и аксиома (2) даёт противоречие. Схема $C$ имеет полиномиальный размер и степень (VP-IPS), а подстановка $Q_i^\varphi$ сохраняет полиномиальную степень, поэтому $K$ применим. $\square$
+*Proof (sketch).* From $\mathrm{Truthbool}([\varphi],p)$ we derive $K([Q_i^\varphi(p)])$ for all $i$ (the clause polynomial vanishes at the true clause). Next, using axioms (1), (3), (4), we transfer the substitutions $p$ and $Q_i^\varphi$ inside $C$, obtaining $K([C(p,Q^\varphi(p))])$, and from $K([C(x,0)])$ - $K([C(p,0)])$. Then $K([1-C(x,Q^\varphi(x))])$ by (1) gives $K([1-C(p,Q^\varphi(p))])$, and axiom (2) gives a contradiction. The circuit $C$ has polynomial size and degree (VP-IPS), and the substitution $Q_i^\varphi$ preserves the polynomial degree, so $K$ is applicable. $\square$
 
-**Лемма 15.7.3b (константы и степень; Grochow–Pitassi 2014, Sec. 1.2.1).** PIT-аксиомы формулируются для constant-free алгебраических схем. Это несущественно:
-в фиксированном конечном поле $\mathbb F_q$ constant-free эквивалентно общему случаю (констант конечное число); над $\mathbb Z$ или $\overline{\mathbb F_p}$ константы полиномиального бит-размера строятся constant-free схемой через двоичное разложение. Поэтому VP с полиномиальным total bit-size констант совпадает с constant-free вариантом. В IPS используется VP-IPS: полиномиальный размер и полиномиальная степень. Для 3-CNF полиномы $Q_i^\varphi$ имеют степень $\le 3$, а подстановка $Q^\varphi$ в $C$ сохраняет полиномиальную степень, значит PIT-схема $K$ должна работать на схемах полиномиальной степени.
+**Lemma 15.7.3b (constants and degree; Grochow-Pitassi 2014, Sec. 1.2.1).** The PIT axioms are formulated for constant-free algebraic schemes. It's not important:
+in a fixed finite field $\mathbb F_q$ constant-free is equivalent to the general case (there are a finite number of constants); over $\mathbb Z$ or $\overline{\mathbb F_p}$, polynomial bit-size constants are constructed by a constant-free circuit through binary expansion. Therefore, VP with polynomial total bit-size constants coincides with the constant-free option. IPS uses VP-IPS: polynomial size and polynomial degree. For 3-CNF, the polynomials $Q_i^\varphi$ have degree $\le 3$, and substituting $Q^\varphi$ into $C$ preserves the polynomial degree, which means the PIT scheme $K$ should work on schemes of polynomial degree.
 
-**Лемма 15.7.3c (3-CNF без потери общности).** Стандартная редукция переводит CNF в эквисатисфакционную 3-CNF с линейным ростом: клаузы длины $\le 3$ оставляем, а клаузу длины $k>3$ заменяем цепочкой 3-клауз с новыми переменными $(\ell_1\lor\ell_2\lor y_1)\wedge(\neg y_1\lor\ell_3\lor y_2)\wedge\cdots\wedge(\neg y_{k-3}\lor\ell_{k-1}\lor\ell_k)$. Для клаузы длины $k>3$ получаем $k-2$ новых клауз и $k-3$ новых переменных; если $\varphi$ имеет $L$ литералов, то $r(\varphi)$ имеет $\le L$ клауз и $\le 3L$ литералов (см. §16.78). Тогда $\varphi$ удовлетворима $\iff r(\varphi)$ удовлетворима, и EF доказывает $\neg r(\varphi)\to \neg\varphi$ через явный выбор новых переменных (см. Лемму 15.7.3d). Поэтому SoundnessIPS, сформулированная для 3-CNF, достаточно сильна для общего случая: можно предварительно заменить $\varphi$ на $r(\varphi)$ в определении $\mathrm{ProofIPS}$.
+**Lemma 15.7.3c (3-CNF without loss of generality).** Standard reduction transforms CNF into equisatisfactional 3-CNF with linear growth: clauses of length $\le 3$ are retained, and a clause of length $k>3$ is replaced by a chain of 3-clauses with new variables $(\ell_1\lor\ell_2\lor y_1)\wedge(\neg y_1\lor\ell_3\lor y_2)\wedge\cdots\wedge(\neg y_{k-3}\lor\ell_{k-1}\lor\ell_k)$. For a clause of length $k>3$ we obtain $k-2$ new clauses and $k-3$ new variables; if $\varphi$ has $L$ literals, then $r(\varphi)$ has $\le L$ clauses and $\le 3L$ literals (see Section 16.78). Then $\varphi$ is satisfiable, $\iff r(\varphi)$ is satisfiable, and EF proves $\neg r(\varphi)\to \neg\varphi$ through an explicit choice of new variables (see Lemma 15.7.3d). Therefore, SoundnessIPS formulated for 3-CNF is strong enough for the general case: one can first replace $\varphi$ with $r(\varphi)$ in the definition of $\mathrm{ProofIPS}$.
 
-**Лемма 15.7.3d (equisatisfiable достаточно; явный выбор $g$).** В редукции CNF→3-CNF формулы $\varphi$ и $r(\varphi)$ лишь equisatisfiable (не логически эквивалентны по одним и тем же переменным), но для SoundnessIPS достаточно эквисатисфакции: из неразрешимости $r(\varphi)$ следует неразрешимость $\varphi$. Более того, существует явная полиномиальная функция $g$ (по значениям исходных переменных), задающая значения новых $y_i$ так, что EF доказывает
+**Lemma 15.7.3d (equisatisfiable is sufficient; explicit choice of $g$).** In the CNF->3-CNF reduction, the formulas $\varphi$ and $r(\varphi)$ are only equisatisfiable (not logically equivalent in the same variables), but for SoundnessIPS equisatisfaction is sufficient: the undecidability of $r(\varphi)$ implies the undecidability $\varphi$. Moreover, there is an explicit polynomial function $g$ (over the values of the original variables) specifying the values of the new $y_i$ so that EF proves
 $$\mathrm{Truthbool}([\varphi],p)\ \to\ \mathrm{Truthbool}([r(\varphi)],p,g(p)).$$
-Для цепочки, полученной из $(\ell_1\lor\cdots\lor\ell_k)$, можно взять
+For the chain obtained from $(\ell_1\lor\cdots\lor\ell_k)$, we can take
 $$y_i\ :=\ \neg(\ell_1\lor\cdots\lor\ell_{i+1})\quad (i=1,\dots,k-3),$$
-что удовлетворяет всем новым клаузам при любом истинном значении исходной клаузы. Отсюда
+which satisfies all new clauses for any true meaning of the original clause. From here
 $$\neg\mathrm{Truthbool}([r(\varphi)],p,g(p))\to\neg\mathrm{Truthbool}([\varphi],p),$$
-и потому в SoundnessIPS достаточно equisatisfiable редукции.
+and therefore in SoundnessIPS there is enough equisatisfiable reduction.
 
-**Барьер-чек (для 15.7.3–15.7.3d).**
-- Relativization: шаг опирается на корректность детерминированного PIT; но есть оракулы с $\mathrm{BPP}^A\ne\mathrm{P}^A$, поэтому такой вывод не может быть чисто релятивизирующим.
-- Natural proofs: вывод PIT через схемные нижние оценки ожидаемо попадает под барьер Разборова–Рудича при наличии PRF.
-- Algebrization: стандартная hard\-vs\-randomness дерэндомизация PIT считается неалгебраизирующей; алгебраизирующих доказательств не известно.
+**Barrier check (for 15.7.3-15.7.3d).**
+- Relativization: the step is based on the correctness of the deterministic PIT; but there are oracles with $\mathrm{BPP}^A\ne\mathrm{P}^A$, so such a conclusion cannot be purely relativizing.
+- Natural proofs: the output of PIT via circuit lower bounds is expected to fall under the Razborov-Rudich barrier in the presence of PRF.
+- Algebrization: standard hard\-vs\-randomness de-randomization PIT is considered non-algebraizing; no algebraic proofs are known.
 
-**Лемма 15.7.4 (слабый ROABP-барьер для CNF-класса).** Пусть $P_\varphi$ - полином из санити-чека выше, вычисляемый depth-3 формулой размера $\mathrm{poly}(|\varphi|)$ (произведение клаузных полиномов $S_C$). Если существует p-time алгоритм $\mathcal A$, который по CNF $\varphi$ строит ROABP размера $\mathrm{poly}(|\varphi|)$ для $\mathrm{ML}(P_\varphi)$, то $\mathrm{UNSAT}\in\mathrm{P}$, а значит $\mathrm{P}=\mathrm{NP}$.
+**Lemma 15.7.4 (weak ROABP barrier for CNF class).** Let $P_\varphi$ be the polynomial from the sanity check above, calculated by the depth-3 size formula $\mathrm{poly}(|\varphi|)$ (the product of clause polynomials $S_C$). If there is a p-time algorithm $\mathcal A$, which, using CNF $\varphi$, constructs a ROABP of size $\mathrm{poly}(|\varphi|)$ for $\mathrm{ML}(P_\varphi)$, then $\mathrm{UNSAT}\in\mathrm{P}$, and therefore $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Вычислим $R:=\mathcal A(\varphi)$ и применим детерминированный PIT для ROABP. По санити-чеку $\varphi$ невыполнима $\iff \mathrm{ML}(P_\varphi)\equiv 0$, поэтому PIT решает UNSAT за полиномиальное время. $\square$
+*Proof.* Compute $R:=\mathcal A(\varphi)$ and apply deterministic PIT to ROABP. By the sanity check $\varphi$ $\iff \mathrm{ML}(P_\varphi)\equiv 0$ is unsatisfiable, so PIT solves UNSAT in polynomial time. $\square$
 
-**Замечание.** Класс $P_\varphi$ - это стандартное алгебраическое кодирование CNF (клаузные полиномы), используемое в IPS/EF; барьер действует уже на таком минимальном входе.
+**Note:** The class $P_\varphi$ is the standard algebraic CNF (clause polynomials) encoding used in IPS/EF; the barrier already operates at such a minimal input.
 
-**Лемма 15.7.4a (достаточность 3-CNF).** Если существует p-time алгоритм $\mathcal A$, который для любой 3-CNF $\varphi$ строит ROABP размера $\mathrm{poly}(|\varphi|)$ для $\mathrm{ML}(P_\varphi)$, то $\mathrm{3\text{-}UNSAT}\in\mathrm{P}$, следовательно $\mathrm{P}=\mathrm{NP}$.
+**Lemma 15.7.4a (3-CNF sufficiency).** If there is a p-time algorithm $\mathcal A$ that, for any 3-CNF $\varphi$, constructs a ROABP of size $\mathrm{poly}(|\varphi|)$ for $\mathrm{ML}(P_\varphi)$, then $\mathrm{3\text{-}UNSAT}\in\mathrm{P}$, therefore $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Для 3-CNF $\varphi$ вычислим $R:=\mathcal A(\varphi)$ и применим детерминированный PIT для ROABP. По санити-чеку $\varphi$ невыполнима $\iff \mathrm{ML}(P_\varphi)\equiv 0$, значит $\mathrm{3\text{-}UNSAT}\in\mathrm{P}$. Так как $\mathrm{3\text{-}UNSAT}$ coNP-полна и $\mathrm{P}$ замкнут по дополнению, получаем $\mathrm{P}=\mathrm{NP}$. $\square$
+*Proof.* For 3-CNF $\varphi$, calculate $R:=\mathcal A(\varphi)$ and apply deterministic PIT to ROABP. According to the sanity check $\varphi$ $\iff \mathrm{ML}(P_\varphi)\equiv 0$ is not feasible, which means $\mathrm{3\text{-}UNSAT}\in\mathrm{P}$. Since $\mathrm{3\text{-}UNSAT}$ is coNP-complete and $\mathrm{P}$ is complement closed, we obtain $\mathrm{P}=\mathrm{NP}$. $\square$
 
-**Лемма 15.7.4b (NP-полные подклассы CNF).** Пусть $\mathcal C$ — подкласс CNF, для которого существует p-time редукция $r$ из 3-CNF в $\mathcal C$, сохраняющая (не)выполнимость и удовлетворяющая $|r(\varphi)|\le\mathrm{poly}(|\varphi|)$. Если существует p-time алгоритм $\mathcal A$, который по $\psi\in\mathcal C$ строит ROABP размера $\mathrm{poly}(|\psi|)$ для $\mathrm{ML}(P_\psi)$, то $\mathrm{P}=\mathrm{NP}$.
+**Lemma 15.7.4b (NP-complete subclasses of CNF).** Let $\mathcal C$ be a subclass of CNF for which there exists a p-time reduction of $r$ from 3-CNF to $\mathcal C$ that preserves (un)satisfiability and satisfies $|r(\varphi)|\le\mathrm{poly}(|\varphi|)$. If there is a p-time algorithm $\mathcal A$, which, using $\psi\in\mathcal C$, constructs a ROABP of size $\mathrm{poly}(|\psi|)$ for $\mathrm{ML}(P_\psi)$, then $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Для произвольной 3-CNF $\varphi$ построим $\psi=r(\varphi)$ и применим $\mathcal A$ к $\psi$, затем PIT для ROABP. По санити-чеку $\psi$ невыполнима $\iff \mathrm{ML}(P_\psi)\equiv 0$, а по корректности $r$ это эквивалентно невыполнимости $\varphi$. Значит $\mathrm{3\text{-}UNSAT}\in\mathrm{P}$, то есть $\mathrm{P}=\mathrm{NP}$. Полиномиальный рост $|r(\varphi)|$ не меняет требования $\mathrm{poly}(|\psi|)=\mathrm{poly}(|\varphi|)$. $\square$
+*Proof.* For an arbitrary 3-CNF $\varphi$, construct $\psi=r(\varphi)$ and apply $\mathcal A$ to $\psi$, then PIT for ROABP. By the sanity check $\psi$ $\iff \mathrm{ML}(P_\psi)\equiv 0$ is unsatisfiable, and by the correctness of $r$ this is equivalent to the unsatisfiability of $\varphi$. This means $\mathrm{3\text{-}UNSAT}\in\mathrm{P}$, that is, $\mathrm{P}=\mathrm{NP}$. Polynomial growth of $|r(\varphi)|$ does not change the requirement $\mathrm{poly}(|\psi|)=\mathrm{poly}(|\varphi|)$. $\square$
 
-**Лемма 15.7.4c (учёт blow-up).** Пусть редукция $r$ удовлетворяет $|r(\varphi)|\le |\varphi|^c$ и алгоритм $\mathcal A$ строит ROABP размера $\le |\psi|^d$ для входа $\psi$. Тогда композиция даёт ROABP размера $\le |\varphi|^{cd}$ для исходной 3-CNF. Следовательно, любой полиномиальный blow-up редукции лишь меняет константу в степени и не влияет на вывод $\mathrm{P}=\mathrm{NP}$ в Лемме 15.7.4b.
+**Lemma 15.7.4c (accounting for blow-ups).** Let the reduction $r$ satisfy $|r(\varphi)|\le |\varphi|^c$ and the algorithm $\mathcal A$ constructs a ROABP of size $\le |\psi|^d$ for input $\psi$. Then the composition gives a ROABP of size $\le |\varphi|^{cd}$ for the original 3-CNF. Therefore, any polynomial blow-up reduction only changes the constant to a power and does not affect the derivation of $\mathrm{P}=\mathrm{NP}$ in Lemma 15.7.4b.
 
-**Лемма 15.7.4d (конкретные NP-полные подклассы).** Планарный 3-SAT NP-полон (Lichtenstein 1982, `../resources/downloads/lichtenstein_1982_planar_formulae.pdf`); в его редукции размер растёт не более квадратично: $|r(\varphi)|=O(|\varphi|^2)$ (см. §16.83). Более того, Planar‑3‑SAT(≤4‑occ) NP‑полон (композиция Лихтенштейна и §16.84). Кроме того, 3-SAT с ограничением «каждая переменная встречается не более 4 раз» NP-полон: NP‑трудность следует из явной линейной редукции 3‑SAT → 3‑SAT(≤4‑occ) в §16.81–16.82, а принадлежность NP тривиальна. Поэтому для этих подклассов $\mathcal C$ выполняется предпосылка Леммы 15.7.4b (p-time редукция из 3-CNF с полиномиальным blow-up).
+**Lemma 15.7.4d (concrete NP-complete subclasses).** Planar 3-SAT NP-complete (Lichtenstein 1982, `../resources/downloads/lichtenstein_1982_planar_formulae.pdf`); in its reduction the size grows no more than quadratically: $|r(\varphi)|=O(|\varphi|^2)$ (see Section 16.83). Moreover, Planar3SAT(<=4occ) is NPcomplete (Lichtenstein composition and Section 16.84). Moreover, 3-SAT with the constraint "each variable appears at most 4 times" is NP-complete: NP-hardness follows from the explicit linear reduction 3-SAT -> 3-SAT(<=4-occ) in Section 16.81-16.82, and membership of NP is trivial. Therefore, for these subclasses of $\mathcal C$ the premise of Lemma 15.7.4b (p-time reduction from 3-CNF with polynomial blow-up) is satisfied.
 
-**Контрпример (монотонные CNF).** Ограничение на монотонные клаузы слишком сильное: любая монотонная CNF без пустой клаузы удовлетворима (присваивание всех переменных 1), поэтому даже идеальная канонизация на этом классе не даёт NP-трудности.
+**Counterexample (monotone CNFs).** The restriction on monotone clauses is too strong: any monotone CNF without an empty clause is satisfied (assigning all variables to 1), so even perfect canonization on this class does not give NP-hardness.
 
-**Барьер-чек (для 15.7.4–15.7.4d).**
-- Relativization: если $\mathcal A$ релятивизируется, то для любого оракула $A$ получаем $\mathrm{P}^A=\mathrm{NP}^A$, что противоречит BGS.
-- Natural proofs: построение такой $\mathcal A$ через конструктивные/крупные свойства попадает под барьер Разборова-Рудича при наличии PRF.
-- Algebrization: коллапс $\mathrm{P}=\mathrm{NP}$ не алгебраизует, значит доказательство существования $\mathcal A$ не может быть чисто алгебраизирующим.
+**Barrier check (for 15.7.4-15.7.4d).**
+- Relativization: if $\mathcal A$ is relativized, then for any oracle $A$ we obtain $\mathrm{P}^A=\mathrm{NP}^A$, which contradicts BGS.
+- Natural proofs: the construction of such $\mathcal A$ through constructive/large-scale properties falls under the Razborov-Rudich barrier in the presence of PRF.
+- Algebrization: the collapse of $\mathrm{P}=\mathrm{NP}$ is not algebraizing, which means that the proof of the existence of $\mathcal A$ cannot be purely algebraizing.
 
-**Скелет доказательства (для шага 2).** См. также скелет L2/RedCorr выше.
-Параметры: фиксируем константы $a,t$ (из Theorem 9), рассматриваем $n$ достаточно большие.
-Формализация в $\mathrm{S}^1_2$: определения $\mathrm{Enc}$, $\mathrm{Len}$
-и редукции $R$ должны быть bounded (лемма-мост EF$\leftrightarrow\mathrm{S}^1_2$).
-Указание: формула для $\mathrm{Enc}$ квантифицирует индексы строк $i\le |\pi|$ и проверяет локальные правила вывода и аксиомы.
-Аналогично, $\mathrm{Len}$ задаётся через предикат длины кода, а редукция $R$
-задаётся p-time вычислимой функцией (Sec. 2.2 в Pich–Santhanam).
-Итог: L2/L3 остаются открытыми; именно они требуют нетривиальной EF-нижней оценки.
-Кандидаты: PHP, Tseitin (XOR‑паритеты на рёбрах), Clique-Coloring.
-Ссылки: Beame–Sabharwal 2000, `../resources/downloads/beame_sabharwal_2000_proof_complexity.pdf`.
+**Skeleton of the proof (for step 2).** See also the L2/RedCorr skeleton above.
+Parameters: fix the constants $a,t$ (from Theorem 9), consider $n$ sufficiently large.
+Formalization in $\mathrm{S}^1_2$: definitions $\mathrm{Enc}$, $\mathrm{Len}$
+and the reductions $R$ must be bounded (lemma-bridge EF$\leftrightarrow\mathrm{S}^1_2$).
+Hint: The formula for $\mathrm{Enc}$ quantifies the string indices $i\le |\pi|$ and checks local inference rules and axioms.
+Similarly, $\mathrm{Len}$ is specified through the code length predicate, and the reduction $R$
+is given by the p-time computable function (Sec. 2.2 in Pich-Santhanam).
+Result: L2/L3 remain open; they are the ones that require a non-trivial EF-lower bound.
+Candidates: PHP, Tseitin (XOR parities on edges), Clique-Coloring.
+References: Beame-Sabharwal 2000, `../resources/downloads/beame_sabharwal_2000_proof_complexity.pdf`.
 Buss 1997, `../resources/downloads/buss_1997_proof_complexity_intro.pdf`.
 Hrubeš 2013, `../resources/downloads/hrubes_2013_interpolation_technique.pdf`.
-Feasible interpolation: короткие доказательства clique-coloring ⇒ малые
-монотонные схемы (Tabatabai 2025, `../resources/downloads/tabatabai_2025_feasible_interpolation.pdf`).
-Монотонные нижние оценки для CLIQUE: Razborov 1985, `../resources/downloads/razborov_1985_monotone.pdf`.
-Схема: малые доказательства + (монотонная) интерполяция ⇒ малые монотонные схемы;
-контрапозиция + Razborov ⇒ нижние оценки на доказательства.
-Другие кандидаты: случайные $k$‑CNF; CNF «NP не имеет малых схем» (Razborov 2023).
-Для Tseitin на экспандерах известны экспоненциальные нижние оценки в резолюции через ширину/экспансию; Itsykson–Oparin 2013.
-Формально: при $\deg(G)\le k$ имеем $W\ge e(G)-1$ и $S\ge 2^{(e(G)-k-1)^2/|E|}$, значит на bounded‑degree экспандерах $S=2^{\Omega(|V|)}$; см. §16.85–16.86.
-С явной expander‑семьёй это даёт явное bounded‑occ семейство 3‑CNF (см. §16.87).
-Для Tseitin(Grid$_{n,n}$) (где число переменных $N=\Theta(n^2)$) в bounded‑depth Frege известны лишь разнесённые границы для polynomial‑size:
-depth $=\Omega(\log_2 N/\log_2\log_2 N)$ (Håstad’20, Cor. 6.6) и depth $=O(\log_2 N)$ (upper из GIRS’19; см. §16.92+§16.115+§16.116+§16.120).
-**Q39 (frontier как неориентированный срез).**
-В `formal/WIP/Work.lean` введён `frontier` как объединение ориентированных границ.
-Для симметрических графов доказана инвариантность `frontier` при замене $S$ на $\\neg S$.
-Это позволяет рассматривать фронтиры в двухполосном шаге без ориентационной двусмысленности.
-Лемма: `Q39_frontier_compl` (см. `formal/WIP/Work.lean`).
+Feasible interpolation: short proofs clique-coloring  small
+monotonous patterns (Tabatabai 2025, `../resources/downloads/tabatabai_2025_feasible_interpolation.pdf`).
+Monotonic lower bounds for CLIQUE: Razborov 1985, `../resources/downloads/razborov_1985_monotone.pdf`.
+Scheme: small proofs + (monotonic) interpolation  small monotonic schemes;
+contraposition + Razborov  lower estimates for evidence.
+Other candidates: random $k$CNF; CNF "NP has no small circuits" (Razborov 2023).
+For Tseitin on expanders, exponential lower bounds on resolution in terms of width/expansion are known; Itsykson-Oparin 2013.
+Formally: for $\deg(G)\le k$ we have $W\ge e(G)-1$ and $S\ge 2^{(e(G)-k-1)^2/|E|}$, which means on boundeddegree expanders $S=2^{\Omega(|V|)}$; see Section 16.85-16.86.
+With an explicit expander family, this gives an explicit bounded-occ family 3-CNF (see Section 16.87).
+For Tseitin(Grid$_{n,n}$) (where the number of variables $N=\Theta(n^2)$) in boundeddepth Frege only spaced boundaries for polynomialsize are known:
+depth $=\Omega(\log_2 N/\log_2\log_2 N)$ (Hastad'20, Cor. 6.6) and depth $=O(\log_2 N)$ (upper from GIRS'19; see Section 16.92+Section 16.115+Section 16.116+Section 16.120).
+**Q39 (frontier as undirected slice).**
+IN `formal/WIP/Work.lean` introduced `frontier` as a union of oriented boundaries.
+Invariance has been proven for symmetric graphs `frontier` when replacing $S$ with $\\neg S$.
+This allows frontiers to be viewed in two-lane increments without orientational ambiguity.
+Lemma: `Q39_frontier_compl` (see `formal/WIP/Work.lean`).
 **Q39 (frontier → adjacency).**
-Для симметрических графов доказано, что любое `frontier`-ребро действительно
-является ребром графа (в неориентированном смысле).
-Это снимает техническую разницу между ориентацией в `boundary` и ребром разреза
-при переходе к ранговым/интервальным оценкам.
-Лемма: `Q39_frontier_adj` (см. `formal/WIP/Work.lean`).
+For symmetric graphs it has been proven that any `frontier`- the edge is really
+is an edge of the graph (in the undirected sense).
+This removes the technical difference between orientation in `boundary` and the edge of the cut
+when moving to rank/interval estimates.
+Lemma: `Q39_frontier_adj` (see `formal/WIP/Work.lean`).
 **Q39 (two‑strip toy rank).**
-Toy при $n=4$: даже если каждый внутренний узел имеет
-$|S_j\\cap\\delta(U)|\\le 2$ и $|S_{j+1}\\cap\\delta(U)|\\le 2$, проекционный ранг на два блока
-остаётся равным 2 (верхняя/нижняя половины полос дают независимые проекции).
-См. `formal/Notes/TseitinQ39.lean` §16.167 (Q39.S23-2k-two-strip-rank-toy).
+Toy for $n=4$: even if each internal node has
+$|S_j\\cap\\delta(U)|\\le 2$ and $|S_{j+1}\\cap\\delta(U)|\\le 2$, projection rank on two blocks
+remains equal to 2 (the upper/lower halves of the stripes give independent projections).
+See `formal/Notes/TseitinQ39.lean` §16.167 (Q39.S23-2k-two-strip-rank-toy).
 **Q39 (balanced anchored blocks).**
-Toy при $k=2$: даже при «сбалансированных» якорных блоках в фиксированном расписании
-две разные ненулевые проекции остаются различимыми, поэтому ранг не падает ниже 2.
-В `formal/WIP/Work.lean` зафиксированы две сбалансированные 12‑битные проекции
-и лемма `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced`.
-Это закрывает попытку «уравновесить» anchored‑шаги в двухполосной модели.
+Toy at $k=2$: even with "balanced" anchor blocks in a fixed schedule
+two different non-zero projections remain distinguishable, so the rank does not fall below 2.
+IN `formal/WIP/Work.lean` two balanced 12bit projections are recorded
+and lemma `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced`.
+This closes the attempt to "balance" the anchored steps in the two-way model.
 **Q39 (row/column swap symmetry).**
-Toy при $k=2$: даже при симметрии между полосами (row/column swap)
-две strip‑симметричные ненулевые проекции остаются различимыми, так что ранг 2 сохраняется.
-В `formal/WIP/Work.lean` зафиксированы две такие проекции и лемма
+Toy at $k=2$: even with symmetry between stripes (row/column swap)
+the two strip-symmetric nonzero projections remain distinguishable, so rank 2 is preserved.
+IN `formal/WIP/Work.lean` two such projections and the lemma are fixed
 `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap`.
-Это исключает простую симметризацию полос как механизм снижения ранга.
+This rules out simple strip symmetrization as a rank reduction mechanism.
 **Q39 (fixed‑pair row/column swap).**
-Toy при $k=2$: даже при фиксированной паре строк/колонок и обязательном row/column swap
-две ненулевые проекции остаются различимыми, поэтому ранг 2 сохраняется.
-В `formal/WIP/Work.lean` зафиксированы такие проекции и лемма
+Toy for $k=2$: even with a fixed row/column pair and mandatory row/column swap
+the two non-zero projections remain distinguishable, so rank 2 is preserved.
+IN `formal/WIP/Work.lean` such projections and lemma are fixed
 `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair`.
-Это исключает «fixed‑pair swap» как простой путь к рангу 1.
+This rules out "fixed-pair swap" as an easy path to rank 1.
 **Q39 (fixed‑pair + same‑order).**
-Toy при $k=2$: даже при fixed‑pair и одинаковом порядке в обеих полосах
-две ненулевые проекции остаются различимыми, поэтому ранг 2 сохраняется.
-В `formal/WIP/Work.lean` зафиксированы такие проекции и лемма
+Toy for $k=2$: even with a fixedpair and the same order in both stripes
+the two non-zero projections remain distinguishable, so rank 2 is preserved.
+IN `formal/WIP/Work.lean` such projections and lemma are fixed
 `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder`.
-Это исключает same‑order как простой механизм снижения ранга в fixed‑pair режиме.
+This rules out same-order as a simple rank reduction mechanism in fixed-pair mode.
 **Q39 (global fixed‑pair).**
-Toy при $k=2$: даже при фиксированной паре на всей цепочке
-две ненулевые проекции остаются различимыми, поэтому ранг 2 сохраняется.
-В `formal/WIP/Work.lean` зафиксированы такие проекции и лемма
+Toy for $k=2$: even with a fixed pair on the entire chain
+the two non-zero projections remain distinguishable, so rank 2 is preserved.
+IN `formal/WIP/Work.lean` such projections and lemma are fixed
 `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder_globalfixedpair`.
-Это исключает global fixed‑pair как простой путь к рангу 1.
+This rules out global fixed-pair as an easy path to rank 1.
 **Q39 (contiguous shift alt8).**
-Toy при $k=2$: следующий циклический сдвиг contiguous‑блоков при fixed‑orientation
-по‑прежнему даёт две разные ненулевые проекции, так что ранг остаётся 2.
-См. `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt8`).
+Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
+still gives two different non-zero projections, so the rank remains 2.
+See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt8`).
 **Q39 (contiguous shift alt9).**
-Toy при $k=2$: следующий циклический сдвиг contiguous‑блоков при fixed‑orientation
-по‑прежнему даёт две разные ненулевые проекции, так что ранг остаётся 2.
-См. `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt9`).
+Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
+still gives two different non-zero projections, so the rank remains 2.
+See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt9`).
 **Q39 (contiguous shift alt10).**
-Toy при $k=2$: следующий циклический сдвиг contiguous‑блоков при fixed‑orientation
-по‑прежнему даёт две разные ненулевые проекции, так что ранг остаётся 2.
-См. `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt10`).
+Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
+still gives two different non-zero projections, so the rank remains 2.
+See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt10`).
 **Q39 (contiguous shift alt11).**
-Toy при $k=2$: следующий циклический сдвиг contiguous‑блоков при fixed‑orientation
-по‑прежнему даёт две разные ненулевые проекции, так что ранг остаётся 2.
-См. `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt11`).
+Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
+still gives two different non-zero projections, so the rank remains 2.
+See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt11`).
 **Q39 (contiguous shift alt12).**
-Toy при $k=2$: следующий циклический сдвиг contiguous‑блоков при fixed‑orientation
-по‑прежнему даёт две разные ненулевые проекции, так что ранг остаётся 2.
-См. `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt12`).
+Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
+still gives two different non-zero projections, so the rank remains 2.
+See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt12`).
 **Q39 (contiguous shift alt13).**
-Toy при $k=2$: следующий циклический сдвиг contiguous‑блоков при fixed‑orientation
-по‑прежнему даёт две разные ненулевые проекции, так что ранг остаётся 2.
-См. `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt13`).
-**Q43 (flat local‑EF(s), параметр‑сводка).**
-При явном $A\le 668$ из HR’22 получаем $n_0(A)=2$, поэтому в HR‑режиме
-условие $n\ge n_0(A)$ избыточно по сравнению с $n\ge 20 C n' \log_2 n'$
-(при $C\ge 3$ и $t\le s\le n'/32$). Итоговая сводка оставляет
-единственный $n$‑барьер $n \ge 20 C n' \log_2 n'$ и прочие предпосылки без изменений.
-См. `formal/Notes/TseitinLocalEF.lean` §16.275 (Q43.S132-update-summary-dominant-bound).
-**Q43 (compatibility после $t\mapsto(2s+1)t$).**
-Для $M=\mathrm{poly}(n)$ и $s=\mathrm{polylog}(n)$ имеем $t'=(2s+1)\log_2 M=(\log_2 n)^{O(1)}$,
-а рекурсия HR даёт $n_\eta \ge n/\mathrm{polylog}(n)^\eta$ при $\eta\le d=O(\log_2 n/\log_2\log_2 n)$.
-Это обеспечивает совместимость условий $t'(d)\le n_d/16$ и $t'\le s_\eta\le n'/32$
-при достаточно большом $n$; возможна замена $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ без изменения
-asymptotics (см. §16.276, Q43.S133-hr-compatibility-check).
+Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
+still gives two different non-zero projections, so the rank remains 2.
+See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt13`).
+**Q43 (flat local-EF(s), parameter-summary).**
+With explicit $A\le 668$ from HR'22 we obtain $n_0(A)=2$, therefore in HR mode
+condition $n\ge n_0(A)$ is redundant compared to $n\ge 20 C n' \log_2 n'$
+(for $C\ge 3$ and $t\le s\le n'/32$). The final summary leaves
+the only $n$-barrier $n \ge 20 C n' \log_2 n'$ and other prerequisites unchanged.
+See `formal/Notes/TseitinLocalEF.lean` §16.275 (Q43.S132-update-summary-dominant-bound).
+**Q43 (compatibility after $t\mapsto(2s+1)t$).**
+For $M=\mathrm{poly}(n)$ and $s=\mathrm{polylog}(n)$ we have $t'=(2s+1)\log_2 M=(\log_2 n)^{O(1)}$,
+and HR recursion gives $n_\eta \ge n/\mathrm{polylog}(n)^\eta$ with $\eta\le d=O(\log_2 n/\log_2\log_2 n)$.
+This ensures compatibility of the conditions $t'(d)\le n_d/16$ and $t'\le s_\eta\le n'/32$
+for sufficiently large $n$; it is possible to replace $s_1=\log_2 N$ with $s_1=\max\{\log_2 N,t'\}$ without changing
+asymptotics (see Section 16.276, Q43.S133-hr-compatibility-check).
 **Q43 (axiom-size bound).**
-Если в flat local-EF(s) размер доказательства $S$ измеряется размером строк и
-extension-аксиомы $p_i\leftrightarrow\varphi_i(X)$ входят как строки, то $|\varphi_i|\le S$.
-Тогда для любой строки $F$ размер развёртывания $M(F)\le |F|+|F|\cdot\max_i|\varphi_i|\le S+S^2$,
-поэтому $t=\log_2 M(F)=O(\log_2 S)$, а при $S=\mathrm{poly}(n)$ получаем $t=O(\log_2 n)$.
-Если аксиомы не учитываются в размере, можно взять $|\varphi_i|=2^{(\log_2 n)^2}$ при
-$|\mathrm{supp}(\varphi_i)|\le s$, и тогда $t$ становится суперполиномиальным.
-См. `formal/Notes/TseitinLocalEF.lean` §16.332 (Q43.S192-flat-eval-axiom-size-bound).
+If in flat local-EF(s) the size of the proof $S$ is measured by the size of the strings and
+extension axioms $p_i\leftrightarrow\varphi_i(X)$ are included as strings, then $|\varphi_i|\le S$.
+Then for any string $F$ the expansion size is $M(F)\le |F|+|F|\cdot\max_i|\varphi_i|\le S+S^2$,
+therefore $t=\log_2 M(F)=O(\log_2 S)$, and for $S=\mathrm{poly}(n)$ we get $t=O(\log_2 n)$.
+If the axioms are not taken into account in size, one can take $|\varphi_i|=2^{(\log_2 n)^2}$ for
+$|\mathrm{supp}(\varphi_i)|\le s$, and then $t$ becomes superpolynomial.
+See `formal/Notes/TseitinLocalEF.lean` §16.332 (Q43.S192-flat-eval-axiom-size-bound).
 **Q43 (size metric formalized).**
-В `formal/WIP/Work.lean` зафиксированы определения line-size/line-count/line-max
-и лемма: если строка входит в proof, то ее размер не превышает суммарный размер proof.
-Это дает формальное ядро для метрики $(N,M)$ и для контроля $M$ через суммарный размер.
-См. `formal/WIP/Work.lean` (Q43_lineSize/Q43_proofSize/Q43_lineSize_le_proofSize).
+IN `formal/WIP/Work.lean` definitions of line-size/line-count/line-max are fixed
+and lemma: if a string is included in proof, then its size does not exceed the total size of proof.
+This provides a formal kernel for the $(N,M)$ metric and for controlling $M$ through the total size.
+See `formal/WIP/Work.lean` (Q43_lineSize/Q43_proofSize/Q43_lineSize_le_proofSize).
 **Q43 (t parameter formalized).**
-В `formal/WIP/Work.lean` введен параметр $t:=\\log_2 M$ как `Nat.log2 M` и
-доказана оценка $t\\le M$ (лемма `Q43_tParam_le`). Это фиксирует базовую
-связь между line-size $M$ и глубиной evaluations в Q43.
-См. `formal/WIP/Work.lean` (Q43_tParam/Q43_tParam_le).
+IN `formal/WIP/Work.lean` the parameter $t:=\\log_2 M$ is introduced as `Nat.log2 M` and
+the estimate $t\\le M$ is proved (lemma `Q43_tParam_le`). This fixes the basic
+relationship between line-size $M$ and depth of evaluations in Q43.
+See `formal/WIP/Work.lean` (Q43_tParam/Q43_tParam_le).
 **Q43 (t bounded by proof size).**
-В `formal/WIP/Work.lean` доказано, что `lineMax` не превосходит суммарного
-размера proof (`Q43_lineMax_le_proofSize`), а значит
-$t=\\log_2(\\mathrm{lineMax})\\le\\mathrm{proofSize}$ через `Q43_tParam_le_proofSize`.
-Это дает формальную связь между $t$ и общей метрикой размера.
-См. `formal/WIP/Work.lean` (Q43_lineMax_le_proofSize/Q43_tParam_le_proofSize).
+IN `formal/WIP/Work.lean` it has been proven that `lineMax` does not exceed the total
+proof size (`Q43_lineMax_le_proofSize`), which means
+$t=\\log_2(\\mathrm{lineMax})\\le\\mathrm{proofSize}$ via `Q43_tParam_le_proofSize`.
+This gives a formal connection between $t$ and the general size metric.
+See `formal/WIP/Work.lean` (Q43_lineMax_le_proofSize/Q43_tParam_le_proofSize).
 **Q43 (t <= log_2 S).**
-В `formal/WIP/Work.lean` доказана монотонность $\\log_2$ на Nat и лемма
+IN `formal/WIP/Work.lean` the monotonicity of $\\log_2$ on Nat is proved and the lemma
 $t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$.
-Это формализует связь $t \\le \\log_2 S$ при $S=\\mathrm{proofSize}$ (логарифм базы 2).
-См. `formal/WIP/Work.lean` (Q43_log2_mono/Q43_tParam_le_log2_proofSize).
-**Q43 (t = O(log_2 n) для poly-size).**
-Если суммарный размер $S(n)$ полиномиален, $S(n)\\le n^k+1$, то при $n\\ge 2$
-имеем $S\\le 2n^k$ и $t\\le\\log_2 S\\le 1+k\\log_2 n$, т.е. $t=O(\\log_2 n)$.
-Это связывает Q43-оценки с режимом depth $O(\\log_2 n)$ при poly-size.
-См. `formal/Notes/TseitinLocalEF.lean` §16.340 (Q43.S200-flat-eval-tparam-ologn).
-**Q43 (t = polylog n при quasi-poly size).**
-Если $S(n)\\le n^{(\\log_2 n)^c}=2^{(\\log_2 n)^{c+1}}$, то
-$t\\le\\log_2 S\\le(\\log_2 n)^{c+1}$, т.е. $t=\\mathrm{polylog}(n)$ (база 2).
-Замечание: при $c\\ge 1$ функция $2^{(\\log_2 n)^{c+1}}$ суперполиномиальна.
-См. `formal/Notes/TseitinLocalEF.lean` §16.341 (Q43.S201-flat-eval-tparam-polylogn).
+This formalizes the relationship $t \\le \\log_2 S$ with $S=\\mathrm{proofSize}$ (logarithm of base 2).
+See `formal/WIP/Work.lean` (Q43_log2_mono/Q43_tParam_le_log2_proofSize).
+**Q43 (t = O(log_2 n) for poly-size).**
+If the total size of $S(n)$ is polynomial, $S(n)\\le n^k+1$, then for $n\\ge 2$
+we have $S\\le 2n^k$ and $t\\le\\log_2 S\\le 1+k\\log_2 n$, i.e. $t=O(\\log_2 n)$.
+This relates Q43 estimates to the depth $O(\\log_2 n)$ mode at poly-size.
+See `formal/Notes/TseitinLocalEF.lean` §16.340 (Q43.S200-flat-eval-tparam-ologn).
+**Q43 (t = polylog n with quasi-poly size).**
+If $S(n)\\le n^{(\\log_2 n)^c}=2^{(\\log_2 n)^{c+1}}$, then
+$t\\le\\log_2 S\\le(\\log_2 n)^{c+1}$, i.e. $t=\\mathrm{polylog}(n)$ (base 2).
+Note: for $c\\ge 1$ the function $2^{(\\log_2 n)^{c+1}}$ is superpolynomial.
+See `formal/Notes/TseitinLocalEF.lean` §16.341 (Q43.S201-flat-eval-tparam-polylogn).
 **Q43 (swap $s_1$).**
-Замена стартового $s_1=\log_2 N$ на $s_1=\max\{\log_2 N,t'\}$ не ломает HR‑проверки:
-$s_\eta$ и $t(\eta)=\sum s_i+\log_2 M$ монотонно увеличиваются, а в режиме
-$M=\mathrm{poly}(n)$, $s=\mathrm{polylog}(n)$ остаётся $t(\eta)\ll n_\eta$.
-Это снимает формальный риск несогласованности условия $t'\le s_\eta$ и сохраняет
-$s_\eta\le n'/32$ при больших $n$ (см. §16.277, Q43.S134-s1-swap-compatibility).
+Replacing the starting $s_1=\log_2 N$ with $s_1=\max\{\log_2 N,t'\}$ does not break HR checks:
+$s_\eta$ and $t(\eta)=\sum s_i+\log_2 M$ increase monotonically, and in the mode
+$M=\mathrm{poly}(n)$, $s=\mathrm{polylog}(n)$ remains $t(\eta)\ll n_\eta$.
+This removes the formal risk of inconsistency of the condition $t'\le s_\eta$ and preserves
+$s_\eta\le n'/32$ for large $n$ (see Section 16.277, Q43.S134-s1-swap-compatibility).
 **Q43 (audit $s_1$).**
-В Proof of Thm. 4.3 HR’22 $s_1=\log_2 N$ появляется только через
-$s_\eta=2^{\eta-1}\log_2 N$ и $t(\eta)=\sum_{i\le\eta}s_i+\log_2 M$; в Lemma 4.5
-используются лишь суммы $\sum s_i$ и условие $t(\eta)\le n_\eta/16$.
-Прямые вхождения $\log_2 N$ в Proof of Thm. 4.3/Lemma 4.5 идут только через
-$s_\eta/t(\eta)$ и bound $t(d)\le 2^d\log_2 N+\log_2 M$, так что замена $s_1$
-влияет лишь через $s_\eta/t(\eta)$ (см. §16.278–§16.279, Q43.S135–S136).
-Оставшиеся $\log_2 N$ в §4 относятся к Proof of Thm. 4.1 (single‑switching):
-там фиксируется $s=152\log_2 N$ и используется $t_d=152\log_2 N$, но это не входит
-в Proof of Thm. 4.3/Lemma 4.5 (см. §16.280, Q43.S137-logn-remaining-scan).
-**Q43 (явный $A_0$ через $C$ из Lemma 5.5).**
-В `formal/WIP/Work.lean` зафиксировано определение `Q43_A0_from_C C := 78*C`.
-Это связывает “appropriate $A_0$” в Proof Lemma 4.2 с константой $C$ из Lemma 5.5.
-Лемма `Q43_A0_from_C_bound` переиспользует агрегацию
-$(A_0\\log n')\\,\\Delta^a\\,\\Delta^b=(A_0\\log n')\\,\\Delta^{a+b}$ для этого выбора $A_0$.
-Следующий шаг — сделать $C$ численным (Chernoff‑константа), иначе $A_0$ остаётся параметром.
-См. `formal/WIP/Work.lean`.
-**Q43 (явный $C$ и $A_0$ в Lean).**
-В `formal/WIP/Work.lean` зафиксирован Chernoff-константный `C=120000`
-для оценки из §16.308 при `exp=e^x` и `log=ln`.
-Отсюда `A0=78*C=9,360,000`, что формализовано как `Q43_A0_chernoff_ln`
-и лемма `Q43_A0_chernoff_ln_eval`.
-Если `log=log2`, то $C$ масштабируется на `ln 2`, поэтому численное
-значение меняется (порядок сохраняется).
-См. `formal/WIP/Work.lean`.
-**Q43 (проталкивание явного $A_0$ в лог‑фактор).**
-Лемма `Q43_A0_chernoff_ln_bound_explicit` переписывает фактор
-$(A_0\\log n')\\,\\Delta^a\\,\\Delta^b$ в виде
+In Proof of Thm. 4.3 HR'22 $s_1=\log_2 N$ appears only after
+$s_\eta=2^{\eta-1}\log_2 N$ and $t(\eta)=\sum_{i\le\eta}s_i+\log_2 M$; in Lemma 4.5
+only the sums $\sum s_i$ and the condition $t(\eta)\le n_\eta/16$ are used.
+Direct occurrences of $\log_2 N$ in Proof of Thm. 4.3/Lemma 4.5 go only through
+$s_\eta/t(\eta)$ and bound $t(d)\le 2^d\log_2 N+\log_2 M$, so the replacement $s_1$
+influences only through $s_\eta/t(\eta)$ (see Section 16.278-Section 16.279, Q43.S135-S136).
+The remaining $\log_2 N$ in Section 4 refers to Proof of Thm. 4.1 (singleswitching):
+there $s=152\log_2 N$ is fixed and $t_d=152\log_2 N$ is used, but this is not included
+in Proof of Thm. 4.3/Lemma 4.5 (see Section 16.280, Q43.S137-logn-remaining-scan).
+**Q43 (explicit $A_0$ via $C$ from Lemma 5.5).**
+IN `formal/WIP/Work.lean` definition fixed `Q43_A0_from_C C := 78*C`.
+This links "appropriate $A_0$" in Proof Lemma 4.2 to the constant $C$ from Lemma 5.5.
+Lemma `Q43_A0_from_C_bound` reuses aggregation
+$(A_0\\log n')\\,\\Delta^a\\,\\Delta^b=(A_0\\log n')\\,\\Delta^{a+b}$ for this choice $A_0$.
+The next step is to make $C$ numeric (Chernoff constant), otherwise $A_0$ remains a parameter.
+See `formal/WIP/Work.lean`.
+**Q43 (explicit $C$ and $A_0$ in Lean).**
+IN `formal/WIP/Work.lean` fixed Chernoff-constant `C=120000`
+for the assessment from Section 16.308 when `exp=e^x` and `log=ln`.
+From here `A0=78*C=9,360,000`, which is formalized as `Q43_A0_chernoff_ln`
+and lemma `Q43_A0_chernoff_ln_eval`.
+If `log=log2`, then $C$ is scaled by `ln 2`, therefore numerical
+the meaning changes (the order is maintained).
+See `formal/WIP/Work.lean`.
+**Q43 (pushing explicit $A_0$ into log factor).**
+Lemma `Q43_A0_chernoff_ln_bound_explicit` rewrites the factor
+$(A_0\\log n')\\,\\Delta^a\\,\\Delta^b$ in the form
 $(9{,}360{,}000\\cdot\\log n')\\,\\Delta^{a+b}$.
-Это фиксирует численное значение в месте, где A0 входит в Proof Lemma 4.2,
-и позволяет далее сворачивать константы $c_1,c_2$ без скрытых множителей.
-См. `formal/WIP/Work.lean`.
-**Q43 (явные $c_1,c_2$ в Thm. 4.1).**
-Из §16.302–§16.303 и §16.215 берём $A_{\\mathrm{bits}}=76$, значит $A=2^{76}$
-(для двоичного счёта; при переходе к $\\ln$ заменить на $e^{76\\ln 2}$).
-Определяем $c_2:=8\\cdot 152\\cdot A$ и $c_1:=16\\cdot 152\\cdot c_2$ — этим
-устраняются фразы “large/some constant” в Proof Thm. 4.1.
-Рекурсия $n_i=\\lfloor n_{i-1}/(4A t\\log_2^4 n_{i-1})\\rfloor$ даёт
-$n_d\\ge n/(\\log_2^{d-1} N\\cdot(c_2\\log_2^4 n)^d)$ при $t=152\\log_2 N$.
-Условие $\\log_2 N\\le n^{1/d}/(c_1\\log_2^4 n)$ обеспечивает $t_d\\le n_d/16$,
-и Proof Thm. 4.1 завершает переход к Lemma 2.13; см. §16.310 и
+This fixes the numerical value at the location where A0 comes into Proof Lemma 4.2.
+and allows further convolution of the constants $c_1,c_2$ without hidden factors.
+See `formal/WIP/Work.lean`.
+**Q43 (explicit $c_1,c_2$ in Thm. 4.1).**
+From Section 16.302-Section 16.303 and Section 16.215 we take $A_{\\mathrm{bits}}=76$, which means $A=2^{76}$
+(for binary counting; when moving to $\\ln$, replace with $e^{76\\ln 2}$).
+We define $c_2:=8\\cdot 152\\cdot A$ and $c_1:=16\\cdot 152\\cdot c_2$ - by this
+the phrases "large/some constant" in Proof Thm are eliminated. 4.1.
+Recursion $n_i=\\lfloor n_{i-1}/(4A t\\log_2^4 n_{i-1})\\rfloor$ gives
+$n_d\\ge n/(\\log_2^{d-1} N\\cdot(c_2\\log_2^4 n)^d)$ at $t=152\\log_2 N$.
+The condition $\\log_2 N\\le n^{1/d}/(c_1\\log_2^4 n)$ provides $t_d\\le n_d/16$,
+and Proof Thm. 4.1 completes the transition to Lemma 2.13; see Section 16.310 and
 `formal/WIP/Work.lean`.
-**Q43 (явные $c_1,c_2$ при численном $A_0$).**
-В `formal/WIP/Work.lean` зафиксированы значения `c2` и `c1` при выборе
-`A0=9,360,000` (из `C=120000` при `exp=e^x` и `log=ln`):
-`c2=11,381,760,000` и `c1=27,680,440,320,000`.
-Это конкретизирует формулы `c2:=8*A0*152` и `c1:=16*152*c2` без скрытых
-множителей; при переходе к `log2` числа масштабируются, но структура оценок та же.
-См. `formal/WIP/Work.lean`.
-**Q43 (лог2‑порог Thm. 4.1 с явным $c_1$).**
-В `formal/WIP/Work.lean` введён предикат
-$\\log_2 n\\le n/(c_1\\log_2^4 n)$ с явной численной подстановкой
-`c1=27,680,440,320,000`, а также зафиксирован множитель `c2` в знаменателе.
-Это фиксирует log2‑режим без скрытых констант и готовит проверку
-границы для выбранного диапазона $d$.
-**Q43 (перевод $\\log_2 n$ к $|F|$ для grid).**
-Для grid‑Tseitin берём $|F|=n^2$ и фиксируем определение `Q43_grid_size n := n^2`.
-В `formal/WIP/Work.lean` доказано, что при $n\\ge 1$ выполняется
-$\\log_2 n\\le \\log_2 |F|$, так что log2‑порог можно выражать в терминах $|F|$.
-Здесь используется именно $\\log_2$ (без `exp`; база экспоненты не задействована).
-См. `formal/WIP/Work.lean` (Q43_log2_le_log2_grid_size).
-**Q43 (log2‑порог в терминах $|F|=n^2$).**
-В `formal/WIP/Work.lean` введён предикат log2‑порога Thm. 4.1 с заменой $n\\mapsto|F|$
-и явным `c1=27,680,440,320,000`:
+**Q43 (explicit $c_1,c_2$ with numerical $A_0$).**
+IN `formal/WIP/Work.lean` values are fixed `c2` and `c1` when choosing
+`A0=9,360,000` (from `C=120000` at `exp=e^x` and `log=ln`):
+`c2=11,381,760,000` and `c1=27,680,440,320,000`.
+This makes the formulas more specific `c2:=8*A0*152` and `c1:=16*152*c2` no hidden
+multipliers; when moving to `log2` the numbers are scaled, but the scoring structure is the same.
+See `formal/WIP/Work.lean`.
+**Q43 (log2 threshold Thm. 4.1 with explicit $c_1$).**
+IN `formal/WIP/Work.lean` predicate introduced
+$\\log_2 n\\le n/(c_1\\log_2^4 n)$ with explicit numerical substitution
+`c1=27,680,440,320,000`, and the multiplier is also fixed `c2` in the denominator.
+This fixes log2 mode without hidden constants and prepares the check
+bounds for the selected range $d$.
+**Q43 (translation of $\\log_2 n$ to $|F|$ for grid).**
+For grid-Tseitin we take $|F|=n^2$ and fix the definition `Q43_grid_size n := n^2`.
+IN `formal/WIP/Work.lean` it has been proven that for $n\\ge 1$ the following holds true:
+$\\log_2 n\\le \\log_2 |F|$, so the log2 threshold can be expressed in terms of $|F|$.
+Here exactly $\\log_2$ is used (without `exp`; the exhibitor base is not used).
+See `formal/WIP/Work.lean` (Q43_log2_le_log2_grid_size).
+**Q43 (log2threshold in terms of $|F|=n^2$).**
+IN `formal/WIP/Work.lean` the predicate log2threshold Thm was introduced. 4.1 with replacement $n\\mapsto|F|$
+and explicit `c1=27,680,440,320,000`:
 $\\log_2 |F|\\le |F|/(c_1\\log_2^4 |F|)$.
-Это фиксирует финальную форму порога в grid‑параметре без скрытых констант
-(используется база $\\log_2$, `exp` не участвует).
-См. `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_explicit).
-**Q43 (умноженная форма порога).**
-В `formal/WIP/Work.lean` порог $\\log_2 |F|\\le |F|/(c_1\\log_2^4 |F|)$
-переписан в эквивалентную мультипликативную форму
-$\\log_2 |F|\\cdot c_1\\log_2^4 |F|\\le |F|$ при $\\log_2 |F|\\ge 1$.
-Это удобно для проверки режима $d$ без деления (все оценки остаются в базе $\\log_2$).
-См. `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_iff_mul).
+This fixes the final form of the threshold in the grid parameter without hidden constants
+(using $\\log_2$ base, `exp` does not participate).
+See `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_explicit).
+**Q43 (multiplied form of threshold).**
+IN `formal/WIP/Work.lean` threshold $\\log_2 |F|\\le |F|/(c_1\\log_2^4 |F|)$
+rewritten into equivalent multiplicative form
+$\\log_2 |F|\\cdot c_1\\log_2^4 |F|\\le |F|$ for $\\log_2 |F|\\ge 1$.
+This is convenient for checking the $d$ mode without division (all estimates remain in the $\\log_2$ base).
+See `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_iff_mul).
 **Q43 (regime-d bundle + poly N/M bounds).**
 In `formal/WIP/Work.lean` the lemma `Q43_regime_d_ok_polyNM_bounds` is added.
 It packages the log2^5 regime-d criterion (via `Q43_thm41_regime_d_ok_of_pow5`)
@@ -617,224 +617,224 @@ In `formal/WIP/Work.lean` the lemma
 `Q43_thm41_log2_threshold_c1_grid_pow5_scaled_iff_simple` rewrites the scaled
 condition into the compact form `2C·c1·log2^5|F| <= |F|` (still base‑2 `log2`).
 This makes the remaining task purely a threshold choice `|F| >= n0(C)`.
-Кратко: Tseitin — паритеты на графе (нечетная сумма зарядов ⇒ невыполнимость);
-нижние оценки через ограниченную степень и экспансию; Clique-Coloring —
-несовместимость клики и раскраски.
-Замечание: Tseitin часто изучают в алгебраических системах (PC/Nullstellensatz).
-Beame–Sabharwal 2000; обзор: Pitassi–Tzameret 2016, `../resources/downloads/pitassi_tzameret_2016_algebraic_proof_complexity.pdf`.
-Статус: для этих семейств EF-нижние оценки остаются открыты; «Открытые шаги» ниже.
-Достаточно: сверхполиномиальная EF-нижняя оценка на таких $tt$-формулах уже даёт вывод (через Pich–Santhanam).
-Точнее: для Theorem 9 требуется отсутствие доказательств длины $2^{a n}$
-(экспоненциальная граница), а для Cor. 2 достаточно суперполиномиальной
-неполиномиальности EF+$w$.
-Речь о формулах вида $tt(g_n,n^t,t(n))$ (шаблон выше).
-Здесь $t(n)=1/2-1/2^{n/4}$ по настройке из Pich–Santhanam.
-Чем ближе $t(n)$ к $1/2$, тем сильнее требование средней-сложности (меньше допустимая корреляция).
-Напоминание: $t(n)$ — порог ошибки в определении $tt(f_n,s,t)$ (доля входов, на которых схема ошибается).
-- (L1) Лемма (кодирование EF). p-time $\mathrm{Enc}(n,\pi)$, $\mathrm{Len}(n,\pi)$.
-  «есть EF-вывод $tt(g_n,n^t,t(n))$ длины $\le 2^{a n}$» $\Leftrightarrow$
+Briefly: Tseitin - parities on the graph (odd sum of charges  unsatisfiability);
+lower bounds through limited degree and expansion; Clique-Coloring -
+incompatibility between cliques and coloring.
+Note: Tseitin is often studied in algebraic systems (PC/Nullstellensatz).
+Beame-Sabharwal 2000; review: Pitassi-Tzameret 2016, `../resources/downloads/pitassi_tzameret_2016_algebraic_proof_complexity.pdf`.
+Status: For these EF families, lower estimates remain open; "Open Steps" below.
+Enough: the superpolynomial EF-lower bound on such $tt$-formulas already gives the conclusion (via Pich-Santhanam).
+More precisely: Theorem 9 requires the absence of proofs of length $2^{a n}$
+(exponential bound), and for Cor. 2 is sufficiently superpolynomial
+non-polynomiality EF+$w$.
+We are talking about formulas of the form $tt(g_n,n^t,t(n))$ (template above).
+Here $t(n)=1/2-1/2^{n/4}$ according to the setting from Pich-Santhanam.
+The closer $t(n)$ is to $1/2$, the stronger the medium-complexity requirement (the smaller the acceptable correlation).
+Reminder: $t(n)$ is the error threshold in the definition of $tt(f_n,s,t)$ (the proportion of inputs at which the circuit is errored).
+- (L1) Lemma (EF coding). p-time $\mathrm{Enc}(n,\pi)$, $\mathrm{Len}(n,\pi)$.
+  "there is an EF output $tt(g_n,n^t,t(n))$ of length $\le 2^{a n}$" $\Leftrightarrow$
   $\exists\pi\,\mathrm{Enc}(n,\pi)\wedge(\mathrm{Len}(n,\pi)\le 2^{a n})$.
-  $\mathrm{Enc}$ проверяет локальные правила/аксиомы и последнюю строку (Cook–Reckhow).
-- (L2) Лемма (короткий EF $\Rightarrow$ аппроксимация). p-time редукция $R$
-  по коду $\pi$ строит схему $C$ размера $n^t$ с ошибкой $< t(n)$ за
+  $\mathrm{Enc}$ checks local rules/axioms and the last line (Cook-Reckhow).
+- (L2) Lemma (short EF $\Rightarrow$ approximation). p-time reduction $R$
+  using code $\pi$ builds a circuit $C$ of size $n^t$ with an error $< t(n)$ in
   $\mathrm{poly}(|\pi|,n)$.
-  Формализуется в $\mathrm{S}^1_2$ и соответствует $\mathrm{RedCorr}$/learning. *(Открытый шаг.)*
-  Скелет: $\mathrm{RedCorr}(n,C,y):=(y=R(n,C))\wedge \mathrm{Err}_{t(n)}(C,y)$.
+  Formalized in $\mathrm{S}^1_2$ and corresponding to $\mathrm{RedCorr}$/learning. *(Open step.)*
+  Skeleton: $\mathrm{RedCorr}(n,C,y):=(y=R(n,C))\wedge \mathrm{Err}_{t(n)}(C,y)$.
   $\mathrm{Err}_{t(n)}$: $\exists S\le 2^n, |S|<t(n)2^n\wedge\forall x<2^n\ (x\notin S\to C(x)=g_n(x))$.
-  Pich–Santhanam, Sec. 2.4/Thm 9; минимум (A)–(C) ниже.
-- (L3) Лемма (противоречие). Если $g_n\in\mathrm{E}$ не аппроксимируется схемами размера $n^t$ с ошибкой $< t(n)$, то L2 противоречит этому.
-**Формализационный минимум (кванторы).**
-**Шаблон.** $tt(g_n,n^t,t(n))$: никакая схема размера $n^t$ не аппроксимирует $g_n$ (ошибка $\ge t(n)=1/2-1/2^{n/4}$).
-Минимум: (A) $\mathrm{S}^1_2\vdash \exists n_0\,\forall n>n_0\ tt(h_{0,n},2^{n/4},t(n))$;
+  Pich-Santhanam, Sec. 2.4/Thm 9; minimum (A)-(C) below.
+- (L3) Lemma (contradiction). If $g_n\in\mathrm{E}$ is not approximated by circuits of size $n^t$ with error $< t(n)$, then L2 contradicts this.
+**Formalization minimum (quantifiers).**
+**Pattern.** $tt(g_n,n^t,t(n))$: no pattern of size $n^t$ approximates $g_n$ (error $\ge t(n)=1/2-1/2^{n/4}$).
+Minimum: (A) $\mathrm{S}^1_2\vdash \exists n_0\,\forall n>n_0\ tt(h_{0,n},2^{n/4},t(n))$;
 (B) $\mathrm{S}^1_2\vdash \forall n\,\forall C\,\exists y\le n^{O(1)}\ \mathrm{RedCorr}(n,C,y)$.
-  (C) EF: $\exists a>0\,\forall n>n_0$ нет EF-вывода длины $\le 2^{a n}$
-  для $tt(g_n,n^t,t(n))$. Thm 9 / Cor. 2 ⇒ схемные и равномерные нижние оценки.
-**Определение (tt-формулы; Pich–Santhanam Sec. 2.4).** Пусть $f_n:\{0,1\}^n\to\{0,1\}$ задана таблицей истинности.
-$tt(f_n,s)$: ни одна схема размера $s$ не вычисляет $f_n$ (нужны схемы $>s$).
-$tt(f_n,s,t)$: все схемы размера $s$ ошибаются на доле входов $\ge t$; эти формулы — аксиомы EF+tt (см. шаблон $tt(g_n,n^t)$ выше).
+  (C) EF: $\exists a>0\,\forall n>n_0$ no EF output of length $\le 2^{a n}$
+  for $tt(g_n,n^t,t(n))$. Thm 9/Cor. 2  schematic and uniform lower bounds.
+**Definition (tt-formulas; Pich-Santhanam Sec. 2.4).** Let $f_n:\{0,1\}^n\to\{0,1\}$ be given by a truth table.
+$tt(f_n,s)$: no circuit of size $s$ computes $f_n$ (need $>s$ circuits).
+$tt(f_n,s,t)$: all circuits of size $s$ err on a fraction of inputs $\ge t$; these formulas are axioms EF+tt (see pattern $tt(g_n,n^t)$ above).
 
-**Определение (формальная $tt(f_n,s,t)$).** Зафиксируем кодирование схем размера $s$ битстроками $C$ длины $m(s)$ и формулу $\mathrm{Eval}(C,x)$ полиномиального размера, вычисляющую выход схемы $C$ на фиксированном $x$ (через переменные значений гейтов). Для каждого $x\in\{0,1\}^n$ положим $e_x:=\mathrm{Eval}(C,x)\oplus f_n(x)$. Пусть $\mathrm{Count}_{\ge t2^n}(e)$ — стандартная формула подсчёта (например, сортировочная сеть), истинная тогда и только тогда, когда $\sum_x e_x\ge t2^n$. Тогда
+**Definition (formal $tt(f_n,s,t)$).** Let us fix the encoding of circuits of size $s$ by bitstrings $C$ of length $m(s)$ and a formula $\mathrm{Eval}(C,x)$ of polynomial size, calculating the output of circuit $C$ on a fixed $x$ (via variable gate values). For each $x\in\{0,1\}^n$ we set $e_x:=\mathrm{Eval}(C,x)\oplus f_n(x)$. Let $\mathrm{Count}_{\ge t2^n}(e)$ be a standard counting formula (for example, a sorting network), true if and only if $\sum_x e_x\ge t2^n$. Then
 $$tt(f_n,s,t)\ :=\ \mathrm{Valid}_s(C)\ \to\ \mathrm{Count}_{\ge t2^n}\bigl((e_x)_{x\in\{0,1\}^n}\bigr).$$
-Размер $|tt|=\mathrm{poly}(2^n,s)$.
+Size $|tt|=\mathrm{poly}(2^n,s)$.
 
-**Лемма 15.7.1a (Pich–Santhanam, Sec. 2.4.1).** В PS средняя сложность фиксируется формулой $LB_{tt}(h,s(n),t(n)2^n)$ при масштабе $n\in\mathrm{LogLog}$; её пропозициональный перевод и есть $tt(f,s(n),t(n))$ с порогом $\mathrm{Count}_{\ge T(n)}$, где $T(n)=t(n)2^n$ — целое. В частности, при $t(n)=1/2-1/2^{n/4}$ имеем $T(n)=2^{n-1}-2^{3n/4}$, и именно такой порог используется в (H1) и далее в Theorem 9/Cor. 2.
+**Lemma 15.7.1a (Pich-Santhanam, Sec. 2.4.1).** In PS, the average complexity is fixed by $LB_{tt}(h,s(n),t(n)2^n)$ at scale $n\in\mathrm{LogLog}$; its propositional translation is $tt(f,s(n),t(n))$ with threshold $\mathrm{Count}_{\ge T(n)}$, where $T(n)=t(n)2^n$ is an integer. In particular, for $t(n)=1/2-1/2^{n/4}$ we have $T(n)=2^{n-1}-2^{3n/4}$, and this is the threshold used in (H1) and further in Theorem 9/Cor. 2.
 
-**Барьер-чек (для 15.7.1a).**
-- Relativization: перевод $LB_{tt}\mapsto tt$ сохраняется при оракульных гейтах; это чисто синтаксический шаг.
-- Natural proofs: фиксация порога $T(n)$ не избегает барьер RR, если доказательство средней сложности строится через конструктивные/крупные свойства.
-- Algebrization: шаг не алгебраизирует; это лишь кодирование счётчика.
+**Barrier check (for 15.7.1a).**
+- Relativization: translation of $LB_{tt}\mapsto tt$ is preserved during oracle gates; This is purely a syntactic step.
+- Natural proofs: fixing the threshold $T(n)$ does not avoid the RR barrier if the proof of medium complexity is constructed via constructive/large-scale properties.
+- Algebrization: the step does not algebraize; This is just the coding of the counter.
 
-**Лемма 15.7.1b (масштаб $n\in\mathrm{LogLog}$ и округление порога).** В PS (Sec. 2.4.1) $tt(f,s(n),t(n))$ получается переводом $LB_{tt}(h,s(n),t(n)2^n)$ с подстановкой фиксированной константы $x=2^{2^n}$ (то есть $n=||x||$), что делает таблицу истинности $f$ «доступной» и сохраняет $\Pi^b_1$-форму. Если $t(n)2^n$ не целое, порог в $\mathrm{Count}_{\ge T(n)}$ можно взять как $T(n):=\lceil t(n)2^n\rceil$ (или $\lfloor\cdot\rfloor$); это меняет формулу лишь на $\pm1$ по счёту и не влияет на использование в (H1)/Thm 9.
+**Lemma 15.7.1b (scale $n\in\mathrm{LogLog}$ and threshold rounding).** In PS (Sec. 2.4.1) $tt(f,s(n),t(n))$ is obtained by translating $LB_{tt}(h,s(n),t(n)2^n)$ with the substitution of a fixed constant $x=2^{2^n}$ (i.e. $n=||x||$), which makes the truth table $f$ "accessible" and preserves the $\Pi^b_1$-form. If $t(n)2^n$ is not an integer, the threshold in $\mathrm{Count}_{\ge T(n)}$ can be taken as $T(n):=\lceil t(n)2^n\rceil$ (or $\lfloor\cdot\rfloor$); this changes the formula only by $\pm1$ in count and does not affect the use in (H1)/Thm 9.
 
-**Лемма 15.7.1c (деление $n/4$ и реализация $\mathrm{Count}_{\ge T}$).** В PS параметры пишутся как $2^{||x||/4}$ и $1/2-1/2^{||x||/4}$ (Sec. 2.4.2, Def. 3), то есть фактически используется целочисленное $r(n)=\lfloor n/4\rfloor$. Тогда $t(n)=1/2-1/2^{r(n)}$ и
-$$T(n)=t(n)2^n=2^{n-1}-2^{n-r(n)}\quad(\text{при }4\mid n\text{ это }2^{n-1}-2^{3n/4}).$$
-Можно либо ограничиться $n$ кратными $4$ (добавив условие в (H1)), либо принять $r(n)=\lfloor n/4\rfloor$ без изменения вывода. Формулу $\mathrm{Count}_{\ge T}$ можно реализовать стандартной сортировочной сетью или сумматором за $\mathrm{poly}(2^n)$ (это достаточно для EF и для масштаба $n\in\mathrm{LogLog}$).
+**Lemma 15.7.1c (division $n/4$ and implementation $\mathrm{Count}_{\ge T}$).** In PS the parameters are written as $2^{||x||/4}$ and $1/2-1/2^{||x||/4}$ (Sec. 2.4.2, Def. 3), that is, in fact the integer $r(n)=\lfloor is used n/4\rfloor$.  $t(n)=1/2-1/2^{r(n)}$ 
+$$T(n)=t(n)2^n=2^{n-1}-2^{n-r(n)}\quad(\text{with }4\mid n\text{ this is }2^{n-1}-2^{3n/4}).$$
+You can either restrict yourself to $n$ being multiples of $4$ (by adding a condition to (H1)), or accept $r(n)=\lfloor n/4\rfloor$ without changing the output. The formula $\mathrm{Count}_{\ge T}$ can be implemented by a standard sorting network or an adder using $\mathrm{poly}(2^n)$ (this is sufficient for EF and for the scale $n\in\mathrm{LogLog}$).
 
-**Лемма 15.7.1d (размер счётчика).** Пусть $N=2^n$ — число битов $(e_x)_x$. Существует булева схема размера $O(N\log N)$ и глубины $O(\log N)$, вычисляющая сумму $\sum_x e_x$ в двоичном виде (например, двоичное дерево сумматоров), а затем компаратором проверяющая $\sum_x e_x\ge T$. Следовательно, $\mathrm{Count}_{\ge T}$ можно зашить в $tt(f,s,t)$ схемой размера $\mathrm{poly}(N)=\mathrm{poly}(2^n)$.
+**Lemma 15.7.1d (counter size).** Let $N=2^n$ be the number of bits of $(e_x)_x$. There is a Boolean circuit of size $O(N\log N)$ and depth $O(\log N)$ that computes the sum $\sum_x e_x$ in binary form (for example, a binary adder tree) and then checks $\sum_x e_x\ge T$ with a comparator. Therefore, $\mathrm{Count}_{\ge T}$ can be wired into $tt(f,s,t)$ with a circuit of size $\mathrm{poly}(N)=\mathrm{poly}(2^n)$.
 
-**Замечание (3‑CNF для $\mathrm{Count}_{\ge T}$).** Если нужно иметь именно CNF/3‑CNF подформулу, то схему из Леммы 15.7.1d можно перевести в 3‑CNF с $O(N\log N)$ клаузами стандартным Tseitin‑кодированием (см. §16.80).
+**Note (3CNF for $\mathrm{Count}_{\ge T}$).** If you need to have exactly a CNF/3CNF subformula, then the scheme from Lemma 15.7.1d can be translated into 3CNF with $O(N\log N)$ clauses using standard Tseitin encoding (see Section 16.80).
 
-**Барьер-чек (для 15.7.1b–15.7.1d).**
-- Relativization: фиксация $x=2^{2^n}$ и округление — синтаксис, релятивизируется.
-- Natural proofs: не даёт обхода RR-барьера (чисто кодирование).
-- Algebrization: не алгебраизирует.
+**Barrier check (for 15.7.1b-15.7.1d).**
+- Relativization: fixing $x=2^{2^n}$ and rounding - the syntax is relativized.
+- Natural proofs: does not bypass the RR barrier (pure coding).
+- Algebrization: does not algebraize.
 
-**Лемма 15.7.1 (эквивалентность).** $tt(f_n,s,t)$ — тавтология $\iff$ любая схема размера $s$ ошибается на доле входов $\ge t$.
+**Lemma 15.7.1 (equivalence).** $tt(f_n,s,t)$ is a tautology $\iff$ any circuit of size $s$ fails on a fraction of inputs $\ge t$.
 
-*Доказательство.* ($\Rightarrow$) Пусть есть схема $C$ размера $s$ с ошибкой $<t$. Подставим её код в $C$ и согласованные значения гейтов; тогда $\mathrm{Valid}_s(C)=1$, но счётчик выдаёт $0$, формула ложна. ($\Leftarrow$) Если формула ложна на некотором присваивании, то $C$ валидна и $\sum_x e_x<t2^n$, значит найдена схема с ошибкой $<t$. $\square$
+*Proof.* ($\Rightarrow$) Let there be a circuit $C$ of size $s$ with error $<t$. Let's substitute its code into $C$ and the agreed gate values; then $\mathrm{Valid}_s(C)=1$, but the counter produces $0$, the formula is false. ($\Leftarrow$) If the formula is false on some assignment, then $C$ is valid and $\sum_x e_x<t2^n$, then a scheme with error $<t$ was found. $\square$
 
-**Где используется.** В гипотезе (H1) раздела 15.7 берётся $s=2^{n/4}$ и $t(n)=1/2-1/2^{n/4}$, и утверждается, что $tt(h_{0,n},s,t(n))$ — тавтология для всех больших $n$. Эти формулы входят в аксиомную схему $\mathrm{EF}+tt(h,s,t)$ и используются как предпосылка в Theorem 8/9 (Pich–Santhanam) для вывода схемных нижних оценок.
+**Where used.** Conjecture (H1) of Section 15.7 takes $s=2^{n/4}$ and $t(n)=1/2-1/2^{n/4}$ and states that $tt(h_{0,n},s,t(n))$ is a tautology for all large $n$. These formulas are included in the axiom scheme $\mathrm{EF}+tt(h,s,t)$ and are used as a premise in Theorem 8/9 (Pich-Santhanam) to derive the scheme lower bounds.
 
-**Барьер-чек.**
-- Relativization: определение полностью релятивизируется (можно добавить оракульные гейты), так что само по себе не даёт нерелятивизирующего шага.
-- Natural proofs: доказательство средней сложности явной $h_0$ через конструктивное/крупное свойство попадёт под барьер Разборова–Рудича, если существуют PRF.
-- Algebrization: шаг не алгебраизует проблему; перевод в алгебраическую форму не снимает требований к non-algebrizing техникам.
+**Barrier check.**
+- Relativization: the definition is completely relativized (oracle gates can be added), so that by itself does not give a non-relativizing step.
+- Natural proofs: a proof of average complexity of explicit $h_0$ via a constructive/large-scale property will fall under the Razborov-Rudich barrier if PRFs exist.
+- Algebrization: the step does not algebraize the problem; translation into algebraic form does not remove the requirements for non-algebrizing techniques.
 
-**Лемма 15.7.2 (распаковка S$^1_2$-предпосылок).** Зафиксируем явную $h_0\in\mathrm{E}$ с предикатом вычисления $\mathrm{Eval}_{h_0}(n,x,b)$, а также явную p-time редукцию $R$ с граф-предикатом $\mathrm{Graph}_R(n,C,y)$ и оценкой $|y|\le p(n)$. Тогда предпосылки из Pich–Santhanam можно записать как $\forall\Pi^b_1$-предложения:
+**Lemma 15.7.2 (unpacking S$^1_2$-premises).** Let us fix an explicit $h_0\in\mathrm{E}$ with the evaluation predicate $\mathrm{Eval}_{h_0}(n,x,b)$, as well as an explicit p-time reduction of $R$ with the graph predicate $\mathrm{Graph}_R(n,C,y)$ and the estimate $|y|\le p(n)$. Then the premises from Pich-Santhanam can be written as $\forall\Pi^b_1$-sentences:
 
 1) (H1$_\Pi$) $\exists n_0\,\forall n>n_0\,\forall C\le m(2^{n/4})\;
 \bigl(\mathrm{Valid}_{2^{n/4}}(C)\to \mathrm{Count}_{\ge t(n)2^n}((e_x)_x)\bigr)$,
-где $e_x:=\mathrm{Eval}(C,x)\oplus \mathrm{Eval}_{h_0}(n,x,1)$.
+where $e_x:=\mathrm{Eval}(C,x)\oplus \mathrm{Eval}_{h_0}(n,x,1)$.
 
 2) (H2$_\Pi$) $\forall n\,\forall C\le m(n)\;\mathrm{RedCorr}(n,C,R(n,C))$,
-где $R(n,C)$ определяется $\mathrm{Graph}_R(n,C,y)$.
+where $R(n,C)$ is defined by $\mathrm{Graph}_R(n,C,y)$.
 
-*Доказательство (эскиз).* В (H1$_\Pi$) все кванторы ограничены,
-$\mathrm{Eval}_{h_0}$ задаётся bounded-проверкой вычисления за $2^{O(n)}$,
-а $\mathrm{Count}_{\ge}$ реализуется стандартной схемой подсчёта; это даёт
-формулу класса $\Pi^b_1$ под внешним $\exists n_0$. В (H2$_\Pi$) замена
-$\exists y$ на $y=R(n,C)$ делает формулу $\Pi^b_1$, а в $\mathrm{S}^1_2$
-провозится тотальность p-time $R$, поэтому (H2$_\Pi$) $\Rightarrow$
+*Proof (sketch).* In (H1$_\Pi$) all quantifiers are bounded,
+$\mathrm{Eval}_{h_0}$ is specified by bounded-check calculation for $2^{O(n)}$,
+and $\mathrm{Count}_{\ge}$ is implemented by a standard counting scheme; it gives
+class formula $\Pi^b_1$ under the outer $\exists n_0$. In (H2$_\Pi$) replacement
+$\exists y$ on $y=R(n,C)$ makes the formula $\Pi^b_1$, and in $\mathrm{S}^1_2$
+the totality p-time $R$ is transported, therefore (H2$_\Pi$) $\Rightarrow$
 $\forall n\,\forall C\,\exists y\,\mathrm{RedCorr}(n,C,y)$. $\square$
 
-**Лемма 15.7.2a (кодирование $\mathrm{Eval}_{h_0}$ и $\mathrm{Graph}_R$).** В формализации PS (Sec. 2.2/2.4) предикаты $\mathrm{Eval}_{h_0}$ и $\mathrm{Graph}_R$ можно считать PV-формулами с полиномиальными ограничениями длины: если $h_0\in\mathrm{E}$, то при масштабе $n\in\mathrm{LogLog}$ (то есть $\exists x,\ n=||x||$) вычисление $h_0$ за $2^{O(n)}$ времени становится $\mathrm{poly}(|x|)$ и допускает PV-определение $\mathrm{Eval}_{h_0}(n,x,b)$; если $R$ — p-time редукция, то её граф $\mathrm{Graph}_R(n,C,y)$ задаётся PV-формулой с ограничением $|y|\le p(n)$ для некоторого полинома $p$.
+**Lemma 15.7.2a (encoding $\mathrm{Eval}_{h_0}$ and $\mathrm{Graph}_R$).** In the PS formalization (Sec. 2.2/2.4), the predicates $\mathrm{Eval}_{h_0}$ and $\mathrm{Graph}_R$ can be considered PV-formulas with polynomial length constraints: if $h_0\in\mathrm{E}$, then at the scale $n\in\mathrm{LogLog}$ (that is, $\exists x,\ n=||x||$) the calculation of $h_0$ in $2^{O(n)}$ time becomes $\mathrm{poly}(|x|)$ and admits the PV definition $\mathrm{Eval}_{h_0}(n,x,b)$; if $R$ is a p-time reduction, then its graph $\mathrm{Graph}_R(n,C,y)$ is given by a PV formula with the constraint $|y|\le p(n)$ for some polynomial $p$.
 
-**Барьер-чек (для 15.7.2a).**
-- Relativization: шаг чисто синтаксический (PV-определимость) и релятивизируется.
-- Natural proofs: не применимо (нет утверждения о схемной сложности).
-- Algebrization: не применимо (нет алгебраической трансформации).
+**Barrier check (for 15.7.2a).**
+- Relativization: the step is purely syntactic (PV-definable) and is relativized.
+- Natural proofs: not applicable (no circuit complexity statement).
+- Algebrization: not applicable (no algebraic transformation).
 
-**Лемма 15.7.2b (длина кода схемы и $\mathrm{Valid}_s$).** Зафиксируем стандартное списковое кодирование булевой схемы размера $s$ с фан-ин $2$: для каждой вершины $i$ храним тип гейта и два индекса входов $<i$ (плюс входные переменные и константы). Тогда длина кода $m(s,n)=O(s\log s+n\log s)$, и при $n\le s$ можно взять $m(s)=O(s\log s)$. Предикат $\mathrm{Valid}_s(C)$, проверяющий корректность индексов/типов, является $\Delta^b_0$-формулой (и потому PV-вычислим), что оправдывает ограничение $C\le m(s)$ в (H1$_\Pi$)/(H2$_\Pi$). В частности, при $s=2^{n/4}$ имеем $m(s)=2^{O(n)}$.
+**Lemma 15.7.2b (circuit code length and $\mathrm{Valid}_s$).** Let us fix the standard list encoding of a Boolean circuit of size $s$ with fan-in $2$: for each vertex $i$ we store the gate type and two input indices $<i$ (plus input variables and constants). Then the code length is $m(s,n)=O(s\log s+n\log s)$, and for $n\le s$ we can take $m(s)=O(s\log s)$. The predicate $\mathrm{Valid}_s(C)$ that checks the correctness of indices/types is a $\Delta^b_0$-formula (and therefore PV-computable), which justifies the constraint of $C\le m(s)$ in (H1$_\Pi$)/(H2$_\Pi$). In particular, for $s=2^{n/4}$ we have $m(s)=2^{O(n)}$.
 
-**Барьер-чек (для 15.7.2b).**
-- Relativization: кодирование и проверка корректности схемы — чисто синтаксический шаг.
-- Natural proofs: не применимо.
-- Algebrization: не применимо.
+**Barrier check (for 15.7.2b).**
+- Relativization: encoding and checking the correctness of the scheme is a purely syntactic step.
+- Natural proofs: not applicable.
+- Algebrization: not applicable.
 
-**Замечание (паддинг; смысл ограничения $C\le m(s)$).** В (H1$_\Pi$)/(H2$_\Pi$) квантор по $C$ читается как bounded-квантор по коду схемы длины $\le m(s)$ (эквивалентно, по числу $C<2^{m(s)}$). Это ограничение не исключает ни одной схемы размера $\le s$: при gate-list кодировании можно всегда привести код к фиксированной длине $m(s)$ (например, дополнив список до $s$ гейтов фиктивными записями/нулями), не меняя декодированную схему. Поэтому все содержательные ограничения на $C$ идут через $\mathrm{Valid}_s(C)$, а $C\le m(s)$ лишь делает квантор bounded (см. §16.79).
+**Note (padding; the meaning of the constraint $C\le m(s)$).** In (H1$_\Pi$)/(H2$_\Pi$) the quantifier over $C$ is read as a bounded quantifier over the code of the circuit of length $\le m(s)$ (equivalently, over the number $C<2^{m(s)}$). This restriction does not exclude any scheme of size $\le s$: with gate-list encoding, you can always reduce the code to a fixed length $m(s)$ (for example, by adding dummy entries/zeros to the list of $s$ gates) without changing the decoded scheme. Therefore, all meaningful restrictions on $C$ go through $\mathrm{Valid}_s(C)$, and $C\le m(s)$ only makes the quantifier bounded (see Section 16.79).
 
-**Лемма 15.7.2c (оценка $\mathrm{Eval}(C,x)$).** Для gate-list кодирования из Леммы 15.7.2b функция $\mathrm{Out}(C,x)$, вычисляющая выход схемы $C$ на входе $x$, является PV-функцией (вычисляется за $\mathrm{poly}(s)$ шагов). Тогда предикат $\mathrm{Eval}(C,x,b):\equiv (\mathrm{Out}(C,x)=b)$ — $\Delta^b_0$-формула. В пропозициональном переводе можно использовать $O(s)$ вспомогательных переменных для значений гейтов и $O(s)$ локальных ограничений, так что размер формулы $\mathrm{Eval}(C,x)$ — $\mathrm{poly}(s)$ (и, следовательно, $|tt|=\mathrm{poly}(2^n,s)$).
+**Lemma 15.7.2c (evaluation $\mathrm{Eval}(C,x)$).** For gate-list encoding from Lemma 15.7.2b, the function $\mathrm{Out}(C,x)$, which calculates the output of circuit $C$ at input $x$, is a PV function (computed in $\mathrm{poly}(s)$ steps). Then the predicate $\mathrm{Eval}(C,x,b):\equiv (\mathrm{Out}(C,x)=b)$ is a $\Delta^b_0$-formula. The propositional translation can use $O(s)$ of auxiliary variables for gate values and $O(s)$ of local constraints, so that the size of the formula $\mathrm{Eval}(C,x)$ is $\mathrm{poly}(s)$ (and hence $|tt|=\mathrm{poly}(2^n,s)$).
 
-**Барьер-чек (для 15.7.2c).**
-- Relativization: оценка выхода схемы релятивизируется.
-- Natural proofs: не применимо.
-- Algebrization: не применимо.
+**Barrier check (for 15.7.2c).**
+- Relativization: The circuit output estimate is relativized.
+- Natural proofs: not applicable.
+- Algebrization: not applicable.
 
-**Где скрыто усиление.**
-- (H1$_\Pi$) — это a.e.-твёрдость (для всех больших $n$), а не i.o.-вариант,
-и функция $h_0$ фиксирована и явна.
-- (H2$_\Pi$) требует **фиксированную** редукцию $R$ и доказуемую тотальность
-в $\mathrm{S}^1_2$; без $R$ формула становится $\Sigma^b_2$.
+**Where the power-up is hidden.**
+- (H1$_\Pi$) is the a.e.-hardness (for all large $n$), and not the i.o.-variant,
+and the function $h_0$ is fixed and explicit.
+- (H2$_\Pi$) requires a **fixed** reduction of $R$ and provable totality
+in $\mathrm{S}^1_2$; without $R$ the formula becomes $\Sigma^b_2$.
 
-**Барьер-чек.**
-- Relativization: обе формулы релятивизируются при добавлении оракульных гейтов.
-- Natural proofs: (H1$_\Pi$) при конструктивном/крупном доказательстве подпадает под барьер RR (при PRF).
-- Algebrization: формулы не снимают алгебраизирующий барьер; нужны неалгебраизирующие идеи.
+**Barrier check.**
+- Relativization: both formulas are relativized when adding oracle gates.
+- Natural proofs: (H1$_\Pi$) with a constructive/large proof falls under the RR barrier (with PRF).
+- Algebrization: formulas do not remove the algebrization barrier; non-algebraizing ideas are needed.
 
-**Определение (схема аксиом EF + tt(h,s,t); Pich–Santhanam Sec. 2.4).** Пусть $h\in\mathrm{E}$ и функции $s(2^n),t(2^n)$ таковы.
-Для всех больших $n$ любая схема размера $s(2^n)$ ошибается на доле $\ge t(2^n)$ на $h_n$.
-Тогда $\mathrm{EF}+tt(h,s,t)$ — EF с аксиомами $\{tt(h_n,s(2^n),t(2^n)):\ n\ge n_0\}$.
+**Definition (axiom scheme EF + tt(h,s,t); Pich-Santhanam Sec. 2.4).** Let $h\in\mathrm{E}$ and the functions $s(2^n),t(2^n)$ be as follows.
+For all large $n$, any circuit of size $s(2^n)$ errs by a fraction of $\ge t(2^n)$ by $h_n$.
+Then $\mathrm{EF}+tt(h,s,t)$ is EF with axioms $\{tt(h_n,s(2^n),t(2^n)):\n\ge n_0\}$.
 
-**Определение (anticheckers).** Для функции $f$ и $s$ множество
-$A_n^{f,s}\subseteq\{0,1\}^n$ называется antichecker, если
+**Definition (anticheckers).** For the function $f$ and $s$ the set
+$A_n^{f,s}\subseteq\{0,1\}^n$ is called antichecker if
 $|A_n^{f,s}|=\mathrm{poly}(s)$.
-Любая схема такого размера ошибается на входе из $A_n^{f,s}$.
-Для функций $f$, трудных для схем размера $s^3$ (при $s\ge n^3$), anticheckers существуют.
-Средняя сложность $f$ даёт anticheckers; Pich–Santhanam, Sec. 3 (`../resources/downloads/pich_santhanam_2023_ef_lower_bounds.pdf`).
-Thm 7: «feasible anticheckers» формализуются через EF+$w$ и дают схемные нижние оценки при неполиномиальности EF (average‑case предпосылка).
+Any circuit of this size fails at input from $A_n^{f,s}$.
+For functions $f$ that are difficult for circuits of size $s^3$ (for $s\ge n^3$), anticheckers exist.
+Average difficulty $f$ gives anticheckers; Pich-Santhanam, Sec. 3 (`../resources/downloads/pich_santhanam_2023_ef_lower_bounds.pdf`).
+Thm 7: "feasible anticheckers" are formalized in terms of EF+$w$ and give schematic lower bounds when EF is non-polynomial (averagecase premise).
 
-**Теоремы 7–9 (Pich–Santhanam 2023, Sec. 3–5; цитируются).**
-**Схема зависимостей (сжато).**
-- (H1) $\mathrm{S}^1_2$ доказывает среднюю сложность $h_0\in\mathrm{E}$: $tt(h_{0,n},2^{n/4},t(n))$ *(статус: не доказано для явных $h_0$).*
-- (H2a) $\mathrm{S}^1_2$ формализует редукцию $\neg\exists\mathrm{OWF}\Rightarrow$ learning (через $\mathrm{RedCorr}$).
-- (H2b) $\mathrm{S}^1_2$ формализует редукцию $\mathrm{NP}\not\subseteq\mathrm{P/poly}\Rightarrow$ OWF (альтернатива).
-- (H3a) EF+tt имеет нижние оценки $2^{a n}$ на $tt(g_n,n^t,t(n))$ (шаблон выше) *(статус: открыто).*
-- (H3b) EF (или EF+$w$) не p-bounded (вариант Thm 7/Cor. 2) *(статус: открыто).*
-Тогда: (H1)+(H2a)+(H3a) $\Rightarrow$ $\mathrm{SAT}\notin\mathrm{Circuit}[n^k]$ (Thm 9; Cor. 2 даёт равномерный вариант).
+**Theorems 7-9 (Pich-Santhanam 2023, Sec. 3-5; cited).**
+**Dependency diagram (compressed).**
+- (H1) $\mathrm{S}^1_2$ proves the average complexity of $h_0\in\mathrm{E}$: $tt(h_{0,n},2^{n/4},t(n))$ *(status: not proven for explicit $h_0$).*
+- (H2a) $\mathrm{S}^1_2$ formalizes the reduction of $\neg\exists\mathrm{OWF}\Rightarrow$ learning (via $\mathrm{RedCorr}$).
+- (H2b) $\mathrm{S}^1_2$ formalizes the $\mathrm{NP}\not\subseteq\mathrm{P/poly}\Rightarrow$ OWF reduction (alternative).
+- (H3a) EF+tt has lower bounds $2^{a n}$ on $tt(g_n,n^t,t(n))$ (pattern above) *(status: open).*
+- (H3b) EF (or EF+$w$) not p-bounded (option Thm 7/Cor. 2) *(status: open).*
+Then: (H1)+(H2a)+(H3a) $\Rightarrow$ $\mathrm{SAT}\notin\mathrm{Circuit}[n^k]$ (Thm 9; Cor. 2 gives the uniform version).
 (H1)+(H2b)+(H3b) $\Rightarrow$ $\mathrm{SAT}\notin\mathrm{P/poly}$ (Thm 8).
-Замечание: EF‑нижние оценки сами по себе недостаточны для $\mathrm{NP}\ne\mathrm{coNP}$ без p‑оптимальности.
+Note: EF lower bounds by themselves are not sufficient for $\mathrm{NP}\ne\mathrm{coNP}$ without p-optimality.
 
-**Открытые шаги (checklist).**
-- (O1) Доказать среднюю сложность $h_0\in\mathrm{E}$: $tt(h_{0,n},2^{n/4},t(n))$.
-- (O2) Доказать EF‑нижние оценки $2^{a n}$ для $tt(g_n,n^t,t(n))$ (или неполиномиальность EF/EF+$w$ на явных тавтологиях).
+**Open steps (checklist).**
+- (O1) Prove the average complexity $h_0\in\mathrm{E}$: $tt(h_{0,n},2^{n/4},t(n))$.
+- (O2) Prove EF lower bounds $2^{a n}$ for $tt(g_n,n^t,t(n))$ (or non-polynomiality EF/EF+$w$ on explicit tautologies).
 
-Статус: (O1) — стандартная гипотеза о средней сложности в $\mathrm{E}$ (для явных функций границы не доказаны); (O2) — открытая EF‑задача.
+Status: (O1) - standard conjecture about average complexity in $\mathrm{E}$ (bounds have not been proven for explicit functions); (O2) is an open EF task.
 
-Барьерный контекст: Natural Proofs и Algebrization ограничивают схемные техники;
-сильные EF‑нижние оценки ожидают нерелятивизирующих/ненатуральных идей.
+Barrier context: Natural Proofs and Algebrization limit circuit techniques;
+strong EF lower bounds expect non-relativizing/non-natural ideas.
 
-**Определение (вариант с советом).** $w_{n,k,u}(f)$: схемы $C$ читаются как коды
-алгоритмов времени $O(n^k)$ с советом длины $u(n)$ (p-time, $u(n)\le n^k$).
-$W_{n,k,u}(f)$ — $\forall\Pi^b_1$-формализация "для всех $n>n_0$ формулы $w_{n,k,u}(f)$ — тавтологии".
-$\mathrm{Time}[n^k]/u(n)$ — класс языков, решаемых такими алгоритмами.
+**Definition (option with advice).** $w_{n,k,u}(f)$: $C$ circuits read like codes
+$O(n^k)$ time algorithms with advice of length $u(n)$ (p-time, $u(n)\le n^k$).
+$W_{n,k,u}(f)$ -- $\forall\Pi^b_1$-formalization "for all $n>n_0$ the formulas $w_{n,k,u}(f)$ are tautologies."
+$\mathrm{Time}[n^k]/u(n)$ is a class of languages that can be solved by such algorithms.
 
-Замечание: EF+tt фиксирует hardness конкретного $h$, тогда как EF+$w$ кодирует нижние оценки против $\mathrm{Time}[n^k]/u(n)$.
-Thm 9 использует EF+tt, Cor. 2 — EF+$w$. См. список «Открытые шаги» ниже.
+Note: EF+tt captures the hardness of a particular $h$, while EF+$w$ encodes lower bounds against $\mathrm{Time}[n^k]/u(n)$.
+Thm 9 uses EF+tt, Cor. 2 -- EF+$w$. See the list of "Open Steps" below.
 
-**Обозначение.** $\mathrm{EF}+w_{k,u}(f)$ означает EF с аксиомной схемой
-$\{w_{n,k,u}(f): n\ge n_0\}$ (аналогично определению $\mathrm{EF}+tt(h,s,t)$ выше).
+**Notation.** $\mathrm{EF}+w_{k,u}(f)$ means EF with axiom circuit
+$\{w_{n,k,u}(f): n\ge n_0\}$ (similar to the definition of $\mathrm{EF}+tt(h,s,t)$ above).
 
-**Следствие (Pich–Santhanam 2023, Cor. 2).**
-Пусть $k\ge 1$ и $u$ p-time, $u(n)\le n^k$.
+**Consequence (Pich-Santhanam 2023, Cor. 2).**
+Let $k\ge 1$ and $u$ p-time, $u(n)\le n^k$.
 
-1) Если существует p-time $f$ такое, что для всех больших $n$ $w_{n,k,u}(f)$ — тавтологии, и система $\mathrm{EF}+w_{k,u}(f)$ не p-bounded,
-то $\mathrm{SAT}\notin\mathrm{Time}[n^{\Omega(k)}]/u(n)$ бесконечно многих $n$.
+1) If there is a p-time $f$ such that for all large $n$ $w_{n,k,u}(f)$ are tautologies, and the system $\mathrm{EF}+w_{k,u}(f)$ is not p-bounded,
+then $\mathrm{SAT}\notin\mathrm{Time}[n^{\Omega(k)}]/u(n)$ of infinitely many $n$.
 
-2) Если $\mathrm{S}^1_2\vdash W_{n,k,u}(f)$ и EF не p-bounded, то то же заключение.
+2) If $\mathrm{S}^1_2\vdash W_{n,k,u}(f)$ and EF is not p-bounded, then the same conclusion.
 
-**Сравнение систем (кратко).**
-| Система | Идея | Комментарий |
+**Comparison of systems (briefly).**
+|  |  | Comment |
 |---|---|---|
-| Frege | фиксированные схемы аксиом + правила | разные варианты полиномиально эквивалентны |
-| EF | Frege + расширения $p\leftrightarrow\psi$ | одна из самых сильных стандартных систем |
-| AC⁰-Frege | Frege с глубиной $d$ | существенно слабее EF; нижние оценки известны |
-| CP | линейные неравенства над $\{0,1\}$ | удобно для счётных аргументов (`../resources/downloads/buss_cutting_planes_notes.pdf`) |
+| Frege | fixed axiom schemes + rules | different options are polynomially equivalent |
+| EF | Frege + extensions $p\leftrightarrow\psi$ | one of the most powerful standard systems |
+| AC0-Frege | Frege with depth $d$ | significantly weaker than EF; lower bounds are known |
+| CP | linear inequalities over $\{0,1\}$ | convenient for counting arguments (`../resources/downloads/buss_cutting_planes_notes.pdf`) |
 
-### 15.8. PHP имеет полиномиальное опровержение в CP (полное доказательство)
+### 15.8. PHP has a polynomial refutation in CP (complete proof)
 
-Здесь видно «почему» резолюция слаба: PHP экспоненциально трудна
-для резолюции, но элементарно опровергается в CP за счёт счётного
-(линейного) аргумента.
+Here you can see "why" the resolution is weak: PHP is exponentially difficult
+for a resolution, but is simply refuted in CP due to the countable
+(linear) argument.
 
-Рассмотрим $m=n+1$ голубей и $n$ норок, переменные $x_{i,j}\in\{0,1\}$.
+Consider $m=n+1$ pigeons and $n$ minks, variables $x_{i,j}\in\{0,1\}$.
 
-Вместо CNF‑кодировки из раздел 15 используем эквивалентную (на $\{0,1\}$) систему линейных неравенств:
+Instead of the CNF encoding from Section 15, we use an equivalent (at $\{0,1\}$) system of linear inequalities:
 
-1) *(голубь где‑то сидит)* для каждого $i\in\{1,\dots,m\}$:
+1) *(a dove is sitting somewhere)* for each $i\in\{1,\dots,m\}$:
 $$\sum_{j=1}^n x_{i,j}\ \ge\ 1.$$
 
-2) *(не вместе)* для каждого $j\in\{1,\dots,n\}$:
+2) *(not together)* for each $j\in\{1,\dots,n\}$:
 $$\sum_{i=1}^m x_{i,j}\ \le\ 1,$$
-то есть эквивалентно
+that is equivalent
 $$-\sum_{i=1}^m x_{i,j}\ \ge\ -1.$$
 
-Замечание: попарные CNF‑клаузы $(\neg x_{i,j}\lor\neg x_{i',j})$ на $\{0,1\}$
-эквивалентны ограничению $\sum_i x_{i,j}\le 1$ ("не более одной единицы в столбце").
-$(\Leftarrow)$ очевидно, а если $\sum_i x_{i,j}\ge 2$, то найдутся $i\ne i'$ с $x_{i,j}=x_{i',j}=1$, и клауза ложна.
+Note: pairwise CNF clauses $(\neg x_{i,j}\lor\neg x_{i',j})$ by $\{0,1\}$
+are equivalent to the constraint $\sum_i x_{i,j}\le 1$ ("at most one one per column").
+$(\Leftarrow)$ is obvious, and if $\sum_i x_{i,j}\ge 2$, then there are $i\ne i'$ with $x_{i,j}=x_{i',j}=1$, and the clause is false.
 
-**Теорема 15.8.** Существует CP‑опровержение $\mathrm{PHP}^{n}_{n+1}$ размера $\mathrm{poly}(n)$.
+**Theorem 15.8.** There is a CP refutation of $\mathrm{PHP}^{n}_{n+1}$ of size $\mathrm{poly}(n)$.
 
-*Доказательство.* Обозначим $S:=\sum_{i=1}^m\sum_{j=1}^n x_{i,j}$.
+*Proof.* Let us denote $S:=\sum_{i=1}^m\sum_{j=1}^n x_{i,j}$.
 
-Сложим неравенства (1) по всем $i$ (правило сложения CP): получаем
+Let us add inequalities (1) over all $i$ (addition rule CP): we obtain
 $$S\ \ge\ m\ =\ n+1.$$ 
 
-Сложим неравенства (2') по всем $j$ (в форме с $\ge$):
+Let us add inequalities (2') over all $j$ (in the form with $\ge$):
 $$-S\ \ge\ -n.$$ 
 
-Сложив эти два неравенства, получаем $0\ge 1$ (эквивалентно $-1\ge 0$),
-то есть противоречие. Значит система не имеет 0/1‑решений, и это и есть
-CP‑опровержение.
+Adding these two inequalities, we obtain $0\ge 1$ (equivalent to $-1\ge 0$),
+that is, a contradiction. This means that the system does not have 0/1solutions, and this is
+CP refutation.
 
-*Оценка размера.* Мы используем $O(n)$ сложений, каждое неравенство имеет
-$O(n)$ мономов, поэтому общий размер вывода $\mathrm{poly}(n)$. $\square$
+*Size estimate.* We use $O(n)$ additions, each inequality has
+$O(n)$ ,     $\mathrm{poly}(n)$. $\square$

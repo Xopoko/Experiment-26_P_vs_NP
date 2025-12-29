@@ -1,60 +1,60 @@
-## 6. Редукция 3SAT $\le_m^p$ CLIQUE (доказательство + проверка на малых случаях)
+## 6. Reduction of 3SAT $\le_m^p$ CLIQUE (proof + verification on small cases)
 
-**Задача CLIQUE (decision).** Вход: неориентированный граф $G=(V,E)$ и число $k$. Вопрос: существует ли клика размера $\ge k$?
+**Problem CLIQUE (decision).** Input: undirected graph $G=(V,E)$ and number $k$. Question: Is there a clique of size $\ge k$?
 
-**Lean‑скелет:** CNF/3CNF/SAT в `formal/PvNP/Core/SAT.lean`, базовый граф и клика — `formal/PvNP/Core/Graph.lean`, определение 3SAT→CLIQUE — `formal/PvNP/Core/ReductionsSAT.lean`.
-Корректность — цель для формализации в Lean (пока не доказана в `formal/`).
+**Lean skeleton:** CNF/3CNF/SAT in `formal/PvNP/Core/SAT.lean`, base graph and clique - `formal/PvNP/Core/Graph.lean`, definition 3SAT->CLIQUE - `formal/PvNP/Core/ReductionsSAT.lean`.
+Correctness is the goal for formalization in Lean (not yet proven in `formal/`).
 
-**Теорема 6.1.** 3SAT $\le_m^p$ CLIQUE.
+**Theorem 6.1.** 3SAT $\le_m^p$ CLIQUE.
 
-*Конструкция.* Пусть 3CNF‑формула $\varphi$ имеет $m$ клауз $C_1,\dots,C_m$, каждая — дизъюнкт из трёх литералов. Строим граф $G$:
+*Construction.* Let a 3CNF formula $\varphi$ have $m$ clauses $C_1,\dots,C_m$, each a clause of three literals. We build the graph $G$:
 
-- Вершины: по одной вершине на каждый литерал в каждой клаузе, т.е. $v_{i,\ell}$ для $\ell\in C_i$.
-- Рёбра: соединяем $v_{i,\ell}$ и $v_{j,\ell'}$ (где $i\ne j$)
-  тогда и только тогда, когда литералы **совместимы**: не являются
-  взаимоисключающими, т.е. не имеют вид $x$ и $\neg x$ для одной переменной.
+- Vertices: one vertex for each literal in each clause, i.e. $v_{i,\ell}$ for $\ell\in C_i$.
+- Edges: connect $v_{i,\ell}$ and $v_{j,\ell'}$ (where $i\ne j$)
+  if and only if the literals are **compatible**: are not
+  mutually exclusive, i.e. do not have the form $x$ and $\neg x$ for one variable.
 
-Выход: пара $(G,k)$ где $k=m$.
+Output: pair $(G,k)$ where $k=m$.
 
-*Корректность.*
+*Correctness.*
 
-- Если $\varphi$ выполнима, выберем в каждой клаузе истинный литерал $\ell_i$.
-  Эти литералы совместимы (иначе присваивание делало бы один из них ложным).
-  Тогда для любых $i\ne j$ вершины $v_{i,\ell_i}$ и $v_{j,\ell_j}$ соединены;
-  получаем клику из $m$ вершин.
+- If $\varphi$ is satisfiable, choose a true literal $\ell_i$ in each clause.
+  These literals are compatible (otherwise the assignment would make one of them false).
+  Then for any $i\ne j$ the vertices $v_{i,\ell_i}$ and $v_{j,\ell_j}$ are connected;
+  we obtain a clique of $m$ vertices.
 
-- Если в $G$ есть клика размера $m$, то она берёт по одной вершине из каждой группы
-  $\{v_{i,\ell}:\ell\in C_i\}$ (внутри клаузы рёбер нет), т.е. выбирает $\ell_i$.
-  Совместимость всех пар означает отсутствие пары вида $x$ и $\neg x$.
-  Построим присваивание, согласованное с выбранными литералами (остальные — произвольно).
-  Тогда каждый $C_i$ удовлетворён выбранным $\ell_i$, значит удовлетворена вся формула.
+- If $G$ has a clique of size $m$, then it takes one vertex from each group
+  $\{v_{i,\ell}:\ell\in C_i\}$ (there are no edges inside the clause), i.e. selects $\ell_i$.
+  The compatibility of all pairs means that there is no pair of the form $x$ and $\neg x$.
+  Let's construct an assignment consistent with the selected literals (the rest are arbitrary).
+  Then each $C_i$ is satisfied with the chosen $\ell_i$, which means the entire formula is satisfied.
 
-*Сложность.* Граф имеет $3m$ вершин и $O(m^2)$ потенциальных рёбер; построение занимает полиномиальное время.
+*Complexity.* The graph has $3m$ vertices and $O(m^2)$ potential edges; construction takes polynomial time.
 
 $\square$
 
-**Лемма 6.2.** 3SAT $\in\mathrm{NP}$.
+**Lemma 6.2.** 3SAT $\in\mathrm{NP}$.
 
 
-*Доказательство.* Сертификат — присваивание булевых значений переменным.
-Верификатор за время $O(|\varphi|)$ проверяет истинность каждой клаузы.
+*Proof.* Certificate - assignment of Boolean values to variables.
+The verifier checks the truth of each clause in $O(|\varphi|)$ time.
 $\square$
 
 
-**Следствие 6.3.** Если SAT NP‑полна (Cook–Levin), то 3SAT NP‑полна.
+**Corollary 6.3.** If SAT is NP-complete (Cook-Levin), then 3SAT is NP-complete.
 
-*Доказательство.* Из Теоремы 5.1 имеем SAT $\le_m^p$ 3SAT.
-Так как 3SAT $\in\mathrm{NP}$, то 3SAT NP‑трудна и принадлежит NP,
-значит NP‑полна. $\square$
+*Proof.* From Theorem 5.1 we have SAT $\le_m^p$ 3SAT.
+Since 3SAT $\in\mathrm{NP}$, then 3SAT is NP-hard and belongs to NP,
+means NPcomplete. $\square$
 
-**Лемма 6.4.** CLIQUE $\in\mathrm{NP}$.
+**Lemma 6.4.** CLIQUE $\in\mathrm{NP}$.
 
-*Доказательство.* Сертификат — список из $k$ вершин.
-Верификатор проверяет за $O(k^2)$, что все пары соединены ребром.
+*Proof.* Certificate is a list of $k$ vertices.
+The verifier checks in $O(k^2)$ that all pairs are connected by an edge.
 $\square$
 
-**Следствие 6.5.** CLIQUE NP‑полна.
+**Corollary 6.5.** CLIQUE is NPcomplete.
 
-*Доказательство.* По Теореме 6.1 имеем 3SAT $\le_m^p$ CLIQUE.
-По Следствию 6.3 задача 3SAT NP‑полна. С Леммой 6.4 (CLIQUE $\in\mathrm{NP}$)
-получаем NP‑полноту CLIQUE. $\square$
+*Proof.* By Theorem 6.1 we have 3SAT $\le_m^p$ CLIQUE.
+By Corollary 6.3, problem 3SAT is NPcomplete. With Lemma 6.4 (CLIQUE $\in\mathrm{NP}$)
+we obtain NP-completeness CLIQUE. $\square$

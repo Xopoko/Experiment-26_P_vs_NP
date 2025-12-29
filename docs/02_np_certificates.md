@@ -1,24 +1,24 @@
-## 2. Эквивалентная «сертификатная» формулировка NP
+## 2. Equivalent "certificate" NP formulation
 
-Часто удобно определять $\mathrm{NP}$ через полиномиально проверяемые сертификаты.
+It is often convenient to define $\mathrm{NP}$ in terms of polynomially verifiable certificates.
 
-**Определение (верификатор).** Детерминированная машина $V$ — *верификатор* для языка $L$, если существует полином $p$ такой, что
+**Definition (verifier).** A deterministic machine $V$ is a *verifier* for a language $L$ if there exists a polynomial $p$ such that
 
 $$x\in L \iff \exists y\in\Sigma^\*,\ |y|\le p(|x|):\ V(x,y)=1,$$
 
-и время работы $V$ на паре $(x,y)$ ограничено полиномом от $|x|$.
+and the running time of $V$ on the pair $(x,y)$ is limited by a polynomial in $|x|$.
 
-**Лемма 2.1.** Язык $L\in\mathrm{NP}$ тогда и только тогда, когда у него есть полиномиальный верификатор.
+**Lemma 2.1.** A language $L\in\mathrm{NP}$ if and only if it has a polynomial verifier.
 
-*Доказательство.*
+*Proof.*
 
-($\Rightarrow$) Пусть $L$ распознаётся НМТ $N$ за время $n^k$.
-Сертификат $y$ — последовательность недетерминированных выборов, кодирующая ветвь длины $\le n^k$.
-Верификатор $V(x,y)$ детерминированно симулирует $N$ по этим выборам и проверяет, что ветвь принимает.
-Длина $y$ и время симуляции ограничены полиномом от $n$.
+($\Rightarrow$) Let $L$ be recognized by $N$ in time $n^k$.
+Certificate $y$ is a sequence of nondeterministic choices encoding a branch of length $\le n^k$.
+The verifier $V(x,y)$ deterministically simulates $N$ over these choices and verifies that the branch accepts.
+The length of $y$ and the simulation time are limited by a polynomial in $n$.
 
-($\Leftarrow$) Пусть есть верификатор $V$ и полином $p$.
-$N$ на входе $x$ недетерминированно угадывает $y$ длины $\le p(|x|)$ и запускает $V(x,y)$.
-Принимающая ветвь существует тогда и только тогда, когда существует сертификат; время полиномиально.
+($\Leftarrow$) Let there be a verifier $V$ and a polynomial $p$.
+$N$ on input $x$ nondeterministically guesses $y$ of length $\le p(|x|)$ and runs $V(x,y)$.
+The accepting branch exists if and only if the certificate exists; time is polynomial.
 
 $\square$

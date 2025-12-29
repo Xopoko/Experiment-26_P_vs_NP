@@ -1,44 +1,44 @@
 # Agent brief (bounded working memory)
 
-Правило: этот файл — «оперативная память» агента. Он **не должен разрастаться**
-(лимит проверяется в `scripts/verify_all.sh`). Обновляй его **заменой/сжатием**,
-а не дописыванием бесконечных списков.
+Rule: this file is the agent's "RAM". It **shouldn't grow**
+(the limit is checked in `scripts/verify_all.sh`). Update it by **replacement/compression**,
+and not by adding to endless lists.
 
-## Anti-loop (обновлять, не раздувать)
+## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S120-globalfixedpair-fixedorientation-contiguous-shift-alt33
-- `Do-not-repeat (next 2 runs):` Q39.S120-globalfixedpair-fixedorientation-contiguous-shift-alt33, Q39.S119-globalfixedpair-fixedorientation-contiguous-shift-alt32
+- `LastStepID:` Q39.S133-globalfixedpair-fixedorientation-contiguous-shift-alt46
+- `Do-not-repeat (next 2 runs):` Q39.S133-globalfixedpair-fixedorientation-contiguous-shift-alt46, Q43.S262-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k22
 - `Last InfoGain:` 1
 
-## Текущее направление (держать 1–2 строки)
+## Current direction (keep 1-2 lines)
 
-Q43: toy‑проверка на концах разрыва; дальше — явная оценка на разрыве и lift порога по кускам.
-Q39: alt33‑shift для contiguous blocks при fixed‑orientation всё ещё даёт ранг 2; следующий шаг — alt34‑shift.
+Q43: drop in ratio in gap at k=22 (n=5931641->5931642); then the general k and lift in pieces.
+Q39: alt46shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt47shift.
 
-## Что уже сделано (не повторять)
+## What has already been done (do not repeat)
 
-- ROABP‑канонизация multilinearization для CNF даёт $\mathrm{P}=\mathrm{NP}$ (барьер‑леммы 15.7.4* в `docs/15_proof_complexity.md`).
-- PIT‑аксиомы ⇒ EF p‑симулирует IPS; базовые кодирования (CNF→3‑CNF + $g$, Tseitin‑Eval, счётчики) уже в 16.x.
-- Tseitin: Frege poly (16.91); bounded‑depth lower bounds (Håstad’20, 16.92) + all‑graphs extension (GIRS’19, 16.97); missing Gauss‑step отмечен у Håstad–Risse §1.2 (16.122). Cor. 34: bounded‑depth Frege ⇒ tree‑like Res quasi‑poly (16.98); EF poly (16.88); PC: $\\mathbb F_2$ easy (16.89), char$\\ne2$ hard (16.90).
+- ROABP canonicalization multilinearization for CNF gives $\mathrm{P}=\mathrm{NP}$ (barrier lemmas 15.7.4* in `docs/15_proof_complexity.md`).
+- PIT-axioms  EF p-simulates IPS; basic encodings (CNF->3CNF + $g$, TseitinEval, counters) already in 16.x.
+- Tseitin: Frege poly (16.91); bounded-depth lower bounds (Hastad'20, 16.92) + all-graphs extension (GIRS'19, 16.97); missing Gauss step noted in Hastad-Risse Section 1.2 (16.122). Cor. 34: bounded-depth Frege  tree-like Res quasi-poly (16.98); EF poly (16.88); PC: $\\mathbb F_2$ easy (16.89), char$\\ne2$ hard (16.90).
 
-## Активные “неповторимые” задачи (выбрать одну за прогон)
+## Active "unique" tasks (select one per run)
 
-- Q39 из `docs/open_questions.md` (следующий alt‑shift для contiguous blocks).
-- Q43 из `docs/open_questions.md` (lift порога без глобальной монотонности отношения).
+- Q39 from `docs/open_questions.md` (next alt-shift for contiguous blocks).
+- Q43 from `docs/open_questions.md` (lift the threshold without global monotonicity of the relationship).
 
-## Реестр экспериментов (макс 12 пунктов; перезаписывать старые)
+## Experiment register (max 12 items; overwrite old ones)
 
-- E01: Формализация PIT‑аксиом (GP14 Def. 1.7) и связь с SoundnessIPS → EF sim IPS (см. 15.7.3).
-- E02: Барьер канонизации $\mathrm{ML}(P_\varphi)$ → ROABP (см. 15.7.4*).
-- E03: LogLog‑трюк для bounded‑кванторов/таблиц истинности (toy‑шаги в 16.x).
-- E04: Контрпример «эквивалентность CNF→3‑CNF» и корректный режим equisatisfiable + явный $g$ + линейный счёт (15.7.3c–d; 16.78).
-- E05: Tseitin‑кодирование $\mathrm{Eval}(C,x)$ даёт 3‑CNF $O(s)$ (toy‑шаги 16.x).
+- E01: Formalization of PIT axioms (GP14 Def. 1.7) and connection with SoundnessIPS -> EF sim IPS (see 15.7.3).
+- E02: Canonization barrier $\mathrm{ML}(P_\varphi)$ -> ROABP (see 15.7.4*).
+- E03: LogLog trick for bounded quantifiers/truth tables (toy steps in 16.x).
+- E04: Counterexample "equivalence CNF->3CNF" and correct mode equisatisfiable + explicit $g$ + linear counting (15.7.3c-d; 16.78).
+- E05: Tseitin encoding $\mathrm{Eval}(C,x)$ gives 3-CNF $O(s)$ (toy steps 16.x).
 - E07: Planar‑3‑SAT → Planar‑3‑SAT(≤4‑occ) (16.83–16.84).
-- E08: Tseitin($G,\\chi$): паритетный сертификат невыполнимости + 3‑CNF для 3‑регулярных графов (16.85).
-- E09: Tseitin на bounded‑degree экспандерах: $W\\ge e(G)-1$ и $S\\ge 2^{(e(G)-k-1)^2/|E|}$ (16.86).
-- E10: Явное bounded‑occ Tseitin‑семейство на 3‑регулярных экспандерах (16.87).
-- E11: Tseitin‑сводка: Frege poly (16.91), depth‑vs‑size (16.92–16.99), EF через XOR (16.88), PC: $\\mathbb F_2$ easy (16.89), $\\mathrm{char}\\ne 2$ hard (16.90).
+- E08: Tseitin($G,\\chi$): parity certificate of unsatisfiability + 3CNF for 3regular graphs (16.85).
+- E09: Tseitin on boundeddegree expanders: $W\\ge e(G)-1$ and $S\\ge 2^{(e(G)-k-1)^2/|E|}$ (16.86).
+- E10: Explicit bounded-occ Tseitin-family on 3-regular expanders (16.87).
+- E11: Tseitin summary: Frege poly (16.91), depth vs size (16.92-16.99), EF via XOR (16.88), PC: $\\mathbb F_2$ easy (16.89), $\\mathrm{char}\\ne 2$ hard (16.90).
 
-## Линзы (держать 5 последних; обновлять, не наращивать)
+## Lenses (keep the last 5; update, do not increase)
 
-Последние:Эквивалентность→Инвариант→Коммуникация/ранг→Эквивалентность→Коммуникация/ранг
+Latest:Communication/Rank->Equivalence->Communication/Rank->Equivalence->Communication/Rank

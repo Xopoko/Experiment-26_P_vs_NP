@@ -999,6 +999,175 @@ theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt33 :
       Q39_globalfixedpair_fixedorientation_contiguous_shift_alt33_vec2 := by
   decide
 
+-- Q39.S121-globalfixedpair-fixedorientation-contiguous-shift-alt34:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt34_vec1 : BitVec12 :=
+  [false, false, false, true, true, true, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt34_vec2 : BitVec12 :=
+  [false, false, false, false, true, true, true, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt34 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt34_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt34_vec2 := by
+  decide
+
+-- Q39.S122-globalfixedpair-fixedorientation-contiguous-shift-alt35:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt35_vec1 : BitVec12 :=
+  [false, false, false, false, true, true, true, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt35_vec2 : BitVec12 :=
+  [false, false, false, false, false, true, true, true, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt35 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt35_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt35_vec2 := by
+  decide
+
+-- Q39.S123-globalfixedpair-fixedorientation-contiguous-shift-alt36:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt36_vec1 : BitVec12 :=
+  [false, false, false, false, false, true, true, true, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt36_vec2 : BitVec12 :=
+  [false, false, false, false, false, false, true, true, true, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt36 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt36_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt36_vec2 := by
+  decide
+
+-- Q39.S124-globalfixedpair-fixedorientation-contiguous-shift-alt37:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt37_vec1 : BitVec12 :=
+  [false, false, false, false, false, false, true, true, true, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt37_vec2 : BitVec12 :=
+  [false, false, false, false, false, false, false, true, true, true, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt37 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt37_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt37_vec2 := by
+  decide
+
+-- Q39.S125-globalfixedpair-fixedorientation-contiguous-shift-alt38:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt38_vec1 : BitVec12 :=
+  [false, false, false, false, false, false, false, true, true, true, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt38_vec2 : BitVec12 :=
+  [false, false, false, false, false, false, false, false, true, true, true, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt38 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt38_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt38_vec2 := by
+  decide
+
+-- Q39.S126-globalfixedpair-fixedorientation-contiguous-shift-alt39:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt39_vec1 : BitVec12 :=
+  [false, false, false, false, false, false, false, false, true, true, true, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt39_vec2 : BitVec12 :=
+  [false, false, false, false, false, false, false, false, false, true, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt39 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt39_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt39_vec2 := by
+  decide
+
+-- Q39.S127-globalfixedpair-fixedorientation-contiguous-shift-alt40:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt40_vec1 : BitVec12 :=
+  [false, false, false, false, false, false, false, false, false, true, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt40_vec2 : BitVec12 :=
+  [true, false, false, false, false, false, false, false, false, false, true, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt40 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt40_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt40_vec2 := by
+  decide
+
+-- Q39.S128-globalfixedpair-fixedorientation-contiguous-shift-alt41:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt41_vec1 : BitVec12 :=
+  [true, false, false, false, false, false, false, false, false, false, true, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt41_vec2 : BitVec12 :=
+  [true, true, false, false, false, false, false, false, false, false, false, true]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt41 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt41_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt41_vec2 := by
+  decide
+
+-- Q39.S129-globalfixedpair-fixedorientation-contiguous-shift-alt42:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt42_vec1 : BitVec12 :=
+  [true, true, false, false, false, false, false, false, false, false, false, true]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt42_vec2 : BitVec12 :=
+  [true, true, true, false, false, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt42 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt42_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt42_vec2 := by
+  decide
+
+-- Q39.S130-globalfixedpair-fixedorientation-contiguous-shift-alt43:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt43_vec1 : BitVec12 :=
+  [true, true, true, false, false, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt43_vec2 : BitVec12 :=
+  [false, true, true, true, false, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt43 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt43_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt43_vec2 := by
+  decide
+
+-- Q39.S131-globalfixedpair-fixedorientation-contiguous-shift-alt44:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt44_vec1 : BitVec12 :=
+  [false, true, true, true, false, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt44_vec2 : BitVec12 :=
+  [false, false, true, true, true, false, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt44 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt44_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt44_vec2 := by
+  decide
+
+-- Q39.S132-globalfixedpair-fixedorientation-contiguous-shift-alt45:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt45_vec1 : BitVec12 :=
+  [false, false, true, true, true, false, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt45_vec2 : BitVec12 :=
+  [false, false, false, true, true, true, false, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt45 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt45_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt45_vec2 := by
+  decide
+
+-- Q39.S133-globalfixedpair-fixedorientation-contiguous-shift-alt46:
+-- contiguous blocks with fixed orientation still give rank 2 after another shift.
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt46_vec1 : BitVec12 :=
+  [false, false, false, true, true, true, false, false, false, false, false, false]
+
+def Q39_globalfixedpair_fixedorientation_contiguous_shift_alt46_vec2 : BitVec12 :=
+  [false, false, false, false, true, true, true, false, false, false, false, false]
+
+theorem Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt46 :
+    Q39_rank2_12 Q39_globalfixedpair_fixedorientation_contiguous_shift_alt46_vec1
+      Q39_globalfixedpair_fixedorientation_contiguous_shift_alt46_vec2 := by
+  decide
+
 -- Q43.S139-polym-avoids-thm41-branch: IsPoly is monotone under pointwise upper bounds.
 theorem Q43_IsPoly_of_le {t s : Nat -> Nat} (hpoly : IsPoly t) (hle : ∀ n, s n <= t n) :
     IsPoly s := by
@@ -1973,6 +2142,11 @@ theorem Q43_grid_ratio_mono_on_plateau_upper {k n m : Nat} (hk : 2 <= k)
 def Q43_gap_k : Nat := 12
 def Q43_gap_n : Nat := 5792
 def Q43_gap_n_succ : Nat := 5793
+def Q43_gap_end_lo_k (k : Nat) : Nat := 5 * 2 ^ (k - 2)
+def Q43_gap_end_hi_k (k : Nat) : Nat := 3 * 2 ^ (k - 1)
+def Q43_gap_range_list_k (k : Nat) : List Nat :=
+  (List.range (Q43_gap_end_hi_k k - Q43_gap_end_lo_k k)).map (fun i => Q43_gap_end_lo_k k + i)
+def Q43_gap_min_ratio_k (k n0 : Nat) : Nat := Q43_grid_ratio n0
 
 theorem Q43_gap_range :
     5 * 2 ^ (Q43_gap_k - 2) <= Q43_gap_n ∧
@@ -1984,14 +2158,204 @@ theorem Q43_grid_ratio_drop_gap :
     Q43_grid_ratio Q43_gap_n_succ < Q43_grid_ratio Q43_gap_n := by
   decide
 
+-- Q43.S253-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k13:
+-- counterexample inside the gap for k=13.
+def Q43_gap_k13 : Nat := 13
+def Q43_gap_n13 : Nat := 11585
+def Q43_gap_n13_succ : Nat := 11586
+
+theorem Q43_gap_range_k13 :
+    Q43_gap_end_lo_k Q43_gap_k13 <= Q43_gap_n13 ∧
+    Q43_gap_end_lo_k Q43_gap_k13 <= Q43_gap_n13_succ ∧
+    Q43_gap_n13_succ < Q43_gap_end_hi_k Q43_gap_k13 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k13 :
+    Q43_grid_ratio Q43_gap_n13_succ < Q43_grid_ratio Q43_gap_n13 := by
+  decide
+
+-- Q43.S254-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k14:
+-- counterexample inside the gap for k=14.
+def Q43_gap_k14 : Nat := 14
+def Q43_gap_n14 : Nat := 23170
+def Q43_gap_n14_succ : Nat := 23171
+
+theorem Q43_gap_range_k14 :
+    Q43_gap_end_lo_k Q43_gap_k14 <= Q43_gap_n14 ∧
+    Q43_gap_end_lo_k Q43_gap_k14 <= Q43_gap_n14_succ ∧
+    Q43_gap_n14_succ < Q43_gap_end_hi_k Q43_gap_k14 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k14 :
+    Q43_grid_ratio Q43_gap_n14_succ < Q43_grid_ratio Q43_gap_n14 := by
+  decide
+
+-- Q43.S255-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k15:
+-- counterexample inside the gap for k=15.
+def Q43_gap_k15 : Nat := 15
+def Q43_gap_n15 : Nat := 46340
+def Q43_gap_n15_succ : Nat := 46341
+
+theorem Q43_gap_range_k15 :
+    Q43_gap_end_lo_k Q43_gap_k15 <= Q43_gap_n15 ∧
+    Q43_gap_end_lo_k Q43_gap_k15 <= Q43_gap_n15_succ ∧
+    Q43_gap_n15_succ < Q43_gap_end_hi_k Q43_gap_k15 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k15 :
+    Q43_grid_ratio Q43_gap_n15_succ < Q43_grid_ratio Q43_gap_n15 := by
+  decide
+
+-- Q43.S256-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k16:
+-- counterexample inside the gap for k=16.
+def Q43_gap_k16 : Nat := 16
+def Q43_gap_n16 : Nat := 92681
+def Q43_gap_n16_succ : Nat := 92682
+
+theorem Q43_gap_range_k16 :
+    Q43_gap_end_lo_k Q43_gap_k16 <= Q43_gap_n16 ∧
+    Q43_gap_end_lo_k Q43_gap_k16 <= Q43_gap_n16_succ ∧
+    Q43_gap_n16_succ < Q43_gap_end_hi_k Q43_gap_k16 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k16 :
+    Q43_grid_ratio Q43_gap_n16_succ < Q43_grid_ratio Q43_gap_n16 := by
+  decide
+
+-- Q43.S257-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k17:
+-- counterexample inside the gap for k=17.
+def Q43_gap_k17 : Nat := 17
+def Q43_gap_n17 : Nat := 185363
+def Q43_gap_n17_succ : Nat := 185364
+
+theorem Q43_gap_range_k17 :
+    Q43_gap_end_lo_k Q43_gap_k17 <= Q43_gap_n17 ∧
+    Q43_gap_end_lo_k Q43_gap_k17 <= Q43_gap_n17_succ ∧
+    Q43_gap_n17_succ < Q43_gap_end_hi_k Q43_gap_k17 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k17 :
+    Q43_grid_ratio Q43_gap_n17_succ < Q43_grid_ratio Q43_gap_n17 := by
+  decide
+
+-- Q43.S258-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k18:
+-- counterexample inside the gap for k=18.
+def Q43_gap_k18 : Nat := 18
+def Q43_gap_n18 : Nat := 370727
+def Q43_gap_n18_succ : Nat := 370728
+
+theorem Q43_gap_range_k18 :
+    Q43_gap_end_lo_k Q43_gap_k18 <= Q43_gap_n18 ∧
+    Q43_gap_end_lo_k Q43_gap_k18 <= Q43_gap_n18_succ ∧
+    Q43_gap_n18_succ < Q43_gap_end_hi_k Q43_gap_k18 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k18 :
+    Q43_grid_ratio Q43_gap_n18_succ < Q43_grid_ratio Q43_gap_n18 := by
+  decide
+
+-- Q43.S259-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k19:
+-- counterexample inside the gap for k=19.
+def Q43_gap_k19 : Nat := 19
+def Q43_gap_n19 : Nat := 741455
+def Q43_gap_n19_succ : Nat := 741456
+
+theorem Q43_gap_range_k19 :
+    Q43_gap_end_lo_k Q43_gap_k19 <= Q43_gap_n19 ∧
+    Q43_gap_end_lo_k Q43_gap_k19 <= Q43_gap_n19_succ ∧
+    Q43_gap_n19_succ < Q43_gap_end_hi_k Q43_gap_k19 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k19 :
+    Q43_grid_ratio Q43_gap_n19_succ < Q43_grid_ratio Q43_gap_n19 := by
+  decide
+
+-- Q43.S260-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k20:
+-- counterexample inside the gap for k=20.
+def Q43_gap_k20 : Nat := 20
+def Q43_gap_n20 : Nat := 1482910
+def Q43_gap_n20_succ : Nat := 1482911
+
+theorem Q43_gap_range_k20 :
+    Q43_gap_end_lo_k Q43_gap_k20 <= Q43_gap_n20 ∧
+    Q43_gap_end_lo_k Q43_gap_k20 <= Q43_gap_n20_succ ∧
+    Q43_gap_n20_succ < Q43_gap_end_hi_k Q43_gap_k20 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k20 :
+    Q43_grid_ratio Q43_gap_n20_succ < Q43_grid_ratio Q43_gap_n20 := by
+  decide
+
+-- Q43.S261-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k21:
+-- counterexample inside the gap for k=21.
+def Q43_gap_k21 : Nat := 21
+def Q43_gap_n21 : Nat := 2965820
+def Q43_gap_n21_succ : Nat := 2965821
+
+theorem Q43_gap_range_k21 :
+    Q43_gap_end_lo_k Q43_gap_k21 <= Q43_gap_n21 ∧
+    Q43_gap_end_lo_k Q43_gap_k21 <= Q43_gap_n21_succ ∧
+    Q43_gap_n21_succ < Q43_gap_end_hi_k Q43_gap_k21 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k21 :
+    Q43_grid_ratio Q43_gap_n21_succ < Q43_grid_ratio Q43_gap_n21 := by
+  decide
+
+-- Q43.S262-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k22:
+-- counterexample inside the gap for k=22.
+def Q43_gap_k22 : Nat := 22
+def Q43_gap_n22 : Nat := 5931641
+def Q43_gap_n22_succ : Nat := 5931642
+
+theorem Q43_gap_range_k22 :
+    Q43_gap_end_lo_k Q43_gap_k22 <= Q43_gap_n22 ∧
+    Q43_gap_end_lo_k Q43_gap_k22 <= Q43_gap_n22_succ ∧
+    Q43_gap_n22_succ < Q43_gap_end_hi_k Q43_gap_k22 := by
+  decide
+
+theorem Q43_grid_ratio_drop_gap_k22 :
+    Q43_grid_ratio Q43_gap_n22_succ < Q43_grid_ratio Q43_gap_n22 := by
+  decide
+
 -- Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
 -- apply-params-poly-n0-ratio-lift-piecewise-gap-alternative:
 -- toy check: ratio at the gap endpoints (k=12) does not drop.
-def Q43_gap_end_lo : Nat := 5 * 2 ^ (Q43_gap_k - 2)
-def Q43_gap_end_hi : Nat := 3 * 2 ^ (Q43_gap_k - 1)
+def Q43_gap_end_lo : Nat := Q43_gap_end_lo_k Q43_gap_k
+def Q43_gap_end_hi : Nat := Q43_gap_end_hi_k Q43_gap_k
 
 theorem Q43_gap_end_ratio_le :
     Q43_grid_ratio Q43_gap_end_lo <= Q43_grid_ratio Q43_gap_end_hi := by
+  decide
+
+-- Q43.S251-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-bound:
+-- toy scan over the gap [5*2^(k-2), 3*2^(k-1)) for k=12 to get a uniform lower bound.
+def Q43_gap_range_list : List Nat := Q43_gap_range_list_k Q43_gap_k
+
+def Q43_gap_min_ratio : Nat := Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ
+
+theorem Q43_gap_min_ratio_le_all :
+    List.All (fun n => Q43_gap_min_ratio <= Q43_grid_ratio n) Q43_gap_range_list := by
+  decide
+
+-- Q43.S252-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
+-- apply-params-poly-n0-ratio-lift-piecewise-gap-bound-generalize:
+-- parameterized gap scan instantiated at k=12.
+theorem Q43_gap_min_ratio_le_all_k12 :
+    List.All
+        (fun n => Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ <= Q43_grid_ratio n)
+        (Q43_gap_range_list_k Q43_gap_k) := by
   decide
 
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.

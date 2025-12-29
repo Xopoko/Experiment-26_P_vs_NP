@@ -1,26 +1,26 @@
-## 17. Источники и опорные ссылки
+## 17. Sources and reference links
 
-**Постановка и базовые учебники**
-- Clay Mathematics Institute (формулировка P vs NP): ../resources/downloads/clay_p_vs_np.pdf
+**Staging and basic tutorials**
+- Clay Mathematics Institute (P vs NP formulation): ../resources/downloads/clay_p_vs_np.pdf
 - M. Sipser, *Introduction to the Theory of Computation*: ../resources/downloads/sipser_book.html.
-- O. Goldreich, *P, NP, and NP‑Completeness* (конспект): ../resources/downloads/goldreich_np.pdf
+- O. Goldreich, *P, NP, and NPCompleteness* (summary): ../resources/downloads/goldreich_np.pdf
 - S. Arora, B. Barak, *Computational Complexity: A Modern Approach* (draft PDF): ../resources/downloads/arora_barak.pdf
 - A. Rao (2022), *Lecture 5: Hierarchy Theorems (CSEP 531)* (PDF):
   ../resources/downloads/uw_hierarchy_2022_lecture5.pdf
 
-**Обзоры (статус и контекст)**
+**Reviews (status and context)**
 - L. Fortnow (2021), *Fifty Years of P Versus NP and the Possibility of the Impossible* (PDF): ../resources/downloads/fortnow_pvnp50_2021.pdf
 - S. Aaronson (2017), *P = NP* (ECCC TR17-004, PDF): ../resources/downloads/aaronson_pnp_2017.pdf
 - L. Fortnow (2009), *The Status of the P versus NP Problem* (CACM, PDF): ../resources/downloads/fortnow_cacm_2009.pdf
 - D. van Melkebeek (2007), *A Survey of Lower Bounds for Satisfiability and Related Problems* (PDF):
   ../resources/downloads/van_melkebeek_2007_survey.pdf
 
-**NP‑полнота**
+**NPcompleteness**
 - S. Cook (1971), *The Complexity of Theorem‑Proving Procedures* (Cook–Levin): ../resources/downloads/cook_1971.pdf
 - R. Karp (1972), *Reducibility Among Combinatorial Problems* (PDF): ../resources/downloads/karp_1972.pdf, p.9 “3SAT ≤P Clique”.
 - J. Srba (2010), *CNF-SAT ≤p 3SAT; NP-Completeness of CLIQUE* (PDF): ../resources/downloads/srba_np_completeness_2010.pdf, Theorem “CNF-SAT ≤P 3SAT” p.3/13.
 
-**Барьеры**
+**Barriers**
 - Baker–Gill–Solovay (1975), *Relativizations of the P = ? NP Question* (`../resources/downloads/jkatz_relativization_2005.pdf`, Katz lecture p.1, main result).
 - S. Arora, R. Impagliazzo, U. Vazirani (1992), *Relativizing versus Nonrelativizing Techniques:
   The Role of Local Checkability* (PDF): ../resources/downloads/arora_impagliazzo_vazirani_1992.pdf
@@ -33,7 +33,7 @@
   ../resources/downloads/chen_hu_ren_2025_algebrization_barriers.pdf
 - A. Razborov (2023), *Propositional proof complexity* (ECM survey, PDF): ../resources/downloads/razborov_2023_proof_complexity_ecm.pdf
 
-**Bounded arithmetic (для EF / proof complexity)**
+**Bounded arithmetic (for EF / proof complexity)**
 - S. Buss (1995), *Bounded Arithmetic and Propositional Proofs, Part I:
   Bounded Arithmetic* (PDF): ../resources/downloads/buss_1995_bounded_arithmetic_notes.pdf
 - A. Razborov, *Bounded Arithmetic and Lower Bounds in Boolean Complexity* (PDF): ../resources/downloads/razborov_bobo.pdf
@@ -90,16 +90,16 @@
 - M. Lauria (2015), *Lecture 2: Resolution Lower Bounds via the Pigeonhole Principle* (PDF): ../resources/downloads/lauria_lecture2_2015.pdf
 - University of Toronto (TSS, 2021), *Introduction to Proof Complexity* (notes, PDF): ../resources/downloads/tss_proof_complexity_notes.pdf
 
-**Вероятностные оценки**
+**Probabilistic estimates**
 - D. Dubhashi, D. Ranjan (1996), *Balls and Bins: A Study in Negative Dependence* (BRICS RS-96-25, PDF):
   ../resources/downloads/dubhashi_ranjan_1996_balls_bins_negative_dependence.pdf
 
-**Неравномерность (P/poly)**
+**Unevenness (P/poly)**
 - Karp–Lipton (1980), *Some connections between nonuniform and uniform complexity classes*
   (`../resources/downloads/trevisan_lecture05_2008.pdf`).
 - L. Trevisan (2008), *Lecture 5: The Karp-Lipton-Sipser Theorem* (notes, PDF): ../resources/downloads/trevisan_lecture05_2008.pdf
 
-**Схемные нижние оценки и техника**
+**Schematic lower bounds and technique**
 - Furst–Saxe–Sipser (1984), *Parity, circuits, and the polynomial-time hierarchy* (PDF): ../resources/downloads/fss_1984.pdf
 - J. Håstad (1986), *Almost Optimal Lower Bounds for Small Depth Circuits* (PDF): ../resources/downloads/hastad_1986.pdf
 - R. Smolensky (1987), *Algebraic methods in the theory of lower bounds for Boolean circuit complexity* (PDF):
@@ -108,10 +108,10 @@
   ../resources/downloads/razborov_1985_monotone.pdf
 - S. Grewal, V. M. Kumar (2024), *Improved Circuit Lower Bounds and Quantum-Classical Separations* (PDF):
   ../resources/downloads/grewal_kumar_2024_gc0.pdf
-- R. O’Donnell (курс/лекции; switching lemma и AC⁰‑нижние оценки): ../resources/downloads/odonnell_course.html
+- R. O'Donnell (course/lectures; switching lemma and AC0lower marks): ../resources/downloads/odonnell_course.html
 - R. O’Donnell (2009), *Lecture 14: The Switching Lemma* (PDF): ../resources/downloads/odonnell_lecture14.pdf
 
-**Алгебраические подходы (GCT)**
+**Algebraic approaches (GCT)**
 - M. Bläser, C. Ikenmeyer (2025), *Introduction to Geometric Complexity Theory* (PDF):
   ../resources/downloads/blaser_ikenmeyer_2025_gct_intro.pdf
 - R. Saptharishi (2016), *A survey of lower bounds in arithmetic circuit complexity* (PDF):
@@ -126,11 +126,11 @@
 
 
 
-**Интерактивные доказательства и дерэндомизация**
+**Interactive evidence and de-randomization**
 - A. Shamir (1992), *IP = PSPACE* (PDF): ../resources/downloads/shamir_1992.pdf
 - N. Nisan, A. Wigderson (1994), *Hardness vs. Randomness* (PDF): ../resources/downloads/nisan_wigderson_1994.pdf
 
 
-**Примечание.** Термин $\mathrm{Time}[n^k]/u(n)$ фиксирован в разделе 9;
-схема $w_{n,k,u}(f)$ — в разделе 15.7.
-(Локальный манифест ссылок/скачивалка: `../resources/manifest.tsv`, `../resources/download_resources.py`; скачанные PDF: `../resources/downloads/`.)
+**Note.** The term $\mathrm{Time}[n^k]/u(n)$ is fixed in Section 9;
+the $w_{n,k,u}(f)$ circuit is in Section 15.7.
+(Local link manifest/download: `../resources/manifest.tsv`, `../resources/download_resources.py`; downloaded PDF: `../resources/downloads/`.)

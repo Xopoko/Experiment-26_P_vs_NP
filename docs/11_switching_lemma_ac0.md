@@ -1,130 +1,130 @@
-## 11. От глубины 2 к AC⁰: switching lemma (цитируется) → PARITY ∉ AC⁰
+## 11. From depth 2 to AC0: switching lemma (quoted) -> PARITY  AC0
 
-Нижняя оценка из Раздела 10 относится к глубине 2 (DNF/CNF).
-Для произвольной постоянной глубины $d$ ключевой инструмент — переключательная лемма Хастада.
-Здесь фиксируем формальный «скелет» доказательства: какие определения/леммы нужны
-и где применяется switching lemma.
+The lower bound from Section 10 is for depth 2 (DNF/CNF).
+For an arbitrary constant depth $d$, the key tool is Hustad's switching lemma.
+Here we fix the formal "skeleton" of the proof: what definitions/lemmas are needed
+and where the switching lemma is applied.
 
-### 11.0. Ограничения и decision trees
+### 11.0. Constraints and decision trees
 
-**Определение (ограничение).** Ограничение $\rho$ на переменные $x_1,\dots,x_n$ —
-это вектор из $\{0,1,*\}^n$.
-Координата $\rho_i\in\{0,1\}$ означает фиксацию $x_i=\rho_i$,
-а $\rho_i=*\,$ означает «свободно».
-Обозначим через $m(\rho)$ число свободных переменных.
+**Definition (constraint).** Constraint $\rho$ on variables $x_1,\dots,x_n$ --
+is a vector of $\{0,1,*\}^n$.
+The coordinate $\rho_i\in\{0,1\}$ means fixation $x_i=\rho_i$,
+and $\rho_i=*\,$ means "free".
+Let $m(\rho)$ denote the number of free variables.
 
-Для булевой функции $f:\{0,1\}^n\to\{0,1\}$ ограниченная функция
-$f\upharpoonright\rho$ получается подстановкой фиксированных значений
-и рассматривается как функция от $m(\rho)$ свободных переменных.
+For a Boolean function $f:\{0,1\}^n\to\{0,1\}$ the bounded function
+$f\upharpoonright\rho$ is obtained by substituting fixed values
+and is considered as a function of $m(\rho)$ free variables.
 
-**Определение (decision tree).** Decision tree для $f$ — адаптивный алгоритм,
-который на входе $x$ последовательно запрашивает значения отдельных $x_i$
-и в листе выдаёт 0/1.
-*Глубина* — максимальное число запросов на пути корень→лист.
-Обозначим минимальную возможную глубину через $\mathrm{DT}(f)$.
+**Definition (decision tree).** Decision tree for $f$ is an adaptive algorithm,
+which at the input $x$ sequentially requests the values of individual $x_i$
+and in the sheet it gives 0/1.
+*Depth*--the maximum number of requests on the root->leaf path.
+Let us denote the minimum possible depth by $\mathrm{DT}(f)$.
 
-**Факт 11.6.** Если $\mathrm{DT}(f)\le d$, то $f$ имеет DNF ширины $\le d$ и CNF ширины $\le d$.
+**Fact 11.6.** If $\mathrm{DT}(f)\le d$, then $f$ has a DNF of width $\le d$ and a CNF of width $\le d$.
 
-*Доказательство.* Возьмём decision tree глубины $d$ для $f$.
-Каждый путь, ведущий к листу со значением 1, задаёт терм
-(конъюнкцию запрошенных литералов) длины $\le d$;
-OR всех таких термов вычисляет $f$, давая DNF ширины $\le d$.
-Для CNF применяем тот же аргумент к $\neg f$ и затем де Моргана. $\square$
+*Proof.* Take a decision tree of depth $d$ for $f$.
+Each path leading to a leaf with value 1 defines a term
+(conjunction of the requested literals) of length $\le d$;
+The OR of all such terms evaluates $f$, giving a DNF of width $\le d$.
+For CNF, apply the same argument to $\neg f$ and then de Morgan. $\square$
 
-### 11.1. PARITY под ограничениями (полное доказательство)
+### 11.1. PARITY under restrictions (full proof)
 
-**Лемма 11.3.** Для любого ограничения $\rho$ функция
-$\mathrm{PARITY}_n\upharpoonright\rho$ равна $\mathrm{PARITY}_{m(\rho)}$
-или $\neg\mathrm{PARITY}_{m(\rho)}$ (то есть $\mathrm{PARITY}_{m(\rho)}\oplus c$
-для некоторой константы $c\in\{0,1\}$).
+**Lemma 11.3.** For any constraint $\rho$ the function
+$\mathrm{PARITY}_n\upharpoonright\rho$ is equal to $\mathrm{PARITY}_{m(\rho)}$
+or $\neg\mathrm{PARITY}_{m(\rho)}$ (that is, $\mathrm{PARITY}_{m(\rho)}\oplus c$
+for some constant $c\in\{0,1\}$).
 
-*Доказательство.* Паритет есть XOR всех битов.
-После подстановки фиксированных переменных их вклад становится константой
-$c\in\{0,1\}$, а оставшиеся $m(\rho)$ свободных переменных остаются под XOR.
-Значит $\mathrm{PARITY}_n\upharpoonright\rho = \mathrm{PARITY}_{m(\rho)}\oplus c$;
-при $c=0$ это паритет, при $c=1$ — его отрицание. $\square$
+*Proof.* Parity is the XOR of all bits.
+After substituting fixed variables, their contribution becomes constant
+$c\in\{0,1\}$, and the remaining $m(\rho)$ free variables remain under XOR.
+So $\mathrm{PARITY}_n\upharpoonright\rho = \mathrm{PARITY}_{m(\rho)}\oplus c$;
+for $c=0$ this is parity, for $c=1$ it is its negation. $\square$
 
-### 11.2. PARITY требует полной decision-tree глубины (полное доказательство)
+### 11.2. PARITY requires full decision-tree depth (full proof)
 
-**Лемма 11.4.** $\mathrm{DT}(\mathrm{PARITY}_m)=m$.
+**Lemma 11.4.** $\mathrm{DT}(\mathrm{PARITY}_m)=m$.
 
-*Доказательство.* Верхняя оценка $\le m$ очевидна: запросить все $m$ переменных и вычислить XOR.
+*Proof.* The upper bound for $\le m$ is obvious: query all $m$ variables and compute XOR.
 
-Для нижней оценки предположим, что существует decision tree глубины $<m$,
-вычисляющее $\mathrm{PARITY}_m$. Тогда на любом пути к листу запрашивается
-$<m$ переменных, значит в листе остаётся хотя бы одна свободная переменная.
-Но лист соответствует подкубу, заданному фиксацией запрошенных переменных, и по
-Лемме 10.1 паритет на таком подкубе не может быть константой, тогда как
-decision tree в листе выдаёт константу. Противоречие. $\square$
+For the lower bound, we assume that there is a decision tree of depth $<m$,
+calculating $\mathrm{PARITY}_m$. Then on any path to the sheet it is requested
+$<m$ variables, which means there is at least one free variable left in the sheet.
+But the sheet corresponds to the subcube specified by fixing the requested variables, and by
+Lemma 10.1 parity on such a subcube cannot be constant, whereas
+The decision tree in the sheet produces a constant. Contradiction. $\square$
 
-**Следствие 11.5.** Для любого $\rho$ с $m(\rho)=m$ имеем
+**Corollary 11.5.** For any $\rho$ with $m(\rho)=m$ we have
 $\mathrm{DT}(\mathrm{PARITY}_n\upharpoonright\rho)=m$
-(в частности, если $m\ge 1$, то $\mathrm{PARITY}_n\upharpoonright\rho$ не константа).
+(in particular, if $m\ge 1$, then $\mathrm{PARITY}_n\upharpoonright\rho$ is not a constant).
 
-*Доказательство.* По Лемме 11.3 ограничение паритета — это
-$\mathrm{PARITY}_m$ или $\neg\mathrm{PARITY}_m$, а инверсия выхода не меняет
-decision-tree глубину. Применяем Лемму 11.4. $\square$
+*Proof.* By Lemma 11.3, the parity constraint is
+$\mathrm{PARITY}_m$ or $\neg\mathrm{PARITY}_m$, and inverting the output does not change
+decision-tree depth. We apply Lemma 11.4. $\square$
 
 ### 11.3. Switching lemma → PARITY $\notin$ AC⁰
 
-Далее даём доказательство Теоремы 11.2, принимая switching lemma (Теорема 11.1).
+Next we give the proof of Theorem 11.2, taking the switching lemma (Theorem 11.1).
 
-**Теорема 11.1 (Håstad switching lemma, цитируется; форма с явными константами).**
-Пусть $F$ — DNF (или CNF) ширины не более $w$ над $n$ переменными.
-Пусть $\rho$ — случайное ограничение, выбираемое равномерно среди ограничений
-с ровно $s=\sigma n$ свободными переменными, где $\sigma\le 1/5$.
-Тогда для любого $t\le s$
+**Theorem 11.1 (Hastad switching lemma, cited; form with explicit constants).**
+Let $F$ be a DNF (or CNF) of width at most $w$ over $n$ variables.
+Let $\rho$ be a random constraint chosen uniformly among the constraints
+with exactly $s=\sigma n$ free variables, where $\sigma\le 1/5$.
+Then for any $t\le s$
 $$\Pr\big[\mathrm{DT}(F\upharpoonright\rho)>t\big] \le (10\sigma w)^t.$$
 
-Источник: O’Donnell, Lecture 14 (The Switching Lemma), Theorem 1.8; исходный результат — Håstad (1986).
+Source: O'Donnell, Lecture 14 (The Switching Lemma), Theorem 1.8; original result: Hastad (1986).
 
-**Теорема 11.2 (PARITY $\notin$ AC⁰, доказательство при Теореме 11.1).**
-Для любого фиксированного $k\ge 2$ любая глубины-$k$ AC⁰‑схема,
-вычисляющая $\mathrm{PARITY}_n$, имеет размер $S\ge 2^{\Omega(n^{1/(k-1)})}$.
+**Theorem 11.2 (PARITY $\notin$ AC0, proof of Theorem 11.1).**
+For any fixed $k\ge 2$, any depth-$k$ AC0scheme,
+computing $\mathrm{PARITY}_n$, has size $S\ge 2^{\Omega(n^{1/(k-1)})}$.
 
-*Доказательство.* Пусть $C$ — глубины-$k$ схема размера $S$, вычисляющая $\mathrm{PARITY}_n$.
+*Proof.* Let $C$ be a depth-$k$ circuit of size $S$ computing $\mathrm{PARITY}_n$.
 
-1) *(Нормализация, цитируется.)* Можно считать, что схема «слоистая»
-(уровни чередуют AND/OR), входы — литералы, а fan-out равен 1 (формула).
-При фиксированном $k$ это увеличивает размер лишь до $S^{O(1)}$;
-переобозначим его снова через $S$.
+1) *(Normalization, quoted.)* We can consider that the circuit is "layered"
+(levels alternate AND/OR), inputs are literals, and fan-out is 1 (formula).
+For a fixed $k$, this only increases the size to $S^{O(1)}$;
+let us redesignate it again as $S$.
 
-2) Положим $w:=20\log_2 S$.
-Далее (также стандартно) сведёмся к случаю, когда fan-in всех нижних гейтов
-не превосходит $w$; это делается дополнительным случайным ограничением, которое
-с положительной вероятностью убивает все нижние гейты ширины $>w$
-(O’Donnell, Lecture 14, конец доказательства Теоремы 3.1).
-Снова переобозначим полученную схему через $C$.
+2) Set $w:=20\log_2 S$.
+Next (also standard) we reduce to the case when the fan-in of all lower gates
+does not exceed $w$; this is done by an additional random constraint, which
+kills all lower gates of width $>w$ with positive probability
+(O'Donnell, Lecture 14, end of proof of Theorem 3.1).
+Let us again redesignate the resulting circuit as $C$.
 
-3) Предположим без потери общности, что нижний слой — AND. Тогда каждый гейт следующего слоя вычисляет DNF ширины $\le w$.
+3) Assume without loss of generality that the bottom layer is AND. Then each gate of the next layer calculates a DNF of width $\le w$.
 
-Возьмём $\sigma:=1/(20w)$ и применим случайное ограничение $\rho_1$
-с ровно $\sigma n$ свободными переменными. По Теореме 11.1
-для фиксированного такого DNF вероятность события $\mathrm{DT}(\cdot)>w$
-не превосходит $(10\sigma w)^w=(1/2)^w=S^{-20}$.
+Let's take $\sigma:=1/(20w)$ and apply a random constraint $\rho_1$
+with exactly $\sigma n$ free variables. By Theorem 11.1
+for a fixed such DNF the probability of the event is $\mathrm{DT}(\cdot)>w$
+does not exceed $(10\sigma w)^w=(1/2)^w=S^{-20}$.
 
-По объединённой оценке (union bound) по всем $\le S$ гейтам этого слоя
-существует ограничение $\rho_1$, при котором *каждый* из них после ограничения
-имеет $\mathrm{DT}\le w$. По Факту 11.6 каждый такой гейт эквивалентен
-CNF ширины $\le w$, и потому два соседних слоя схемы становятся одного типа
-и могут быть слиты. В результате получаем схему глубины $k-1$ с тем же
-ограничением fan-in $\le w$ на нижнем уровне.
+According to the union bound for all $\le S$ gates of this layer
+there is a constraint $\rho_1$ such that *each* of them after the constraint
+has $\mathrm{DT}\le w$. According to Fact 11.6, each such gate is equivalent
+CNF of width $\le w$, and therefore two adjacent layers of the circuit become of the same type
+and can be merged. As a result, we obtain a $k-1$ depth scheme with the same
+restriction of fan-in $\le w$ at the lower level.
 
-4) Повторяем шаг (3) ещё $k-3$ раза (каждый раз оставляя долю $\sigma$
-свободных переменных). Пусть $\rho$ — композиция полученных ограничений.
-Через $k-2$ таких шагов получаем глубину 2 и число свободных переменных
+4) Repeat step (3) another $k-3$ times (each time leaving a fraction of $\sigma$
+free variables). Let $\rho$ be the composition of the obtained constraints.
+After $k-2$ of such steps we obtain the depth 2 and the number of free variables
 $$m := n\cdot \sigma^{k-2} = \frac{n}{(20w)^{k-2}} = \frac{n}{(400\log_2 S)^{k-2}}.$$
 
-По Лемме 11.3 ограничение $\mathrm{PARITY}_n\upharpoonright\rho$ — это $\mathrm{PARITY}_m$ или его отрицание.
+By Lemma 11.3, the constraint $\mathrm{PARITY}_n\upharpoonright\rho$ is $\mathrm{PARITY}_m$ or its negation.
 
-5) Но по Теореме 10.3 любая глубины‑2 DNF/CNF для $\mathrm{PARITY}_m$
-требует размера $\ge 2^{m-1}$. Размер нашей формулы после ограничений
-не превосходит $S$, значит $S\ge 2^{m-1}$ и, следовательно, $m=O(\log_2 S)$.
+5) But by Theorem 10.3 any depth-2 DNF/CNF for $\mathrm{PARITY}_m$
+requires size $\ge 2^{m-1}$. The size of our formula after restrictions
+does not exceed $S$, which means $S\ge 2^{m-1}$ and, therefore, $m=O(\log_2 S)$.
 
-Подставляя $m=\Theta\big(n/(\log_2 S)^{k-2}\big)$, получаем
-$(\log_2 S)^{k-1}=\Omega(n)$, то есть $\log_2 S=\Omega(n^{1/(k-1)})$.
-Следовательно, $S\ge 2^{\Omega(n^{1/(k-1)})}$. $\square$
+Substituting $m=\Theta\big(n/(\log_2 S)^{k-2}\big)$, we get
+$(\log_2 S)^{k-1}=\Omega(n)$, that is, $\log_2 S=\Omega(n^{1/(k-1)})$.
+Therefore, $S\ge 2^{\Omega(n^{1/(k-1)})}$. $\square$
 
-**Цель на продолжение:** либо выписать доказательство Теоремы 11.1
-(switching lemma), либо зафиксировать одну выбранную ссылку как «доверенную»
-и дальше двигаться к другим моделям/функциям.
+**Goal for continuation:** or write out the proof of Theorem 11.1
+(switching lemma), or fix one selected link as "trusted"
+and then move on to other models/functions.

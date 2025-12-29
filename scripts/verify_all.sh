@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-python3 scripts/verify_notebook.py
+verify_args=()
+if [ "${SKIP_RESOURCE_CHECKS:-}" = "1" ] || [ ! -d resources/downloads ]; then
+  verify_args+=(--skip-resource-checks)
+fi
+python3 scripts/verify_notebook.py "${verify_args[@]}"
 
 if [ -d formal ] && [ -f formal/lakefile.lean ]; then
   if [ "${FORMAL_SKIP:-}" = "1" ]; then

@@ -1,57 +1,57 @@
-## 5. Лемма: SAT $\le_m^p$ 3SAT (полное доказательство)
+## 5. Lemma: SAT $\le_m^p$ 3SAT (complete proof)
 
-Будем кодировать CNF‑формулу $F$ как конъюнкцию клауз (дизъюнктов) из литералов. Литерал — переменная $x_i$ или её отрицание $\neg x_i$.
+We will encode the CNF formula $F$ as a conjunction of clauses (disjuncts) from literals. Literal is the variable $x_i$ or its negation $\neg x_i$.
 
-**Lean‑скелет:** синтаксические определения CNF/3CNF и SAT заданы в `formal/PvNP/Core/SAT.lean` (кодирование в битстроки пока не формализовано).
-Определение преобразования SAT→3SAT задано в `formal/PvNP/Core/ReductionsSAT.lean`;
-свойство “результат — 3CNF” формализовано как `satTo3Sat_is3cnf` там же.
-Эквисатисфакция — цель для формализации в `formal/PvNP/Core/ReductionsSAT.lean` (пока не доказана в Lean).
+**Lean skeleton:** syntactic definitions of CNF/3CNF and SAT are specified in `formal/PvNP/Core/SAT.lean` (encoding into bitstrings has not yet been formalized).
+The definition of the SAT->3SAT conversion is specified in `formal/PvNP/Core/ReductionsSAT.lean`;
+the "result - 3CNF" property is formalized as `satTo3Sat_is3cnf` right there.
+Equivalence is a goal for formalization in `formal/PvNP/Core/ReductionsSAT.lean` (not yet proven in Lean).
 
-**Теорема 5.1.** Существует полиномиально вычислимая функция $T$, которая
-по CNF‑формуле $F$ строит 3CNF‑формулу $T(F)$ такую, что $F$ выполнима
-тогда и только тогда, когда $T(F)$ выполнима.
+**Theorem 5.1.** There is a polynomial computable function $T$, which
+using a CNF formula $F$ constructs a 3CNF formula $T(F)$ such that $F$ is satisfiable
+if and only if $T(F)$ is satisfiable.
 
-*Конструкция.* Пусть $F=\bigwedge_{j=1}^m C_j$, где $C_j$ — дизъюнкт из $k_j$ литералов.
+*Construction.* Let $F=\bigwedge_{j=1}^m C_j$, where $C_j$ is the clause of $k_j$ literals.
 
-1) Если $k_j=1$, то $C_j=(\ell_1)$ заменяем на $(\ell_1\lor\ell_1\lor\ell_1)$.
+1) If $k_j=1$, then $C_j=(\ell_1)$ is replaced by $(\ell_1\lor\ell_1\lor\ell_1)$.
 
-2) Если $k_j=2$, то $C_j=(\ell_1\lor\ell_2)$ заменяем на $(\ell_1\lor\ell_2\lor\ell_2)$.
+2) If $k_j=2$, then $C_j=(\ell_1\lor\ell_2)$ is replaced by $(\ell_1\lor\ell_2\lor\ell_2)$.
 
-3) Если $k_j=3$, оставляем как есть.
+3) If $k_j=3$, leave it as is.
 
-4) Если $k_j>3$ и $C_j=(\ell_1\lor\ell_2\lor\cdots\lor\ell_{k_j})$, вводим
-новые переменные $y_1,\dots,y_{k_j-3}$ и заменяем $C_j$
-на конъюнкцию $k_j-2$ трёхлитеральных клауз:
+4) If $k_j>3$ and $C_j=(\ell_1\lor\ell_2\lor\cdots\lor\ell_{k_j})$, enter
+new variables $y_1,\dots,y_{k_j-3}$ and replace $C_j$
+on the conjunction of $k_j-2$ triliteral clauses:
 
 $$(\ell_1\lor\ell_2\lor y_1)\ \wedge\ (\neg y_1\lor\ell_3\lor y_2)\ \wedge\ \cdots
 (\neg y_{k_j-4}\lor\ell_{k_j-2}\lor y_{k_j-3})
 \ \wedge\ (\neg y_{k_j-3}\lor\ell_{k_j-1}\lor\ell_{k_j}).$$
 
-Определим $T(F)$ как конъюнкцию преобразованных клауз для всех $j$.
+Let us define $T(F)$ as the conjunction of transformed clauses for all $j$.
 
-*Корректность (эквисатисфайбилити).* Достаточно проверить для каждой клаузы $C_j$.
+*Correctness (equisatisfiability).* It is enough to check $C_j$ for each clause.
 
-- Случаи $k_j\le 3$ очевидно сохраняют выполнимость: замена добавляет дубликаты литералов.
+- The $k_j\le 3$ cases obviously preserve satisfiability: the replacement adds duplicate literals.
 
-- Пусть $k_j>3$. Обозначим полученную цепочку клауз как $D_1\wedge\cdots\wedge D_{k_j-2}$.
+- Let $k_j>3$. Let us denote the resulting chain of clauses as $D_1\wedge\cdots\wedge D_{k_j-2}$.
 
-($\Rightarrow$) Пусть $C_j$ истинна на присваивании $x$, и $\ell_t$ истинна.
-Если $t\le 2$, положим все $y_i=\mathrm{false}$.
-Если $t>2$, зададим $y_i=\mathrm{true}$ для $i< t-2$ и $y_i=\mathrm{false}$ для $i\ge t-2$.
-Тогда в каждой $D_i$ истинен хотя бы один литерал; цепочка выполнима.
+($\Rightarrow$) Let $C_j$ be true on assignment $x$, and $\ell_t$ be true.
+If $t\le 2$, we set all $y_i=\mathrm{false}$.
+If $t>2$, set $y_i=\mathrm{true}$ for $i< t-2$ and $y_i=\mathrm{false}$ for $i\ge t-2$.
+Then in each $D_i$ at least one literal is true; the chain is feasible.
 
-($\Leftarrow$) Пусть цепочка выполнима, но все $\ell_1,\dots,\ell_{k_j}$ ложны.
-Тогда из $D_1=(\ell_1\lor\ell_2\lor y_1)$ следует $y_1=\mathrm{true}$,
-из $D_2=(\neg y_1\lor\ell_3\lor y_2)$ — $y_2=\mathrm{true}$, и так далее,
-получаем $y_{k_j-3}=\mathrm{true}$.
-Последняя клауза $D_{k_j-2}$ становится ложной — противоречие.
-Значит хотя бы один $\ell_t$ истинен, то есть $C_j$ истинна.
+($\Leftarrow$) Let the chain be satisfiable, but all $\ell_1,\dots,\ell_{k_j}$ are false.
+Then from $D_1=(\ell_1\lor\ell_2\lor y_1)$ it follows that $y_1=\mathrm{true}$,
+from $D_2=(\neg y_1\lor\ell_3\lor y_2)$ - $y_2=\mathrm{true}$, and so on,
+we get $y_{k_j-3}=\mathrm{true}$.
+The last clause $D_{k_j-2}$ becomes false - a contradiction.
+This means that at least one $\ell_t$ is true, that is, $C_j$ is true.
 
-Таким образом, $C_j$ выполнима $\iff$ соответствующая 3CNF‑замена выполнима.
-По конъюнкции по всем $j$ получаем $F$ выполнима $\iff T(F)$ выполнима.
+Thus, $C_j$ is feasible. $\iff$ the corresponding 3CNF substitution is feasible.
+By conjunction over all $j$ we obtain $F$ is satisfiable $\iff T(F)$ is satisfiable.
 
-*Сложность.* Размер увеличивается линейно по суммарной длине клауз
-(для клаузы длины $k$ создаётся $k-2$ клауз и $k-3$ новых переменных).
-Значит $T$ вычислима за полиномиальное время.
+*Complexity.* Size increases linearly with the total length of the clauses
+(for a clause of length $k$, $k-2$ clauses and $k-3$ new variables are created).
+This means $T$ is computable in polynomial time.
 
 $\square$

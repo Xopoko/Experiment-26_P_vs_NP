@@ -2,1359 +2,1359 @@ import Paperproof
 
 /-!
 
-# P vs NP — исследовательские шаги 16.153–16.273 (flat local‑EF(s): Q41–Q43)
+# P vs NP - research steps 16.153-16.273 (flat localEF(s): Q41-Q43)
 
-Главный индекс: `P_vs_NP.md`.
+Main index: `P_vs_NP.md`.
 
-### 16.153. Исследовательский шаг: «строки‑схемы» = extension variables ⇒ circuit‑Frege p‑симулируется EF (и наоборот), так что спасение representability через sharing фактически переводит Q39 в EF‑режим
+### 16.153. Exploratory step: "circuit-lines" = extension variables  circuit-Frege p-simulated by EF (and vice versa), so saving representability via sharing actually puts the Q39 into EF mode
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` Пусть $C$ — De Morgan‑**схема** (DAG) размера $S$ и глубины $d$ над входами $x_1,\\dots,x_m$.
-  Тогда существует расширение переменных $\\{p_g\\}_{g\\in\\mathrm{Gates}(C)}$ и набор extension‑аксиом (по одной на гейт)
+- `Lens:` Equivalence.
+- `Statement:` Let $C$ be a De Morgan-**circuit** (DAG) of size $S$ and depth $d$ over inputs $x_1,\\dots,x_m$.
+  Then there is an extension of variables $\\{p_g\\}_{g\\in\\mathrm{Gates}(C)}$ and a set of extension axioms (one per gate)
   $$p_g\\ \\leftrightarrow\\ \\mathrm{op}_g\\bigl(p_{g_1},\\dots,p_{g_k}\\bigr)$$
-  такой, что в EF можно “представлять” значение схемы формулой размера $O(S)$ и глубины $O(d)$: выходная переменная $p_{\\mathrm{out}}$ играет роль результата $C(x)$.
-  Следовательно, любой proof system, в котором линии разрешены как схемы (sharing), по сути совпадает (p‑эквивалентен) с EF: sharing ↔ abbreviations через extension variables (см. также Buss’97, §5.1 для мотивации).
-- `Доказательство:`
-  1) (Кодирование схемы extension‑переменными.) Для каждого входного литерала положим $p_{x_i}:=x_i$, $p_{\\neg x_i}:=\\neg x_i$.
-     Для каждого внутреннего гейта $g$ схемы с детьми $g_1,\\dots,g_k$ вводим свежую переменную $p_g$ и добавляем extension‑формулу
-     $$p_g\\leftrightarrow (p_{g_1}\\vee\\cdots\\vee p_{g_k})\\quad\\text{или}\\quad p_g\\leftrightarrow (p_{g_1}\\wedge\\cdots\\wedge p_{g_k})$$
-     (или $p_g\\leftrightarrow\\neg p_{g_1}$, если $g$ — NOT‑гейт). Эти формулы имеют размер $O(k)$ и константную alternation‑глубину.
-  2) (Почему это “представление”.) После добавления всех extension‑формул получаем, что каждый $p_g$ (под любым назначением $x$) равен значению под‑схемы $C_g(x)$; в частности, $p_{\\mathrm{out}}$ вычисляет $C(x)$.
-     В терминах “representing parity” из HR §1.2 это означает: если паритет вычислим схемой глубины $d$ и размера $M$, то он автоматически представим EF‑линией размера $O(M)$ и глубины $O(d)$ (за счёт extension variables, т.е. DAG‑шеринга).
-  3) (Связь с circuit‑Frege.) “Frege‑линии как схемы” можно рассматривать как Frege с разрешённым DAG‑шэрингом внутри строки; заменяя каждый общий под‑узел схемы на extension‑переменную, получаем EF‑режим с полиномиальным overhead по размеру.
-     Обратное направление тривиально: EF‑линия уже есть формула с extension‑переменными, а значит вычисляет некоторую DAG‑схему (где extension‑переменные играют роль узлов с fan‑out $>1$).
-- `Toy‑тест:` схемы из §16.152 для $\\mathrm{PARITY}_{t^{d-1}}$ глубины $d$ и размера $2^{O(t)}\\mathrm{poly}(t)$ превращаются в EF‑представления того же размера, т.е. при $t=\\Theta(\\log M)$ дают “блок” $(\\log M)^{d-1}$ без противоречия с Rossman’16 (потому что Rossman — про **формулы** без sharing).
-- `Статус:` доказано: “починить” representability переходом от формул к схемам означает перейти к EF/circuit‑Frege (abbreviations); значит следующий вопрос Q39 — применимы ли LB Håstad’20/HR’22 к такому усиленному режиму.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` в Håstad’20/HR’22 найти точку, где требуется fan‑out 1 (дерево) в switching/evaluation‑аргументе, и решить: (a) LB распространяется на circuit‑Frege/EF‑вариант, или (b) именно здесь нужен нерелятивизирующий/не‑natural шаг.
+  such that in EF one can "represent" the value of the circuit by a formula of size $O(S)$ and depth $O(d)$: the output variable $p_{\\mathrm{out}}$ plays the role of the result $C(x)$.
+  Therefore, any proof system in which lines are allowed as sharing is essentially the same (pequivalent) to EF: sharing  abbreviations via extension variables (see also Buss'97, Section 5.1 for motivation).
+- `Proof:`
+  1) (Encoding the circuit with extension variables.) For each input literal we set $p_{x_i}:=x_i$, $p_{\\neg x_i}:=\\neg x_i$.
+     For each internal gate $g$ of the circuit with children $g_1,\\dots,g_k$, we introduce a fresh variable $p_g$ and add an extension formula
+     $$p_g\\leftrightarrow (p_{g_1}\\vee\\cdots\\vee p_{g_k})\\quad\\text{or}\\quad p_g\\leftrightarrow (p_{g_1}\\wedge\\cdots\\wedge p_{g_k})$$
+     (or $p_g\\leftrightarrow\\neg p_{g_1}$ if $g$ is a NOT gate). These formulas have size $O(k)$ and constant alternation depth.
+  2) (Why is this a "representation".) After adding all the extension formulas, we get that each $p_g$ (under any assignment $x$) is equal to the value of the sub-circuit $C_g(x)$; in particular, $p_{\\mathrm{out}}$ evaluates $C(x)$.
+     In terms of "representing parity" from HR Section 1.2, this means: if parity is calculated by a circuit of depth $d$ and size $M$, then it will automatically be represented by an EF line of size $O(M)$ and depth $O(d)$ (due to extension variables, i.e. DAG sharing).
+  3) (Connection with circuitFrege.) "Fregelines as circuits" can be considered as Frege with DAGsharing allowed within the line; By replacing each common subnode of the circuit with an extension variable, we get EF mode with polynomial overhead in size.
+     The reverse direction is trivial: the EF line is already a formula with extension variables, which means it calculates some DAG scheme (where extension variables play the role of nodes with fan-out $>1$).
+- `Toy test:` the diagrams from Section 16.152 for $\\mathrm{PARITY}_{t^{d-1}}$ of depth $d$ and size $2^{O(t)}\\mathrm{poly}(t)$ turn into EF representations of the same size, i.e. with $t=\\Theta(\\log M)$ they give a "block" $(\\log M)^{d-1}$ without contradicting Rossman'16 (because Rossman is about **formulas** without sharing).
+- `Status:` it has been proven: "fixing" representability by moving from formulas to diagrams means moving to EF/circuitFrege (abbreviations); So the next question is Q39 - are LB Hastad'20/HR'22 applicable to such an enhanced regime.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` in Hastad'20/HR'22, find the point where fan-out 1 (tree) is required in the switching/evaluation argument, and decide: (a) LB extends to the circuit-Frege/EF-variant, or (b) this is where the non-relativizing/non-natural step is needed.
 
-### 16.154. Исследовательский шаг: EF даёт polynomial‑size refutation Tseitin(Grid) уже при $O(1)$‑глубине (в терминах $\\vee/\\neg$), поэтому LB Håstad’20 принципиально не распространяется на EF/circuit‑Frege
+### 16.154. Research step: EF gives a polynomialsize refutation Tseitin(Grid) already at $O(1)$depth (in terms of $\\vee/\\neg$), so LB Hastad'20 fundamentally does not extend to EF/circuitFrege
 
-- `Линза:` Модельный стресс‑тест (что ломается при усилении модели).
-- `Утверждение:` Для любого ограниченного по степени графа $G$ и заряда $\\chi$ с $\\bigoplus_{v\\in V}\\chi(v)=1$ существует EF‑рефутация
-  $F:=\\mathrm{TseitinCNF}(G,\\chi)$ полиномиального размера, в которой **каждая строка имеет константную глубину** в смысле HR/Håstad (чередования $\\vee/\\neg$).
-  В частности, для grid это даёт poly‑size refutation при глубине $O(1)$.
-  Следовательно, любая попытка распространить нижнюю оценку Håstad’20 (Cor. 6.6) с bounded‑depth Frege на “circuit‑Frege”/EF невозможна: EF уже обходит порог $\\Omega(\\log N/\\log\\log N)$.
-- `Доказательство:`
-  1) (EF‑каркас.) См. §16.88: вводим extension‑переменные $p_v$ для XOR‑уравнений у вершин и переменную $P:=\\bigoplus_v p_v$.
-     Из эквивалентности клауз ↔ XOR‑уравнений получаем $p_v\\leftrightarrow\\chi(v)$, откуда $P\\leftrightarrow\\bigoplus_v\\chi(v)=1$ и, значит, $P$.
-     С другой стороны, раскрывая определения $p_v$ и перегруппировывая XOR (ассоц./коммутативность + сокращение $x\\oplus x\\leftrightarrow 0$), получаем
+- `Lens:` Model stress test (what breaks when the model is strengthened).
+- `Statement:` For any degree-bounded graph $G$ and charge $\\chi$ with $\\bigoplus_{v\\in V}\\chi(v)=1$ there is an EF-refutation
+  $F:=\\mathrm{TseitinCNF}(G,\\chi)$ of polynomial size, in which **each row has a constant depth** in the sense of HR/Hastad (alternating $\\vee/\\neg$).
+  In particular, for grid this gives polysize refutation with a depth of $O(1)$.
+  Therefore, any attempt to extend the lower bound of Hastad'20 (Cor. 6.6) from boundeddepth Frege to "circuitFrege"/EF is impossible: EF already bypasses the $\\Omega(\\log N/\\log\\log N)$ threshold.
+- `Proof:`
+  1) (EF-framework.) See Section 16.88: introduce extension variables $p_v$ for XOR equations at vertices and variable $P:=\\bigoplus_v p_v$.
+     From the equivalence of clauses  XOR equations we obtain $p_v\\leftrightarrow\\chi(v)$, whence $P\\leftrightarrow\\bigoplus_v\\chi(v)=1$ and, therefore, $P$.
+     On the other hand, expanding the definitions of $p_v$ and rearranging XOR (association/commutativity + abbreviation $x\\oplus x\\leftrightarrow 0$), we get
      $$P\\leftrightarrow\\bigoplus_{v\\in V}\\ \\bigoplus_{e\\ni v} x_e\\leftrightarrow\\bigoplus_{e\\in E}(x_e\\oplus x_e)\\leftrightarrow 0,$$
-     то есть $\\neg P$. Противоречие.
-  2) (Почему глубина $O(1)$.) Каждый extension‑шаг задаётся формулой константной глубины:
-     бинарный XOR $a\\oplus b$ — константная формула в базисе $\\{\\vee,\\neg\\}$ (через $\\wedge:=\\neg(\\neg\\cdot\\vee\\neg\\cdot)$), а extension‑аксиомы имеют вид $p\\leftrightarrow\\varphi$ с $\\varphi$ константной глубины.
-     Ассоциативность/коммутативность/сокращение XOR в §16.88 — это тавтологии на константном числе переменных, значит их инстанцирования в EF можно делать, не увеличивая глубину строк (линии содержат только переменные $p_*$, $x_*$ и константы).
-  3) (Связь с circuit‑Frege.) По §16.153 любая “строка‑схема/sharing” p‑эквивалентна EF через extension variables, так что схемный режим действительно даёт тот же эффект: глубина строк может оставаться константой, скрывая большую схемную глубину в abbreviations.
-- `Toy‑тест:` для 3‑регулярного $G$ формулы $p_v\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$ и шаги XOR‑перегруппировки используют лишь константные шаблоны (§16.88), а число введённых extension‑переменных $O(|V|+|E|)$.
-- `Статус:` доказано (stress‑тест показывает: пороговая LB Håstad’20 — по сути про **формулы** fan‑out 1; в EF/circuit‑Frege глубина не является ограничением).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` в Håstad’20 явно указать, что доказательство работает только для Frege без extension variables, и локализовать в switching/evaluation‑аргументе место, где попытка включить extension‑переменные рушится (нужно “согласованно” рестриктить новые переменные, т.е. вычислять скрытую схему).
+     that is, $\\neg P$. Contradiction.
+  2) (Why is the depth $O(1)$.) Each extension step is given by the constant depth formula:
+     binary XOR $a\\oplus b$ is a constant formula in the basis $\\{\\vee,\\neg\\}$ (via $\\wedge:=\\neg(\\neg\\cdot\\vee\\neg\\cdot)$), and extension axioms have the form $p\\leftrightarrow\\varphi$ with $\\varphi$ of constant depth.
+     Associativity/commutativity/XOR abbreviation in Section 16.88 are tautologies on a constant number of variables, which means they can be instantiated in EF without increasing the depth of lines (lines contain only variables $p_*$, $x_*$ and constants).
+  3) (Connection with circuitFrege.) By Section 16.153, any "linecircuit/sharing" is pequivalent to EF via extension variables, so circuit mode does have the same effect: line depth can remain constant, hiding greater circuit depth in abbreviations.
+- `Toy test:` for 3regular $G$, the formulas $p_v\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$ and XOR rearrangement steps use only constant patterns (Section 16.88), and the number of extension variables introduced is $O(|V|+|E|)$.
+- `Status:` proven (stress test shows: threshold LB Hastad'20 - essentially about **formulas** fan-out 1; in EF/circuit-Frege depth is not a limitation).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` in Hastad'20, explicitly indicate that the proof only works for Frege without extension variables, and localize in the switching/evaluation argument the place where the attempt to include extension variables fails (you need to "consistently" restrict new variables, i.e. calculate the hidden scheme).
 
-### 16.155. Исследовательский шаг: точка, где Håstad’20 жёстко использует “variables = edges” (fan‑out 1 по сути) — локальность через $\\mathrm{supp}(\\alpha)\\subseteq V$; extension variables ломают эту локальность и потому не входят в switching/evaluation‑framework
+### 16.155. Research step: the point where Hastad'20 strictly uses "variables = edges" (fanout 1 essentially) - locality via $\\mathrm{supp}(\\alpha)\\subseteq V$; extension variables break this locality and therefore are not included in the switching/evaluationframework
 
-- `Линза:` Модельный стресс‑тест (локализовать зависимость от модели).
-- `Утверждение:` В Håstad’20 локальная техника (restrictions + evaluations) опирается на то, что **каждая переменная соответствует ребру** и потому “затрагивает” лишь два конца ребра: для частичного присваивания $\\alpha$ определён
-  $$\\mathrm{supp}(\\alpha)\\subseteq V\\quad\\text{как множество вершин, смежных с присвоенными переменными}$$
-  (Håstad’20, §3: определения “complete assignment”, “support”, “locally consistent”, см. `../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`, абзац начиная с “On a set $X$ of nodes …” и Definition 3.1).
-  Из этого следует ключевой инвариант: путь decision‑tree глубины $t$, читающий только edge‑переменные, задаёт присваивание с
+- `Lens:` Model stress test (localize dependence on the model).
+- `Statement:` In Hastad'20, the local technique (restrictions + evaluations) relies on the fact that **each variable corresponds to an edge** and therefore "affects" only the two ends of the edge: for partial assignment $\\alpha$ is defined
+  $$\\mathrm{supp}(\\alpha)\\subseteq V\\quad\\text{as the set of vertices adjacent to the assigned variables}$$
+  (Hastad'20, Section 3: definitions of "complete assignment", "support", "locally consistent", see `../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`, paragraph starting with "On a set $X$ of nodes ..." and Definition 3.1).
+  This implies a key invariant: a decision-tree path of depth $t$, reading only edge variables, specifies an assignment with
   $$|\\mathrm{supp}(\\alpha)|\\le 2t.$$
-  Поэтому “малая глубина” автоматически означает “малая геометрическая поддержка” на grid, и можно говорить про giant component и замыкание $\\mathrm{cl}(X)$.
-  Для EF/circuit‑Frege extension‑переменные $p$ не являются edge‑переменными: если трактовать $p$ как сокращение глобальной функции от многих рёбер (например, PARITY большого блока), то у неё нет малой поддержки, и инвариант $|\\mathrm{supp}(\\alpha)|\\le O(t)$ для глубины $t$ ломается уже при одном запросе $p$.
-  Поэтому Håstad‑техника (в текущем виде) **не предназначена** для EF/circuit‑Frege: либо $p$ считается “свободной” переменной без поддержки (тогда теряется смысл extension‑аксиом), либо $\\mathrm{supp}(p)$ становится большим и рушит локальные леммы.
-- `Доказательство:`
-  1) (Локальность edge‑переменных.) В Tseitin(G) каждая переменная $x_e$ соответствует ребру $e=\\{u,v\\}$, значит при присваивании $x_e:=b$ в поддержку добавляются только $u,v$.
-     Поэтому если decision tree спрашивает $t$ разных $x_e$, то множество затронутых вершин имеет размер $\\le 2t$.
-  2) (Где это используется.) В §3 Håstad’20 рассматривает частичные присваивания с $|X|\\le 2n/3$ (где $X=\\mathrm{supp}(\\alpha)$) и выводит существование “giant component” в дополнении $X^c$ и корректность понятия $\\mathrm{cl}(X)$; это фундаментально для “locally consistent” и для того, чтобы evaluations работали с деревьями малой глубины.
-  3) (Контр‑пример с extension variable.) Пусть в EF введена extension‑переменная $p\\leftrightarrow\\bigoplus_{e\\in E'} x_e$ для множества рёбер $E'$ размера $\\Theta(n)$ (например, граница большого прямоугольника).
-     Если пытаться включить $p$ в ту же геометрию, естественно положить $\\mathrm{supp}(p):=\\bigcup_{e\\in E'}\\mathrm{supp}(x_e)$, что имеет размер $\\Theta(n)$.
-     Тогда один запрос $p$ (глубина 1) уже порождает $|\\mathrm{supp}(\\alpha)|=\\Theta(n)$, и связка “глубина ⇒ малая поддержка” исчезает.
-     Если же объявить $\\mathrm{supp}(p)=\\varnothing$ (чтобы сохранить $|\\mathrm{supp}(\\alpha)|\\le 2t$), то “locally consistent” перестаёт контролировать согласованность $p$ с рёбрами и extension‑аксиомами: значение $p$ можно выбирать независимо от $x$ без увеличения поддержки, что именно и даёт EF‑обход (§16.154).
-- `Toy‑тест:` глобальная переменная $P$ из §16.88 (XOR всех вершинных $p_v$) в “поддержке‑по‑смыслу” затрагивает всю сетку, но как атомарная переменная имеет глубину 1; это несовместимо с инвариантом $|\\mathrm{supp}(\\alpha)|\\le 2t$.
-- `Статус:` доказано как локализация: точка “fan‑out 1 / variables=edges” встроена в саму геометрию support/closure; потому Håstad‑LB не переносится на EF/circuit‑Frege без новой техники.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` попробовать сформулировать промежуточную модель “local‑EF”: разрешать extension‑переменные только с $|\\mathrm{supp}(p)|\\le \\mathrm{polylog}(n)$, и проверить, остаётся ли возможным EF‑доказательство глубины $o(\\log n/\\log\\log n)$ или техника Håstad’20 начинает работать.
+  Therefore, "small depth" automatically means "small geometric support" on the grid, and we can talk about the giant component and the closure $\\mathrm{cl}(X)$.
+  For EF/circuit-Frege, extension variables $p$ are not edge variables: if you treat $p$ as a reduction of a global function of many edges (for example, PARITY of a large block), then it has little support, and the invariant $|\\mathrm{supp}(\\alpha)|\\le O(t)$ for depth $t$ breaks down with just one query of $p$.
+  Therefore, the Hastad technique (in its current form) is **not intended** for EF/circuit-Frege: either $p$ is considered a "free" variable without support (then the meaning of extension axioms is lost), or $\\mathrm{supp}(p)$ becomes large and breaks local lemmas.
+- `Proof:`
+  1) (Locality of edge variables.) In Tseitin(G) each variable $x_e$ corresponds to an edge $e=\\{u,v\\}$, which means that when assigning $x_e:=b$ only $u,v$ are added to the support.
+     Therefore, if a decision tree asks $t$ different $x_e$, then the set of affected vertices has size $\\le 2t$.
+  2) (Where this is used.) In Section 3, Hastad'20 considers partial assignments with $|X|\\le 2n/3$ (where $X=\\mathrm{supp}(\\alpha)$) and deduces the existence of a "giant component" in the complement of $X^c$ and the correctness of the concept $\\mathrm{cl}(X)$; this is fundamental for "locally consistent" and for evaluations to work with shallow trees.
+  3) (Counter-example with an extension variable.) Let an extension variable $p\\leftrightarrow\\bigoplus_{e\\in E'} x_e$ be introduced into EF for a set of edges $E'$ of size $\\Theta(n)$ (for example, the boundary of a large rectangle).
+     If we try to include $p$ in the same geometry, it is natural to put $\\mathrm{supp}(p):=\\bigcup_{e\\in E'}\\mathrm{supp}(x_e)$, which has size $\\Theta(n)$.
+     Then one request $p$ (depth 1) already generates $|\\mathrm{supp}(\\alpha)|=\\Theta(n)$, and the connection "depth  small support" disappears.
+     If we declare $\\mathrm{supp}(p)=\\varnothing$ (to preserve $|\\mathrm{supp}(\\alpha)|\\le 2t$), then "locally consistent" ceases to control the consistency of $p$ with edges and extension axioms: the value of $p$ can be chosen independently of $x$ without increasing the support, which is exactly what the EF bypass gives (Section 16.154).
+- `Toy test:` the global variable $P$ from Section 16.88 (XOR of all vertex $p_v$) in "support-by-sense" affects the entire mesh, but as an atomic variable has depth 1; this is incompatible with the invariant $|\\mathrm{supp}(\\alpha)|\\le 2t$.
+- `Status:` proven as localization: the "fanout 1 / variables=edges" point is built into the support/closure geometry itself; therefore HastadLB is not transferred to EF/circuitFrege without new technology.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` try to formulate an intermediate "local-EF" model: allow extension variables only with $|\\mathrm{supp}(p)|\\le \\mathrm{polylog}(n)$, and check whether the EF-proof of depth $o(\\log n/\\log\\log n)$ remains possible or whether the Hastad'20 technique starts to work.
 
-### 16.156. Исследовательский шаг: “local‑EF(s)” (extension‑переменные с ограниченной геометрической поддержкой) и факт: EF‑опровержение Tseitin через глобальный XOR неизбежно вводит переменную с поддержкой $\\Omega(|V|)$
+### 16.156. Exploratory step: "localEF(s)" (extension variables with limited geometric support) and fact: Tseitin's EF refutation via global XOR inevitably introduces a variable with $\\Omega(|V|)$ support
 
-- `Линза:` Инвариант (геометрическая поддержка).
-- `Определение (support формулы):` Для Tseitin на графе $G=(V,E)$ и формулы $\\varphi$ над edge‑переменными $\\{x_e\\}_{e\\in E}$ положим
-  $$\\mathrm{supp}(\\varphi):=\\bigcup\\{\\{u,v\\}: e=\\{u,v\\}\\in E\\text{ и }x_e\\text{ встречается в }\\varphi\\}\\ \\subseteq V.$$
-- `Определение (local‑EF(s)):` Назовём EF‑доказательство $s$‑локальным, если для каждого extension‑шага $p\\leftrightarrow\\varphi$ выполняется
+- `Lens:` Invariant (geometric support).
+- `Definition (formula support):` For Tseitin on the graph $G=(V,E)$ and the formula $\\varphi$ over edge variables $\\{x_e\\}_{e\\in E}$ we set
+  $$\\mathrm{supp}(\\varphi):=\\bigcup\\{\\{u,v\\}: e=\\{u,v\\}\\in E\\text{ and }x_e\\text{ occurs in }\\varphi\\}\\ \\subseteq V.$$
+- `Definition (localEF(s)):` Let us call an EF proof $s$-local if for each extension step $p\\leftrightarrow\\varphi$ holds
   $$|\\mathrm{supp}(\\varphi)|\\le s.$$
-  (Т.е. сокращать разрешено только “локальные” подформулы по вершинам графа.)
-- `Утверждение:` EF‑рефутация Tseitin(Grid) из §16.88/§16.154 **не** является $s$‑локальной ни для какого $s=o(|V|)$:
-  в ней неизбежно появляется extension‑переменная $P$ с $|\\mathrm{supp}(P)|=\\Omega(|V|)$.
-- `Доказательство:`
-  1) В §16.88 вводится переменная $P\\leftrightarrow\\bigoplus_{v\\in V} p_v$, где каждое $p_v$ кодирует локальный паритет инцидентных рёбер вершины $v$.
-  2) Для grid каждая вершина имеет константную степень, значит $|\\mathrm{supp}(p_v)|=O(1)$, но
+  (That is, only "local" subformulas along the vertices of the graph are allowed to reduce.)
+- `Statement:` The EF-refutation of Tseitin(Grid) from Section 16.88/Section 16.154 is **not** $s$-local for any $s=o(|V|)$:
+  it inevitably contains an extension variable $P$ with $|\\mathrm{supp}(P)|=\\Omega(|V|)$.
+- `Proof:`
+  1) In Section 16.88, the variable $P\\leftrightarrow\\bigoplus_{v\\in V} p_v$ is introduced, where each $p_v$ encodes the local parity of incident edges of vertex $v$.
+  2) For grid, each vertex has a constant degree, which means $|\\mathrm{supp}(p_v)|=O(1)$, but
      $$\\mathrm{supp}(P)=\\bigcup_{v\\in V}\\mathrm{supp}(p_v)=V,$$
-     поскольку каждое $p_v$ зависит от рёбер, инцидентных $v$.
-     Следовательно, $|\\mathrm{supp}(P)|=|V|=\\Theta(n^2)$.
-  3) Значит для этого EF‑доказательства требуется $s\\ge |V|$; при $s=\\mathrm{polylog}(n)$ оно не попадает в local‑EF(s).
-- `Toy‑тест:` для torus‑grid $|V|=n^2$: даже если все локальные $p_v$ имеют поддержку $\\le 5$, переменная $P$ имеет поддержку $n^2$.
-- `Статус:` доказано (локальный вариант EF исключает “глобальный XOR”‑обход).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` понять, можно ли обойтись без глобальной переменной типа $P$ в local‑EF($\\mathrm{polylog}(n)$), или же любая poly‑size рефутация должна где‑то “раздуть” поддержку; попробовать адаптировать поддержку‑ориентированную версию evaluation‑метода Håstad’20 к local‑EF(s).
+     since each $p_v$ depends on the edges incident to $v$.
+     Therefore, $|\\mathrm{supp}(P)|=|V|=\\Theta(n^2)$.
+  3) So this EF proof requires $s\\ge |V|$; with $s=\\mathrm{polylog}(n)$ it does not fall into localEF(s).
+- `Toy test:` for torus-grid $|V|=n^2$: even if all local $p_v$ have support $\\le 5$, variable $P$ has support $n^2$.
+- `Status:` proven (the local version of EF excludes the "global XOR" bypass).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` understand whether it is possible to do without a global variable of type $P$ in localEF($\\mathrm{polylog}(n)$), or whether any polysize refutation should "inflate" support somewhere; try to adapt the support-oriented version of the Hastad'20 evaluation method to local-EF(s).
 
-### 16.157. Исследовательский шаг: в local‑EF(s) локальность восстанавливается с потерей $\\times s$: decision tree глубины $t$ даёт присваивание с $|\\mathrm{supp}|\\le O(s\\,t)$ (если поддержка extension‑переменных определена через их формулы)
+### 16.157. Exploratory step: in localEF(s) locality is restored with the loss of $\\times s$: decision tree of depth $t$ gives assignment with $|\\mathrm{supp}|\\le O(s\\,t)$ (if support for extension variables is defined through their formulas)
 
-- `Линза:` Инвариант.
-- `Утверждение:` Рассмотрим proof‑линию/формулу над edge‑переменными $\\{x_e\\}$ и extension‑переменными $\\{p_i\\}$, где каждый $p_i$ введён правилом extension $p_i\\leftrightarrow\\varphi_i(x)$ и $|\\mathrm{supp}(\\varphi_i)|\\le s$ (то есть мы находимся в local‑EF(s) по §16.156).
-  Определим поддержку переменных как
+- `Lens:` Invariant.
+- `Statement:` Consider a proof line/formula over edge variables $\\{x_e\\}$ and extension variables $\\{p_i\\}$, where each $p_i$ is introduced by the rule extension $p_i\\leftrightarrow\\varphi_i(x)$ and $|\\mathrm{supp}(\\varphi_i)|\\le s$ (that is, we are in localEF(s) under Section 16.156).
+  Let's define variable support as
   $$\\mathrm{supp}(x_{\\{u,v\\}}):=\\{u,v\\},\\qquad \\mathrm{supp}(p_i):=\\mathrm{supp}(\\varphi_i).$$
-  Тогда любой decision tree $T$ глубины $t$, который спрашивает только переменные из $\\{x_e\\}\\cup\\{p_i\\}$, порождает по любому пути частичное присваивание $\\alpha$ с
+  Then any decision tree $T$ of depth $t$, which asks only for variables from $\\{x_e\\}\\cup\\{p_i\\}$, generates along any path a partial assignment $\\alpha$ with
   $$|\\mathrm{supp}(\\alpha)|\\le (2+s)\\,t.$$
-  Следовательно, для $s=\\mathrm{polylog}(n)$ инвариант “малая глубина $\\Rightarrow$ малая геометрическая поддержка” (из Håstad’20/HR’22, §3) переносится на local‑EF(s) с потерей множителя $s$.
-- `Доказательство:` Пусть путь в $T$ содержит $t$ запросов.
-  Каждый запрос edge‑переменной $x_e$ добавляет в поддержку не более 2 вершин.
-  Каждый запрос extension‑переменной $p_i$ по определению добавляет не более $|\\mathrm{supp}(\\varphi_i)|\\le s$ вершин.
-  Поэтому суммарно по подаддитивности
-  $$|\\mathrm{supp}(\\alpha)|\\le 2\\cdot(\\#\\text{edge‑запросов})+s\\cdot(\\#\\text{ext‑запросов})\\le (2+s)t.$$
-- `Toy‑тест:` если $s=5$ и $t=100$, то $|\\mathrm{supp}(\\alpha)|\\le 700$, т.е. такая ветвь “видит” лишь локальный фрагмент grid и остаётся в режиме giant component/closure при больших $n$.
-- `Статус:` доказано (это первый формальный мост “evaluation‑метод + локальные extension‑переменные”: локальность не исчезает, а деградирует на множитель $s$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` попытаться переписать Definition 2.11 (t‑evaluation) HR’22 с поддержкой, учитывающей extension‑переменные, и проверить, сохраняются ли ключевые леммы “locally consistent” при условии $|\\mathrm{supp}(\\varphi_i)|\\le s$ (параметры должны меняться как $t\\mapsto t\\cdot s$).
+  Therefore, for $s=\\mathrm{polylog}(n)$ the invariant "small depth $\\Rightarrow$ small geometric support" (from Hastad'20/HR'22, Section 3) is carried over to localEF(s) with the loss of the factor $s$.
+- `Proof:` Let a path in $T$ contain $t$ queries.
+  Each request for the edge variable $x_e$ adds no more than 2 vertices to support.
+  Each request for the extension variable $p_i$ by definition adds at most $|\\mathrm{supp}(\\varphi_i)|\\le s$ vertices.
+  Therefore, in total by subditivity
+  $$|\\mathrm{supp}(\\alpha)|\\le 2\\cdot(\\#\\text{edge-queries})+s\\cdot(\\#\\text{ext-queries})\\le (2+s)t.$$
+- `Toy test:` if $s=5$ and $t=100$, then $|\\mathrm{supp}(\\alpha)|\\le 700$, i.e. such a branch "sees" only a local fragment of the grid and remains in giant component/closure mode for large $n$.
+- `Status:` proven (this is the first formal bridge "evaluation method + local extension variables": locality does not disappear, but degrades by a factor of $s$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` try to rewrite Definition 2.11 (tevaluation) HR'22 with support that takes into account extension variables, and check whether the key lemmas are "locally consistent" under the condition $|\\mathrm{supp}(\\varphi_i)|\\le s$ (parameters should change as $t\\mapsto t\\cdot s$).
 
-### 16.158. Исследовательский шаг: устранение запросов extension‑переменных в decision tree (local‑EF(s) ⇒ edge‑only DT с глубиной $O(s\\,t)$)
+### 16.158. Exploratory step: eliminating queries for extension variables in the decision tree (local-EF(s)  edge-only DT with depth $O(s\\,t)$)
 
-- `Линза:` Эквивалентность (модель запросов: $x$ vs $(x,p)$).
-- `Утверждение:` Пусть $G=(V,E)$ — граф максимальной степени $\\Delta$ (для grid: $\\Delta\\le 4$).
-  Рассмотрим переменные рёбер $\\{x_e\\}_{e\\in E}$ и extension‑переменные $\\{p_i\\}$, где для каждого $i$ задан extension‑шаг
-  $$p_i\\leftrightarrow\\varphi_i(x)\\qquad\\text{и}\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s.$$
-  Обозначим через $\\mathrm{vars}(\\varphi_i)$ множество **различных** edge‑переменных, встречающихся в $\\varphi_i$, и положим
+- `Lens:` Equivalence (query model: $x$ vs $(x,p)$).
+- `Statement:` Let $G=(V,E)$ be a graph of maximum degree $\\Delta$ (for grid: $\\Delta\\le 4$).
+  Consider edge variables $\\{x_e\\}_{e\\in E}$ and extension variables $\\{p_i\\}$, where for each $i$ an extension step is specified
+  $$p_i\\leftrightarrow\\varphi_i(x)\\qquad\\text{i}\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s.$$
+  Let $\\mathrm{vars}(\\varphi_i)$ denote the set of **different** edge-variables occurring in $\\varphi_i$ and set
   $$m:=\\max_i |\\mathrm{vars}(\\varphi_i)|\\le \\Delta s/2.$$
-  Тогда для любого decision tree $T$ глубины $t$, который может спрашивать переменные из $\\{x_e\\}\\cup\\{p_i\\}$, существует decision tree $T_x$ над одними edge‑переменными $\\{x_e\\}$ глубины $\\le (1+m)\\,t$ такое, что для любого полного присваивания $a\\in\\{0,1\\}^E$ выполнено
+  Then for any decision tree $T$ of depth $t$ that can ask for variables from $\\{x_e\\}\\cup\\{p_i\\}$, there is a decision tree $T_x$ over some edge variables $\\{x_e\\}$ of depth $\\le (1+m)\\,t$ such that for any complete assignment $a\\in\\{0,1\\}^E$
   $$T_x(a)\\ =\\ T\\bigl(a,\\ (\\varphi_i(a))_i\\bigr),$$
-  т.е. $T_x$ симулирует $T$ на **согласованных** присваиваниях, где $p_i=\\varphi_i(x)$.
-  В частности, на grid глубина увеличивается не более чем до $(1+2s)\\,t=O(s\\,t)$.
-- `Доказательство:`
-  1) (Оценка $m$.) Каждая переменная $x_{\\{u,v\\}}$ добавляет в $\\mathrm{supp}(\\varphi_i)$ вершины $u,v$, поэтому все рёбра из $\\mathrm{vars}(\\varphi_i)$ лежат внутри индуцированного подграфа на $\\mathrm{supp}(\\varphi_i)$.
-     При степени $\\le\\Delta$ число рёбер в таком подграфе не превосходит $\\Delta|\\mathrm{supp}(\\varphi_i)|/2\\le \\Delta s/2$, откуда $|\\mathrm{vars}(\\varphi_i)|\\le \\Delta s/2$.
-  2) (Локальная замена запроса $p_i$.) Зафиксируем порядок переменных из $\\mathrm{vars}(\\varphi_i)$.
-     Построим decision tree $D_i$ глубины $|\\mathrm{vars}(\\varphi_i)|$, который последовательно спрашивает эти edge‑переменные и в листе вычисляет значение булевой формулы $\\varphi_i$ на собранных значениях.
-     Тогда запрос $p_i$ в $T$ (на согласованных присваиваниях) эквивалентен прохождению $D_i$ с последующим переходом в соответствующего сына (“$p_i=0$” или “$p_i=1$”).
-  3) (Глобальная симуляция.) Заменим в $T$ каждый внутренний узел, спрашивающий $p_i$, на копию $D_i$ со склейкой листьев по предыдущему пункту.
-     Получаем дерево $T_x$, спрашивающее только edge‑переменные. По глубине: каждый исходный запрос edge‑переменной даёт +1, каждый запрос $p_i$ даёт +$|\\mathrm{vars}(\\varphi_i)|\\le m$, значит для любого пути
-     $$\\mathrm{depth}_{T_x}\\le (\\#\\text{edge‑запросов})+m\\cdot(\\#\\text{ext‑запросов})\\le (1+m)\\,t.$$
-     Корректность на $a$ следует из индукции по структуре дерева: в узле $p_i$ новая развилка выбирает ветвь ровно по $\\varphi_i(a)$.
-- `Toy‑тест:` если $p\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$ (локальный XOR на 3 рёбрах), то запрос $p$ заменяется тремя запросами $x_{e_1},x_{e_2},x_{e_3}$ и вычислением паритета в листе; это и есть $D_i$ при $|\\mathrm{vars}(\\varphi)|=3$.
-- `Статус:` доказано (модель запросов к $p$ “сворачивается” в модель запросов к $x$ с мультипликативной потерей $O(s)$ на bounded‑degree графах).
-- `Барьер‑чек:` r — применимо (чисто синтаксическая симуляция, релятивизируется), NP — неприменимо (не «natural property»), alg — неприменимо (нет арифметизации).
-- `Следующий шаг:` применить это как технический лемматизатор при попытке перенести HR’22: разрешить в определении $t$‑evaluation запросы $p_i$ (для local‑EF(s)), затем заменить их на edge‑запросы и отследить, что все пороги в леммах “locally consistent/closure” сохраняются при $t\\mapsto O(s\\,t)$.
+  those. $T_x$ simulates $T$ on **consistent** assignments, where $p_i=\\varphi_i(x)$.
+  In particular, on grid the depth increases to no more than $(1+2s)\\,t=O(s\\,t)$.
+- `Proof:`
+  1) (Evaluate $m$.) Each variable $x_{\\{u,v\\}}$ adds vertices $u,v$ to $\\mathrm{supp}(\\varphi_i)$, so all edges from $\\mathrm{vars}(\\varphi_i)$ lie inside the induced subgraph on $\\mathrm{supp}(\\varphi_i)$.
+     For degree $\\le\\Delta$, the number of edges in such a subgraph does not exceed $\\Delta|\\mathrm{supp}(\\varphi_i)|/2\\le \\Delta s/2$, whence $|\\mathrm{vars}(\\varphi_i)|\\le \\Delta s/2$.
+  2) (Local replacement of query $p_i$.) Let us fix the order of variables from $\\mathrm{vars}(\\varphi_i)$.
+     Let's build a decision tree $D_i$ of depth $|\\mathrm{vars}(\\varphi_i)|$, which sequentially queries these edge variables and in the sheet calculates the value of the Boolean formula $\\varphi_i$ on the collected values.
+     Then querying $p_i$ into $T$ (on consistent assignments) is equivalent to traversing $D_i$ and then going to the corresponding child ("$p_i=0$" or "$p_i=1$").
+  3) (Global simulation.) Let us replace in $T$ each internal node asking $p_i$ with a copy of $D_i$ with the leaves glued together according to the previous point.
+     We get a tree $T_x$ asking only edge variables. By depth: each initial request for an edge variable gives +1, each request $p_i$ gives +$|\\mathrm{vars}(\\varphi_i)|\\le m$, which means for any path
+     $$\\mathrm{depth}_{T_x}\\le (\\#\\text{edge queries})+m\\cdot(\\#\\text{ext queries})\\le (1+m)\\,t.$$
+     Correctness on $a$ follows from induction on the structure of the tree: at node $p_i$ a new fork selects a branch exactly along $\\varphi_i(a)$.
+- `Toy test:` if $p\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$ (local XOR on 3 edges), then the query $p$ is replaced by three queries $x_{e_1},x_{e_2},x_{e_3}$ and a parity calculation in the leaf; this is $D_i$ for $|\\mathrm{vars}(\\varphi)|=3$.
+- `Status:` proven (the query model for $p$ "collapses" into a query model for $x$ with a multiplicative loss of $O(s)$ on boundeddegree graphs).
+- `Barrier check:` r - applicable (purely syntactic simulation, relativized), NP - not applicable (not a "natural property"), alg - not applicable (no arithmetization).
+- `Next step:` apply this as a technical lemmatizer when trying to migrate HR'22: allow $p_i$ queries (for local-EF(s)) in the definition of $t$-evaluation, then replace them with edge-queries and ensure that all thresholds in the "locally consistent/closure" lemmas are preserved for $t\\mapsto O(s\\,t)$.
 
-### 16.159. Исследовательский шаг: черновик “HR‑evaluation для local‑EF(s)” через расширенную поддержку и $s$‑стоимость запросов
+### 16.159. Research step: draft "HRevaluation for localEF(s)" through extended support and $s$cost of requests
 
-- `Линза:` Инвариант (геометрическая поддержка = “видимая область”).
-- `Утверждение (черновик‑патч к HR’22, §2.4–2.7):` Пусть $X=\\{x_e\\}$ — edge‑переменные $\\mathrm{Tseitin}(G_n)$ на grid, и в доказательстве разрешены extension‑переменные $P=\\{p_i\\}$ с аксиомами
+- `Lens:` Invariant (geometric support = "visible area").
+- `Statement (draft patch to HR'22, Section 2.4-2.7):` Let $X=\\{x_e\\}$ be edge variables $\\mathrm{Tseitin}(G_n)$ on the grid, and extension variables $P=\\{p_i\\}$ with axioms are allowed in the proof
   $$p_i\\leftrightarrow\\varphi_i(X),\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s,$$
-  где $\\mathrm{supp}(\\varphi)$ — множество вершин, инцидентных рёбрам, чьи переменные встречаются в $\\varphi$ (как в HR’22: $\\mathrm{supp}(x_{\\{u,v\\}})=\\{u,v\\}$).
-  Тогда естественное обобщение HR’22 Definition 2.2 / Cor. 2.7 такое:
+  where $\\mathrm{supp}(\\varphi)$ is the set of vertices incident to edges whose variables occur in $\\varphi$ (as in HR'22: $\\mathrm{supp}(x_{\\{u,v\\}})=\\{u,v\\}$).
+  Then a natural generalization of HR'22 Definition 2.2 / Cor. 2.7 is like this:
 
-  1) (**Расширенная поддержка присваивания.**) Для частичного присваивания $\\alpha$ на $X\\cup P$ положим
+  1) (**Extended assignment support.**) For partial assignment $\\alpha$ to $X\\cup P$ set
      $$\\mathrm{supp}_s(\\alpha):=\\mathrm{supp}(\\alpha\\!\upharpoonright_X)\\ \\cup\\ \\bigcup_{p_i\\in\\mathrm{dom}(\\alpha)}\\mathrm{supp}(\\varphi_i).$$
 
-  2) (**$s$‑локальная согласованность.**) $\\alpha$ называется $s$‑locally consistent, если при $U=\\mathrm{supp}_s(\\alpha)$ существует $\\beta$ на $X$, *complete on* $\\mathrm{closure}(U)$ (в смысле HR: присваивает все edge‑переменные, инцидентные $\\mathrm{closure}(U)$), такая что:
-     (i) $\\beta$ расширяет $\\alpha\\!\upharpoonright_X$; (ii) удовлетворяет всем parity‑constraints на $\\mathrm{closure}(U)$; (iii) для всех присвоенных $p_i$ выполнено $\\alpha(p_i)=\\varphi_i(\\beta)$.
+  2) (**$s$-local consistency.**) $\\alpha$ is called $s$-locally consistent if for $U=\\mathrm{supp}_s(\\alpha)$ there is $\\beta$ on $X$, *complete on* $\\mathrm{closure}(U)$ (in the sense of HR: assigns all edge-variables incident $\\mathrm{closure}(U)$), such that:
+     (i) $\\beta$ extends $\\alpha\\!\upharpoonright_X$; (ii) satisfies all parity-constraints on $\\mathrm{closure}(U)$; (iii) for all assigned $p_i$, $\\alpha(p_i)=\\varphi_i(\\beta)$ holds.
 
-  3) (**Стоимость ветви/дерева.**) Для ветви $\\tau$ decision tree (на переменных $X\\cup P$) положим
-     $$\\mathrm{cost}_s(\\tau):=2\\cdot\\#(x\\text{‑запросов в }\\tau)+\\sum_{p_i\\in\\mathrm{dom}(\\tau)}|\\mathrm{supp}(\\varphi_i)|,$$
-     и $\\mathrm{cost}_s(T):=\\max_{\\tau\\in T}\\mathrm{cost}_s(\\tau)$, так что грубо $\\mathrm{cost}_s(T)\\le (s+2)\\,\\mathrm{depth}(T)$.
+  3) (**Cost of the branch/tree.**) For the branch $\\tau$ decision tree (on variables $X\\cup P$) we set
+     $$\\mathrm{cost}_s(\\tau):=2\\cdot\\#(x\\text{-queries in }\\tau)+\\sum_{p_i\\in\\mathrm{dom}(\\tau)}|\\mathrm{supp}(\\varphi_i)|,$$
+     and $\\mathrm{cost}_s(T):=\\max_{\\tau\\in T}\\mathrm{cost}_s(\\tau)$, so roughly $\\mathrm{cost}_s(T)\\le (s+2)\\,\\mathrm{depth}(T)$.
 
-  4) (**Ожидаемый аналог HR Cor. 2.7.**) Если $\\alpha$ $s$‑locally consistent и
+  4) (**Expected analogue of HR Cor. 2.7.**) If $\\alpha$ $s$locally consistent and
      $$|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2,$$
-     то “trimmed restriction” $T\\lceil\\alpha$ (как у HR, но с pairwise $s$‑local consistency) корректен и снова $s$‑locally consistent.
+     then "trimmed restriction" $T\\lceil\\alpha$ (like HR, but with pairwise $s$local consistency) is correct and again $s$locally consistent.
 
-  В таком виде можно попытаться перенести HR’22 Definition 2.11 (t‑evaluation) на local‑EF(s), при замене всех порогов вида
-  $|\\mathrm{supp}(\\alpha)|+2\\,\\mathrm{depth}(T)\\le n/2$ на $|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2$ (или грубее $t\\mapsto O(s\\,t)$).
-- `Toy‑тест:` если $p\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$, то запрос $p$ “стоит” 3 ребра/6 концов; это согласовано с §16.158 (запрос $p$ разворачивается в 3 edge‑запроса).
-- `Статус:` черновик (нужна аккуратная проверка: где именно в доказательствах HR’22 используется, что переменные *именно edges*, и что добавление запроса $p_i$ корректно “оплачивается” локальным witness на $\\mathrm{closure}(\\mathrm{supp}_s)$).
-- `Барьер‑чек:` r — применимо (вся схема support/closure/DT релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q41: (a) выбрать точную модель local‑EF(s) (запрещаем $\\varphi_i(P)$ или считаем $\\mathrm{supp}(p_i)$ как поддержку полностью развёрнутой формулы), (b) формально доказать (или найти контрпример) пункт (4) как аналог Cor. 2.7, и только после этого пытаться переносить Lemma 2.13 (порог $t\\le n/16$ станет $t\\le \\Theta(n/s)$).
+  In this form, you can try to transfer HR'22 Definition 2.11 (tevaluation) to localEF(s), replacing all thresholds of the form
+  $|\\mathrm{supp}(\\alpha)|+2\\,\\mathrm{depth}(T)\\le n/2$ by $|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2$ (or more roughly $t\\mapsto O(s\\,t)$).
+- `Toy test:` if $p\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$, then the request $p$ "costs" 3 edges/6 ends; this is consistent with Section 16.158 (query $p$ is expanded into 3 edge queries).
+- `Status:` draft (a careful check is needed: where exactly in the HR'22 proofs is it used that the variables are *exactly edges*, and that adding a query $p_i$ is correctly "paid" by the local witness on $\\mathrm{closure}(\\mathrm{supp}_s)$).
+- `Barrier check:` r - applicable (the entire support/closure/DT scheme is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q41: (a) choose the exact model localEF(s) (we prohibit $\\varphi_i(P)$ or consider $\\mathrm{supp}(p_i)$ as support for the fully expanded formula), (b) formally prove (or find a counterexample) item (4) as an analogue of Cor. 2.7, and only after that try to transfer Lemma 2.13 (the threshold $t\\le n/16$ becomes $t\\le \\Theta(n/s)$).
 
-### 16.160. Исследовательский шаг: контрпример — “nested extension” без полного разворачивания поддержки делает local‑EF(s) бессодержательной
+### 16.160. Exploratory step: counterexample - "nested extension" without fully deploying support makes localEF(s) meaningless
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (контрпример к «naive nested‑locality»):`
-  Пусть разрешены extension‑аксиомы вида $p\\leftrightarrow\\varphi(X,P_{<p})$, и “наивная поддержка” шага измеряется только по *синтаксически встречающимся edge‑переменным* в $\\varphi$ (extension‑переменные считаются атомами и не разворачиваются в $X$).
-  Тогда существует цепочка extension‑шагов, где **каждый** шаг имеет поддержку $\\le 2$ (одна edge‑переменная), но итоговая переменная вычисляет XOR от $m$ edge‑переменных и потому имеет “истинную” поддержку $\\Theta(m)$.
-  Следовательно, без запрета nesting или без разворачивания поддержки определение local‑EF(s) перестаёт контролировать геометрию (и не может служить базой для $\\mathrm{supp}_s/\\mathrm{cost}_s$‑версии Cor. 2.7).
-- `Доказательство (явная конструкция):`
-  Возьмём попарно различные edge‑переменные $x_{e_1},\\dots,x_{e_m}$ и введём extension‑переменные $p_1,\\dots,p_m$:
+- `Lens:` Model stress test.
+- `Statement (counterexample to "naive nestedlocality"):`
+  Let extension axioms of the form $p\\leftrightarrow\\varphi(X,P_{<p})$ be allowed, and the "naive support" of a step is measured only by *syntactically occurring edge variables* in $\\varphi$ (extension variables are considered atoms and are not expanded in $X$).
+  Then there is a chain of extension steps, where **each** step has support $\\le 2$ (one edge variable), but the resulting variable calculates the XOR of $m$ edge variables and therefore has "true" support $\\Theta(m)$.
+  Therefore, without disabling nesting or without deploying support, the definition of localEF(s) ceases to control the geometry (and cannot serve as the basis for $\\mathrm{supp}_s/\\mathrm{cost}_s$version of Cor. 2.7).
+- `Proof (explicit construction):`
+  Let's take pairwise different edge variables $x_{e_1},\\dots,x_{e_m}$ and introduce extension variables $p_1,\\dots,p_m$:
   $$p_1\\leftrightarrow x_{e_1},\\qquad p_i\\leftrightarrow (p_{i-1}\\oplus x_{e_i})\\ \\ (2\\le i\\le m).$$
-  (Операция $\\oplus$ выражается формулой константного размера в базисе $\\vee,\\wedge,\\neg$.)
-  Тогда по индукции $p_i\\equiv\\bigoplus_{j\\le i}x_{e_j}$.
-  При наивном подсчёте поддержки каждый $\\varphi_i$ содержит **ровно одну** edge‑переменную $x_{e_i}$, поэтому $|\\mathrm{supp}(\\varphi_i)|=2$ для всех $i$.
-  Но “развёрнутая” формула для $p_m$ содержит все $x_{e_1},\\dots,x_{e_m}$, так что
+  (The operation $\\oplus$ is expressed by a constant size formula in the basis $\\vee,\\wedge,\\neg$.)
+  Then by induction $p_i\\equiv\\bigoplus_{j\\le i}x_{e_j}$.
+  With naive support calculation, each $\\varphi_i$ contains **exactly one** edge variable $x_{e_i}$, so $|\\mathrm{supp}(\\varphi_i)|=2$ for all $i$.
+  But the "expanded" formula for $p_m$ contains all $x_{e_1},\\dots,x_{e_m}$, so
   $$\\mathrm{supp}(p_m)=\\bigcup_{j\\le m}\\mathrm{supp}(x_{e_j}).$$
-  В частности, если выбрать рёбра $e_j$ попарно без общих концов, то $|\\mathrm{supp}(p_m)|=2m$.
-- `Toy‑тест:` на $n\\times n$ grid можно взять $m=\\lfloor n^2/2\\rfloor$ попарно непересекающихся рёбер (matching); тогда “naive” $s=2$, но $|\\mathrm{supp}(p_m)|=\\Theta(n^2)$.
-- `Статус:` контрпример (фиксирует выбор модели: либо flat $\\varphi_i(X)$, либо $\\mathrm{supp}(p_i)$ считается по полностью развёрнутой формуле в $X$).
-- `Барьер‑чек:` r — применимо (чисто синтаксический трюк), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q41 принять “flat” (запрет $\\varphi_i(P)$) или “unfolded‑support” модель и уже в ней доказывать/опровергать аналог HR Cor. 2.7 для $\\mathrm{supp}_s/\\mathrm{cost}_s$.
+  In particular, if we choose edges $e_j$ in pairs without common ends, then $|\\mathrm{supp}(p_m)|=2m$.
+- `Toy test:` on $n\\times n$ grid we can take $m=\\lfloor n^2/2\\rfloor$ pairs of disjoint edges (matching); then "naive" $s=2$, but $|\\mathrm{supp}(p_m)|=\\Theta(n^2)$.
+- `Status:` counterexample (fixes the choice of model: either flat $\\varphi_i(X)$ or $\\mathrm{supp}(p_i)$ is calculated using a fully expanded formula in $X$).
+- `Barrier check:` r - applicable (purely a syntactic trick), NP - not applicable, alg - not applicable.
+- `Next step:` for Q41, accept the "flat" (prohibition $\\varphi_i(P)$) or "unfoldedsupport" model and prove/refute the analogue of HR Cor in it. 2.7 for $\\mathrm{supp}_s/\\mathrm{cost}_s$.
 
-### 16.161. Исследовательский шаг: доказательство аналога HR Cor. 2.7 для **flat** local‑EF(s) через $\\mathrm{supp}_s/\\mathrm{cost}_s$
+### 16.161. Exploratory step: evidence of an analogue of HR Cor. 2.7 for **flat** localEF(s) via $\\mathrm{supp}_s/\\mathrm{cost}_s$
 
-- `Линза:` Инвариант.
-- `Утверждение (Q41.S3-proof-cor27-analogue-flat):`
-  Работаем в **flat**‑модели: extension‑аксиомы имеют вид
+- `Lens:` Invariant.
+- `Statement (Q41.S3-proof-cor27-analogue-flat):`
+  We work in the **flat** model: extension axioms have the form
   $$p_i\\leftrightarrow\\varphi_i(X),\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s,$$
-  где $X$ — edge‑переменные Tseitin($G_n$), а $\\varphi_i$ не содержит extension‑переменных.
-  Используем определения $\\mathrm{supp}_s(\\alpha)$, $s$‑local consistency и $\\mathrm{cost}_s(T)$ из §16.159.
-  Тогда выполняется прямой аналог HR’22 Cor. 2.7 (p. 8; PDF p. 10) с заменой $|\\mathrm{supp}(\\alpha)|+2\\,\\mathrm{depth}(T)$ на
+  where $X$ are edge variables of Tseitin($G_n$), and $\\varphi_i$ does not contain extension variables.
+  We use the definitions of $\\mathrm{supp}_s(\\alpha)$, $s$local consistency, and $\\mathrm{cost}_s(T)$ from Section 16.159.
+  Then a direct analogue of HR'22 Cor is performed. 2.7 (p. 8; PDF p. 10) with $|\\mathrm{supp}(\\alpha)|+2\\,\\mathrm{depth}(T)$ replaced by
   $|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)$:
-  если $T$ — (обычный) decision tree над переменными $X\\cup P$ и $\\alpha$ $s$‑locally consistent, и
+  if $T$ is a (usual) decision tree over the variables $X\\cup P$ and $\\alpha$ $s$locally consistent, and
   $$|\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2,$$
-  то “trimmed restriction” $T\\lceil\\alpha$ (как у HR, но по pairwise $s$‑local consistency) корректен и является $s$‑locally consistent decision tree
-  (в частности, $T\\lceil\\alpha\\ne\\varnothing$).
-- `Доказательство:`
-  Достаточно показать, что существует хотя бы одна ветвь $\\tau$ дерева $T$, такая что $\\alpha\\cup\\tau$ $s$‑locally consistent.
-  Построим её жадно, спускаясь от корня к листу.
-  На шаге имеем частичное присваивание
+  then "trimmed restriction" $T\\lceil\\alpha$ (like HR, but pairwise $s$local consistency) is correct and is $s$locally consistent decision tree
+  (specifically $T\\lceil\\alpha\\ne\\varnothing$).
+- `Proof:`
+  It is enough to show that there is at least one branch $\\tau$ of the tree $T$ such that $\\alpha\\cup\\tau$ $s$locally consistent.
+  Let's build it greedily, going down from the root to the leaf.
+  At the step we have a partial assignment
   $$\\gamma:=\\alpha\\cup\\tau_{\\le k}$$
-  (префикс ветви), которое $s$‑locally consistent, и положим $U:=\\mathrm{supp}_s(\\gamma)$.
-  Для любой вершины дерева $T$ любой префикс ветви имеет $\\mathrm{cost}_s(\\tau_{\\le k})\\le \\mathrm{cost}_s(T)$, поэтому по условию
+  (branch prefix), which is $s$locally consistent, and set $U:=\\mathrm{supp}_s(\\gamma)$.
+  For any vertex of the tree $T$, any branch prefix has $\\mathrm{cost}_s(\\tau_{\\le k})\\le \\mathrm{cost}_s(T)$, so by condition
   $$|U|\\le |\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(\\tau_{\\le k})\\le |\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(T)\\le n/2.$$
-  Рассмотрим следующую переменную запроса в $T$ (в текущем узле) и выберем значение, сохраняющее $s$‑локальную согласованность.
-  1) **Edge‑запрос $x_e$.**
-     Из $s$‑local consistency для $\\gamma$ существует witness $\\beta$ на $X$, complete on $\\mathrm{closure}(U)$, удовлетворяющий parity‑constraints на $\\mathrm{closure}(U)$ и согласованный со всеми присвоенными $p_j$.
-     Обозначим через $E_P$ множество edge‑переменных, встречающихся в $\\varphi_j$ для всех $p_j\\in\\mathrm{dom}(\\gamma)$.
-     Расширим $\\gamma\\!\upharpoonright_X$ до частичного присваивания $\\delta$ на $X$, присвоив все переменные из $E_P$ так, как в $\\beta$.
-     Тогда $\\mathrm{supp}(\\delta)\\subseteq U$, и $\\delta$ локально согласовано в смысле HR Definition 2.2 (witness — та же $\\beta$).
-     По HR Lemma 2.3 (p. 6; PDF p. 8) существует локально согласованное $\\delta'\\supseteq\\delta$ с $x_e$ в домене.
-     Пусть $b:=\\delta'(x_e)$. Тогда $\\gamma':=\\gamma\\cup\\{x_e\\mapsto b\\}$ $s$‑locally consistent:
-     все ранее присвоенные $p_j$ остаются совместимыми, т.к. их формулы $\\varphi_j$ используют только переменные из $E_P$, уже зафиксированные в $\\delta$ и потому неизменные в $\\delta'$.
-  2) **Extension‑запрос $p_i$.**
-     Пусть $E_i:=\\mathrm{vars}(\\varphi_i)$ — множество edge‑переменных в $\\varphi_i$.
-     Начнём с той же $\\delta$ (фиксирует $E_P$ по witness $\\beta$) и последовательно применим HR Lemma 2.3, добавляя в домен $\\delta$ переменные из $E_i$.
-     По построению на каждом шаге поддержка остаётся в $U\\cup\\mathrm{supp}(\\varphi_i)$, а
+  Consider the next query variable in $T$ (at the current node) and choose a value that preserves $s$-local consistency.
+  1) **Edge-query $x_e$.**
+     From $s$local consistency for $\\gamma$ there is a witness $\\beta$ on $X$, complete on $\\mathrm{closure}(U)$, satisfying parityconstraints on $\\mathrm{closure}(U)$ and consistent with all assigned $p_j$.
+     Let $E_P$ denote the set of edge variables occurring in $\\varphi_j$ for all $p_j\\in\\mathrm{dom}(\\gamma)$.
+     Let's extend $\\gamma\\!\upharpoonright_X$ to a partial assignment of $\\delta$ on $X$, assigning all variables from $E_P$ as in $\\beta$.
+     Then $\\mathrm{supp}(\\delta)\\subseteq U$, and $\\delta$ is locally consistent in the sense of HR Definition 2.2 (witness is the same $\\beta$).
+     By HR Lemma 2.3 (p. 6; PDF p. 8) there is a locally consistent $\\delta'\\supseteq\\delta$ with $x_e$ in the domain.
+     Let $b:=\\delta'(x_e)$. Then $\\gamma':=\\gamma\\cup\\{x_e\\mapsto b\\}$ $s$locally consistent:
+     all previously assigned $p_j$ remain compatible, because their formulas $\\varphi_j$ use only variables from $E_P$ that are already fixed in $\\delta$ and therefore unchanged in $\\delta'$.
+  2) **Extension request $p_i$.**
+     Let $E_i:=\\mathrm{vars}(\\varphi_i)$ be the set of edge variables in $\\varphi_i$.
+     Let's start with the same $\\delta$ (fixes $E_P$ by witness $\\beta$) and sequentially apply HR Lemma 2.3, adding variables from $E_i$ to the $\\delta$ domain.
+     By construction, at each step the support remains in $U\\cup\\mathrm{supp}(\\varphi_i)$, and
      $$|U\\cup\\mathrm{supp}(\\varphi_i)|\\le |\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(\\tau_{\\le k})+|\\mathrm{supp}(\\varphi_i)|\\le |\\mathrm{supp}_s(\\alpha)|+\\mathrm{cost}_s(\\tau_{\\le k+1})\\le n/2,$$
-     так что лемма применима.
-     Получаем локально согласованное $\\delta'$ на $X$, которое присваивает все переменные из $E_P\\cup E_i$.
-     Положим $b:=\\varphi_i(\\delta')$ и $\\gamma':=\\gamma\\cup\\{p_i\\mapsto b\\}$.
-     Тогда $\\gamma'$ $s$‑locally consistent: witness задаётся completion’ом $\\delta'$ на $\\mathrm{closure}(U\\cup\\mathrm{supp}(\\varphi_i))$,
-     а равенство $p_i=\\varphi_i(X)$ выполнено по определению $b$.
-  В обоих случаях мы нашли значение для следующего запроса, сохранив $s$‑local consistency и инвариант $|\\mathrm{supp}_s(\\gamma')|\\le n/2$.
-  Продолжая до листа, получаем ветвь $\\tau$ с $\\alpha\\cup\\tau$ $s$‑locally consistent.
-  Значит множество ветвей, pairwise $s$‑locally consistent с $\\alpha$, непусто, и “trimmed restriction” $T\\lceil\\alpha$ определён и $s$‑locally consistent (по определению).
-- `Toy‑тест:` если $p\\leftrightarrow x_e$ (поддержка 2), то случай “extension‑запрос” буквально сводится к HR Lemma 2.3 для $x_e$.
-- `Статус:` доказано (в flat‑модели; снимает главный риск в §16.159: ограничение “ветка мала ⇒ closure‑witness существует” переносится на local‑EF(s) при замене $2\\,\\mathrm{depth}$ на $\\mathrm{cost}_s$).
-- `Барьер‑чек:` r — применимо (аргумент целиком про support/closure/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` используя этот аналог Cor. 2.7, переписать HR Definition 2.11 (t‑evaluation) для flat local‑EF(s) и проверить, где в Lemma 2.13 требуется точнее контролировать порог (ожидаемо $t\\le\\Theta(n/s)$).
+     so the lemma applies.
+     We obtain a locally consistent $\\delta'$ on $X$, which assigns all variables from $E_P\\cup E_i$.
+     Let us put $b:=\\varphi_i(\\delta')$ and $\\gamma':=\\gamma\\cup\\{p_i\\mapsto b\\}$.
+     Then $\\gamma'$ $s$locally consistent: witness is given by completion $\\delta'$ on $\\mathrm{closure}(U\\cup\\mathrm{supp}(\\varphi_i))$,
+     and the equality $p_i=\\varphi_i(X)$ is satisfied by the definition of $b$.
+  In both cases, we found the value for the next query, preserving $s$local consistency and the invariant $|\\mathrm{supp}_s(\\gamma')|\\le n/2$.
+  Continuing to the leaf, we obtain a branch $\\tau$ with $\\alpha\\cup\\tau$ $s$locally consistent.
+  This means that the set of branches pairwise $s$locally consistent with $\\alpha$ is non-empty, and the "trimmed restriction" $T\\lceil\\alpha$ is defined and $s$locally consistent (by definition).
+- `Toy test:` if $p\\leftrightarrow x_e$ (support 2), then the "extension query" case literally reduces to HR Lemma 2.3 for $x_e$.
+- `Status:` proven (in the flat model; removes the main risk in Section 16.159: the constraint "the branch is small  closure-witness exists" is transferred to local-EF(s) when $2\\,\\mathrm{depth}$ is replaced by $\\mathrm{cost}_s$).
+- `Barrier check:` r - applicable (the argument is entirely about support/closure/decision trees and is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` using this analog Cor. 2.7, rewrite HR Definition 2.11 (tevaluation) for flat localEF(s) and check where in Lemma 2.13 the threshold needs to be controlled more precisely (expectedly $t\\le\\Theta(n/s)$).
 
-### 16.162. Исследовательский шаг: flat local‑EF(s) — “t‑evaluation” и перенос HR Lemma 2.13 с порогом $t\\le\\Theta(n/s)$
+### 16.162. Research step: flat localEF(s) - "tevaluation" and transfer of HR Lemma 2.13 with threshold $t\\le\\Theta(n/s)$
 
-- `Линза:` Эквивалентность.
-- `Определение (cost‑t evaluation, flat local‑EF(s)):` Зафиксируем $n\\times n$ grid $G_n$, edge‑переменные $X$ и extension‑переменные $P$ с аксиомами
+- `Lens:` Equivalence.
+- `Definition (costt evaluation, flat localEF(s)):` Let us fix $n\\times n$ grid $G_n$, edge variables $X$ and extension variables $P$ with axioms
   $$p_i\\leftrightarrow\\varphi_i(X),\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s,$$
-  где $\\varphi_i$ не содержит переменных из $P$ (flat).
-  Скажем, что множество формул $\\Gamma$ имеет **cost‑$t$‑evaluation** $\\phi$, если $\\phi$ отображает каждую формулу $F\\in\\Gamma$ в $s$‑locally consistent decision tree $\\phi(F)$ с
+  where $\\varphi_i$ does not contain variables from $P$ (flat).
+  We say that the set of formulas $\\Gamma$ has **cost$t$evaluation** $\\phi$ if $\\phi$ maps each formula $F\\in\\Gamma$ to $s$locally consistent decision tree $\\phi(F)$ with
   $$\\mathrm{cost}_s(\\phi(F))\\le t,$$
-  и выполняются Properties 1–4 из HR’22 Definition 2.11 (PDF p. 11), но с “locally consistent” заменённым на “$s$‑locally consistent”.
-- `Утверждение (аналог HR Lemma 2.13):`
-  Пусть $t\\le n/16$ и существует Frege‑вывод формулы $A$ из Tseitin($G_n$) (и, при желании, flat extension‑аксиом) такой, что **каждая** строка имеет cost‑$t$‑evaluation, и все эти evaluations попарно функционально эквивалентны (как в HR’22 Definition 2.12).
-  Тогда каждая строка вывода отображается в 1‑tree; в частности, нельзя вывести $\\bot$.
-- `Доказательство (сведение к HR):`
-  Доказательство HR’22 Lemma 2.13 (Appendix A.1, paper p. 47–48; PDF p. 50–51) переносится дословно, потому что использует только:
+  and executes Properties 1-4 from HR'22 Definition 2.11 (PDF p. 11), but with "locally consistent" replaced by "$s$locally consistent".
+- `Statement (analogous to HR Lemma 2.13):`
+  Let $t\\le n/16$ and there exist a Frege-derivation of the formula $A$ from Tseitin($G_n$) (and, optionally, flat extension-axioms) such that **each** line has a cost-$t$-evaluation, and all these evaluations are pairwise functionally equivalent (as in HR'22 Definition 2.12).
+  Then each line of output is displayed in a 1tree; in particular, $\\bot$ cannot be inferred.
+- `Proof (reduced to HR):`
+  Proof of HR'22 Lemma 2.13 (Appendix A.1, paper p. 47-48; PDF p. 50-51) is translated verbatim because it only uses:
   (i) Properties 1–4 evaluation,
-  (ii) функциональную эквивалентность evaluations,
-  (iii) факт, что все ограничения вида $T\\lceil\\alpha$ и $T\\lceil(\\alpha\\cup\\tau)$ корректно определены и дают (s‑)locally consistent деревья.
+  (ii) functional equivalence of evaluations,
+  (iii) the fact that all constraints of the form $T\\lceil\\alpha$ and $T\\lceil(\\alpha\\cup\\tau)$ are correctly defined and give (s)locally consistent trees.
 
-  В HR пункт (iii) обеспечивается Cor. 2.7 при $t\\le n/16$; в flat local‑EF(s) он обеспечивается §16.161, поскольку для любой ветви $\\tau$ дерева $T$ имеем
+  In HR, clause (iii) is provided by Cor. 2.7 at $t\\le n/16$; in flat localEF(s) it is provided by Section 16.161, since for any branch $\\tau$ of tree $T$ we have
   $$|\\mathrm{supp}_s(\\tau)|\\le \\mathrm{cost}_s(\\tau)\\le \\mathrm{cost}_s(T)\\le t,$$
-  и потому для любого другого дерева $T'$ с $\\mathrm{cost}_s(T')\\le t$:
+  and therefore for any other tree $T'$ with $\\mathrm{cost}_s(T')\\le t$:
   $$|\\mathrm{supp}_s(\\tau)|+\\mathrm{cost}_s(T')\\le 2t\\le n/2.$$
-  Аналогично, если в Cut‑случае нужно ограничивать по $\\tau\\cup\\tau'$, то
-  $|\\mathrm{supp}_s(\\tau\\cup\\tau')|\\le |\\mathrm{supp}_s(\\tau)|+|\\mathrm{supp}_s(\\tau')|\\le 2t$ и
+  Similarly, if in the Cut case it is necessary to limit by $\\tau\\cup\\tau'$, then
+  $|\\mathrm{supp}_s(\\tau\\cup\\tau')|\\le |\\mathrm{supp}_s(\\tau)|+|\\mathrm{supp}_s(\\tau')|\\le 2t$ and
   $|\\mathrm{supp}_s(\\tau\\cup\\tau')|+\\mathrm{cost}_s(T'')\\le 3t\\le 3n/16<n/2$,
-  так что §16.161 применим.
-  Значит все restricted trees, используемые в индукции HR, корректны, и вывод “нельзя получить 0‑ветвь на новой строке” сохраняется.
-- `Следствие (порог $t\\le\\Theta(n/s)$ в терминах глубины):`
-  В flat‑модели любой decision tree глубины $d$ удовлетворяет $\\mathrm{cost}_s(T)\\le (s+2)\\,d$ (см. §16.159),
-  поэтому “depth‑$d$ evaluation” имплицирует cost‑$t$ evaluation с $t:=(s+2)d$.
-  В частности, условие $t\\le n/16$ эквивалентно $d\\le n/(16(s+2))=\\Theta(n/s)$.
-- `Toy‑тест:` при $s=0$ (нет extension‑переменных) имеем $\\mathrm{cost}_0=2\\,\\mathrm{depth}$, так что условие $t\\le n/16$ соответствует $\\mathrm{depth}\\le n/32$ (константы не оптимизировались; важен масштаб $\\Theta(n)$).
-- `Статус:` доказано (flat‑модель; даёт явный “gatekeeper”: весь evaluation‑каркас переносится с заменой $t\\mapsto (s+2)t$).
-- `Барьер‑чек:` r — применимо (вся конструкция support/closure/DT релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если пытаться использовать это для lower bounds, нужно показать: (a) почему poly‑size flat local‑EF(s) вывод *индуцирует* depth‑$d$ evaluations с $d=\\mathrm{polylog}(n)$, или (b) где именно multi‑switching/representation ломается в присутствии extension‑переменных даже в flat‑режиме.
+  so Section 16.161 applies.
+  This means that all restricted trees used in HR induction are correct, and the conclusion "you cannot get a 0branch on a new line" is preserved.
+- `Corollary (threshold $t\\le\\Theta(n/s)$ in terms of depth):`
+  In the flat model, any decision tree of depth $d$ satisfies $\\mathrm{cost}_s(T)\\le (s+2)\\,d$ (see Section 16.159),
+  so "depth$d$ evaluation" implies cost$t$ evaluation with $t:=(s+2)d$.
+  In particular, the condition $t\\le n/16$ is equivalent to $d\\le n/(16(s+2))=\\Theta(n/s)$.
+- `Toy test:` for $s=0$ (no extension variables) we have $\\mathrm{cost}_0=2\\,\\mathrm{depth}$, so the condition $t\\le n/16$ corresponds to $\\mathrm{depth}\\le n/32$ (the constants were not optimized; the scale $\\Theta(n)$ is important).
+- `Status:` proven (flat model; gives an explicit "gatekeeper": the entire evaluation framework is transferred with the replacement $t\\mapsto (s+2)t$).
+- `Barrier check:` r - applicable (the entire support/closure/DT construction is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` if you try to use this for lower bounds, you need to show: (a) why poly-size flat local-EF(s) output *induces* depth-$d$ evaluations with $d=\\mathrm{polylog}(n)$, or (b) where exactly multi-switching/representation breaks down in the presence of extension variables even in flat mode.
 
-### 16.163. Исследовательский шаг: точная цитата — где HR’22 строят t‑evaluation индукцией по глубине (Proof of Thm. 4.1)
+### 16.163. Research step: exact quote - where HR'22 builds tevaluation by induction on depth (Proof of Thm. 4.1)
 
-- `Линза:` Инвариант.
-- `Утверждение:` В HR’22 явно выписано *индуктивное определение* t‑evaluation для всех подформул “короткого и мелкого” Frege‑доказательства (после применения последовательности full restrictions); единственное нетривиальное расширение домена происходит в случае дизъюнкции и делается через switching lemma.
-- `Доказательство/ссылка:` Håstad–Risse, `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`:
+- `Lens:` Invariant.
+- `Statement:` In HR'22, an *inductive definition* of tevaluation is explicitly written for all subformulas of the "short and small" Fregeproof (after applying the full restrictions sequence); the only non-trivial domain extension occurs in the case of disjunction and is done through the switching lemma.
+- `Proof/link:` Håstad–Risse, `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`:
   1) (paper p. 15; PDF p. 17) “For the total size lower bound we in fact do not create distinct t-evaluations per line but rather a single one, used on each line.”
-  2) (paper p. 16; PDF p. 18) в доказательстве Theorem 4.1 после формулы (4) дано определение $\\phi_{i+1}$ по случаям (цитата):
+  2) (paper p. 16; PDF p. 18) in the proof of Theorem 4.1 after formula (4) the definition of $\\phi_{i+1}$ is given for cases (quote):
      > “Consider any such formula $F\\in\\Gamma$. We define $\\phi_{i+1}$ as follows.
      > 1. If $F$ is of depth at most $\\mathrm{depth}(F)\\le i$, then we let $\\phi_{i+1}(F\\!\upharpoonright\\!\\sigma_i^*)=\\phi_i(F\\!\upharpoonright\\!\\sigma_i^{*\\! -1})\\!\upharpoonright\\!\\sigma_i$. By Lemma 3.4 the restricted $t_i$-evaluation $\\phi_i\\!\upharpoonright\\!\\sigma_i$ is defined on such formulas.
      > 2. If $F=\\neg F'$ is of depth $i+1$, then $\\phi_{i+1}(F\\!\upharpoonright\\!\\sigma_i^*)$ is defined in terms of $\\phi_{i+1}(F'\\!\\upharpoonright\\!\\sigma_i^*)$ by negating all the leaf labels.
      > 3. If $F=\\bigvee_j F_j$ is of depth $i+1$ and each $F_j$ is of depth at most $\\mathrm{depth}(F_j)\\le i$, then we appeal to Lemma 4.2 to obtain a decision tree $T$ … representing $\\bigvee_j T_j$ for $T_j=\\phi_i(F_j\\!\\upharpoonright\\!\\sigma_i^{*\\! -1})$.”
-- `Toy‑тест:` извлечение текста `pdftotext -f 18 -l 18` показывает пункты 1–3 выше дословно (проверка “где именно строится evaluation”).
-- `Статус:` известный факт (точная ссылка на конструкцию evaluations).
-- `Барьер‑чек:` r — неприменимо (на этом шаге только локализация цитаты), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 локализовать аналогичное “построчное” построение (functionally equivalent $t(\\eta)$‑evaluations) в доказательстве Theorem 4.3/Lemma 4.5 и отметить, где в этом месте появление extension‑переменных может ломать switching/representation.
+- `Toy test:` text extraction `pdftotext -f 18 -l 18` shows points 1-3 above verbatim (checking "where exactly evaluation is built").
+- `Status:` known fact (exact reference to the evaluations construct).
+- `Barrier check:` r - not applicable (at this step only quote localization), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, localize a similar "line-by-line" construction (functionally equivalent $t(\\eta)$evaluations) in the proof of Theorem 4.3/Lemma 4.5 and note where in this place the appearance of extension variables can break switching/representation.
 
-### 16.164. Исследовательский шаг: точная цитата — построчное построение functionally equivalent $t(\\eta)$‑evaluations (Theorem 4.3 / Lemma 4.5)
+### 16.164. Research step: exact quote - line-by-line construction of functionally equivalent $t(\\eta)$evaluations (Theorem 4.3 / Lemma 4.5)
 
-- `Линза:` Эквивалентность.
-- `Утверждение:` В доказательстве HR’22 Theorem 4.3 явно поддерживаются (i) для каждой строки $\\nu$ доказательства — своё $t(\\eta)$‑evaluation $\\phi^\\eta_\\nu$ на множестве подформул $\\Gamma^\\eta_\\nu$, (ii) для каждой строки — “общий” partial decision tree $T_\\eta(\\nu)$, используемый для расширения evaluations на следующий уровень глубины. Индуктивный шаг зафиксирован как Lemma 4.5 и использует multi‑switching lemma (Lemma 4.4) на деревьях $\\phi^{\\eta-1}_\\nu(F)\\!\upharpoonright\\!\\tau$.
-- `Доказательство/ссылка:` Håstad–Risse, `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`:
+- `Lens:` Equivalence.
+- `Statement:` The proof of HR'22 Theorem 4.3 explicitly supports (i) for each line $\\nu$ of the proof - its own $t(\\eta)$evaluation $\\phi^\\eta_\\nu$ on the set of subformulas $\\Gamma^\\eta_\\nu$, (ii) for each line - a "general" partial decision tree $T_\\eta(\\nu)$, used to extend evaluations to next level of depth. The inductive step is fixed as Lemma 4.5 and uses the multiswitching lemma (Lemma 4.4) on $\\phi^{\\eta-1}_\\nu(F)\\!\upharpoonright\\!\\tau$ trees.
+- `Proof/link:` Håstad–Risse, `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`:
   1) (Theorem 4.3, PDF p. 19) “The main difference is that instead of creating a single t-evaluation for the entire proof we in fact independently create t-evaluations for each line. These t-evaluations turn out to be functionally equivalent…”.
-  2) (после (6), PDF p. 19) для каждого $\\eta$ вводится
+  2) (after (6), PDF p. 19) for each $\\eta$ we introduce
      $$\\Gamma^\\eta_\\nu:=\\{F\\!\upharpoonright\\!\\sigma^*_\\eta\\mid F\\in\\Gamma_\\nu\\ \\wedge\\ \\mathrm{depth}(F)\\le \\eta\\},\\tag{6}$$
-     и требуется функциональная эквивалентность всех $\\phi^\\eta_\\nu$.
-  3) (Lemma 4.5, PDF p. 20) индуктивный шаг (цитата из утверждения):
+     and functional equivalence of all $\\phi^\\eta_\\nu$ is required.
+  3) (Lemma 4.5, PDF p. 20) inductive step (quote from statement):
      > “Suppose that for every line $\\nu\\in[N]$ we have functionally equivalent $t(\\eta-1)$-evaluations $\\phi^{\\eta-1}_\\nu$ … Suppose that $t(\\eta)\\le n_\\eta/16$. For $\\sigma_\\eta\\sim D_k\\Sigma(n_{\\eta-1},n_\\eta)$ with probability $1-N^{-1}$, for every line $\\nu$ … there are functionally equivalent $t(\\eta)$-evaluations $\\phi^\\eta_\\nu$ … and a $t$-common partial decision tree $T_\\eta(\\nu)$ …”.
-- `Toy‑тест:` `pdftotext -f 20 -l 20` показывает Lemma 4.5 и внутри доказательства явное определение $\\phi^\\eta_\\nu$ по случаям (depth<η / ¬ / ∨) с использованием построенного $T_\\eta(\\nu)$.
-- `Статус:` известный факт (точная ссылка на “linewise evaluations” каркас HR’22).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 выделить в доказательстве Lemma 4.5 место, где используется, что деревья $\\phi^{\\eta-1}_\\nu(F)$ запрашивают *только edge‑переменные* и что full restrictions/локальная согласованность закрыты относительно этих запросов; затем проверить, сохраняется ли этот шаг при добавлении flat extension‑переменных (или зафиксировать точку поломки).
+- `Toy test:` `pdftotext -f 20 -l 20` shows Lemma 4.5 and within the proof an explicit definition of $\\phi^\\eta_\\nu$ by cases (depth< /  / ) using the constructed $T_\\eta(\\nu)$.
+- `Status:` known fact (exact reference to "linewise evaluations" HR'22 framework).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, highlight the place in the proof of Lemma 4.5 where it is used that $\\phi^{\\eta-1}_\\nu(F)$ trees query *only edge variables* and that full restrictions/local consistency are closed with respect to these queries; then check whether this step remains the same when adding flat extension variables (or fix the breaking point).
 
-### 16.165. Исследовательский шаг: flat extensions — как убрать $P$‑запросы из decision trees (unfolding) ценой фактора $O(s)$ по глубине
+### 16.165. Research step: flat extensions - how to remove $P$ queries from decision trees (unfolding) at the cost of the $O(s)$ factor in depth
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S3-check-lemma45-flat-ext-break):`
-  Пусть работаем на $n\\times n$ grid и разрешены **flat** extension‑переменные $P$ с аксиомами
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S3-check-lemma45-flat-ext-break):`
+  Let us work on a $n\\times n$ grid and let **flat** extension variables $P$ with axioms be allowed
   $$p_i\\leftrightarrow\\varphi_i(X),\\qquad |\\mathrm{supp}(\\varphi_i)|\\le s,$$
-  где $X$ — edge‑переменные.
-  Тогда любой decision tree $T$ над переменными $X\\cup P$ можно преобразовать в decision tree $U$ над **только** edge‑переменными $X$ так, что:
-  1) для любого присваивания $\\alpha:X\\to\\{0,1\\}$ значение $U(\\alpha)$ совпадает со значением $T(\\alpha, P=\\varphi(X))$;
-  2) для любой ветви $\\tau$ дерева $T$ соответствующая ветвь $\\hat\\tau$ дерева $U$ имеет глубину
-     $$\\mathrm{depth}(\\hat\\tau)\\le \\#(X\\text{‑запросов в }\\tau)+2s\\cdot\\#(P\\text{‑запросов в }\\tau)\\le (2s+1)\\,\\mathrm{depth}(\\tau).$$
-  В частности, если в HR Lemma 4.5/Lemma 4.4 требуется “decision trees querying edges of the $n\\times n$ grid” глубины $\\le t$, то для flat local‑EF(s) достаточно заменить параметр $t$ на $t':=(2s+1)t$ после такого unfolding.
-- `Доказательство:`
-  Для каждого $p_i$ обозначим через $E_i\\subseteq X$ множество edge‑переменных, встречающихся в $\\varphi_i$.
-  Так как grid имеет степень $\\le 4$, любой фиксированный набор вершин $S$ инцидентен не более чем $2|S|$ рёбрам, значит
+  where $X$ are edge variables.
+  Then any decision tree $T$ over variables $X\\cup P$ can be transformed into a decision tree $U$ over **only** edge variables $X$ so that:
+  1) for any assignment $\\alpha:X\\to\\{0,1\\}$ the value $U(\\alpha)$ coincides with the value $T(\\alpha, P=\\varphi(X))$;
+  2) for any branch $\\tau$ of tree $T$, the corresponding branch $\\hat\\tau$ of tree $U$ has depth
+     $$\\mathrm{depth}(\\hat\\tau)\\le \\#(X\\text{-queries in }\\tau)+2s\\cdot\\#(P\\text{-queries in }\\tau)\\le (2s+1)\\,\\mathrm{depth}(\\tau).$$
+  In particular, if HR Lemma 4.5/Lemma 4.4 requires "decision trees querying edges of the $n\\times n$ grid" of depth $\\le t$, then for flat localEF(s) it is enough to replace the parameter $t$ with $t':=(2s+1)t$ after such unfolding.
+- `Proof:`
+  For each $p_i$, let $E_i\\subseteq X$ denote the set of edge variables occurring in $\\varphi_i$.
+  Since grid has degree $\\le 4$, any fixed set of vertices $S$ is incident to at most $2|S|$ edges, so
   $$|E_i|\\le 2\\,|\\mathrm{supp}(\\varphi_i)|\\le 2s.$$
-  Построим decision tree $D_i$ над $E_i$ глубины $|E_i|$ вычисляющее булеву функцию $\\varphi_i$ (например, запрашиваем все переменные из $E_i$ в фиксированном порядке и помечаем листья значением $\\varphi_i$ на соответствующем наборе).
+  Let's build a decision tree $D_i$ over $E_i$ of depth $|E_i|$ that calculates the Boolean function $\\varphi_i$ (for example, we request all variables from $E_i$ in a fixed order and mark the leaves with the value $\\varphi_i$ on the corresponding set).
 
-  Теперь определим $U$ из $T$ рекурсивной заменой каждого узла‑запроса $p_i$ на дерево $D_i$:
-  каждое листо $D_i$, помеченное $b\\in\\{0,1\\}$, перенаправляем в ребёнка исходного узла $p_i$ по ответу $b$.
-  Тогда по индукции по структуре $T$ для любого $\\alpha$ деревья $T$ и $U$ вычисляют одно и то же значение при интерпретации $p_i:=\\varphi_i(\\alpha)$.
+  Now we define $U$ from $T$ by recursively replacing each query node $p_i$ with the tree $D_i$:
+  Each leaf $D_i$, labeled $b\\in\\{0,1\\}$, is redirected to the child of the source node $p_i$ according to the answer $b$.
+  Then by induction on the structure of $T$, for any $\\alpha$ the trees $T$ and $U$ compute the same value under the interpretation $p_i:=\\varphi_i(\\alpha)$.
 
-  По глубине: замена одного $p_i$‑запроса добавляет вдоль ветви не более $\\mathrm{depth}(D_i)=|E_i|\\le 2s$ edge‑запросов, а $X$‑запросы сохраняются.
-  Отсюда
+  By depth: replacing one $p_i$-query adds no more than $\\mathrm{depth}(D_i)=|E_i|\\le 2s$ edge-queries along the branch, and $X$-queries are saved.
+  From here
   $$\\mathrm{depth}(\\hat\\tau)\\le \\#X(\\tau)+\\sum_{p_i\\in\\mathrm{dom}_P(\\tau)}|E_i|\\le \\#X(\\tau)+2s\\cdot\\#P(\\tau).$$
-- `Toy‑тест:` если $p\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$, то $|\\mathrm{supp}(\\varphi)|\\le 6$ и $|E|=3$; unfolding одного запроса $p$ даёт дерево глубины 3 на $\\{x_{e_1},x_{e_2},x_{e_3}\\}$.
-- `Статус:` доказано (фиксирует, где именно в Lemma 4.5 “edge‑only” используется и как к нему вернуться ценой фактора $O(s)$ по глубине).
-- `Барьер‑чек:` r — применимо (чисто комбинаторный аргумент про decision trees/поддержку и релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 проверить параметрический режим в HR Lemma 4.5: достаточно ли после замены $t\\mapsto (2s+1)t$ сохранить условия вида $t(\\eta)\\le n_\\eta/16$ и $t\\le s_\\eta\\le n' /32$; если нет — зафиксировать точную точку поломки как барьер.
+- `Toy test:` if $p\\leftrightarrow(x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3})$, then $|\\mathrm{supp}(\\varphi)|\\le 6$ and $|E|=3$; unfolding one query $p$ gives a tree of depth 3 on $\\{x_{e_1},x_{e_2},x_{e_3}\\}$.
+- `Status:` proven (fixes where exactly in Lemma 4.5 "edgeonly" is used and how to return to it at the cost of a factor $O(s)$ in depth).
+- `Barrier check:` r - applicable (purely combinatorial argument about decision trees/support and is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, check the parametric mode in HR Lemma 4.5: is it sufficient to preserve conditions of the form $t(\\eta)\\le n_\\eta/16$ and $t\\le s_\\eta\\le n' /32$ after replacing $t\\mapsto (2s+1)t$; if not, record the exact point of failure as a barrier.
 
-### 16.166. Исследовательский шаг: параметр‑чек — как меняются условия HR Lemma 4.5 после unfolding $t\\mapsto t':=(2s+1)t$
+### 16.166. Research step: check parameter - how the conditions of HR Lemma 4.5 change after unfolding $t\\mapsto t':=(2s+1)t$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S4-parameter-check-after-unfolding):`
-  В HR’22 доказательство Theorem 4.3 использует параметры Lemma 4.4/4.5 только через величину
+- `Lens:` Trade-off.
+- `Statement (Q43.S4-parameter-check-after-unfolding):`
+  In HR'22, the proof of Theorem 4.3 uses the parameters of Lemma 4.4/4.5 only through the quantity
   $$t:=\\log M$$
-  (глубина “остаточных” деревьев, уникальных для формулы после общего префикса $T_\\eta(\\nu)$).
-  Поэтому после unfolding из §16.165, который заменяет каждый $P$‑запрос на $\\le 2s$ edge‑запросов и даёт
+  (the depth of "residual" trees unique to the formula after the common prefix $T_\\eta(\\nu)$).
+  Therefore, after unfolding from Section 16.165, which replaces each $P$ query with $\\le 2s$ edge queries and gives
   $$t' := (2s+1)\\,t = (2s+1)\\log M,$$
-  параметрическая часть HR Lemma 4.5 сохраняется *в той же форме* при замене $t\\rightsquigarrow t'$:
-  - выбираем $\\ell:=t'$ в Lemma 4.4;
-  - задаём рекурсию $n_\\eta:=\\lfloor n_{\\eta-1}/(A_1\\,t'\\,\\log^{c_1} n_{\\eta-1})\\rfloor$ как у HR (PDF p. 19–20), и $s_\\eta:=2^{\\eta-1}\\log N$;
-  - итоговая достаточная проверка сводится к (HR, Proof of Thm. 4.3; PDF p. 19–20)
-    $$t'(d)\\le 2^d\\log N + t'\\quad\\text{и}\\quad n_d\\ \\gtrsim\\ \\frac{n}{(\\log^{c_1} n\\cdot t')^d},$$
-    а значит достаточно требовать
+  the parametric part of HR Lemma 4.5 is preserved *in the same form* when $t\\rightsquigarrow t'$ is replaced:
+  - choose $\\ell:=t'$ in Lemma 4.4;
+  - set the recursion $n_\\eta:=\\lfloor n_{\\eta-1}/(A_1\\,t'\\,\\log^{c_1} n_{\\eta-1})\\rfloor$ as in HR (PDF p. 19-20), and $s_\\eta:=2^{\\eta-1}\\log N$;
+  - the final sufficient verification is reduced to (HR, Proof of Thm. 4.3; PDF p. 19-20)
+    $$t'(d)\\le 2^d\\log N + t'\\quad\\text{i}\\quad n_d\\ \\gtrsim\\ \\frac{n}{(\\log^{c_1} n\\cdot t')^d},$$
+    which means it's enough to demand
     $$\\log N\\ \\le\\ \\frac{n}{C\\,\\bigl(\\log^{c_1} n\\cdot t'\\bigr)^d}$$
-    для достаточно большой абсолютной константы $C$.
-  В частности, “цена” flat‑extensions в этом месте — замена $\\log M\\mapsto (2s+1)\\log M$ (то есть ухудшение нижней оценки на длину на фактор $(2s+1)^d$ в знаменателе экспоненты).
-- `Доказательство:`
-  Сравним с параметр‑блоком в HR’22 (см. `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, Proof of Thm. 4.3; PDF p. 19–20):
-  (i) HR выбирают $\\ell=t=\\log M$ и рекурсию $n_\\eta=\\lfloor n_{\\eta-1}/(A_1\\,t\\,\\log^{c_1} n_{\\eta-1})\\rfloor$, а также $s_\\eta=2^{\\eta-1}\\log N$ и $t(\\eta)=\\sum_{i\\le\\eta}s_i+\\log M$;
-  (ii) единственная зависимость от $M$ в этом блоке проходит через $t=\\log M$ (см. строку “We choose $\\ell=t=\\log M$ …” и формулу $t(\\eta)=\\sum s_i+\\log M$);
-  (iii) unfolding из §16.165 меняет глубину “уникальной части” дерева на множитель $2s+1$, то есть достаточно заменить $t$ на $t':=(2s+1)t$ во всех местах, где HR используют $t$ как bound на глубину входных decision trees в Lemma 4.4.
-  Все оценки в HR для вероятности отказа/union bound используют только величины $t,\\ell,n_\\eta,s_\\eta$ (и константы), поэтому при замене $t,\\ell\\rightsquigarrow t'$ получаем те же неравенства с $t'$.
-  Финальная проверка $t(d)\\le n_d/16$ в конце Proof of Thm. 4.3 (PDF p. 19) также зависит от $M$ лишь через добавку $+\\log M$, поэтому становится $t'(d)\\le n_d/16$ с $+t'$.
-- `Toy‑тест:` если $M=\\mathrm{poly}(n)$ и $s=\\mathrm{polylog}(n)$, то $t'=(2s+1)\\log M=\\mathrm{polylog}(n)$, и замена $\\log M\\mapsto t'$ лишь усиливает polylog‑факторы в знаменателе экспоненты.
-- `Статус:` доказано (параметрическая часть; точка, где flat‑extensions “платятся” множителем $(2s+1)$ по $t$).
-- `Барьер‑чек:` r — применимо (switching‑леммы/DT‑аргументы релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 попытаться свести “poly‑size flat local‑EF(s) ⇒ существуют evaluations” к HR Lemma 4.5 с заменой $t\\mapsto t'$ и затем проверить, что требуемая локальная согласованность trees (для evaluation) действительно сохраняется в присутствии extension‑аксиом (или зафиксировать конкретный провал).
+    for a sufficiently large absolute constant $C$.
+  In particular, the "price" of flat-extensions in this place is the replacement of $\\log M\\mapsto (2s+1)\\log M$ (that is, the deterioration of the lower bound for length by the factor $(2s+1)^d$ in the denominator of the exponent).
+- `Proof:`
+  Let's compare it with the parameter block in HR'22 (see. `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, Proof of Thm. 4.3; PDF p. 19–20):
+  (i) HR choose $\\ell=t=\\log M$ and recursion $n_\\eta=\\lfloor n_{\\eta-1}/(A_1\\,t\\,\\log^{c_1} n_{\\eta-1})\\rfloor$, as well as $s_\\eta=2^{\\eta-1}\\log N$ and $t(\\eta)=\\sum_{i\\le\\eta}s_i+\\log M$;
+  (ii) the only dependence on $M$ in this block passes through $t=\\log M$ (see the line "We choose $\\ell=t=\\log M$ ..." and the formula $t(\\eta)=\\sum s_i+\\log M$);
+  (iii) unfolding from Section 16.165 changes the depth of the "unique part" of the tree by a factor of $2s+1$, that is, it is sufficient to replace $t$ with $t':=(2s+1)t$ in all places where HR uses $t$ as a bound on the depth of the input decision trees in Lemma 4.4.
+  All estimates in HR for the probability of failure/union bound use only the quantities $t,\\ell,n_\\eta,s_\\eta$ (and constants), so when replacing $t,\\ell\\rightsquigarrow t'$ we get the same inequalities with $t'$.
+  Final check $t(d)\\le n_d/16$ at the end of Proof of Thm. 4.3 (PDF p. 19) also depends on $M$ only through the addition of $+\\log M$, so it becomes $t'(d)\\le n_d/16$ with $+t'$.
+- `Toy test:` if $M=\\mathrm{poly}(n)$ and $s=\\mathrm{polylog}(n)$, then $t'=(2s+1)\\log M=\\mathrm{polylog}(n)$, and the replacement $\\log M\\mapsto t'$ only strengthens the polylog factors in the denominator of the exponent.
+- `Status:` proven (parametric part; point where flat-extensions are "paid" by the factor $(2s+1)$ over $t$).
+- `Barrier check:` r -- applicable (switching lemmas/DT arguments are relativized), NP -- not applicable, alg -- not applicable.
+- `Next step:` for Q43, try to reduce "polysize flat localEF(s)  evaluations exist" to HR Lemma 4.5 with replacement $t\\mapsto t'$ and then check that the required local consistency of trees (for evaluation) actually holds in the presence of extension axioms (or fix a specific failure).
 
-### 16.167. Исследовательский шаг: контрпример — наивный unfolding $P\\to X$ может нарушать локальную согласованность ветвей
+### 16.167. Exploratory step: counterexample - naive unfolding $P\\to X$ can violate local branch consistency
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S5-check-local-consistency-after-unfolding):`
-  Даже в **flat**‑режиме $p\\leftrightarrow\\varphi(X)$ и при малой поддержке $|\\mathrm{supp}(\\varphi)|=O(1)$, наивная замена $P$‑запроса на “полное вычисление $\\varphi$ по edge‑переменным” может породить decision tree с **локально несогласованными** ветвями (в смысле HR’22 Def. 2.5), и потому такую замену нельзя напрямую подставлять в HR‑определение evaluation.
-- `Контрпример:`
-  Рассмотрим Tseitin($G_n$) на $n\\times n$ grid с зарядами $\\alpha_v=1$ для всех вершин (как в HR’22 основной случай), и выберем внутреннюю вершину $v$ степени 4 с инцидентными рёбрами $e_1,e_2,e_3,e_4$.
-  Положим
+- `Lens:` Model stress test.
+- `Statement (Q43.S5-check-local-consistency-after-unfolding):`
+  Even in the **flat**-mode $p\\leftrightarrow\\varphi(X)$ and with little support $|\\mathrm{supp}(\\varphi)|=O(1)$, a naive replacement of the $P$-query with "complete calculation of $\\varphi$ by edge-variables" can generate a decision tree with **locally inconsistent** branches (in the sense HR'22 Def. 2.5), and therefore such a replacement cannot be directly substituted into the HR definition of evaluation.
+- `Counterexample:`
+  Consider Tseitin($G_n$) on a $n\\times n$ grid with charges $\\alpha_v=1$ for all vertices (as in HR'22 main case), and choose an internal vertex $v$ of degree 4 with incident edges $e_1,e_2,e_3,e_4$.
+  Let's put
   $$\\varphi(X):= (x_{e_1}\\wedge x_{e_2})\\ \\vee\\ (x_{e_3}\\wedge x_{e_4}),$$
-  и введём flat extension‑переменную $p\\leftrightarrow\\varphi(X)$ (поддержка $\\mathrm{supp}(\\varphi)$ состоит из $v$ и 4 соседей, то есть $O(1)$).
+  and introduce a flat extension variable $p\\leftrightarrow\\varphi(X)$ (the support of $\\mathrm{supp}(\\varphi)$ consists of $v$ and 4 neighbors, that is, $O(1)$).
 
-  Рассмотрим “наивный unfolding” $P\\to X$ как decision tree $D$ глубины 4, который последовательно запрашивает
-  $x_{e_1},x_{e_2},x_{e_3},x_{e_4}$ и в листе помечает значение $\\varphi$ на полученных 4 битах.
-  Тогда $D$ содержит ветвь
+  Consider the "naive unfolding" $P\\to X$ as a decision tree $D$ of depth 4, which sequentially requests
+  $x_{e_1},x_{e_2},x_{e_3},x_{e_4}$ and in the sheet marks the value $\\varphi$ on the received 4 bits.
+  Then $D$ contains a branch
   $$\\tau:\\ x_{e_1}=0,\\ x_{e_2}=0,\\ x_{e_3}=1,\\ x_{e_4}=1,$$
-  для которой $\\varphi(\\tau)=1$, но паритет в вершине $v$ равен
+  for which $\\varphi(\\tau)=1$, but the parity at vertex $v$ is equal to
   $$x_{e_1}\\oplus x_{e_2}\\oplus x_{e_3}\\oplus x_{e_4}=0\\ne 1=\\alpha_v.$$
-  Поскольку ветвь $\\tau$ уже фиксирует **все** рёбра, инцидентные $v$, никакое продолжение присваивания не может исправить нарушение XOR‑ограничения в $v$.
-  Значит $\\tau$ не является locally consistent assignment (HR’22 Def. 2.2), и потому $D$ не является locally consistent decision tree (HR’22 Def. 2.5).
-- `Toy‑тест:` паритетная проверка в $v$ для ветви $(0,0,1,1)$ даёт 0, тогда как заряд $\\alpha_v=1$ требует 1.
-- `Статус:` контрпример (фиксирует точку риска в Q43: edge‑only unfolding обязан избегать “локально подразумеваемых” запросов или применять aggressive trimming как у HR’22 перед Cor. 2.7).
-- `Барьер‑чек:` r — применимо (контрпример полностью на уровне local consistency/closure/DT и релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43: сформулировать и доказать правило построения edge‑only decision trees для формул $\\varphi(X)$ (с $|\\mathrm{supp}(\\varphi)|\\le s$), которое гарантирует локальную согласованность всех ветвей (например, “не запрашивать локально подразумеваемые рёбра”, HR’22 p. 7 после Def. 2.5) и оценить глубину в терминах $s$.
+  Since branch $\\tau$ already commits **all** edges incident to $v$, no further assignment can correct the violation of the XOR constraint on $v$.
+  This means $\\tau$ is not a locally consistent assignment (HR'22 Def. 2.2), and therefore $D$ is not a locally consistent decision tree (HR'22 Def. 2.5).
+- `Toy test:` the parity check in $v$ for the branch $(0,0,1,1)$ gives 0, while the charge $\\alpha_v=1$ requires 1.
+- `Status:` counter-example (fixes the risk point in Q43: edgeonly unfolding is obliged to avoid "locally implied" queries or apply aggressive trimming as in HR'22 before Cor. 2.7).
+- `Barrier check:` r - applicable (the counterexample is entirely at the local consistency/closure/DT level and is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43: formulate and prove a rule for constructing edgeonly decision trees for formulas $\\varphi(X)$ (with $|\\mathrm{supp}(\\varphi)|\\le s$), which guarantees the local consistency of all branches (for example, "do not query locally implied edges", HR'22 p. 7 after Def. 2.5) and estimate the depth in terms of $s$.
 
-### 16.168. Исследовательский шаг: “locally consistent unfolding” для $\\varphi(X)$ — строим edge‑only decision tree без плохих ветвей
+### 16.168. Research step: "locally consistent unfolding" for $\\varphi(X)$ - build an edgeonly decision tree without bad branches
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S6-construct-locally-consistent-unfolding):`
-  Пусть $\\varphi$ — формула над edge‑переменными $E:=\\mathrm{vars}(\\varphi)\\subseteq X$ на $n\\times n$ grid, и $S:=\\mathrm{supp}(\\varphi)$ — множество вершин, инцидентных рёбрам из $E$ (так что $|S|\\le s$).
-  Пусть $\\alpha$ — locally consistent частичное присваивание (HR’22 Def. 2.2) такое, что
+- `Lens:` Invariant.
+- `Statement (Q43.S6-construct-locally-consistent-unfolding):`
+  Let $\\varphi$ be a formula over edge variables $E:=\\mathrm{vars}(\\varphi)\\subseteq X$ on $n\\times n$ grid, and $S:=\\mathrm{supp}(\\varphi)$ be the set of vertices incident to edges from $E$ (so $|S|\\le s$).
+  Let $\\alpha$ be a locally consistent partial assignment (HR'22 Def. 2.2) such that
   $$|\\mathrm{supp}(\\alpha)|+|S|\\le n/2.$$
-  Тогда существует decision tree $T_{\\varphi,\\alpha}$, который
-  1) запрашивает только переменные из $E$ и имеет глубину $\\le |E|\\le 2|S|\\le 2s$;
-  2) является locally consistent (HR’22 Def. 2.5), т.е. каждая его ветвь $\\tau$ даёт locally consistent присваивание $\\alpha\\cup\\tau$;
-  3) в каждом листе помечает значение $\\varphi$ на ветви (то есть $\\varphi\\!\upharpoonright\\!\\tau$ — $b$‑формула, где $b$ — метка листа).
-- `Доказательство:`
-  Заметим, что в $4$‑регулярном grid каждое ребро даёт две инцидентные вершины, и потому
+  Then there exists a decision tree $T_{\\varphi,\\alpha}$, which
+  1) requests only variables from $E$ and has a depth of $\\le |E|\\le 2|S|\\le 2s$;
+  2) is locally consistent (HR'22 Def. 2.5), i.e. each of its branches $\\tau$ gives a locally consistent assignment $\\alpha\\cup\\tau$;
+  3) in each leaf, marks the value $\\varphi$ on the branch (that is, $\\varphi\\!\upharpoonright\\!\\tau$ is a $b$-formula, where $b$ is the leaf label).
+- `Proof:`
+  Note that in a $4$-regular grid each edge gives two incident vertices, and therefore
   $$|E|\\le \\tfrac12\\sum_{v\\in S}\\deg(v)\\le 2|S|.$$
-  Построим дерево по индукции, поддерживая инвариант: текущая ветвь $\\tau$ такова, что $\\beta:=\\alpha\\cup\\tau$ locally consistent и
+  Let us construct the tree by induction, maintaining the invariant: the current branch $\\tau$ is such that $\\beta:=\\alpha\\cup\\tau$ locally consistent and
   $|\\mathrm{supp}(\\beta)|\\le |\\mathrm{supp}(\\alpha)|+|S|\\le n/2$.
-  Если $\\varphi\\!\upharpoonright\\!\\tau$ уже константа, останавливаемся и ставим соответствующую метку листа.
-  Иначе выберем переменную $x_e\\in E\\setminus\\mathrm{dom}(\\tau)$, встречающуюся в $\\varphi\\!\upharpoonright\\!\\tau$.
-  По HR’22 Lemma 2.3 (PDF p. 6) существует $b\\in\\{0,1\\}$, что $\\beta\\cup\\{x_e\\mapsto b\\}$ locally consistent.
-  Если такой $b$ единственен, то $x_e$ locally implied by $\\beta$ (HR’22 Def. 2.4), и мы **не ветвим** по $x_e$ (как у HR’22: “disallow queries … if x is locally implied”, PDF p. 7),
-  а добавляем это значение к $\\tau$ и продолжаем.
-  Если же $x_e$ *не* locally implied, то из существования хотя бы одного $b$ следует, что локально согласованы обе ветви ($b=0$ и $b=1$), и мы ветвим по $x_e$ на два поддерева.
-  В обоих случаях инвариант сохраняется, так как мы присваиваем лишь рёбра, инцидентные вершинам из $S$.
-  Поскольку на каждом шаге мы фиксируем новую переменную из $E$, процесс завершается за $\\le |E|$ шагов, а глубина (число ветвлений) не превосходит $|E|$.
-  По построению все ветви locally consistent и листья корректно помечены значением $\\varphi$ на ветви.
-- `Toy‑тест:` в контрпримере §16.167, после присваиваний $x_{e_1}=x_{e_2}=0,\\ x_{e_3}=1$ ребро $e_4$ становится locally implied (иначе нарушится XOR‑ограничение в вершине $v$), поэтому ветвь $x_{e_4}=1$ отсекается и “плохая” ветвь $(0,0,1,1)$ не появляется.
-- `Статус:` доказано (даёт корректный шаблон “unfolding без плохих ветвей”: строить/расширять деревья, запрещая запросы локально подразумеваемых рёбер и триммируя по local consistency).
-- `Барьер‑чек:` r — применимо (вся конструкция про local consistency/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 попробовать встроить $T_{\\varphi,\\alpha}$ в замену $P$‑запросов внутри HR Lemma 4.5, проследив, что functional equivalence и multi‑switching остаются применимы при замене $t\\mapsto (2s+1)t$.
+  If $\\varphi\\!\upharpoonright\\!\\tau$ is already a constant, we stop and set the appropriate sheet mark.
+  Otherwise, we choose the variable $x_e\\in E\\setminus\\mathrm{dom}(\\tau)$ occurring in $\\varphi\\!\upharpoonright\\!\\tau$.
+  By HR'22 Lemma 2.3 (PDF p. 6) there exists $b\\in\\{0.1\\}$ such that $\\beta\\cup\\{x_e\\mapsto b\\}$ locally consistent.
+  If such $b$ is unique, then $x_e$ is locally implied by $\\beta$ (HR'22 Def. 2.4), and we **do not branch** on $x_e$ (as in HR'22: "disallow queries ... if x is locally implied", PDF p. 7),
+  and add this value to $\\tau$ and continue.
+  If $x_e$ is *not* locally implied, then from the existence of at least one $b$ it follows that both branches ($b=0$ and $b=1$) are locally consistent, and we branch $x_e$ into two subtrees.
+  In both cases, the invariant is preserved, since we assign only edges incident to vertices from $S$.
+  Since at each step we fix a new variable from $E$, the process is completed in $\\le |E|$ steps, and the depth (number of branches) does not exceed $|E|$.
+  By construction, all branches are locally consistent and leaves are correctly marked with the $\\varphi$ value on the branch.
+- `Toy test:` in the counterexample Section 16.167, after the assignments $x_{e_1}=x_{e_2}=0,\\ x_{e_3}=1$ the edge $e_4$ becomes locally implied (otherwise the XOR constraint at vertex $v$ will be violated), so the branch $x_{e_4}=1$ is cut off and the "bad" branch $(0,0,1,1)$ doesn't appear.
+- `Status:` proven (gives the correct pattern "unfolding without bad branches": build/expand trees, prohibiting requests for locally implied edges and trimming by local consistency).
+- `Barrier check:` r - applicable (the whole construction is about local consistency/decision trees and is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, try to embed $T_{\\varphi,\\alpha}$ into the replacement of $P$-queries inside HR Lemma 4.5, ensuring that functional equivalence and multi-switching remain applicable when replacing $t\\mapsto (2s+1)t$.
 
-### 16.169. Исследовательский шаг: подстановка locally consistent unfolding в $P$‑запросы (путь к применению HR Lemma 4.5)
+### 16.169. Exploratory step: substitution of locally consistent unfolding into $P$ queries (path to using HR Lemma 4.5)
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S7-plug-lc-unfolding-into-lemma45):`
-  Работая в flat‑модели $p_i\\leftrightarrow\\varphi_i(X)$ с $|\\mathrm{supp}(\\varphi_i)|\\le s$, можно заменить любой decision tree $T$ над переменными $X\\cup P$ на decision tree $U$ над **только** edge‑переменными $X$, так что:
-  1) вдоль любой ветви $\\tau$ дерева $U$ значение каждого “встреченного” $p_i$ равно $\\varphi_i\\!\upharpoonright\\!\\tau$ (то есть $U$ реализует вычисление $T$ в семантике подстановки $p_i:=\\varphi_i(X)$);
-  2) $U$ можно построить так, чтобы все ветви были locally consistent (HR’22 Def. 2.5), используя Lemma 2.3 + правило “не запрашивать локально подразумеваемые переменные” (HR’22, PDF p. 7);
-  3) глубина увеличивается не более чем на фактор $(2s+1)$: для каждой ветви
+- `Lens:` Equivalence.
+- `Statement (Q43.S7-plug-lc-unfolding-into-lemma45):`
+  Working in a flat model $p_i\\leftrightarrow\\varphi_i(X)$ with $|\\mathrm{supp}(\\varphi_i)|\\le s$, we can replace any decision tree $T$ over variables $X\\cup P$ with a decision tree $U$ over **only** edge variables $X$, so that:
+  1) along any branch $\\tau$ of the tree $U$, the value of each "encountered" $p_i$ is equal to $\\varphi_i\\!\upharpoonright\\!\\tau$ (that is, $U$ implements the calculation of $T$ in the substitution semantics $p_i:=\\varphi_i(X)$);
+  2) $U$ can be constructed so that all branches are locally consistent (HR'22 Def. 2.5), using Lemma 2.3 + the "do not query locally implied variables" rule (HR'22, PDF p. 7);
+  3) the depth increases by no more than a factor $(2s+1)$: for each branch
      $$\\mathrm{depth}_X(U)\\le \\#X(\\tau_T)+2s\\cdot\\#P(\\tau_T)\\le (2s+1)\\,\\mathrm{depth}(T),$$
-     где $\\tau_T$ — соответствующая ветвь в исходном дереве $T$.
-  Следовательно, для использования HR multi‑switching (Lemma 4.4) внутри Lemma 4.5 достаточно заменить параметр $t=\\log M$ на $t'=(2s+1)\\log M$ *и* строить unfolding‑поддеревья локально согласованными.
-- `Доказательство:`
-  Строим $U$ сверху вниз, поддерживая инвариант: текущая ветвь даёт locally consistent присваивание $\\alpha$ на $X$ с $|\\mathrm{supp}(\\alpha)|\\le n/2$.
-  - Если в $T$ запрашивается edge‑переменная $x_e$, то:
-    *если* $x_e$ locally implied by $\\alpha$ (HR’22 Def. 2.4), то не ветвим и продолжаем по единственному locally consistent значению;
-    иначе ветвим по $x_e$ на обе ветви (обе сохраняют local consistency, иначе была бы локальная импликация).
-  - Если в $T$ запрашивается extension‑переменная $p_i$, то вставляем поддерево $T_{\\varphi_i,\\alpha}$ из §16.168 (глубины $\\le 2s$), которое (i) запрашивает только рёбра из $\\mathrm{vars}(\\varphi_i)$, (ii) по каждой ветви сохраняет local consistency, и (iii) в листе возвращает $b=\\varphi_i\\!\upharpoonright\\!\\tau$; затем продолжаем построение из соответствующего ребёнка узла $p_i$ (по ответу $b$).
-  Повторяя рекурсивно, получаем edge‑only $U$ с locally consistent ветвями.
-  Оценка глубины получается суммированием: каждый $X$‑запрос в $T$ даёт $\\le 1$ edge‑уровень в $U$, а каждый $P$‑запрос заменяется на поддерево глубины $\\le 2s$.
-- `Toy‑тест:` контрпример §16.167 устраняется именно вставкой $T_{\\varphi,\\alpha}$: ветка $(0,0,1,1)$ не появляется, потому что $x_{e_4}$ locally implied после $x_{e_1}=x_{e_2}=0,\\ x_{e_3}=1$.
-- `Статус:` доказано (локальная “прошивка” §16.168 в механизм HR’22: теперь остаётся проверить functional equivalence evaluations после этой замены).
-- `Барьер‑чек:` r — применимо (аргумент на уровне local consistency/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 проверить, что после такой замены сохраняется нужная функциональная эквивалентность evaluations (возможно, потребуется ослабить/переопределить её в flat local‑EF(s) контексте).
+     where $\\tau_T$ is the corresponding branch in the original tree $T$.
+  Therefore, to use HR multiswitching (Lemma 4.4) inside Lemma 4.5, it is enough to replace the parameter $t=\\log M$ with $t'=(2s+1)\\log M$ *and* build unfolding subtrees that are locally consistent.
+- `Proof:`
+  We construct $U$ from top to bottom, maintaining the invariant: the current branch gives a locally consistent assignment $\\alpha$ on $X$ with $|\\mathrm{supp}(\\alpha)|\\le n/2$.
+  - If the edge variable $x_e$ is requested in $T$, then:
+    *if* $x_e$ locally implied by $\\alpha$ (HR'22 Def. 2.4), then we do not branch and continue according to the only locally consistent value;
+    otherwise we branch $x_e$ into both branches (both preserve local consistency, otherwise there would be local implication).
+  - If an extension variable $p_i$ is requested in $T$, then we insert a subtree $T_{\\varphi_i,\\alpha}$ from Section 16.168 (depth $\\le 2s$), which (i) requests only edges from $\\mathrm{vars}(\\varphi_i)$, (ii) preserves local consistency for each branch, and (iii) in leaf returns $b=\\varphi_i\\!\upharpoonright\\!\\tau$; then we continue constructing the node $p_i$ from the corresponding child (based on the answer $b$).
+  Repeating recursively, we get edgeonly $U$ with locally consistent branches.
+  The depth estimate is obtained by summation: each $X$-query in $T$ produces a $\\le 1$ edge-level in $U$, and each $P$-query is replaced by a $\\le 2s$ depth subtree.
+- `Toy test:` the counterexample of Section 16.167 is eliminated precisely by inserting $T_{\\varphi,\\alpha}$: the branch $(0,0,1,1)$ does not appear because $x_{e_4}$ is locally implied after $x_{e_1}=x_{e_2}=0,\\ x_{e_3}=1$.
+- `Status:` proven (local "firmware" Section 16.168 into the HR'22 mechanism: now it remains to check the functional equivalence evaluations after this replacement).
+- `Barrier check:` r - applicable (the argument is at the level of local consistency/decision trees and is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, check that after such a replacement the required functional equivalence of evaluations is preserved (you may need to weaken/redefine it in a flat localEF(s) context).
 
-### 16.170. Исследовательский шаг: functional equivalence следует из семантической эквивалентности для locally consistent decision trees
+### 16.170. Exploratory step: functional equivalence follows from semantic equivalence for locally consistent decision trees
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S8-functional-equivalence-after-unfolding):`
-  Пусть $T_1,T_2$ — locally consistent decision trees (HR’22 Def. 2.5) над edge‑переменными Tseitin($G_n$) глубины $\\le n/8$.
-  Если они вычисляют одну и ту же булеву функцию $f:X\\to\\{0,1\\}$ на всех полных присваиваниях $X$, то $T_1$ и $T_2$ **functionally equivalent** (HR’22 Def. 2.8).
-  Следовательно, в Q43 после замены $P$‑запросов на edge‑only locally consistent unfolding (§16.169) функциональная эквивалентность evaluations сохраняется автоматически: изоморфные формулы задают одну и ту же функцию от $X$ (после подстановки $p_i:=\\varphi_i(X)$), а значит соответствующие деревья functionally equivalent.
-- `Доказательство:`
-  Возьмём ветвь $\\tau$ дерева $T_1$, заканчивающуюся листом с меткой $b$.
-  Тогда на любом полном присваивании $\\rho:X\\to\\{0,1\\}$, согласованном с $\\tau$, имеем $T_1(\\rho)=b$, а значит по предположению $T_2(\\rho)=b$.
+- `Lens:` Equivalence.
+- `Statement (Q43.S8-functional-equivalence-after-unfolding):`
+  Let $T_1,T_2$ be locally consistent decision trees (HR'22 Def. 2.5) over edge variables Tseitin($G_n$) of depth $\\le n/8$.
+  If they evaluate the same Boolean function $f:X\\to\\{0,1\\}$ on all full assignments of $X$, then $T_1$ and $T_2$ are **functionally equivalent** (HR'22 Def. 2.8).
+  Consequently, in Q43, after replacing $P$-queries with edge-only locally consistent unfolding (Section 16.169), the functional equivalence of evaluations is preserved automatically: isomorphic formulas define the same function of $X$ (after substituting $p_i:=\\varphi_i(X)$), and hence the corresponding functionally equivalent trees.
+- `Proof:`
+  Take a branch $\\tau$ of the tree $T_1$ ending with a leaf labeled $b$.
+  Then on any complete assignment $\\rho:X\\to\\{0,1\\}$ consistent with $\\tau$, we have $T_1(\\rho)=b$, and therefore, by assumption, $T_2(\\rho)=b$.
 
-  Рассмотрим любую ветвь $\\tau'$ дерева $T_2$, которая pairwise locally consistent с $\\tau$ (HR’22 Def. 2.2).
-  Тогда объединение $\\tau\\cup\\tau'$ — locally consistent частичное присваивание, и потому оно продолжимо до полного присваивания $\\rho$ на $X$ (вне $\\mathrm{closure}(\\mathrm{supp}(\\tau\\cup\\tau'))$ присваиваем произвольно).
-  На этом $\\rho$ дерево $T_2$ проходит по ветви $\\tau'$, значит метка листа $\\tau'$ равна $T_2(\\rho)=b$.
-  Следовательно, **все** ветви $T_2$, pairwise locally consistent с $\\tau$, имеют метку $b$, т.е. “trimmed restriction” $T_2\\!\upharpoonright\\!\\tau$ — $b$‑tree.
-  Аналогично, для любой ветви $\\tau'$ дерева $T_2$ получаем, что $T_1\\!\upharpoonright\\!\\tau'$ — соответствующий $b$‑tree. Это и есть functional equivalence.
-- `Toy‑тест:` для изоморфных $\\vee$‑формул $((A\\vee B)\\vee C)$ и $(A\\vee(B\\vee C))$ любая пара locally consistent деревьев, вычисляющих одну и ту же функцию $A\\vee B\\vee C$, автоматически functionally equivalent по лемме.
-- `Статус:` доказано (functional equivalence в Q43 сводится к “вычисляют одну и ту же функцию” + local consistency).
-- `Барьер‑чек:` r — применимо (аргумент на уровне local consistency/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43: после снятия functional‑equivalence риска проверить, что полученные edge‑only trees по‑прежнему удовлетворяют Properties 1–4 определения evaluation (и t‑common partial decision tree) в шаге Lemma 4.5.
+  Consider any branch $\\tau'$ of the tree $T_2$ that is pairwise locally consistent with $\\tau$ (HR'22 Def. 2.2).
+  Then the union $\\tau\\cup\\tau'$ is a locally consistent partial assignment, and therefore it is extendable to a complete assignment $\\rho$ on $X$ (outside $\\mathrm{closure}(\\mathrm{supp}(\\tau\\cup\\tau'))$ we assign arbitrarily).
+  On this $\\rho$ tree $T_2$ passes along the branch $\\tau'$, which means the leaf label $\\tau'$ is equal to $T_2(\\rho)=b$.
+  Consequently, **all** branches of $T_2$, pairwise locally consistent with $\\tau$, have label $b$, i.e. "trimmed restriction" $T_2\\!\upharpoonright\\!\\tau$ -- $b$tree.
+  Similarly, for any branch $\\tau'$ of the tree $T_2$ we obtain that $T_1\\!\upharpoonright\\!\\tau'$ is the corresponding $b$tree. This is functional equivalence.
+- `Toy test:` for isomorphic $\\vee$formulas $((A\\vee B)\\vee C)$ and $(A\\vee(B\\vee C))$ any pair of locally consistent trees that evaluate the same function $A\\vee B\\vee C$ is automatically functionally equivalent by the lemma.
+- `Status:` proven (functional equivalence in Q43 boils down to "compute the same function" + local consistency).
+- `Barrier check:` r - applicable (the argument is at the level of local consistency/decision trees and is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43: after removing the functional-equivalence risk, check that the resulting edge-only trees still satisfy Properties 1-4 of the evaluation definition (and t-common partial decision tree) in step Lemma 4.5.
 
-### 16.171. Исследовательский шаг: “Property 1” в t‑evaluation не нужно для Lemma 2.13 (можно разрешить переменным деревья глубины $\\le t$)
+### 16.171. Exploratory step: "Property 1" in tevaluation is not needed for Lemma 2.13 (we can resolve variables to depth trees $\\le t$)
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S9-check-evaluation-properties-after-unfolding):`
-  В доказательстве HR’22 Lemma 2.13 (Appendix A.1; PDF p. 50–51) не используется Property 1 из Definition 2.11 (т.е. что *переменные* обязаны отображаться в деревья глубины 1).
-  Достаточно, чтобы (a) все деревья были locally consistent и глубины $\\le t$, (b) аксиомы были 1‑trees (Property 2), и выполнялись Properties 3–4 (¬ и ∨) плюс functional equivalence между строками.
-  Следовательно, в Q43 можно после unfolding разрешить extension‑переменным $p_i$ отображаться в edge‑only деревья глубины $O(s)$ (например, $T_{\\varphi_i,\\alpha}$ из §16.168), не ломая “gatekeeper” Lemma 2.13.
-- `Доказательство:`
-  Просматриваем доказательство Lemma 2.13 у HR’22 (PDF p. 50–51): оно делает индукцию по строкам и во всех случаях использует только
+- `Lens:` Invariant.
+- `Statement (Q43.S9-check-evaluation-properties-after-unfolding):`
+  The proof of HR'22 Lemma 2.13 (Appendix A.1; PDF p. 50-51) does not use Property 1 from Definition 2.11 (i.e. that *variables* are required to map to depth 1 trees).
+  It is enough that (a) all trees are locally consistent and depths $\\le t$, (b) the axioms are 1trees (Property 2), and Properties 3-4 ( and ) plus functional equivalence between rows are satisfied.
+  Therefore, in Q43 it is possible, after unfolding, to allow extension variables $p_i$ to be mapped into edge-only trees of depth $O(s)$ (for example, $T_{\\varphi_i,\\alpha}$ from Section 16.168) without breaking the "gatekeeper" of Lemma 2.13.
+- `Proof:`
+  Let's look at the proof of Lemma 2.13 from HR'22 (PDF p. 50-51): it does row induction and in all cases uses only
   - “axioms are mapped to 1‑trees” (Property 2),
-  - связь $T_{\\neg F}$ с $T_F$ (Property 3),
-  - что $T_{F\\vee G}$ **represents** $T_F\\vee T_G$ (Property 4),
+  - connection $T_{\\neg F}$ with $T_F$ (Property 3),
+  - that $T_{F\\vee G}$ **represents** $T_F\\vee T_G$ (Property 4),
   - functional equivalence + Lemma 2.9,
-  - и Corollary 2.7 (чтобы $T\\!\upharpoonright\\!\\tau$ был определён при глубинах $\\le n/16$).
+  - and Corollary 2.7 (so that $T\\!\upharpoonright\\!\\tau$ was defined at depths $\\le n/16$).
 
-  Нигде не требуется, чтобы дерево для атома $p$ было глубины 1: в “Excluded Middle” они обозначают $T_p:=\\phi_\\nu(p)$ и работают с ним только через Properties 3–4; в остальных правилах $p,q,r$ — произвольные формулы строк, а не обязательно атомы.
-  Поэтому если заменить Property 1 на более слабое требование “каждый атом отображается в locally consistent decision tree глубины $\\le t$”, то весь вывод Lemma 2.13 остаётся дословным.
-- `Toy‑тест:` если $p_i\\leftrightarrow\\varphi_i(X)$ и $|\\mathrm{supp}(\\varphi_i)|\\le s$, то после unfolding можно взять дерево для $p_i$ равным $T_{\\varphi_i,\\emptyset}$ глубины $\\le 2s$ (§16.168); при условии $2s\\le t\\le n/16$ лемма 2.13 применима без изменения.
-- `Статус:` доказано (закрывает “проверку Property 1”: после unfolding не надо удерживать глубину 1 для extension‑переменных).
-- `Барьер‑чек:` r — применимо (аргумент целиком про local consistency/decision trees и релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 проверить оставшуюся часть “evaluation properties” в шаге Lemma 4.5: что построенные edge‑only деревья действительно дают $t$‑common partial decision tree и удовлетворяют Property 4 (representation) для ∨‑формул после unfolding.
+  Nowhere is it required that the tree for the atom $p$ be of depth 1: in "Excluded Middle" they denote $T_p:=\\phi_\\nu(p)$ and work with it only through Properties 3-4; in the remaining rules $p,q,r$ are arbitrary string formulas, and not necessarily atoms.
+  Therefore, if we replace Property 1 with the weaker requirement "each atom is mapped to a locally consistent decision tree of depth $\\le t$", then the entire conclusion of Lemma 2.13 remains verbatim.
+- `Toy test:` if $p_i\\leftrightarrow\\varphi_i(X)$ and $|\\mathrm{supp}(\\varphi_i)|\\le s$, then after unfolding we can take a tree for $p_i$ equal to $T_{\\varphi_i,\\emptyset}$ of depth $\\le 2s$ (Section 16.168); under the condition $2s\\le t\\le n/16$ Lemma 2.13 applies without modification.
+- `Status:` proven (closes "Property 1 check": after unfolding there is no need to maintain depth 1 for extension variables).
+- `Barrier check:` r - applicable (the argument is entirely about local consistency/decision trees and is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, check the rest of the "evaluation properties" in step Lemma 4.5: that the constructed edgeonly trees indeed produce $t$common partial decision trees and satisfy Property 4 (representation) for formulas after unfolding.
 
-### 16.172. Исследовательский шаг: unfolding не ломает common partial decision tree и Property 4 (representation) — инвариантность под functional equivalence
+### 16.172. Research step: unfolding does not break the common partial decision tree and Property 4 (representation) - invariance under functional equivalence
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S10-common-partial-tree-after-unfolding):`
-  Пусть $T_1,\\dots,T_m$ и $T'_1,\\dots,T'_m$ — locally consistent decision trees над edge‑переменными Tseitin($G_n$) глубины $\\le n/8$ такие, что для всех $i$ деревья $T_i$ и $T'_i$ functionally equivalent (HR’22 Def. 2.8).
-  Тогда:
-  1) (**representation стабилен**) если decision tree $R$ represents $\\bigvee_{i=1}^m T_i$ (HR’22, абзац перед Def. 2.10), то $R$ также represents $\\bigvee_{i=1}^m T'_i$;
-  2) (**common partial tree стабилен**) если partial decision tree $S$ — $\\ell$‑common partial decision tree для $T_1,\\dots,T_m$ (HR’22 Def. 2.10), то тот же $S$ является $\\ell$‑common partial decision tree для $T'_1,\\dots,T'_m$.
+- `Lens:` Equivalence.
+- `Statement (Q43.S10-common-partial-tree-after-unfolding):`
+  Let $T_1,\\dots,T_m$ and $T'_1,\\dots,T'_m$ be locally consistent decision trees over edge variables Tseitin($G_n$) of depth $\\le n/8$ such that for all $i$ the trees $T_i$ and $T'_i$ are functionally equivalent (HR'22 Def. 2.8).
+  Then:
+  1) (**representation is stable**) if decision tree $R$ represents $\\bigvee_{i=1}^m T_i$ (HR'22, paragraph before Def. 2.10), then $R$ also represents $\\bigvee_{i=1}^m T'_i$;
+  2) (**common partial tree is stable**) if partial decision tree $S$ is $\\ell$common partial decision tree for $T_1,\\dots,T_m$ (HR'22 Def. 2.10), then the same $S$ is $\\ell$common partial decision tree for $T'_1,\\dots,T'_m$.
 
-  В частности, в Q43 после замены $P$‑запросов на edge‑only locally consistent unfolding из §16.169 (глубина $t\\mapsto t':=(2s+1)t$ и семантическая эквивалентность в смысле подстановки $p_i:=\\varphi_i(X)$) проверка в HR’22 Lemma 4.5, что $T_\\eta(\\nu)$ — $t'$‑common partial decision tree и что Property 4 (representation) выполняется для $\\vee$‑формул, переносится без изменений (проверка идёт «по ветвям» и использует только b‑tree факты для trimmed restriction).
-- `Доказательство:`
-  Ключевой факт: из HR’22 Lemma 2.9 следует, что для любых functionally equivalent $T,T'$ и любого locally consistent частичного присваивания $\\alpha$ (в режиме, где все trimmed restrictions определены) выполняется эквивалентность
+  In particular, in Q43, after replacing $P$-queries with edge-only locally consistent unfolding from Section 16.169 (depth $t\\mapsto t':=(2s+1)t$ and semantic equivalence in the sense of substitution $p_i:=\\varphi_i(X)$), check in HR'22 Lemma 4.5 that $T_\\eta(\\nu)$ -- $t'$common partial decision tree and that Property 4 (representation) is satisfied for $\\vee$formulas, transferred without changes (the check goes "along the branches" and uses only btree facts for trimmed restriction).
+- `Proof:`
+  Key fact: From HR'22 Lemma 2.9 it follows that for any functionally equivalent $T,T'$ and any locally consistent partial assignment $\\alpha$ (in the mode where all trimmed restrictions are defined) the equivalence holds
   $$T\\!\upharpoonright\\!\\alpha\\text{ — $b$‑tree}\\ \\Longleftrightarrow\\ T'\\!\\upharpoonright\\!\\alpha\\text{ — $b$‑tree}.$$
 
-  1) **Stability для representation.**
-     Пусть $R$ represents $\\bigvee_i T_i$.
-     Возьмём ветвь $\\tau$ дерева $R$, оканчивающуюся листом с меткой $b$.
-     - Если $b=0$, то по определению “represents” имеем $T_i\\!\\upharpoonright\\!\\tau=0$ для всех $i$, а значит по ключевому факту $T'_i\\!\\upharpoonright\\!\\tau=0$ для всех $i$.
-     - Если $b=1$, то по определению “represents” существует $i$ с $T_i\\!\\upharpoonright\\!\\tau=1$, а значит $T'_i\\!\\upharpoonright\\!\\tau=1$.
-     Это ровно означает, что $R$ represents $\\bigvee_i T'_i$.
+  1) **Stability for representation.**
+     Let $R$ represent $\\bigvee_i T_i$.
+     Take a branch $\\tau$ of the tree $R$ ending with a leaf labeled $b$.
+     - If $b=0$, then by definition of "represents" we have $T_i\\!\\upharpoonright\\!\\tau=0$ for all $i$, which means by the key fact $T'_i\\!\\upharpoonright\\!\\tau=0$ for all $i$.
+     - If $b=1$, then by definition of "represents" there is $i$ with $T_i\\!\\upharpoonright\\!\\tau=1$, which means $T'_i\\!\\upharpoonright\\!\\tau=1$.
+     This exactly means that $R$ represents $\\bigvee_i T'_i$.
 
-  2) **Stability для $\\ell$‑common partial decision tree.**
-     Пусть $S$ — $\\ell$‑common partial decision tree для $T_1,\\dots,T_m$.
-     Тогда по HR’22 Def. 2.10 для каждого $i$ и каждой ветви $\\tau\\in S$ существует decision tree $S^{(i,\\tau)}$ глубины $\\ell$, такой что если $\\widehat S_i$ получено из $S$ подстановкой $S^{(i,\\tau)}$ в лист $\\tau$, то для любой ветви $\\tau'\\in\\widehat S_i$, оканчивающейся листом $b$, выполнено $T_i\\!\\upharpoonright\\!\\tau'=b$.
-     Применяя ключевой факт к каждому такому $\\tau'$, получаем $T'_i\\!\\upharpoonright\\!\\tau'=b$.
-     Значит те же witness‑деревья $S^{(i,\\tau)}$ доказывают, что $S$ — $\\ell$‑common partial decision tree и для $T'_1,\\dots,T'_m$.
+  2) **Stability for $\\ell$common partial decision tree.**
+     Let $S$ be a $\\ell$common partial decision tree for $T_1,\\dots,T_m$.
+     Then according to HR'22 Def. 2.10 for each $i$ and each branch $\\tau\\in S$ there is a decision tree $S^{(i,\\tau)}$ of depth $\\ell$ such that if $\\widehat S_i$ is obtained from $S$ by substituting $S^{(i,\\tau)}$ into the sheet $\\tau$, then for any branch $\\tau'\\in\\widehat S_i$ ending with leaf $b$, $T_i\\!\\upharpoonright\\!\\tau'=b$ is satisfied.
+     Applying the key fact to each such $\\tau'$, we obtain $T'_i\\!\\upharpoonright\\!\\tau'=b$.
+     This means that the same witness-trees $S^{(i,\\tau)}$ prove that $S$ is a $\\ell$-common partial decision tree for $T'_1,\\dots,T'_m$.
 
-  Применение к Q43: деревья, полученные локально согласованным unfolding (§16.169), вычисляют ту же функцию от $X$ (в семантике $p_i:=\\varphi_i(X)$), а потому по §16.170 автоматически functionally equivalent любому другому locally consistent edge‑only представлению той же функции.
-  Следовательно, любые trees/partial trees, построенные по HR’22 Lemma 4.4 внутри Lemma 4.5 для “наивного” edge‑only представления, остаются корректными и для locally consistent unfolding, и Property 4 + common partial tree переносятся (с единственной платой в параметре глубины $t\\mapsto t'$ из §16.166).
-- `Toy‑тест:` пусть $T_1$ — 1‑tree для $x_e$, а $T'_1$ — дерево глубины 2, которое сначала спрашивает $x_e$, затем (локально подразумеваемую) переменную и не ветвится; тогда $T_1$ и $T'_1$ functionally equivalent, и любое $R$, представляющее $T_1\\vee 0$, автоматически представляет $T'_1\\vee 0$ по пункту (1).
-- `Статус:` доказано (закрывает “common partial tree/representation” узел в Q43: после unfolding HR Lemma 4.5 можно применять дословно при замене $t\\mapsto t'$).
-- `Барьер‑чек:` r — применимо (аргумент чисто про decision trees/trimmed restriction и релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 формализовать, как из poly‑size flat local‑EF(s)‑доказательства получить входные family of decision trees глубины $t'=\\mathrm{polylog}(n)$ для Lemma 4.5 (или зафиксировать, почему “индукция по строкам” не даёт таких trees без nesting/глобальной поддержки).
+  Application to Q43: trees obtained by locally consistent unfolding (Section 16.169) evaluate the same function of $X$ (in semantics $p_i:=\\varphi_i(X)$), and therefore by Section 16.170 are automatically functionally equivalent to any other locally consistent edgeonly representation of the same function.
+  Consequently, any trees/partial trees built using HR'22 Lemma 4.4 inside Lemma 4.5 for a "naive" edgeonly representation remain correct for locally consistent unfolding, and Property 4 + common partial tree is carried over (with a single board in the depth parameter $t\\mapsto t'$ from Section 16.166).
+- `Toy test:` let $T_1$ be a 1-tree for $x_e$, and let $T'_1$ be a depth 2 tree that first asks $x_e$, then a (locally implied) variable, and does not branch; then $T_1$ and $T'_1$ are functionally equivalent, and any $R$ representing $T_1\\vee 0$ automatically represents $T'_1\\vee 0$ by clause (1).
+- `Status:` proven (closes the "common partial tree/representation" node in Q43: after unfolding HR Lemma 4.5 can be applied verbatim by replacing $t\\mapsto t'$).
+- `Barrier check:` r - applicable (the argument is purely about decision trees/trimmed restriction and is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, formalize how to obtain input family of decision trees of depth $t'=\\mathrm{polylog}(n)$ from polysize flat localEF(s)proof for Lemma 4.5 (or fix why "row induction" does not produce such trees without nesting/global support).
 
-### 16.173. Исследовательский шаг: где именно “индуцируются” edge‑only деревья для Lemma 4.5 в flat local‑EF(s) (уникальная часть + locally consistent unfolding)
+### 16.173. Research step: where exactly edgeonly trees for Lemma 4.5 are "induced" in flat localEF(s) (unique part + locally consistent unfolding)
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S11-induce-trees-from-proof):`
-  Рассмотрим индуктивный шаг HR’22 Lemma 4.5 (PDF p. 20) для фиксированной строки $\\nu$ и уровня $\\eta$.
-  В нём “входные” деревья, к которым применяется multi‑switching lemma (HR’22 Lemma 4.4), имеют вид
+- `Lens:` Invariant.
+- `Statement (Q43.S11-induce-trees-from-proof):`
+  Consider the inductive step HR'22 Lemma 4.5 (PDF p. 20) for a fixed string $\\nu$ and level $\\eta$.
+  In it, the "input" trees to which the multiswitching lemma (HR'22 Lemma 4.4) is applied have the form
   $$\\bigl\\{\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau\\bigr\\}_i,$$
-  где $\\tau$ — ветвь $t$‑common partial decision tree $T_{\\eta-1}(\\nu)$ глубины $\\sum_{j<\\eta}s_j$.
+  where $\\tau$ is the branch $t$common partial decision tree $T_{\\eta-1}(\\nu)$ of depth $\\sum_{j<\\eta}s_j$.
 
-  В flat local‑EF(s) (переменные $P$ с аксиомами $p_i\\leftrightarrow\\varphi_i(X)$, $|\\mathrm{supp}(\\varphi_i)|\\le s$) эти restricted‑деревья могут запрашивать $P$.
-  Тогда “индуцированные” edge‑only деревья для применения HR Lemma 4.4 получаются **точно** так:
-  для каждого $i$ и каждой ветви $\\tau$ берём locally consistent unfolding
+  In flat localEF(s) (variables $P$ with axioms $p_i\\leftrightarrow\\varphi_i(X)$, $|\\mathrm{supp}(\\varphi_i)|\\le s$) these restricted trees can query $P$.
+  Then the "induced" edge-only trees for applying HR Lemma 4.4 are obtained **exactly** like this:
+  for each $i$ and each branch $\\tau$ we take locally consistent unfolding
   $$U_{i,\\tau}:=\\mathrm{Unfold}_{\\varphi}(\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau)$$
-  из §16.169, то есть заменяем каждый $P$‑запрос на поддерево $T_{\\varphi_j,\\alpha}$ (с текущим $\\alpha$ вдоль ветви), запрещая локально подразумеваемые edge‑запросы.
-  Тогда:
-  1) каждое $U_{i,\\tau}$ — locally consistent decision tree над **только** edge‑переменными $X$ (HR’22 Def. 2.5);
-  2) глубина ограничена
+  from Section 16.169, that is, we replace each $P$ query with a subtree $T_{\\varphi_j,\\alpha}$ (with the current $\\alpha$ along the branch), disabling locally implied edge queries.
+  Then:
+  1) each $U_{i,\\tau}$ is a locally consistent decision tree over **only** edge variables $X$ (HR'22 Def. 2.5);
+  2) depth is limited
      $$\\mathrm{depth}(U_{i,\\tau})\\le (2s+1)\\,t=:t',\\qquad t:=\\log M,$$
-     поскольку в HR’22 для любой ветви $\\tau$ “общая часть” длины $\\sum_{j<\\eta}s_j$ уже зафиксирована, и остаётся только уникальная часть глубины $\\le t$ (а unfolding умножает глубину не более чем на $2s+1$, §16.165).
+     since in HR'22 for any branch $\\tau$ the "common part" of length $\\sum_{j<\\eta}s_j$ is already fixed, and only the unique part of the depth $\\le t$ remains (and unfolding multiplies the depth by at most $2s+1$, Section 16.165).
 
-  Следовательно, в доказательстве Lemma 4.5 можно применять HR multi‑switching lemma (Lemma 4.4) к семействам $\\{U_{i,\\tau}\\}_i$ с параметром $t'$ вместо $t=\\log M$.
-  Оставшаяся часть шага Lemma 4.5 (построение $T_\\eta(\\nu)$ и проверка Property 4 “representing $\\vee$” по ветвям $\\tau$) проходит дословно, так как использует только вывод Lemma 4.4 для этих входных деревьев.
-  Это и есть формальная реализация пункта “poly‑size доказательство индуцирует нужные edge‑only деревья глубины $t'$” в Q43.
-- `Доказательство:`
-  В HR’22 Lemma 4.5 (PDF p. 20) к фиксированному $\\tau\\in T_{\\eta-1}(\\nu)$ применяют Lemma 4.4 к деревьям
-  $\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau$ и используют, что их глубина $\\le t=\\log M$ (“unique part”).
-  В flat local‑EF(s) мы заменяем каждое такое дерево на $U_{i,\\tau}$ по §16.169.
-  По построению §16.169 ветви $U_{i,\\tau}$ locally consistent и запросы только edge‑переменные, значит $U_{i,\\tau}$ подходит под HR’22 Lemma 4.4.
+  Therefore, in the proof of Lemma 4.5, one can apply the HR multiswitching lemma (Lemma 4.4) to families $\\{U_{i,\\tau}\\}_i$ with parameter $t'$ instead of $t=\\log M$.
+  The rest of the Lemma 4.5 step (constructing $T_\\eta(\\nu)$ and checking Property 4 "representing $\\vee$" along the branches of $\\tau$) goes verbatim, since it only uses the output of Lemma 4.4 for these input trees.
+  This is the formal implementation of the point "polysize proof induces the required edgeonly trees of depth $t'$" in Q43.
+- `Proof:`
+  In HR'22 Lemma 4.5 (PDF p. 20) to a fixed $\\tau\\in T_{\\eta-1}(\\nu)$ apply Lemma 4.4 to trees
+  $\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau$ and use that their depth is $\\le t=\\log M$ ("unique part").
+  In flat localEF(s) we replace each such tree with $U_{i,\\tau}$ according to Section 16.169.
+  By the construction of Section 16.169, branches $U_{i,\\tau}$ are locally consistent and queries are only edge variables, which means $U_{i,\\tau}$ fits HR'22 Lemma 4.4.
 
-  Оценка глубины: в §16.165 показано, что unfolding любого decision tree глубины $t$ (где каждый $P$‑запрос заменяется на дерево глубины $\\le 2s$) даёт edge‑only дерево глубины $\\le(2s+1)t$.
-  Применяя это к $\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau$ глубины $\\le t$, получаем $\\mathrm{depth}(U_{i,\\tau})\\le (2s+1)t=t'$.
+  Depth estimation: Section 16.165 shows that unfolding any decision tree of depth $t$ (where each $P$-query is replaced by a tree of depth $\\le 2s$) yields an edge-only tree of depth $\\le(2s+1)t$.
+  Applying this to $\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau$ depth $\\le t$, we get $\\mathrm{depth}(U_{i,\\tau})\\le (2s+1)t=t'$.
 
-  Наконец, в HR’22 проверка Property 4 (и построение $T_\\eta(\\nu)$) делается **по каждой** ветви $\\tau$ отдельно:
-  для фиксированного $\\tau$ именно Lemma 4.4 даёт common partial decision tree глубины $s_\\eta$, который представляет дизъюнкцию деревьев, ассоциированных с дисъюнктами.
-  Поэтому если подставить в этом месте деревья $\\{U_{i,\\tau}\\}_i$ (вместо $\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau$), то весь шаг Lemma 4.5 проходит в той же форме при замене $t\\mapsto t'$.
-- `Toy‑тест:` при $s=1$ каждый $P$‑запрос разворачивается в дерево глубины $\\le 2$, поэтому дерево уникальной части глубины $t=3$ после unfolding имеет глубину $\\le (2\\cdot 1+1)\\cdot 3=9$.
-- `Статус:` доказано (закрывает “индукцию деревьев” в Q43: указано точное место в Lemma 4.5 и явная конструкция входных edge‑only деревьев глубины $t'$).
-- `Барьер‑чек:` r — применимо (switching/decision trees релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 сформулировать итоговый corollary уровня HR Theorem 4.3 для depth‑$d$ flat local‑EF(s): как меняется нижняя оценка на длину/размер при подстановке $t'= (2s+1)\\log M$.
+  Finally, in HR'22, checking Property 4 (and constructing $T_\\eta(\\nu)$) is done **for each** branch of $\\tau$ separately:
+  for a fixed $\\tau$ it is Lemma 4.4 that gives the common partial decision tree of depth $s_\\eta$, which represents the disjunction of the trees associated with the disjuncts.
+  Therefore, if we substitute the trees $\\{U_{i,\\tau}\\}_i$ in this place (instead of $\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau$), then the entire step of Lemma 4.5 goes through the same form when replacing $t\\mapsto t'$.
+- `Toy test:` for $s=1$, each $P$-query is expanded into a tree of depth $\\le 2$, so the tree of the unique part of depth $t=3$ after unfolding has depth $\\le (2\\cdot 1+1)\\cdot 3=9$.
+- `Status:` proven (closes "tree induction" in Q43: the exact location in Lemma 4.5 and the explicit construction of input edgeonly trees of depth $t'$ are indicated).
+- `Barrier check:` r - applicable (switching/decision trees are relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43 formulate the final corollary level HR Theorem 4.3 for depth$d$ flat localEF(s): how does the lower bound for length/size change when substituting $t'= (2s+1)\\log M$.
 
-### 16.174. Исследовательский шаг: corollary — HR Theorem 4.3 переносится на depth‑$d$ flat local‑EF(s) с заменой $\\log M\\mapsto (2s+1)\\log M$
+### 16.174. Research step: corollary - HR Theorem 4.3 is transferred to depth$d$ flat localEF(s) with replacement $\\log M\\mapsto (2s+1)\\log M$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S12-corollary-thm43-flat-local-ef):`
-  Пусть задана flat local‑EF(s)‑рефутация Tseitin($G_n$) на $n\\times n$ grid (odd charges в каждой вершине, как в HR’22),
-  где все extension‑аксиомы имеют вид $p_i\\leftrightarrow\\varphi_i(X)$ с $|\\mathrm{supp}(\\varphi_i)|\\le s$ (flat),
-  и каждая строка — формула глубины $\\le d$ и размера $\\le M$.
-  Тогда число строк $N$ удовлетворяет той же форме нижней оценки, что и HR’22 Theorem 4.3, но с заменой
+- `Lens:` Trade-off.
+- `Statement (Q43.S12-corollary-thm43-flat-local-ef):`
+  Let a flat localEF(s)refutation Tseitin($G_n$) be given on $n\\times n$ grid (odd charges at each vertex, as in HR'22),
+  where all extension axioms have the form $p_i\\leftrightarrow\\varphi_i(X)$ with $|\\mathrm{supp}(\\varphi_i)|\\le s$ (flat),
+  and each line is a formula for depth $\\le d$ and size $\\le M$.
+  Then the number of rows $N$ satisfies the same form of lower bound as HR'22 Theorem 4.3, but with the replacement
   $$\\log M\\ \\rightsquigarrow\\ t':=(2s+1)\\log M,$$
-  то есть
+  that is
   $$N\\ \\ge\\ 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{O(1)}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)}.$$
-- `Доказательство:`
-  Повторяем доказательство HR’22 Theorem 4.3 (см. `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, Thm. 4.3 + Proof; PDF p. 19–20), меняя ровно одно место:
-  в Lemma 4.4/4.5 вместо “decision trees querying edges … of depth $t:=\\log M$” используем edge‑only locally consistent деревья глубины
+- `Proof:`
+  We repeat the proof of HR'22 Theorem 4.3 (see. `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`, Thm. 4.3 + Proof; PDF p. 19-20), changing exactly one place:
+  in Lemma 4.4/4.5 instead of "decision trees querying edges ... of depth $t:=\\log M$" we use edgeonly locally consistent depth trees
   $$t':=(2s+1)\\log M.$$
 
-  Корректность этой замены обеспечивают предыдущие шаги:
-  - §16.169+§16.173: restricted уникальные части $\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau$ в Lemma 4.5 разворачиваются в edge‑only locally consistent деревья глубины $\\le t'$;
-  - §16.166: параметрический блок Proof of Thm. 4.3 зависит от $M$ только через $t=\\log M$, значит все оценки/union bound переносятся с $t\\rightsquigarrow t'$;
-  - §16.162: получив в конце $t'(d)$‑evaluation с $t'(d)\\le n_d/16$, применяем (flat) аналог HR Lemma 2.13 и получаем, что рефутации быть не может.
+  The correctness of this replacement is ensured by the previous steps:
+  - Section 16.169+Section 16.173: restricted unique parts $\\phi^{\\eta-1}_\\nu(F_i)\\!\upharpoonright\\!\\tau$ in Lemma 4.5 are expanded to edgeonly locally consistent trees of depth $\\le t'$;
+  - Section 16.166: Proof of Thm parametric block. 4.3 depends on $M$ only through $t=\\log M$, which means all estimates/union bound are transferred from $t\\rightsquigarrow t'$;
+  - Section 16.162: having received at the end $t'(d)$evaluation with $t'(d)\\le n_d/16$, we apply the (flat) analogue of HR Lemma 2.13 and find that there can be no refutation.
 
-  Следовательно, чтобы избежать противоречия с Lemma 2.13, длина $N$ должна удовлетворять указанной экспоненциальной нижней оценке с $\\log M$ заменённым на $t'$.
-- `Toy‑тест:` при $s=0$ (нет extension‑переменных) имеем $t'=\\log M$, и формула совпадает с HR’22 Theorem 4.3.
-- `Статус:` доказано (условный перенос HR’22 нижней оценки на depth‑$d$ flat local‑EF(s), цена — множитель $(2s+1)^d$ в знаменателе экспоненты).
-- `Барьер‑чек:` r — применимо (switching‑леммы/decision trees релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 проверить “почти tightness”: при каких режимах $s$ и $M$ нижняя оценка остаётся $2^{n^{1-o(1)}}$ и сравнить с известным upper $2^{O(n)}$ (резолюция).
+  Therefore, to avoid a contradiction with Lemma 2.13, the length of $N$ must satisfy the specified exponential lower bound with $\\log M$ replaced by $t'$.
+- `Toy test:` for $s=0$ (no extension variables) we have $t'=\\log M$, and the formula coincides with HR'22 Theorem 4.3.
+- `Status:` proven (conditional transfer HR'22 of the lower estimate to depth$d$ flat localEF(s), price is the factor $(2s+1)^d$ in the denominator of the exponent).
+- `Barrier check:` r - applicable (switching lemmas/decision trees are relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, check "almost tightness": under what modes $s$ and $M$ the lower estimate remains $2^{n^{1-o(1)}}$ and compare with the known upper $2^{O(n)}$ (resolution).
 
-### 16.175. Исследовательский шаг (toy computation): режимы “почти tightness” для corollary при $t'=(2s+1)\\log M$
+### 16.175. Exploratory step (toy computation): "almost tightness" modes for corollary at $t'=(2s+1)\\log M$
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S13-tightness-regime):`
-  Пусть выполняется lower bound из §16.174:
+- `Lens:` Invariant.
+- `Statement (Q43.S13-tightness-regime):`
+  Let the lower bound from Section 16.174 be executed:
   $$N\\ge 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{C}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)}$$
-  для некоторой абсолютной константы $C\\ge 1$.
-  Тогда:
-  1) если
+  for some absolute constant $C\\ge 1$.
+  Then:
+  1) if
      $$d\\cdot\\log\\bigl((\\log n)^{C}(2s+1)\\log M\\bigr)=o(\\log n),\\tag{*}$$
-     то показатель экспоненты равен $n^{1-o(1)}$, то есть
+     then the exponent is equal to $n^{1-o(1)}$, that is
      $$N\\ge 2^{n^{1-o(1)}};$$
-  2) в частности, если $(2s+1)\\log M\\le \\log^{O(1)}n$ и $d=o(\\log n/\\log\\log n)$, то условие $(*)$ выполнено и снова $N\\ge 2^{n^{1-o(1)}}$;
-  3) при фиксированной глубине $d=O(1)$ и $(2s+1)\\log M\\le \\log^{O(1)}n$ получаем $N\\ge 2^{\\Omega(n/\\log^{O(1)}n)}$, что согласуется с известным upper $2^{O(n)}$ (резолюция).
-- `Toy‑вычисление:`
-  Из $(*)$ следует
+  2) in particular, if $(2s+1)\\log M\\le \\log^{O(1)}n$ and $d=o(\\log n/\\log\\log n)$, then the condition $(*)$ is satisfied and again $N\\ge 2^{n^{1-o(1)}}$;
+  3) for a fixed depth $d=O(1)$ and $(2s+1)\\log M\\le \\log^{O(1)}n$ we obtain $N\\ge 2^{\\Omega(n/\\log^{O(1)}n)}$, which is consistent with the known upper $2^{O(n)}$ (resolution).
+- `Toy computing:`
+  From $(*)$ it follows
   $$\\bigl((\\log n)^{C}(2s+1)\\log M\\bigr)^d=2^{o(\\log n)}=n^{o(1)}.$$
-  Тогда показатель экспоненты равен
+  Then the exponent is equal to
   $$\\Omega\\Bigl(\\frac{n}{n^{o(1)}}\\Bigr)=n^{1-o(1)}.$$
-  Пункт (2) — частный случай, т.к. при $(2s+1)\\log M\\le \\log^{K}n$ имеем $\\log((\\log n)^C(2s+1)\\log M)=O(\\log\\log n)$, и потому
-  $d\\cdot O(\\log\\log n)=o(\\log n)$ при $d=o(\\log n/\\log\\log n)$.
-- `Статус:` проверено (явный критерий, когда corollary даёт $2^{n^{1-o(1)}}$).
-- `Барьер‑чек:` r — применимо (это лишь алгебра над параметрами + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 оценить “порог по $s$”: при каких $s=s(n)$ (при $M=\\mathrm{poly}(n)$ и $d=o(\\log n/\\log\\log n)$) условие $(*)$ перестаёт быть верным.
+  Point (2) is a special case, because for $(2s+1)\\log M\\le \\log^{K}n$ we have $\\log((\\log n)^C(2s+1)\\log M)=O(\\log\\log n)$, and therefore
+  $d\\cdot O(\\log\\log n)=o(\\log n)$ for $d=o(\\log n/\\log\\log n)$.
+- `Status:` checked (explicit criterion when corollary gives $2^{n^{1-o(1)}}$).
+- `Barrier check:` r - applicable (this is only an algebra over parameters + the switching framework is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43 estimate the "threshold on $s$": at what $s=s(n)$ (at $M=\\mathrm{poly}(n)$ and $d=o(\\log n/\\log\\log n)$) condition $(*)$ ceases to be true.
 
-### 16.176. Исследовательский шаг (toy computation): порог по $s$ при $M=\\mathrm{poly}(n)$ и $d=o(\\log n/\\log\\log n)$
+### 16.176. Exploratory step (toy computation): threshold on $s$ with $M=\\mathrm{poly}(n)$ and $d=o(\\log n/\\log\\log n)$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S14-threshold-in-s):`
-  В режиме $M=\\mathrm{poly}(n)$ (то есть $\\log M=O(\\log n)$) и $d=o(\\log n/\\log\\log n)$ условие $(*)$ из §16.175 эквивалентно
+- `Lens:` Trade-off.
+- `Statement (Q43.S14-threshold-in-s):`
+  In the mode $M=\\mathrm{poly}(n)$ (that is, $\\log M=O(\\log n)$) and $d=o(\\log n/\\log\\log n)$ the condition $(*)$ from Section 16.175 is equivalent
   $$d\\cdot\\log(2s+1)=o(\\log n).\\tag{**}$$
-  В частности, lower bound из §16.174 даёт $N\\ge 2^{n^{1-o(1)}}$ при любом $s$ таком, что
-  $$\\log s=o(\\log n/d)\\quad\\text{(то есть)}\\quad s\\le 2^{o(\\log n/d)}.$$
-- `Toy‑вычисление:`
-  При $\\log M=O(\\log n)$ имеем $\\log\\log M=O(\\log\\log n)$, и потому
+  In particular, the lower bound from Section 16.174 gives $N\\ge 2^{n^{1-o(1)}}$ for any $s$ such that
+  $$\\log s=o(\\log n/d)\\quad\\text{(that is)}\\quad s\\le 2^{o(\\log n/d)}.$$
+- `Toy computing:`
+  For $\\log M=O(\\log n)$ we have $\\log\\log M=O(\\log\\log n)$, and therefore
   $$\\log\\bigl((\\log n)^C(2s+1)\\log M\\bigr)=\\log(2s+1)+O(\\log\\log n).$$
-  Подставляя в $(*)$ из §16.175 получаем
+  Substituting into $(*)$ from Section 16.175 we get
   $$d\\cdot\\log(2s+1)+d\\cdot O(\\log\\log n)=o(\\log n).$$
-  Но при $d=o(\\log n/\\log\\log n)$ второй член автоматически $o(\\log n)$, так что остаётся ровно $(**)$.
-- `Статус:` проверено (явный порог по $s$ в subcritical‑глубине).
-- `Барьер‑чек:` r — применимо (чистая параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 подставить $s=n^{\\varepsilon}$ и выписать, при каких $d$ показатель в §16.174 остаётся $n^{1-o(1)}$ или хотя бы $n^{\\Omega(1)}$ (где lower bound ещё нетривиален).
+  But for $d=o(\\log n/\\log\\log n)$ the second term is automatically $o(\\log n)$, so exactly $(**)$ remains.
+- `Status:` checked (explicit threshold for $s$ in subcritical depth).
+- `Barrier check:` r - applicable (pure parametrics + switching framework is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, substitute $s=n^{\\varepsilon}$ and write down for which $d$ the exponent in Section 16.174 remains $n^{1-o(1)}$ or at least $n^{\\Omega(1)}$ (where the lower bound is still non-trivial).
 
-### 16.177. Исследовательский шаг (toy computation): режим $s=n^{\\varepsilon}$ — когда bound из §16.174 нетривиален по глубине $d$
+### 16.177. Exploratory step (toy computation): mode $s=n^{\\varepsilon}$ - when the bound from Section 16.174 is non-trivial in depth $d$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S15-poly-s-depth-regime):`
-  Пусть $M=\\mathrm{poly}(n)$, $s=n^{\\varepsilon}$ для фиксированного $\\varepsilon\\in(0,1)$, и применим corollary §16.174:
+- `Lens:` Trade-off.
+- `Statement (Q43.S15-poly-s-depth-regime):`
+  Let $M=\\mathrm{poly}(n)$, $s=n^{\\varepsilon}$ for fixed $\\varepsilon\\in(0,1)$, and apply corollary Section 16.174:
   $$N\\ge 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{O(1)}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)}.$$
-  Тогда показатель экспоненты имеет порядок
+  Then the exponent has the order
   $$\\Omega\\Bigl(\\frac{n^{1-\\varepsilon d}}{\\log^{O(d)} n}\\Bigr).\\tag{***}$$
-  Отсюда:
-  1) (**почти tightness**) $N\\ge 2^{n^{1-o(1)}}$ возможно только при $\\varepsilon d=o(1)$ (т.е. $d=o(1/\\varepsilon)$);
-  2) (**нетривиальность**) $N\\ge 2^{n^{\\Omega(1)}}$ сохраняется для любой константной глубины $d$ с $\\varepsilon d<1$;
-  3) при $d\\ge 1/\\varepsilon$ показатель в $(***)$ становится $n^{o(1)}$, и bound перестаёт давать сверхполиномиальную нижнюю оценку на $N$.
-- `Toy‑вычисление:`
-  При $s=n^{\\varepsilon}$ имеем $2s+1=\\Theta(n^{\\varepsilon})$ и при $M=\\mathrm{poly}(n)$ также $\\log M=\\Theta(\\log n)$.
-  Тогда знаменатель в §16.174 равен
+  From here:
+  1) (**almost tightness**) $N\\ge 2^{n^{1-o(1)}}$ is possible only with $\\varepsilon d=o(1)$ (i.e. $d=o(1/\\varepsilon)$);
+  2) (**non-triviality**) $N\\ge 2^{n^{\\Omega(1)}}$ is preserved for any constant depth $d$ with $\\varepsilon d<1$;
+  3) for $d\\ge 1/\\varepsilon$ the exponent in $(***)$ becomes $n^{o(1)}$, and bound ceases to give a superpolynomial lower bound on $N$.
+- `Toy computing:`
+  For $s=n^{\\varepsilon}$ we have $2s+1=\\Theta(n^{\\varepsilon})$ and for $M=\\mathrm{poly}(n)$ also $\\log M=\\Theta(\\log n)$.
+  Then the denominator in Section 16.174 is
   $$\\bigl((\\log n)^{O(1)}(2s+1)\\log M\\bigr)^d\\ =\\ \\bigl(n^{\\varepsilon}\\,\\log^{O(1)}n\\bigr)^d\\ =\\ n^{\\varepsilon d}\\,\\log^{O(d)}n,$$
-  и получаем $(***)$.
-  Пункты (1)–(3) следуют из сравнения $n^{1-\\varepsilon d}$ с $n^{1-o(1)}$, $n^{\\Omega(1)}$ и $n^{o(1)}$ соответственно.
-- `Статус:` проверено (явный “depth‑порог” при полиномиальных flat‑extensions).
-- `Барьер‑чек:` r — применимо (параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 рассмотреть промежуточные режимы $s=2^{(\\log n)^\\alpha}$ и сравнить порог $d\\log(2s+1)=o(\\log n)$ с $d=o(\\log n/\\log\\log n)$.
+  and we get $(***)$.
+  Points (1)-(3) follow from comparing $n^{1-\\varepsilon d}$ with $n^{1-o(1)}$, $n^{\\Omega(1)}$ and $n^{o(1)}$, respectively.
+- `Status:` tested (explicit "depth-threshold" for polynomial flat-extensions).
+- `Barrier check:` r - applicable (parameter + switching framework is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, consider intermediate modes $s=2^{(\\log n)^\\alpha}$ and compare the threshold $d\\log(2s+1)=o(\\log n)$ with $d=o(\\log n/\\log\\log n)$.
 
-### 16.178. Исследовательский шаг (toy computation): режим $s=2^{(\\log n)^\\alpha}$ — depth‑порог $d\\approx \\log^{1-\\alpha}n$
+### 16.178. Exploratory step (toy computation): mode $s=2^{(\\log n)^\\alpha}$ -- depth threshold $d\\approx \\log^{1-\\alpha}n$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S16-subexp-s-regime):`
-  Пусть $M=\\mathrm{poly}(n)$ и $s=2^{(\\log n)^\\alpha}$ для некоторого $\\alpha>0$.
-  Тогда показатель экспоненты в corollary §16.174 имеет вид
+- `Lens:` Trade-off.
+- `Statement (Q43.S16-subexp-s-regime):`
+  Let $M=\\mathrm{poly}(n)$ and $s=2^{(\\log n)^\\alpha}$ for some $\\alpha>0$.
+  Then the exponent in corollary Section 16.174 has the form
   $$\\Omega\\Bigl(\\frac{n\\,2^{-d\\,(\\log n)^\\alpha}}{\\log^{O(d)}n}\\Bigr).\\tag{****}$$
-  В частности:
-  1) если $0<\\alpha<1$ и $d=o(\\log^{1-\\alpha}n)$, то $N\\ge 2^{n^{1-o(1)}}$;
-  2) если $0<\\alpha<1$ и $d=c\\,\\log^{1-\\alpha}n$ для константы $c\\in(0,1)$, то $N\\ge 2^{n^{1-c-o(1)}}$;
-  3) если $\\alpha>1$, то уже при $d\\ge 1$ выражение $(****)$ стремится к 0, и corollary §16.174 перестаёт давать сверхполиномиальную нижнюю оценку на $N$.
-- `Toy‑вычисление:`
-  При $s=2^{(\\log n)^\\alpha}$ имеем $2s+1=2^{(\\log n)^\\alpha+O(1)}$, а при $M=\\mathrm{poly}(n)$ также $\\log M=\\Theta(\\log n)$.
-  Тогда знаменатель в §16.174 равен
+  In particular:
+  1) if $0<\\alpha<1$ and $d=o(\\log^{1-\\alpha}n)$, then $N\\ge 2^{n^{1-o(1)}}$;
+  2) if $0<\\alpha<1$ and $d=c\\,\\log^{1-\\alpha}n$ for the constant $c\\in(0,1)$, then $N\\ge 2^{n^{1-c-o(1)}}$;
+  3) if $\\alpha>1$, then already for $d\\ge 1$ the expression $(****)$ tends to 0, and corollary Section 16.174 ceases to give a superpolynomial lower bound on $N$.
+- `Toy computing:`
+  For $s=2^{(\\log n)^\\alpha}$ we have $2s+1=2^{(\\log n)^\\alpha+O(1)}$, and for $M=\\mathrm{poly}(n)$ also $\\log M=\\Theta(\\log n)$.
+  Then the denominator in Section 16.174 is
   $$\\bigl((\\log n)^{O(1)}(2s+1)\\log M\\bigr)^d\\ =\\ 2^{d(\\log n)^\\alpha}\\cdot\\log^{O(d)}n,$$
-  что даёт $(****)$.
-  Пункт (1): из $d=o(\\log^{1-\\alpha}n)$ следует $d(\\log n)^\\alpha=o(\\log n)$, а также автоматически $d=o(\\log n/\\log\\log n)$, так что $\\log^{O(d)}n=2^{o(\\log n)}=n^{o(1)}$.
-  Пункт (2): при $d=c\\log^{1-\\alpha}n$ имеем $2^{d(\\log n)^\\alpha}=2^{c\\log n}=n^c$, а $\\log^{O(d)}n=2^{o(\\log n)}=n^{o(1)}$.
-  Пункт (3): при $\\alpha>1$ уже $2^{d(\\log n)^\\alpha}\\gg n$, поэтому $n\\,2^{-d(\\log n)^\\alpha}=o(1)$.
-- `Статус:` проверено (явный “phase transition”: при $\\alpha>1$ bound тривиализируется уже на глубине 1).
-- `Барьер‑чек:` r — применимо (параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 выделить “максимально допустимый” рост $s(n)$ из условия $d\\log(2s+1)=o(\\log n)$ при $d=\\Theta(\\log n/\\log\\log n)$ (граница между нетривиальным и тривиальным lower bound).
+  which gives $(****)$.
+  Point (1): $d=o(\\log^{1-\\alpha}n)$ implies $d(\\log n)^\\alpha=o(\\log n)$, and also automatically $d=o(\\log n/\\log\\log n)$, so $\\log^{O(d)}n=2^{o(\\log n)}=n^{o(1)}$.
+  Point (2): for $d=c\\log^{1-\\alpha}n$ we have $2^{d(\\log n)^\\alpha}=2^{c\\log n}=n^c$, and $\\log^{O(d)}n=2^{o(\\log n)}=n^{o(1)}$.
+  Point (3): for $\\alpha>1$ there is already $2^{d(\\log n)^\\alpha}\\gg n$, therefore $n\\,2^{-d(\\log n)^\\alpha}=o(1)$.
+- `Status:` checked (explicit "phase transition": for $\\alpha>1$ bound is trivialized already at depth 1).
+- `Barrier check:` r - applicable (parameter + switching framework is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, select the "maximum permissible" growth of $s(n)$ from the condition $d\\log(2s+1)=o(\\log n)$ with $d=\\Theta(\\log n/\\log\\log n)$ (the boundary between the nontrivial and trivial lower bound).
 
-### 16.179. Исследовательский шаг (toy computation): критическая глубина $d\\asymp \\log n/\\log\\log n$ ⇒ $s=(\\log n)^{o(1)}$ для “почти tightness”
+### 16.179. Exploratory step (toy computation): critical depth $d\\asymp \\log n/\\log\\log n$  $s=(\\log n)^{o(1)}$ for "almost tightness"
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S17-max-s-critical-depth):`
-  В режиме $M=\\mathrm{poly}(n)$ и “критической” глубины
+- `Lens:` Trade-off.
+- `Statement (Q43.S17-max-s-critical-depth):`
+  In the mode $M=\\mathrm{poly}(n)$ and "critical" depth
   $$d=\\Theta\\left(\\frac{\\log n}{\\log\\log n}\\right),$$
-  условие $(**)$ из §16.176 (эквивалентное “почти tightness” $N\\ge 2^{n^{1-o(1)}}$) равносильно
+  the condition $(**)$ from Section 16.176 (equivalent to "almost tightness" $N\\ge 2^{n^{1-o(1)}}$) is equivalent
   $$\\log(2s+1)=o(\\log\\log n),$$
-  то есть
+  that is
   $$s=2^{o(\\log\\log n)}=(\\log n)^{o(1)}.$$
-- `Toy‑вычисление:`
-  Подставим $d=\\Theta(\\log n/\\log\\log n)$ в $(**)$ из §16.176:
+- `Toy computing:`
+  Substitute $d=\\Theta(\\log n/\\log\\log n)$ into $(**)$ from Section 16.176:
   $$d\\log(2s+1)=o(\\log n)\\ \\Longleftrightarrow\\ \\frac{\\log n}{\\log\\log n}\\cdot\\log(2s+1)=o(\\log n)\\ \\Longleftrightarrow\\ \\log(2s+1)=o(\\log\\log n).$$
-  Отсюда $2s+1=2^{o(\\log\\log n)}$ и потому $s=2^{o(\\log\\log n)}$.
-  Равенство $2^{o(\\log\\log n)}=(\\log n)^{o(1)}$ следует из $2^{a\\log\\log n}=(\\log n)^a$.
-- `Статус:` проверено (явный максимальный рост $s(n)$ при критической глубине для сохранения $2^{n^{1-o(1)}}$).
-- `Барьер‑чек:` r — применимо (чистая параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 оценить “границу нетривиальности” при $d=\\Theta(\\log n/\\log\\log n)$: если $s=(\\log n)^c$, какой показатель $n^{1-\\Theta(1)}$ даёт corollary §16.174 (вместо $n^{1-o(1)}$).
+  Hence $2s+1=2^{o(\\log\\log n)}$ and therefore $s=2^{o(\\log\\log n)}$.
+  The equality $2^{o(\\log\\log n)}=(\\log n)^{o(1)}$ follows from $2^{a\\log\\log n}=(\\log n)^a$.
+- `Status:` verified (explicit maximum growth of $s(n)$ at critical depth for conservation of $2^{n^{1-o(1)}}$).
+- `Barrier check:` r - applicable (pure parametrics + switching framework is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43 estimate the "non-triviality bound" for $d=\\Theta(\\log n/\\log\\log n)$: if $s=(\\log n)^c$, what exponent $n^{1-\\Theta(1)}$ gives corollary Section 16.174 (instead of $n^{1-o(1)}$).
 
-### 16.180. Исследовательский шаг (toy computation): при $d=\\Theta(\\log n/\\log\\log n)$ и $s=(\\log n)^c$ показатель экспоненты = $n^{1-\\Theta(1)}$
+### 16.180. Exploratory step (toy computation): with $d=\\Theta(\\log n/\\log\\log n)$ and $s=(\\log n)^c$ exponent = $n^{1-\\Theta(1)}$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S18-polylog-s-critical-depth-exponent):`
-  Предположим $M=\\mathrm{poly}(n)$ и $s=(\\log n)^c$ для фиксированного $c\\ge 0$.
-  Пусть глубина строк
+- `Lens:` Trade-off.
+- `Statement (Q43.S18-polylog-s-critical-depth-exponent):`
+  Suppose $M=\\mathrm{poly}(n)$ and $s=(\\log n)^c$ for fixed $c\\ge 0$.
+  Let the row depth
   $$d=\\left(\\kappa+o(1)\\right)\\frac{\\log n}{\\log\\log n}$$
-  для некоторой константы $\\kappa>0$.
-  Тогда lower bound из §16.174 имеет показатель экспоненты вида
+  for some constant $\\kappa>0$.
+  Then the lower bound from Section 16.174 has an exponent of the form
   $$\\Omega\\bigl(n^{1-\\kappa(C+1+c)-o(1)}\\bigr),$$
-  где $C=O(1)$ — абсолютная константа из polylog‑фактора $(\\log n)^{O(1)}$ в §16.174 (унаследованного от HR’22 Thm. 4.3).
-  В частности, при $\\kappa(C+1+c)<1$ получаем нетривиальный bound
+  where $C=O(1)$ is the absolute constant from the polylog factor $(\\log n)^{O(1)}$ in Section 16.174 (inherited from HR'22 Thm. 4.3).
+  In particular, for $\\kappa(C+1+c)<1$ we obtain a nontrivial bound
   $$N\\ge 2^{n^{\\Omega(1)}},$$
-  а при $\\kappa(C+1+c)\\ge 1$ этот bound перестаёт давать сверхполиномиальную нижнюю оценку на $N$.
-- `Toy‑вычисление:`
-  В §16.174 оценка имеет вид
+  and when $\\kappa(C+1+c)\\ge 1$ this bound ceases to give a superpolynomial lower bound on $N$.
+- `Toy computing:`
+  In Section 16.174 the estimate is
   $$N\\ge 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^{C}\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)}$$
-  для некоторой фиксированной $C\\ge 1$.
-  При $M=\\mathrm{poly}(n)$ имеем $\\log M=\\Theta(\\log n)$, а при $s=(\\log n)^c$ имеем $2s+1=\\Theta((\\log n)^c)$.
-  Тогда
+  for some fixed $C\\ge 1$.
+  For $M=\\mathrm{poly}(n)$ we have $\\log M=\\Theta(\\log n)$, and for $s=(\\log n)^c$ we have $2s+1=\\Theta((\\log n)^c)$.
+  Then
   $$((\\log n)^{C}(2s+1)\\log M)^{d}=\\bigl((\\log n)^{C+1+c}\\bigr)^{d}.$$
-  Подставляя $d=(\\kappa+o(1))\\log n/\\log\\log n$, получаем
+  Substituting $d=(\\kappa+o(1))\\log n/\\log\\log n$, we get
   $$\\bigl((\\log n)^{C+1+c}\\bigr)^{d}=2^{(\\kappa+o(1))(C+1+c)\\log n}=n^{\\kappa(C+1+c)+o(1)}.$$
-  Поэтому показатель экспоненты равен
+  Therefore the exponent is equal to
   $$\\Omega\\Bigl(\\frac{n}{n^{\\kappa(C+1+c)+o(1)}}\\Bigr)=\\Omega\\bigl(n^{1-\\kappa(C+1+c)-o(1)}\\bigr).$$
-- `Статус:` проверено (критическая глубина превращает polylog‑$s$ в константную потерю в степени $n$).
-- `Барьер‑чек:` r — применимо (чистая параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 извлечь/зафиксировать явную константу $C$ (в $(\\log n)^C$) из Proof of HR’22 Thm. 4.3 и сравнить порог $\\kappa<1/(C+1+c)$ с реальным диапазоном глубин.
+- `Status:` verified (critical depth turns polylog$s$ into a constant loss to the power of $n$).
+- `Barrier check:` r - applicable (pure parametrics + switching framework is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, extract/fix the explicit constant $C$ (in $(\\log n)^C$) from Proof of HR'22 Thm. 4.3 and compare the threshold $\\kappa<1/(C+1+c)$ with the actual depth range.
 
-### 16.181. Исследовательский шаг: $C$ в $(\\log n)^C$ из HR’22 Thm. 4.3 = константа $c_1$ из multi‑switching (Lemma 4.4)
+### 16.181. Research Step: $C$ to $(\\log n)^C$ from HR'22 Thm. 4.3 = constant $c_1$ from multiswitching (Lemma 4.4)
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S19-pin-down-constant-C):`
-  В формулировке HR’22 Theorem 4.3 polylog‑фактор $(\\log n)^{O(1)}$ можно взять равным $\\log^{c_1}n$, где $c_1$ — константа из HR’22 Lemma 4.4 (Multi-switching Lemma).
-  Следовательно, в corollary §16.174 для flat local‑EF(s) можно считать
+- `Lens:` Equivalence.
+- `Statement (Q43.S19-pin-down-constant-C):`
+  In the HR'22 Theorem 4.3 formulation, the polylog factor $(\\log n)^{O(1)}$ can be taken equal to $\\log^{c_1}n$, where $c_1$ is the constant from HR'22 Lemma 4.4 (Multi-switching Lemma).
+  Therefore, in corollary Section 16.174 for flat localEF(s) one can consider
   $$C=c_1$$
-  (а все остальные потери учтены отдельно через $t'=(2s+1)\\log M$).
-- `Доказательство/точная ссылка:`
-  В HR’22 Lemma 4.4 (PDF p. 19; `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`) параметрическая предпосылка содержит
+  (and all other losses are taken into account separately through $t'=(2s+1)\\log M$).
+- `Proof/exact link:`
+  In HR'22 Lemma 4.4 (PDF p. 19; `../../resources/downloads/hastad_risse_2022_tseitin_grid_revisited.pdf`) the parametric premise contains
   $$\\frac{n}{n'}\\ge A\\,t\\,\\log^{c_1}n.$$
-  В Proof of Theorem 4.3 (PDF p. 19–20) они затем выбирают $\\ell=t=\\log M$ и задают рекурсию
+  In Proof of Theorem 4.3 (PDF p. 19-20), they then choose $\\ell=t=\\log M$ and specify the recursion
   $$n_\\eta=\\Bigl\\lfloor\\frac{n_{\\eta-1}}{A_1\\,t\\,\\log^{c_1}n_{\\eta-1}}\\Bigr\\rfloor\\qquad(\\eta\\in[d]).$$
-  Иначе говоря, единственный источник “$(\\log n)^{O(1)}$” в знаменателе экспоненты — именно множитель $\\log^{c_1}n$ из multi‑switching lemma (Lemma 4.4).
-- `Toy‑тест:` если бы в Lemma 4.4 можно было взять $c_1=4$, то формула Thm. 4.3 стала бы с $(\\log n)^4$ (как в Lemma 4.2/Thm. 4.1); в тексте HR’22 $c_1$ оставлена как “absolute constant”.
-- `Статус:` точная локализация константы (используем в Q43 как явный $C=c_1$).
-- `Барьер‑чек:` r — применимо (switching‑леммы/decision trees релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43: в Proof of Lemma 4.4 (Section 7) попытаться извлечь явное значение/upper bound для $c_1$ (или зафиксировать, что текст не даёт численного $c_1$ без повторного анализа доказательства).
+  In other words, the only source of "$(\\log n)^{O(1)}$" in the denominator of the exponent is precisely the factor $\\log^{c_1}n$ from the multiswitching lemma (Lemma 4.4).
+- `Toy test:` if in Lemma 4.4 it were possible to take $c_1=4$, then the formula Thm. 4.3 would become with $(\\log n)^4$ (as in Lemma 4.2/Thm. 4.1); in the text of HR'22 $c_1$ is left as "absolute constant".
+- `Status:` exact localization of the constant (we use it in Q43 as explicit $C=c_1$).
+- `Barrier check:` r - applicable (switching lemmas/decision trees are relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43: in Proof of Lemma 4.4 (Section 7) try to extract an explicit value/upper bound for $c_1$ (or note that the text does not give a numerical value of $c_1$ without re-analyzing the proof).
 
-### 16.182. Исследовательский шаг (exact citation): в HR’22 Lemma 4.4 константа $c_1$ (в $\\log^{c_1}n$) не фиксируется явно
+### 16.182. Exploratory step (exact citation): in HR'22 Lemma 4.4 the constant $c_1$ (in $\\log^{c_1}n$) is not fixed explicitly
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S20-bound-c1):`
-  В HR’22 Lemma 4.4 константа $c_1$ вводится только как “absolute constant” и в proof (Section 7.3) не выводится в явном виде: дополнительные издержки в инверсии отображения “absorbed by the constants $c_1$ and $c_2$”.
-  Поэтому из текста HR’22 нельзя извлечь численное значение/upper bound для $c_1$ без самостоятельного трекинга констант (или замены леммы на источник с явными параметрами).
-- `Точная ссылка (HR’22, text cache):`
-  1) формулировка Lemma 4.4: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2570–2571` (“There are absolute constants A, c1, c2, n0 > 0 … n/n′ ≥ At log^{c1} n”);
-  2) proof, Section 7.3: `…:2776–2777` (“the cost is absorbed by the constants c1 and c2”) и `…:2787–2790` (“only the index j cannot be absorbed by the constants A, c1 and c2”).
-- `Toy‑тест:` поиск по шаблонам `c1=`/`choose c1` в text cache не находит явного выбора $c_1$ (только использование как “absolute constant”).
-- `Статус:` exact citation (попытка “оценить $c_1$ из текста” упирается в неявные константы).
-- `Барьер‑чек:` r — применимо (switching‑леммы релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` либо перепройти proof Lemma 4.4 с трекингом констант и получить явный $c_1$, либо найти источник multi‑switching lemma с явно выписанным показателем у $\\log n$.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S20-bound-c1):`
+  In HR'22 Lemma 4.4, the constant $c_1$ is introduced only as "absolute constant" and in proof (Section 7.3) it is not output explicitly: the additional overhead in the inversion of the mapping is "absorbed by the constants $c_1$ and $c_2$".
+  Therefore, it is impossible to extract the numerical value/upper bound for $c_1$ from the HR'22 text without independently tracking the constants (or replacing the lemma with a source with explicit parameters).
+- `Exact link (HR'22, text cache):`
+  1) formulation of Lemma 4.4: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2570–2571` (“There are absolute constants A, c1, c2, n0 > 0 … n/n′ ≥ At log^{c1} n”);
+  2) proof, Section 7.3: `…:2776–2777` ("the cost is absorbed by the constants c1 and c2") and `…:2787–2790` (“only the index j cannot be absorbed by the constants A, c1 and c2”).
+- `Toy test:` search by templates `c1=`/`choose c1` in text cache does not find an explicit choice of $c_1$ (only used as "absolute constant").
+- `Status:` exact citation (the attempt to "estimate $c_1$ from the text" rests on implicit constants).
+- `Barrier check:` r -- applicable (switching lemmas are relativized), NP -- not applicable, alg -- not applicable.
+- `Next step:` either rerun proof Lemma 4.4 with constant tracking and get an explicit $c_1$, or find a source of multiswitching lemma with an explicitly written exponent of $\\log n$.
 
-### 16.183. Исследовательский шаг (proof): PARITY имеет полиномиальные формулы глубины $O(\\log m/\\log\\log m)$ (снятие «глубинного» барьера для XOR‑строки)
+### 16.183. Research step (proof): PARITY has polynomial-size formulas of depth $O(\\log m/\\log\\log m)$ (removing the "depth" barrier for the XOR line)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q39.S2-parity-depth-loglog):`
-  Для каждого $m\\ge 2$ существует булева формула над базисом $\\{\\wedge,\\vee,\\neg\\}$, вычисляющая $\\mathrm{PARITY}_m(x_1,\\dots,x_m)$, глубины
+- `Lens:` Trade-off.
+- `Statement (Q39.S2-parity-depth-loglog):`
+  For each $m\\ge 2$ there is a Boolean formula over the basis $\\{\\wedge,\\vee,\\neg\\}$ that calculates $\\mathrm{PARITY}_m(x_1,\\dots,x_m)$, depths
   $$O\\Bigl(\\frac{\\log m}{\\log\\log m}\\Bigr)$$
-  и размера $\\mathrm{poly}(m)$ (например, $O(m^2)$).
-  Следовательно, при глубине $d=\\Theta(\\log m/\\log\\log m)$ **само представление** большого XOR‑линейного условия (как одной строки Frege) не упирается в «нужно $\\Theta(\\log m)$ по глубине»; узел Q39 остаётся в **синтаксическом выводе** такого XOR‑шагa из предыдущих строк.
-- `Доказательство (конструкция):`
-  1) Для $k\\ge 1$ зададим depth‑2 DNF‑формулу паритета
+  and size $\\mathrm{poly}(m)$ (for example, $O(m^2)$).
+  Consequently, with depth $d=\\Theta(\\log m/\\log\\log m)$ **the very representation** of the large XOR-linear condition (as a single Frege line) does not rest on "you need $\\Theta(\\log m)$ in depth"; node Q39 remains in the **syntax output** of the XOR step from the previous lines.
+- `Proof (construction):`
+  1) For $k\\ge 1$ we define the depth-2 DNF parity formula
   $$\\mathrm{PARITY}^{\\mathrm{DNF}}_k(x_1,\\dots,x_k)\\;:=\\;\\bigvee_{S\\subseteq[k],\\ |S|\\text{ odd}}\\ \\Bigl(\\bigwedge_{i\\in S} x_i\\ \\wedge\\ \\bigwedge_{i\\notin S}\\neg x_i\\Bigr).$$
-  Она вычисляет $\\mathrm{PARITY}_k$ и имеет размер $O(k\\,2^k)$ и глубину 2.
-  2) Пусть $b:=\\lceil\\log_2 m\\rceil$. Разобьём $x_1,\\dots,x_m$ на блоки длины $b$ (последний дополним константами 0).
-  Пусть $y_1,\\dots,y_{\\lceil m/b\\rceil}$ — формулы, где $y_j$ есть $\\mathrm{PARITY}^{\\mathrm{DNF}}_b$ от переменных $j$‑го блока.
-  Тогда
+  It computes $\\mathrm{PARITY}_k$ and has size $O(k\\,2^k)$ and depth 2.
+  2) Let $b:=\\lceil\\log_2 m\\rceil$. Let us divide $x_1,\\dots,x_m$ into blocks of length $b$ (we will supplement the latter with constants 0).
+  Let $y_1,\\dots,y_{\\lceil m/b\\rceil}$ be formulas where $y_j$ is $\\mathrm{PARITY}^{\\mathrm{DNF}}_b$ in the variables of the $j$-th block.
+  Then
   $$\\mathrm{PARITY}_m(x)=\\mathrm{PARITY}_{\\lceil m/b\\rceil}(y_1,\\dots,y_{\\lceil m/b\\rceil}).$$
-  3) Итерация: повторяем тот же шаг для $\\mathrm{PARITY}_{\\lceil m/b\\rceil}$, снова группируя входы по $b$ и применяя $\\mathrm{PARITY}^{\\mathrm{DNF}}_b$ на каждом блоке, пока число входов не станет $\\le b$ (тогда завершаем одной $\\mathrm{PARITY}^{\\mathrm{DNF}}_{\\le b}$).
+  3) Iteration: repeat the same step for $\\mathrm{PARITY}_{\\lceil m/b\\rceil}$, again grouping the inputs by $b$ and applying $\\mathrm{PARITY}^{\\mathrm{DNF}}_b$ on each block until the number of inputs becomes $\\le b$ (then we end with one $\\mathrm{PARITY}^{\\mathrm{DNF}}_{\\le b}$).
 
-  Глубина: каждый уровень добавляет 2, а число уровней $t$ удовлетворяет $m/b^t\\le b$, т.е.
+  Depth: each level adds 2, and the number of levels $t$ satisfies $m/b^t\\le b$, i.e.
   $$t\\le \\left\\lceil\\log_b(m/b)\\right\\rceil=O\\Bigl(\\frac{\\log m}{\\log\\log m}\\Bigr),$$
-  значит глубина $\\le 2t+2=O(\\log m/\\log\\log m)$.
-  Размер: так как $2^b\\le 2m$, имеем $|\\mathrm{PARITY}^{\\mathrm{DNF}}_b|=O(b\\,2^b)=O(m\\log m)$.
-  На уровне $i$ блоков $\\le m/b^{i+1}$, поэтому вклад размера
+  this means the depth is $\\le 2t+2=O(\\log m/\\log\\log m)$.
+  Size: since $2^b\\le 2m$, we have $|\\mathrm{PARITY}^{\\mathrm{DNF}}_b|=O(b\\,2^b)=O(m\\log m)$.
+  At the level of $i$ blocks $\\le m/b^{i+1}$, so the contribution of the size
   $$O\\Bigl(\\frac{m}{b^{i+1}}\\cdot m\\log m\\Bigr)=O\\Bigl(\\frac{m^2\\log m}{b^{i+1}}\\Bigr).$$
-  Суммируя геометрический ряд по $i=0,1,\\dots,t-1$ и учитывая $b=\\Theta(\\log m)$, получаем общий размер $O(m^2)$.
-- `Toy‑тест:` при $m=2^{16}$ имеем $b=16$ и уровней $t=3$ (так как $2^{16}/16^3<16$), то есть глубина $\\le 8$ при размере $O(m^2)$.
-- `Статус:` доказано (явная конструкция формулы).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` найти/зафиксировать, существует ли **полиномиальный bounded‑depth Frege‑вывод** одной XOR‑операции (сложения двух линейных форм над $\\mathbb F_2$) при глубине $\\Theta(\\log n/\\log\\log n)$, или известен барьер/эквивалентность с моделями типа $\\mathrm{AC}^0$‑Frege с MOD2.
+  Summing the geometric series over $i=0,1,\\dots,t-1$ and taking into account $b=\\Theta(\\log m)$, we obtain the total size $O(m^2)$.
+- `Toy test:` for $m=2^{16}$ we have $b=16$ and levels $t=3$ (since $2^{16}/16^3<16$), that is, the depth is $\\le 8$ with a size of $O(m^2)$.
+- `Status:` proven (explicit construction of the formula).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` find/fix whether there is a **polynomial boundeddepth Fregeoutput** of a single XORoperation (the addition of two linear forms over $\\mathbb F_2$) at depth $\\Theta(\\log n/\\log\\log n)$, or a known barrier/equivalence with models like $\\mathrm{AC}^0$Frege with MOD2.
 
-### 16.184. Исследовательский шаг (exact citation): GIRS’19 дают bounded‑depth вывод XOR‑шага (сложение $\\mathbb F_2$‑уравнений) для “compact representation” паритета
+### 16.184. Exploratory step (exact citation): GIRS'19 gives boundeddepth output of XORstep (addition of $\\mathbb F_2$equations) for "compact representation" parity
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q39.S3-cite-xor-step-bdfrege):`
-  В Galesi–Itsykson–Riazanov–Sofronova’19 вводится “compact representation” $\\Phi^a(S,U)$ для уравнения паритета
+- `Lens:` Equivalence.
+- `Statement (Q39.S3-cite-xor-step-bdfrege):`
+  Galesi-Itsykson-Riazanov-Sofronova'19 introduces the "compact representation" $\\Phi^a(S,U)$ for the parity equation
   $$\\bigoplus_{i\\in S} x_i = a$$
-  относительно фиксированного refinement $U$ множества $[n]$.
-  В Section 4.2 (“Summation of linear equations”) они доказывают, что из двух таких представлений относительно **одного и того же** $U$
-  можно синтаксически вывести их сумму над $\\mathbb F_2$, т.е. XOR‑шаг
+  with respect to a fixed refinement $U$ of the set $[n]$.
+  In Section 4.2 ("Summation of linear equations") they prove that of two such representations relative to **the same** $U$
+  one can syntactically derive their sum over $\\mathbb F_2$, i.e. XOR step
   $$\\Phi^a(S,U),\\ \\Phi^b(T,U)\\ \\vdash\\ \\Phi^{a\\oplus b}(S\\triangle T, U)$$
-  в bounded‑depth Frege с глубиной $3d+O(1)$ и полиномиальным (по размеру представлений) overhead.
-  Это даёт положительный “XOR‑step”‑факт в литературе (но только в режиме compact‑representation+общий refinement).
-- `Точная ссылка:`
+  in boundeddepth Frege with depth $3d+O(1)$ and polynomial (in the size of representations) overhead.
+  This gives a positive "XOR-step" fact in the literature (but only in the compact-representation + general refinement mode).
+- `Exact link:`
   `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`, p. 11,
   Section 4.2, **Lemma 24**: “Let $U$ be a $(t_1,\\dots,t_d)$‑refinement … there exist a constant $c$ and a derivation
   $\\Phi^a(S,U),\\Phi^b(T,U)\\vdash_{3d+O(1)}\\Phi^{a\\oplus b}(S\\triangle T,U)$ of size at most $c\\cdot|\\Phi^1(\\emptyset,U)|^6$.”
-- `Toy‑тест:` при $S=\\{1,2\\}$, $T=\\{2,3\\}$ получаем $S\\triangle T=\\{1,3\\}$ и именно $x_1\\oplus x_3=(x_1\\oplus x_2)\\oplus(x_2\\oplus x_3)$.
-- `Статус:` exact citation (XOR‑сложение уравнений известно для compact‑representation).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо (локальный факт о bounded‑depth Frege‑выводе).
-- `Следующий шаг:` сопоставить HR’22 “representing parity” (формулы depth $d$, size $M$) с compact‑representation $\\Phi^a(S,U)$: можно ли в bounded‑depth Frege переводить/поддерживать единый refinement $U$ для нужных промежуточных уравнений без blow‑up, или именно здесь “missing Gauss step” у HR остаётся.
+- `Toy test:` for $S=\\{1,2\\}$, $T=\\{2,3\\}$ we obtain $S\\triangle T=\\{1,3\\}$ and precisely $x_1\\oplus x_3=(x_1\\oplus x_2)\\oplus(x_2\\oplus x_3)$.
+- `Status:` exact citation (XOR addition of equations is known for compact representation).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable (local fact about bounded-depth Frege-output).
+- `Next step:` compare HR'22 "representing parity" (formulas depth $d$, size $M$) with compact-representation $\\Phi^a(S,U)$: is it possible to translate/maintain a single refinement $U$ into bounded-depth Frege for the required intermediate equations without blow-up, or is this where HR's "missing Gauss step" remains.
 
-### 16.185. Исследовательский шаг (toy computation): GIRS‑compact XOR‑step даёт лишь quasi‑poly размер в режиме глубины $\\Theta(\\log m/\\log\\log m)$
+### 16.185. Exploratory step (toy computation): GIRScompact XORstep gives only quasipoly size in depth mode $\\Theta(\\log m/\\log\\log m)$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q39.S4-compare-hr-vs-girs-repr):`
-  Если пытаться реализовать “XOR‑step” в bounded‑depth Frege через **GIRS’19 compact representation** $\\Phi^a(S,U)$ и их Lemma 24,
-  то при глубине строк $D=\\Theta(\\log m/\\log\\log m)$ (где $m$ — ширина линейного уравнения) получается лишь квазиполиномиальная
-  верхняя оценка на размер вывода, а не $\\mathrm{poly}(m)$.
-  Поэтому наличие Lemma 24 само по себе не закрывает Q39: остаётся разрыв между “XOR‑step существует для compact‑representation” и
-  “XOR‑step polynomial‑size в требуемом depth‑режиме для естественных паритет‑формул (HR §1.2)”.
-- `Toy‑вычисление (по GIRS’19 Lemma 20/21/24):`
-  В GIRS’19 (p. 10) Lemma 20: если $t_1\\cdots t_d\\ge m$, то существует $(t_1,\\dots,t_d)$‑refinement $U$ множества $[m]$.
-  По Lemma 21 (p. 10) соответствующая compact‑формула паритета имеет глубину $\\le 3d+1$ и размер
+- `Lens:` Trade-off.
+- `Statement (Q39.S4-compare-hr-vs-girs-repr):`
+  If you try to implement "XORstep" in boundeddepth Frege using **GIRS'19 compact representation** $\\Phi^a(S,U)$ and their Lemma 24,
+  then with the row depth $D=\\Theta(\\log m/\\log\\log m)$ (where $m$ is the width of the linear equation), only a quasi-polynomial
+  upper bound on output size, not $\\mathrm{poly}(m)$.
+  Therefore, the presence of Lemma 24 does not in itself close Q39: there remains a gap between "XORstep exists for compactrepresentation" and
+  "XOR-step polynomial-size in the required depth mode for natural parity formulas (HR Section 1.2)."
+- `Toy calculation (according to GIRS'19 Lemma 20/21/24):`
+  In GIRS'19 (p. 10) Lemma 20: If $t_1\\cdots t_d\\ge m$, then there is $(t_1,\\dots,t_d)$refinement $U$ of set $[m]$.
+  By Lemma 21 (p. 10), the corresponding compact parity formula has depth $\\le 3d+1$ and size
   $$|\\Phi^1(\\emptyset,U)|\\ \\le\\ \\prod_{i=1}^d 2^{t_i+1}t_i\\ =\\ 2^{d+\\sum_i t_i}\\cdot\\prod_i t_i.$$
-  Если хотим уложиться в глубину $D$, то берём $d:=\\lfloor (D-1)/3\\rfloor$.
-  Чтобы минимизировать грубую оценку на размер, можно взять все $t_i$ одинаковыми: $t:=\\lceil m^{1/d}\\rceil$, тогда $t^d\\ge m$.
-  Из Lemma 21 получаем
+  If we want to fit into the depth $D$, then we take $d:=\\lfloor (D-1)/3\\rfloor$.
+  To minimize the rough estimate on the size, we can take all $t_i$ the same: $t:=\\lceil m^{1/d}\\rceil$, then $t^d\\ge m$.
+  From Lemma 21 we get
   $$|\\Phi^1(\\emptyset,U)|\\ \\le\\ (2^{t+1}t)^d\\ =\\ 2^{O(d\\,t)}.$$
-  В режиме $D\\asymp \\log m/\\log\\log m$ имеем $d\\asymp \\log m/\\log\\log m$ и
+  In the mode $D\\asymp \\log m/\\log\\log m$ we have $d\\asymp \\log m/\\log\\log m$ and
   $$t=m^{1/d}=2^{\\Theta(\\log m/d)}=2^{\\Theta(\\log\\log m)}=\\log^{\\Theta(1)}m,$$
-  так что $d\\,t=\\log^{\\Theta(1)}m$ и потому $|\\Phi^1(\\emptyset,U)|=2^{\\log^{\\Theta(1)}m}$ (quasi‑poly bound).
-  Наконец, Lemma 24 (p. 11) даёт вывод XOR‑шага размера $\\le c\\cdot|\\Phi^1(\\emptyset,U)|^6$, то есть по этой оценке также quasi‑poly при таком $D$.
-- `Статус:` проверено (параметрический разрыв: GIRS‑compact не даёт $\\mathrm{poly}(m)$ при $D\\asymp\\log m/\\log\\log m$).
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q39 нужно либо (a) другая “компактная” репрезентация паритета, совместимая с depth $\\Theta(\\log m/\\log\\log m)$ и $\\mathrm{poly}(m)$‑размером, для которой XOR‑step выводим, либо (b) барьер/негативный результат, что XOR‑step не может быть poly‑size в этом depth‑режиме.
+  so $d\\,t=\\log^{\\Theta(1)}m$ and therefore $|\\Phi^1(\\emptyset,U)|=2^{\\log^{\\Theta(1)}m}$ (quasipoly bound).
+  Finally, Lemma 24 (p. 11) gives the derivation of an XOR step of size $\\le c\\cdot|\\Phi^1(\\emptyset,U)|^6$, that is, by this estimate it is also quasi-poly for such $D$.
+- `Status:` checked (parametric discontinuity: GIRScompact does not give $\\mathrm{poly}(m)$ for $D\\asymp\\log m/\\log\\log m$).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` for Q39 we need either (a) another "compact" parity representation compatible with depth $\\Theta(\\log m/\\log\\log m)$ and $\\mathrm{poly}(m)$-size, for which XOR-step is derived, or (b) a barrier/negative result that XOR-step cannot be poly-size in this depth mode.
 
-### 16.186. Исследовательский шаг (proof): Håstad’20 Thm. 6.5 + XOR‑каркас ⇒ “универсальный poly XOR‑step” исключается лишь при $d=o(\\log n/\\log\\log n)$
+### 16.186. Research step (proof): Hastad'20 Thm. 6.5 + XOR-framework  "universal poly XOR-step" is excluded only when $d=o(\\log n/\\log\\log n)$
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q39.S5-lb-xor-step-hastad20):`
-  Пусть $d\\le 59\\,\\frac{\\log n}{\\log\\log n}$ (как в Håstad’20, Thm. 6.5) и рассмотрим Tseitin(Grid$_n$) с нечётной суммой зарядов.
-  Если бы существовала процедура, которая для каждого XOR‑шагa, возникающего в стандартном гауссовом/column‑summing каркасе (суммирование $\\mathbb F_2$‑уравнений на границах регионов),
-  строила depth‑$d$ Frege‑вывод этого шага размера $\\mathrm{poly}(n)$, то существовала бы depth‑$d$ Frege‑рефутация Tseitin(Grid$_n$) размера $\\mathrm{poly}(n)$.
-  Сравнивая с Håstad’20 Thm. 6.5 (любой depth‑$d$ refutation имеет размер $\\ge 2^{\\Omega(n^{1/(58(d+1))})}$) получаем противоречие **лишь в тех режимах $d$, где эта нижняя оценка сверхполиномиальна** (т.е. $n^{1/(58(d+1))}=\\omega(\\log n)$, эквивалентно $d=o(\\log n/\\log\\log n)$).
-  В режиме $d=\\Theta(\\log n/\\log\\log n)$ сама по себе Thm. 6.5 не запрещает polynomial‑size (см. контрпример‑проверку §16.187).
-- `Доказательство:`
-  1) (Нижняя оценка.) По Håstad’20, Thm. 6.5 (`../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`, p. 17 в тексте pdf‑to‑text)
-  при $d\\le 59\\,\\frac{\\log n}{\\log\\log n}$ любая depth‑$d$ Frege‑рефутация Tseitin(Grid$_n$) имеет размер
+- `Lens:` Model stress test.
+- `Statement (Q39.S5-lb-xor-step-hastad20):`
+  Let $d\\le 59\\,\\frac{\\log n}{\\log\\log n}$ (as in Hastad'20, Thm. 6.5) and consider Tseitin(Grid$$) with an odd sum of charges.
+  If there were a procedure that for each XOR step occurring in a standard Gaussian/column-summing framework (summing $\\mathbb F_2$ equations at region boundaries),
+  built a depth-$d$ Frege-output of this step of size $\\mathrm{poly}(n)$, then there would be a depth-$d$ Frege-output Tseitin(Grid$_n$) of size $\\mathrm{poly}(n)$.
+  Comparing with Hastad'20 Thm. 6.5 (any depth$d$ refutation has size $\\ge 2^{\\Omega(n^{1/(58(d+1))})}$) we obtain a contradiction **only in those $d$ regimes where this lower estimate is superpolynomial** (i.e. $n^{1/(58(d+1))}=\\omega(\\log n)$, equivalent $d=o(\\log n/\\log\\log n)$).
+  In mode $d=\\Theta(\\log n/\\log\\log n)$ itself is Thm. 6.5 does not prohibit polynomial-size (see counterexample-check Section 16.187).
+- `Proof:`
+  1) (Lower estimate.) According to Hastad'20, Thm. 6.5 (`../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`, p. 17 in text pdftotext)
+  for $d\\le 59\\,\\frac{\\log n}{\\log\\log n}$ any depth-$d$ Frege-refutation Tseitin(Grid$_n$) has the size
   $$\\ge 2^{\\Omega(n^{1/(58(d+1))})}.$$
-  2) (Каркас по XOR‑суммированию.) В гауссовом/column‑summing рассуждении противоречие $0=1$ получается как $\\mathbb F_2$‑линейная комбинация вершинных уравнений
-  (сумма всех вершинных уравнений даёт $0=\\bigoplus_v \\chi(v)=1$).
-  Любой такой вывод можно разложить на $T=\\mathrm{poly}(n)$ локальных XOR‑шагов вида
+  2) (Framework for XOR-summation.) In Gaussian/column-summing reasoning, the contradiction $0=1$ is obtained as $\\mathbb F_2$-linear combination of vertex equations
+  (the sum of all vertex equations gives $0=\\bigoplus_v \\chi(v)=1$).
+  Any such output can be decomposed into $T=\\mathrm{poly}(n)$ local XOR steps of the form
   $$E(S_1,b_1),\\ E(S_2,b_2)\\ \\vdash\\ E(S_1\\triangle S_2,\\ b_1\\oplus b_2)$$
-  (см. редукцию «XOR‑шаг ↔ 3‑вершинный Tseitin» в §16.126).
-  3) (Склейка.) Если каждый из этих $T$ шагов имеет depth‑$d$ Frege‑вывод размера $\\mathrm{poly}(n)$, то их конкатенация даёт depth‑$d$ refutation размера $T\\cdot\\mathrm{poly}(n)=\\mathrm{poly}(n)$.
-  4) (Когда возникает противоречие.) Конкатенация даёт refutation размера $\\mathrm{poly}(n)$, что противоречит пункту (1) **только если**
-  $$2^{\\Omega(n^{1/(58(d+1))})}\\ \\text{сверхполиномиальна по }n.$$
-  В этом случае в XOR‑каркасе действительно есть “плохой шаг” размера
+  (see the reduction "XOR step  3-vertex Tseitin" in Section 16.126).
+  3) (Glueing.) If each of these $T$ steps has a depth$d$ Fregeoutput of size $\\mathrm{poly}(n)$, then their concatenation gives a depth$d$ refutation of size $T\\cdot\\mathrm{poly}(n)=\\mathrm{poly}(n)$.
+  4) (When a contradiction arises.) Concatenation gives a refutation of size $\\mathrm{poly}(n)$, which contradicts point (1) **only if**
+  $$2^{\\Omega(n^{1/(58(d+1))})}\\ \\text{superpolynomial in }n.$$
+  In this case, there is indeed a "bad step" in the size of the XOR framework
   $$2^{\\Omega(n^{1/(58(d+1))})}/\\mathrm{poly}(n).$$
-- `Toy‑тест:` если $d=o(\\log n/\\log\\log n)$, то $n^{1/(58(d+1))}=\\omega(\\log n)$ и lower bound в (1) сверхполиномиален; значит “универсальный poly XOR‑step” в таком depth‑режиме невозможен.
-- `Статус:` доказано (корректная формулировка: аргумент даёт барьер лишь в режиме $d=o(\\log n/\\log\\log n)$).
-- `Барьер‑чек:` r — применимо (LB Håstad’20 через switching‑лемму релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q39 уточнить класс “XOR‑шагов каркаса”: найти, можно ли держать special‑форму представления (общий partition/blocks) так, чтобы *все* шаги попадали в лёгкий режим §16.130 без base‑change, или доказать, что это невозможно.
+- `Toy test:` if $d=o(\\log n/\\log\\log n)$, then $n^{1/(58(d+1))}=\\omega(\\log n)$ and the lower bound in (1) is superpolynomial; means "universal poly XORstep" is impossible in this depthmode.
+- `Status:` proven (correct formulation: the argument gives a barrier only in the mode $d=o(\\log n/\\log\\log n)$).
+- `Barrier check:` r -- applicable (LB Hastad'20 is relativized through the switching lemma), NP -- not applicable, alg -- not applicable.
+- `Next step:` for Q39, clarify the class of "XOR framework steps": find whether it is possible to keep a special representation form (general partition/blocks) so that *all* steps fall into the easy mode of Section 16.130 without a base change, or prove that this is impossible.
 
-### 16.187. Исследовательский шаг (counterexample): Thm. 6.5 не запрещает polynomial‑size при $d=\\Theta(\\log n/\\log\\log n)$
+### 16.187. Exploratory step (counterexample): Thm. 6.5 does not prohibit polynomialsize for $d=\\Theta(\\log n/\\log\\log n)$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q39.S6-block-carcas-or-impossibility):`
-  Утверждение вида «Håstad’20 Thm. 6.5 запрещает polynomial‑size refutation при $d=\\Theta(\\log n/\\log\\log n)$» неверно:
-  при $d=(\\kappa+o(1))\\frac{\\log n}{\\log\\log n}$ нижняя оценка Thm. 6.5 даёт лишь
+- `Lens:` Trade-off.
+- `Statement (Q39.S6-block-carcas-or-impossibility):`
+  Statement of the form "Hastad'20 Thm. 6.5 prohibits polynomialsize refutation for $d=\\Theta(\\log n/\\log\\log n)$" is incorrect:
+  for $d=(\\kappa+o(1))\\frac{\\log n}{\\log\\log n}$ is the lower bound for Thm. 6.5 gives only
   $$\\mathrm{size}\\ \\ge\\ 2^{\\Omega(\\log^{1/(58\\kappa)}n)}=n^{o(1)},$$
-  что совместимо с polynomial‑size.
-  Поэтому из Thm. 6.5 нельзя вывести, что “универсальный poly XOR‑step” невозможен на *критической* глубине; нужен структурный аргумент про base‑change/blocks.
-- `Toy‑вычисление:`
-  Подставим $d=(\\kappa+o(1))\\frac{\\log n}{\\log\\log n}$ в экспоненту Thm. 6.5:
+  which is compatible with polynomialsize.
+  Therefore from Thm. 6.5 cannot be deduced that "universal poly XORstep" is impossible at the *critical* depth; we need a structural argument about basechange/blocks.
+- `Toy computing:`
+  Let's substitute $d=(\\kappa+o(1))\\frac{\\log n}{\\log\\log n}$ into the exponent Thm. 6.5:
   $$n^{1/(58(d+1))}=\\exp\\Bigl(\\frac{\\log n}{58(d+1)}\\Bigr)=\\exp\\Bigl(\\Theta\\bigl(\\tfrac{\\log\\log n}{58\\kappa}\\bigr)\\Bigr)=\\log^{\\Theta(1)}n.$$
-  Отсюда $2^{\\Omega(n^{1/(58(d+1))})}=2^{\\Omega(\\log^{\\Theta(1)}n)}=n^{o(1)}\\le n$ (например, при $\\kappa\\ge 1/58$).
-  Следовательно, наличие refutation размера $n^{10}$ при такой глубине **не** противоречило бы Thm. 6.5.
-- `Статус:` контрпример‑проверка (уточняет, где именно “LB ⇒ тяжёлый XOR‑шаг” работает).
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q39: либо найти реальный “hard” XOR‑шаг (где неизбежен base‑change между несовместимыми блок‑разбиениями), либо построить последовательность блок‑разбиений, в которой все шаги остаются в лёгком режиме §16.130.
+  Hence $2^{\\Omega(n^{1/(58(d+1))})}=2^{\\Omega(\\log^{\\Theta(1)}n)}=n^{o(1)}\\le n$ (for example, for $\\kappa\\ge 1/58$).
+  Therefore, the presence of a refutation of size $n^{10}$ at such a depth would **not** contradict Thm. 6.5.
+- `Status:` counterexample check (clarifies where exactly "LB  heavy XOR step" works).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` for Q39: either find a real "hard" XOR step (where a base change between incompatible block splits is inevitable), or construct a sequence of block splits in which all steps remain in the easy mode Section 16.130.
 
-### 16.188. Исследовательский шаг (exact citation): у HR’22 single switching‑леммы показатель polylog фиксирован (=4), а в multi‑слое новая “непоглощаемая” цена — только $M^{s/\\ell}$
+### 16.188. Research step (exact citation): in HR'22 single switching lemma the polylog exponent is fixed (=4), and in the multi-layer the new "non-absorbable" price is only $M^{s/\\ell}$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S21-cite-log4-and-Mfactor):`
-  В HR’22 единственный *явно зафиксированный* polylog‑показатель в switching‑каркасе равен 4 (Lemma 4.2: предпосылка $n/n'\\ge A\\,t\\,\\log^4 n$ и хвост $(A t\\log^4 n'/(n/n'))^{s/64}$).
-  Для multi‑switching (Lemma 4.4) в Proof/§7.3 авторы явно утверждают, что из “дополнительной информации” по сравнению со стандартным switching‑случаем **только** индекс $j\\in[M]$ “не поглощается” абсолютными константами и именно он порождает множитель $M^{s/\\ell}$.
-  Следовательно, чтобы сделать показатель $c_1$ в Lemma 4.4 явным, достаточно трекать только места, где в §7.3 “absorbed by $c_1,c_2$” (например, идентификация доп. chosen centers на расстоянии 1), а не заново пересобирать весь single‑switching (где показатель уже равен 4).
-- `Точная ссылка (HR’22, text cache):`
+- `Lens:` Equivalence.
+- `Statement (Q43.S21-cite-log4-and-Mfactor):`
+  In HR'22, the only *explicitly fixed* polylog exponent in the switching framework is 4 (Lemma 4.2: premise $n/n'\\ge A\\,t\\,\\log^4 n$ and tail $(A t\\log^4 n'/(n/n'))^{s/64}$).
+  For multiswitching (Lemma 4.4) in Proof/Section 7.3, the authors explicitly state that from the "additional information" compared to the standard switching case, **only** the index $j\\in[M]$ is "not absorbed" by absolute constants and it is this that generates the multiplier $M^{s/\\ell}$.
+  Therefore, to make the exponent $c_1$ explicit in Lemma 4.4, it is enough to track only the places where in Section 7.3 "absorbed by $c_1,c_2$" (for example, identifying additional chosen centers at a distance of 1), and not reassemble the entire singleswitching (where the exponent is already equal to 4).
+- `Exact link (HR'22, text cache):`
   1) Lemma 4.2 (Switching Lemma): `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:950–961`.
-  2) Proof of Lemma 4.4, §7.3 (что именно даёт $M^{s/\\ell}$ и что “absorbed”): `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2777` и `…:2787–2790`.
-- `Toy‑тест:` проверка по text cache: в (1) действительно стоит $\\log^4$, а в (2) дословно выделен единственный “не‑absorbed” вклад — индекс $j$, порождающий $M^{s/\\ell}$.
-- `Статус:` exact citation (локализация источников явных/неявных констант в HR’22).
-- `Барьер‑чек:` r — применимо (switching/encoding‑аргументы релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` для Q43 проверить, что “identity of additional chosen centers” из §7.3 реально укладывается в прежний $b\\log\\Delta$‑терм (как в Lemma 6.9) и не требует увеличивать показатель у $\\log n$ сверх 4; иначе выписать явный upper bound на $c_1$ (пусть и грубый).
+  2) Proof of Lemma 4.4, Section 7.3 (what exactly does $M^{s/\\ell}$ give and what is "absorbed"): `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2777` and `…:2787–2790`.
+- `Toy test:` checking by text cache: in (1) it really costs $\\log^4$, and in (2) the only "non-absorbed" contribution is highlighted verbatim - the index $j$, which generates $M^{s/\\ell}$.
+- `Status:` exact citation (localization of sources of explicit/implicit constants in HR'22).
+- `Barrier check:` r - applicable (switching/encoding arguments are relativized), NP - not applicable, alg - not applicable.
+- `Next step:` for Q43, check that "identity of additional chosen centers" from Section 7.3 actually fits into the previous $b\\log\\Delta$ term (as in Lemma 6.9) and does not require increasing the exponent of $\\log n$ beyond 4; otherwise, write an explicit upper bound on $c_1$ (albeit a rough one).
 
-### 16.189. Исследовательский шаг (toy computation): доп. идентификация chosen centers в multi‑switching даёт множитель $(n/n')^{O(s)}$ и влияет только на $c_2$ (а не на $\\log^4$)
+### 16.189. Research step (toy computation): additional. identification of chosen centers in multiswitching gives a multiplier $(n/n')^{O(s)}$ and affects only $c_2$ (and not $\\log^4$)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S22-check-c1-vs-log4):`
-  В HR’22 Proof of Lemma 4.4 (Multi-switching) указано, что для восстановления “additional chosen centers” на расстоянии $\\le1$ от новых exposed centers читается $\\le\\log\\Delta$ бит на центр и таких центров “at most linear in $s$”.
-  Поэтому весь этот вклад даёт лишь дополнительный множитель
+- `Lens:` Trade-off.
+- `Statement (Q43.S22-check-c1-vs-log4):`
+  HR'22 Proof of Lemma 4.4 (Multi-switching) states that to restore "additional chosen centers" at a distance of $\\le1$ from new exposed centers, read $\\le\\log\\Delta$ bits per center and such centers "at most linear in $s$".
+  Therefore, all this contribution provides only an additional multiplier
   $$2^{O(s\\log\\Delta)}=\\Delta^{O(s)}=(n/n')^{O(s)}$$
-  в энкодинге (при $\\Delta=\\Theta(n/n')$).
-  Такой множитель естественно “прячется” в константу $c_2$ в хвосте Lemma 4.4 вида
+  in encoding (with $\\Delta=\\Theta(n/n')$).
+  Such a factor is naturally "hidden" in the constant $c_2$ in the tail of Lemma 4.4 of the form
   $$(At\\,\\log^{c_1}n\\,/(n/n'))^{s/c_2},$$
-  т.е. меняет только коэффициент при $\\log(n/n')$ в экспоненте, но **не порождает** нового polylog‑показателя сверх $\\log^4$ из single‑switching (Lemma 4.2).
-- `Точная ссылка (HR’22, text cache):` `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2777`.
-- `Toy‑тест:` $\\log\\Delta$ бит на центр и $O(s)$ центров ⇒ $O(s\\log\\Delta)$ бит ⇒ $2^{O(s\\log\\Delta)}=\\Delta^{O(s)}$.
-- `Статус:` toy computation (локализует, что именно может “раздуть” только $c_2$, но не показатель у $\\log n$).
-- `Барьер‑чек:` r — применимо (вся энкодинг‑оценка релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если нужен *численный* $c_2$, оценить константу в “linear in $s$” для числа таких centers из конструкции common partial decision tree (HR’22 §7.2) и подставить в энкодинг.
+  those. only changes the coefficient of $\\log(n/n')$ in the exponential, but **does not generate** a new polylog exponent beyond $\\log^4$ from single-switching (Lemma 4.2).
+- `Exact link (HR'22, text cache):` `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2777`.
+- `Toy test:` $\\log\\Delta$ bits per center and $O(s)$ centers  $O(s\\log\\Delta)$ bits  $2^{O(s\\log\\Delta)}=\\Delta^{O(s)}$.
+- `Status:` toy computation (locals what exactly can "inflate" only $c_2$, but not the exponent of $\\log n$).
+- `Barrier check:` r -- applicable (the entire encoding evaluation is relativized), NP -- not applicable, alg -- not applicable.
+- `Next step:` if you need a *numerical* $c_2$, evaluate the constant in "linear in $s$" for the number of such centers from the common partial decision tree construction (HR'22 Section 7.2) and substitute it into the encoding.
 
-### 16.190. Исследовательский шаг (toy computation): явная константа в “linear in $s$” для additional chosen centers в HR’22 Lemma 4.4 (≤ $2s$)
+### 16.190. Exploratory step (toy computation): explicit constant in "linear in $s$" for additional chosen centers in HR'22 Lemma 4.4 (<= $2s$)
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S23-bound-linear-centers):`
-  В HR’22 (Lemma 4.4 / §7.2–§7.3) число chosen centers $v$, для которых в §7.3 нужно “recover the chosen centers $v$ at distance at most 1 from the newly exposed chosen centers”, можно взять не просто “$O(s)$”, а **явно** $\\le 2s$ для ветви глубины $s$ в common partial decision tree.
-  Следовательно, соответствующая цена идентификации ограничена сверху $\\le 2s\\log\\Delta$ бит.
-- `Доказательство (заряд по запросам):`
-  Возьмём фиксированную ветвь $\\tau$ common partial decision tree $T$ глубины $s$.
-  По построению (HR’22 §7.2) на каждом раунде для long branch $\\lambda^j$ вводится множество $S_{\\lambda^j}$ и $T$ расширяется запросами “all variables incident to $S_{\\lambda^j}$”.
-  Поэтому для каждого chosen center $v\\in\\bigcup_j S_{\\lambda^j}$ существует хотя бы один запрос переменной на ветви $\\tau$, инцидентной $v$.
-  Для каждого такого $v$ выберем **первый** (по порядку на $\\tau$) запрос переменной, инцидентной $v$.
-  Но каждая переменная $y_P$ соответствует chosen path $P$, соединяющему **две** chosen centers (HR’22 §3), т.е. один запрос может быть инцидентен не более чем двум chosen centers.
-  Значит, отображение $v\\mapsto$ “первый инцидентный запрос” является $\\le2$‑к‑$1$, и
+- `Lens:` Invariant.
+- `Statement (Q43.S23-bound-linear-centers):`
+  In HR'22 (Lemma 4.4 / Section 7.2-Section 7.3) the number of chosen centers $v$, for which in Section 7.3 you need to "recover the chosen centers $v$ at distance at most 1 from the newly exposed chosen centers", you can take not just "$O(s)$", but **explicitly** $\\le 2s$ for a branch of depth $s$ in the common partial decision tree.
+  Consequently, the corresponding identification cost is upper bounded by $\\le 2s\\log\\Delta$ bits.
+- `Proof (charge upon requests):`
+  Let us take a fixed branch $\\tau$ common partial decision tree $T$ of depth $s$.
+  By construction (HR'22 Section 7.2), at each round for long branch $\\lambda^j$ the set $S_{\\lambda^j}$ is introduced and $T$ is expanded with the queries "all variables incident to $S_{\\lambda^j}$".
+  Therefore, for each chosen center $v\\in\\bigcup_j S_{\\lambda^j}$ there is at least one request for a variable on the branch $\\tau$ incident to $v$.
+  For each such $v$, we select the **first** (in order by $\\tau$) request for a variable incident to $v$.
+  But each variable $y_P$ corresponds to a chosen path $P$ connecting **two** chosen centers (HR'22 Section 3), i.e. one request can be incident to no more than two chosen centers.
+  This means that the mapping $v\\mapsto$ "first incident query" is $\\le2$-to-$1$, and
   $$\\Bigl|\\bigcup_j S_{\\lambda^j}\\Bigr|\\le 2\\cdot |\\text{queries on }\\tau|=2s.$$
-  Отсюда цена идентификации $\\le (2s)\\log\\Delta$ бит.
-- `Точная ссылка (HR’22, text cache):`
-  1) Определение $S_{\\lambda^j}$ и “querying all variables incident to $S_{\\lambda^j}$”: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2724–2729`.
-  2) Место, где говорится “linear in $s$”: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2777`.
-  3) “chosen path connects two chosen centers” и ввод $y_P$: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:733–735`.
-- `Toy‑тест:` при $s$ запросах можно достигать $2s$ distinct chosen centers (каждый запрос касается двух “новых” центров), так что константа 2 оптимальна для такого счёта.
-- `Статус:` toy computation (явная константа для hidden “linear in $s$”).
+  Hence the identification price is $\\le (2s)\\log\\Delta$ bits.
+- `Exact link (HR'22, text cache):`
+  1) Definition of $S_{\\lambda^j}$ and "querying all variables incident to $S_{\\lambda^j}$": `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2724–2729`.
+  2) The place where it says "linear in $s$": `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2777`.
+  3) "chosen path connects two chosen centers" and input $y_P$: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:733–735`.
+- `Toy test:` with $s$ queries one can reach $2s$ distinct chosen centers (each query concerns two "new" centers), so the constant 2 is optimal for such a count.
+- `Status:` toy computation (explicit constant for hidden "linear in $s$").
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (комбинаторный энкодинг‑аргумент релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` подставить $2s\\log\\Delta$ в оценку “absorbed by $c_2$” в proof of Lemma 4.4 (§7.3) и выписать грубый численный $c_2$ (с учётом базового $s/64$ из single‑switching).
+- `Barrier check:` r -- applicable (combinatorial encoding argument is relativized), NP -- not applicable, alg -- not applicable.
+- `Next step:` substitute $2s\\log\\Delta$ into the "absorbed by $c_2$" estimate in the proof of Lemma 4.4 (Section 7.3) and write down the rough numerical $c_2$ (taking into account the base $s/64$ from singleswitching).
 
-### 16.191. Исследовательский шаг (toy computation): грубый явный $c_2$ для HR’22 Lemma 4.4 из bound $|\\bigcup_j S_{\\lambda^j}|\\le 2s$
+### 16.191. Exploratory step (toy computation): rough explicit $c_2$ for HR'22 Lemma 4.4 from bound $|\\bigcup_j S_{\\lambda^j}|\\le 2s$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S24-derive-numeric-c2):`
-  Если в proof‑схеме HR’22 Lemma 4.4 (Multi-switching) использовать тот же “заряд по стадиям”, что и в single‑switching (Lemma 4.2 через Lemma 6.8–6.9), то можно взять **$c_2=64$** (т.е. тот же знаменатель, что в хвосте $(\\cdot)^{s/64}$), а вклад “additional chosen centers” из §7.3 лишь раздувает polylog‑часть: грубо достаточно $c_1\\le 132$.
-- `Вывод (как в Lemma 6.8–6.9, с подстановкой 16.190):`
-  1) В single‑switching имеем $a\\ge s/64$ (HR’22 Lemma 6.8) и оценку числа bad‑ограничений через $a\\log t+b\\log\\Delta+O(s)$ бит (HR’22 Lemma 6.9), где $b\\le 3a$ (Lemma 6.8), откуда получается $\\log^{4a}$ и хвост $(At\\,\\log^4(\\cdot)/(n/n'))^{s/64}$ (Lemma 4.2).
-  2) В multi‑switching дополнительно нужно идентифицировать chosen centers из $\\bigcup_j S_{\\lambda^j}$; по §16.190 их не больше $2s$, значит вклад в энкодинг не превосходит $2s\\log\\Delta$ бит.
-  3) Заряд Lemma 6.8 даёт $s\\le 64a$, поэтому $2s\\le 128a$. Следовательно, можно просто увеличить “$b$‑часть” на $128a$ и получить грубую оценку $a+b\\le a+(3a+128a)=132a$, т.е. заменить $\\log^4$ на $\\log^{132}$, сохранив знаменатель 64 в экспоненте.
-- `Toy‑тест:` арифметика: $a\\ge s/64\\Rightarrow 2s\\le 128a$; при $b\\le 3a$ получаем $a+b+128a\\le 132a$.
-- `Статус:` toy computation (явный, хотя и грубый, upper на константы).
+- `Lens:` Trade-off.
+- `Statement (Q43.S24-derive-numeric-c2):`
+  If in the proof-scheme HR'22 Lemma 4.4 (Multi-switching) we use the same "charge by stages" as in single-switching (Lemma 4.2 through Lemma 6.8-6.9), then we can take **$c_2=64$** (i.e. the same denominator as in the tail $(\\cdot)^{s/64}$), and the contribution of "additional chosen centers" from Section 7.3 only inflates the polylog part: roughly $c_1\\le 132$ is sufficient.
+- `Output (as in Lemma 6.8-6.9, with substitution 16.190):`
+  1) In single-switching we have $a\\ge s/64$ (HR'22 Lemma 6.8) and an estimate of the number of bad-constraints in terms of $a\\log t+b\\log\\Delta+O(s)$ bits (HR'22 Lemma 6.9), where $b\\le 3a$ (Lemma 6.8), which gives $\\log^{4a}$ and the tail $(At\\,\\log^4(\\cdot)/(n/n'))^{s/64}$ (Lemma 4.2).
+  2) In multiswitching, you additionally need to identify chosen centers from $\\bigcup_j S_{\\lambda^j}$; according to Section 16.190 there are no more than $2s$, which means that the contribution to encoding does not exceed $2s\\log\\Delta$ bits.
+  3) Charge Lemma 6.8 gives $s\\le 64a$, so $2s\\le 128a$. Therefore, we can simply increase the "$b$-part" by $128a$ and get a rough estimate of $a+b\\le a+(3a+128a)=132a$, i.e. replace $\\log^4$ with $\\log^{132}$, keeping the denominator 64 in the exponent.
+- `Toy test:` arithmetic: $a\\ge s/64\\Rightarrow 2s\\le 128a$; for $b\\le 3a$ we get $a+b+128a\\le 132a$.
+- `Status:` toy computation (explicit, albeit crude, upper on constants).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (switching/encoding релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` уточнить, действительно ли “additional chosen centers” из §7.3 можно зарядить в тот же $b\\log\\Delta$‑терм с коэффициентом $O(1)$ (тогда $c_1$ может остаться $\\approx 4$), и отдельно проверить вклад “differences in values” (тоже заявлен как absorbed).
+- `Barrier check:` r - applicable (switching/encoding is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` clarify whether the "additional chosen centers" from Section 7.3 can really be charged into the same $b\\log\\Delta$-term with coefficient $O(1)$ (then $c_1$ can remain $\\approx 4$), and separately check the contribution of "differences in values" (also declared as absorbed).
 
-### 16.192. Исследовательский шаг (exact citation): HR’22 §7.3 — “additional chosen centers” и “differences in values” поглощаются; только индекс $j$ даёт фактор $M^{s/\\ell}$
+### 16.192. Research step (exact citation): HR'22 Section 7.3 - "additional chosen centers" and "differences in values" are absorbed; only the index $j$ gives the factor $M^{s/\\ell}$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S25-tighten-c1-charge):`
-  В доказательстве Multi-switching Lemma 4.4 (HR’22) в §7.3 явно перечислены дополнительные данные, читаемые на каждом раунде инверсии:
-  (i) индекс $j\\in[M]$ (log $M$ бит),
-  (ii) идентичность дополнительных chosen centers на расстоянии $\\le 1$ от новых exposed centers (log $\\Delta$ бит на центр),
-  (iii) “differences in values” между ответами в деревьях $T^j$ и $T$.
-  HR’22 прямо утверждают, что **только** (i) не поглощается константами $A,c_1,c_2$ и именно он порождает множитель $M^{s/\\ell}$ в оценке Lemma 4.4; пункты (ii)–(iii) поглощаются константами.
-- `Точная ссылка (HR’22, text cache):`
+- `Lens:` Trade-off.
+- `Statement (Q43.S25-tighten-c1-charge):`
+  The proof of Multi-switching Lemma 4.4 (HR'22) in Section 7.3 explicitly lists the additional data read at each round of inversion:
+  (i) index $j\\in[M]$ (log $M$ bits),
+  (ii) the identity of additional chosen centers at a distance of $\\le 1$ from the new exposed centers (log $\\Delta$ bits per center),
+  (iii) "differences in values" between responses in trees $T^j$ and $T$.
+  HR'22 directly state that **only** (i) is not absorbed by the constants $A,c_1,c_2$ and it is this that generates the factor $M^{s/\\ell}$ in the estimate of Lemma 4.4; points (ii)-(iii) are absorbed by constants.
+- `Exact link (HR'22, text cache):`
   1) (ii) + “absorbed by $c_1,c_2$”: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2777`.
   2) (iii) “differences in values”: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2778–2783`.
-  3) “only index $j$ cannot be absorbed” ⇒ фактор $M^{s/\\ell}$: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2787–2790`.
-- `Toy‑тест:` проверено по text cache, что формулировки (ii)–(iii) и вывод “only the index $j$” действительно записаны в §7.3.
-- `Статус:` точная ссылка (закрывает подпункт “differences in values absorbed”; остаётся распаковать “absorbed” в явные константы для $c_1$).
+  3) "only index $j$ cannot be absorbed"  factor $M^{s/\\ell}$: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2787–2790`.
+- `Toy test:` verified by text cache that statements (ii)-(iii) and the conclusion "only the index $j$" are indeed written in Section 7.3.
+- `Status:` exact link (closes the subparagraph "differences in values absorbed"; all that remains is to unpack "absorbed" into explicit constants for $c_1$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (encoding‑аргумент релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` выписать явный верхний bound на число “differences in values” бит на раунд (в терминах $s$ или $a,b$ из Lemma 6.9) и тем самым отделить вклад, который меняет только $A$ (а не $c_1$).
+- `Barrier check:` r - applicable (encoding argument is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` write out an explicit upper bound on the number of "differences in values" bits per round (in terms of $s$ or $a,b$ from Lemma 6.9) and thereby separate out the contribution that changes only $A$ (and not $c_1$).
 
-### 16.193. Исследовательский шаг (toy computation): “differences in values” в HR’22 §7.3 стоят ≤ 1 бит на запрос и меняют только константу $A$
+### 16.193. Research step (toy computation): "differences in values" in HR'22 Section 7.3 cost <= 1 bit per request and only change the constant $A$
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S26-bound-diff-values-bits):`
-  В схеме инверсии Multi-switching Lemma 4.4 (HR’22, §7.3) дополнительная информация “differences in values” кодируется ≤ 1 битом на каждую булеву переменную, запрошенную на рассматриваемой ветви common decision tree $T$; следовательно, на ветви глубины $s$ суммарная цена ≤ $s$ бит.
-  Так как в single‑switching имеем $a\\ge s/64$ (HR’22 Lemma 6.8), то $s\\le 64a$ и вклад ≤ $64a$ бит лишь умножает счётчик кодировок на $2^{64a}=(2^{64})^a$, т.е. поглощается увеличением константы $A$ и **не** меняет $c_1,c_2$.
-- `Доказательство (счёт бит):`
-  На каждом раунде HR’22 читают “difference in values of variables queried in the decision tree $T^j$ and the same variables in the common decision tree $T$” (§7.3).
-  Для каждой такой переменной значение в $T^j$ и в $T$ — два бита, значит их разность определяется одним битом (XOR).
-  На фиксированной ветви $\\tau$ common decision tree $T$ глубины $s$ запрошено ровно $s$ переменных, поэтому даже в худшем случае достаточно ≤ $s$ бит, чтобы задать разности для всех этих запросов (по раундам это просто разбиение запросов ветви $\\tau$).
-  Используя $s\\le 64a$ (Lemma 6.8), получаем ≤ $64a$ бит сверх энкодинга Lemma 6.9; это даёт множитель $2^{64a}=(2^{64})^a$, который поглощается заменой $A\\leftarrow 2^{64}A$ в финальной оценке вероятности.
-- `Toy‑тест:` на ветви из $s$ булевых запросов вектор разностей может быть произвольным в $\\{0,1\\}^s$, так что линейный по $s$ upper (и “1 бит на запрос”) асимптотически точен.
-- `Статус:` toy computation (явный bound на “differences in values”, отделяющий вклад в $A$).
+- `Lens:` Invariant.
+- `Statement (Q43.S26-bound-diff-values-bits):`
+  In the inversion scheme Multi-switching Lemma 4.4 (HR'22, Section 7.3), the additional information "differences in values" is encoded <= 1 bit for each Boolean variable requested on the considered branch of the common decision tree $T$; therefore, on a branch of depth $s$ the total cost <= $s$ bits.
+  Since in singleswitching we have $a\\ge s/64$ (HR'22 Lemma 6.8), then $s\\le 64a$ and the contribution <= $64a$ bits only multiplies the encoding counter by $2^{64a}=(2^{64})^a$, i.e. is absorbed by an increase in the constant $A$ and **does not** change $c_1,c_2$.
+- `Proof (bit counting):`
+  At each round of HR'22 they read "difference in values of variables queried in the decision tree $T^j$ and the same variables in the common decision tree $T$" (Section 7.3).
+  For each such variable, the value in $T^j$ and in $T$ are two bits, which means their difference is determined by one bit (XOR).
+  On a fixed branch $\\tau$ of the common decision tree $T$ of depth $s$, exactly $s$ variables are requested, so even in the worst case, <= $s$ bits are enough to set the differences for all these requests (by round, this is simply a split of the requests of the $\\tau$ branch).
+  Using $s\\le 64a$ (Lemma 6.8), we get <= $64a$ bits over Lemma 6.9 encoding; this gives a factor $2^{64a}=(2^{64})^a$, which is absorbed by the substitution $A\\leftarrow 2^{64}A$ in the final probability estimate.
+- `Toy test:` on the branch of $s$ Boolean queries, the difference vector can be arbitrary in $\\{0,1\\}^s$, so that linear in $s$ upper (and "1 bit per query") is asymptotically exact.
+- `Status:` toy computation (explicit bound on "differences in values", separating the contribution to $A$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (счёт кодировок релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` так же “раздуть” в явные константы пункт (ii) про additional chosen centers, но попытаться зарядить его в тот же $b\\log\\Delta$‑терм без роста показателя логарифма (чтобы удержать $c_1\\approx 4$).
+- `Barrier check:` r - applicable (the encoding count is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` also "inflate" point (ii) about additional chosen centers into explicit constants, but try to charge it into the same $b\\log\\Delta$-term without increasing the logarithm exponent (to keep $c_1\\approx 4$).
 
-### 16.194. Исследовательский шаг (toy computation): “additional chosen centers” в HR’22 §7.3 дают ≤ $5a$ центров (а не ≤ $2s$), улучшая грубый bound на $c_1$
+### 16.194. Exploratory step (toy computation): "additional chosen centers" in HR'22 Section 7.3 give <= $5a$ centers (not <= $2s$), improving the rough bound by $c_1$
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S27-charge-centers-into-b):`
-  В HR’22 §7.3 (Multi-switching Lemma 4.4) дополнительная информация (ii) “identity of additional chosen centers” может быть ограничена не через глубину ветви $s$ common tree, а через параметр $a$ из single‑switching энкодинга (HR’22 Lemma 6.8): на всей ветви глубины $s$ достаточно восстановить не более чем $5a$ chosen centers из объединения $S_{\\lambda^j}$ по раундам $j$.
-  Следовательно, цена пункта (ii) составляет ≤ $5a\\log\\Delta$ бит, и грубый переход “≤$2s$ центров ⇒ $c_1\\le 132$” (§16.191) можно заменить на “≤$5a$ центров ⇒ $b$ эффективно меняется на $b+5a\\le 8a$”, т.е. $c_1$ можно взять порядка 9 (в той же схеме оценки).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S27-charge-centers-into-b):`
+  In HR'22 Section 7.3 (Multi-switching Lemma 4.4), additional information (ii) "identity of additional chosen centers" can be limited not through the depth of the $s$ common tree branch, but through the $a$ parameter from singleswitching encoding (HR'22 Lemma 6.8): on the entire depth $s$ branch it is enough to restore no more than $5a$ chosen centers from the union $S_{\\lambda^j}$ by rounds $j$.
+  Therefore, the cost of item (ii) is <= $5a\\log\\Delta$ bits, and the rough transition "<=$2s$ centers  $c_1\\le 132$" (Section 16.191) can be replaced by "<=$5a$ centers  $b$ effectively changes to $b+5a\\le 8a$", i.e. $c_1$ can be taken of order 9 (in the same estimation scheme).
 
-- `Доказательство (счёт центров):`
-  В HR’22 §7.2 множество $S_{\\lambda^j}$ определяется как chosen centers на расстоянии ≤1 от *новых* exposed chosen centers на длинной ветви $\\lambda^j$ (см. `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2720–2726`).
-  Пусть
+- `Proof (counting centers):`
+  In HR'22 Section 7.2, the set $S_{\\lambda^j}$ is defined as chosen centers at a distance <=1 from *new* exposed chosen centers on the long branch $\\lambda^j$ (see `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2720–2726`).
+  Let
   $$U_j:=(S(\\lambda^j,\\sigma)\\setminus S(\\tau,\\sigma))\\cap C_\\sigma$$
-  — эти “newly exposed chosen centers”. Тогда по определению $S_{\\lambda^j}\\subseteq N_{\\le 1}(U_j)$, где соседство берётся по “adjacent sub-squares” (HR’22: “neighbors … in adjacent sub-squares”; `…:1573–1574`), и потому на решётке под‑квадратов
+  - these "newly exposed chosen centers". Then, by definition, $S_{\\lambda^j}\\subseteq N_{\\le 1}(U_j)$, where the neighborhood is taken by "adjacent sub-squares" (HR'22: "neighbors ... in adjacent sub-squares"; `…:1573–1574`), and therefore on the lattice of sub-squares
   $$|S_{\\lambda^j}|\\le |U_j|+4|U_j|=5|U_j|.$$
-  Далее, каждый новый exposed chosen center из $U_j$ появляется в стадии $j$ как associated center некоторой переменной на соответствующей 1‑ветви (это ровно то, что считает $a_j$ в HR’22 Lemma 6.8; `…:2078–2086`), откуда $|U_j|\\le a_j$.
-  Суммируя по раундам,
+  Further, each new exposed chosen center from $U_j$ appears in stage $j$ as the associated center of some variable on the corresponding 1branch (this is exactly what $a_j$ is considered in HR'22 Lemma 6.8; `…:2078–2086`), whence $|U_j|\\le a_j$.
+  Summing up by rounds,
   $$\\Bigl|\\bigcup_j S_{\\lambda^j}\\Bigr|\\le \\sum_j |S_{\\lambda^j}|\\le 5\\sum_j a_j=5a.$$
-  В §7.3 HR’22 указывают, что на восстановление каждого такого chosen center читается ≤$\\log\\Delta$ бит (`…:2774–2777`), значит общий бюджет на (ii) ≤ $5a\\log\\Delta$ бит.
+  In Section 7.3 HR'22 they indicate that <=$\\log\\Delta$ bits are read to restore each such chosen center (`…:2774–2777`), which means the total budget for (ii) <= $5a\\log\\Delta$ bits.
 
-- `Toy‑тест:` worst‑case на решётке: если $U_j$ — множество попарно “разнесённых” новых exposed centers, то их соседства почти не пересекаются и $|S_{\\lambda^j}|\\approx 5|U_j|$, т.е. константа 5 по порядку точна.
-- `Статус:` toy computation (улучшенный счёт “additional chosen centers” через $a$, без фактора 64).
+- `Toy test:` worst-case on the lattice: if $U_j$ is a set of pairwise "spaced apart" new exposed centers, then their neighborhoods almost do not intersect and $|S_{\\lambda^j}|\\approx 5|U_j|$, i.e. the constant 5 is exact in order.
+- `Status:` toy computation (improved calculation of "additional chosen centers" via $a$, without factor 64).
 - `InfoGain:` 2.
-- `Барьер‑чек:` r — применимо (encoding‑аргументы релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` попытаться усилить $|U_j|\\le a_j$ до “$S_{\\lambda^j}$ уже входит в $b$ из Lemma 6.9” (т.е. показать, что (ii) вообще не увеличивает показатель polylog), или найти точную точку, где это невозможно.
+- `Barrier check:` r - applicable (encoding arguments are relativized), NP - not applicable, alg - not applicable.
+- `Next step:` try to strengthen $|U_j|\\le a_j$ to "$S_{\\lambda^j}$ is already in $b$ from Lemma 6.9" (i.e. show that (ii) does not increase the polylog exponent at all), or find the exact point where this is impossible.
 
-### 16.195. Исследовательский шаг (proof): (ii) “identity of additional chosen centers” в HR’22 §7.3 не увеличивает polylog‑показатель — она уже покрывается $b\\log\\Delta$ из Lemma 6.9
+### 16.195. Research step (proof): (ii) "identity of additional chosen centers" in HR'22 Section 7.3 does not increase the polylogscore - it is already covered by $b\\log\\Delta$ from Lemma 6.9
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S28-centers-already-in-b):`
-  В proof of HR’22 Lemma 4.4 (Multi-switching, §7.3) дополнительный пункт (ii) “identity of additional chosen centers” для множеств $S_{\\lambda^j}$ можно зарядить в тот же $b\\log\\Delta$‑терм, что и в single‑switching Lemma 6.9: центры $v\\in S_{\\lambda^j}$ уже восстанавливаются стандартной инверсией как “неэкспонированные соседи” новых exposed chosen centers, а случаи, где нужен $\\log\\Delta$, совпадают с “other disappearing centers”, считаемыми в $b$.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S28-centers-already-in-b):`
+  In the proof of HR'22 Lemma 4.4 (Multi-switching, Section 7.3), the additional clause (ii) "identity of additional chosen centers" for sets $S_{\\lambda^j}$ can be charged into the same $b\\log\\Delta$-term as in single-switching Lemma 6.9: centers $v\\in S_{\\lambda^j}$ are already restored by standard inversion as "unexposed neighbors" of new exposed chosen centers, and cases where $\\log\\Delta$ is needed coincide with "other disappearing centers" calculated in $b$.
 
-- `Доказательство (по тексту HR’22):`
-  В раунде $j$ multi-switching задана длинная ветвь $\\lambda^j$ и
+- `Proof (according to HR'22 text):`
+  In the $j$ multi-switching round, a long branch $\\lambda^j$ is given and
   $$U:=(S(\\lambda^j,\\sigma)\\setminus S(\\tau,\\sigma))\\cap C_\\sigma$$
-  — множество “newly exposed chosen centers” (HR’22: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2724–2729`).
-  По определению $S_{\\lambda^j}$ каждый $v\\in S_{\\lambda^j}$ лежит в под‑квадрате, соседнем (в $n'\\times n'$‑решётке) некоторому $u\\in U$.
-  Так как при построении $T^j$ “maintain the same invariants as in Invariants 6.1” (HR’22: `…:2698–2699`), то для каждого exposed chosen center $u$ на ветви $\\lambda^j$ запрошены **все** инцидентные переменные $y_P$ (Invariant 6.1(5); `…:1858–1861`).
-  В частности, запрошена переменная выбранного пути между $u$ и соседним $v$, и в восстановимом information set присутствует information piece $\\{u,v\\}$.
-  Ровно такие ситуации (edge/non-edge между exposed chosen center $u$ и неэкспонированным chosen center $v$) разбираются в proof of Lemma 6.9: Case 1–3 при восстановлении $I_j$ (`…:2518–2534`).
-  В Case 1 $v$ восстанавливается позже, в Case 3 — бесплатно как alive chosen center, а в Case 2 $v$ идентифицируется за $\\log\\Delta$ бит и при этом **не** является associated center (по Property 2, Definition 6.2), то есть относится к “other disappearing centers”, оплачиваемым $b\\log\\Delta$ (`…:2531–2534`, `…:2547–2548`).
-  Следовательно, (ii) не требует добавлять новый $\\log\\Delta$‑бюджет поверх Lemma 6.9 и не увеличивает polylog‑показатель по сравнению с single‑switching (за исключением отдельного фактора по индексу $j\\in[M]$).
+  -- set of "newly exposed chosen centers" (HR'22: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2724–2729`).
+  By definition, $S_{\\lambda^j}$ each $v\\in S_{\\lambda^j}$ lies in a sub-square adjacent (in $n'\\times n'$-lattice) to some $u\\in U$.
+  Since when constructing $T^j$ "maintain the same invariants as in Invariants 6.1" (HR'22: `…:2698–2699`), then for each exposed chosen center $u$ on branch $\\lambda^j$ **all** incident variables $y_P$ are requested (Invariant 6.1(5); `…:1858–1861`).
+  In particular, the variable of the selected path between $u$ and the neighboring $v$ is requested, and the information piece $\\{u,v\\}$ is present in the restored information set.
+  Exactly such situations (edge/non-edge between chosen exposed center $u$ and unexposed chosen center $v$) are analyzed in the proof of Lemma 6.9: Case 1-3 when recovering $I_j$ (`…:2518–2534`).
+  In Case 1 $v$ is restored later, in Case 3 - free of charge as alive chosen center, and in Case 2 $v$ is identified for $\\log\\Delta$ bits and is **not** an associated center (according to Property 2, Definition 6.2), that is, it refers to "other disappearing centers", paid for $b\\log\\Delta$ (`…:2531–2534`, `…:2547–2548`).
+  Therefore, (ii) does not require adding a new $\\log\\Delta$-budget on top of Lemma 6.9 and does not increase the polylog-score compared to single-switching (except for a separate factor at index $j\\in[M]$).
 
-- `Toy‑тест:` локально на решётке каждый новый exposed chosen center $u$ имеет ≤4 соседних chosen centers; по Invariant 6.1(5) они неизбежно появляются как вторые концы queried variables, а Lemma 6.9 Case 1–3 даёт готовую схему их восстановления без нового polylog.
-- `Статус:` доказано (на уровне схемы инверсии HR’22; пункт (ii) не увеличивает polylog‑показатель).
+- `Toy test:` locally on the lattice, each new exposed chosen center $u$ has <=4 neighboring chosen centers; according to Invariant 6.1(5), they inevitably appear as the second ends of queried variables, and Lemma 6.9 Case 1-3 provides a ready-made scheme for their recovery without a new polylog.
+- `Status:` proven (at the level of the HR'22 inversion scheme; point (ii) does not increase the polylog indicator).
 - `InfoGain:` 2.
-- `Барьер‑чек:` r — применимо (энкодинг‑аргументы релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` обновить §16.191–§16.194: убрать добавку “$+5a$” как обязательную для $c_1$, зафиксировать $c_1\\approx 4$ (и отдельно вынести единственный непоглощаемый вклад $\\log M$), либо указать точное место, где “forgotten answers” ломают прямой перенос Case 1–3.
+- `Barrier check:` r - applicable (encoding arguments are relativized), NP - not applicable, alg - not applicable.
+- `Next step:` update Section 16.191-Section 16.194: remove the "$+5a$" addition as mandatory for $c_1$, fix $c_1\\approx 4$ (and separately remove the only non-absorbable contribution $\\log M$), or specify the exact place where "forgotten answers" break the forward carry of Cases 1-3.
 
-### 16.196. Исследовательский шаг (proof): в HR’22 Lemma 4.4 можно взять $c_1=4$; непоглощаемый вклад §7.3 — только индекс $j$ (даёт фактор $M^{s/\\ell}$)
+### 16.196. Research step (proof): in HR'22 Lemma 4.4 you can take $c_1=4$; non-absorbable contribution Section 7.3 - only index $j$ (gives factor $M^{s/\\ell}$)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S29-propagate-c1-back-to-4):`
-  В вероятностной оценке HR’22 Lemma 4.4 (Multi-switching) показатель $c_1$ при $\\log^{c_1}n$ можно выбрать равным $4$ (как в single-switching Lemma 4.2), т.е. без роста polylog‑показателя по сравнению с single‑switching.
-  Все дополнительные данные, перечисленные в HR’22 §7.3, кроме индекса $j\\in[M]$, поглощаются константами $A,c_2$; единственный непоглощаемый вклад даёт фактор $M^{s/\\ell}$ (эквивалентно чтению $(s/\\ell)\\log M$ бит).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S29-propagate-c1-back-to-4):`
+  In the probabilistic estimate HR'22 Lemma 4.4 (Multi-switching), the indicator $c_1$ for $\\log^{c_1}n$ can be chosen equal to $4$ (as in single-switching Lemma 4.2), i.e. without an increase in the polylog indicator compared to single switching.
+  All additional data listed in HR'22 Section 7.3, except for the index $j\\in[M]$, is absorbed by the constants $A,c_2$; the only unabsorbed contribution comes from the factor $M^{s/\\ell}$ (equivalent to reading $(s/\\ell)\\log M$ bits).
 
-- `Доказательство (сведение к single-switching):`
-  В HR’22 §7.3 на каждом раунде инверсии перечислены дополнительные данные (i)–(iii); при этом в тексте прямо сказано, что **только** (i) “cannot be absorbed by the constants $A,c_1,c_2$” и именно он порождает фактор $M^{s/\\ell}$ (см. `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2790`).
-  Для (iii) “differences in values” достаточно ≤ $s$ бит на ветвь глубины $s$, значит при $a\\ge s/64$ (HR’22 Lemma 6.8) имеем $s\\le 64a$ и этот вклад даёт множитель $2^{O(a)}$, поглощаемый увеличением $A$ (см. §16.193).
-  Для (ii) “identity of additional chosen centers” по §16.195 не требуется добавлять новый $\\log\\Delta$‑бюджет сверх Lemma 6.9: соответствующие центры уже восстанавливаются в Case 1–3 и (в единственном месте, где нужен $\\log\\Delta$) относятся к “other disappearing centers”, оплачиваемым тем же $b\\log\\Delta$.
-  Следовательно, в части, отвечающей за polylog‑показатель $\\log^{c_1}n$, multi-switching использует тот же single‑switching энкодинг, где $c_1=4$ (Lemma 4.2), а все отличия сводятся к фактору $M^{s/\\ell}$ и перенормировке $A$.
+- `Proof (reduction to single-switching):`
+  HR'22 Section 7.3 lists additional data (i)-(iii) at each inversion round; Moreover, the text directly states that **only** (i) "cannot be absorbed by the constants $A,c_1,c_2$" and it is this that generates the factor $M^{s/\\ell}$ (see. `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2774–2790`).
+  For (iii) "differences in values", <= $s$ bits per branch of depth $s$ are sufficient, which means that for $a\\ge s/64$ (HR'22 Lemma 6.8) we have $s\\le 64a$ and this contribution gives the factor $2^{O(a)}$, absorbed by the increase in $A$ (see Section 16.193).
+  For (ii) "identity of additional chosen centers" under Section 16.195, there is no need to add a new $\\log\\Delta$budget beyond Lemma 6.9: the corresponding centers are already restored in Cases 1-3 and (in the only place where $\\log\\Delta$ is needed) refer to "other disappearing centers", paid for by the same $b\\log\\Delta$.
+  Consequently, in the part responsible for the polylog exponent $\\log^{c_1}n$, multi-switching uses the same single-switching encoding, where $c_1=4$ (Lemma 4.2), and all differences are reduced to the factor $M^{s/\\ell}$ and renormalization $A$.
 
-- `Toy‑тест:` если бы (ii) или (iii) требовали увеличивать $b$ сверх $3a$ или добавлять $\\log\\Delta$‑терм “поверх” Lemma 6.9, это проявилось бы как рост показателя у $\\log n$ в предпосылке $n/n'\\ge A t\\log^{c_1}n$; после §16.193 и §16.195 остаётся только (i), дающий множитель $M^{s/\\ell}$ без изменения $c_1$.
-- `Статус:` доказано (получено явное $c_1=4$ и изолирован единственный вклад $\\log M$).
+- `Toy test:` if (ii) or (iii) required increasing $b$ beyond $3a$ or adding a $\\log\\Delta$ term "on top" of Lemma 6.9, this would manifest itself as an increase in the exponent of $\\log n$ under the assumption $n/n'\\ge A t\\log^{c_1}n$; after Section 16.193 and Section 16.195, only (i) remains, giving the factor $M^{s/\\ell}$ without changing $c_1$.
+- `Status:` proven (explicit $c_1=4$ is obtained and the only contribution $\\log M$ is isolated).
 - `InfoGain:` 2.
-- `Барьер‑чек:` r — применимо (switching/encoding релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` в corollary‑оценках для Q43 заменить “$(\\log n)^C$ из Thm. 4.3” на явное $\\log^4 n$, оставив $\\log M$ только в параметре $t$ (и факторе $M^{s/\\ell}$), и перепроверить порог нетривиальности при $d=\\Theta(\\log n/\\log\\log n)$.
+- `Barrier check:` r - applicable (switching/encoding is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` in corollary estimates for Q43, replace "$(\\log n)^C$ from Thm. 4.3" with explicit $\\log^4 n$, leaving $\\log M$ only in the parameter $t$ (and the factor $M^{s/\\ell}$), and recheck the non-triviality threshold at $d=\\Theta(\\log n/\\log\\log n)$.
 
-### 16.197. Исследовательский шаг (proof): явный corollary с $\\log^4 n$ при $c_1=4$ и зависимостью от $M$ только через $t'$ и $M^{s/\\ell}$
+### 16.197. Exploratory step (proof): explicit corollary with $\\log^4 n$ for $c_1=4$ and dependence on $M$ only through $t'$ and $M^{s/\\ell}$
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S30-log4-into-corollary):`
-  Пусть есть flat local‑EF(s)‑рефутация Tseitin($G_n$) на $n\\times n$ grid (odd charges, как в HR’22),
-  и каждая строка — формула глубины $\\le d$ и размера $\\le M$.
-  Тогда число строк $N$ удовлетворяет явной нижней оценке
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S30-log4-into-corollary):`
+  Let there be a flat localEF(s)refutation Tseitin($G_n$) on $n\\times n$ grid (odd charges, as in HR'22),
+  and each line is a formula for depth $\\le d$ and size $\\le M$.
+  Then the number of rows $N$ satisfies the explicit lower bound
   $$N\\ \\ge\\ \\exp\\!\\left(\\Omega\\left(\\frac{n}{\\bigl((\\log n)^4\\,(2s+1)\\,\\log M\\bigr)^{d}}\\right)\\right).$$
-  При этом зависимость от $M$ в доказательстве проходит **только** через $t'=(2s+1)\\log M$ и через фактор $M^{s/\\ell}$ из multi‑switching (индекс $j\\in[M]$); других $\\log M$‑вкладов в polylog‑показатель нет.
-- `Доказательство:`
-  По §16.174 имеем corollary HR’22 Thm. 4.3 с заменой $t=\\log M\\mapsto t'=(2s+1)\\log M$ и polylog‑фактором $(\\log n)^{O(1)}$.
-  По §16.181 этот показатель равен $\\log^{c_1}n$, где $c_1$ — константа из HR’22 Lemma 4.4,
-  а по §16.196 можно взять $c_1=4$ (как в single‑switching).
-  Подставляя $c_1=4$ в corollary §16.174, получаем указанную формулу с $(\\log n)^4$.
+  Moreover, the dependence on $M$ in the proof passes **only** through $t'=(2s+1)\\log M$ and through the factor $M^{s/\\ell}$ from multiswitching (index $j\\in[M]$); there are no other $\\log M$ contributions to the polylog exponent.
+- `Proof:`
+  According to Section 16.174 we have corollary HR'22 Thm. 4.3 with the replacement $t=\\log M\\mapsto t'=(2s+1)\\log M$ and the polylog factor $(\\log n)^{O(1)}$.
+  According to Section 16.181, this indicator is equal to $\\log^{c_1}n$, where $c_1$ is the constant from HR'22 Lemma 4.4,
+  and according to Section 16.196 you can take $c_1=4$ (as in singleswitching).
+  Substituting $c_1=4$ into corollary Section 16.174, we obtain the indicated formula with $(\\log n)^4$.
 
-  Зависимость от $M$: параметрический блок Proof of Thm. 4.3 использует $M$ только через $t=\\log M$ (§16.166),
-  а единственный непоглощаемый вклад §7.3 HR’22 — индекс $j\\in[M]$, дающий фактор $M^{s/\\ell}$ (§16.196).
-  Следовательно, после unfolding зависимость от $M$ идёт лишь через $t'$ и $M^{s/\\ell}$, как утверждается.
-- `Toy‑тест:` при $s=0$ получаем исходный HR’22 Thm. 4.3 с $(\\log n)^4$ (single‑switching Lemma 4.2).
-- `Статус:` доказано (явная подстановка $c_1=4$ в corollary).
+  Dependency on $M$: Proof of Thm parametric block. 4.3 uses $M$ only via $t=\\log M$ (Section 16.166),
+  and the only non-absorbable contribution of Section 7.3 HR'22 is the index $j\\in[M]$, giving the factor $M^{s/\\ell}$ (Section 16.196).
+  Consequently, after unfolding, the dependence on $M$ goes only through $t'$ and $M^{s/\\ell}$, as stated.
+- `Toy test:` at $s=0$ we obtain the initial HR'22 Thm. 4.3 with $(\\log n)^4$ (singleswitching Lemma 4.2).
+- `Status:` proven (explicit substitution of $c_1=4$ into corollary).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (switching/DT‑аргументы релятивизируются), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` при $M=\\mathrm{poly}(n)$ и $s=(\\log n)^c$ пересчитать показатель при критической глубине $d=(\\kappa+o(1))\\log n/\\log\\log n$ с явной константой $4$ (Q43.S31-critical-depth-kappa).
+- `Barrier check:` r -- applicable (switching/DT arguments are relativized), NP -- not applicable, alg -- not applicable.
+- `Next step:` for $M=\\mathrm{poly}(n)$ and $s=(\\log n)^c$, recalculate the exponent at the critical depth $d=(\\kappa+o(1))\\log n/\\log\\log n$ with an explicit constant $4$ (Q43.S31-critical-depth-kappa).
 
-### 16.198. Исследовательский шаг (toy computation): критическая глубина $d=(\\kappa+o(1))\\log n/\\log\\log n$ при $s=(\\log n)^c$
+### 16.198. Exploratory step (toy computation): critical depth $d=(\\kappa+o(1))\\log n/\\log\\log n$ at $s=(\\log n)^c$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S31-critical-depth-kappa):`
-  Пусть $M=\\mathrm{poly}(n)$, $s=(\\log n)^c$ для фиксированного $c\\ge 0$, и
+- `Lens:` Trade-off.
+- `Statement (Q43.S31-critical-depth-kappa):`
+  Let $M=\\mathrm{poly}(n)$, $s=(\\log n)^c$ for fixed $c\\ge 0$, and
   $$d=\\left(\\kappa+o(1)\\right)\\frac{\\log n}{\\log\\log n}.$$
-  Тогда corollary §16.197 даёт
+  Then corollary Section 16.197 gives
   $$N\\ge 2^{\\Omega(n^{1-\\kappa(5+c)-o(1)})}.$$
-  В частности, lower bound нетривиален ($N\\ge 2^{n^{\\Omega(1)}}$) тогда и только тогда, когда
+  In particular, lower bound is nontrivial ($N\\ge 2^{n^{\\Omega(1)}}$) if and only if
   $$\\kappa<\\frac{1}{5+c}.$$
-- `Toy‑вычисление:`
-  В §16.197 имеем
+- `Toy computing:`
+  In Section 16.197 we have
   $$N\\ge 2^{\\Omega\\left(\\frac{n}{\\bigl((\\log n)^4(2s+1)\\log M\\bigr)^d}\\right)}.$$
-  При $M=\\mathrm{poly}(n)$ получаем $\\log M=\\Theta(\\log n)$, а при $s=(\\log n)^c$ имеем $2s+1=\\Theta((\\log n)^c)$.
-  Тогда
+  For $M=\\mathrm{poly}(n)$ we obtain $\\log M=\\Theta(\\log n)$, and for $s=(\\log n)^c$ we have $2s+1=\\Theta((\\log n)^c)$.
+  Then
   $$\\bigl((\\log n)^4(2s+1)\\log M\\bigr)^d=\\bigl((\\log n)^{5+c}\\bigr)^d.$$
-  Подставляя $d=(\\kappa+o(1))\\log n/\\log\\log n$, получаем
+  Substituting $d=(\\kappa+o(1))\\log n/\\log\\log n$, we get
   $$\\bigl((\\log n)^{5+c}\\bigr)^d=2^{(\\kappa+o(1))(5+c)\\log n}=n^{\\kappa(5+c)+o(1)},$$
-  и потому показатель экспоненты равен $n^{1-\\kappa(5+c)-o(1)}$.
-- `Toy‑тест:` при $c=0$, $M=n^2$, $\\kappa=1/6$ имеем
+  and therefore the exponent is equal to $n^{1-\\kappa(5+c)-o(1)}$.
+- `Toy test:` for $c=0$, $M=n^2$, $\\kappa=1/6$ we have
   $$\\bigl((\\log n)^5\\bigr)^d=2^{(5/6+o(1))\\log n}=n^{5/6+o(1)},$$
-  значит $N\\ge 2^{\\Omega(n^{1/6})}$.
-- `Статус:` проверено (явный $\\kappa$‑порог при критической глубине с $c_1=4$).
+  means $N\\ge 2^{\\Omega(n^{1/6})}$.
+- `Status:` verified (explicit $\\kappa$threshold at critical depth with $c_1=4$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (параметрика + switching‑каркас релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` оценить вклад фактора $M^{s/\\ell}$ при естественном выборе $\\ell:=t'=(2s+1)\\log M$ и проверить, остаётся ли он $2^{\\Theta(1)}$ (Q43.S32-m-factor-ell-constant).
+- `Barrier check:` r - applicable (parameter + switching framework is relativized), NP - not applicable, alg - not applicable.
+- `Next step:` estimate the contribution of the factor $M^{s/\\ell}$ under the natural choice of $\\ell:=t'=(2s+1)\\log M$ and check whether it remains $2^{\\Theta(1)}$ (Q43.S32-m-factor-ell-constant).
 
-### 16.199. Исследовательский шаг (toy computation): константность фактора $M^{s/\\ell}$ при $\\ell=t'$
+### 16.199. Exploratory step (toy computation): constancy of the factor $M^{s/\\ell}$ for $\\ell=t'$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S32-m-factor-ell-constant):`
-  Пусть $s\\ge 0$, $M>1$ и
+- `Lens:` Trade-off.
+- `Statement (Q43.S32-m-factor-ell-constant):`
+  Let $s\\ge 0$, $M>1$ and
   $$\\ell:=t':=(2s+1)\\log M.$$
-  Тогда
+  Then
   $$M^{s/\\ell}=2^{\\frac{s}{2s+1}}\\le 2^{1/2},$$
-  то есть фактор $M^{s/\\ell}$ — абсолютная константа и поглощается в $A$.
-- `Toy‑вычисление:`
+  that is, the factor $M^{s/\\ell}$ is an absolute constant and is absorbed into $A$.
+- `Toy computing:`
   $$M^{s/\\ell}=2^{\\frac{s}{\\ell}\\cdot\\log M}=2^{\\frac{s}{(2s+1)\\log M}\\cdot\\log M}=2^{\\frac{s}{2s+1}}.$$
-  Так как $s/(2s+1)\\le 1/2$ при $s\\ge 0$, получаем $M^{s/\\ell}\\le 2^{1/2}$.
-  (При переходе к $e^x$ получаем $M^{s/\\ell}=e^{s/(2s+1)}\\le e^{1/2}$.)
-- `Toy‑тест:` при $s=1$, $M=2$ имеем $2^{1/3}\\le\\sqrt{2}$.
-- `Статус:` проверено (фактор $M^{s/\\ell}$ константен при $\\ell=t'$).
+  Since $s/(2s+1)\\le 1/2$ for $s\\ge 0$, we obtain $M^{s/\\ell}\\le 2^{1/2}$.
+  (When passing to $e^x$ we obtain $M^{s/\\ell}=e^{s/(2s+1)}\\le e^{1/2}$.)
+- `Toy test:` for $s=1$, $M=2$ we have $2^{1/3}\\le\\sqrt{2}$.
+- `Status:` verified (the factor $M^{s/\\ell}$ is constant for $\\ell=t'$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (чистая арифметика в параметрах), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить допустимость выбора $\\ell=t'$ в Lemma 4.4/Def. “$\\ell$‑common” (есть ли ограничение $\\ell\\le s$ или иное) — Q43.S33-ell-admissibility-check.
+- `Barrier check:` r - applicable (pure arithmetic in parameters), NP - not applicable, alg - not applicable.
+- `Next step:` check the validity of the choice $\\ell=t'$ in Lemma 4.4/Def. "$\\ell$common" (is there a $\\ell\\le s$ restriction or another) - Q43.S33-ell-admissibility-check.
 
-### 16.200. Исследовательский шаг (exact citation): допустимость $\\ell=t'$ в Def. 2.10 / Lemma 4.4
+### 16.200. Exploratory step (exact citation): admissibility of $\\ell=t'$ in Def. 2.10 / Lemma 4.4
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S33-ell-admissibility-check):`
-  В HR’22 Def. 2.10 и Lemma 4.4 параметр $\\ell$ не ограничен сверху (нет условий вида $\\ell\\le t$ или $\\ell\\le s$);
-  значит выбор $\\ell=t'$ допустим на уровне формулировок (при сохранении условий на $t,s$ из Lemma 4.4).
+- `Lens:` Equivalence.
+- `Statement (Q43.S33-ell-admissibility-check):`
+  In HR'22 Def. 2.10 and Lemma 4.4 the parameter $\\ell$ is not bounded from above (there are no conditions of the form $\\ell\\le t$ or $\\ell\\le s$);
+  This means that the choice of $\\ell=t'$ is admissible at the formulation level (while maintaining the conditions on $t,s$ from Lemma 4.4).
 - `Exact citation:`
   Def. 2.10: “for every $T_i$ and branch $\\tau\\in T$ there are decision trees $T^{(i,\\tau)}$ of depth $\\ell$ …”
-  без дополнительных условий на $\\ell$ (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:574–582`).
-  Lemma 4.4: параметры $k,M,n',s,t\\in\\mathbb N^+$ с условиями $t\\le s\\le n'/32$ и $\\mathrm{depth}(T_i)\\le t$,
-  а $\\ell$ появляется только в требовании “represented by an $\\ell$‑common partial decision tree of depth $s$”
-  и в множителе $M^{s/\\ell}$ (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1073–1084`).
-- `Toy‑тест:` при дереве глубины $t$ и частичном дереве глубины $0$ Def. 2.10 допускает любой $\\ell$,
-  так что выбор $\\ell>t$ не вызывает противоречия в определении.
-- `Статус:` подтверждено (ограничения на $\\ell$ в формулировках отсутствуют).
+  without additional conditions on $\\ell$ (HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:574–582`).
+  Lemma 4.4: parameters $k,M,n',s,t\\in\\mathbb N^+$ with conditions $t\\le s\\le n'/32$ and $\\mathrm{depth}(T_i)\\le t$,
+  and $\\ell$ appears only in the requirement "represented by an $\\ell$common partial decision tree of depth $s$"
+  and in the factor $M^{s/\\ell}$ (HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1073–1084`).
+- `Toy test:` with a tree of depth $t$ and a partial tree of depth $0$ Def. 2.10 allows any $\\ell$,
+  so the choice of $\\ell>t$ does not cause a contradiction in the definition.
+- `Status:` confirmed (there are no restrictions on $\\ell$ in the formulations).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо (цитата/формулировка), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, не используется ли в доказательстве Lemma 4.4 скрытое условие $\\ell\\le t$ или $\\ell\\le s$ (Q43.S35-ell-vs-t-constraint).
+- `Barrier check:` r - not applicable (quote/wording), NP - not applicable, alg - not applicable.
+- `Next step:` check whether the proof of Lemma 4.4 uses the hidden condition $\\ell\\le t$ or $\\ell\\le s$ (Q43.S35-ell-vs-t-constraint).
 
-### 16.201. Исследовательский шаг (toy computation): скрытое $\\ell\\le s$ в подсчёте раундов Lemma 4.4
+### 16.201. Exploratory step (toy computation): hidden $\\ell\\le s$ in round counting Lemma 4.4
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S35-ell-vs-t-constraint):`
-  В доказательстве Lemma 4.4 фактор $M^{s/\\ell}$ получается из “по одному индексу $j\\in[M]$ на раунд”
+- `Lens:` Invariant.
+- `Statement (Q43.S35-ell-vs-t-constraint):`
+  In the proof of Lemma 4.4, the factor $M^{s/\\ell}$ is obtained from "one index $j\\in[M]$ per round"
   (HR’22 §7.3: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2784–2790`).
-  Это требует верхней оценки на число раундов вдоль ветви глубины $s$; в §7.2 раунд завершается,
-  когда добавлено $\\ge\\ell/4$ центров, и затем в $T$ запрашиваются все переменные, инцидентные $S_{\\lambda_j}$
+  This requires an upper bound on the number of rounds along the branch of depth $s$; in Section 7.2 the round ends,
+  when $\\ge\\ell/4$ centers are added, and then $T$ is queried for all variables incident to $S_{\\lambda_j}$
   (HR’22 §7.2: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2718–2732`).
-  Поэтому без явного округления получается неявное ограничение $\\ell\\le s$ (иначе число раундов
-  может быть $1$, тогда как $s/\\ell<1$).
-- `Toy‑тест:` пусть $s=2$, $t=1$, $\\ell=5$. В каждом раунде добавляется $\\ge\\ell/4>1$ центров и
-  запрашиваются инцидентные переменные, значит одна итерация уже даёт глубину $\\ge s$ и требует один
-  индекс $j$ (cost $\\log M$). Но $s/\\ell=0.4$, и множитель $M^{s/\\ell}$ даёт $<M$; это несовместимо с
-  “по одному индексу на раунд”, если не вводить явное $\\lceil s/\\ell\\rceil$ или условие $\\ell\\le s$.
-- `Статус:` контрпример‑toy к гипотезе “нет скрытого ограничения”; нужна явная оговорка $\\ell\\le s$
-  (или округление числа раундов).
+  Therefore, without explicit rounding, we get the implicit constraint $\\ell\\le s$ (otherwise the number of rounds
+  may be $1$, whereas $s/\\ell<1$).
+- `Toy test:` let $s=2$, $t=1$, $\\ell=5$. Each round adds $\\ge\\ell/4>1$ centers and
+  incident variables are requested, which means one iteration already gives the depth $\\ge s$ and requires one
+  index $j$ (cost $\\log M$). But $s/\\ell=0.4$, and the multiplier $M^{s/\\ell}$ gives $<M$; this is incompatible with
+  "one index per round", if you do not introduce an explicit $\\lceil s/\\ell\\rceil$ or the condition $\\ell\\le s$.
+- `Status:` counterexample toy to the "no hidden limitation" hypothesis; need explicit clause $\\ell\\le s$
+  (or rounding the number of rounds).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо (локальная проверка proof), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить в оригинальном PDF/доказательстве, как фиксируется число раундов
-  (округление/транкция) и можно ли заменить $M^{s/\\ell}$ на $M^{\\lceil s/\\ell\\rceil}$ без изменения остального.
+- `Barrier check:` r - not applicable (local proof check), NP - not applicable, alg - not applicable.
+- `Next step:` check in the original PDF/proof how the number of rounds is fixed
+  (rounding/transition) and is it possible to replace $M^{s/\\ell}$ with $M^{\\lceil s/\\ell\\rceil}$ without changing the rest.
 
-### 16.202. Исследовательский шаг (proof): округление числа раундов по глубине
+### 16.202. Exploratory step (proof): rounding the number of rounds by depth
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S36-round-count-from-depth):`
-  В §7.2 каждый раунд добавляет к ветви $T$ по крайней мере $\\ell$ **новых** запросов,
-  поэтому префикс длины $s$ на любой ветви может пересекать не более $\\lceil s/\\ell\\rceil$ раундов.
-  Следовательно, “по одному индексу $j$ на раунд” даёт фактор $M^{\\lceil s/\\ell\\rceil}$ (при $s<\\ell$ это даёт $M$).
-- `Доказательство:`
-  В §7.2 раунд выбирает ветвь $\\lambda$ длины $\\ge\\ell$ в $T^j$ и **расширяет** $T$ в листе $\\tau$
-  запросами “всех переменных на $\\lambda$” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2671–2684`).
-  По определению дерева решений внутренняя разметка на любой ветви использует **различные** переменные
+- `Lens:` Invariant.
+- `Statement (Q43.S36-round-count-from-depth):`
+  In Section 7.2, each round adds at least $\\ell$ **new** queries to branch $T$,
+  therefore, a prefix of length $s$ on any branch can cross at most $\\lceil s/\\ell\\rceil$ rounds.
+  Therefore, "one index $j$ per round" gives the factor $M^{\\lceil s/\\ell\\rceil}$ (for $s<\\ell$ this gives $M$).
+- `Proof:`
+  In Section 7.2, the round selects a branch $\\lambda$ of length $\\ge\\ell$ in $T^j$ and **expands** $T$ into leaf $\\tau$
+  queries for "all variables on $\\lambda$" (HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2671–2684`).
+  By definition of a decision tree, the internal markup on any branch uses **different** variables
   (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:489–494`),
-  а при расширении листа запрещены запросы к переменным, локально имплицированным $\\tau$
+  and when expanding a sheet, queries to variables locally implied by $\\tau$ are prohibited
   (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:532–535`),
-  поэтому $\\lambda$ добавляет $\\ge\\ell$ новых запросов к текущей ветви.
-  Значит префикс длины $s$ может включать не более $\\lceil s/\\ell\\rceil$ раундов
-  (каждый раунд даёт минимум $\\ell$ новых запросов), и индекс $j\\in[M]$ кодируется
-  не более чем $\\lceil s/\\ell\\rceil$ раз.
-- `Toy‑тест:` $s=2$, $\\ell=5$: первый раунд уже добавляет $\\ge 5$ запросов, значит префикс длины $2$
-  использует $\\le 1$ раунд; $M^{\\lceil 2/5\\rceil}=M$.
-- `Статус:` доказано.
+  so $\\lambda$ adds $\\ge\\ell$ new requests to the current branch.
+  This means that a prefix of length $s$ can include no more than $\\lceil s/\\ell\\rceil$ rounds
+  (each round produces at least $\\ell$ new queries), and the index $j\\in[M]$ is encoded
+  no more than $\\lceil s/\\ell\\rceil$ times.
+- `Toy test:` $s=2$, $\\ell=5$: the first round already adds $\\ge 5$ requests, so the prefix is of length $2$
+  uses $\\le 1$ round; $M^{\\lceil 2/5\\rceil}=M$.
+- `Status:` proven.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо (локальная оценка в доказательстве), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить альтернативный bound по числу centers (Q43.S37-round-count-from-centers).
+- `Barrier check:` r - not applicable (local estimate in the proof), NP - not applicable, alg - not applicable.
+- `Next step:` check the alternative bound by the number of centers (Q43.S37-round-count-from-centers).
 
-### 16.203. Исследовательский шаг (counterexample): из “$\\ge\\ell/4$ центров за раунд” не следует $\\le\\lceil 4a/\\ell\\rceil$
+### 16.203. Exploratory step (counterexample): "$\\ge\\ell/4$ centers per round" does not imply $\\le\\lceil 4a/\\ell\\rceil$
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S37-rounds-via-uj):`
-  В §7.2 “$\\ge\\ell/4$ центров за раунд” относится к **всем** exposed centers в $S(\\lambda^j,\\sigma)$, а не к associated centers.
-  Поэтому утверждение “в каждом раунде добавляется $\\ge\\ell/4$ associated centers” (и, следовательно, bound $\\#\\text{rounds}\\le\\lceil 4a/\\ell\\rceil$) неверно без дополнительной структуры.
-  В общем виде из Lemma 6.5–6.8 следует лишь
+- `Lens:` Invariant.
+- `Statement (Q43.S37-rounds-via-uj):`
+  In Section 7.2, "$\\ge\\ell/4$ centers per round" refers to **all** exposed centers in $S(\\lambda^j,\\sigma)$, not associated centers.
+  Therefore, the statement "each round adds $\\ge\\ell/4$ associated centers" (and therefore bound $\\#\\text{rounds}\\le\\lceil 4a/\\ell\\rceil$) is false without additional structure.
+  In general, from Lemma 6.5-6.8 it follows only
   $$\\#\\text{rounds}\\le\\Bigl\\lceil\\frac{64a}{\\ell}\\Bigr\\rceil.$$
-- `Контрпример (структурный разрыв):`
-  В §7.2 раунд заканчивается, когда “at least $\\ell/4$ centers have been added … to $S(\\lambda^j,\\sigma)$” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2718–2722`).
-  Но в одной стадии центры добавляются как $\\mathrm{supp}(J)\\cup S_J$, и Lemma 6.5 даёт верхний bound “at most $4|\\mathrm{supp}(J)|$ centers are added” (там же: `…:2013–2022`).
-  Далее Lemma 6.8 утверждает $|\\mathrm{supp}(J)|\\le 4a_j$ (там же: `…:2081–2086`), поэтому одна стадия может добавить до $16a_j$ центров.
-  Следовательно, раунд может достичь порога $\\ell/4$ при $a_j\\ge \\ell/64$, так что вывод $a_j\\ge\\ell/4$ (и bound $\\lceil 4a/\\ell\\rceil$) не проходит; корректный общий upper — $\\lceil 64a/\\ell\\rceil$.
-- `Toy‑тест:` локальная конфигурация, где каждый associated center даёт 3 соседних chosen centers в $\\mathrm{supp}(J)$, а каждый из них имеет ещё 3 новых соседних chosen centers в $S_J\\setminus\\mathrm{supp}(J)$, реализует фактор 16 между $a_j$ и числом новых центров.
-- `Статус:` контрпример (гипотеза “$\\ge\\ell/4$ associated centers за раунд” не следует из §7.2).
+- `Counterexample (structural break):`
+  In Section 7.2, the round ends when "at least $\\ell/4$ centers have been added ... to $S(\\lambda^j,\\sigma)$" (HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2718–2722`).
+  But at one stage the centers are added as $\\mathrm{supp}(J)\\cup S_J$, and Lemma 6.5 gives the upper bound "at most $4|\\mathrm{supp}(J)|$ centers are added" (ibid.: `…:2013–2022`).
+  Next, Lemma 6.8 states $|\\mathrm{supp}(J)|\\le 4a_j$ (ibid.: `…:2081–2086`), so one stage can add up to $16a_j$ centers.
+  Therefore, the round can reach the $\\ell/4$ threshold at $a_j\\ge \\ell/64$, so the output $a_j\\ge\\ell/4$ (and bound $\\lceil 4a/\\ell\\rceil$) fails; the correct general upper is $\\lceil 64a/\\ell\\rceil$.
+- `Toy test:` a local configuration, where each associated center gives 3 neighboring chosen centers in $\\mathrm{supp}(J)$, and each of them has 3 more new neighboring chosen centers in $S_J\\setminus\\mathrm{supp}(J)$, implements a factor of 16 between $a_j$ and the number of new centers.
+- `Status:` counterexample (the conjecture "$\\ge\\ell/4$ associated centers per round" does not follow from Section 7.2).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (комбинаторный счёт релятивизируется), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить в оригинальном PDF, что “centers” в §7.2 не означает “chosen centers”; если нет, встроить константу $64$ в фактор $M^{s/\\ell}$ и оценить, даёт ли это что‑то лучшее, чем bound через $\\lceil s/\\ell\\rceil$.
+- `Barrier check:` r -- applicable (combinatorial counting is relativized), NP -- not applicable, alg -- not applicable.
+- `Next step:` check in the original PDF that "centers" in Section 7.2 does not mean "chosen centers"; if not, embed the constant $64$ into the factor $M^{s/\\ell}$ and evaluate whether this gives something better than bound via $\\lceil s/\\ell\\rceil$.
 
-### 16.204. Исследовательский шаг (exact citation): “centers” в §7.2 — это exposed centers (подмножество alive centers)
+### 16.204. Exploratory step (exact citation): "centers" in Section 7.2 are exposed centers (a subset of alive centers)
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S38-quote-centers-exposed):`
-  В HR’22 “центры” в остановке раунда §7.2 — это именно exposed centers $S(\\lambda^j,\\sigma)$, а exposed centers определены как подмножество alive centers.
+- `Lens:` Equivalence.
+- `Statement (Q43.S38-quote-centers-exposed):`
+  In HR'22, the "centers" in round stopping Section 7.2 are precisely exposed centers $S(\\lambda^j,\\sigma)$, and exposed centers are defined as a subset of alive centers.
 - `Exact citation:`
-  Определение exposed centers: “1. a subset of the alive centers $S = S(\\tau,\\sigma)$ called the exposed centers” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1841`).
-  Остановка раунда: “We continue with the next stage until at least $\\ell/4$ centers have been added in this round to the set of exposed centers $S(\\lambda^j,\\sigma)$ …” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2718–2719`).
-- `Toy‑тест:` подстановка определений: слово “centers” в §7.2 прямо отсылает к “set of exposed centers”, без упоминания chosen centers.
-- `Статус:` подтверждено (точная цитата).
+  Definition of exposed centers: "1. a subset of the alive centers $S = S(\\tau,\\sigma)$ called the exposed centers" (HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1841`).
+  Stopping the round: "We continue with the next stage until at least $\\ell/4$ centers have been added in this round to the set of exposed centers $S(\\lambda^j,\\sigma)$ ..." (HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2718–2719`).
+- `Toy test:` substitution of definitions: the word "centers" in Section 7.2 directly refers to "set of exposed centers", without mentioning chosen centers.
+- `Status:` confirmed (exact quote).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` сравнить верхнюю оценку числа раундов через $\\lceil 64a/\\ell\\rceil$ с фактором $M^{\\lceil s/\\ell\\rceil}$ и показать, что константа 64 не ухудшает итог (Q43.S39-compare-round-bounds).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` compare the upper bound for the number of rounds via $\\lceil 64a/\\ell\\rceil$ with the factor $M^{\\lceil s/\\ell\\rceil}$ and show that the constant 64 does not worsen the result (Q43.S39-compare-round-bounds).
 
-### 16.205. Исследовательский шаг (proof): 64 поглощается рескейлом $\\ell$ ($\\ell\\ge t$ ⇒ t‑common)
+### 16.205. Research step (proof): 64 is absorbed by rescaling $\\ell$ ($\\ell\\ge t$  tcommon)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S39-absorb-64-rescale-ell):`
-  В HR’22 Lemma 4.4 параметр $\\ell$ свободен (без условий $\\ell\\le t$ или $\\ell\\le s$), и если входные деревья имеют глубину $\\le t'$,
-  то $\\ell$‑common partial decision tree при $\\ell\\ge t'$ автоматически является $t'$‑common.
-  Поэтому можно выбрать $\\ell:=64t'$ и получить
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S39-absorb-64-rescale-ell):`
+  In HR'22 Lemma 4.4, the $\\ell$ parameter is free (without $\\ell\\le t$ or $\\ell\\le s$ conditions), and if the input trees have depth $\\le t'$,
+  then $\\ell$common partial decision tree for $\\ell\\ge t'$ is automatically $t'$common.
+  Therefore, we can choose $\\ell:=64t'$ and get
   $$M^{\\lceil 64a/\\ell\\rceil}=M^{\\lceil a/t'\\rceil},$$
-  а множитель $M^{s/\\ell}$ в Lemma 4.4 только уменьшается.
-- `Доказательство:`
-  1) Def. 2.10 и Lemma 4.4 не накладывают ограничений на $\\ell$; $\\ell$ входит только как глубина локальных деревьев и в фактор $M^{s/\\ell}$
+  and the factor $M^{s/\\ell}$ in Lemma 4.4 only decreases.
+- `Proof:`
+  1) Def. 2.10 and Lemma 4.4 do not impose restrictions on $\\ell$; $\\ell$ is included only as the depth of local trees and in the factor $M^{s/\\ell}$
      (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:574–582`, `…:1073–1084`).
-  2) Пусть все $T_i$ имеют глубину $\\le t'$, а $T$ — $\\ell$‑common partial tree с $\\ell\\ge t'$. Для каждой ветви $\\tau$ ограничение
-     $T_i\\!\\upharpoonright\\!\\tau$ — decision tree глубины $\\le t'$ (глубина не возрастает при ограничении), а корректность/локальная согласованность
-     обеспечивает факт, что $T$ — $\\ell$‑common. Тогда, выбирая $T^{(i,\\tau)}:=T_i\\!\\upharpoonright\\!\\tau$, получаем $t'$‑common partial tree.
-  3) Подстановка $\\ell:=64t'$ преобразует $M^{\\lceil 64a/\\ell\\rceil}$ в $M^{\\lceil a/t'\\rceil}$, а $M^{s/\\ell}\\le M^{s/t'}$,
-     поэтому коэффициент 64 поглощается без ухудшения вероятностной оценки.
-- `Toy‑тест:` при $s=2$, $M=n^k$, $t'=(2s+1)\\log M$ и $\\ell=64t'$ условия Lemma 4.4
-  ($t'\\le s_\\eta\\le n'/32$) остаются прежними, а фактор по $M$ становится $M^{\\lceil a/t'\\rceil}$.
-- `Статус:` доказано.
+  2) Let all $T_i$ have depth $\\le t'$, and let $T$ be a $\\ell$common partial tree with $\\ell\\ge t'$. For each branch $\\tau$ the constraint
+     $T_i\\!\\upharpoonright\\!\\tau$ is a decision tree of depth $\\le t'$ (the depth does not increase with the constraint), and correctness/local consistency
+     ensures the fact that $T$ is $\\ell$common. Then, choosing $T^{(i,\\tau)}:=T_i\\!\\upharpoonright\\!\\tau$, we obtain $t'$common partial tree.
+  3) The substitution $\\ell:=64t'$ transforms $M^{\\lceil 64a/\\ell\\rceil}$ into $M^{\\lceil a/t'\\rceil}$, and $M^{s/\\ell}\\le M^{s/t'}$,
+     therefore, the factor 64 is absorbed without degrading the probability estimate.
+- `Toy test:` for $s=2$, $M=n^k$, $t'=(2s+1)\\log M$ and $\\ell=64t'$ conditions Lemma 4.4
+  ($t'\\le s_\\eta\\le n'/32$) remain the same, and the factor over $M$ becomes $M^{\\lceil a/t'\\rceil}$.
+- `Status:` proven.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо (перемасштабирование параметров), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, можно ли связать $a$ с $s$ (например $a\\le s$) или иначе пересчитать corollary с фактором $M^{\\lceil a/t'\\rceil}$ — Q43.S40-bound-a-by-s.
+- `Barrier check:` r - not applicable (parameter rescaling), NP - not applicable, alg - not applicable.
+- `Next step:` check whether it is possible to bind $a$ to $s$ (for example $a\\le s$) or otherwise recalculate the corollary with the factor $M^{\\lceil a/t'\\rceil}$ - Q43.S40-bound-a-by-s.
 
-### 16.206. Исследовательский шаг (counterexample): non-chosen associated centers не инъектируются в запросы, $a\\le s$ не следует
+### 16.206. Exploratory step (counterexample): non-chosen associated centers are not injected into queries, $a\\le s$ should not be
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S40-inject-a-to-queries):`
-  Каждый disappearing center, учтённый в $a$, соответствует хотя бы одному запросу на ветви $\\tau$,
-  разные центры дают разные запросы, значит $a\\le s$.
-- `Контрпример (структурный):`
-  В построении HR’22 ветвь $\\tau$ запрашивает **только** переменные, инцидентные chosen центрам:
-  $S_J$ определяется как множество chosen центров на расстоянии $\\le 1$ от $\\mathrm{supp}(J)\\cap C_\\sigma$,
-  и $T$ расширяется запросами всех переменных, инцидентных $S_J$
+- `Lens:` Invariant.
+- `Statement (Q43.S40-inject-a-to-queries):`
+  Each disappearing center counted in $a$ corresponds to at least one request on branches $\\tau$,
+  different centers give different requests, which means $a\\le s$.
+- `Counterexample (structural):`
+  In the HR'22 construction, the $\\tau$ branch requests **only** variables incident to the chosen centers:
+  $S_J$ is defined as the set of chosen centers at a distance $\\le 1$ from $\\mathrm{supp}(J)\\cap C_\\sigma$,
+  and $T$ is expanded by queries of all variables incident to $S_J$
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1943–1947`);
-  Invariant 6.1(5) фиксирует, что запросы появляются только из exposed chosen centers
+  Invariant 6.1(5) fixes that requests appear only from exposed chosen centers
   (`…:1858–1860`).
-  Но на forceable branch $\\psi$ могут стоять переменные с non-chosen associated center:
-  Cor. 6.6 прямо различает случаи “associated center chosen/non-chosen”
-  (`…:2024–2026`), а Def. 6.2(2) требует закрывать $J$ на таких центрах
+  But forceable branch $\\psi$ may contain variables with non-chosen associated center:
+  Cor. 6.6 directly distinguishes between "associated center chosen/non-chosen" cases
+  (`…:2024–2026`), and Def. 6.2(2) requires closing $J$ on such centers
   (`…:1886–1888`).
-  Такие non-chosen центры входят в $\\mathrm{supp}(J)\\setminus S^*_{j-1}$ и учитываются в $a_j$,
-  но не попадают в $S_J$, поэтому **не создают запросов** на $\\tau$.
-  Следовательно, инъекция “$a$ → запросы” не работает, и $a\\le s$ не обосновано.
-- `Toy‑тест:` пусть $T_i$ имеет 1‑ветвь из одного ребра $x_e$, чья associated center $u$ — non-chosen.
-  Выберем $\\sigma$ так, что pairing $\\pi$ фиксирует соответствующий non-chosen path
-  (Eq. (11), `…:1456–1467`), тогда $\\psi$ pairwise locally consistent с $\\sigma$.
-  По Def. 6.2(2) $J$ закрыт на $u$, значит $a_j=1$, но $\\mathrm{supp}(J)\\cap C_\\sigma=\\varnothing$
-  и $S_J=\\varnothing$, т.е. на $\\tau$ не добавляется ни одного запроса.
-- `Статус:` контрпример (инъекция ломается на non-chosen центрах).
+  Such non-chosen centers are included in $\\mathrm{supp}(J)\\setminus S^*_{j-1}$ and are taken into account in $a_j$,
+  but they don't get into $S_J$, so they **don't create requests** for $\\tau$.
+  Therefore, the injection "$a$ -> queries" does not work, and $a\\le s$ is not justified.
+- `Toy test:` let $T_i$ have 1-branch from one edge $x_e$, whose associated center $u$ is non-chosen.
+  Let us choose $\\sigma$ so that pairing $\\pi$ fixes the corresponding non-chosen path
+  (Eq. (11), `…:1456–1467`), then $\\psi$ pairwise locally consistent with $\\sigma$.
+  By Def. 6.2(2) $J$ is closed on $u$, so $a_j=1$, but $\\mathrm{supp}(J)\\cap C_\\sigma=\\varnothing$
+  and $S_J=\\varnothing$, i.e. no queries are added to $\\tau$.
+- `Status:` counterexample (injection breaks on non-chosen centers).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` разделить $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$ и проверить,
-  можно ли bound’ить $a_{\\mathrm{ch}}$ через $s$, а вклад $a_{\\mathrm{nch}}$ переформулировать в параметрах,
-  не требующих $a\\le s$ (или перейти к оптимизации суммы по $a$ без этого шага).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` divide $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$ and check
+  Is it possible to bound $a_{\\mathrm{ch}}$ through $s$, and the contribution of $a_{\\mathrm{nch}}$ be reformulated in parameters,
+  not requiring $a\\le s$ (or proceed to optimizing the sum over $a$ without this step).
 
-### 16.207. Исследовательский шаг (proof): $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$, раунд‑фактор зависит только от $a_{\\mathrm{ch}}$
+### 16.207. Research step (proof): $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$, round factor depends only on $a_{\\mathrm{ch}}$
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S41-split-a-ch-nch):`
-  Пусть $a_{j,\\mathrm{ch}}$ — число **chosen** associated centers среди переменных на $\\psi_j$,
-  лежащих в $\\mathrm{supp}(J_j)\\setminus S^*_{j-1}$, и $a_{\\mathrm{ch}}:=\\sum_j a_{j,\\mathrm{ch}}$.
-  Тогда $s\\le 64a_{\\mathrm{ch}}$, а значит фактор по раундам можно оценивать как
+- `Lens:` Invariant.
+- `Statement (Q43.S41-split-a-ch-nch):`
+  Let $a_{j,\\mathrm{ch}}$ be the number of **chosen** associated centers among the variables on $\\psi_j$,
+  lying in $\\mathrm{supp}(J_j)\\setminus S^*_{j-1}$, and $a_{\\mathrm{ch}}:=\\sum_j a_{j,\\mathrm{ch}}$.
+  Then $s\\le 64a_{\\mathrm{ch}}$, which means the factor for rounds can be estimated as
   $$M^{\\lceil s/\\ell\\rceil}\\le M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}.$$
-  Вклад $a_{\\mathrm{nch}}$ кодируется через $\\pi$ и не порождает новых запросов.
-- `Доказательство:`
-  1) Non‑chosen информация определяется pairing $\\pi$ и не требует запросов в $T$
-     (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1854–1866`), при этом
-     $I$ не содержит путей между chosen и non‑chosen центрами
-     (`…:1869–1870`). Следовательно, только exposed **chosen** centers создают запросы.
-  2) Пусть $S_{\\mathrm{ch}}(\\tau,\\sigma):=S(\\tau,\\sigma)\\cap C_\\sigma$.
-     Из §6.4: “only variables incident to exposed chosen centers are queried and each exposed center causes at most 4 queries”
-     (`…:2049–2051`), значит существует стадия $g$ с $|S^*_g\\cap C_\\sigma|\\ge s/4$.
-  3) В стадии $j$ множество новых chosen центров лежит в $\\mathrm{supp}(J_j)\\cap C_\\sigma$ и $S_J$.
-     По аргументу Lemma 6.5 (ограниченному на chosen‑центры) каждый chosen центр в $\\mathrm{supp}(J_j)$
-     имеет chosen‑соседа в $\\mathrm{supp}(J_j)$, поэтому
+  The contribution $a_{\\mathrm{nch}}$ is encoded via $\\pi$ and does not generate new queries.
+- `Proof:`
+  1) Non-chosen information is determined by pairing $\\pi$ and does not require queries in $T$
+     (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1854–1866`), while
+     $I$ does not contain paths between chosen and non-chosen centers
+     (`…:1869–1870`). Therefore, only exposed **chosen** centers create requests.
+  2) Let $S_{\\mathrm{ch}}(\\tau,\\sigma):=S(\\tau,\\sigma)\\cap C_\\sigma$.
+     From Section 6.4: "only variables incident to exposed chosen centers are queried and each exposed center causes at most 4 queries"
+     (`…:2049–2051`), which means there is a stage $g$ with $|S^*_g\\cap C_\\sigma|\\ge s/4$.
+  3) At stage $j$, the set of new chosen centers lies in $\\mathrm{supp}(J_j)\\cap C_\\sigma$ and $S_J$.
+     By the argument of Lemma 6.5 (restricted to chosen centers), each chosen center in $\\mathrm{supp}(J_j)$
+     has a chosen neighbor in $\\mathrm{supp}(J_j)$, so
      $$|\\mathrm{supp}(J_j)\\cap C_\\sigma\\cup S_J|\\le 4|\\mathrm{supp}(J_j)\\cap C_\\sigma|.$$
-     Кроме того, из минимальности $J_j$ и запрета chosen–non‑chosen путей следует, что каждый chosen центр
-     в $\\mathrm{supp}(J_j)$ либо сам является associated center переменной на $\\psi_j$,
-     либо соседствует с таким chosen associated center; значит
+     In addition, from the minimality of $J_j$ and the prohibition of chosen-non-chosen paths, it follows that every chosen center
+     in $\\mathrm{supp}(J_j)$ or is itself an associated center variable on $\\psi_j$,
+     or adjacent to such a chosen associated center; Means
      $$|\\mathrm{supp}(J_j)\\cap C_\\sigma|\\le 4a_{j,\\mathrm{ch}}.$$
-     Следовательно, на стадии $j$ добавляется не более $16a_{j,\\mathrm{ch}}$ chosen‑центров, и
+     Consequently, at stage $j$ no more than $16a_{j,\\mathrm{ch}}$ chosen-centers are added, and
      $|S^*_g\\cap C_\\sigma|\\le 16a_{\\mathrm{ch}}$.
-  4) Совмещая с п.2, получаем $s\\le 4|S^*_g\\cap C_\\sigma|\\le 64a_{\\mathrm{ch}}$ и требуемый bound на
+  4) Combining with step 2, we obtain $s\\le 4|S^*_g\\cap C_\\sigma|\\le 64a_{\\mathrm{ch}}$ and the required bound on
      $M^{\\lceil s/\\ell\\rceil}$.
-- `Toy‑тест:` $s=1$, $\\psi$ содержит переменную с non‑chosen associated center $u$.
-  По Def. 6.2(2) $J$ закрыт на $u$, а Invariant 6.1(4) + ремарка про $\\pi$ дают,
-  что нужная информация уже в $\\pi$ и не требует запросов (`…:1854–1866`);
-  при $\\mathrm{supp}(J)\\cap C_\\sigma=\\varnothing$ имеем $S_J=\\varnothing$, поэтому
-  depth ветви не увеличивается и раунд‑счёт не растёт.
-- `Статус:` доказано (для раунд‑фактора; $a\\log t$ в Lemma 6.9 по‑прежнему зависит от $a$).
+- `Toy test:` $s=1$, $\\psi$ contains a variable with non-chosen associated center $u$.
+  By Def. 6.2(2) $J$ is closed on $u$, and Invariant 6.1(4) + remark about $\\pi$ gives,
+  that the necessary information is already in $\\pi$ and does not require queries (`…:1854–1866`);
+  for $\\mathrm{supp}(J)\\cap C_\\sigma=\\varnothing$ we have $S_J=\\varnothing$, therefore
+  The depth of the branch does not increase and the round score does not increase.
+- `Status:` proven (for the round factor; $a\\log t$ in Lemma 6.9 still depends on $a$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (encoding/center‑счёт), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` оптимизировать суммирование по $a$ без предположения $a\\le s$ (Q43.S42-optimise-a-sum).
+- `Barrier check:` r -- applicable (encoding/center count), NP -- not applicable, alg -- not applicable.
+- `Next step:` optimize the sum over $a$ without the assumption $a\\le s$ (Q43.S42-optimise-a-sum).
 
-### 16.208. Исследовательский шаг (proof): $\\log t$ в Lemma 6.9 нужен только для chosen associated centers
+### 16.208. Research step (proof): $\\log t$ in Lemma 6.9 is needed only for chosen associated centers
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S42-encode-nch-no-logt):`
-  В доказательстве Lemma 6.9 log t-биты используются только для **chosen** associated centers,
-  тогда как non-chosen associated centers восстанавливаются из pairing $\\pi$ с постоянным числом бит
-  на структуру компоненты и $O(\\log \\Delta)$ на идентификацию узлов.
-  Следовательно, в оценке кодирования можно заменить $t^{a}$ на $t^{a_{\\mathrm{ch}}}$, а вклад
-  $a_{\\mathrm{nch}}$ переносится в $\\Delta$-часть.
-- `Доказательство:`
-  В реконструкции $J_j$ из подписей: для каждого associated center $u$,
-  который **chosen**, читаются (до 3) инцидентные центры, и если такой центр уже определен,
-  он выбирается по "first bit in the signature is 1" с ценой $\\log t$ (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2468-2475`).
-  После этого "structure of $J_j$ on the chosen centers" фиксирована (`…:2474-2476`).
-  Для non-chosen центров затем "complete some connected components from the pairing $\\pi$",
-  структура компоненты кодируется константным числом бит, и каждый узел восстанавливается
-  с ценой не более $\\log \\Delta$ (`…:2476-2480`).
-  Значит, log t участвует только при идентификации chosen центров, тогда как non-chosen
-  оплачиваются лишь $\\log \\Delta$.
-- `Toy‑тест:` один раунд, одна переменная на $\\psi_j$ с non-chosen associated center.
-  По тексту реконструкции $J_j$ для non-chosen используется только pairing $\\pi$ и
-  $\\log \\Delta$ на узлы, без упоминания $\\log t$ (`…:2476-2480`).
-- `Статус:` доказано (точная цитата в доказательстве Lemma 6.9).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S42-encode-nch-no-logt):`
+  In the proof of Lemma 6.9, log t-bits are used only for **chosen** associated centers,
+  whereas non-chosen associated centers are reconstructed from pairing $\\pi$ with a constant number of bits
+  on the component structure and $O(\\log \\Delta)$ on node identification.
+  Therefore, in the encoding estimate, $t^{a}$ can be replaced by $t^{a_{\\mathrm{ch}}}$, and the contribution
+  $a_{\\mathrm{nch}}$ is transferred to the $\\Delta$-part.
+- `Proof:`
+  In the reconstruction of $J_j$ from signatures: for each associated center $u$,
+  which is **chosen**, (up to 3) incident centers are read, and if such a center is already defined,
+  it is selected by "first bit in the signature is 1" with a cost of $\\log t$ (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2468-2475`).
+  After this, the "structure of $J_j$ on the chosen centers" is fixed (`…:2474-2476`).
+  For non-chosen centers then "complete some connected components from the pairing $\\pi$",
+  the component structure is encoded with a constant number of bits, and each node is reconstructed
+  with price no more than $\\log \\Delta$ (`…:2476-2480`).
+  This means that log t is involved only in identifying chosen centers, while non-chosen
+  only $\\log \\Delta$ are paid.
+- `Toy test:` one round, one variable per $\\psi_j$ with non-chosen associated center.
+  According to the text of the $J_j$ reconstruction, for non-chosen only pairing $\\pi$ and
+  $\\log \\Delta$ per nodes, without mentioning $\\log t$ (`…:2476-2480`).
+- `Status:` proven (exact quotation in the proof of Lemma 6.9).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (encoding), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` переписать сумму по $a_{\\mathrm{ch}},a_{\\mathrm{nch}}$ в Eq. (18) и проверить геометрию (Q43.S42-sum-split-geometric).
+- `Barrier check:` r - applicable (encoding), NP - not applicable, alg - not applicable.
+- `Next step:` rewrite the sum over $a_{\\mathrm{ch}},a_{\\mathrm{nch}}$ into Eq. (18) and check the geometry (Q43.S42-sum-split-geometric).
 
-### 16.209. Исследовательский шаг (proof): геометрия суммы после разбиения $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$
+### 16.209. Exploratory step (proof): geometry of the sum after partitioning $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S43-sum-split-geometric):`
-  В Eq. (18) HR’22 (сумма $\\sum_a A_2^s(4t\\log n'/\\Delta)^a$) после замены $t^a\\rightsquigarrow t^{a_{\\mathrm{ch}}}$
-  и разбиения $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$ получается факторизация в два геометрических ряда.
-  При $\\ell\\ge 64t'$ раунд‑фактор удовлетворяет $M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}\\le M^{a_{\\mathrm{ch}}/t'}$,
-  поэтому
+- `Lens:` Equivalence.
+- `Statement (Q43.S43-sum-split-geometric):`
+  In Eq. (18) HR'22 (sum $\\sum_a A_2^s(4t\\log n'/\\Delta)^a$) after replacing $t^a\\rightsquigarrow t^{a_{\\mathrm{ch}}}$
+  and partitioning $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$ we obtain a factorization into two geometric series.
+  For $\\ell\\ge 64t'$ the round factor satisfies $M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}\\le M^{a_{\\mathrm{ch}}/t'}$,
+  That's why
   $$
   \\sum_{a_{\\mathrm{ch}},a_{\\mathrm{nch}}\\ge 0}
   A_2^s\\Bigl(\\frac{4t'\\log n'}{\\Delta}\\Bigr)^{a_{\\mathrm{ch}}}
@@ -1364,1003 +1364,1003 @@ import Paperproof
   A_2^s\\Bigl(\\sum_{a_{\\mathrm{ch}}\\ge 0} r_{\\mathrm{ch}}^{a_{\\mathrm{ch}}}\\Bigr)
   \\Bigl(\\sum_{a_{\\mathrm{nch}}\\ge 0} r_{\\mathrm{nch}}^{a_{\\mathrm{nch}}}\\Bigr),
   $$
-  где $r_{\\mathrm{ch}}:=(4t'\\log n'/\\Delta)\\cdot M^{1/t'}$ и $r_{\\mathrm{nch}}:=4\\log n'/\\Delta$.
-  В режиме HR (выбор $n_\\eta$ даёт $t'\\log n'/\\Delta\\le c<1$) оба отношения $<1$, значит сумма ограничена константой.
-- `Доказательство:`
-  Из Eq. (18) HR’22 имеем сумму $\\sum_a A_2^s(4t\\log n'/\\Delta)^a$ (см. PDF, Eq. (18)). По §16.208
-  можно заменить $t^a$ на $t^{a_{\\mathrm{ch}}}$, то есть
+  where $r_{\\mathrm{ch}}:=(4t'\\log n'/\\Delta)\\cdot M^{1/t'}$ and $r_{\\mathrm{nch}}:=4\\log n'/\\Delta$.
+  In HR mode (choosing $n_\\eta$ gives $t'\\log n'/\\Delta\\le c<1$) both ratios are $<1$, which means the sum is limited by a constant.
+- `Proof:`
+  From Eq. (18) HR'22 we have the sum $\\sum_a A_2^s(4t\\log n'/\\Delta)^a$ (see PDF, Eq. (18)). Per Section 16.208
+  $t^a$ can be replaced by $t^{a_{\\mathrm{ch}}}$, that is
   $$(4t\\log n'/\\Delta)^a=(4t\\log n'/\\Delta)^{a_{\\mathrm{ch}}}(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}.$$
-  После переноса на $t'= (2s+1)\\log M$ и учёта раунд‑множителя (из §16.207) получаем указанную двойную сумму.
-  При $\\ell\\ge 64t'$ имеем $M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}\\le M^{a_{\\mathrm{ch}}/t'}$, поэтому
-  ряд по $a_{\\mathrm{ch}}$ имеет отношение $r_{\\mathrm{ch}}$, а по $a_{\\mathrm{nch}}$ — $r_{\\mathrm{nch}}$.
-  В HR‑параметрах $\\Delta=\\Theta(n/n')$ и рекурсия $n_\\eta$ обеспечивает $t'\\log n'/\\Delta<1$,
-  значит оба ряда геометрические и сходятся к константе.
-- `Toy‑тест:` $s=2$, $\\ell=5$, $t'=5$; возьмём $n'=2$ (так что $\\log n'=1$), $M=2$ (тогда $t'=(2s+1)\\log M=5$)
-  и $\\Delta=32$.
-  Тогда $r_{\\mathrm{ch}}=(4\\cdot5/32)\\cdot 2^{1/5}\\approx 0.72$ и $r_{\\mathrm{nch}}=4/32=0.125$.
-  Сумма начинается как $1+r_{\\mathrm{ch}}+r_{\\mathrm{nch}}+\\cdots$ и равна
+  After transferring to $t'= (2s+1)\\log M$ and taking into account the round multiplier (from Section 16.207), we obtain the indicated double amount.
+  For $\\ell\\ge 64t'$ we have $M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}\\le M^{a_{\\mathrm{ch}}/t'}$, therefore
+  the series in $a_{\\mathrm{ch}}$ has the relation $r_{\\mathrm{ch}}$, and the series in $a_{\\mathrm{nch}}$ has the relation $r_{\\mathrm{nch}}$.
+  In HR parameters $\\Delta=\\Theta(n/n')$ and recursion $n_\\eta$ provides $t'\\log n'/\\Delta<1$,
+  This means that both series are geometric and converge to a constant.
+- `Toy test:` $s=2$, $\\ell=5$, $t'=5$; let's take $n'=2$ (so $\\log n'=1$), $M=2$ (then $t'=(2s+1)\\log M=5$)
+  and $\\Delta=32$.
+  Then $r_{\\mathrm{ch}}=(4\\cdot5/32)\\cdot 2^{1/5}\\approx 0.72$ and $r_{\\mathrm{nch}}=4/32=0.125$.
+  The sum starts as $1+r_{\\mathrm{ch}}+r_{\\mathrm{nch}}+\\cdots$ and is equal to
   $1/\\bigl((1-r_{\\mathrm{ch}})(1-r_{\\mathrm{nch}})\\bigr)=O(1)$.
-- `Статус:` доказано (факторизация и геометричность после разбиения $a$).
+- `Status:` proven (factorization and geometricity after partitioning $a$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (оценка вероятности/счёт), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` оценить связь $a_{\\mathrm{nch}}$ с $a_{\\mathrm{ch}}$ или $s$ (например через pairing $\\pi$),
-  чтобы убрать зависимость от $a_{\\mathrm{nch}}$ в основной сумме (Q43.S44-bound-anonch).
+- `Barrier check:` r - applicable (probability estimate/score), NP - not applicable, alg - not applicable.
+- `Next step:` evaluate the connection of $a_{\\mathrm{nch}}$ with $a_{\\mathrm{ch}}$ or $s$ (for example, through pairing $\\pi$),
+  to remove the dependence on $a_{\\mathrm{nch}}$ in the principal amount (Q43.S44-bound-anonch).
 
-### 16.210. Исследовательский шаг (proof): Eq. (18) после $t^a\\to t^{a_{\\mathrm{ch}}}$ не содержит $a_{\\mathrm{nch}}$ вне $\\Delta$‑части
+### 16.210. Research step (proof): Eq. (18) after $t^a\\to t^{a_{\\mathrm{ch}}}$ does not contain $a_{\\mathrm{nch}}$ outside the $\\Delta$ part
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S45-audit-eq18-anonch-free):`
-  После замены $t^a\\rightsquigarrow t^{a_{\\mathrm{ch}}}$ и при $\\ell\\ge 64t'$ вся зависимость от
-  $a_{\\mathrm{nch}}$ в сумме Eq. (18) HR’22 остаётся только в множителе
-  $(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}$; ни $A_2^s$, ни раунд‑фактор
-  $M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}$ от $a_{\\mathrm{nch}}$ не зависят.
-  Следовательно, суммирование по $a_{\\mathrm{nch}}$ — чисто геометрическое и не требует
-  доп. оценки $a_{\\mathrm{nch}}$ через $a_{\\mathrm{ch}}$ или $s$.
-- `Доказательство:`
-  В HR Eq. (18) стоит сумма вида $\\sum_a A_2^s(4t\\log n'/\\Delta)^a$
+- `Lens:` Equivalence.
+- `Statement (Q43.S45-audit-eq18-anonch-free):`
+  After replacing $t^a\\rightsquigarrow t^{a_{\\mathrm{ch}}}$ and for $\\ell\\ge 64t'$ the entire dependence on
+  $a_{\\mathrm{nch}}$ in the sum Eq. (18) HR'22 remains only in the multiplier
+  $(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}$; neither $A_2^s$ nor round factor
+  $M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}$ do not depend on $a_{\\mathrm{nch}}$.
+  Consequently, summation over $a_{\\mathrm{nch}}$ is purely geometric and does not require
+  add. estimates $a_{\\mathrm{nch}}$ through $a_{\\mathrm{ch}}$ or $s$.
+- `Proof:`
+  In HR Eq. (18) there is a sum of the form $\\sum_a A_2^s(4t\\log n'/\\Delta)^a$
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2125-2134`).
-  По §16.208 можно заменить $t^a$ на $t^{a_{\\mathrm{ch}}}$ и разложить
-  $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$, откуда
+  By Section 16.208, $t^a$ can be replaced by $t^{a_{\\mathrm{ch}}}$ and expanded
+  $a=a_{\\mathrm{ch}}+a_{\\mathrm{nch}}$, from where
   $(4t\\log n'/\\Delta)^a=(4t'\\log n'/\\Delta)^{a_{\\mathrm{ch}}}(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}$.
-  Раунд‑множитель в flat local‑EF(s) зависит только от chosen‑центров
-  ($M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}$ из §16.207), поскольку non‑chosen centers
-  не создают запросов. Поскольку $A_2^s$ зависит только от $s$, единственный источник
-  зависимости от $a_{\\mathrm{nch}}$ — это $(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}$,
-  а значит суммирование по $a_{\\mathrm{nch}}$ геометрично.
-- `Toy‑тест:` возьмём $a_{\\mathrm{ch}}=0$. Тогда вклад равен
-  $A_2^s(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}$, без $t'$ и без $M$,
-  что подтверждает отсутствие скрытых зависимостей.
-- `Статус:` доказано (audit Eq. (18): $a_{\\mathrm{nch}}$ только в $\\Delta$‑части).
+  The round multiplier in flat local EF(s) depends only on the chosen centers
+  ($M^{\\lceil 64a_{\\mathrm{ch}}/\\ell\\rceil}$ from Section 16.207) since nonchosen centers
+  do not create requests. Since $A_2^s$ depends only on $s$, the only source
+  depending on $a_{\\mathrm{nch}}$ is $(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}$,
+  which means the summation over $a_{\\mathrm{nch}}$ is geometric.
+- `Toy test:` let's take $a_{\\mathrm{ch}}=0$. Then the contribution is equal
+  $A_2^s(4\\log n'/\\Delta)^{a_{\\mathrm{nch}}}$, without $t'$ and without $M$,
+  which confirms the absence of hidden dependencies.
+- `Status:` proven (audit Eq. (18): $a_{\\mathrm{nch}}$ only in the $\\Delta$ part).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, что в HR‑параметрах гарантированно $4\\log n'/\\Delta<1$
-  (после подстановки $\\Delta=\\Theta(n/n')$) и зафиксировать это в основном bound (Q43.S46-check-rnch-params).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check that the HR parameters are guaranteed to be $4\\log n'/\\Delta<1$
+  (after substituting $\\Delta=\\Theta(n/n')$) and fix this in the main bound (Q43.S46-check-rnch-params).
 
-### 16.211. Исследовательский шаг (proof): $r_{\\mathrm{nch}}<1$ из HR‑оценок на $\\Delta$
+### 16.211. Research step (proof): $r_{\\mathrm{nch}}<1$ from HR estimates by $\\Delta$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S48-delta-constant-bridge):`
-  В HR‑параметрах при условии $n\\ge 20 C n'\\log n'$ имеем $\\Delta\\ge 2C\\log n'$,
-  а также $\\Delta\\ge n/(6n')$. Тогда
+- `Lens:` Equivalence.
+- `Statement (Q43.S48-delta-constant-bridge):`
+  In the HR parameters, under the condition $n\\ge 20 C n'\\log n'$ we have $\\Delta\\ge 2C\\log n'$,
+  and also $\\Delta\\ge n/(6n')$. Then
   $$
   r_{\\mathrm{nch}}=\\frac{4\\log n'}{\\Delta}\\le \\frac{2}{C}<1 \\quad (C\\ge 3),
   $$
-  так что сумма по $a_{\\mathrm{nch}}$ в §16.210 ограничена константой.
-- `Доказательство:`
-  В HR после (14) явно сказано: из предположения $n\\ge 20 n' C\\log n'$ следует
-  $\\Delta\\ge 2C\\log n'$, и далее «claimed bound follows from the fact $\\Delta\\ge n/6 n'$»
+  so the sum over $a_{\\mathrm{nch}}$ in Section 16.210 is limited to a constant.
+- `Proof:`
+  In HR after (14) it is clearly stated: from the assumption $n\\ge 20 n' C\\log n'$ it follows
+  $\\Delta\\ge 2C\\log n'$, and further "claimed bound follows from the fact $\\Delta\\ge n/6 n'$"
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1567-1568`).
-  По §16.209–§16.210 $r_{\\mathrm{nch}}=4\\log n'/\\Delta$, поэтому
-  $r_{\\mathrm{nch}}\\le 4\\log n'/(2C\\log n')=2/C<1$ для $C\\ge 3$.
-- `Toy‑тест:` минимальный случай $n=20 C n'\\log n'$ даёт $\\Delta\\ge 2C\\log n'$ и
-  $r_{\\mathrm{nch}}\\le 2/C$; при $C=4$ получаем $r_{\\mathrm{nch}}\\le 1/2$.
-- `Статус:` доказано (константное $r_{\\mathrm{nch}}$ из HR‑оценок на $\\Delta$).
+  By Section 16.209-Section 16.210 $r_{\\mathrm{nch}}=4\\log n'/\\Delta$, therefore
+  $r_{\\mathrm{nch}}\\le 4\\log n'/(2C\\log n')=2/C<1$ for $C\\ge 3$.
+- `Toy test:` the minimal case $n=20 C n'\\log n'$ gives $\\Delta\\ge 2C\\log n'$ and
+  $r_{\\mathrm{nch}}\\le 2/C$; for $C=4$ we get $r_{\\mathrm{nch}}\\le 1/2$.
+- `Status:` proven (constant $r_{\\mathrm{nch}}$ from HR estimates on $\\Delta$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (оценка параметров), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` подставить $r_{\\mathrm{nch}}<1$ в итоговый bound Eq. (18)
-  и зафиксировать константу в основном резюме Q43 (Q43.S49-finalize-geo-constant).
+- `Barrier check:` r--applicable (parameter estimation), NP--not applicable, alg--not applicable.
+- `Next step:` substitute $r_{\\mathrm{nch}}<1$ into the final bound Eq. (18)
+  and capture the constant in the main summary of Q43 (Q43.S49-finalize-geo-constant).
 
-### 16.212. Исследовательский шаг (proof): $r_{\\mathrm{ch}}<1$ из HR‑параметров
+### 16.212. Research step (proof): $r_{\\mathrm{ch}}<1$ from HR parameters
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S50-bound-rch-constant):`
-  В режиме HR при $t':=(2s+1)\\log M$ и $s\\ge 1$ имеем
+- `Lens:` Trade-off.
+- `Statement (Q43.S50-bound-rch-constant):`
+  In the HR mode with $t':=(2s+1)\\log M$ and $s\\ge 1$ we have
   $$r_{\\mathrm{ch}}=\\Bigl(\\frac{4t'\\log n'}{\\Delta}\\Bigr)\\cdot M^{1/t'}\\le \\kappa<1$$
-  для всех достаточно больших $n$. Более точно, из условий
-  $n/n'\\ge A t'\\log^4 n$ (Lemma 4.2) и $\\Delta\\ge n/(6n')$ следует
+  for all sufficiently large $n$. More precisely, from the conditions
+  $n/n'\\ge A t'\\log^4 n$ (Lemma 4.2) and $\\Delta\\ge n/(6n')$ follows
   $$r_{\\mathrm{ch}}\\le \\frac{24e^{1/2}}{A\\,\\log^3 n},$$
-  так что при $\\log^3 n\\ge 48e^{1/2}/A$ можно взять $\\kappa=1/2$.
-- `Доказательство:`
-  Из $t'=(2s+1)\\log M$ получаем
+  so for $\\log^3 n\\ge 48e^{1/2}/A$ we can take $\\kappa=1/2$.
+- `Proof:`
+  From $t'=(2s+1)\\log M$ we obtain
   $$M^{1/t'}=\\exp\\!\\left(\\frac{1}{2s+1}\\right)\\le e^{1/2}$$
-  при $s\\ge 1$. По HR Lemma 4.2 выполняется $n/n'\\ge A t'\\log^4 n$
+  for $s\\ge 1$. By HR Lemma 4.2, $n/n'\\ge A t'\\log^4 n$ holds
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:950-952`),
-  а после (14) имеем $\\Delta\\ge n/(6n')$
+  and after (14) we have $\\Delta\\ge n/(6n')$
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1567-1568`).
-  Тогда
+  Then
   $$r_{\\mathrm{ch}}\\le \\frac{4t'\\log n'}{\\Delta}\\,e^{1/2}
   \\le \\frac{24t'\\log n'}{n/n'}\\,e^{1/2}
   \\le \\frac{24e^{1/2}}{A}\\cdot\\frac{\\log n'}{\\log^4 n}.$$
-  Используя $\\log n'\\le\\log n$, получаем указанную оценку
-  $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)$ и, следовательно, $r_{\\mathrm{ch}}<1$
-  при $n\\ge n_0(A)$.
-- `Toy‑тест:` $s=2$, $M=2$ дают $t'=5$ и $M^{1/t'}=2^{1/5}\\approx 1.15$.
-  Если $A=1$ и $\\log n=32$, то
+  Using $\\log n'\\le\\log n$, we obtain the indicated estimate
+  $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)$ and, therefore, $r_{\\mathrm{ch}}<1$
+  for $n\\ge n_0(A)$.
+- `Toy test:` $s=2$, $M=2$ give $t'=5$ and $M^{1/t'}=2^{1/5}\\approx 1.15$.
+  If $A=1$ and $\\log n=32$, then
   $$r_{\\mathrm{ch}}\\le \\frac{24e^{1/2}}{32^3}\\approx 1.2\\cdot 10^{-3}<1.$$
-- `Статус:` доказано (явная константа для $r_{\\mathrm{ch}}$ при HR‑параметрах).
+- `Status:` proven (explicit constant for $r_{\\mathrm{ch}}$ with HR parameters).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (оценка параметров), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` подставить $r_{\\mathrm{ch}}<1$ и $r_{\\mathrm{nch}}<1$ в Eq. (18)
-  и зафиксировать константу в основном резюме Q43 (Q43.S49-finalize-geo-constant).
+- `Barrier check:` r--applicable (parameter estimation), NP--not applicable, alg--not applicable.
+- `Next step:` substitute $r_{\\mathrm{ch}}<1$ and $r_{\\mathrm{nch}}<1$ into Eq. (18)
+  and capture the constant in the main summary of Q43 (Q43.S49-finalize-geo-constant).
 
-### 16.213. Исследовательский шаг (proof): явная константа из геометрической суммы
+### 16.213. Exploratory step (proof): explicit constant from geometric sum
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S51-geo-constant-explicit):`
-  Из факторизации §16.209 имеем
+- `Lens:` Invariant.
+- `Statement (Q43.S51-geo-constant-explicit):`
+  From the factorization of Section 16.209 we have
   $$
   \\sum_{a_{\\mathrm{ch}},a_{\\mathrm{nch}}\\ge 0}
   A_2^s\\,r_{\\mathrm{ch}}^{a_{\\mathrm{ch}}}\\,r_{\\mathrm{nch}}^{a_{\\mathrm{nch}}}
   =\\frac{A_2^s}{(1-r_{\\mathrm{ch}})(1-r_{\\mathrm{nch}})}.
   $$
-  При условиях HR (C\\ge 3 и $n\\ge n_0(A)$) можно взять
-  $r_{\\mathrm{ch}}\\le 1/2$ (§16.212) и $r_{\\mathrm{nch}}\\le 2/3$ (§16.211), поэтому
-  сумма в Eq. (18) ограничена $6\\,A_2^s$.
-- `Доказательство:`
-  Геометрическая сумма по $a_{\\mathrm{ch}}$ равна $1/(1-r_{\\mathrm{ch}})$,
-  по $a_{\\mathrm{nch}}$ — $1/(1-r_{\\mathrm{nch}})$ (§16.209). В §16.212 получено
-  $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)$, так что при $\\log^3 n\\ge 48e^{1/2}/A$
-  можно взять $r_{\\mathrm{ch}}\\le 1/2$. В §16.211 имеем $r_{\\mathrm{nch}}\\le 2/C$,
-  и при $C\\ge 3$ получаем $r_{\\mathrm{nch}}\\le 2/3$. Тогда
+  Under the conditions HR (C\\ge 3 and $n\\ge n_0(A)$) we can take
+  $r_{\\mathrm{ch}}\\le 1/2$ (Section 16.212) and $r_{\\mathrm{nch}}\\le 2/3$ (Section 16.211), so
+  sum in Eq. (18) is limited to $6\\,A_2^s$.
+- `Proof:`
+  The geometric sum over $a_{\\mathrm{ch}}$ is equal to $1/(1-r_{\\mathrm{ch}})$,
+  by $a_{\\mathrm{nch}}$ - $1/(1-r_{\\mathrm{nch}})$ (Section 16.209). Received in Section 16.212
+  $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)$, so for $\\log^3 n\\ge 48e^{1/2}/A$
+  we can take $r_{\\mathrm{ch}}\\le 1/2$. In Section 16.211 we have $r_{\\mathrm{nch}}\\le 2/C$,
+  and for $C\\ge 3$ we obtain $r_{\\mathrm{nch}}\\le 2/3$. Then
   $1/((1-r_{\\mathrm{ch}})(1-r_{\\mathrm{nch}}))\\le 1/((1-1/2)(1-2/3))=6$.
-- `Toy‑тест:` подставляя $r_{\\mathrm{ch}}=1/2$, $r_{\\mathrm{nch}}=2/3$ получаем множитель 6.
-  Для чисел из §16.209 ($s=2$, $M=2$, $\\Delta=32$) имеем
-  $r_{\\mathrm{ch}}\\approx 0.72$, $r_{\\mathrm{nch}}=0.125$ и итоговый множитель
+- `Toy test:` substituting $r_{\\mathrm{ch}}=1/2$, $r_{\\mathrm{nch}}=2/3$ we get the factor 6.
+  For the numbers from Section 16.209 ($s=2$, $M=2$, $\\Delta=32$) we have
+  $r_{\\mathrm{ch}}\\approx 0.72$, $r_{\\mathrm{nch}}=0.125$ and final multiplier
   $1/((1-0.72)(1-0.125))\\approx 4.1\\le 6$.
-- `Статус:` доказано (явная константа в сумме Eq. (18)).
+- `Status:` proven (explicit constant in the sum Eq. (18)).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (суммирование), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` вывести явное $n_0(A)$ для условия $r_{\\mathrm{ch}}\\le 1/2$
-  и сопоставить с требованием $n\\ge 20Cn'\\log n'$ (Q43.S52-explicit-n0).
+- `Barrier check:` r - applicable (summation), NP - not applicable, alg - not applicable.
+- `Next step:` print explicit $n_0(A)$ for the condition $r_{\\mathrm{ch}}\\le 1/2$
+  and compare with the requirement $n\\ge 20Cn'\\log n'$ (Q43.S52-explicit-n0).
 
-### 16.214. Исследовательский шаг (proof): явный $n_0(A)$ для $r_{\\mathrm{ch}}\\le 1/2$
+### 16.214. Exploratory step (proof): explicit $n_0(A)$ for $r_{\\mathrm{ch}}\\le 1/2$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S52-explicit-n0-closedform):`
-  Пусть $A>0$ из условий HR Lemma 4.2 и выполнена оценка
+- `Lens:` Trade-off.
+- `Statement (Q43.S52-explicit-n0-closedform):`
+  Let $A>0$ from the conditions of HR Lemma 4.2 and the estimate
   $$r_{\\mathrm{ch}}\\le \\frac{24e^{1/2}}{A\\log^3 n}$$
-  (§16.212). Тогда
+  (Section 16.212). Then
   $$n_0(A):=\\left\\lceil \\exp\\!\\left(\\left(\\frac{48e^{1/2}}{A}\\right)^{1/3}\\right)\\right\\rceil$$
-  гарантирует $r_{\\mathrm{ch}}\\le 1/2$ для всех $n\\ge n_0(A)$.
-- `Доказательство:`
-  Из $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)$ следует, что $r_{\\mathrm{ch}}\\le 1/2$
-  достаточно при $\\log^3 n\\ge 48e^{1/2}/A$, т.е.
+  guarantees $r_{\\mathrm{ch}}\\le 1/2$ for all $n\\ge n_0(A)$.
+- `Proof:`
+  From $r_{\\mathrm{ch}}\\le 24e^{1/2}/(A\\log^3 n)$ it follows that $r_{\\mathrm{ch}}\\le 1/2$
+  sufficient for $\\log^3 n\\ge 48e^{1/2}/A$, i.e.
   $$\\log n\\ge \\left(\\frac{48e^{1/2}}{A}\\right)^{1/3}.$$
-  Экспоненцируя, получаем $n\\ge \\exp\\!\\left((48e^{1/2}/A)^{1/3}\\right)$; для целых $n$
-  это эквивалентно $n\\ge n_0(A)$.
-- `Toy‑тест:` при $A=1$ имеем $n_0=\\lceil e^{(48e^{1/2})^{1/3}}\\rceil=74$ и
+  Exponentiating, we get $n\\ge \\exp\\!\\left((48e^{1/2}/A)^{1/3}\\right)$; for integers $n$
+  this is equivalent to $n\\ge n_0(A)$.
+- `Toy test:` for $A=1$ we have $n_0=\\lceil e^{(48e^{1/2})^{1/3}}\\rceil=74$ and
   $r_{\\mathrm{ch}}\\le 24e^{1/2}/\\log^3 74\\approx 0.496<1/2$.
-  При $A=10$ получаем $n_0=8$ и $r_{\\mathrm{ch}}\\le 0.440<1/2$.
-- `Статус:` доказано (явная замкнутая формула $n_0(A)$).
+  For $A=10$ we get $n_0=8$ and $r_{\\mathrm{ch}}\\le 0.440<1/2$.
+- `Status:` proven (explicit closed formula $n_0(A)$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (оценка параметров), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` сравнить условие $n\\ge 20Cn'\\log n'$ с $n\\ge n_0(A)$
+- `Barrier check:` r--applicable (parameter estimation), NP--not applicable, alg--not applicable.
+- `Next step:` compare the condition $n\\ge 20Cn'\\log n'$ with $n\\ge n_0(A)$
   (Q43.S53-compare-20cnlogn).
 
-### 16.215. Исследовательский шаг (exact citation): константа $A$ в Lemma 6.9/4.2 не раскрыта численно
+### 16.215. Exploratory step (exact citation): constant $A$ in Lemma 6.9/4.2 is not solved numerically
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S53-extract-a-bound):`
-  В HR'22 константа $A$ в Lemma 6.9/4.2 вводится как "some constant" без численного значения;
-  в доказательстве появляются дополнительные константы $A_1,A_2,A_3,A_4$ также без оценок.
-  Поэтому явный нижний bound $A_{\\min}$ нельзя извлечь из текста без подробного подсчёта битов
-  в алгоритмах восстановления (§6.5/Appendix B), и сравнение $n\\ge 20Cn'\\log n'$ с $n\\ge n_0(A)$
-  требует отдельного вычисления констант.
-- `Доказательство (exact citation):`
-  В `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt` Lemma 6.9 формулируется
-  как "There is a constant A > 0 ... a log t + b log \\Delta + s * A many bits suffice to encode ρ"
-  (строки 2096-2101). В конце доказательства перечисляются дополнительные "some constant"
-  величины: "A1 |S*_g| ... for some constant A1", "another A2 |S*_g| ... for some constant A2",
-  "There is a constant A3 > 0 ...", "some other constant A4" (строки 2551-2562). Численных
-  оценок для этих констант не приводится.
-- `Toy-тест:` из $t\\le s$ следует $s+16t+s/4\\le (69/4)s$, так что можно взять
-  $A_3,A_4\\le 69/4$, но $A_1,A_2$ остаются неявными, и потому $A_{\\min}$ не фиксируется.
-- `Статус:` частично (константа $A$ существует, но неявная).
+- `Lens:` Trade-off.
+- `Statement (Q43.S53-extract-a-bound):`
+  In HR'22, the constant $A$ in Lemma 6.9/4.2 is introduced as "some constant" without a numerical value;
+  additional constants $A_1,A_2,A_3,A_4$ appear in the proof, also without estimates.
+  Therefore, the explicit lower bound $A_{\\min}$ cannot be extracted from the text without detailed bit counting
+  in recovery algorithms (Section 6.5/Appendix B), and comparison of $n\\ge 20Cn'\\log n'$ with $n\\ge n_0(A)$
+  requires separate calculation of constants.
+- `Proof (exact citation):`
+  IN `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt` Lemma 6.9 is stated
+  like "There is a constant A > 0 ... a log t + b log \\Delta + s * A many bits suffice to encode "
+  (lines 2096-2101). At the end of the proof an additional "some constant" is listed
+  values: "A1 |S*_g| ... for some constant A1", "another A2 |S*_g| ... for some constant A2",
+  "There is a constant A3 > 0...", "some other constant A4" (lines 2551-2562). Numerical
+  No estimates are given for these constants.
+- `Toy test:` from $t\\le s$ it follows $s+16t+s/4\\le (69/4)s$, so we can take
+  $A_3,A_4\\le 69/4$, but $A_1,A_2$ remain implicit, and therefore $A_{\\min}$ is not fixed.
+- `Status:` partially (the constant $A$ exists, but is implicit).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (оценка констант), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` пройти Appendix B / Algorithms 2–7 и выписать явный верхний bound
-  на $A_1,A_2$ (сколько бит на центр/ребро), затем получить явный $A$ и сравнить $n_0(A)$
-  с $20Cn'\\log n'$ (Q43.S54-bound-a1a2-bits).
+- `Barrier check:` r - applicable (evaluation of constants), NP - not applicable, alg - not applicable.
+- `Next step:` go through Appendix B / Algorithms 2-7 and write down an explicit upper bound
+  by $A_1,A_2$ (how many bits per center/edge), then get explicit $A$ and compare $n_0(A)$
+  with $20Cn'\\log n'$ (Q43.S54-bound-a1a2-bits).
 
-### 16.216. Исследовательский шаг (toy computation): toy‑bound для $A_1$ из Algorithms 2–4
+### 16.216. Exploratory step (toy computation): toy-bound for $A_1$ from Algorithms 2-4
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S54-bound-a1-from-alg2-4):`
-  В toy‑случае $|S^{*}_g|=1$, $s=2$, $\\ell=5$ (одна стадия) псевдокод Algorithms 2–4
-  читает не более 18 константных бит из $X$ сверх терминов $a\\log t$, $b\\log\\Delta$
-  и $9|S^{*}_g|$. Следовательно, для этого случая можно взять $A_1\\le 18$.
-- `Toy‑тест:` при $|S^{*}_g|=1$ имеем $g=1$ (так как $|S^{*}_g|\\ge s/4$). В Algorithm 2
-  внутренний цикл читает ровно один бит `discover=1` для единственного ассоц. центра
-  и один бит `discover=0` для завершения стадии (2 бита;
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S54-bound-a1-from-alg2-4):`
+  In the toy case $|S^{*}_g|=1$, $s=2$, $\\ell=5$ (one stage) pseudocode Algorithms 2-4
+  reads at most 18 constant bits from $X$ beyond the terms $a\\log t$, $b\\log\\Delta$
+  and $9|S^{*}_g|$. Therefore, for this case we can take $A_1\\le 18$.
+- `Toy test:` for $|S^{*}_g|=1$ we have $g=1$ (since $|S^{*}_g|\\ge s/4$). In Algorithm 2
+  the inner loop reads exactly one bit `discover=1` for a single assoc. center
+  and one bit `discover=0` to end the stage (2 bits;
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3119-3127`).
-  Рассматривая худший по константным битам вариант (центр выбранный),
-  Algorithm 3 вызывает `GetPossiblyDeadCenter` не более 4 раз по направлениям
-  подписи (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3166-3173`),
-  давая 4 бита `known` (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3304`).
-  Далее `RecoverExposed` даёт ещё ≤4 вызова (4 бита `known`;
+  Considering the worst option in terms of constant bits (the center chosen),
+  Algorithm 3 calls `GetPossiblyDeadCenter` no more than 4 times per destination
+  signatures (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3166-3173`),
+  giving 4 bits `known` (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3304`).
+  Next `RecoverExposed` gives <=4 more calls (4 bits `known`;
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3259-3264`)
-  и `RecoverNonExposed` даёт ≤4 бита `recover` плюс ≤4 бита `known`
+  and `RecoverNonExposed` gives <=4 bits `recover` plus <=4 bits `known`
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3283-3286,3304`).
-  Итого $2+4+4+8=18$ константных бит. В альтернативе (центр не выбранный)
-  читаются $\\log 20\\le 5$ бит `cc` и ≤8 бит `known`
+  Total $2+4+4+8=18$ constant bits. Alternatively (center not selected)
+  read $\\log 20\\le 5$ bits `cc` and <=8 bits `known`
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3182-3193,3304`),
-  что даёт ≤15, поэтому 18 остаётся верхней оценкой.
-- `Статус:` частично (toy‑случай; общий bound на $A_1$ ещё не выведен).
+  which gives <=15, so 18 remains the top estimate.
+- `Status:` partially (toy case; the general bound on $A_1$ has not yet been output).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (подсчёт констант), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` обобщить подсчёт константных бит на произвольный $|S^{*}_g|$
-  и выписать явный $A_1$ (с отделением вкладов $\\log t$, $\\log\\Delta$ и 9‑битных подписей).
+- `Barrier check:` r - applicable (counting constants), NP - not applicable, alg - not applicable.
+- `Next step:` generalize the counting of constant bits to an arbitrary $|S^{*}_g|$
+  and write out explicit $A_1$ (separating the contributions of $\\log t$, $\\log\\Delta$ and 9bit signatures).
 
-### 16.217. Исследовательский шаг (toy computation): $|S^{*}_g|=2$ (один chosen + один non‑chosen)
+### 16.217. Research step (toy computation): $|S^{*}_g|=2$ (one chosen + one non-chosen)
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S55-count-a1-per-center):`
-  В toy‑сценарии $|S^{*}_g|=2$ с одним chosen и одним non‑chosen центром при $s=2$, $\\ell=5$
-  Algorithms 2–4 читают не более 32 константных бит сверх $a\\log t$, $b\\log\\Delta$
-  и $9|S^{*}_g|$. Следовательно, линейный bound $A_1|S^{*}_g|$ выполняется уже с $A_1=18$.
-- `Toy‑тест:` здесь $g=1$ (так как $|S^{*}_g|\\ge s/4$). Пусть оба центра обнаружены как ассоц.
-  центры на ветви $\\psi$ (худший случай для константных битов). Тогда Algorithm 2 читает
-  два бита `discover=1` и один бит `discover=0` (итого 3 бита;
+- `Lens:` Invariant.
+- `Statement (Q43.S55-count-a1-per-center):`
+  In the toy scenario $|S^{*}_g|=2$ with one chosen and one non-chosen center at $s=2$, $\\ell=5$
+  Algorithms 2-4 read no more than 32 constant bits beyond $a\\log t$, $b\\log\\Delta$
+  and $9|S^{*}_g|$. Consequently, the linear bound $A_1|S^{*}_g|$ is already executed with $A_1=18$.
+- `Toy test:` here $g=1$ (since $|S^{*}_g|\\ge s/4$). Let both centers be found associative.
+  centers on the $\\psi$ branch (worst case for constant bits). Then Algorithm 2 reads
+  two bits `discover=1` and one bit `discover=0` (total 3 bits;
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3119-3127`).
-  В Algorithm 3 для chosen‑центра возможно до 4 вызовов `GetPossiblyDeadCenter`, каждый даёт
-  один бит `known` (4 бита; `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3166-3173,3304`).
-  Для non‑chosen‑центра: в первом цикле ≤4 бита `known` (те же строки), затем читается
-  $\\log 20\\le 5$ бит `cc` и ещё ≤4 бита `known` для восстановления компонент (всего 13 бит;
+  In Algorithm 3, up to 4 calls are possible for the chosen center `GetPossiblyDeadCenter`, everyone gives
+  one bit `known` (4 bits; `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3166-3173,3304`).
+  For non-chosen center: in the first cycle <=4 bits `known` (same lines), then read
+  $\\log 20\\le 5$ bits `cc` and <=4 more bits `known` to restore components (total 13 bits;
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3182-3193,3304`).
-  Далее `RecoverExposed` для единственного chosen‑центра даёт ≤4 бита `known`, а
-  `RecoverNonExposed` даёт ≤4 бита `recover` и ≤4 бита `known`
+  Next `RecoverExposed` for a single chosen center gives <=4 bits `known`, A
+  `RecoverNonExposed` gives <=4 bits `recover` and <=4 bits `known`
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3259-3264,3283-3286,3304`).
-  Суммарно $3+4+13+12=32$ константных бита; так как $32\\le 18\\cdot 2$, линейность по
-  $|S^{*}_g|$ сохраняется на этом toy‑уровне.
-- `Статус:` доказано (toy‑случай; линейное масштабирование подтверждено).
+  Total $3+4+13+12=32$ constant bits; since $32\\le 18\\cdot 2$, linearity in
+  $|S^{*}_g|$ is stored at this toy level.
+- `Status:` proven (toy case; linear scaling confirmed).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (подсчёт констант), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` перейти к общему $|S^{*}_g|$: вывести per‑center bound, аккуратно учесть
-  единственный `discover=0` на стадию и получить явный $A_1$.
+- `Barrier check:` r - applicable (counting constants), NP - not applicable, alg - not applicable.
+- `Next step:` go to general $|S^{*}_g|$: output percenter bound, carefully take into account
+  the only one `discover=0` per stage and get an explicit $A_1$.
 
-### 16.218. Исследовательский шаг (toy scan): локальный arXiv‑срез не даёт прямой ссылки на “common partial decision tree” / “multi‑switching”
+### 16.218. Research step (toy scan): local arXiv-slice does not provide a direct link to the "common partial decision tree" / "multi-switching"
 
-- `Линза:` Эксперимент.
-- `Утверждение (Q43.S56a-arxiv-scan):`
-  В локальном arXiv‑срезе `resources/arxiv/pvnp_slice.tsv` нет прямых совпадений по фразам
-  “common partial decision tree” или “multi‑switching”; совпадения по “Tseitin” указывают на HR’22,
-  а по “switching lemma” — лишь на общий обзор/проект. Готовой ссылки на “a‑sum trick” в метаданных
-  не видно.
-- `Toy‑тест:`
-  1) `rg -ni "common partial decision tree|multi-switching" resources/arxiv/pvnp_slice.tsv` → нет совпадений.
-  2) `rg -ni "tseitin" resources/arxiv/pvnp_slice.tsv | head -20` → есть HR’22 (`…:13`).
-  3) `rg -ni "switching lemma" resources/arxiv/pvnp_slice.tsv | head -20` → есть общий обзор (`…:149`).
-- `Статус:` прямых ссылок не найдено (локальный срез).
+- `Lens:` Experiment.
+- `Statement (Q43.S56a-arxiv-scan):`
+  In a local arXiv slice `resources/arxiv/pvnp_slice.tsv` there are no direct matches for phrases
+  "common partial decision tree" or "multiswitching"; matches for "Tseitin" indicate HR'22,
+  and for "switching lemma" - only for a general overview/project. A ready-made link to the "a-sum trick" in the metadata
+  not visible.
+- `Toy test:`
+  1) `rg -ni "common partial decision tree|multi-switching" resources/arxiv/pvnp_slice.tsv` -> no matches.
+  2) `rg -ni "tseitin" resources/arxiv/pvnp_slice.tsv | head -20` -> there is HR'22 (`…:13`).
+  3) `rg -ni "switching lemma" resources/arxiv/pvnp_slice.tsv | head -20` -> there is a general overview (`…:149`).
+- `Status:` no direct links found (local slice).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` продолжить Q43.S56-generalize-a1-per-center.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` continue Q43.S56-generalize-a1-per-center.
 
-### 16.219. Исследовательский шаг (toy computation): $|S^{*}_g|=3$ (две chosen + одна non‑chosen)
+### 16.219. Research step (toy computation): $|S^{*}_g|=3$ (two chosen + one non-chosen)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S56-generalize-a1-per-center):`
-  В toy‑сценарии $|S^{*}_g|=3$ (две chosen + одна non‑chosen) при $s=2$, $\\ell=5$
-  Algorithms 2–4 читают не более 49 константных бит сверх $a\\log t$, $b\\log\\Delta$
-  и $9|S^{*}_g|$. Следовательно, $49\\le 18\\cdot |S^{*}_g|$ и линейность по
-  $|S^{*}_g|$ сохраняется на этом toy‑уровне.
-- `Toy‑тест:` здесь $g=1$ (так как $|S^{*}_g|\\ge s/4$). Предположим, что все три
-  центра обнаружены как ассоц. центры на ветви $\\psi$ (хуже по константным битам).
-  Algorithm 2 читает три бита `discover=1` и один бит `discover=0` (4 бита;
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S56-generalize-a1-per-center):`
+  In the toy scenario $|S^{*}_g|=3$ (two chosen + one non-chosen) with $s=2$, $\\ell=5$
+  Algorithms 2-4 read no more than 49 constant bits beyond $a\\log t$, $b\\log\\Delta$
+  and $9|S^{*}_g|$. Therefore, $49\\le 18\\cdot |S^{*}_g|$ and linearity in
+  $|S^{*}_g|$ is stored at this toy level.
+- `Toy test:` here $g=1$ (since $|S^{*}_g|\\ge s/4$). Let's assume that all three
+  centers found as assoc. centers on the $\\psi$ branch (worse for constant bits).
+  Algorithm 2 reads three bits `discover=1` and one bit `discover=0` (4 bits;
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3119-3127`).
-  В Algorithm 3 первый цикл даёт до 4 вызовов `GetPossiblyDeadCenter` на центр, т.е.
-  12 бит `known` (`…:3166-3173,3304`). Для non‑chosen‑центра дополнительно читаются
-  $\\log 20\\le 5$ бит `cc` и ещё ≤4 бита `known` при восстановлении компонент
-  (`…:3182-3193,3304`), итого 21 бит в Algorithm 3. Далее `RecoverExposed` даёт
-  ≤4 бита `known` на chosen‑центр (8 бит; `…:3259-3264,3304`), а `RecoverNonExposed`
-  даёт ≤4 бита `recover` и ≤4 бита `known` на chosen‑центр (16 бит; `…:3283-3286,3304`).
-  Суммарно $4+21+24=49$ константных бит, что ≤ $18\\cdot 3=54$.
-- `Статус:` частично (toy‑случай; общий $A_1$ ещё не выведен).
+  In Algorithm 3, the first loop gives up to 4 calls `GetPossiblyDeadCenter` to the center, i.e.
+  12 bit `known` (`…:3166-3173,3304`). For a non-chosen center, additionally read
+  $\\log 20\\le 5$ bits `cc` and <=4 more bits `known` when restoring components
+  (`…:3182-3193,3304`), a total of 21 bits in Algorithm 3. Next `RecoverExposed` gives
+  <=4 bits `known` to chosencenter (8 bits; `…:3259-3264,3304`), A `RecoverNonExposed`
+  gives <=4 bits `recover` and <=4 bits `known` to chosencenter (16 bits; `…:3283-3286,3304`).
+  A total of $4+21+24=49$ constant bits, which is <= $18\\cdot 3=54$.
+- `Status:` partially (toy case; general $A_1$ has not yet been printed).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (подсчёт констант), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` попытаться вывести общий per‑center инвариант
-  “каждый associated‑center обнаруживается максимум один раз” и тем самым получить
-  глобальный $A_1$ (Q43.S57-invariant-one-discovery).
+- `Barrier check:` r - applicable (counting constants), NP - not applicable, alg - not applicable.
+- `Next step:` try to derive a general percenter invariant
+  "each associatedcenter is detected at most once" and thereby obtain
+  global $A_1$ (Q43.S57-invariant-one-discovery).
 
-### 16.220. Исследовательский шаг (proof): one‑discovery для associated centers
+### 16.220. Research step (proof): onediscovery for associated centers
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S57-one-discovery-proof):`
-  Если associated center $u$ переменной на forceable branch $\\psi_j$ не лежит в $S^{*}_{j-1}$,
-  то $u$ становится disappearing center ровно в этой стадии; следовательно, в Algorithm 2 бит
-  `discover=1` читается не более одного раза на центр, и число таких битов $\\le |\\mathrm{supp}(K^{*})|\\le |S^{*}_g|$.
-- `Доказательство:`
-  1) По Def. 6.2(2), если associated center $u$ переменной на $\\psi_j$ не в $S^{*}_{j-1}$, то $J_j$ закрыт в $u$
-     (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1886-1888`), и такие $u$ — disappearing centers
-     (`…:2255-2257`). Поэтому $u\\in\\mathrm{supp}(J_j)=\\mathrm{supp}(K_j)$.
-  2) По Lemma 6.7 supports $J_j$ и $J_{j'}$ дискретны при $j\\ne j'$ (`…:2028-2041`), значит любой disappearing center
-     принадлежит единственной стадии.
-  3) Обновление $S(\\tau',\\sigma)=S(\\tau,\\sigma)\\cup S_J\\cup\\mathrm{supp}(J)$ (`…:1949-1952`)
-     и Invariant 6.1(1) (“S только растёт”, `…:1838-1842`) дают: после стадии $j$ тот же $u$ уже в $S^{*}_{j}$,
-     поэтому в последующих стадиях он не может снова входить в $\\mathrm{supp}(J_{j'})\\setminus S^{*}_{j'-1}$.
-  4) В Algorithm 2 бит `discover=1` читается лишь для disappearing center, который является associated center
-     переменной на $\\psi$ (`…:3119-3124`), значит каждое такое $u$ даёт ≤1 чтение. Так как
-     $\\bigcup_{j\\le g}\\mathrm{supp}(J_j)\\subseteq S^{*}_g$, число этих битов $\\le |S^{*}_g|$.
-- `Toy‑тест:` двухстадийный сценарий: пусть один и тот же центр $u$ пытается быть associated center на $\\psi_j$
-  и $\\psi_{j+1}$ при $u\\notin S^{*}_{j-1}$. Тогда $u\\in\\mathrm{supp}(J_j)$ по Def. 6.2(2), но Lemma 6.7
-  запрещает $u\\in\\mathrm{supp}(J_{j+1})$ — противоречие. Если же $u\\in S^{*}_j$, то он не участвует в $a_{j+1}$
-  и не требует `discover=1`.
-- `Статус:` доказано.
+- `Lens:` Invariant.
+- `Statement (Q43.S57-one-discovery-proof):`
+  If the associated center $u$ of a variable on a forceable branch $\\psi_j$ does not lie in $S^{*}_{j-1}$,
+  then $u$ becomes disappearing center exactly at this stage; therefore, there are 2 bits in Algorithm
+  `discover=1` is read no more than once per center, and the number of such bits is $\\le |\\mathrm{supp}(K^{*})|\\le |S^{*}_g|$.
+- `Proof:`
+  1) By Def. 6.2(2), if the associated center $u$ of a variable on $\\psi_j$ is not in $S^{*}_{j-1}$, then $J_j$ is closed in $u$
+     (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1886-1888`), and such $u$ are disappearing centers
+     (`…:2255-2257`). Therefore $u\\in\\mathrm{supp}(J_j)=\\mathrm{supp}(K_j)$.
+  2) By Lemma 6.7 supports $J_j$ and $J_{j'}$ are discrete for $j\\ne j'$ (`…:2028-2041`), means any disappearing center
+     belongs to a single stage.
+  3) Update $S(\\tau',\\sigma)=S(\\tau,\\sigma)\\cup S_J\\cup\\mathrm{supp}(J)$ (`…:1949-1952`)
+     and Invariant 6.1(1) ("S is only growing", `…:1838-1842`) give: after stage $j$ the same $u$ is already in $S^{*}_{j}$,
+     therefore, in subsequent stages it cannot enter $\\mathrm{supp}(J_{j'})\\setminus S^{*}_{j'-1}$ again.
+  4) Algorithm has 2 bits `discover=1` read only for disappearing center, which is the associated center
+     variable on $\\psi$ (`…:3119-3124`), which means each such $u$ gives <=1 reading. Because
+     $\\bigcup_{j\\le g}\\mathrm{supp}(J_j)\\subseteq S^{*}_g$, the number of these bits is $\\le |S^{*}_g|$.
+- `Toy test:` two-stage scenario: let the same center $u$ try to be an associated center on $\\psi_j$
+  and $\\psi_{j+1}$ for $u\\notin S^{*}_{j-1}$. Then $u\\in\\mathrm{supp}(J_j)$ by Def. 6.2(2), but Lemma 6.7
+  prohibits $u\\in\\mathrm{supp}(J_{j+1})$--a contradiction. If $u\\in S^{*}_j$, then it does not participate in $a_{j+1}$
+  and does not require `discover=1`.
+- `Status:` proven.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` использовать one‑discovery для полного per‑center подсчёта константных бит в Algorithms 2–4
-  и вывести явный $A_1$ (Q43.S58-bound-a1-constant).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` use onediscovery for full percenter counting of constant bits in Algorithms 2-4
+  and output explicit $A_1$ (Q43.S58-bound-a1-constant).
 
-### 16.221. Исследовательский шаг (proof): Algorithm 3 даёт ≤13 константных бит на центр
+### 16.221. Research step (proof): Algorithm 3 gives <=13 constant bits per center
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S59-alg3-per-center-constant):`
-  В Algorithm 3 (RecoverForcingInformation) суммарное число константных битов (known/recover/cc)
-  из $X$, прочитанных на стадиях $j\\le g$, не превышает $13\\,|S^{*}_g|$. Эквивалентно, каждому
-  центру из $S^{*}_g$ можно приписать ≤13 таких битов.
-- `Доказательство:`
-  1) В первом цикле Algorithm 3 каждый associated center $v\\in E_{\\psi}$ вызывает `GetPossiblyDeadCenter`
-     не более 4 раз (по направлениям), и каждый вызов читает ровно один бит `known`
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S59-alg3-per-center-constant):`
+  In Algorithm 3 (RecoverForcingInformation) the total number of constant bits (known/recover/cc)
+  of $X$ read at stages $j\\le g$ does not exceed $13\\,|S^{*}_g|$. Equivalent to everyone
+  the center of $S^{*}_g$ can be assigned <=13 such bits.
+- `Proof:`
+  1) In the first loop of Algorithm 3, each associated center $v\\in E_{\\psi}$ causes `GetPossiblyDeadCenter`
+     no more than 4 times (per direction), and each call reads exactly one bit `known`
      (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3161-3173,3304`).
-     Для non‑chosen‑центра второй цикл добавляет $\\log 20\\le 5$ бит `cc` и ещё ≤4 бита `known`
-     при восстановлении компонент (`…:3177-3193,3304`), итого ≤13 константных бит.
-  2) Для chosen‑центров из $\\mathrm{supp}(J)$ Lemma 6.5 даёт наличие соседнего chosen‑центра в
-     $\\mathrm{supp}(J)$ (`…:2013-2017`), поэтому в `RecoverExposed` среди 4 направлений хотя бы одно
-     уже содержит chosen‑центр, и `GetPossiblyDeadCenter` вызывается ≤3 раз (≤3 бита `known`;
+     For a non-chosen center, the second loop adds $\\log 20\\le 5$ bits `cc` and <=4 more bits `known`
+     when restoring components (`…:3177-3193,3304`), total <=13 constant bits.
+  2) For chosen-centers from $\\mathrm{supp}(J)$ Lemma 6.5 gives the presence of a neighboring chosen-center in
+     $\\mathrm{supp}(J)$ (`…:2013-2017`), so in `RecoverExposed` at least one among 4 directions
+     already contains the chosen center, and `GetPossiblyDeadCenter` called <=3 times (<=3 bits `known`;
      `…:3259-3264,3304`).
-  3) Каждый chosen‑центр $u\\in S$ имеет соседний chosen‑центр в $S$: если $u\\in\\mathrm{supp}(J)$ —
-     по Lemma 6.5, иначе $u$ добавлен `RecoverExposed` из под‑квадрата, смежного с таким
-     центром. Тогда в `RecoverNonExposed` условие “нет chosen‑центра” может выполняться
-     не более чем в 3 направлениях, давая ≤3 бита `recover` и ≤3 бита `known`
+  3) Each chosen-center $u\\in S$ has a neighboring chosen-center in $S$: if $u\\in\\mathrm{supp}(J)$ --
+     by Lemma 6.5, otherwise $u$ is added `RecoverExposed` from the sub-square adjacent to such
+     center. Then in `RecoverNonExposed` the condition "no chosen center" can be satisfied
+     in no more than 3 directions, giving <=3 bits `recover` and <=3 bits `known`
      (`…:3279-3286,3304`).
-  4) Следовательно, каждый chosen associated center даёт ≤$4+3+6=13$ константных бит,
-     а любые другие chosen‑центры, найденные через `RecoverExposed`, дают ≤$1+6\\le 7$.
-     По Lemma 6.7 supports $J_j$ дискретны (`…:2028-2036`), а $S$ монотонен
-     (Invariant 6.1(1) и обновление $S(\\tau',\\sigma)$; `…:1842-1844,1949-1952`),
-     поэтому каждый центр из $S^{*}_g$ обрабатывается максимум один раз. Итог:
-     ≤$13\\,|S^{*}_g|$ константных бит.
-- `Toy‑тест:` для toy‑случая $|S^{*}_g|=3$ оценки из §16.219 можно усилить:
-  заменяя “4 направления” на “≤3” в `RecoverExposed/RecoverNonExposed`, получаем
+  4) Therefore, each chosen associated center gives <=$4+3+6=13$ constant bits,
+     and any other chosen centers found through `RecoverExposed`, give <=$1+6\\le 7$.
+     By Lemma 6.7 supports $J_j$ are discrete (`…:2028-2036`), and $S$ is monotone
+     (Invariant 6.1(1) and update $S(\\tau',\\sigma)$; `…:1842-1844,1949-1952`),
+     therefore, each center from $S^{*}_g$ is processed at most once. Result:
+     <=$13\\,|S^{*}_g|$ constant bits.
+- `Toy test:` for the toy case $|S^{*}_g|=3$ the estimates from Section 16.219 can be strengthened:
+  replacing "4 directions" with "<=3" in `RecoverExposed/RecoverNonExposed`, we get
   $21+6+12=39\\le 13|S^{*}_g|$.
-- `Статус:` доказано (линейный per‑center bound для Algorithm 3).
+- `Status:` proven (linear percenter bound for Algorithm 3).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (учёт битов), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` закрыть вклад Algorithm 2 (`discover=0` на стадию) и собрать явный $A_1$
-  вместе с Algorithm 4 (Q43.S58-alg2-discover-budget).
+- `Barrier check:` r - applicable (bit counting), NP - not applicable, alg - not applicable.
+- `Next step:` close Algorithm 2 contribution (`discover=0` per stage) and collect explicit $A_1$
+  along with Algorithm 4 (Q43.S58-alg2-discover-budget).
 
-### 16.222. Исследовательский шаг (proof): `discover=0` ограничен числом центров
+### 16.222. Research step (proof): `discover=0` limited by number of centers
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S60-bound-g-by-centers):`
-  В Algorithm 2 число битов `discover=0` равно числу стадий $g$, и $g\\le |S^{*}_g|$.
-  Следовательно, вклад `discover=0` в $A_1$ не превосходит $|S^{*}_g|$.
-- `Доказательство:`
-  1) В Algorithm 2 шаг 3 читает бит $b$; если $b=1$, процедура остаётся в той же стадии
-     и возвращается к шагу 3, а если $b=0$, то выполняется шаг 5 и стадия $j$ завершается
+- `Lens:` Invariant.
+- `Statement (Q43.S60-bound-g-by-centers):`
+  In Algorithm 2 the number of bits `discover=0` is equal to the number of stages $g$, and $g\\le |S^{*}_g|$.
+  Therefore, the contribution `discover=0` in $A_1$ does not exceed $|S^{*}_g|$.
+- `Proof:`
+  1) In Algorithm 2, step 3 reads bit $b$; if $b=1$, the procedure remains in the same stage
+     and returns to step 3, and if $b=0$, then step 5 is executed and stage $j$ ends
      (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2381-2388`).
-     Значит, на каждую стадию приходится ровно один бит `discover=0`, и их число равно $g$.
-  2) $g$ — первая стадия, где $|S^{*}_g|\\ge s/4$ (`…:2043-2051`), и в тексте явно сказано,
-     что «в каждой стадии добавляется хотя бы один центр в $S$», откуда $g\\le s/4$
-     (`…:2052-2054`). Следовательно, $g\\le s/4\\le |S^{*}_g|$.
-  3) Комбинируя (1)–(2), получаем требуемую оценку вклада `discover=0`.
-- `Toy‑тест:` при $|S^{*}_g|=1$ неизбежно $g=1$ (так как $|S^{*}_g|\\ge s/4$),
-  и Algorithm 2 действительно читает ровно один бит `discover=0` на единственной стадии.
-- `Статус:` доказано.
+     This means that there is exactly one bit per stage `discover=0`, and their number is $g$.
+  2) $g$ is the first stage, where $|S^{*}_g|\\ge s/4$ (`…:2043-2051`), and the text explicitly states,
+     that "at each stage at least one center is added to $S$", whence $g\\le s/4$
+     (`…:2052-2054`). Therefore, $g\\le s/4\\le |S^{*}_g|$.
+  3) Combining (1)-(2), we obtain the required contribution estimate `discover=0`.
+- `Toy test:` for $|S^{*}_g|=1$ it is inevitable that $g=1$ (since $|S^{*}_g|\\ge s/4$),
+  and Algorithm 2 actually reads exactly one bit `discover=0` at a single stage.
+- `Status:` proven.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` оценить константные биты в Algorithm 4 и собрать явный $A_1$
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` evaluate constant bits in Algorithm 4 and collect explicit $A_1$
   (Q43.S61-alg4-constant).
 
-### 16.223. Исследовательский шаг (proof): Algorithm 4 не читает X ⇒ вклад 0
+### 16.223. Research step (proof): Algorithm 4 does not read X  contribution 0
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S61-alg4-constant):`
-  В Algorithm 4 (RecoverK) не читаются биты из $X$; множество $K$ вычисляется
-  детерминированно из $J$ и $I^{*}_{-}$. Следовательно, вклад Algorithm 4 в число
-  константных битов равен $0$ (и, в частности, $\\le C\\,|S^{*}_g|$ при $C=1$).
-- `Доказательство:`
-  1) Псевдокод Algorithm 4 принимает только $I^{*}_{-}$ и $J$ и не содержит обращений
-     к `next bit from X`; операции — это обход $u\\in\\mathrm{supp}(J)$ и добавление
-     не‑ребра $(u,\\delta,\\bot)$ в $K$
+- `Lens:` Invariant.
+- `Statement (Q43.S61-alg4-constant):`
+  Algorithm 4 (RecoverK) does not read bits from $X$; the set $K$ is calculated
+  deterministically from $J$ and $I^{*}_{-}$. Therefore, the contribution of Algorithm 4 to the number
+  of constant bits is equal to $0$ (and, in particular, $\\le C\\,|S^{*}_g|$ for $C=1$).
+- `Proof:`
+  1) Algorithm 4 pseudocode only accepts $I^{*}_{-}$ and $J$ and does not contain calls
+     To `next bit from X`; operations are traversing $u\\in\\mathrm{supp}(J)$ and adding
+     non-edges $(u,\\delta,\\bot)$ in $K$
      (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:3230-3238`).
-  2) Направление $\\delta$ определяется из уже восстановленных $J$ и $I^{*}_{-}$
-     как направление без информации в $J\\cup I^{*}_{-}$; это вычисление не требует
-     чтения дополнительных битов.
-  3) Поэтому суммарный вклад Algorithm 4 в константные биты равен $0$.
-- `Toy‑тест:` при $s=2$, $\\ell=5$ и $|S^{*}_g|\\in\\{1,2\\}$ Algorithm 4 не читает $X$,
-  поэтому toy‑подсчёты из §16.216–§16.217 не меняются.
-- `Статус:` доказано.
+  2) The direction of $\\delta$ is determined from the already restored $J$ and $I^{*}_{-}$
+     as a direction without information in $J\\cup I^{*}_{-}$; this calculation does not require
+     reading additional bits.
+  3) Therefore, the total contribution of Algorithm 4 to constant bits is $0$.
+- `Toy test:` for $s=2$, $\\ell=5$ and $|S^{*}_g|\\in\\{1,2\\}$ Algorithm 4 does not read $X$,
+  therefore, the toy counts from Section 16.216-Section 16.217 do not change.
+- `Status:` proven.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (учёт битов), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` собрать явный $A_1$ как сумму вкладов Algorithms 2–4 и зафиксировать
-  итоговую константу (Q43.S62-assemble-a1).
+- `Barrier check:` r - applicable (bit counting), NP - not applicable, alg - not applicable.
+- `Next step:` collect explicit $A_1$ as the sum of contributions of Algorithms 2-4 and fix
+  final constant (Q43.S62-assemble-a1).
 
-### 16.224. Исследовательский шаг (proof): явный $A_1$ из суммы вкладов Algorithms 2–4
+### 16.224. Research step (proof): explicit $A_1$ from the sum of contributions of Algorithms 2-4
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S62-assemble-a1-sum):`
-  Суммарное число константных битов, читаемых в Algorithms 2–4, плюс чтение подписей
-  (не более $9|S^{*}_g|$) ограничено величиной $24|S^{*}_g|$. Эквивалентно, можно взять
-  явную константу $A_1^{\\mathrm{tot}}=24$ для всего “constant‑part” термина в Lemma 6.9.
-  Если держать подписи отдельно, то $A_1\\le 15$.
-- `Доказательство:`
-  1) По §16.220 биты `discover=1` читаются не более одного раза на центр, т.е.
-     не более $|S^{*}_g|$ бит.
-  2) По §16.222 биты `discover=0` равны числу стадий и не превосходят $|S^{*}_g|$.
-  3) По §16.221 Algorithm 3 даёт ≤ $13|S^{*}_g|$ константных бит (known/recover/cc).
-  4) По §16.223 Algorithm 4 не читает $X$, вклад равен 0.
-  5) Чтение подписей даёт ещё ≤ $9|S^{*}_g|$ бит
+- `Lens:` Invariant.
+- `Statement (Q43.S62-assemble-a1-sum):`
+  Total number of constant bits read in Algorithms 2-4, plus signatures read
+  (no more than $9|S^{*}_g|$) is limited to $24|S^{*}_g|$. Equivalently, you can take
+  explicit constant $A_1^{\\mathrm{tot}}=24$ for the entire "constant-part" term in Lemma 6.9.
+  If you keep the signatures separately, then $A_1\\le 15$.
+- `Proof:`
+  1) According to Section 16.220 bits `discover=1` read no more than once per center, i.e.
+     no more than $|S^{*}_g|$ bits.
+  2) According to Section 16.222 bits `discover=0` are equal to the number of stages and do not exceed $|S^{*}_g|$.
+  3) By Section 16.221 Algorithm 3 gives <= $13|S^{*}_g|$ constant bits (known/recover/cc).
+  4) According to Section 16.223, Algorithm 4 does not read $X$, the contribution is 0.
+  5) Reading signatures gives <= $9 more|S^{*}_g|$ bits
      (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2549`).
-  Складывая, получаем $9+1+1+13=24$ бит на центр; при раздельном учёте подписи
-  остаётся $A_1\\le 15$.
-- `Toy‑тест:` при $|S^{*}_g|=4$ (2 chosen + 2 non‑chosen) суммарный worst‑case равен
-  $4+4+13\\cdot 4+9\\cdot 4=96=24\\cdot 4$, что согласуется с bound $A_1^{\\mathrm{tot}}|S^{*}_g|$.
-- `Статус:` доказано (явная константа $A_1$ получена суммированием вкладов).
+  Adding, we get $9+1+1+13=24$ bits per center; with separate accounting of signatures
+  that leaves $A_1\\le 15$.
+- `Toy test:` with $|S^{*}_g|=4$ (2 chosen + 2 non-chosen) the total worst-case is equal to
+  $4+4+13\\cdot 4+9\\cdot 4=96=24\\cdot 4$, which is consistent with bound $A_1^{\\mathrm{tot}}|S^{*}_g|$.
+- `Status:` proven (the explicit constant $A_1$ is obtained by summing the contributions).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (учёт битов), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` оценить явный $A_2$ для структуры $J_j$ и $I^{*}_{-}$, чтобы получить
-  полностью численные константы Lemma 6.9 (Q43.S63-bound-a2-graph-structure).
+- `Barrier check:` r - applicable (bit counting), NP - not applicable, alg - not applicable.
+- `Next step:` evaluate explicit $A_2$ for structure $J_j$ and $I^{*}_{-}$ to get
+  fully numerical constants Lemma 6.9 (Q43.S63-bound-a2-graph-structure).
 
-### 16.225. Исследовательский шаг (proof): явный $A_2$ для структуры $J_j$ и $I^{*}_{-}$
+### 16.225. Exploratory step (proof): explicit $A_2$ for structure $J_j$ and $I^{*}_{-}$
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S63-bound-a2-graph-structure):`
-  Для каждого центра есть ровно 4 направления (left/right/up/down), поэтому структура
-  information set (в частности, $J_j$ или $I_j$) кодируется ≤2 битами на направление
-  (нет информации / non-edge / edge), то есть ≤8 бит на центр. Следовательно, для совокупной
-  структуры $J_j$ и $I^{*}_{-}$ можно взять явную константу $A_2\\le 16$.
-- `Доказательство:`
-  1) По Def. 5.6 information piece — либо edge $\\{v,w\\}$ между соседними центрами, либо
-     non-edge $(v,\\delta,\\bot)$ с $\\delta\\in\\{\\text{left},\\text{right},\\text{up},\\text{down}\\}$,
-     т.е. ровно 4 направления на центр
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S63-bound-a2-graph-structure):`
+  For each center there are exactly 4 directions (left/right/up/down), so the structure
+  information set (specifically $J_j$ or $I_j$) is encoded with <=2 bits per direction
+  (no information/non-edge/edge), i.e. <=8 bits per center. Therefore, for the total
+  structures $J_j$ and $I^{*}_{-}$, we can take an explicit constant $A_2\\le 16$.
+- `Proof:`
+  1) By Def. 5.6 information piece -- either edge $\\{v,w\\}$ between neighboring centers, or
+     non-edge $(v,\\delta,\\bot)$ with $\\delta\\in\\{\\text{left},\\text{right},\\text{up},\\text{down}\\}$,
+     those. exactly 4 directions to the center
      (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1586-1590`).
-  2) В тексте HR структура $J_j$ восстанавливается за «constant number of bits per potential edge»
-     (`…:2259-2261`), а для $I_j$ требуется тот же тип константы
-     (`…:2536-2539`); итоговый вклад суммируется в $A_2|S^{*}_g|$ (`…:2555`).
-  3) При известном support центров (log $\\Delta$ биты учтены отдельно) для каждого направления
-     остаётся тройственный выбор: нет информации / non-edge / edge. Это кодируется 2 битами,
-     значит ≤8 бит на центр для $J_j$ и ≤8 бит на центр для $I_j$.
-  4) Итого можно взять явную $A_2:=16$ для структуры $J_j$ и $I^{*}_{-}$.
-- `Toy‑тест:` $s=2$, один chosen‑центр. У центра 4 направления; 2 бита на направление дают
-  8 бит для структуры $J_j$ и 8 бит для структуры $I_j$, всего 16 = $A_2\\cdot|S^{*}_g|$
-  при $|S^{*}_g|=1$.
-- `Статус:` доказано (явная константа $A_2$).
+  2) In the HR text, the $J_j$ structure is restored using "constant number of bits per potential edge"
+     (`…:2259-2261`), and $I_j$ requires the same constant type
+     (`…:2536-2539`); the final contribution is summed up to $A_2|S^{*}_g|$ (`…:2555`).
+  3) With known support centers (log $\\Delta$ bits are taken into account separately) for each direction
+     There remains a triple choice: no information / non-edge / edge. This is encoded in 2 bits,
+     means <=8 bits per center for $J_j$ and <=8 bits per center for $I_j$.
+  4) In total, we can take an explicit $A_2:=16$ for the structure $J_j$ and $I^{*}_{-}$.
+- `Toy test:` $s=2$, one chosencenter. The center has 4 directions; 2 bits per direction give
+  8 bits for structure $J_j$ and 8 bits for structure $I_j$, total 16 = $A_2\\cdot|S^{*}_g|$
+  for $|S^{*}_g|=1$.
+- `Status:` proven (explicit constant $A_2$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо (подсчёт бит), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, можно ли поглотить $A_2$ в подписи/структуру $J_j$
+- `Barrier check:` r - applicable (bit counting), NP - not applicable, alg - not applicable.
+- `Next step:` check if $A_2$ can be absorbed into signature/structure $J_j$
   (Q43.S64-absorb-a2-into-signature).
 
-### 16.226. Исследовательский шаг (counterexample): подписи не фиксируют структуру $I_j$
+### 16.226. Exploratory step (counterexample): signatures do not capture the structure of $I_j$
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S64-absorb-a2-by-signature):`
-  Подписи Definition 6.11 фиксируют только структуру $J_j$ и не определяют структуру $I_j$;
-  уже на toy‑примере существуют два разных $I_j$ при одинаковых подписях и поддержке, так что
-  $A_2=0$ не следует.
-- `Контрпример / Toy‑тест:`
-  Пусть на стадии $j$ множество exposed‑центров $S_j$ — это 2x2 блок chosen‑центров, а $J_j$
-  (и его подписи) фиксированы. По Invariant 6.1(2) $I_j$ должен быть локально согласован и
-  замкнут на $S_j$ (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1841-1848`),
-  а замкнутость/нечётность степеней задаются Definition 5.8 и 5.11
-  (`…:1618-1623,1659-1665`). Тогда возможны два разных закрытых $I_j$ на той же поддержке:
-  $I_j^{H}$ с горизонтальным matching (две горизонтальные рёбра) и $I_j^{V}$ с вертикальным
-  matching. В обоих случаях у каждого центра ровно одно инцидентное ребро (нечётная степень),
-  а остальные направления заняты non‑edge‑информацией, так что локальная согласованность
-  сохраняется. Подписи зависят только от $J_j$ (`…:2327-2333`), поэтому для $I_j^{H}$ и $I_j^{V}$
-  они совпадают, но структуры различны. Следовательно, подписи/поддержка не определяют $I_j$,
-  и отдельный $A_2$‑терм необходим.
-- `Статус:` контрпример (поглощение $A_2$ в подписи невозможно в текущем виде).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S64-absorb-a2-by-signature):`
+  Definition 6.11 signatures capture only the structure $J_j$ and do not define the structure $I_j$;
+  already in the toy example there are two different $I_j$ with the same signatures and support, so
+  $A_2=0$ should not be.
+- `Counterexample / Toy test:`
+  Let at stage $j$ the set of exposed centers $S_j$ be a 2x2 block of chosen centers, and $J_j$
+  (and his signatures) are fixed. By Invariant 6.1(2) $I_j$ must be locally consistent and
+  is closed on $S_j$ (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1841-1848`),
+  and the closedness/oddness of the degrees is specified by Definition 5.8 and 5.11
+  (`…:1618-1623,1659-1665`). Then two different closed $I_j$ are possible on the same support:
+  $I_j^{H}$ with horizontal matching (two horizontal edges) and $I_j^{V}$ with vertical matching
+  matching. In both cases, each center has exactly one incident edge (odd degree),
+  and the remaining directions are occupied by non-edge information, so local consistency
+  is saved. Signatures depend only on $J_j$ (`…:2327-2333`), so for $I_j^{H}$ and $I_j^{V}$
+  they are the same, but the structures are different. Therefore, signatures/support do not define $I_j$,
+  and a separate $A_2$ term is needed.
+- `Status:` counterexample (absorption of $A_2$ in the signature is impossible in its current form).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, можно ли добавить $O(1)$ бит на центр к подписи так, чтобы
-  закодировать структуру $I_j$ при сохранении константного размера (Q43.S66-tradeoff-augment-signature).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check if $O(1)$ bits can be added to the center of the signature so that
+  encode structure $I_j$ while maintaining constant size (Q43.S66-tradeoff-augment-signature).
 
-### 16.227. Исследовательский шаг (proof): циклы дают 1 бит неоднозначности $I_j$
+### 16.227. Exploratory step (proof): loops provide 1 bit of ambiguity $I_j$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S68-tree-uniqueness-cycle-bit):`
-  Зафиксируем support и граф возможных рёбер $G$ на этих центрах (ребро между центрами
-  в соседних под‑квадратах, Definition 5.6). Тогда каждый закрытый $I$ на данном support
-  эквивалентен выбору подмножества рёбер $E(I)\\subseteq E(G)$, в котором у каждой вершины
-  нечётная степень; множество таких $I$ имеет размер $2^{\\beta(G)}$, где $\\beta(G)$ — цикломатическое
-  число. В частности, если $G$ — лес, то $I$ единственен.
-- `Доказательство:`
-  1) По Definition 5.6 любая информация в направлении — это либо edge‑piece $\\{v,w\\}$,
-     либо non‑edge $(v,\\delta,\\bot)$ (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1586-1590`).
-     Для фиксированного support: если в направлении нет центра, то non‑edge обязателен,
-     если центр есть — выбор «edge vs non‑edge» определяет наличие ребра. Значит $I$
-     полностью задаётся множеством рёбер $E(I)$ в графе возможных рёбер $G$.
-  2) По Definition 5.8 и 5.11 локальная согласованность и замкнутость на support дают
-     «нечётное число рёбер у каждой вершины» (`…:1618-1623,1659-1665`), т.е. $E(I)$ —
-     нечётностепенной подграф $G$.
-  3) Пусть $I$ и $I'$ — два закрытых множества на одном support. Тогда в $E(I)\\oplus E(I')$
-     каждая вершина имеет чётную степень (odd ⊕ odd = even), значит $E(I)\\oplus E(I')$
-     раскладывается в дизъюнктное объединение циклов. Отсюда множество решений — аффинное
-     пространство размерности $\\beta(G)$, и $|\\{I\\}|=2^{\\beta(G)}$.
-  4) Если $G$ — лес (циклов нет), то $E(I)\\oplus E(I')=\\varnothing$ и $I=I'$; каждый
-     независимый цикл добавляет ровно 1 бит (переключение по циклу сохраняет нечётные степени).
-- `Toy‑тест:` путь из 4 центров (дерево) допускает ровно один $I$; 2x2 блок центров имеет
-  $\\beta=1$ и даёт два $I$ (горизонтальный/вертикальный matching), как в §16.226.
-- `Статус:` доказано.
+- `Lens:` Trade-off.
+- `Statement (Q43.S68-tree-uniqueness-cycle-bit):`
+  Let us fix support and the graph of possible edges $G$ on these centers (the edge between the centers
+  in adjacent sub-squares, Definition 5.6). Then every closed $I$ on a given support
+  is equivalent to choosing a subset of edges $E(I)\\subseteq E(G)$ in which each vertex
+  odd degree; the set of such $I$ has size $2^{\\beta(G)}$, where $\\beta(G)$ is the cyclomatic
+  number. In particular, if $G$ is a forest, then $I$ is unique.
+- `Proof:`
+  1) According to Definition 5.6, any information in the direction is either edgepiece $\\{v,w\\}$,
+     or non-edge $(v,\\delta,\\bot)$ (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1586-1590`).
+     For fixed support: if there is no center in the direction, then nonedge is required,
+     if there is a center, the choice "edge vs non-edge" determines the presence of an edge. So $I$
+     is completely specified by the set of edges $E(I)$ in the graph of possible edges $G$.
+  2) According to Definition 5.8 and 5.11, local consistency and closedness to support give
+     "an odd number of edges at each vertex" (`…:1618-1623,1659-1665`), i.e. $E(I)$ --
+     odd-degree subgraph $G$.
+  3) Let $I$ and $I'$ be two closed sets on one support. Then in $E(I)\\oplus E(I')$
+     each vertex has an even degree (odd  odd = even), which means $E(I)\\oplus E(I')$
+     decomposes into a disjoint union of cycles. Hence the set of solutions is affine
+     space of dimension $\\beta(G)$, and $|\\{I\\}|=2^{\\beta(G)}$.
+  4) If $G$ is a forest (there are no cycles), then $E(I)\\oplus E(I')=\\varnothing$ and $I=I'$; every
+     an independent loop adds exactly 1 bit (loop switching preserves odd powers).
+- `Toy test:` a path of 4 centers (tree) admits exactly one $I$; 2x2 center block has
+  $\\beta=1$ and gives two $I$ (horizontal/vertical matching), as in Section 16.226.
+- `Status:` proven.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` попытаться закодировать выбор базиса циклов $G$ через $O(1)$ бит на центр
-  (например, через фиксированный spanning forest + биты на chords) и проверить, укладывается ли
-  это в подписи Definition 6.11 (Q43.S69-encode-cycle-basis-bits).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` try to encode the choice of cycle basis $G$ in $O(1)$ bits per center
+  (for example, through a fixed spanning forest + bits on chords) and check if it fits
+  it's in the Definition 6.11 signature (Q43.S69-encode-cycle-basis-bits).
 
-### 16.228. Исследовательский шаг (proof): канонический остов + биты хорд
+### 16.228. Research step (proof): canonical skeleton + chord bits
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S69-encode-cycle-basis-bits):`
-  Для фиксированного support и графа возможных рёбер $G$ (Definition 5.6) существует
-  канонический spanning forest $F(G)$ и канонический odd‑degree подграф $E_0\\subseteq F(G)$
-  такие, что любой закрытый $I$ с этим support удовлетворяет
-  $E(I)=E_0\\oplus\\bigoplus_{e\\in\\mathrm{Chords}(G)} b_e C_e$, где $C_e$ — фундаментальный
-  цикл хорды $e$, а биты $b_e\\in\\{0,1\\}$ можно хранить на концах хорд, используя
-  $\\le 4$ дополнительных бита на центр.
-- `Доказательство:`
-  1) Зафиксируем канонический порядок центров (например, лексикографический) и построим
-     $F(G)$ как BFS‑forest. Если закрытый $I$ существует, то в каждой компоненте $G$
-     число вершин чётно: сумма нечётных степеней равна $2|E(I)|$ (чётно). Тогда на дереве
-     $F$ существует ровно один подграф с нечётной степенью в каждой вершине (решение
-     системы паритетов на дереве; строится удалением листьев). Обозначим его $E_0$.
-  2) Для любого закрытого $I$ подграф $D:=E(I)\\oplus E_0$ имеет чётные степени в каждой
-     вершине, то есть лежит в cycle space $G$. По стандартному факту, cycle space
-     порождается фундаментальными циклами хорд $e\\in E(G)\\setminus E(F)$, и коэффициенты
-     $b_e$ при этом разложении единственны.
-  3) Каждая хорда $e=\\{u,v\\}$ соответствует направлению у $u$ и $v$. Храним $b_e$ у конца
-     с меньшим лексикографическим идентификатором; у центра максимум 4 инцидентных ребра,
-     значит он хранит ≤4 бит хорд.
-  4) Реконструкция: стартуем с $E_0$ и для каждой хорды с $b_e=1$ переключаем рёбра на
-     цикле $C_e$ (хорда + уникальный путь в $F$ между концами). Получаем $E(I)$.
-- `Toy‑тест:` 2×2 блок центров. Канонический $F$ — путь из 3 рёбер; $E_0$ — два несмежных
-  ребра. Единственная хорда даёт цикл длины 4: $b=0$ даёт один matching, $b=1$ — второй.
-  2×3 ladder: $|V|=6$, $|E|=7$, $|E(F)|=5$, значит две хорды. $E_0$ фиксирован на дереве,
-  а два бита хорд дают 4 закрытых $I$, что совпадает с $2^{\\beta(G)}$.
-- `Статус:` доказано.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S69-encode-cycle-basis-bits):`
+  For a fixed support and a possible edge graph $G$ (Definition 5.6) there is
+  canonical spanning forest $F(G)$ and canonical odddegree subgraph $E_0\\subseteq F(G)$
+  such that any closed $I$ with this support satisfies
+  $E(I)=E_0\\oplus\\bigoplus_{e\\in\\mathrm{Chords}(G)} b_e C_e$, where $C_e$ is the fundamental
+  the cycle of the chord $e$, and the bits $b_e\\in\\{0,1\\}$ can be stored at the ends of the chords using
+  $\\le$4 extra bits per center.
+- `Proof:`
+  1) Let us fix the canonical order of centers (for example, lexicographic) and construct
+     $F(G)$ as BFSforest. If a closed $I$ exists, then in each component of $G$
+     the number of vertices is even: the sum of odd powers is $2|E(I)|$ (even). Then on the tree
+     $F$ there is exactly one subgraph with odd degree at each vertex (solution
+     parity systems on the tree; built by removing leaves). Let's denote it $E_0$.
+  2) For any closed $I$, the subgraph $D:=E(I)\\oplus E_0$ has even degrees in each
+     vertex, that is, lies in cycle space $G$. According to the standard fact, cycle space
+     is generated by fundamental cycles of chords $e\\in E(G)\\setminus E(F)$, and the coefficients
+     $b_e$ are unique in this expansion.
+  3) Each chord $e=\\{u,v\\}$ corresponds to the direction y of $u$ and $v$. Store $b_e$ at the end
+     with a smaller lexicographic identifier; the center has a maximum of 4 incident edges,
+     This means it stores <=4 bits of chords.
+  4) Reconstruction: we start from $E_0$ and for each chord from $b_e=1$ we switch the edges to
+     cycle $C_e$ (chord + unique path in $F$ between ends). We get $E(I)$.
+- `Toy test:` 2x2 block of centers. Canonical $F$ is a path of 3 edges; $E_0$ -- two non-adjacent
+  ribs A single chord gives a cycle of length 4: $b=0$ gives one matching, $b=1$ gives the second.
+  23 ladder: $|V|=6$, $|E|=7$, $|E(F)|=5$, which means two chords. $E_0$ is fixed on the tree,
+  and two bits of chords give 4 closed $I$, which is the same as $2^{\\beta(G)}$.
+- `Status:` proven.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, что добавление 4 бит на центр согласуется с Def. 6.11/Def. 6.13
-  и не ломает критерий конфликта (т.е. не требует идентификаторов центров).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check that adding 4 bits per center is consistent with Def. 6.11/Def. 6.13
+  and does not break the conflict criterion (i.e. does not require center identifiers).
 
-### 16.229. Исследовательский шаг (proof): интеграция битов хорд в подписи
+### 16.229. Exploratory step (proof): integration of chord bits into signatures
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S70-integrate-chord-bits-signature):`
-  Если подпись Definition 6.11 расширить дополнительными ≤4 битами на центр,
-  кодирующими выбор хорд из §16.228, то Definition 6.13 и Algorithms 2–4 остаются
-  корректны без изменения логики чтения: конфликт‑чек использует только 9‑битный
-  префикс подписи, а новые биты участвуют лишь в восстановлении структуры $I_j$.
-- `Доказательство:`
-  1) Подпись Definition 6.11 — это 9 бит на центр (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`),
-     читаемые вместе с фиксированным центром (`…:2336-2338`). Поэтому можно присоединить к подписи
-     локальные биты $b_e$ для хорд, назначенных этому центру (≤4 на центр по §16.228), не кодируя
-     никакую «личность» центра — центр известен по порядку чтения.
-  2) Definition 6.13 определяет конфликт через частичное присваивание на инцидентных направлениях,
-     задаваемое первой и второй четверками бит подписи (`…:2345-2367`). Дополнительные chord‑биты
-     не изменяют эти восемь бит, значит predicate “conflict” совпадает с исходным после проекции
-     на 9‑битный префикс.
-  3) В процедуре восстановления (Algorithms 2–4) подписи читаются как константные блоки бит и
-     добавляются в $E$ (`…:2378-2385`); логика шагов 1–5 использует только конфликт и восстановление
-     $J_j$. Поэтому можно читать расширенные подписи и сохранять chord‑биты до момента восстановления
-     $I_j$. По §16.228 канонический остов $F(G)$ вместе с набором $b_e$ однозначно восстанавливает
-     $E(I_j)$; это добавляет лишь ≤$4|S^{*}_g|$ бит и не меняет логику чтения.
-  4) Следовательно, добавление ≤4 бит на центр совместимо с Definition 6.13 и алгоритмами.
-- `Toy‑тест:` 2×2 блок chosen‑центров. Для фиксированного support возможны два $I_j$
-  (горизонтальный/вертикальный matching, §16.226). Канонический остов даёт одну хорду и бит $b$.
-  Фиксируем $b=0$, получаем $I_j^{H}$. Любая ветвь $\\psi$, содержащая переменную на вертикальном
-  ребре, вместе с $I_j^{H}$ нарушает pairwise local consistency в Definition 6.13(2), поэтому
-  конфликт‑чек отсекает несовместимую ветвь при фиксированном $b$.
-- `Статус:` доказано.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S70-integrate-chord-bits-signature):`
+  If the Definition 6.11 signature is extended with an additional <=4 bits per center,
+  encoding the choice of chords from Section 16.228, then Definition 6.13 and Algorithms 2-4 remain
+  are correct without changing the reading logic: the conflict check uses only 9-bit
+  signature prefix, and new bits participate only in restoring the $I_j$ structure.
+- `Proof:`
+  1) Definition 6.11 signature is 9 bits per center (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`),
+     read together with a fixed center (`…:2336-2338`). Therefore, you can attach to the signature
+     local bits $b_e$ for chords assigned to this center (<=4 per center per Section 16.228), without encoding
+     no "personality" of the center - the center is known by the order of reading.
+  2) Definition 6.13 defines a conflict through partial assignment on incident directions,
+     specified by the first and second quadruples of signature bits (`…:2345-2367`). Additional chord beats
+     these eight bits do not change, which means predicate "conflict" coincides with the original one after projection
+     to a 9-bit prefix.
+  3) In the recovery procedure (Algorithms 2-4), signatures are read as constant blocks of bits and
+     are added to $E$ (`…:2378-2385`); the logic of steps 1-5 uses only conflict and recovery
+     $J_j$. Therefore, you can read extended signatures and save chord bits until they are restored
+     $I_j$. By Section 16.228, the canonical skeleton $F(G)$ together with the set $b_e$ uniquely reconstructs
+     $E(I_j)$; this only adds <=$4|S^{*}_g|$ bits and does not change the reading logic.
+  4) Therefore, adding <=4 bits per center is compatible with Definition 6.13 and algorithms.
+- `Toy test:` 22 block of chosencenters. For fixed support two $I_j$ are possible
+  (horizontal/vertical matching, Section 16.226). The canonical spanning tree gives one chord and bit $b$.
+  We fix $b=0$ and get $I_j^{H}$. Any branch of $\\psi$ containing a variable on the vertical
+  edge, together with $I_j^{H}$ violates pairwise local consistency in Definition 6.13(2), so
+  conflict-check cuts off an incompatible branch for a fixed $b$.
+- `Status:` proven.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, не нарушает ли правило назначения chord‑битов требование
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether the chord bit assignment rule violates the requirement
   “signature does not include identity” (Q43.S72-identity-leak-check-chord-bits).
 
-### 16.230. Исследовательский шаг (counterexample): chord‑биты зависят от глобальной нумерации
+### 16.230. Exploratory step (counterexample): chord bits depend on global numbering
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S72-identity-leak-check-chord-bits):`
-  В расширении §16.228–16.229 дополнительные chord‑биты на центр зависят только от локальной
-  структуры (support + инцидентные направления) и инвариантны под автоморфизмами grid,
-  поэтому расширенная подпись не кодирует identity центра (Remark 6.12).
-- `Контрпример / Toy‑тест:`
-  Возьмём support = 2×2 блок центров. Граф возможных рёбер $G$ — квадрат. Канонический
-  остов $F(G)$ из §16.228 строится BFS с лексикографическим порядком центров: три рёбра
-  входят в $F(G)$, а единственная хорда — четвёртое ребро квадрата. Эта хорда соединяет
-  два диагонально симметричных центра. По правилу §16.228 бит $b_e$ хранится у конца
-  хорды с меньшим лексикографическим идентификатором. Если применить симметрию квадрата
-  (поворот/отражение) и переименовать направления, то 9‑битные подписи Definition 6.11
-  преобразуются эквивариантно, но правило «меньший лексикографический ID хранит бит»
-  не сохраняется: хорда переносит бит на другой угол. Значит расширенная подпись зависит
-  от глобальной нумерации центров и не инвариантна под симметрией.
-- `Статус:` контрпример (identity‑leak для правила назначения chord‑битов §16.228).
+- `Lens:` Invariant.
+- `Statement (Q43.S72-identity-leak-check-chord-bits):`
+  In the Section 16.228-16.229 extension, the additional chord bits per center depend only on the local
+  structures (support + incident directions) and are invariant under grid automorphisms,
+  therefore the extended signature does not encode the identity of the center (Remark 6.12).
+- `Counterexample / Toy test:`
+  Let's take support = 22 block of centers. The graph of possible edges $G$ is a square. Canonical
+  the skeleton $F(G)$ from Section 16.228 constructs a BFS with lexicographic order of centers: three edges
+  are included in $F(G)$, and the only chord is the fourth edge of the square. This chord connects
+  two diagonally symmetrical centers. By rule Section 16.228, bit $b_e$ is stored at the end
+  chords with a smaller lexicographic identifier. If we apply square symmetry
+  (rotate/flip) and rename the directions, then 9bit signatures Definition 6.11
+  are converted equivariantly, but the rule is "smaller lexicographic ID stores bit"
+  not preserved: the chord carries the bit to another angle. So the extended signature depends
+  from the global numbering of centers and is not invariant under symmetry.
+- `Status:` counterexample (identity-leak for the chord bit assignment rule Section 16.228).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` переопределить назначение chord‑битов локально‑канонически (без
-  глобальной нумерации) или явно зафиксировать допустимую ориентацию grid
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` redefine the assignment of chord bits locally canonically (without
+  global numbering) or explicitly fix the allowed grid orientation
   (Q43.S74-local-reencode-chord-bits).
 
-### 16.231. Исследовательский шаг (toy): локальное правило назначения chord‑битов по направлению
+### 16.231. Exploratory step (toy): local rule for assigning chord bits by direction
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S74-dir-rule-chord-bits):`
-  При фиксированной ориентации grid бит каждой хорды $e=\\{u,v\\}$ можно назначать локально:
-  хранить $b_e$ у того конца, для которого направление к соседу минимально в фиксированном
-  порядке, например South < West < North < East (то есть «южный» или «западный» конец).
-  Это использует только метки направлений, не требует глобальной нумерации центров, сохраняет
-  ≤4 бит на центр и не изменяет конфликт‑чек Definition 6.13 (он зависит лишь от 9‑битного
-  префикса подписи).
-- `Toy‑тест:`
-  1) 2×2 блок центров. Единственная хорда — одно ребро квадрата. Бит хранится на «южном/западном»
-     конце хорды; при переносе блока (translation) направление ребра и выбор конца сохраняются,
-     поэтому распределение битов по центрам не зависит от абсолютных координат. Конфликт‑чек
-     использует только первые 9 бит подписи (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2345-2367`),
-     так что дополнительные chord‑биты игнорируются.
-  2) 2×3 ladder. Две хорды: каждая горизонтальная/вертикальная, бит хранится на западном
-     или южном конце. Любой перенос ladder сохраняет направления и распределение битов;
-     на каждом центре ≤4 инцидентных направления ⇒ ≤4 бит.
-- `Статус:` частично (toy‑подтверждение; общая корректность и допустимость фиксированной
-  ориентации пока не доказаны).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S74-dir-rule-chord-bits):`
+  With a fixed grid orientation, the bit of each chord $e=\\{u,v\\}$ can be assigned locally:
+  store $b_e$ at the end for which the direction to the neighbor is minimal in a fixed
+  order, for example South < West < North < East (that is, the "south" or "west" end).
+  This uses only directional labels, does not require global center numbering, saves
+  <=4 bits per center and does not change the Definition 6.13 conflict check (it depends only on the 9-bit
+  signature prefix).
+- `Toy test:`
+  1) 2x2 block of centers. A single chord is one edge of a square. The bit is stored in "south/west"
+     end of the chord; when transferring a block (translation), the edge direction and end selection are preserved,
+     therefore, the distribution of bits by center does not depend on absolute coordinates. Conflict check
+     uses only the first 9 bits of the signature (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2345-2367`),
+     so the extra chord bits are ignored.
+  2) 23 ladder. Two chords: each horizontal/vertical, the bit is stored in the western
+     or the south end. Any ladder transfer preserves the directions and distribution of bits;
+     at each center <=4 incident directions  <=4 bits.
+- `Status:` partially (toy confirmation; general correctness and admissibility of fixed
+  orientations have not yet been proven).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить на общем support, не вносит ли фиксированная ориентация
-  (South/West‑правило) скрытого identity‑leak при симметриях, и нужно ли явно фиксировать
-  ориентацию grid в модели.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check on general support whether fixed orientation is causing problems
+  (South/Westrule) of hidden identityleak for symmetries, and whether it is necessary to explicitly fix
+  grid orientation in the model.
 
-### 16.232. Исследовательский шаг (proof): фиксированная ориентация не даёт identity‑leak
+### 16.232. Exploratory step (proof): fixed orientation does not give identityleak
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S75-orientation-leak-check):`
-  Если grid рассматривается как ориентированный (направления N/E/S/W фиксированы и уже
-  используются в Definition 6.11), то правило «бит хорды хранится на южном/западном конце»
-  зависит только от направлений инцидентных рёбер, инвариантно при переносах support и не
-  кодирует identity центра (Remark 6.12).
-- `Доказательство:`
-  1) Definition 6.11 задаёт подпись из 9 бит, где две четвёрки отвечают направлениям
-     (information pieces + наличие рёбер), а Remark 6.12 подчёркивает, что подпись не включает
-     identity центра (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2337`).
-     Следовательно, фиксированные направления уже являются допустимой частью локальной
-     информации.
-  2) South/West‑правило выбирает конец хорды по направлению ребра (южный/западный), то есть
-     использует только локальные direction‑метки и не обращается к глобальной нумерации или
-     координатам. Поэтому любая ориентационно‑сохраняющая автоморфизм (перенос) сохраняет
-     распределение chord‑битов.
-  3) В симметричных support (2×2, 2×3) попытка “поменять конец” через поворот/отражение меняет
-     направления инцидентных рёбер, а значит не сохраняет 9‑битную подпись; такие симметрии не
-     допустимы при фиксированной ориентации. Следовательно, локально изоморфных (с сохранением
-     направлений) окружений с разными chord‑битами нет.
-- `Toy‑тест:` 2×2 и 2×3: переносы сохраняют направления и выбор “южного/западного” конца;
-  отражение/поворот меняют direction‑биты в подписи и не являются допустимой изоморфией.
-- `Статус:` доказано (при фиксированной ориентации grid, уже используемой в подписи).
+- `Lens:` Model stress test.
+- `Statement (Q43.S75-orientation-leak-check):`
+  If the grid is considered as oriented (directions N/E/S/W are fixed and already
+  are used in Definition 6.11), then the rule is "the chord bit is stored at the south/west end"
+  depends only on the directions of the incident edges, is invariant under support transfers and not
+  encodes the identity of the center (Remark 6.12).
+- `Proof:`
+  1) Definition 6.11 specifies a signature of 9 bits, where two fours correspond to directions
+     (information pieces + presence of edges), and Remark 6.12 emphasizes that the signature does not include
+     identity center (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2337`).
+     Therefore, fixed directions are already a valid part of the local
+     information.
+  2) South/West rule selects the end of the chord in the direction of the edge (south/west), that is
+     uses only local direction labels and does not refer to global numbering or
+     coordinates. Therefore, any orientation-preserving automorphism (translation) preserves
+     distribution of chord bits.
+  3) In symmetrical support (22, 23), an attempt to "change the end" through rotation/reflection changes
+     directions of incident edges, which means it does not save the 9-bit signature; such symmetries are not
+     valid for fixed orientation. Consequently, locally isomorphic (preserving
+     directions) there are no environments with different chord beats.
+- `Toy test:` 2x2 and 2x3: transfers preserve directions and selection of the "south/west" end;
+  reflection/rotation changes the direction bits in the signature and is not a valid isomorphy.
+- `Status:` proven (with a fixed grid orientation already used in the signature).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если ориентация не считается частью структуры (допускаются повороты/отражения),
-  построить канонический якорь/ориентацию из одной подписи (Q43.S76-anchor-canonicalization).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if the orientation is not considered part of the structure (rotations/reflections are allowed),
+  build canonical anchor/orientation from one signature (Q43.S76-anchor-canonicalization).
 
-### 16.233. Исследовательский шаг (exact citation): в HR’22 ориентация grid фиксирована координатами и направлениями
+### 16.233. Exploratory step (exact citation): in HR'22 the grid orientation is fixed by coordinates and directions
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S78-orientation-explicit-quote):`
-  В HR’22 grid задаётся как ориентированная структура с фиксированными координатами (i, j) ∈ [n] и
-  явно используемыми направлениями left/right/up/down и нумерацией строк; значит повороты/отражения
-  не являются допустимыми симметриями модели по умолчанию.
-- `Точная ссылка (HR’22, text cache):`
-  1) определение grid через координаты: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:395–399`
+- `Lens:` Equivalence.
+- `Statement (Q43.S78-orientation-explicit-quote):`
+  In HR'22, the grid is defined as an oriented structure with fixed coordinates (i, j)  [n] and
+  explicitly used left/right/up/down directions and line numbering; means rotations/reflections
+  are not valid symmetries of the default model.
+- `Exact link (HR'22, text cache):`
+  1) definition of grid through coordinates: `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:395–399`
      (“Throughout the paper we work over graphs Gn = (V, E) with n2 nodes which we call the grid.
       However, in order to avoid problems at the boundary, we in fact work over the 2-dimensional
       torus: each node (i, j) ∈ V is indexed by two integers i, j ∈ [n] and an edge {u, v} is in E if and
       only if it connects two adjacent nodes, that is, if one of the coordinates of u and v are identical
       and the other differs by 1 modulo n.”)
-  2) направления left/right/up/down заданы в терминах относительного положения: `…:1382–1384`
+  2) left/right/up/down directions are given in terms of relative position: `…:1382–1384`
      (“Given a fixed center v we say that a path P connecting v to some other center u goes to the δ,
       where δ is one of the directions left, right, up or down, if v lies in the sub-square to the δ of u.”)
-  3) используется нумерация строк: `…:1403–1405`
+  3) line numbering is used: `…:1403–1405`
      (“… fixing the alive centers with the lowest numbered row in each sub-square to be the chosen
       centers Cσ of σ.”)
-- `Toy‑тест:` не требуется (цитата фиксирует структуру модели).
-- `Статус:` exact citation.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если рассматривается ориентационно‑свободная модель (с поворотами/отражениями),
-  нужна канонизация якоря (Q43.S76); иначе вернуться к основному треку Q43.
+- `Toy test:` not required (the quotation fixes the structure of the model).
+- `Status:` exact citation.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if an orientation-free model is considered (with rotations/reflections),
+  anchor canonization is needed (Q43.S76); otherwise return to main track Q43.
 
-### 16.234. Исследовательский шаг (counterexample): односигнатурные данные не фиксируют ориентацию
+### 16.234. Exploratory step (counterexample): single-signature data does not capture orientation
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S79-symmetry-counterexample):`
-  В ориентационно‑свободной модели (допускающей повороты/отражения) одной подписи центра
-  (Definition 6.11, даже с добавленными локальными chord‑битами) недостаточно, чтобы канонически
-  зафиксировать ориентацию: существует симметричный support, где поворот на 180° оставляет
-  односигнатурные данные неизменными, но меняет ориентацию.
-- `Контрпример / Toy‑тест:`
-  1) Возьмём support как «крест» из 5 центров: центральный v и его четыре соседа по N/E/S/W.
-     Граф возможных рёбер здесь — дерево, так что никаких chord‑битов нет. Пусть v выбран (chosen),
-     и в J_j у v есть information pieces во всех четырёх направлениях и присутствуют все четыре
-     инцидентные ребра. Тогда подпись v имеет вид (chosen=1; info=1111; edges=1111)
-     (Definition 6.11 в `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`).
-  2) Поворот на 180° или отражение сохраняет этот «крест», фиксирует v и переставляет направления.
-     В ориентационно‑свободной модели это допустимый автоморфизм. Поскольку все четыре direction‑бита
-     у v одинаковы, подпись v инвариантна под этой перестановкой.
-  3) Следовательно, две противоположные ориентации (N/E/S/W и S/W/N/E) совместимы с одной и той же
-     подписью v; любая процедура, использующая только одну подпись, не может выбрать между ними
-     без дополнительного симметри‑ломающего бита.
-- `Статус:` контрпример (канонизация ориентации из одной подписи в ориентационно‑свободной модели невозможна).
+- `Lens:` Model stress test.
+- `Statement (Q43.S79-symmetry-counterexample):`
+  In an orientation-free model (allowing rotations/reflections) of one center signature
+  (Definition 6.11, even with added local chord bits) is not enough to be canonical
+  fix orientation: there is symmetrical support, where a 180 rotation leaves
+  single-signature data remains unchanged, but changes orientation.
+- `Counterexample / Toy test:`
+  1) Let's take support as a "cross" of 5 centers: central v and its four neighbors along N/E/S/W.
+     The graph of possible edges here is a tree, so there are no chord bits. Let v be chosen (chosen),
+     and in J_j v has information pieces in all four directions and all four are present
+     incident ribs. Then the signature v has the form (chosen=1; info=1111; edges=1111)
+     (Definition 6.11 in `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`).
+  2) A 180 rotation or reflection preserves this "cross", fixes v and rearranges the directions.
+     In the orientation-free model, this is an admissible automorphism. Since all four direction bits
+     v are the same, the signature of v is invariant under this permutation.
+  3) Therefore, two opposite orientations (N/E/S/W and S/W/N/E) are compatible with the same
+     signed v; any procedure using only one signature cannot choose between them
+     without additional symmetry breaking bit.
+- `Status:` counterexample (canonization of orientation from one signature is impossible in the orientation-free model).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, достаточно ли добавить один глобальный chirality‑бит или иной
-  минимальный симметри‑ломающий маркер к подписи, чтобы фиксировать ориентацию без identity‑leak
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether it is enough to add one global chirality bit or another
+  minimal symmetry-breaking marker to the signature to fix the orientation without identity-leak
   (Q43.S80-chirality-bit).
 
-### 16.235. Исследовательский шаг (counterexample): глобальный chirality‑бит не ломает симметрию
+### 16.235. Exploratory step (counterexample): global chirality bit does not break symmetry
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S80-chirality-bit):`
-  Добавление одного глобального бита $\\chi$, общего для всех центров и не зависящего от их identity
-  (Remark 6.12), к 9‑битным подписям достаточно для канонической фиксации ориентации в
-  ориентационно‑свободной модели.
-- `Контрпример / Toy‑тест:`
-  1) Предположим, что $\\chi$ вычисляется из unlabeled‑support и набора подписей, то есть инвариантен
-     относительно автоморфизмов grid (иначе он использует identity центров). Возьмём «крест» из 5
-     центров как в §16.234, с chosen‑центром $v$ и подписью $(1;1111;1111)$. Поворот на $180^\\circ$
-     сохраняет support и все подписи, поэтому $\\chi$ имеет то же значение. Следовательно, расширенные
-     подписи (signature+$\\chi$) совпадают для двух противоположных ориентаций.
-  2) Аналогично для 2×2 блока центров с симметричным набором локальных данных: $180^\\circ$‑поворот
-     переставляет углы, но сохраняет мультимножество подписей, а глобальный инвариант $\\chi$ остаётся
-     тем же. Ориентация по расширенным подписям не фиксируется.
-- `Статус:` контрпример (один глобальный инвариантный бит не фиксирует ориентацию без identity).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S80-chirality-bit):`
+  Adding one global bit $\\chi$, common to all centers and independent of their identity
+  (Remark 6.12), 9bit signatures are sufficient to canonically fix orientation in
+  orientation-free model.
+- `Counterexample / Toy test:`
+  1) Suppose that $\\chi$ is calculated from unlabeledsupport and a set of signatures, that is, it is invariant
+     regarding grid automorphisms (otherwise it uses identity centers). Let's take the "cross" from 5
+     centers as in Section 16.234, with chosen center $v$ and signature $(1;1111;1111)$. Rotate $180^\\circ$
+     preserves support and all signatures, so $\\chi$ has the same meaning. Therefore, extended
+     signatures (signature+$\\chi$) are the same for two opposite orientations.
+  2) Similarly for a 22 block of centers with a symmetric set of local data: $180^\\circ$rotation
+     rearranges the angles, but preserves the multiset of signatures, and the global invariant $\\chi$ remains
+     the same. Orientation based on extended signatures is not recorded.
+- `Status:` counterexample (one global invariant bit does not fix orientation without identity).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` если разрешить внешнее «ориентационное» значение $\\chi$ как advice‑бит, проверить,
-  что оно не нарушает Remark 6.12 и добавляет лишь $O(1)$ бит в Algorithms 2–4; иначе зафиксировать,
-  что ориентационно‑свободная модель требует не‑инвариантного якоря.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` if you resolve the external "orientation" value $\\chi$ as an advice bit, check if
+  that it does not violate Remark 6.12 and only adds $O(1)$ bits to Algorithms 2-4; otherwise fix
+  that the orientation-free model requires a non-invariant anchor.
 
-### 16.236. Исследовательский шаг (proof): advice‑бит ориентации $\\chi$ совместим с Remark 6.12
+### 16.236. Research step (proof): advice bit orientation $\\chi$ compatible with Remark 6.12
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S81-chirality-advice-check):`
-  Если разрешить один глобальный non‑invariant advice‑бит $\\chi$, фиксирующий ориентацию grid,
-  то Algorithms 2–4 используют его с добавкой $O(1)$ бит, подписи остаются identity‑free
-  (Remark 6.12), а комбинация signature+$\\chi$ задаёт ориентацию для всего support.
-- `Доказательство:`
-  1) Remark 6.12 фиксирует, что подпись центра не содержит его identity и читается вместе с
-     заданным центром $v$; порядок подписей — часть внешней информации, но не кодируется в подписи
-     (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2338`). Глобальный
-     бит $\\chi$ не привязан к центру и не меняет 9‑битную подпись, поэтому не нарушает требование
+- `Lens:` Model stress test.
+- `Statement (Q43.S81-chirality-advice-check):`
+  If we allow one global non-invariant advice bit $\\chi$ that fixes the orientation of the grid,
+  then Algorithms 2-4 use it with the addition of $O(1)$ bits, the signatures remain identityfree
+  (Remark 6.12), and the combination signature+$\\chi$ sets the orientation for all support.
+- `Proof:`
+  1) Remark 6.12 fixes that the center signature does not contain its identity and is read together with
+     given center $v$; the order of the signatures is part of the external information, but is not encoded in the signature
+     (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2338`). Global
+     the $\\chi$ bit is not centered and does not change the 9bit signature, so it does not violate the requirement
      “no identity in signature”.
-  2) Algorithms 2–4 читают подписи как константные блоки бит и используют только направление
-     инцидентных рёбер/подквадратов (Algorithm 2: чтение 9 бит подписи; Algorithm 3–4: работа по
-     направлениям и подквадратам) (`…:3089-3133`, `…:3161-3173`, `…:3234-3238`). Следовательно,
-     $\\chi$ можно считать глобальным параметром, определяющим интерпретацию направлений
-     (например, ориентацию “clockwise/anti‑clockwise”); его достаточно прочитать один раз
-     в начале Algorithm 2. Это добавляет только $O(1)$ бит и не требует пер‑центровых данных.
-  3) При фиксированном $\\chi$ направления в подписи трактуются относительно выбранной ориентации,
-     так что ориентация определяется глобально (вся обработка в Algorithms 2–4 согласована по
-     этому выбору). Поэтому signature+$\\chi$ задаёт ориентацию без дополнительного identity‑кода.
-- `Toy‑тест:` «крест» и 2×2 блок из §16.234–16.235. Для каждого support алгоритм читает только
-  9‑битные подписи и направление‑зависимые проверки. Если выбрать $\\chi=0$ как “стандартную”
-  ориентацию, все вызовы в Algorithms 2–4 интерпретируют направления одинаково; поворот на 180°
-  соответствует смене $\\chi$ и не требует обращения к координатам центров. Следовательно, $\\chi$
-  разбивает симметрии на две ориентации без identity‑leak.
-- `Статус:` доказано (advice‑бит допустим и добавляет $O(1)$ бит).
+  2) Algorithms 2-4 read signatures as constant blocks of bits and use direction only
+     incident edges/sub-squares (Algorithm 2: reading 9 bits of signature; Algorithm 3-4: working on
+     directions and sub-squares) (`…:3089-3133`, `…:3161-3173`, `…:3234-3238`). Hence,
+     $\\chi$ can be considered a global parameter that determines the interpretation of directions
+     (for example, "clockwise/anticlockwise" orientation); it is enough to read it once
+     at the beginning of Algorithm 2. This only adds $O(1)$ bits and requires no per-center data.
+  3) For a fixed $\\chi$, the directions in the signature are interpreted relative to the chosen orientation,
+     so the orientation is determined globally (all processing in Algorithms 2-4 is consistent across
+     this choice). Therefore, signature+$\\chi$ specifies the orientation without additional identity code.
+- `Toy test:` "cross" and 2x2 block from Section 16.234-16.235. For each support, the algorithm reads only
+  9-bit signatures and direction-dependent checks. If you choose $\\chi=0$ as "standard"
+  orientation, all calls to Algorithms 2-4 interpret directions the same; turn 180
+  corresponds to the change of $\\chi$ and does not require access to the coordinates of the centers. Therefore, $\\chi$
+  splits symmetries into two orientations without identity-leak.
+- `Status:` proven (advice bit is valid and adds $O(1)$ bits).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` оценить минимальное число глобальных бит для канонизации ориентации (например,
-  различить все 8 симметрий $D_4$) и сравнить с вариантом $|\\chi|=1$ (Q43.S83-min-orientation-bits).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` estimate the minimum number of global bits for orientation canonicalization (e.g.
+  distinguish all 8 symmetries $D_4$) and compare with the variant $|\\chi|=1$ (Q43.S83-min-orientation-bits).
 
-### 16.237. Исследовательский шаг (proof): $D_4$‑симметрия требует ≥3 глобальных бит для ориентации
+### 16.237. Research step (proof): $D_4$symmetry requires >=3 global bits for orientation
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S83-d4-lower-bound):`
-  В ориентационно‑свободной модели существует support и набор 9‑битных подписей, чьи
-  данные инвариантны под всеми 8 симметриями $D_4$; следовательно, любая identity‑free
-  канонизация ориентации требует ≥3 глобальных бит.
-- `Доказательство:`
-  1) Построение. Возьмём support как «крест» из 5 центров на grid: центральный $v$ и
-     четыре соседа по N/E/S/W. Пусть все центры chosen. Зададим подпись $v$ как
-     $(1;1111;1111)$ (есть information pieces и edges во всех направлениях), а подписи
-     листьев — как $(1;1000;1000)$, $(1;0100;0100)$, $(1;0010;0010)$, $(1;0001;0001)$
-     в зависимости от направления к $v$. Такое распределение реализуется $J_j$, содержащим
-     ровно четыре ребра $v$–лист и информацию вдоль этих направлений.
-  2) Любая симметрия $g \\in D_4$ (поворот/отражение) сохраняет support и переставляет
-     направления N/E/S/W. Подпись $v$ инвариантна (все направления =1), а четыре листовых
-     подписи просто переставляются. Следовательно, мультимножество подписей инвариантно
-     под всеми 8 симметриями.
-  3) Пусть $A$ — identity‑free канонизатор ориентации, читающий support, подписи и $k$
-     глобальных advice‑бит. Для этого symmetric support все 8 ориентаций согласованы с
-     входом, и различаться могут только по advice‑битам. Поэтому $2^k \\ge 8$, то есть
+- `Lens:` Invariant.
+- `Statement (Q43.S83-d4-lower-bound):`
+  In the orientation-free model, there is support and a set of 9-bit signatures, whose
+  the data is invariant under all 8 $D_4$ symmetries; therefore, any identityfree
+  Orientation canonicalization requires >=3 global bits.
+- `Proof:`
+  1) Construction. Let's take support as a "cross" of 5 centers on the grid: central $v$ and
+     four neighbors on N/E/S/W. Let all centers be chosen. Let's set the signature $v$ as
+     $(1;1111;1111)$ (there are information pieces and edges in all directions), and the signatures
+     leaves - as $(1;1000;1000)$, $(1;0100;0100)$, $(1;0010;0010)$, $(1;0001;0001)$
+     depending on the direction to $v$. This distribution is realized by $J_j$ containing
+     exactly four $v$-leaf edges and information along these directions.
+  2) Any symmetry $g \\in D_4$ (rotation/reflection) preserves support and rearranges
+     directions N/E/S/W. The signature $v$ is invariant (all directions =1), and the four leaf
+     the signatures are simply rearranged. Therefore, the multiset of signatures is invariant
+     under all 8 symmetries.
+  3) Let $A$ be an identity-free orientation canonizer that reads support, signatures, and $k$
+     global advice bit. For this symmetric support, all 8 orientations are consistent with
+     input, and can only differ in advice bits. Therefore $2^k \\ge 8$, that is
      $k \\ge 3$.
-- `Toy‑тест:` крест: $D_4$ переставляет листья и направления, но мультимножество подписей
-  не меняется; ориентация остаётся неразличимой без внешних бит.
-- `Статус:` доказано (информационно‑теоретический lower bound: ≥3 глобальных бит).
+- `Toy test:` cross: $D_4$ rearranges leaves and directions, but multiset of signatures
+  does not change; the orientation remains indistinguishable without external bits.
+- `Status:` proven (information-theoretical lower bound: >=3 global bits).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` построить явную 3‑битную схему канонизации ориентации, совместимую
-  с Algorithms 2–4 (Q43.S84-3bit-upper).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` build an explicit 3-bit orientation canonicalization scheme compatible
+  with Algorithms 2-4 (Q43.S84-3bit-upper).
 
-### 16.238. Исследовательский шаг (proof): 3‑битная канонизация ориентации (upper bound)
+### 16.238. Research step (proof): 3bit orientation canonization (upper bound)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S84-3bit-upper):`
-  В ориентационно‑свободной модели можно задать глобальный advice‑код $\\omega\\in\\{0,1\\}^3$,
-  кодирующий элемент $D_4$, и интерпретировать direction‑биты в подписях относительно $\\omega$.
-  Такой код читается один раз перед Algorithms 2–4, не зависит от identity центров,
-  не добавляется в 9‑битные подписи и не меняет конфликт‑чек Definition 6.13.
-- `Доказательство:`
-  1) Зафиксируем кодирование $D_4$: пусть $b_2b_1b_0\\in\\{0,1\\}^3$; если $b_2=0$, берём поворот
-     $r^{k}$ (где $k=2b_1+b_0$) на $0/90/180/270^\\circ$, а если $b_2=1$, берём отражение
-     $s\\circ r^{k}$ (где $s$ — отражение относительно вертикали). Это биекция $\\{0,1\\}^3\\leftrightarrow D_4$.
-  2) Definition 6.11 задаёт подпись центра как 9 бит: chosen, четыре direction‑бита для information
-     pieces и четыре direction‑бита для рёбер (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`),
-     а Remark 6.12 запрещает identity в подписи (`…:2333-2336`). Для фиксированного $g\\in D_4$ трактуем
-     эти биты как данные в направлениях $g(N),g(E),g(S),g(W)$. Это глобальная переименовка направлений,
-     одинаковая для всех центров, поэтому identity‑информация не появляется.
-  3) Algorithm 2 читает подпись как ровно 9 бит (`…:3122-3124`), а конфликт‑чек Definition 6.13 опирается
-     только на эти 9 бит и $I$. Algorithms 2–4 далее используют лишь индексы направлений при работе
-     с под‑квадратами (`…:3164-3169`), поэтому интерпретация через $g$ внедряется один раз и не меняет
-     логику алгоритмов.
-- `Toy‑тест:`
-  «Крест», 2×2 блок, 2×3 ladder. Для каждого support любая симметрия $D_4$ лишь переставляет
-  направления; код $\\omega$ выбирает $g$ и тем самым фиксирует соответствие direction‑битов N/E/S/W.
-  Подписи остаются 9‑битными, конфликт‑чек зависит только от префикса, поэтому
-  логика Algorithms 2–4 сохраняется во всех трёх примерах.
-- `Статус:` доказано (3‑битный global advice задаёт ориентацию без identity‑leak).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S84-3bit-upper):`
+  In the orientation-free model, you can set the global advice code $\\omega\\in\\{0,1\\}^3$,
+  encoding element $D_4$, and interpret the direction bits in the signatures relative to $\\omega$.
+  This code is read once before Algorithms 2-4, does not depend on identity centers,
+  is not added to 9-bit signatures and does not change the Definition 6.13 conflict check.
+- `Proof:`
+  1) Let us fix the encoding $D_4$: let $b_2b_1b_0\\in\\{0,1\\}^3$; if $b_2=0$, take a turn
+     $r^{k}$ (where $k=2b_1+b_0$) by $0/90/180/270^\\circ$, and if $b_2=1$, take the reflection
+     $s\\circ r^{k}$ (where $s$ is the reflection relative to the vertical). This is the bijection $\\{0,1\\}^3\\leftrightarrow D_4$.
+  2) Definition 6.11 sets the center signature as 9 bits: chosen, four direction bits for information
+     pieces and four direction bits for edges (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`),
+     and Remark 6.12 prohibits identity in the signature (`…:2333-2336`). For fixed $g\\in D_4$ we treat
+     these bits as data in the directions $g(N),g(E),g(S),g(W)$. This is a global renaming of directions,
+     the same for all centers, so identity information does not appear.
+  3) Algorithm 2 reads the signature as exactly 9 bits (`…:3122-3124`), and conflict check Definition 6.13 is based on
+     only for these 9 bits and $I$. Algorithms 2-4 further use only directional indices when working
+     with sub-squares (`…:3164-3169`), so the interpretation via $g$ is implemented once and does not change
+     logic of algorithms.
+- `Toy test:`
+  "Cross", 2x2 block, 2x3 ladder. For each support, any $D_4$ symmetry only rearranges
+  directions; the $\\omega$ code selects $g$ and thereby fixes the correspondence of the direction bits N/E/S/W.
+  Signatures remain 9-bit, the conflict check depends only on the prefix, so
+  the logic of Algorithms 2-4 is preserved in all three examples.
+- `Status:` proven (3bit global advice sets orientation without identityleak).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, можно ли вычислить эти 3 бита из support+подписей без
-  внешнего advice (anchor‑канонизация) или получить локальный impossibility (Q43.S85/Q43.S86).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check if these 3 bits can be calculated from support+signatures without
+  external advice (anchor canonization) or get local impossibility (Q43.S85/Q43.S86).
 
-### 16.239. Исследовательский шаг (toy computation): допустимость D4‑симметричного «креста»
+### 16.239. Research step (toy computation): admissibility of a D4symmetric "cross"
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S86-admissible-d4-support):`
-  Существует D4‑симметричный support+подписи из §16.237 (крест с центральной подписью
-  $(1;1111;1111)$), который допустим как possible forcing information $J_j$ (Definition 6.2)
-  и может возникать во входах Algorithms 2–4.
-- `Toy‑тест:`
-  1) В §16.237 центральному центру $v$ приписана подпись с info=1111 и edges=1111, то есть
-     $J_j$ имеет информацию во всех четырёх направлениях и 4 инцидентных ребра
+- `Lens:` Model stress test.
+- `Statement (Q43.S86-admissible-d4-support):`
+  There is D4symmetrical support+signatures from Section 16.237 (cross with central signature
+  $(1;1111;1111)$), which is valid as possible forcing information $J_j$ (Definition 6.2)
+  and can occur in inputs of Algorithms 2-4.
+- `Toy test:`
+  1) In Section 16.237, the central center $v$ is assigned a signature with info=1111 and edges=1111, that is
+     $J_j$ has information in all four directions and 4 incident edges
      (Definition 6.11, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`).
-  2) По локальной согласованности, если информация есть во всех 4 направлениях, число
-     инцидентных рёбер должно быть нечётным (`…:1618-1623`). Здесь 4 (чётно), значит
-     такой $J_j$ не локально согласован и нарушает Def. 6.2(1) (`…:1882-1886`).
-- `Статус:` контрпример к допустимости этого D4‑симметричного «креста» как support $J_j$.
+  2) By local consistency, if there is information in all 4 directions, the number
+     incident edges must be odd (`…:1618-1623`). Here 4 (even), which means
+     such $J_j$ is not locally consistent and violates Def. 6.2(1) (`…:1882-1886`).
+- `Status:` a counterexample to the admissibility of this D4symmetric "cross" as support $J_j$.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` либо найти D4‑симметричный support, удовлетворяющий локальной
-  согласованности (odd‑degree), либо доказать, что такие support невозможны в модели.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` or find D4symmetric support that satisfies the local
+  consistency (odddegree), or prove that such support is impossible in the model.
 
-### 16.240. Исследовательский шаг (proof): D4 + фикс‑центр несовместимы с odd‑degree
+### 16.240. Research step (proof): D4 + fixed-center are incompatible with odd-degree
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S87-fixed-center-parity):`
-  Пусть $I$ — closed information set (Def. 5.11 в HR'22), $U:=\\mathrm{supp}(I)$. Если $U$
-  D4‑симметричен относительно фиксированного центра $c\\in U$, то такого $I$ не существует:
-  closed $\\Rightarrow$ граф рёбер на $U$ имеет нечётные степени (1 или 3), поэтому $|U|$ чётно,
-  но D4‑симметрия с фикс‑центром даёт $|U|$ нечётным.
-- `Доказательство:`
-  1) По Def. 5.11 и локальной согласованности, для каждого $u\\in U$ информация дана во всех
-     4 направлениях, и число инцидентных рёбер у $u$ нечётно; значит граф рёбер на $U$ —
-     odd‑degree (степени 1 или 3). См. HR’22, remark после Def. 5.11
+- `Lens:` Invariant.
+- `Statement (Q43.S87-fixed-center-parity):`
+  Let $I$ be a closed information set (Def. 5.11 in HR'22), $U:=\\mathrm{supp}(I)$. If $U$
+  D4 is symmetric with respect to a fixed center $c\\in U$, then such $I$ does not exist:
+  closed $\\Rightarrow$ the edge graph on $U$ has odd degrees (1 or 3), so $|U|$ is even,
+  but D4 symmetry with a fixed center gives $|U|$ odd.
+- `Proof:`
+  1) By Def. 5.11 and local consistency, for each $u\\in U$ the information is given in all
+     4 directions, and the number of incident edges of $u$ is odd; means the graph of edges on $U$ --
+     odddegree (degrees 1 or 3). See HR'22, remark after Def. 5.11
      (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1664-1679`).
-  2) По лемме рукопожатий число вершин с нечётной степенью чётно; следовательно $|U|$ чётно.
-  3) Если $U$ инвариантен под $D_4$ и содержит фиксированный центр $c$, то все остальные
-     орбиты имеют размер 4 или 8 (точки на осях/диагоналях или общий случай), поэтому
-     $|U|=1+4a+8b$ и $|U|$ нечётно. Противоречие.
-- `Toy‑тест:` «крест» (5 центров) и 3×3 блок (9 центров): оба имеют D4‑симметрию
-  с фикс‑центром, но $|\\mathrm{supp}|$ нечётно, значит odd‑degree невозможно.
-- `Статус:` доказано (исключены все D4‑симметричные closed‑supports с фикс‑центром).
+  2) By the handshake lemma, the number of vertices with odd degree is even; hence $|U|$ is even.
+  3) If $U$ is invariant under $D_4$ and contains a fixed center $c$, then all others
+     orbits are size 4 or 8 (points on axes/diagonals or general case) so
+     $|U|=1+4a+8b$ and $|U|$ is odd. Contradiction.
+- `Toy test:` "cross" (5 centers) and 3x3 block (9 centers): both have D4 symmetry
+  with a fixed-center, but $|\\mathrm{supp}|$ is odd, which means odd-degree is impossible.
+- `Status:` proven (all D4symmetric closedsupports with a fixedcenter are excluded).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить D4‑симметричные closed‑supports без фикс‑центра
-  (орбиты 4/8), либо выписать mod‑2 несогласованность (Q43.S88).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check D4symmetrical closedsupports without fixedcenter
+  (orbits 4/8), or write mod-2 inconsistency (Q43.S88).
 
-### 16.241. Исследовательский шаг (counterexample): D4‑квотиент слишком сильный
+### 16.241. Exploratory step (counterexample): D4 quota is too strong
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S88-quotient-parity):`
-  Попытка свести существование D4‑симметричного closed‑support (без фикс‑центра)
-  к системе паритетов на орбитных переменных (D4‑квотиент) некорректна: такая система
-  описывает только D4‑инвариантные множества рёбер и может быть несовместна даже когда
-  closed‑support существует.
-- `Toy‑тест:`
-  1) На grid 4×4 возьмём support $U$ = центральный 2×2 блок. Он D4‑симметричен и не содержит
-     фикс‑центра. Индуцированный граф — цикл $C_4$, и закрытый $I$ существует: например,
-     горизонтальный (или вертикальный) matching даёт нечётные степени 1 у всех вершин
-     (odd‑degree ⇔ closed, Def. 5.11 + ремарка после него,
+- `Lens:` Equivalence.
+- `Statement (Q43.S88-quotient-parity):`
+  An attempt to reduce the existence of D4symmetric closedsupport (without a fixedcenter)
+  to the system of parities on orbital variables (D4-quotient) is incorrect: such a system
+  describes only D4-invariant sets of edges and may be inconsistent even when
+  closedsupport exists.
+- `Toy test:`
+  1) On a 4x4 grid, take support $U$ = central 2x2 block. It is D4symmetrical and does not contain
+     fixed center. The induced graph is a cycle $C_4$, and a closed $I$ exists: for example,
+     horizontal (or vertical) matching gives odd powers of 1 for all vertices
+     (odddegree  closed, Def. 5.11 + remark after it,
      `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1659-1679`).
-  2) Если же требовать D4‑симметрию для рёбер (орбитные переменные на D4‑квотиенте),
-     то у $C_4$ одна орбита рёбер (все 4 ребра), и любая вершина инцидентна ей дважды.
-     Поэтому любая D4‑симметричная выборка рёбер даёт чётные степени (0 или 2),
-     и уравнение $\\deg(v)\\equiv 1\\pmod 2$ несовместно.
-- `Статус:` контрпример (квотиентный паритет захватывает только D4‑инвариантные $I$).
+  2) If we require D4 symmetry for the edges (orbital variables on the D4 quota),
+     then $C_4$ has one edge orbit (all 4 edges), and any vertex is incident to it twice.
+     Therefore, any D4symmetric edge selection gives even degrees (0 or 2),
+     and the equation $\\deg(v)\\equiv 1\\pmod 2$ is inconsistent.
+- `Status:` counterexample (quotient parity captures only D4-invariant $I$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` искать ограничение на supports без фикс‑центра, которое запрещает
-  любые odd‑degree подграфы (без требования D4‑симметрии рёбер), либо перейти к
-  orbit‑8‑only конструированию (Q43.S88b).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` look for a restriction on supports without a fixed center, which prohibits
+  any odddegree subgraphs (without the requirement of D4symmetry of edges), or go to
+  orbit8only design (Q43.S88b).
 
-### 16.242. Исследовательский шаг (toy computation): orbit‑8‑only support на 6×6 с odd‑degree
+### 16.242. Research step (toy computation): orbit8only support at 66 with odddegree
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S89-orbit8-construction):`
-  На grid 6×6 существует D4‑симметричный closed‑support без фикс‑центра, состоящий только
-  из orbit‑8‑центров, на котором есть odd‑degree подграф; значит существует closed information
-  set (Def. 5.11 в HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1659-1670`).
-- `Toy‑тест:`
-  1) Используем координаты $(i,j)\\in[6]^2$ и симметрии $D_4$ квадрата относительно центра
-     $(3.5,3.5)$. Возьмём орбиту точки $(2,3)$:
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S89-orbit8-construction):`
+  On a 66 grid there is a D4symmetric closedsupport without a fixedcenter, consisting only
+  from orbit8centers, on which there is an odddegree subgraph; it means there is closed information
+  set (Def. 5.11 in HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1659-1670`).
+- `Toy test:`
+  1) We use coordinates $(i,j)\\in[6]^2$ and symmetries $D_4$ of the square relative to the center
+     $(3.5,3.5)$. Let's take the orbit of the point $(2,3)$:
      $$U=\\{(2,3),(2,4),(3,2),(3,5),(4,2),(4,5),(5,3),(5,4)\\}.$$
-     Все вершины $U$ вне диагоналей $i=j$ и $i+j=7$, поэтому орбита имеет размер 8
-     (orbit‑8‑only) и $U$ D4‑симметричен.
-  2) В графе соседства grid выберем рёбра
+     All vertices of $U$ are outside the diagonals $i=j$ and $i+j=7$, so the orbit has size 8
+     (orbit8only) and $U$ D4symmetric.
+  2) In the grid neighborhood graph, select the edges
      $$E=\\{(2,3)(2,4),(3,2)(4,2),(3,5)(4,5),(5,3)(5,4)\\}.$$
-     Тогда каждый $u\\in U$ имеет степень $1$ (нечётную).
-  3) Определим information set $I$ как $E$ плюс non‑edges во всех остальных направлениях
-     инцидентных $u\\in U$. По Def. 5.8 условие локальной согласованности выполнено
-     (odd‑degree; `…:1618-1623`), а по Def. 5.11 $I$ — closed.
-- `Статус:` доказано (явная конструкция на 6×6).
+     Then each $u\\in U$ has degree $1$ (odd).
+  3) Define information set $I$ as $E$ plus non-edges in all other directions
+     incident $u\\in U$. By Def. 5.8 local consistency condition is satisfied
+     (odd‑degree; `…:1618-1623`), and according to Def. 5.11 $I$ -- closed.
+- `Status:` proven (explicit construction on 6x6).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, совместимы ли такие orbit‑8 supports с требованиями
-  possible forcing information $J_j$ (Def. 6.2), или найти дополнительную локальную обструкцию.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether such orbit8 supports are compatible with the requirements
+  possible forcing information $J_j$ (Def. 6.2), or find additional local obstruction.
 
-### 16.243. Исследовательский шаг (counterexample): orbit‑8 support не исключается локально
+### 16.243. Research step (counterexample): orbit8 support is not excluded locally
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S91-orbit8-jj-local-obstruction):`
-  Orbit‑8 support на 6×6 не может быть support возможной forcing‑информации $J_j$:
-  локальная согласованность (Def. 6.2(1)) и запрет chosen–non‑chosen edges уже дают
-  локальный паритетный конфликт.
-- `Toy‑тест:`
-  1) Возьмём orbit‑8 support $U$ и рёбра $E$ из §16.242 (4 непересекающихся ребра).
-     Пусть $J$ содержит эти 4 рёбра и non‑edges во всех остальных направлениях у каждого
-     $u\\in U$. Тогда $J$ локально согласован: информация во всех 4 направлениях и ровно
-     1 инцидентное ребро (нечётно) у каждого $u$ (Def. 5.8).
-  2) Пусть $I=\\varnothing$ (или $\\mathrm{supp}(I)\\cap U=\\varnothing$), тогда Def. 6.2(1) выполнено.
-     Если все центры в $U$ одного типа (все chosen или все non‑chosen), то запрет
-     chosen–non‑chosen edges соблюдён автоматически.
-  3) В случае non‑chosen центров возьмём pairing $\\pi$ с 4 компонентами‑рёбрами $E$;
-     тогда $J\\!\upharpoonright_{\\text{non‑chosen}}$ — объединение компонент $\\pi$,
-     т.е. Def. 6.2(4) выполнено.
-  4) Для ветви $\\psi$, состоящей из переменных с ассоц. центрами $U$, $J$ закрыт на
-     каждом $u$ и поэтому все переменные принудительно заданы (Def. 5.9), а удаление
-     любого information piece ломает forcing, т.е. $J$ минимален.
-- `Статус:` контрпример (локальной обструкции нет: Def. 6.2(1) + запрет chosen–non‑chosen
-  не исключают orbit‑8 support).
+- `Lens:` Invariant.
+- `Statement (Q43.S91-orbit8-jj-local-obstruction):`
+  Orbit8 support on 66 cannot be support possible forcinginformation $J_j$:
+  local consistency (Def. 6.2(1)) and the chosen-non-chosen edges prohibition already give
+  local parity conflict.
+- `Toy test:`
+  1) Take orbit8 support $U$ and edges $E$ from Section 16.242 (4 disjoint edges).
+     Let $J$ contain these 4 edges and non-edges in all other directions for each
+     $u\\in U$. Then $J$ is locally consistent: information in all 4 directions and exactly
+     1 incident edge (odd) for each $u$ (Def. 5.8).
+  2) Let $I=\\varnothing$ (or $\\mathrm{supp}(I)\\cap U=\\varnothing$), then Def. 6.2(1) is satisfied.
+     If all centers in $U$ are of the same type (all chosen or all non-chosen), then the ban
+     chosen-non-chosen edges are observed automatically.
+  3) In the case of non-chosen centers, take pairing $\\pi$ with 4 edge components $E$;
+     then $J\\!\upharpoonright_{\\text{nonchosen}}$ is the union of the components of $\\pi$,
+     those. Def. 6.2(4) is satisfied.
+  4) For the branch $\\psi$, consisting of variables with associative centers $U$, $J$ is closed at
+     each $u$ and therefore all variables are forced (Def. 5.9), and deleting
+     any information piece is broken by forcing, i.e. $J$ is minimal.
+- `Status:` counterexample (no local obstruction: Def. 6.2(1) + chosen-non-chosen prohibition
+  do not exclude orbit8 support).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить совместимость такого $J_j$ с реальными ограничениями на $S/I/\\pi$
-  в каноническом дереве (глобальные условия), либо формализовать mod‑2 систему для
-  orbit‑8 с выбранным разбиением chosen/non‑chosen.
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check the compatibility of such $J_j$ with real restrictions on $S/I/\\pi$
+  in the canonical tree (global conditions), or formalize the mod-2 system for
+  orbit8 with chosen/nonchosen split.
 
-### 16.244. Исследовательский шаг (toy computation): orbit‑8 и 2‑стадийный канонический фрагмент
+### 16.244. Research step (toy computation): orbit-8 and 2-stage canonical fragment
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S94-orbit8-canonical-fragment):`
-  Попытка исключить orbit‑8 как стадию канонического дерева через Def. 6.2(3) или Def. 6.13(2)
-  не срабатывает на 2‑стадийном toy‑фрагменте: существует выбор $(\\rho,I,S,\\pi,\\psi)$, где $J_j$
-  из §16.243 удовлетворяет Def. 6.2(1–4), а конфликт Definition 6.13(2) не возникает.
-- `Toy‑тест:`
-  1) Возьмём orbit‑8 support $U$ и $J$ из §16.243. Положим $I=\\varnothing$ и $S=\\varnothing$.
-     Тогда Def. 6.2(1) верно (попарная локальная согласованность), а Def. 6.2(2) тривиально,
-     т.к. $J$ закрыт на каждом $u\\in U$ (информация во всех 4 направлениях).
-  2) Возьмём ветвь $\\psi$ с переменными, ассоц. центрами $U$. По Def. 5.9 каждый такой
-     переменный forced, следовательно Def. 6.2(3) выполняется, а минимальность $J$ следует
-     из того, что удаление любого piece на $u$ снимает forcing у центра $u$.
-  3) Если все центры $U$ non‑chosen, то Def. 6.2(4) выполняется при pairing $\\pi$,
-     чьи компоненты совпадают с 4 рёбрами $E$; а в Def. 6.13(2) множество $E_\\psi$
-     пусто, и assignment из $I$ тривиально pairwise‑locally consistent.
-  4) Если все центры $U$ chosen, то подписи (Definition 6.11) кодируют ту же схему
-     edges/non‑edges, что и $J$; induced assignment на меньшей решётке локально согласован
-     (odd‑degree 1 на каждом $u$), так что Def. 6.13(2) также не даёт конфликта.
-- `Статус:` частично (toy‑фрагмент совместим с Def. 6.2(3) и Def. 6.13(2); обструкция не найдена).
+- `Lens:` Model stress test.
+- `Statement (Q43.S94-orbit8-canonical-fragment):`
+  An attempt to exclude orbit-8 as a stage of the canonical tree via Def. 6.2(3) or Def. 6.13(2)
+  does not work on a 2-stage toy fragment: there is a choice $(\\rho,I,S,\\pi,\\psi)$, where $J_j$
+  of Section 16.243 satisfies Def. 6.2(1-4), and there is no conflict with Definition 6.13(2).
+- `Toy test:`
+  1) Take orbit8 support $U$ and $J$ from Section 16.243. Let's put $I=\\varnothing$ and $S=\\varnothing$.
+     Then Def. 6.2(1) is true (pairwise local consistency), and Def. 6.2(2) is trivial,
+     because $J$ is closed on every $u\\in U$ (information in all 4 directions).
+  2) Take the branch $\\psi$ with variables, associative. $U$ centers. By Def. 5.9 each like this
+     variable forced, hence Def. 6.2(3) is satisfied, and the minimality of $J$ follows
+     from the fact that removing any piece on $u$ removes forcing from the center $u$.
+  3) If all centers $U$ are nonchosen, then Def. 6.2(4) holds for pairing $\\pi$,
+     whose components coincide with 4 edges of $E$; and in Def. 6.13(2) set $E_\\psi$
+     is empty, and assignment from $I$ is trivially pairwiselocally consistent.
+  4) If all centers are $U$ chosen, then the signatures (Definition 6.11) encode the same scheme
+     edges/non-edges, same as $J$; induced assignment on a smaller lattice is locally consistent
+     (odddegree 1 on each $u$), so Def. 6.13(2) also gives no conflict.
+- `Status:` partially (toy fragment is compatible with Def. 6.2(3) and Def. 6.13(2); obstruction not found).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` выписать глобальную mod‑2 систему для orbit‑8 с заданным разбиением
-  chosen/non‑chosen и pairing $\\pi$ (Q43.S95).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` write a global mod-2 system for orbit-8 with a given partition
+  chosen/non-chosen and pairing $\\pi$ (Q43.S95).
 
-### 16.245. Исследовательский шаг (toy computation): orbit‑8 mod‑2 глобальный чек (all‑non‑chosen)
+### 16.245. Research step (toy computation): orbit-8 mod-2 global check (all-non-chosen)
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S95-orbit8-mod2-global):`
-  Для all‑non‑chosen support $U$ и pairing $\\pi=E$ глобальный конфликт Definition 6.13(2)
-  сводится к линейной системе $A x=b$ над $\\mathbb F_2$ по рёбрам $\\pi$; для 6×6 orbit‑8
-  из §16.242 система разрешима (единственное решение $x_e=1$ для всех $e\\in E$).
-- `Toy‑тест:`
-  1) При all‑non‑chosen и $\\pi=E$ assignment на выбранных путях определяется только
-     information pieces на non‑chosen центрах. Локальная согласованность (Def. 5.8) даёт
-     уравнение $\\sum_{e\\ni v} x_e = 1$ для каждого $v\\in U$ (odd‑degree).
-  2) Нумеруем рёбра $e_1=(2,3)(2,4)$, $e_2=(3,2)(4,2)$, $e_3=(3,5)(4,5)$, $e_4=(5,3)(5,4)$.
-     Тогда
+- `Lens:` Invariant.
+- `Statement (Q43.S95-orbit8-mod2-global):`
+  For allnonchosen support $U$ and pairing $\\pi=E$ global conflict Definition 6.13(2)
+  reduces to the linear system $A x=b$ over $\\mathbb F_2$ along the edges $\\pi$; for 6x6 orbit8
+  from Section 16.242 the system is solvable (the unique solution $x_e=1$ for all $e\\in E$).
+- `Toy test:`
+  1) With allnonchosen and $\\pi=E$ assignment on the selected paths, only
+     information pieces at non-chosen centers. Local consistency (Def. 5.8) gives
+     equation $\\sum_{e\\ni v} x_e = 1$ for each $v\\in U$ (odddegree).
+  2) We number the edges $e_1=(2,3)(2,4)$, $e_2=(3,2)(4,2)$, $e_3=(3,5)(4,5)$, $e_4=(5,3)(5,4)$.
+     Then
      $$A=\\begin{pmatrix}
      1&0&0&0\\\\
      1&0&0&0\\\\
@@ -2371,2947 +2371,2947 @@ import Paperproof
      0&0&0&1\\\\
      0&0&0&1
      \\end{pmatrix},\\quad b=\\mathbf 1,$$
-     и система эквивалентна $x_1=x_2=x_3=x_4=1$ (rank$=4$), т.е. совместна.
-- `Статус:` доказано (mod‑2 чек не даёт конфликта в all‑non‑chosen case).
+     and the system is equivalent to $x_1=x_2=x_3=x_4=1$ (rank$=4$), i.e. joint
+- `Status:` proven (mod2 check does not give a conflict in the allnonchosen case).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить mixed chosen/non‑chosen: выписать систему для 2 chosen + 6 non‑chosen
-  и проверить конфликт Definition 6.13(2).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check mixed chosen/non-chosen: write a system for 2 chosen + 6 non-chosen
+  and check for Definition 6.13(2) conflict.
 
-### 16.246. Исследовательский шаг (toy computation): orbit‑8 mixed chosen/non‑chosen, mod‑2 чек
+### 16.246. Research step (toy computation): orbit8 mixed chosen/nonchosen, mod2 check
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S96-orbit8-mixed-chosen-conflict):`
-  На orbit‑8 support $U$ из §16.242 при выборе chosen центров $(2,3)$ и $(5,4)$ и остальных
-  non‑chosen, если $J$ использует рёбра $E$ из §16.242, то mod‑2 чек Definition 6.13(2)
-  остаётся совместимым (как в all‑non‑chosen случае).
-- `Toy‑тест:`
-  1) Берём $U$ и $E$ из §16.242. Обозначим
-     $e_1=(2,3)(2,4)$, $e_2=(3,2)(4,2)$, $e_3=(3,5)(4,5)$, $e_4=(5,3)(5,4)$ и
-     переменные $x_i\\in\\{0,1\}$ для этих рёбер.
-  2) Пусть chosen центры $c_1=(2,3)$ и $c_2=(5,4)$, остальные 6 центров non‑chosen, а $J$
-     содержит рёбра $E$ и non‑edges во всех остальных направлениях, т.е. информация полна
-     на каждом $u\\in U$.
-  3) Локальная согласованность даёт уравнения $\\sum_{e\\ni u} x_e = 1$ для всех $u\\in U$,
-     что эквивалентно $x_1=x_2=x_3=x_4=1$ (система совпадает с §16.245) и, следовательно,
-     совместна.
-  4) Замечание: рёбра $e_1,e_4$ соединяют chosen–non‑chosen и нарушают Def. 6.2(4); здесь
-     проверяется только конфликт‑чек Def. 6.13(2).
-- `Статус:` toy computation (конфликт Definition 6.13(2) не обнаружен в этой конфигурации).
+- `Lens:` Invariant.
+- `Statement (Q43.S96-orbit8-mixed-chosen-conflict):`
+  On orbit8 support $U$ from Section 16.242 when choosing chosen centers $(2,3)$ and $(5,4)$ and the rest
+  non-chosen, if $J$ uses edges $E$ from Section 16.242, then mod-2 check Definition 6.13(2)
+  remains compatible (as in the allnonchosen case).
+- `Toy test:`
+  1) Take $U$ and $E$ from Section 16.242. Let's denote
+     $e_1=(2,3)(2,4)$, $e_2=(3,2)(4,2)$, $e_3=(3,5)(4,5)$, $e_4=(5,3)(5,4)$ and
+     variables $x_i\\in\\{0,1\}$ for these edges.
+  2) Let the chosen centers be $c_1=(2,3)$ and $c_2=(5,4)$, the remaining 6 centers are non-chosen, and $J$
+     contains edges $E$ and non-edges in all other directions, i.e. the information is complete
+     on each $u\\in U$.
+  3) Local consistency gives the equations $\\sum_{e\\ni u} x_e = 1$ for all $u\\in U$,
+     which is equivalent to $x_1=x_2=x_3=x_4=1$ (the system is the same as Section 16.245) and therefore
+     joint
+  4) Note: edges $e_1,e_4$ connect chosen-non-chosen and violate Def. 6.2(4); Here
+     Only conflict check Def is checked. 6.13(2).
+- `Status:` toy computation (Definition 6.13(2) conflict not detected in this configuration).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` повторить mod‑2 чек при запрете chosen–non‑chosen рёбер (Def. 6.2(4)),
-  например, выбрать adjacent chosen центры или зафиксировать $x_{e_1}=x_{e_4}=0$ и проверить
-  совместимость.
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` repeat mod-2 check when choosing-non-chosen edges are prohibited (Def. 6.2(4)),
+  for example, select adjacent chosen centers or fix $x_{e_1}=x_{e_4}=0$ and check
+  compatibility.
 
-### 16.247. Исследовательский шаг (toy computation): orbit‑8 запрет chosen–non‑chosen → $x_{e_1}=x_{e_4}=0$
+### 16.247. Research step (toy computation): orbit8 prohibition chosen-nonchosen -> $x_{e_1}=x_{e_4}=0$
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S97-orbit8-force-e1e4-zero):`
-  В конфигурации §16.246 запрет chosen–non‑chosen edges (Def. 6.2(4)) эквивалентен фиксации
-  $x_{e_1}=x_{e_4}=0$ в мод‑2 системе §16.245; тогда система $A x=\\mathbf 1$ несовместна,
-  так что конфликт Definition 6.13(2) возникает на toy‑уровне.
-- `Toy‑тест:`
-  1) Оставим support $U$ и chosen центры $c_1=(2,3)$, $c_2=(5,4)$ как в §16.246.
-     Рёбра $e_1=(2,3)(2,4)$ и $e_4=(5,3)(5,4)$ соединяют chosen–non‑chosen, поэтому в $J$
-     должны быть non‑edges: $x_{e_1}=x_{e_4}=0$.
-  2) В системе $A x=\\mathbf 1$ из §16.245 строки для $(2,3),(2,4)$ дают $x_{e_1}=1$,
-     а строки для $(5,3),(5,4)$ дают $x_{e_4}=1$. Противоречие с $x_{e_1}=x_{e_4}=0$,
-     следовательно система несовместна.
-- `Статус:` доказано (mod‑2 конфликт при запрете mixed‑edges).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S97-orbit8-force-e1e4-zero):`
+  In a Section 16.246 configuration, the chosen-non-chosen edges prohibition (Def. 6.2(4)) is equivalent to committing
+  $x_{e_1}=x_{e_4}=0$ in mod2 system Section 16.245; then the system $A x=\\mathbf 1$ is inconsistent,
+  so the Definition 6.13(2) conflict arises at the toy level.
+- `Toy test:`
+  1) Let us leave support $U$ and chosen centers $c_1=(2,3)$, $c_2=(5,4)$ as in Section 16.246.
+     The edges $e_1=(2,3)(2,4)$ and $e_4=(5,3)(5,4)$ connect chosen-non-chosen, so in $J$
+     must be non-edges: $x_{e_1}=x_{e_4}=0$.
+  2) In the system $A x=\\mathbf 1$ from Section 16.245 the lines for $(2,3),(2,4)$ give $x_{e_1}=1$,
+     and the lines for $(5,3),(5,4)$ give $x_{e_4}=1$. Contradiction with $x_{e_1}=x_{e_4}=0$,
+     therefore the system is inconsistent.
+- `Status:` proven (mod-2 conflict when mixed-edges are prohibited).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить альтернативную конфигурацию без mixed‑edges, например adjacent chosen
-  центры и новый $J$ без рёбер chosen–non‑chosen (Q43.S98).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check an alternative configuration without mixed-edges, for example adjacent chosen
+  centers and a new $J$ without edges chosen-non-chosen (Q43.S98).
 
-### 16.248. Исследовательский шаг (toy computation): orbit‑8 adjacent chosen без mixed‑edges
+### 16.248. Research step (toy computation): orbit8 adjacent chosen without mixededges
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S98-adjacent-chosen-mod2-conflict):`
-  В orbit‑8 support $U$ при adjacent chosen центрах $(2,3)$ и $(2,4)$, запрете chosen–non‑chosen edges
-  (Def. 6.2(4)) и $J$ с рёбрами $E$ из §16.242 mod‑2 система $A x=\\mathbf 1$
-  несовместна (конфликт Def. 6.13(2)).
-- `Toy‑тест:`
-  1) Берём $U$ и рёбра $E$ из §16.242, обозначим
-     $e_1=(2,3)(2,4)$, $e_2=(3,2)(4,2)$, $e_3=(3,5)(4,5)$, $e_4=(5,3)(5,4)$ и $x_i\\in\\{0,1\}$.
-  2) Выберем chosen центры $c_1=(2,3)$ и $c_2=(2,4)$ (adjacent), остальные 6 центров non‑chosen;
-     пусть $J$ содержит рёбра $E$ и non‑edges во всех остальных направлениях, так что информация
-     полна на каждом $u\\in U$. Тогда среди $E$ нет chosen–non‑chosen рёбер: $e_1$ соединяет
-     chosen‑chosen, а $e_2,e_3,e_4$ — non‑chosen‑non‑chosen.
-  3) Локальная согласованность даёт ту же систему $A x=\\mathbf 1$ из §16.245,
-     т.е. $x_1=x_2=x_3=x_4=1$. Запрет mixed‑edges не фиксирует ни одного $x_i$,
-     поэтому система совместна и конфликт Def. 6.13(2) не возникает.
-- `Статус:` контрпример (adjacent chosen не влечёт mod‑2 конфликт в этой конфигурации).
+- `Lens:` Invariant.
+- `Statement (Q43.S98-adjacent-chosen-mod2-conflict):`
+  In orbit8 support $U$ with adjacent chosen centers $(2,3)$ and $(2,4)$, chosen-nonchosen edges prohibition
+  (Def. 6.2(4)) and $J$ with edges $E$ from Section 16.242 mod2 system $A x=\\mathbf 1$
+  inconsistent (conflict Def. 6.13(2)).
+- `Toy test:`
+  1) Take $U$ and edges $E$ from Section 16.242, denote
+     $e_1=(2,3)(2,4)$, $e_2=(3,2)(4,2)$, $e_3=(3,5)(4,5)$, $e_4=(5,3)(5,4)$ and $x_i\\in\\{0,1\}$.
+  2) Choose chosen centers $c_1=(2,3)$ and $c_2=(2,4)$ (adjacent), the remaining 6 centers are non-chosen;
+     let $J$ contain edges $E$ and non-edges in all other directions, so that the information
+     is complete on every $u\\in U$. Then among $E$ there are no chosen-non-chosen edges: $e_1$ connects
+     chosen-chosen, and $e_2,e_3,e_4$ - non-chosen-non-chosen.
+  3) Local consistency gives the same system $A x=\\mathbf 1$ from Section 16.245,
+     those. $x_1=x_2=x_3=x_4=1$. The mixed-edges ban does not fix any $x_i$,
+     therefore the system is cooperative and conflict Def. 6.13(2) does not arise.
+- `Status:` counterexample (adjacent chosen does not entail a mod-2 conflict in this configuration).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
 
-### 16.249. Исследовательский шаг (exact citation): adjacent chosen допустимы по Def. 5.6/6.2/6.11
+### 16.249. Research step (exact citation): adjacent chosen are allowed by Def. 5.6/6.2/6.11
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S99-adjacent-chosen-allowed):`
-  В HR’22 определения не запрещают минимальный $J$ с ровно двумя adjacent chosen центрами и без
-  chosen–non‑chosen рёбер; конфигурация §16.248 допустима по Def. 5.6/6.2/6.11, а Lemma 6.5
-  требует наличие adjacency между chosen центрами в $\\mathrm{supp}(J)$.
+- `Lens:` Equivalence.
+- `Statement (Q43.S99-adjacent-chosen-allowed):`
+  In HR'22, the definitions do not prohibit a minimal $J$ with exactly two adjacent chosen centers and without
+  chosen-non-chosen ribs; Section 16.248 configuration is allowed under Def. 5.6/6.2/6.11, and Lemma 6.5
+  requires the presence of adjacency between chosen centers in $\\mathrm{supp}(J)$.
 - `Exact citation:`
   “Edges between chosen centers are new grid edges and we say that two chosen centers are neighbors
   if they lie in adjacent sub-squares” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1571-1574`).
-  Definition 5.6: информация — это либо edge между центрами в соседних sub‑squares,
-  либо non‑edge $(v,\\delta,\\bot)$ (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1586-1594`).
-  Definition 6.2: возможный $J$ — минимальный набор с условиями (1)–(4) и явной ремаркой
+  Definition 5.6: information is either the edge between centers in adjacent subsquares,
+  or non-edge $(v,\\delta,\\bot)$ (HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1586-1594`).
+  Definition 6.2: possible $J$ is a minimal set with conditions (1)-(4) and an explicit remark
   “a possible forcing information $J$ never contains an edge between a chosen center and a non-chosen center”
   (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1882-1893`).
-  Lemma 6.5 использует минимальность $J$ и локальную согласованность, чтобы показать:
+  Lemma 6.5 uses $J$ minimality and local consistency to show:
   “every chosen center in $\\mathrm{supp}(J)$ is adjacent to at least one other chosen center in $\\mathrm{supp}(J)$”
   (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2016-2023`).
-  Definition 6.11 задаёт 9‑битную подпись центра (chosen‑бит, направления информации, направления рёбер),
-  без ограничений на adjacency (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`).
-- `Toy‑тест:`
-  1) В конфигурации §16.248 берём chosen центры $c_1=(2,3)$ и $c_2=(2,4)$ (adjacent),
-     $J$ содержит ребро $e_1=c_1c_2$ и рёбра $e_2,e_3,e_4$ между non‑chosen центрами, а
-     остальные направления закрыты non‑edges.
-  2) Def. 5.6 допускает такие информационные куски (edge между adjacent центрами и non‑edge‑записи).
-  3) Нарушения “no chosen–non‑chosen edges” нет: $e_1$ соединяет chosen–chosen, $e_2,e_3,e_4$ —
-     non‑chosen–non‑chosen, что согласуется с Def. 6.2(4) и явной ремаркой после Def. 6.2.
-  4) Локальная согласованность выполнена (ровно один piece на направление и нечётная степень),
-     поэтому при локально согласованном $I$ (например, $I=\\varnothing$) выполняется Def. 6.2(1).
-  5) Подписи Def. 6.11 корректно определены: у выбранных центров bit chosen = 1, отмечены все направления
-     и ровно одно направление с ребром, поэтому adjacency не создаёт запрета.
-- `Статус:` подтверждено (adjacent chosen разрешены на уровне определений; запрета нет).
+  Definition 6.11 specifies the 9bit signature of the center (chosenbit, information directions, edge directions),
+  without restrictions on adjacency (HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2327-2332`).
+- `Toy test:`
+  1) In the configuration Section 16.248 we take chosen centers $c_1=(2,3)$ and $c_2=(2,4)$ (adjacent),
+     $J$ contains edge $e_1=c_1c_2$ and edges $e_2,e_3,e_4$ between non-chosen centers, and
+     other directions are closed non-edges.
+  2) Def. 5.6 allows such information pieces (edge between adjacent centers and non-edge records).
+  3) There is no violation of "no chosen-nonchosen edges": $e_1$ connects chosen-chosen, $e_2,e_3,e_4$ --
+     non-chosen-non-chosen, which is consistent with Def. 6.2(4) and an explicit remark after Def. 6.2.
+  4) Local consistency is satisfied (exactly one piece per direction and odd degree),
+     so if $I$ is locally consistent (e.g. $I=\\varnothing$), Def holds. 6.2(1).
+  5) Signatures Def. 6.11 are correctly defined: the selected centers have bit chosen = 1, all directions are marked
+     and exactly one direction with an edge, so adjacency does not create a ban.
+- `Status:` confirmed (adjacent chosen are allowed at the definition level; there is no prohibition).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо (цитата/формулировка), NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, может ли minimal $J$ с ровно двумя adjacent chosen центрами
-  реально возникать как possible forcing information (Def. 6.2(3)), или требуется ≥3 chosen (Q43.S101).
+- `Barrier check:` r - not applicable (quote/wording), NP - not applicable, alg - not applicable.
+- `Next step:` check whether minimal $J$ with exactly two adjacent chosen centers can
+  actually arise as possible forcing information (Def. 6.2(3)), or >=3 chosen are required (Q43.S101).
 
-### 16.250. Исследовательский шаг (toy computation): 2 adjacent chosen дают possible forcing information
+### 16.250. Research step (toy computation): 2 adjacent chosen give possible forcing information
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S101-two-chosen-example):`
-  На grid 4×4 существует конфигурация с ровно двумя adjacent chosen центрами, для которой
-  можно выбрать $(\\rho,I,S,\\pi,\\psi)$ так, что $J$ является possible forcing information
-  (Def. 6.2) и минимален (Def. 5.9), при этом $J$ не содержит chosen–non‑chosen edges.
-- `Toy‑тест:`
-  1) Возьмём adjacent chosen центры $c_1=(2,3)$ и $c_2=(2,4)$, остальные центры вне поддержки.
-     Положим $I=\\varnothing$, $S=\\varnothing$, $\\pi=\\varnothing$, а $\\psi$ — ветвь,
-     содержащая хотя бы одну переменную, ассоциированную с каждым из $c_1,c_2$.
-  2) Определим $J$ как edge $\\{c_1,c_2\\}$ и non‑edges $(c_1,\\delta,\\bot)$ для трёх остальных
-     направлений от $c_1$ и аналогично для $c_2$. Тогда $J$ закрыт на $c_1,c_2$
+- `Lens:` Model stress test.
+- `Statement (Q43.S101-two-chosen-example):`
+  On a 4x4 grid there is a configuration with exactly two adjacent chosen centers, for which
+  one can choose $(\\rho,I,S,\\pi,\\psi)$ such that $J$ is possible forcing information
+  (Def. 6.2) and minimal (Def. 5.9), while $J$ does not contain chosen-non-chosen edges.
+- `Toy test:`
+  1) Take adjacent chosen centers $c_1=(2,3)$ and $c_2=(2,4)$, the remaining centers are outside support.
+     Let's put $I=\\varnothing$, $S=\\varnothing$, $\\pi=\\varnothing$, and $\\psi$ is a branch,
+     containing at least one variable associated with each of $c_1,c_2$.
+  2) Define $J$ as edge $\\{c_1,c_2\\}$ and non-edges $(c_1,\\delta,\\bot)$ for the other three
+     directions from $c_1$ and similarly for $c_2$. Then $J$ is closed at $c_1,c_2$
      (Def. 5.11; `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1659-1664`)
-     и локально согласован (по одному инцидентному ребру — нечётная степень, Def. 5.8).
-     Следовательно, Def. 6.2(1) выполнено.
-  3) Так как $S=\\varnothing$, Def. 6.2(2) требует закрытости в $c_1,c_2$, что выполнено.
-  4) По Def. 5.9 наличие информации во всех 4 направлениях у $c_1,c_2$ принудительно задаёт
-     все переменные, ассоциированные с этими центрами; значит все переменные на $\\psi$ forced
-     и Def. 6.2(3) выполнено. Если удалить любой piece в $J$, один из центров перестаёт быть
-     закрытым, и переменная на $\\psi$ при этом центре не forced — поэтому $J$ минимален.
-  5) $J$ не содержит non‑chosen центров, значит Def. 6.2(4) выполнено тривиально
-     (пустое подмножество компонент $\\pi$), и chosen–non‑chosen edges отсутствуют.
-- `Статус:` доказано (toy‑пример: $J$ с 2 adjacent chosen возможен).
+     and locally consistent (on one incident edge - odd degree, Def. 5.8).
+     Therefore, Def. 6.2(1) is satisfied.
+  3) Since $S=\\varnothing$, Def. 6.2(2) requires closure in $c_1,c_2$, which is satisfied.
+  4) By Def. 5.9 the presence of information in all 4 directions for $c_1,c_2$ forces
+     all variables associated with these centers; means all variables are $\\psi$ forced
+     and Def. 6.2(3) is satisfied. If you remove any piece in $J$, one of the centers ceases to be
+     closed, and the variable on $\\psi$ at this center is not forced - therefore $J$ is minimal.
+  5) $J$ does not contain non-chosen centers, which means Def. 6.2(4) is trivially fulfilled
+     (the empty subset of $\\pi$ components), and chosen-non-chosen edges are absent.
+- `Status:` proven (toy example: $J$ with 2 adjacent chosen is possible).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, накладывают ли глобальные ограничения на $S/I/\\pi$ инвариант
-  min‑degree≥2 или линейную неоднозначность, исключающие поддержку из 2 chosen (Q43.S102).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether global constraints impose an invariant on the $S/I/\\pi$
+  mindegree>=2 or linear ambiguity, excluding support from 2 chosen (Q43.S102).
 
-### 16.251. Исследовательский шаг (counterexample): глобальные ограничения на $S/I/\\pi$ не дают min‑degree≥2
+### 16.251. Exploratory step (counterexample): global restrictions on $S/I/\\pi$ do not give mindegree>=2
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S102-degree2-invariant):`
-  Если possible forcing information $J$ имеет ровно два adjacent chosen центра, то глобальные
-  ограничения на $S/I/\\pi$ принуждают min‑degree≥2 в графе $\\mathrm{supp}(J)$, поэтому toy‑пример
-  из §16.250 невозможен.
-- `Toy‑тест:`
-  1) Берём конфигурацию §16.250: два chosen центра $c_1,c_2$, $J$ содержит ребро $\\{c_1,c_2\\}$
-     и по три non‑edges из каждого центра; $I=\\varnothing$, $S=\\varnothing$, $\\pi=\\varnothing$.
-  2) По Def. 6.2(2) при $S=\\varnothing$ каждый associated center на ветви $\\psi$ обязан быть
-     закрыт; это ровно выполнено, а Def. 6.2(4) тривиальна (нет non‑chosen центров).
-  3) По Def. 5.9 переменные на $\\psi$ forced **только** если есть информация во всех 4 направлениях;
-     удаление любого piece в $J$ снимает закрытость и разрушает forcedness, так что $J$ минимален.
-  4) Граф $\\mathrm{supp}(J)$ имеет степень 1 у обоих chosen центров (единственное ребро между ними),
-     и это совместимо с Def. 6.2(1–4). Следовательно, глобальные ограничения на $S/I/\\pi$ не дают
-     инвариант min‑degree≥2.
-- `Статус:` контрпример (инвариант min‑degree≥2 не следует).
+- `Lens:` Invariant.
+- `Statement (Q43.S102-degree2-invariant):`
+  If possible forcing information $J$ has exactly two adjacent chosen centers, then global
+  restrictions on $S/I/\\pi$ force mindegree>=2 in the graph $\\mathrm{supp}(J)$, so the toy example
+  from Section 16.250 is not possible.
+- `Toy test:`
+  1) Take the configuration Section 16.250: two chosen centers $c_1,c_2$, $J$ contains the edge $\\{c_1,c_2\\}$
+     and three non-edges from each center; $I=\\varnothing$, $S=\\varnothing$, $\\pi=\\varnothing$.
+  2) By Def. 6.2(2) with $S=\\varnothing$ each associated center on the branch $\\psi$ must be
+     closed; this is exactly executed, and Def. 6.2(4) is trivial (there are no non-chosen centers).
+  3) By Def. 5.9 variables on $\\psi$ forced **only** if there is information in all 4 directions;
+     removing any piece in $J$ removes the closedness and destroys the forcedness, so that $J$ is minimal.
+  4) The graph $\\mathrm{supp}(J)$ has degree 1 for both chosen centers (the only edge between them),
+     and it is compatible with Def. 6.2(1-4). Consequently, global restrictions on $S/I/\\pi$ do not give
+     invariant mindegree>=2.
+- `Status:` counterexample (the mindegree>=2 invariant does not follow).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить линейную неоднозначность $I/\\pi$ для fixed support при двух
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check linear ambiguity $I/\\pi$ for fixed support for two
   adjacent chosen (Q43.S103-linear-ambiguity-2chosen).
 
-### 16.252. Исследовательский шаг (toy computation): adjacent chosen не дают линейной неоднозначности
+### 16.252. Exploratory step (toy computation): adjacent chosen does not give linear ambiguity
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S103-ambiguity-construct):`
-  В конфигурации §16.250 с двумя adjacent chosen и без chosen–non‑chosen рёбер
-  линейная система для closed information set на фиксированном support имеет
-  единственное решение; следовательно, (I,π) на этом support однозначны, и
-  линейной неоднозначности нет.
-- `Toy‑тест:`
-  1) Фиксируем support $U=\\{c_1=(2,3),c_2=(2,4)\\}$ из §16.250; non‑chosen центров нет,
-     поэтому pairing $\\pi=\\varnothing$.
-  2) Граф возможных рёбер $G$ на $U$ имеет единственное ребро $e=\\{c_1,c_2\\}$.
-     Пусть $x_e\\in\\{0,1\\}$ — наличие edge‑piece между $c_1,c_2$.
-  3) Закрытость и локальная согласованность (Def. 5.8/5.11:
+- `Lens:` Invariant.
+- `Statement (Q43.S103-ambiguity-construct):`
+  In configuration Section 16.250 with two adjacent chosen and without chosen-non-chosen edges
+  linear system for closed information set on fixed support has
+  the only solution; therefore, (I,) on this support are single-valued, and
+  there is no linear ambiguity.
+- `Toy test:`
+  1) We fix support $U=\\{c_1=(2,3),c_2=(2,4)\\}$ from Section 16.250; there are no non-chosen centers,
+     so pairing $\\pi=\\varnothing$.
+  2) The graph of possible edges $G$ on $U$ has a single edge $e=\\{c_1,c_2\\}$.
+     Let $x_e\\in\\{0,1\\}$ be the presence of an edgepiece between $c_1,c_2$.
+  3) Closedness and local consistency (Def. 5.8/5.11:
      `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1618-1623,1659-1665`)
-     требуют нечётную степень на каждом $v\\in U$, то есть
+     require an odd degree on each $v\\in U$, that is
      $$A=\\begin{pmatrix}1\\\\1\\end{pmatrix},\\quad A x=\\mathbf 1,$$
-     откуда $x_e=1$.
-  4) Следовательно, для фиксированного support существует ровно один closed information set,
-     и никакой свободы в $I/\\pi$ (при тех же подписях) нет.
-- `Статус:` контрпример (линейной неоднозначности нет: решение единственно).
+     whence $x_e=1$.
+  4) Therefore, for a fixed support there is exactly one closed information set,
+     and there is no freedom in $I/\\pi$ (with the same signatures).
+- `Status:` counterexample (there is no linear ambiguity: the solution is unique).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить критерий “cycle‑space ⇔ неоднозначность” на support с циклом
-  (например, 2×2 chosen блок или mixed chosen/non‑chosen), сравнить с §16.227 (Q43.S105).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check the criterion "cyclespace  ambiguity" on support with a cycle
+  (e.g., 22 chosen block or mixed chosen/nonchosen), compare with Section 16.227 (Q43.S105).
 
-### 16.253. Исследовательский шаг (toy computation): 2×2 chosen‑цикл допускает possible forcing info и 1‑бит неоднозначности
+### 16.253. Exploratory step (toy computation): 22 chosen-loop allows possible forcing info and 1-bit ambiguity
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S105-cycle-space-criterion):`
-  На grid 4×4 support из 2×2 chosen‑центров может быть support возможной forcing‑информации
-  $J$, а закрытые $I$ на этом support ровно два (горизонтальный/вертикальный matching);
-  оба проходят Def. 6.13(2), значит 1‑бит неоднозначности цикла не устраняется локальными
-  условиями.
-- `Toy‑тест:`
-  1) Возьмём chosen‑центры $U=\\{(2,2),(2,3),(3,2),(3,3)\\}$ на 4×4, положим $S=\\varnothing$,
-     $I=\\varnothing$, $\\pi=\\varnothing$, а ветвь $\\psi$ содержит переменные, ассоциированные
-     с каждым $u\\in U$.
-  2) Определим $J^{H}$: два горизонтальных ребра $(2,2)(2,3)$ и $(3,2)(3,3)$ плюс non‑edges во
-     всех остальных направлениях у каждого $u\\in U$. Тогда $J^{H}$ локально согласован и закрыт
-     на каждом $u$ (odd‑degree=1; Def. 5.8/5.11:
+- `Lens:` Invariant.
+- `Statement (Q43.S105-cycle-space-criterion):`
+  On a 44 grid, support from 22 chosencenters may support possible forcinginformation
+  $J$, and closed $I$ on this support are exactly two (horizontal/vertical matching);
+  both pass Def. 6.13(2), which means that 1bit of loop ambiguity is not eliminated by local
+  conditions.
+- `Toy test:`
+  1) Take chosen centers $U=\\{(2,2),(2,3),(3,2),(3,3)\\}$ on 44, set $S=\\varnothing$,
+     $I=\\varnothing$, $\\pi=\\varnothing$, and the branch $\\psi$ contains the variables associated
+     with every $u\\in U$.
+  2) Define $J^{H}$: two horizontal edges $(2,2)(2,3)$ and $(3,2)(3,3)$ plus non-edges in
+     in all other directions for each $u\\in U$. Then $J^{H}$ is locally consistent and closed
+     on each $u$ (odddegree=1; Def. 5.8/5.11:
      `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1618-1623,1659-1665`),
-     поэтому Def. 6.2(1–2) выполнены (`…:1882-1888`). По Def. 5.9 информация во всех 4 направлениях
-     у каждого $u$ принуждает переменные на $\\psi$ (`…:1632-1636`), и удаление любого piece ломает
-     forcedness, значит Def. 6.2(3) и минимальность выполнены. Def. 6.2(4) тривиальна (non‑chosen нет).
-  3) Аналогично $J^{V}$ с двумя вертикальными рёбрами — тоже possible forcing information.
-  4) Для фиксированного support $U$ закрытые information sets соответствуют нечётностепенным
-     подграфам 4‑цикла; единственные решения — $J^{H}$ и $J^{V}$ (см. §16.227). В каждом случае,
-     беря $I:=J$, получаем локально согласованный assignment на выбранных путях, так что
-     Def. 6.13(2) конфликта не даёт (`…:2359-2367`).
-- `Статус:` доказано (support‑цикл реализуем, и остаётся ровно 1 бит неоднозначности).
+     therefore Def. 6.2(1-2) are fulfilled (`…:1882-1888`). By Def. 5.9 information in all 4 directions
+     each $u$ forces variables to $\\psi$ (`…:1632-1636`), and removing any piece breaks
+     forcedness means Def. 6.2(3) and the minimality is satisfied. Def. 6.2(4) is trivial (non-chosen).
+  3) Similar to $J^{V}$ with two vertical edges - also possible forcing information.
+  4) For a fixed support $U$, closed information sets correspond to odd numbers
+     subgraphs of the 4cycle; the only solutions are $J^{H}$ and $J^{V}$ (see Section 16.227). In each case,
+     taking $I:=J$, we get a locally consistent assignment on the chosen paths, so that
+     Def. 6.13(2) does not give rise to conflict (`…:2359-2367`).
+- `Status:` proven (the support loop is implementable, and exactly 1 bit of ambiguity remains).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` обобщить критерий через $\\mathbb F_2$‑ранг/quotient‑граф при фиксированном
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` generalize the criterion through $\\mathbb F_2$-rank/quotient-graph for a fixed
   pairing $\\pi$ (Q43.S106).
 
-### 16.254. Исследовательский шаг (proof): $\\pi$‑quotient сводится к cycle‑space chosen‑части
+### 16.254. Research step (proof): $\\pi$quotient is reduced to the cyclespace chosenpart
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (Q43.S106-pi-quotient-rank-lemma):`
-  Зафиксируем support $U$ и pairing $\\pi$. Пусть $I$ — closed information set на $U$,
-  совместимое с $\\pi$ в смысле Invariant 6.1(4)/Def. 6.2(4), и $I$ не содержит
-  chosen–non‑chosen edges (Remark после Invariant 6.1). Обозначим через $G_{\\mathrm{ch}}$
-  граф возможных рёбер на chosen‑центрах из $U$. Тогда множество таких $I$ образует
-  аффинное $\\mathbb F_2$‑подпространство размерности $\\beta(G_{\\mathrm{ch}})$; в частности
+- `Lens:` Communication/Rank.
+- `Statement (Q43.S106-pi-quotient-rank-lemma):`
+  Let us fix support $U$ and pairing $\\pi$. Let $I$ be a closed information set on $U$,
+  compatible with $\\pi$ in the sense of Invariant 6.1(4)/Def. 6.2(4), and $I$ does not contain
+  chosen-non-chosen edges (Remark after Invariant 6.1). Let us denote by $G_{\\mathrm{ch}}$
+  graph of possible edges on chosen centers from $U$. Then the set of such $I$ forms
+  affine $\\mathbb F_2$ subspace of dimension $\\beta(G_{\\mathrm{ch}})$; in particular
   $$|\\{I\\}|=2^{\\beta(G_{\\mathrm{ch}})}.$$
-  Если определить $G/\\pi$ как граф, полученный стягиванием компонент $\\pi$ внутри $U$,
-  то из отсутствия выбранных–невыбранных рёбер следует $\\beta(G/\\pi)=\\beta(G_{\\mathrm{ch}})$,
-  и формула совпадает с “$\\pi$‑quotient” критерием.
-- `Доказательство:`
-  1) По Invariant 6.1(4) и Remark после Def. 5.11, на non‑chosen центрах $I$ представляет
-     собой объединение целых компонент $\\pi$, каждая из которых сама является closed
-     information set. Следовательно, структура $I$ на non‑chosen фиксирована выбранными
-     компонентами $\\pi$ и не даёт степеней свободы.
-  2) По Remark после Invariant 6.1 в $I$ нет путей между chosen и non‑chosen центрами,
-     значит рёбра $I$ раскладываются по компонентам “chosen” и “non‑chosen”.
-  3) На chosen‑части замкнутость эквивалентна условию “odd‑degree на каждом центре”, так
-     что множество решений — ровно аффинное пространство нечётностепенных подграфов
-     $G_{\\mathrm{ch}}$ и имеет размер $2^{\\beta(G_{\\mathrm{ch}})}$ (см. §16.227).
-  4) Стягивание компонент $\\pi$ не влияет на цикл‑пространство chosen‑части (компоненты
-     $\\pi$ изолированы), поэтому $\\beta(G/\\pi)=\\beta(G_{\\mathrm{ch}})$.
-- `Toy‑тест:`
-  1) 2×2 chosen‑цикл из §16.253: $\\pi=\\varnothing$, $G/\\pi=G$, $\\beta=1$ ⇒ два $I$
-     (горизонтальный/вертикальный matching).
-  2) Два adjacent chosen из §16.252: $\\pi=\\varnothing$, $G/\\pi$ — дерево, $\\beta=0$ ⇒
-     $I$ единственен.
-- `Статус:` доказано (в каноническом режиме $\\pi$ фиксирует non‑chosen части, а неоднозначность
-  целиком задаётся cycle‑space chosen‑графа).
+  If we define $G/\\pi$ as the graph obtained by contracting the components of $\\pi$ inside $U$,
+  then from the absence of selected-unselected edges it follows $\\beta(G/\\pi)=\\beta(G_{\\mathrm{ch}})$,
+  and the formula coincides with the "$\\pi$quotient" criterion.
+- `Proof:`
+  1) According to Invariant 6.1(4) and Remark after Def. 5.11, on non-chosen centers $I$ represents
+     is the union of integer components $\\pi$, each of which is itself closed
+     information set. Consequently, the structure of $I$ on non-chosen is fixed by the chosen
+     components of $\\pi$ and does not give degrees of freedom.
+  2) According to Remark, after Invariant 6.1 in $I$ there are no paths between chosen and non-chosen centers,
+     This means that the edges $I$ are decomposed into the "chosen" and "non-chosen" components.
+  3) On the chosen-part, closedness is equivalent to the condition "odd-degree on each center", so
+     that the set of solutions is exactly an affine space of odd subgraphs
+     $G_{\\mathrm{ch}}$ and has size $2^{\\beta(G_{\\mathrm{ch}})}$ (see Section 16.227).
+  4) Contraction of components $\\pi$ does not affect the cycle-space of the chosen-part (components
+     $\\pi$ are isolated), so $\\beta(G/\\pi)=\\beta(G_{\\mathrm{ch}})$.
+- `Toy test:`
+  1) 22 chosen cycle from Section 16.253: $\\pi=\\varnothing$, $G/\\pi=G$, $\\beta=1$  two $I$
+     (horizontal/vertical matching).
+  2) Two adjacent chosen from Section 16.252: $\\pi=\\varnothing$, $G/\\pi$ is a tree, $\\beta=0$ 
+     $I$ is unique.
+- `Status:` proven (in the canonical mode $\\pi$ fixes the nonchosen parts, and the ambiguity
+  is entirely specified by the cyclespace of the chosengraph).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` найти (или исключить) пример, где $\\beta(G/\\pi)=1$,
-  но Def. 6.2(4) запрещает все closed $I$ (Q43.S107-pi-quotient-counterexample-def6-2-4).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` find (or exclude) an example where $\\beta(G/\\pi)=1$,
+  but Def. 6.2(4) prohibits all closed $I$ (Q43.S107-pi-quotient-counterexample-def6-2-4).
 
-### 16.255. Исследовательский шаг (toy computation): 2×2 chosen‑цикл + π‑компонента из 2 non‑chosen
+### 16.255. Research step (toy computation): 22 chosen-cycle + -component of 2 non-chosen
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S107-pi-quotient-counterexample-def6-2-4):`
-  В минимальной конфигурации “2×2 chosen‑цикл + одна non‑chosen π‑компонента из двух соседних
-  центров” при запрете chosen–non‑chosen edges (Def. 6.2(4)) мод‑2 система на рёбрах совместна,
-  т.е. closed $I$ существуют несмотря на $\\beta(G/\\pi)=1$.
-- `Toy‑тест:`
-  1) Возьмём chosen‑центры $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (4‑цикл) и non‑chosen
-     $N=\\{(2,4),(3,4)\\}$, соседние по вертикали. Пусть pairing $\\pi$ имеет одну компоненту
-     $P$ на $N$ с ребром $f=(2,4)(3,4)$, а $U=C\\cup N$ — support. По Def. 6.2(4) и ремарке
+- `Lens:` Invariant.
+- `Statement (Q43.S107-pi-quotient-counterexample-def6-2-4):`
+  In the minimal configuration "22 chosencycle + one nonchosen component from two neighboring ones
+  centers" with the prohibition of chosen-non-chosen edges (Def. 6.2(4)) mod-2 the system on the edges is consistent,
+  those. closed $I$ exist despite $\\beta(G/\\pi)=1$.
+- `Toy test:`
+  1) Take chosencenters $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (4cycle) and nonchosen
+     $N=\\{(2,4),(3,4)\\}$, vertically adjacent. Let pairing $\\pi$ have one component
+     $P$ on $N$ with edge $f=(2,4)(3,4)$, and $U=C\\cup N$ is support. By Def. 6.2(4) and remark
      “no chosen–non‑chosen edge” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1882-1893`)
-     направления между $(2,3)$–$(2,4)$ и $(3,3)$–$(3,4)$ фиксируются как non‑edges.
-  2) Обозначим рёбра chosen‑цикла:
-     $e_1=(2,2)(2,3)$, $e_2=(2,3)(3,3)$, $e_3=(3,3)(3,2)$, $e_4=(3,2)(2,2)$ и переменную $y$
-     для $f$. Закрытость (Def. 5.8/5.11: `…:1618-1623,1659-1665`) даёт уравнения
-     $e_1+e_4=1$, $e_1+e_2=1$, $e_2+e_3=1$, $e_3+e_4=1$ на chosen‑вершинах и $y=1$ на $N$.
-  3) Система имеет ровно два решения на $C$ (горизонтальный или вертикальный matching) и
-     фиксирует $y=1$; значит closed $I$ существуют и “узкое место” Def. 6.2(4) в этой
-     минимальной конфигурации отсутствует. При стягивании $\\pi$ цикл‑пространство chosen‑части
-     не меняется, поэтому $\\beta(G/\\pi)=\\beta(C)=1$.
-- `Статус:` toy computation (конфликт Def. 6.2(4) не найден в минимальной конфигурации).
+     the directions between $(2,3)$-$(2,4)$ and $(3,3)$-$(3,4)$ are fixed as non-edges.
+  2) Let us denote the edges of the chosen cycle:
+     $e_1=(2,2)(2,3)$, $e_2=(2,3)(3,3)$, $e_3=(3,3)(3,2)$, $e_4=(3,2)(2,2)$ and the variable $y$
+     for $f$. Closedness (Def. 5.8/5.11: `…:1618-1623,1659-1665`) gives the equations
+     $e_1+e_4=1$, $e_1+e_2=1$, $e_2+e_3=1$, $e_3+e_4=1$ on chosen vertices and $y=1$ on $N$.
+  3) The system has exactly two solutions on $C$ (horizontal or vertical matching) and
+     fixes $y=1$; this means closed $I$ exists and a "bottleneck" Def. 6.2(4) in this
+     There is no minimum configuration. When contracting $\\pi$, the cyclespace of the chosenpart
+     does not change, so $\\beta(G/\\pi)=\\beta(C)=1$.
+- `Status:` toy computation (Def. 6.2(4) conflict not found in minimal configuration).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, может ли π‑компонента нечётного размера (или две компоненты),
-  при условии “$J$ закрыт на non‑chosen” (Def. 6.2(2)+(4)), исключить все $I$ при
-  $\\beta(G/\\pi)=1$; либо попытаться доказать общую лемму о декуплинге chosen/non‑chosen.
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether a -component of odd size (or two components) can
+  under the condition "$J$ is closed for nonchosen" (Def. 6.2(2)+(4)), exclude all $I$ under
+  $\\beta(G/\\pi)=1$; or try to prove the general lemma about chosen/non-chosen decoupling.
 
-### 16.256. Исследовательский шаг (toy computation): нечётная π‑компонента non‑chosen
+### 16.256. Exploratory step (toy computation): odd -component non-chosen
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S108-odd-pi-component-parity):`
-  если non‑chosen π‑компонента имеет нечётный размер и Def. 6.2(2)+(4) требует, чтобы $J$
-  был закрыт на всех её центрах при запрете chosen–non‑chosen edges, то mod‑2 система
-  замкнутости несовместна и closed $I$ не существует. Однако по Def. 5.2 компоненты π
-  имеют размер 2 или 4, поэтому такая обструкция не реализуется в реальном π.
-- `Toy‑тест:`
-  1) Пусть chosen‑центры $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (2×2 цикл), а non‑chosen
-     $N=\\{(2,4),(3,4),(4,4)\\}$ образуют одну π‑компоненту $P$ с рёбрами
-     $f_1=(2,4)(3,4)$, $f_2=(3,4)(4,4)$. По Def. 6.2(4) выбранные–невыбранные рёбра запрещены.
-  2) Замкнутость на $N$ (Def. 5.11: `…:1659-1665`) даёт уравнения $f_1=1$, $f_1+f_2=1$,
-     $f_2=1$; суммирование даёт $0=1$ по модулю 2, т.е. решения нет.
-  3) Эквивалентно: в любой графовой компоненте нечётного размера система $A x=\\mathbf 1$
-     несовместна, так как сумма всех уравнений равна 0, а правая часть — 1.
-  4) Часть $C$ по‑прежнему имеет два решения (matching), но odd‑компонента $N$ запрещает
-     все closed $I$.
-- `Статус:` toy computation (паритетный конфликт для нечётной компоненты; вне модели π).
+- `Lens:` Invariant.
+- `Statement (Q43.S108-odd-pi-component-parity):`
+  if the non-chosen -component has an odd size and Def. 6.2(2)+(4) requires that $J$
+  was closed at all its centers with the prohibition of chosen-non-chosen edges, then the mod-2 system
+  closedness is inconsistent and closed $I$ does not exist. However, according to Def. 5.2  components
+  have size 2 or 4, so such obstruction is not implemented in real .
+- `Toy test:`
+  1) Let chosen-centers $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (22 cycle), and non-chosen
+     $N=\\{(2,4),(3,4),(4,4)\\}$ form one -component $P$ with edges
+     $f_1=(2,4)(3,4)$, $f_2=(3,4)(4,4)$. By Def. 6.2(4) selected-unselected edges are prohibited.
+  2) Closure to $N$ (Def. 5.11: `…:1659-1665`) gives the equations $f_1=1$, $f_1+f_2=1$,
+     $f_2=1$; summation gives $0=1$ modulo 2, i.e. there is no solution.
+  3) Equivalently: in any graph component of odd size the system $A x=\\mathbf 1$
+     is inconsistent, since the sum of all equations is 0, and the right side is 1.
+  4) Part $C$ still has two solutions (matching), but the odd component $N$ prohibits
+     all closed $I$.
+- `Status:` toy computation (parity conflict for odd component; outside the  model).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, может ли две π‑компоненты (даже чётные) дать аналогичную
-  несовместимость при $\\beta(G/\\pi)=1$ (Q43.S109).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether two  components (even even ones) can give a similar
+  incompatibility at $\\beta(G/\\pi)=1$ (Q43.S109).
 
-### 16.257. Исследовательский шаг (toy computation): две чётные π‑компоненты non‑chosen
+### 16.257. Exploratory step (toy computation): two even -components non-chosen
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (Q43.S109-two-pi-components-rank):`
-  в конфигурации “2×2 chosen‑цикл + две disjoint π‑компоненты размера 2” при запрете
-  chosen–non‑chosen edges (Def. 6.2(4)) mod‑2 система замкнутости совместна; closed $I$
-  существуют несмотря на $\\beta(G/\\pi)=1$.
-- `Toy‑тест:`
-  1) Возьмём chosen‑центры $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (4‑цикл) и две non‑chosen пары
-     $N_1=\\{(2,4),(3,4)\\}$, $N_2=\\{(4,2),(4,3)\\}$. Пусть pairing $\\pi$ имеет две компоненты
-     $P_1$ с ребром $f_1=(2,4)(3,4)$ и $P_2$ с ребром $f_2=(4,2)(4,3)$; $U=C\\cup N_1\\cup N_2$.
-     По Def. 6.2(4) и ремарке “no chosen–non‑chosen edge” направления между chosen и non‑chosen
-     фиксируются как non‑edges.
-  2) Для chosen‑цикла обозначим $e_1=(2,2)(2,3)$, $e_2=(2,3)(3,3)$, $e_3=(3,3)(3,2)$,
-     $e_4=(3,2)(2,2)$. Замкнутость (Def. 5.8/5.11: `…:1618-1623,1659-1665`) даёт
-     $e_1+e_4=1$, $e_1+e_2=1$, $e_2+e_3=1$, $e_3+e_4=1$ на $C$.
-  3) На non‑chosen парах получаем уравнения $f_1=1$ и $f_2=1$ (каждый центр имеет степень 1
-     внутри своей компоненты). Эти ограничения независимы от chosen‑части.
-  4) Система совместна: уравнения на $C$ дают два решения (горизонтальный/вертикальный matching),
-     а $f_1=f_2=1$ фиксируются однозначно. При стягивании $\\pi$ получаем 4‑цикл и две изолированные
-     вершины, поэтому $\\beta(G/\\pi)=1$.
-- `Статус:` toy computation (две чётные π‑компоненты не создают новой несовместимости).
+- `Lens:` Communication/Rank.
+- `Statement (Q43.S109-two-pi-components-rank):`
+  in the configuration "22 chosencycle + two disjoint components of size 2" when prohibited
+  chosen-non-chosen edges (Def. 6.2(4)) mod-2 closedness system is consistent; closed $I$
+  exist despite $\\beta(G/\\pi)=1$.
+- `Toy test:`
+  1) Take chosencenters $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (4cycle) and two nonchosen pairs
+     $N_1=\\{(2,4),(3,4)\\}$, $N_2=\\{(4,2),(4,3)\\}$. Let pairing $\\pi$ have two components
+     $P_1$ with edge $f_1=(2,4)(3,4)$ and $P_2$ with edge $f_2=(4,2)(4,3)$; $U=C\\cup N_1\\cup N_2$.
+     By Def. 6.2(4) and the remark "no chosen-non-chosen edge" of the direction between chosen and non-chosen
+     are recorded as non-edges.
+  2) For the chosen cycle we denote $e_1=(2,2)(2,3)$, $e_2=(2,3)(3,3)$, $e_3=(3,3)(3,2)$,
+     $e_4=(3,2)(2,2)$. Closedness (Def. 5.8/5.11: `…:1618-1623,1659-1665`) gives
+     $e_1+e_4=1$, $e_1+e_2=1$, $e_2+e_3=1$, $e_3+e_4=1$ on $C$.
+  3) On non-chosen pairs we obtain the equations $f_1=1$ and $f_2=1$ (each center has degree 1
+     inside its component). These restrictions are independent of the chosen part.
+  4) The system is consistent: equations on $C$ give two solutions (horizontal/vertical matching),
+     and $f_1=f_2=1$ are fixed uniquely. By contracting $\\pi$ we obtain a 4cycle and two isolated
+     vertices, so $\\beta(G/\\pi)=1$.
+- `Status:` toy computation (two even  components do not create a new incompatibility).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить конфигурации с π‑компонентами размера 4 или попытаться доказать
-  общую лемму о декуплинге chosen/non‑chosen (Q43.S110).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check configurations with -components of size 4 or try to prove
+  general lemma on chosen/non-chosen decoupling (Q43.S110).
 
-### 16.258. Исследовательский шаг (toy computation): чётная π‑компонента‑звезда и декуплинг
+### 16.258. Exploratory step (toy computation): even -component-star and decoupling
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S110-decouple-even-pi):`
-  В каноническом режиме (Invariant 6.1(4) + запрет chosen–non‑chosen edges) конфигурация
-  “2×2 chosen‑цикл + π‑компонента‑ребро (|P|=2) + π‑компонента‑звезда (|P|=4)” даёт совместную
-  систему $A x=\\mathbf 1$; non‑chosen часть фиксирована, и число closed $I$ равно
-  $2^{\\beta(G_{\\mathrm{ch}})}$ (здесь $=2$).
-- `Toy‑тест:`
-  1) Возьмём chosen‑центры $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (2×2 цикл) и non‑chosen пару
-     $N_2=\\{(2,6),(3,6)\\}$ с ребром $f$ (π‑компонента‑ребро). Для второй π‑компоненты возьмём
-     звезду $N_4=\\{(5,5),(5,4),(5,6),(6,5)\\}$ с рёбрами $g_1=(5,5)(5,4)$,
-     $g_2=(5,5)(5,6)$, $g_3=(5,5)(6,5)$ (Def. 5.2: компоненты π — ребро или звезда размера 4,
+- `Lens:` Invariant.
+- `Statement (Q43.S110-decouple-even-pi):`
+  In canonical mode (Invariant 6.1(4) + chosen-non-chosen edges ban) configuration
+  "22 chosen-cycle + -component-edge (|P|=2) + -component-star (|P|=4)" gives a joint
+  system $A x=\\mathbf 1$; the nonchosen part is fixed, and the number of closed $I$ is equal to
+  $2^{\\beta(G_{\\mathrm{ch}})}$ (here $=2$).
+- `Toy test:`
+  1) Take chosen-centers $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (22 cycle) and a non-chosen pair
+     $N_2=\\{(2,6),(3,6)\\}$ with edge $f$ (-component-edge). For the second -component we take
+     star $N_4=\\{(5,5),(5,4),(5,6),(6,5)\\}$ with edges $g_1=(5,5)(5,4)$,
+     $g_2=(5,5)(5,6)$, $g_3=(5,5)(6,5)$ (Def. 5.2: components  - edge or star of size 4,
      `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1442-1449`).
-     Компоненты отделены от $C$, так что chosen–non‑chosen edges отсутствуют (Def. 6.2(4)).
-  2) На chosen‑цикле уравнения такие же, как в §16.255: $e_1+e_4=1$, $e_1+e_2=1$,
-     $e_2+e_3=1$, $e_3+e_4=1$, откуда два решения (H/V matching).
-  3) На ребре $f$ замкнутость даёт $f=1$.
-  4) На звезде листья дают $g_1=g_2=g_3=1$, а у центрального узла $g_1+g_2+g_3=1$,
-     что совместно; решение единственно.
-  5) Итог: non‑chosen часть фиксирована, а chosen‑часть даёт 2 решения; поэтому
-     $|\\{I\\}|=2=2^{\\beta(G_{\\mathrm{ch}})}$ (так как $\\beta(G_{\\mathrm{ch}})=1$).
-- `Статус:` toy computation (even π‑компонента‑звезда не добавляет ограничений; декуплинг сохраняется).
+     The components are separated from $C$, so there are no chosen-non-chosen edges (Def. 6.2(4)).
+  2) On the chosen cycle the equations are the same as in Section 16.255: $e_1+e_4=1$, $e_1+e_2=1$,
+     $e_2+e_3=1$, $e_3+e_4=1$, hence two solutions (H/V matching).
+  3) On the edge $f$, closure gives $f=1$.
+  4) On the star, the leaves give $g_1=g_2=g_3=1$, and at the central node $g_1+g_2+g_3=1$,
+     what is shared; the only solution.
+  5) Result: the non-chosen part is fixed, and the chosen part gives 2 solutions; That's why
+     $|\\{I\\}|=2=2^{\\beta(G_{\\mathrm{ch}})}$ (since $\\beta(G_{\\mathrm{ch}})=1$).
+- `Status:` toy computation (even -star component does not add restrictions; decoupling is preserved).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, может ли две π‑компоненты‑звезды размера 4 дать
-  несовместимость при $\\beta(G/\\pi)=1$ (Q43.S111-size4-pi-obstruction).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether two size 4 -component stars can produce
+  incompatibility at $\\beta(G/\\pi)=1$ (Q43.S111-size4-pi-obstruction).
 
-### 16.259. Исследовательский шаг (toy computation): две π‑звезды размера 4 не дают паритетной обструкции
+### 16.259. Exploratory step (toy computation): two -stars of size 4 do not give parity obstruction
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S111-size4-pi-obstruction):`
-  в минимальной конфигурации “2×2 chosen‑цикл + две disjoint π‑звезды размера 4”
-  при запрете chosen–non‑chosen edges mod‑2 система замкнутости совместна; паритетной
-  обструкции нет.
-- `Toy‑тест:`
-  1) Пусть chosen‑центры $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (2×2 цикл). Возьмём две disjoint
-     π‑компоненты‑звезды размера 4: $N_4^a=\\{(5,5),(5,4),(5,6),(6,5)\\}$ с рёбрами
-     $g_1=(5,5)(5,4)$, $g_2=(5,5)(5,6)$, $g_3=(5,5)(6,5)$ и
-     $N_4^b=\\{(7,2),(7,1),(7,3),(8,2)\\}$ с рёбрами
+- `Lens:` Invariant.
+- `Statement (Q43.S111-size4-pi-obstruction):`
+  in the minimal configuration "22 chosen-cycle + two disjoint -stars of size 4"
+  under the ban chosen-non-chosen edges mod-2, the closedness system is consistent; parity
+  there is no obstruction.
+- `Toy test:`
+  1) Let chosen centers $C=\\{(2,2),(2,3),(3,2),(3,3)\\}$ (22 cycle). Let's take two disjoint
+     -components of size 4 stars: $N_4^a=\\{(5,5),(5,4),(5,6),(6,5)\\}$ with edges
+     $g_1=(5.5)(5.4)$, $g_2=(5.5)(5.6)$, $g_3=(5.5)(6.5)$ and
+     $N_4^b=\\{(7,2),(7,1),(7,3),(8,2)\\}$ with edges
      $h_1=(7,2)(7,1)$, $h_2=(7,2)(7,3)$, $h_3=(7,2)(8,2)$.
-     Компоненты удалены от $C$, поэтому chosen–non‑chosen edges отсутствуют (Def. 6.2(4)).
-  2) Для chosen‑цикла обозначим $e_1=(2,2)(2,3)$, $e_2=(2,3)(3,3)$, $e_3=(3,3)(3,2)$,
-     $e_4=(3,2)(2,2)$. Замкнутость даёт те же уравнения $e_1+e_4=1$, $e_1+e_2=1$,
-     $e_2+e_3=1$, $e_3+e_4=1$, поэтому два решения (H/V matching).
-  3) На каждой π‑звезде листья дают $g_1=g_2=g_3=1$ и $h_1=h_2=h_3=1$, а у центральных узлов
-     $g_1+g_2+g_3=1$ и $h_1+h_2+h_3=1$; это совместно, т.к. $1+1+1\\equiv 1\\pmod 2$.
-     Решение на non‑chosen части единственно.
-  4) Итог: система $A x=\\mathbf 1$ распадается на блоки chosen/π‑звёзд и совместна; число
-     closed $I$ равно $2^{\\beta(G_{\\mathrm{ch}})}=2$.
-- `Статус:` toy computation (контрпример: две π‑звезды размера 4 не создают обструкции).
+     The components are removed from $C$, so there are no chosen-non-chosen edges (Def. 6.2(4)).
+  2) For the chosen cycle we denote $e_1=(2,2)(2,3)$, $e_2=(2,3)(3,3)$, $e_3=(3,3)(3,2)$,
+     $e_4=(3,2)(2,2)$. Closedness gives the same equations $e_1+e_4=1$, $e_1+e_2=1$,
+     $e_2+e_3=1$, $e_3+e_4=1$, so there are two solutions (H/V matching).
+  3) On each -star the leaves give $g_1=g_2=g_3=1$ and $h_1=h_2=h_3=1$, and at the central nodes
+     $g_1+g_2+g_3=1$ and $h_1+h_2+h_3=1$; this is joint, because $1+1+1\\equiv 1\\pmod 2$.
+     The solution to the non-chosen part is the only one.
+  4) Result: the system $A x=\\mathbf 1$ breaks up into blocks of chosen/stars and is consistent; number
+     closed $I$ is equal to $2^{\\beta(G_{\\mathrm{ch}})}=2$.
+- `Status:` toy computation (counterexample: two size 4  stars do not create an obstruction).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` попытаться обобщить совместимость для двух π‑звёзд или вывести
-  паритетный критерий через $G/\\pi$ (Q43.S112-size4-pi-compatibility).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` try to generalize the compatibility for two -stars or derive
+  parity criterion via $G/\\pi$ (Q43.S112-size4-pi-compatibility).
 
-### 16.260. Исследовательский шаг (toy computation): β=0 не даёт конфликта для двух π‑звёзд
+### 16.260. Exploratory step (toy computation): =0 does not give conflict for two -stars
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S113-beta0-counterexample):`
-  Существует конфигурация из двух π‑звёзд размера 4 без chosen–non‑chosen рёбер, для которой
-  $\\beta(G/\\pi)=0$, но система $A x=\\mathbf 1$ несовместна.
-- `Toy‑тест:`
-  1) При отсутствии chosen–non‑chosen рёбер Def. 6.2(4) фиксирует non‑chosen часть как
-     объединение компонент $\\pi$, т.е. граф возможных рёбер на non‑chosen — дизъюнктная
-     сумма двух π‑звёзд.
-  2) Для одной звезды с центром $v$ и листьями $u_1,u_2,u_3$ замкнутость даёт уравнения
-     $x_{vu_i}=1$ для каждого $i$ и $x_{vu_1}+x_{vu_2}+x_{vu_3}=1$, что совместно; решение
-     единственно: все три ребра равны 1.
-  3) Следовательно, для двух π‑звёзд система $A x=\\mathbf 1$ распадается на два независимых
-     блока и всегда совместна; $\\beta(G/\\pi)=0$ (каждая звезда — дерево).
-  4) Брутфорс‑проверка всех disjoint‑пар π‑звёзд в решётках 4×4 и 5×5: 68 и 564 пар
-     соответственно, несовместимых случаев не найдено.
-- `Статус:` контрпример не найден (β=0 не приводит к конфликту в модели “две π‑звезды”).
+- `Lens:` Model stress test.
+- `Statement (Q43.S113-beta0-counterexample):`
+  There is a configuration of two -stars of size 4 without chosen-non-chosen edges, for which
+  $\\beta(G/\\pi)=0$, but the system $A x=\\mathbf 1$ is inconsistent.
+- `Toy test:`
+  1) In the absence of chosen-non-chosen edges Def. 6.2(4) fixes the non-chosen part as
+     union of components $\\pi$, i.e. graph of possible edges on non-chosen - disjoint
+     the sum of two -stars.
+  2) For one star with center $v$ and leaves $u_1,u_2,u_3$, closure gives the equations
+     $x_{vu_i}=1$ for each $i$ and $x_{vu_1}+x_{vu_2}+x_{vu_3}=1$, which is joint; solution
+     unique: all three edges are equal to 1.
+  3) Consequently, for two -stars the system $A x=\\mathbf 1$ splits into two independent
+     block and always joint; $\\beta(G/\\pi)=0$ (each star is a tree).
+  4) Brute force check of all disjoint pairs of  stars in 44 and 55 lattices: 68 and 564 pairs
+     Accordingly, no incompatible cases were found.
+- `Status:` no counterexample was found (=0 does not lead to a conflict in the "two -stars" model).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` попытаться формализовать общий критерий совместимости для двух π‑звёзд
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` try to formalize a general compatibility criterion for two -stars
   (Q43.S112-size4-pi-compatibility).
 
-### 16.261. Исследовательский шаг (proof): паритетный критерий через π‑quotient
+### 16.261. Research step (proof): parity criterion via quotient
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S115-quotient-parity-criterion):`
-  В каноническом режиме (Invariant 6.1(4) + запрет chosen–non‑chosen edges) система
-  замкнутости $A x=\\mathbf 1$ на support $U$ эквивалентна по существованию решений системе
-  $B_{G/\\pi}x=b$ на графе $G/\\pi$, где $B_{G/\\pi}$ — матрица инцидентности, а
-  $b\\equiv \\mathbf 1$ на вершинах. Следовательно, решение существует тогда и только тогда,
-  когда в каждой связной компоненте $H$ графа $G/\\pi$ выполнено
-  $\\sum_{v\\in H} b_v\\equiv 0$ (т.е. $|V(H)|$ чётно; эквивалентно $b\\perp\\ker B_{G/\\pi}^T$).
-- `Доказательство:`
-  1) Из запрета chosen–non‑chosen edges граф возможных рёбер раскладывается на
-     $G_{\\mathrm{ch}}$ и изолированные компоненты $\\pi$; поэтому $A$ блочно‑диагональна:
+- `Lens:` Equivalence.
+- `Statement (Q43.S115-quotient-parity-criterion):`
+  In canonical mode (Invariant 6.1(4) + chosen-non-chosen edges ban), the system
+  closedness of $A x=\\mathbf 1$ on support $U$ is equivalent in the existence of solutions to the system
+  $B_{G/\\pi}x=b$ on the graph $G/\\pi$, where $B_{G/\\pi}$ is the incidence matrix, and
+  $b\\equiv \\mathbf 1$ on the vertices. Therefore, a solution exists if and only if
+  when in each connected component $H$ of the graph $G/\\pi$ the following holds:
+  $\\sum_{v\\in H} b_v\\equiv 0$ (i.e. $|V(H)|$ is even; equivalent to $b\\perp\\ker B_{G/\\pi}^T$).
+- `Proof:`
+  1) From the chosen-non-chosen edges prohibition, the graph of possible edges is decomposed into
+     $G_{\\mathrm{ch}}$ and isolated components $\\pi$; therefore $A$ is block diagonal:
      $A=A_{\\mathrm{ch}}\\oplus\\bigoplus_{P\\in\\pi}A_P$.
-  2) Для каждой компоненты $P$ допустимы только |P|=2 (ребро) или |P|=4 (звезда) (Def. 5.2).
-     В обоих случаях система $A_P x=\\mathbf 1$ имеет единственное решение (см. §16.256, §16.258),
-     значит совместимость $A x=\\mathbf 1$ эквивалентна совместимости $A_{\\mathrm{ch}}x=\\mathbf 1$.
-  3) Так как компоненты $\\pi$ изолированы, $G/\\pi$ совпадает с $G_{\\mathrm{ch}}$ плюс изолированные
-     вершины; следовательно $A_{\\mathrm{ch}}=B_{G/\\pi}$ и $b\\equiv\\mathbf 1$.
-  4) Для любой компоненты $H$ матрица $B_H$ имеет ранг $|V(H)|-1$, а сумма строк равна нулю,
-     поэтому $B_H x=b_H$ совместна iff $\\sum_{v\\in H} b_v=0$; это эквивалентно условию
+  2) For each component $P$ only |P|=2 (edge) or |P|=4 (star) are allowed (Def. 5.2).
+     In both cases, the system $A_P x=\\mathbf 1$ has a unique solution (see Section 16.256, Section 16.258),
+     this means that the compatibility $A x=\\mathbf 1$ is equivalent to the compatibility $A_{\\mathrm{ch}}x=\\mathbf 1$.
+  3) Since the components of $\\pi$ are isolated, $G/\\pi$ coincides with $G_{\\mathrm{ch}}$ plus isolated
+     tops; hence $A_{\\mathrm{ch}}=B_{G/\\pi}$ and $b\\equiv\\mathbf 1$.
+  4) For any component $H$, the matrix $B_H$ has rank $|V(H)|-1$, and the sum of the rows is zero,
+     therefore $B_H x=b_H$ is consistent iff $\\sum_{v\\in H} b_v=0$; this is equivalent to the condition
      $b\\perp\\ker B_{G/\\pi}^T$.
-- `Toy‑тест:`
-  1) 2×2 chosen‑цикл и adjacent chosen (разделы §16.252–§16.253): $|V|$ чётно ⇒ система совместна.
-  2) Добавление π‑компонент размера 2 или 4 (§16.255–§16.259) не меняет условие: каждая
-     компонента $H$ имеет чётный размер ⇒ совместимость сохраняется.
-  3) Гипотетическая нечётная π‑компонента (§16.256) даёт $|V(H)|$ нечётно ⇒ несогласованность.
-- `Статус:` доказано (совместимость сводится к чётности компонент в $G/\\pi$).
+- `Toy test:`
+  1) 22 chosencycle and adjacent chosen (sections Section 16.252-Section 16.253): $|V|$ is even  the system is consistent.
+  2) Adding -components of size 2 or 4 (Section 16.255-Section 16.259) does not change the condition: each
+     component $H$ has an even size  compatibility is preserved.
+  3) The hypothetical odd -component (Section 16.256) gives $|V(H)|$ odd  inconsistency.
+- `Status:` proven (compatibility reduces to the evenness of the components in $G/\\pi$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` стресс‑тестировать критерий вне канонического режима
-  (overlapping π‑звёзды / chosen–non‑chosen edge) и попытаться найти контрпример
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` stress test the criterion outside the canonical mode
+  (overlapping -stars / chosen-non-chosen edge) and try to find a counterexample
   (Q43.S116-overlapping-stars-counterexample).
 
-### 16.262. Исследовательский шаг (counterexample): overlapping π‑звёзды ломают декуплинг
+### 16.262. Exploratory step (counterexample): overlapping -stars break decoupling
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S116-overlapping-stars-counterexample):`
-  Вне канонического режима (разрешая перекрытие π‑звёзд) паритетный критерий §16.261
-  в наивном виде “каждая π‑звезда имеет чётный размер ⇒ Ax=\\mathbf 1 совместна”
-  неверен: существует support $U$, где каждая из двух π‑звёзд размера 4, но система
-  $A x=\\mathbf 1$ несовместна.
-- `Контрпример (4×4):`
-  1) Пусть все центры non‑chosen. Возьмём $U=\\{(2,2),(2,1),(2,3),(1,2),(3,2)\\}$.
-     Зададим две π‑звезды с общим центром $c=(2,2)$:
-     $P_1$ на рёбрах $c(2,1),c(1,2),c(2,3)$ и $P_2$ на рёбрах $c(2,1),c(2,3),c(3,2)$.
-     Это запрещено Def. 5.2 (перекрытие компонент), но разрешено вне канонического режима.
-  2) Если игнорировать перекрытие и применять критерий §16.261 “по компонентам π”,
-     каждая звезда имеет 4 вершины (чётно), поэтому паритетный тест не исключает решения.
-  3) Обозначим рёбра $e_W=c(2,1)$, $e_E=c(2,3)$, $e_N=c(1,2)$, $e_S=c(3,2)$.
-     Линейная система замкнутости (Def. 5.8/5.11) даёт на листьях $e_W=e_E=e_N=e_S=1$,
-     а на центре $e_W+e_E+e_N+e_S=1$. Подстановка даёт $0=1$, т.е. $A x=\\mathbf 1$ несовместна.
-- `Статус:` контрпример (перекрытие π‑звёзд ломает декуплинг на $U$).
+- `Lens:` Model stress test.
+- `Statement (Q43.S116-overlapping-stars-counterexample):`
+  Outside the canonical regime (allowing overlap of -stars) parity criterion Section 16.261
+  in the naive form "each star has an even size  Ax=\\mathbf 1 is compatible"
+  incorrect: there exists support $U$, where each of the two -stars is of size 4, but the system
+  $A x=\\mathbf 1$ is inconsistent.
+- `Counterexample (4x4):`
+  1) Let all centers be non-chosen. Let's take $U=\\{(2,2),(2,1),(2,3),(1,2),(3,2)\\}$.
+     Let us define two -stars with a common center $c=(2,2)$:
+     $P_1$ on edges $c(2,1),c(1,2),c(2,3)$ and $P_2$ on edges $c(2,1),c(2,3),c(3,2)$.
+     This is prohibited Def. 5.2 (component overlap), but allowed outside of canonical mode.
+  2) If we ignore overlap and apply the Section 16.261 "over  components" criterion,
+     each star has 4 vertices (even), so the parity test does not rule out a solution.
+  3) Let us denote the edges $e_W=c(2,1)$, $e_E=c(2,3)$, $e_N=c(1,2)$, $e_S=c(3,2)$.
+     The linear closed system (Def. 5.8/5.11) gives on the leaves $e_W=e_E=e_N=e_S=1$,
+     and at the center $e_W+e_E+e_N+e_S=1$. Substitution gives $0=1$, i.e. $A x=\\mathbf 1$ is inconsistent.
+- `Status:` counterexample (overlapping -stars breaks decoupling on $U$).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить chosen–non‑chosen edge как источник конфликта в каноническом
-  критерии (Q43.S117-chosen-nonchosen-edge-counterexample).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check chosen-non-chosen edge as a source of conflict in canonical
+  criteria (Q43.S117-chosen-nonchosen-edge-counterexample).
 
-### 16.263. Исследовательский шаг (counterexample): один chosen–non‑chosen edge ломает критерий по $G/\pi$
+### 16.263. Exploratory step (counterexample): one chosen-non-chosen edge breaks the $G/\pi$ criterion
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S117-chosen-nonchosen-edge-counterexample):`
-  Существует каноническое $\\pi$ (одна звезда размера 4) и локально согласованный $J$ с ровно
-  одним chosen–non‑chosen edge, для которого паритетный критерий §16.261 по $G/\\pi$
-  предсказывает совместимость, но система замкнутости $A x=\\mathbf 1$ несовместна.
-- `Контрпример (4×4):`
-  1) Возьмём non‑chosen π‑звезду $P$ с центром $v_0=(2,2)$ и листьями
-     $v_W=(2,1)$, $v_N=(1,2)$, $v_E=(2,3)$; компонента $\\pi$ — рёбра
-     $g_W=v_0v_W$, $g_N=v_0v_N$, $g_E=v_0v_E$. Пусть chosen‑центр $c=(3,1)$ соседен с $v_W$,
-     и $J$ содержит рёбра $g_W,g_N,g_E$ и единственное mixed‑ребро $m=cv_W$;
-     других information pieces нет. Тогда $J$ локально согласован (ни в одном центре
-     нет информации во всех 4 направлениях).
-  2) Любой closed information set $I$, pairwise‑locally consistent с $J$, добавляет
-     non‑edges в отсутствующих направлениях, поэтому система замкнутости на $U$ имеет вид:
+- `Lens:` Model stress test.
+- `Statement (Q43.S117-chosen-nonchosen-edge-counterexample):`
+  There is a canonical $\\pi$ (one star of size 4) and a locally consistent $J$ with exactly
+  one chosen-non-chosen edge, for which the parity criterion Section 16.261 on $G/\\pi$
+  predicts compatibility, but the closed system $A x=\\mathbf 1$ is inconsistent.
+- `Counterexample (4x4):`
+  1) Take a non-chosen -star $P$ with center $v_0=(2,2)$ and leaves
+     $v_W=(2,1)$, $v_N=(1,2)$, $v_E=(2,3)$; component $\\pi$ - edges
+     $g_W=v_0v_W$, $g_N=v_0v_N$, $g_E=v_0v_E$. Let the chosen center $c=(3,1)$ be adjacent to $v_W$,
+     and $J$ contains edges $g_W,g_N,g_E$ and a single mixed edge $m=cv_W$;
+     There are no other information pieces. Then $J$ is locally consistent (at no center
+     no information in all 4 directions).
+  2) Any closed information set $I$, pairwiselocally consistent with $J$, adds
+     non-edges in missing directions, so the system of closure on $U$ has the form:
      $$m=1,\\quad g_N=1,\\quad g_E=1,\\quad g_W+m=1,\\quad g_W+g_N+g_E=1.$$
-     Из $m=1$ получаем $g_W=0$ (уравнение для $v_W$), но из $g_N=g_E=1$ следует
-     $g_W=1$ (уравнение для $v_0$). Противоречие, значит $A x=\\mathbf 1$ несовместна.
-  3) В то же время граф $G/\\pi$ получается стягиванием звезды $P$ в одну вершину $p$;
-     остаются две вершины $\\{p,c\\}$ и одно ребро между ними, т.е. компонент имеет чётный
-     размер и паритетный критерий §16.261 предсказывает совместимость.
-- `Статус:` контрпример (один mixed‑edge ломает критерий по $G/\\pi$).
+     From $m=1$ we obtain $g_W=0$ (equation for $v_W$), but from $g_N=g_E=1$ it follows
+     $g_W=1$ (equation for $v_0$). This is a contradiction, which means $A x=\\mathbf 1$ is inconsistent.
+  3) At the same time, the graph $G/\\pi$ is obtained by contracting the star $P$ into one vertex $p$;
+     there remain two vertices $\\{p,c\\}$ and one edge between them, i.e. component has an even
+     size and Section 16.261 parity criterion predict compatibility.
+- `Status:` counterexample (one mixed-edge breaks the $G/\\pi$ criterion).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` попытаться восстановить критерий, добавив поправку на mixed‑ребро
-  (например, вывести условие на паритет инцидентных рёбер π‑звезды или показать, что
-  любой mixed‑edge при закрытии даёт конфликт).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` try to restore the criterion by adding a correction for the mixed edge
+  (for example, derive a condition for the parity of incident edges of a -star or show that
+  any mixed-edge gives a conflict when closed).
 
-### 16.264. Исследовательский шаг (proof): паритетный инвариант для mixed‑edges у π‑компоненты
+### 16.264. Research step (proof): parity invariant for mixed-edges of the -component
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S118-mixed-edge-parity-invariant):`
-  Пусть $I$ — closed information set на support $U$ при pairing $\\pi$, и система замкнутости
-  на рёбрах $I$ имеет вид $A x=\\mathbf 1$ (odd‑degree на каждом центре). Для любой
-  π‑компоненты $P$ обозначим через $\\delta_{\\mathrm{mix}}(P)$ число mixed‑edges,
-  инцидентных $P$ (edges между $P$ и chosen‑центрами с $x_e=1$). Тогда
+- `Lens:` Invariant.
+- `Statement (Q43.S118-mixed-edge-parity-invariant):`
+  Let $I$ be a closed information set on support $U$ with pairing $\\pi$, and the closedness system
+  on the edges $I$ has the form $A x=\\mathbf 1$ (odddegree at each center). For anyone
+  We denote the -components of $P$ by $\\delta_{\\mathrm{mix}}(P)$ as the number of mixed-edges,
+  incident $P$ (edges between $P$ and chosen centers with $x_e=1$). Then
   $$\\delta_{\\mathrm{mix}}(P)\\equiv \\sum_{v\\in P}1\\pmod 2,$$
-  т.е. паритет mixed‑edges равен сумме “зарядов” на $P$. В частности, так как
-  $|P|\\in\\{2,4\\}$, для любой реализуемой конфигурации $\\delta_{\\mathrm{mix}}(P)$ чётно.
-- `Доказательство:`
-  1) Для каждого $v\\in P$ уравнение $A x=\\mathbf 1$ даёт
+  those. mixed-edges parity is equal to the sum of "charges" on $P$. In particular, since
+  $|P|\\in\\{2,4\\}$, for any realizable configuration $\\delta_{\\mathrm{mix}}(P)$ is even.
+- `Proof:`
+  1) For each $v\\in P$ the equation $A x=\\mathbf 1$ gives
      $\\sum_{e\\ni v} x_e=1$.
-  2) Складывая эти уравнения по всем $v\\in P$, получаем
+  2) Adding these equations over all $v\\in P$, we get
      $\\sum_{e\\in E(P)}2x_e+\\sum_{e\\in\\partial P}x_e=|P|$.
-     Внутренние рёбра $E(P)$ исчезают по модулю 2, остаются только рёбра
-     $\\partial P$, инцидентные $P$ и выходящие из него.
-  3) Все рёбра из $\\partial P$ — ровно mixed‑edges (между $P$ и chosen‑центрами), поэтому
-     $\\sum_{e\\in\\partial P}x_e=\\delta_{\\mathrm{mix}}(P)$, что даёт требуемую конгруэнцию.
-- `Toy‑тест:`
-  1) 4×4 π‑звезда $P$ как в §16.263: центр $v_0=(2,2)$ и листья
-     $v_W=(2,1)$, $v_N=(1,2)$, $v_E=(2,3)$, один chosen‑центр $c=(3,1)$ и mixed‑ребро
-     $m=cv_W$. Тогда $|P|=4$ ⇒ $\\delta_{\\mathrm{mix}}(P)\\equiv 0$, но у $c$ единственный
-     инцидентный edge даёт $m=1$, противоречие. Это объясняет конфликт §16.263.
-  2) Добавим второй chosen‑центр $c'=(1,1)$ и mixed‑ребро $m'=c'v_N$.
-     Присвоение $m=m'=1$, $g_E=1$, $g_W=g_N=0$ удовлетворяет уравнениям
-     $g_W+m=1$, $g_N+m'=1$, $g_E=1$, $g_W+g_N+g_E=1$, так что $A x=\\mathbf 1$ совместна.
-     Паритет $\\delta_{\\mathrm{mix}}(P)=2$ совпадает с $|P|\\equiv 0$.
-- `Статус:` доказано (паритет mixed‑edges на каждой π‑компоненте — необходимое условие).
+     The internal edges of $E(P)$ disappear modulo 2, leaving only the edges
+     $\\partial P$, incident $P$ and leaving it.
+  3) All edges from $\\partial P$ are exactly mixed-edges (between $P$ and chosen-centers), therefore
+     $\\sum_{e\\in\\partial P}x_e=\\delta_{\\mathrm{mix}}(P)$, which gives the required congruence.
+- `Toy test:`
+  1) 44 -star $P$ as in Section 16.263: center $v_0=(2,2)$ and leaves
+     $v_W=(2,1)$, $v_N=(1,2)$, $v_E=(2,3)$, one chosen-center $c=(3,1)$ and mixed-edge
+     $m=cv_W$. Then $|P|=4$  $\\delta_{\\mathrm{mix}}(P)\\equiv 0$, but $c$ has only one
+     incident edge gives $m=1$, a contradiction. This explains the conflict in Section 16.263.
+  2) Add a second chosen center $c'=(1,1)$ and a mixed edge $m'=c'v_N$.
+     The assignment $m=m'=1$, $g_E=1$, $g_W=g_N=0$ satisfies the equations
+     $g_W+m=1$, $g_N+m'=1$, $g_E=1$, $g_W+g_N+g_E=1$, so $A x=\\mathbf 1$ is consistent.
+     The parity $\\delta_{\\mathrm{mix}}(P)=2$ coincides with $|P|\\equiv 0$.
+- `Status:` proven (parity of mixed-edges on each -component is a necessary condition).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить, даёт ли чётность mixed‑edges достаточный критерий
-  (или найти минимальный обструктивный мотив/канонический swap в π‑звезде)
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check whether mixed-edges parity provides a sufficient criterion
+  (or find the minimal obstructive motif/canonical swap in a -star)
   (Q43.S119).
 
-### 16.265. Исследовательский шаг (counterexample): чётность mixed‑edges недостаточна
+### 16.265. Exploratory step (counterexample): mixed-edges parity is insufficient
 
-- `Линза:` Модельный стресс‑тест.
-- `Утверждение (Q43.S120-even-mixed-edge-counterexample):`
-  Даже если у каждой π‑компоненты число mixed‑edges чётно, система замкнутости
-  $A x=\\mathbf 1$ может быть несовместна: достаточно π‑звезды размера 4, где
-  два mixed‑edge инцидентны одному chosen‑центру.
-- `Контрпример (4×4):`
-  1) Non‑chosen π‑звезда $P$ с центром $v_0=(2,2)$ и листьями
-     $v_W=(2,1)$, $v_N=(1,2)$, $v_E=(2,3)$. Компонента $\\pi$ — рёбра
+- `Lens:` Model stress test.
+- `Statement (Q43.S120-even-mixed-edge-counterexample):`
+  Even if each -component has an even number of mixed-edges, the closed system
+  $A x=\\mathbf 1$ may be inconsistent: a -star of size 4 is sufficient, where
+  two mixed-edges are incident to one chosen-center.
+- `Counterexample (4x4):`
+  1) Non-chosen -star $P$ with center $v_0=(2,2)$ and leaves
+     $v_W=(2,1)$, $v_N=(1,2)$, $v_E=(2,3)$. Component $\\pi$ - edges
      $g_W=v_0v_W$, $g_N=v_0v_N$, $g_E=v_0v_E$ (Def. 5.2).
-  2) Один chosen‑центр $c=(1,1)$ смежен с $v_W,v_N$; добавим два mixed‑ребра
-     $m_W=cv_W$, $m_N=cv_N$, других рёбер нет. Тогда
-     $\\delta_{\\mathrm{mix}}(P)=2$ и $|P|=4$ (паритет §16.264 выполнен).
-  3) Уравнения $A x=\\mathbf 1$ на $U=\\{v_0,v_W,v_N,v_E,c\\}$:
+  2) One chosen center $c=(1,1)$ is adjacent to $v_W,v_N$; add two mixed edges
+     $m_W=cv_W$, $m_N=cv_N$, no other edges. Then
+     $\\delta_{\\mathrm{mix}}(P)=2$ and $|P|=4$ (Section 16.264 parity satisfied).
+  3) Equations $A x=\\mathbf 1$ on $U=\\{v_0,v_W,v_N,v_E,c\\}$:
      $$g_E=1,\\quad g_W+m_W=1,\\quad g_N+m_N=1,\\quad
      g_W+g_N+g_E=1,\\quad m_W+m_N=1.$$
-     Из $g_E=1$ получаем $g_W+g_N=0$, значит $m_W=m_N=1+g_W$, и тогда
-     $m_W+m_N=0$, противоречие.
-- `Статус:` контрпример (чётность mixed‑edges на π‑компоненте недостаточна).
+     From $g_E=1$ we get $g_W+g_N=0$, which means $m_W=m_N=1+g_W$, and then
+     $m_W+m_N=0$, a contradiction.
+- `Status:` counterexample (mixed-edges parity on the -component is not sufficient).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить критерий на квотиенте с сохранением chosen‑вершин
-  (например, $b_{\\mathrm{mix}}\\perp\\ker B_{G/\\pi}^T$) и сверить с toy‑случаями
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check the criterion on the quota, saving the chosen vertices
+  (for example, $b_{\\mathrm{mix}}\\perp\\ker B_{G/\\pi}^T$) and check with toy cases
   §16.263–§16.265 (Q43.S121).
 
-### 16.266. Исследовательский шаг (toy computation): mixed‑edge критерий на квотиенте
+### 16.266. Research step (toy computation): mixed-edge criterion on quota
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S121-mixed-edge-quotient-linear-criterion):`
-  Гипотеза: если $G/\\pi$ получен стягиванием каждой non‑chosen π‑компоненты, а chosen‑вершины
-  оставлены, и $b_{\\mathrm{mix}}(v)=1$ для chosen‑вершин, $b_{\\mathrm{mix}}(P)\\equiv|P|\\pmod 2$
-  для стянутых π‑компонент, то совместимость $A x=\\mathbf 1$ требует
-  $b_{\\mathrm{mix}}\\perp\\ker B_{G/\\pi}^T$ (эквивалентно существованию решения
-  $B_{G/\\pi}x=b_{\\mathrm{mix}}$). Toy‑тест: конфигурация §16.265 нарушает это условие.
-- `Toy‑тест:`
-  1) В §16.265 есть π‑звезда $P$ размера 4 и chosen‑центр $c$, инцидентный двум mixed‑рёбрам.
-     В $G/\\pi$ получаем две вершины $\\{p,c\\}$ и две параллельные дуги $pc$.
-  2) Матрица инцидентности $B_{G/\\pi}$ над $\\mathbb F_2$ имеет два одинаковых столбца
-     $(1,1)^T$, значит $\\ker B_{G/\\pi}^T=\\langle(1,1)\\rangle$.
-  3) Здесь $b_{\\mathrm{mix}}(c)=1$ и $b_{\\mathrm{mix}}(p)=|P|\\equiv 0$, поэтому
-     $b_{\\mathrm{mix}}\\cdot(1,1)=1$, и условие $b_{\\mathrm{mix}}\\perp\\ker B_{G/\\pi}^T$
-     не выполняется.
-- `Статус:` частично (toy‑тест поддерживает критерий; §16.265 отсеивается).
+- `Lens:` Invariant.
+- `Statement (Q43.S121-mixed-edge-quotient-linear-criterion):`
+  Conjecture: if $G/\\pi$ is obtained by contracting each non-chosen -component, and the chosen vertex
+  are left, and $b_{\\mathrm{mix}}(v)=1$ for chosen vertices, $b_{\\mathrm{mix}}(P)\\equiv|P|\\pmod 2$
+  for contracted -components, then the compatibility of $A x=\\mathbf 1$ requires
+  $b_{\\mathrm{mix}}\\perp\\ker B_{G/\\pi}^T$ (equivalent to the existence of a solution
+  $B_{G/\\pi}x=b_{\\mathrm{mix}}$). Toy test: Section 16.265 configuration violates this condition.
+- `Toy test:`
+  1) In Section 16.265 there is a -star $P$ of size 4 and a chosen center $c$ incident to two mixed edges.
+     In $G/\\pi$ we obtain two vertices $\\{p,c\\}$ and two parallel arcs $pc$.
+  2) The incidence matrix $B_{G/\\pi}$ over $\\mathbb F_2$ has two identical columns
+     $(1,1)^T$, means $\\ker B_{G/\\pi}^T=\\langle(1,1)\\rangle$.
+  3) Here $b_{\\mathrm{mix}}(c)=1$ and $b_{\\mathrm{mix}}(p)=|P|\\equiv 0$, therefore
+     $b_{\\mathrm{mix}}\\cdot(1,1)=1$, and the condition $b_{\\mathrm{mix}}\\perp\\ker B_{G/\\pi}^T$
+     is not executed.
+- `Status:` partially (toy test supports criterion; Section 16.265 is eliminated).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` либо доказать эквивалентность $A x=\\mathbf 1\\Leftrightarrow B_{G/\\pi}x=b_{\\mathrm{mix}}$
-  в каноническом режиме, либо найти контрпример, где условие выполняется, но $A x=\\mathbf 1$
-  несовместна (Q43.S122).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` or prove the equivalence $A x=\\mathbf 1\\Leftrightarrow B_{G/\\pi}x=b_{\\mathrm{mix}}$
+  in canonical mode, or find a counterexample where the condition is satisfied, but $A x=\\mathbf 1$
+  incompatible (Q43.S122).
 
-### 16.267. Исследовательский шаг (proof): квотиентный критерий с $b_{\\mathrm{mix}}$ достаточен
+### 16.267. Research step (proof): quota criterion with $b_{\\mathrm{mix}}$ is sufficient
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S122-quotient-sufficiency-proof):`
-  В каноническом режиме (Invariant 6.1(4): non‑chosen центры разбиты на π‑компоненты)
-  система замкнутости $A x=\\mathbf 1$ на support $U$ совместна тогда и только тогда,
-  когда существует решение $y$ уравнения $B_{G/\\pi}y=b_{\\mathrm{mix}}$, где $G/\\pi$ —
-  граф после стягивания π‑компонент, а $b_{\\mathrm{mix}}(c)=1$ для chosen‑центров и
-  $b_{\\mathrm{mix}}(P)\\equiv|P|\\pmod 2$ для вершины‑компоненты $P$.
-- `Доказательство:`
-  1) Разделим рёбра $G$ на $E_{cc}$ (chosen–chosen), $E_{\\mathrm{mix}}$ (chosen–non‑chosen)
-     и $E_P$ внутри каждой π‑компоненты $P$. Уравнения $A x=\\mathbf 1$ на chosen‑центрах
-     используют только $E_{cc}\\cup E_{\\mathrm{mix}}$ и совпадают со строками
-     $B_{G/\\pi}y=b_{\\mathrm{mix}}$ при $y:=x|_{E_{cc}\\cup E_{\\mathrm{mix}}}$.
-  2) Для каждой π‑компоненты $P$ положим
-     $m_P(v):=\\sum_{e\\in E_{\\mathrm{mix}}: e\\ni v} y_e$ для $v\\in P$. Тогда уравнения
-     на $P$ имеют вид $B_{H_P}x_P=\\mathbf 1+m_P$, где $H_P=(P,E_P)$.
-  3) Складывая по $v\\in P$, получаем $0=\\sum_{v\\in P}(1+m_P(v))$, т.е.
-     $\\delta_{\\mathrm{mix}}(P)\\equiv|P|\\pmod 2$. Это ровно строка
-     $B_{G/\\pi}y=b_{\\mathrm{mix}}$ для вершины $P$.
-  4) Обратно, если $y$ удовлетворяет $B_{G/\\pi}y=b_{\\mathrm{mix}}$, то для каждого $P$
-     вектор $\\mathbf 1+m_P$ имеет чётную сумму, значит лежит в образе $B_{H_P}$.
-     При $H_P$–дереве (edge или 4‑star) решение $x_P$ единственно (по листьям); в общем
-     графе достаточно этой чётности. Склеивая решения по всем $P$ и беря
-     $x|_{E_{cc}\\cup E_{\\mathrm{mix}}}=y$, получаем решение $A x=\\mathbf 1$.
-- `Toy‑тест:`
-  π‑компонента $P$ — 4‑цикл $v_1v_2v_3v_4v_1$ с двумя boundary‑вершинами $v_1,v_3$
-  и mixed‑рёбрами $m_1,m_3$ к chosen‑центрам. Уравнения:
+- `Lens:` Equivalence.
+- `Statement (Q43.S122-quotient-sufficiency-proof):`
+  In canonical mode (Invariant 6.1(4): non-chosen centers are divided into -components)
+  a closed system $A x=\\mathbf 1$ on support $U$ is consistent if and only if
+  when there is a solution $y$ to the equation $B_{G/\\pi}y=b_{\\mathrm{mix}}$, where $G/\\pi$ is
+  the graph after contraction is a -component, and $b_{\\mathrm{mix}}(c)=1$ for chosen-centers and
+  $b_{\\mathrm{mix}}(P)\\equiv|P|\\pmod 2$ for the component vertex $P$.
+- `Proof:`
+  1) Divide the edges of $G$ into $E_{cc}$ (chosen-chosen), $E_{\\mathrm{mix}}$ (chosen-non-chosen)
+     and $E_P$ inside each -component of $P$. Equations $A x=\\mathbf 1$ on chosencenters
+     use only $E_{cc}\\cup E_{\\mathrm{mix}}$ and match strings
+     $B_{G/\\pi}y=b_{\\mathrm{mix}}$ for $y:=x|_{E_{cc}\\cup E_{\\mathrm{mix}}}$.
+  2) For each -component $P$ we set
+     $m_P(v):=\\sum_{e\\in E_{\\mathrm{mix}}: e\\ni v} y_e$ for $v\\in P$. Then the equations
+     on $P$ have the form $B_{H_P}x_P=\\mathbf 1+m_P$, where $H_P=(P,E_P)$.
+  3) Adding over $v\\in P$, we obtain $0=\\sum_{v\\in P}(1+m_P(v))$, i.e.
+     $\\delta_{\\mathrm{mix}}(P)\\equiv|P|\\pmod 2$. This is exactly a line
+     $B_{G/\\pi}y=b_{\\mathrm{mix}}$ for vertex $P$.
+  4) Conversely, if $y$ satisfies $B_{G/\\pi}y=b_{\\mathrm{mix}}$, then for each $P$
+     the vector $\\mathbf 1+m_P$ has an even sum, which means it lies in the image of $B_{H_P}$.
+     For an $H_P$-tree (edge or 4star), the solution $x_P$ is unique (by leaves); All in all
+     This parity is enough for the graph. Gluing together solutions for all $P$ and taking
+     $x|_{E_{cc}\\cup E_{\\mathrm{mix}}}=y$, we obtain the solution $A x=\\mathbf 1$.
+- `Toy test:`
+  -component $P$ -- 4-cycle $v_1v_2v_3v_4v_1$ with two boundary vertices $v_1,v_3$
+  and mixed-edges $m_1,m_3$ to chosen-centers. Equations:
   $x_{12}+x_{14}+m_1=1$, $x_{12}+x_{23}=1$, $x_{23}+x_{34}+m_3=1$,
-  $x_{34}+x_{14}=1$. Сумма даёт $m_1+m_3=0$ (|P|=4). При $m_1=m_3$ берём $x_{12}=t$,
-  получаем $x_{23}=1+t$, $x_{34}=t+m_3$, $x_{14}=1+t+m_1$, так что решение существует
-  для любого $t$.
-- `Статус:` доказано (квотиентный критерий с $b_{\\mathrm{mix}}$ необходим и достаточен).
+  $x_{34}+x_{14}=1$. The sum gives $m_1+m_3=0$ (|P|=4). For $m_1=m_3$ we take $x_{12}=t$,
+  we get $x_{23}=1+t$, $x_{34}=t+m_3$, $x_{14}=1+t+m_1$, so a solution exists
+  for any $t$.
+- `Status:` proven (the quota criterion with $b_{\\mathrm{mix}}$ is necessary and sufficient).
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` стресс‑тестировать критерий вне канонического режима (например, разрешить
-  перекрытие π‑компонент или дополнительные non‑chosen–non‑chosen рёбра) и проверить,
-  какие дополнительные линейные ограничения появляются (Q43.S123).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` stress test a criterion outside the canonical mode (for example, allow
+  overlap components or additional nonchosen-nonchosen edges) and check
+  what additional linear constraints appear (Q43.S123).
 
-### 16.268. Исследовательский шаг (toy computation): extra non‑chosen edge между двумя π‑звёздами
+### 16.268. Exploratory step (toy computation): extra non-chosen edge between two -stars
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S124-extra-nn-edge-constraint):`
-  В конфигурации из двух disjoint π‑звёзд размера 4 и одного extra non‑chosen edge между ними
-  система $A x=\\mathbf 1$ совместна тогда и только тогда, когда в квотиенте $G/\\pi$ ребро
-  между компонентами имеет значение 0; это ровно условие $B_{G/\\pi}x=b_{\\mathrm{mix}}$
-  (где $b_{\\mathrm{mix}}$ нулевой, т.к. $|P|=|Q|=4$).
-- `Toy‑тест:`
-  1) Пусть обе π‑компоненты non‑chosen: $P=\\{a_0,a_1,a_2,a_3\\}$, $Q=\\{b_0,b_1,b_2,b_3\\}$
-     со звёздами $g_i=a_0a_i$ и $h_i=b_0b_i$ для $i=1,2,3$.
-     Добавим extra edge $e=a_1b_1$ между компонентами; других рёбер нет.
-  2) Уравнения $A x=\\mathbf 1$:
-     $g_2=g_3=1$, $g_1+g_2+g_3=1$, $g_1+e=1$; аналогично
+- `Lens:` Invariant.
+- `Statement (Q43.S124-extra-nn-edge-constraint):`
+  In a configuration of two size 4 disjoint -stars and one extra non-chosen edge between them
+  system $A x=\\mathbf 1$ is consistent if and only if there is an edge in quotient $G/\\pi$
+  between components has the value 0; this is exactly the condition $B_{G/\\pi}x=b_{\\mathrm{mix}}$
+  (where $b_{\\mathrm{mix}}$ is zero, because $|P|=|Q|=4$).
+- `Toy test:`
+  1) Let both -components be non-chosen: $P=\\{a_0,a_1,a_2,a_3\\}$, $Q=\\{b_0,b_1,b_2,b_3\\}$
+     with stars $g_i=a_0a_i$ and $h_i=b_0b_i$ for $i=1,2,3$.
+     Let's add extra edge $e=a_1b_1$ between the components; there are no other ribs.
+  2) Equations $A x=\\mathbf 1$:
+     $g_2=g_3=1$, $g_1+g_2+g_3=1$, $g_1+e=1$; similarly
      $h_2=h_3=1$, $h_1+h_2+h_3=1$, $h_1+e=1$.
-     Отсюда $g_1=h_1=1$ и $e=0$.
-  3) В $G/\\pi$ две вершины $p,q$ (стягиваем $P,Q$) и одно ребро $e$.
-     Так как $|P|=|Q|=4$, имеем $b_{\\mathrm{mix}}(p)=b_{\\mathrm{mix}}(q)=0$, а
-     $B_{G/\\pi}x=b_{\\mathrm{mix}}$ даёт $e=0$.
-- `Статус:` частично (toy‑тест показывает, что в этом минимальном случае добавочное ребро
-  принудительно обнуляется и критерий на квотиенте не ломается).
+     Hence $g_1=h_1=1$ and $e=0$.
+  3) $G/\\pi$ has two vertices $p,q$ (we contract $P,Q$) and one edge $e$.
+     Since $|P|=|Q|=4$, we have $b_{\\mathrm{mix}}(p)=b_{\\mathrm{mix}}(q)=0$, and
+     $B_{G/\\pi}x=b_{\\mathrm{mix}}$ gives $e=0$.
+- `Status:` partially (toy test shows that in this minimal case the additional edge
+  is forced to zero and the criterion on the quota does not break).
 - `StepID:` Q43.S124-extra-nn-edge-constraint.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` добавить связь, образующую цикл в $G/\\pi$ (например, chosen‑вершину
-  с двумя mixed‑рёбрами между $P,Q$) и проверить, появляется ли новое линейное условие
-  сверх $B_{G/\\pi}x=b_{\\mathrm{mix}}$ (Q43.S125-quotient-cycle-test).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` add a connection forming a cycle in $G/\\pi$ (for example, chosen vertex
+  with two mixed edges between $P,Q$) and check whether a new linear condition appears
+  over $B_{G/\\pi}x=b_{\\mathrm{mix}}$ (Q43.S125-quotient-cycle-test).
 
-### 16.269. Исследовательский шаг (toy computation): треугольник в $G/\\pi$ с chosen‑центром
+### 16.269. Exploratory step (toy computation): triangle in $G/\\pi$ with chosencenter
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S125-quotient-cycle-test):`
-  В конфигурации из двух disjoint π‑звёзд размера 4, одного extra non‑chosen ребра между
-  ними и одного chosen‑центра с двумя mixed‑рёбрами к этим компонентам система
-  $A x=\\mathbf 1$ совместна тогда и только тогда, когда существует решение
-  $B_{G/\\pi}x=b_{\\mathrm{mix}}$; в частности, в этом минимальном цикле обе системы
-  несовместны.
-- `Toy‑тест:`
-  1) Пусть $P=\\{a_0,a_1,a_2,a_3\\}$, $Q=\\{b_0,b_1,b_2,b_3\\}$ — non‑chosen π‑звёзды
-     со звёздными рёбрами $g_i=a_0a_i$ и $h_i=b_0b_i$ для $i=1,2,3$.
-     Добавим extra ребро $e=a_1b_1$ и chosen‑центр $c$ с mixed‑рёбрами
+- `Lens:` Invariant.
+- `Statement (Q43.S125-quotient-cycle-test):`
+  In a configuration of two size 4 disjoint -stars, one extra non-chosen edge between
+  them and one chosen center with two mixed edges to these components of the system
+  $A x=\\mathbf 1$ is consistent if and only if there is a solution
+  $B_{G/\\pi}x=b_{\\mathrm{mix}}$; in particular, in this minimal cycle both systems
+  incompatible.
+- `Toy test:`
+  1) Let $P=\\{a_0,a_1,a_2,a_3\\}$, $Q=\\{b_0,b_1,b_2,b_3\\}$ be non-chosen -stars
+     with star edges $g_i=a_0a_i$ and $h_i=b_0b_i$ for $i=1,2,3$.
+     Add an extra edge $e=a_1b_1$ and a chosen center $c$ with mixed edges
      $m_P=ca_2$, $m_Q=cb_2$.
-  2) Уравнения $A x=\\mathbf 1$ дают
-     $g_3=1$, $g_1+g_2+g_3=1$, $g_1+e=1$, $g_2+m_P=1$, откуда $g_1=g_2$ и $e=m_P$;
-     аналогично $h_3=1$, $h_1+h_2+h_3=1$, $h_1+e=1$, $h_2+m_Q=1$, откуда $e=m_Q$.
-     На chosen‑центре $m_P+m_Q=1$, поэтому $e=m_P=m_Q$ даёт противоречие.
-  3) В $G/\\pi$ вершины $p,q,c$ и рёбра $e,m_P,m_Q$; вектор
-     $b_{\\mathrm{mix}}$ имеет $b(c)=1$, $b(p)=b(q)=0$, и
-     $B_{G/\\pi}x=b_{\\mathrm{mix}}$ даёт систему
-     $m_P+m_Q=1$, $m_P+e=0$, $m_Q+e=0$, также несовместную.
-- `Статус:` частично (toy‑тест: противоречие уже в $B_{G/\\pi}x=b_{\\mathrm{mix}}$; дополнительных
-  ограничений сверх квотиентных не найдено).
+  2) The equations $A x=\\mathbf 1$ give
+     $g_3=1$, $g_1+g_2+g_3=1$, $g_1+e=1$, $g_2+m_P=1$, whence $g_1=g_2$ and $e=m_P$;
+     similarly $h_3=1$, $h_1+h_2+h_3=1$, $h_1+e=1$, $h_2+m_Q=1$, whence $e=m_Q$.
+     At the chosen center $m_P+m_Q=1$, so $e=m_P=m_Q$ gives a contradiction.
+  3) In $G/\\pi$ there are vertices $p,q,c$ and edges $e,m_P,m_Q$; vector
+     $b_{\\mathrm{mix}}$ has $b(c)=1$, $b(p)=b(q)=0$, and
+     $B_{G/\\pi}x=b_{\\mathrm{mix}}$ gives the system
+     $m_P+m_Q=1$, $m_P+e=0$, $m_Q+e=0$, also inconsistent.
+- `Status:` partially (toy test: the contradiction is already in $B_{G/\\pi}x=b_{\\mathrm{mix}}$; additional
+  no restrictions beyond quotas were found).
 - `StepID:` Q43.S125-quotient-cycle-test.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` стресс‑тестировать цикл в $G/\\pi$, составленный только из non‑chosen
-  π‑компонент (проверить, допускает ли $A x=\\mathbf 1$ ненулевые nn‑рёбра)
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` stress test a cycle in $G/\\pi$ composed only of non-chosen
+  -component (check whether $A x=\\mathbf 1$ allows non-zero nn-edges)
   (Q43.S126-quotient-cycle-nonchosen).
 
-### 16.270. Исследовательский шаг (counterexample): nn‑цикл даёт 1‑мерное ядро
+### 16.270. Exploratory step (counterexample): nn-cycle gives a 1-dimensional kernel
 
-- `Линза:` Коммуникация/ранг.
-- `Утверждение (Q43.S127-cycle-rank-counterexample):`
-  В конфигурации без chosen‑центров, где $G/\\pi$ — $k$‑цикл из non‑chosen π‑компонент
-  размера 2 и $b_{\\mathrm{mix}}=0$, система замкнутости $A x=\\mathbf 1$ допускает
-  ненулевое присваивание nn‑рёбер; на уровне квотиента это 1‑мерное ядро.
-- `Toy‑тест (k=4):`
-  1) Пусть π‑компоненты $P_i=\\{a_i,b_i\\}$, $i=1,\\dots,4$, и внутренние рёбра
-     $g_i=a_ib_i$. Добавим nn‑рёбра $e_i=a_i a_{i+1}$ (индексы по модулю 4),
-     других рёбер нет.
-  2) Уравнения $A x=\\mathbf 1$: для $b_i$ имеем $g_i=1$ (единственный инцидентный edge),
-     а для $a_i$ выполняется $g_i+e_{i-1}+e_i=1$. Подстановка даёт
-     $e_{i-1}+e_i=0$ для всех $i$.
-  3) Следовательно $e_1=e_2=e_3=e_4$; пространство решений 1‑мерно, и ненулевое решение
-     $e_i=1$ допустимо (при $g_i=1$).
-- `Статус:` контрпример (nn‑рёбра на чистом non‑chosen цикле не обязаны быть нулём).
+- `Lens:` Communication/Rank.
+- `Statement (Q43.S127-cycle-rank-counterexample):`
+  In a configuration without chosen centers, where $G/\\pi$ is a $k$ cycle of non-chosen  components
+  size 2 and $b_{\\mathrm{mix}}=0$, the closed system $A x=\\mathbf 1$ admits
+  non-zero assignment of nn-edges; at the quotation level it is a 1-dimensional core.
+- `Toy test (k=4):`
+  1) Let the -components $P_i=\\{a_i,b_i\\}$, $i=1,\\dots,4$, and internal edges
+     $g_i=a_ib_i$. Let's add nn-edges $e_i=a_i a_{i+1}$ (indices modulo 4),
+     there are no other ribs.
+  2) Equations $A x=\\mathbf 1$: for $b_i$ we have $g_i=1$ (the only incident edge),
+     and for $a_i$ $g_i+e_{i-1}+e_i=1$ is satisfied. Substitution gives
+     $e_{i-1}+e_i=0$ for all $i$.
+  3) Therefore $e_1=e_2=e_3=e_4$; the solution space is 1-dimensional, and a non-zero solution
+     $e_i=1$ is acceptable (with $g_i=1$).
+- `Status:` counterexample (nn-edges on a pure non-chosen cycle do not have to be zero).
 - `StepID:` Q43.S127-cycle-rank-counterexample.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` проверить реализуемость такого цикла на решётке с Def. 6.2(1–4)
-  (например, 3‑ или 4‑цикл из π‑звёзд на 6×6) и не возникает ли конфликт по направлениям
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` check the feasibility of such a cycle on a lattice with Def. 6.2(1-4)
+  (for example, a 3 or 4cycle of stars on 66) and whether there is a conflict in directions
   (Q43.S128-cycle-realizability-grid).
 
-### 16.271. Исследовательский шаг (proof): non‑chosen цикл в $G/\pi$ не реализуется при Def. 6.2(1–4)
+### 16.271. Exploratory step (proof): non-chosen cycle in $G/\pi$ is not implemented at Def. 6.2(1-4)
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S128-cycle-realizability-grid):`
-  В каноническом режиме (Invariant 6.1(4) + Definition 6.2(4)) невозможно иметь
-  nn‑цикл, составленный из разных non‑chosen π‑компонент: любые рёбра между
-  различными компонентами фиксируются как non‑edges, поэтому в $G/\pi$ non‑chosen
-  вершины изолированы.
-- `Доказательство:`
-  1) По Invariant 6.1(4) часть $I$ на non‑chosen центрах — объединение компонент
-     pairing $\pi$ в виде closed information set (HR’22 `…:1857–1862`). Следовательно,
-     $I$ не содержит рёбер между различными π‑компонентами.
-  2) По Definition 6.2(4) часть $J$ на non‑chosen центрах также является подмножеством
-     компонент $\pi$ в виде closed information set (HR’22 `…:1888–1893`). Следовательно,
-     $J$ не содержит рёбер между различными π‑компонентами.
-  3) Для associated non‑chosen центров, которые должны быть closed по Def. 6.2(2),
-     все направления к центрам вне своей π‑компоненты фиксируются как non‑edges.
-     Значит nn‑рёбра между компонентами имеют значение 0.
-  4) Поэтому в графе $G/\pi$ нет рёбер между non‑chosen вершинами, и цикл из таких
-     компонент невозможен. В частности, конструкция §16.270 не реализуется на grid
-     при Def. 6.2(1–4).
-- `Статус:` доказано (цикл не реализуется в каноническом режиме).
+- `Lens:` Invariant.
+- `Statement (Q43.S128-cycle-realizability-grid):`
+  In canonical mode (Invariant 6.1(4) + Definition 6.2(4)) it is impossible to have
+  nn-cycle composed of different non-chosen -components: any edges between
+  by various components are fixed as non-edges, therefore in $G/\pi$ non-chosen
+  the vertices are isolated.
+- `Proof:`
+  1) According to Invariant 6.1(4), part $I$ on non-chosen centers is a union of components
+     pairing $\pi$ as closed information set (HR'22 `…:1857–1862`). Hence,
+     $I$ does not contain edges between different -components.
+  2) By Definition 6.2(4), the part $J$ at non-chosen centers is also a subset
+     component $\pi$ in the form of closed information set (HR'22 `…:1888–1893`). Hence,
+     $J$ does not contain edges between different components.
+  3) For associated non-chosen centers that must be closed by Def. 6.2(2),
+     all directions to centers outside their -component are fixed as non-edges.
+     This means that nn-edges between components have a value of 0.
+  4) Therefore, in the graph $G/\pi$ there are no edges between non-chosen vertices, and a cycle of such
+     component is not possible. In particular, the design of Section 16.270 is not implemented on grid
+     at Def. 6.2(1-4).
+- `Status:` proven (the loop is not implemented in canonical mode).
 - `StepID:` Q43.S128-cycle-realizability-grid.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` вернуться к оценке $A_1$: полный per‑center подсчёт битов в
-  Algorithms 2–4 и явный константный $A_1$ (Q43.S129-bound-a1-constant).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` return to evaluation $A_1$: full percenter bit counting
+  Algorithms 2-4 and explicit constant $A_1$ (Q43.S129-bound-a1-constant).
 
-### 16.272. Исследовательский шаг (exact citation): явный $A_1$ уже получен
+### 16.272. Exploratory step (exact citation): explicit $A_1$ has already been received
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S129-bound-a1-constant):`
-  Явная константа $A_1$ для “constant‑part” в Lemma 6.9 уже вычислена: $A_1^{\mathrm{tot}}=24$,
-  а при раздельном учёте подписей $A_1\le 15$.
-- `Exact citation:` см. §16.224 (Q43.S62-assemble-a1-sum), где суммированы вклады Algorithms 2–4
-  и подписи: $9+1+1+13=24$ бит на центр; без подписей остаётся $A_1\le 15$.
-- `Статус:` exact citation (S129 закрыт ссылкой на уже доказанный шаг).
+- `Lens:` Equivalence.
+- `Statement (Q43.S129-bound-a1-constant):`
+  The explicit constant $A_1$ for "constant-part" in Lemma 6.9 has already been calculated: $A_1^{\mathrm{tot}}=24$,
+  and with separate accounting of signatures $A_1\le 15$.
+- `Exact citation:` see Section 16.224 (Q43.S62-assemble-a1-sum) where the contributions of Algorithms 2-4 are summarized
+  and signatures: $9+1+1+13=24$ bits per center; $A_1\le 15$ remains without signatures.
+- `Status:` exact citation (S129 is closed with a link to an already proven step).
 - `StepID:` Q43.S129-bound-a1-constant.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — неприменимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` собрать явные константы в Lemma 6.9/4.2 из $A_1,A_2,A_3,A_4$ и
-  проверить, что итоговый параметр $A$ даёт корректный режим рекурсии (Q43.S130-explicit-a-constant).
+- `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
+- `Next step:` collect explicit constants in Lemma 6.9/4.2 from $A_1,A_2,A_3,A_4$ and
+  check that the final parameter $A$ gives the correct recursion mode (Q43.S130-explicit-a-constant).
 
-### 16.273. Исследовательский шаг (proof): явный $A$ в Lemma 6.9/4.2
+### 16.273. Exploratory step (proof): explicit $A$ in Lemma 6.9/4.2
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S130-explicit-a-constant):`
-  В Lemma 6.9 можно взять явную константу $A\\le 668$ (при $t\\le s$), а значит та же $A$
-  подходит и для Lemma 4.2.
-- `Доказательство:`
-  В доказательстве Lemma 6.9 суммарное число **константных** бит, помимо $a\\log t$ и $b\\log\\Delta$,
-  складывается из:
-  1) $9|S^{*}_g|$ бит подписи центра;
-  2) $A_1|S^{*}_g|$ бит “other centers” (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2538-2562`);
-  3) $A_2|S^{*}_g|$ бит для структуры $J_j$ и $I^{*}_{-}$ (там же);
-  4) $A_3 s$ бит из счётчиков стадий/открытий, где $A_3$ задан через $s+16t+s/4$ (там же).
-  По §16.224 имеем $9+A_1=A_1^{\\mathrm{tot}}=24$, по §16.225 $A_2\\le 16$.
-  Кроме того, из $|S^{*}_g|\\le s/4+16t$ и $t\\le s$ следует $|S^{*}_g|\\le (65/4)s$, то есть
-  $A_4\\le 65/4$, а из $s+16t+s/4\\le (69/4)s$ следует $A_3\\le 69/4$.
-  Тогда
+- `Lens:` Trade-off.
+- `Statement (Q43.S130-explicit-a-constant):`
+  In Lemma 6.9 we can take an explicit constant $A\\le 668$ (for $t\\le s$), which means the same $A$
+  also suitable for Lemma 4.2.
+- `Proof:`
+  In the proof of Lemma 6.9, the total number of **constant** bits, in addition to $a\\log t$ and $b\\log\\Delta$,
+  consists of:
+  1) $9|S^{*}_g|$ center signature bit;
+  2) $A_1|S^{*}_g|$ bit "other centers" (HR'22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2538-2562`);
+  3) $A_2|S^{*}_g|$ bits for the structure $J_j$ and $I^{*}_{-}$ (ibid.);
+  4) $A_3 s$ bits from the stage/discovery counters, where $A_3$ is given by $s+16t+s/4$ (ibid.).
+  According to Section 16.224 we have $9+A_1=A_1^{\\mathrm{tot}}=24$, according to Section 16.225 $A_2\\le 16$.
+  In addition, from $|S^{*}_g|\\le s/4+16t$ and $t\\le s$ it follows $|S^{*}_g|\\le (65/4)s$, that is
+  $A_4\\le 65/4$, and from $s+16t+s/4\\le (69/4)s$ it follows $A_3\\le 69/4$.
+  Then
   $$A\\le A_3 + A_4(A_1^{\\mathrm{tot}}+A_2)=\\frac{69}{4}+\\frac{65}{4}\\cdot 40=\\frac{2669}{4}<668,$$
-  поэтому можно взять $A:=668$.
-  (Если использовать грубую оценку $A_4\\le 69/4$, то $A\\le 708$.)
-- `Статус:` доказано (явный $A$).
+  so we can take $A:=668$.
+  (If we use a rough estimate of $A_4\\le 69/4$, then $A\\le 708$.)
+- `Status:` proven (explicit $A$).
 - `StepID:` Q43.S130-explicit-a-constant.
 - `InfoGain:` 1.
-- `Барьер‑чек:` r — применимо, NP — неприменимо, alg — неприменимо.
-- `Следующий шаг:` сравнить условия $n\\ge n_0(A)$ и $n\\ge 20 C n'\\log n'$ при $A=668$
-  и отметить, какое из них доминирует в HR‑режиме (Q43.S131-compare-n0-a).
+- `Barrier check:` r - applicable, NP - not applicable, alg - not applicable.
+- `Next step:` compare conditions $n\\ge n_0(A)$ and $n\\ge 20 C n'\\log n'$ for $A=668$
+  and note which one dominates in HR mode (Q43.S131-compare-n0-a).
 
-### 16.274. Исследовательский шаг (proof): сравнение $n_0(668)$ и $20 C n'\\log n'$
+### 16.274. Exploratory step (proof): comparison of $n_0(668)$ and $20 C n'\\log n'$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S131-compare-n0-a):`
-  При $A=668$ имеем $n_0(A)=2$, и при HR‑параметрах ($C\\ge 3$, $t\\le s\\le n'/32$) условие
-  $n\\ge 20 C n'\\log n'$ автоматически даёт $n\\ge n_0(A)$. То есть требование $n\\ge n_0(A)$ избыточно.
-- `Доказательство:`
-  По §16.214 $n_0(A)=\\lceil e^{(48e^{1/2}/A)^{1/3}}\\rceil$. Для $A=668$ имеем
-  $48e^{1/2}/668<1/8$, поскольку $e^{1/2}<5/3$ (из ряда $e^{1/2}$) и
-  $48\\cdot(5/3)=80<668/8$. Тогда $(48e^{1/2}/668)^{1/3}<1/2$, откуда
-  $e^{(48e^{1/2}/668)^{1/3}}<e^{1/2}<2$, а показатель положителен, значит $e^{\\cdot}>1$.
-  Следовательно, $n_0(668)=2$.
-  Далее из $t,s,n'\\in\\mathbb N^+$ и $t\\le s\\le n'/32$ следует $n'\\ge 32\\ge 2$.
-  Поэтому при $C\\ge 3$ имеем
+- `Lens:` Equivalence.
+- `Statement (Q43.S131-compare-n0-a):`
+  For $A=668$ we have $n_0(A)=2$, and for HR parameters ($C\\ge 3$, $t\\le s\\le n'/32$) the condition
+  $n\\ge 20 C n'\\log n'$ automatically gives $n\\ge n_0(A)$. That is, the requirement $n\\ge n_0(A)$ is redundant.
+- `Proof:`
+  By Section 16.214 $n_0(A)=\\lceil e^{(48e^{1/2}/A)^{1/3}}\\rceil$. For $A=668$ we have
+  $48e^{1/2}/668<1/8$, since $e^{1/2}<5/3$ (from the series $e^{1/2}$) and
+  $48\\cdot(5/3)=80<668/8$. Then $(48e^{1/2}/668)^{1/3}<1/2$, whence
+  $e^{(48e^{1/2}/668)^{1/3}}<e^{1/2}<2$, and the exponent is positive, which means $e^{\\cdot}>1$.
+  Therefore, $n_0(668)=2$.
+  Next, from $t,s,n'\\in\\mathbb N^+$ and $t\\le s\\le n'/32$ it follows $n'\\ge 32\\ge 2$.
+  Therefore, for $C\\ge 3$ we have
   $$n\\ge 20 C n'\\log n'\\ge 20\\cdot 3\\cdot 2\\cdot (\\log 2)\\ge 20\\cdot 3\\cdot 2\\cdot \\frac12=60>2,$$
-  где $\\log 2\\ge 1/2$ так как $e^{1/2}<2$. Значит $n\\ge n_0(668)$, и условие $n\\ge n_0(A)$ лишнее.
-- `Toy‑тест:` численно $e^{(48e^{1/2}/668)^{1/3}}\\approx 1.634$, так что $n_0(668)=2$;
-  минимальный RHS при $C=3,n'=2$ даёт $20\\cdot 3\\cdot 2\\log 2\\approx 83$.
-- `Статус:` доказано (доминирование условия $n\\ge 20 C n'\\log n'$).
+  where $\\log 2\\ge 1/2$ since $e^{1/2}<2$. This means $n\\ge n_0(668)$, and the condition $n\\ge n_0(A)$ is superfluous.
+- `Toy test:` numerically $e^{(48e^{1/2}/668)^{1/3}}\\approx 1.634$, so $n_0(668)=2$;
+  the minimum RHS for $C=3,n'=2$ gives $20\\cdot 3\\cdot 2\\log 2\\approx 83$.
+- `Status:` proven (dominance of the condition $n\\ge 20 C n'\\log n'$).
 - `StepID:` Q43.S131-compare-n0-a.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (чистая арифметика, оракул не участвует).
-  B) Natural proofs check: неприменимо (нет свойства функций/нижних оценок схем).
-  C) Algebrization check: неприменимо (нет арифметизации/extension oracle).
-- `Следующий шаг:` обновить сводку Q43 (оставить $n\\ge 20 C n'\\log n'$ как единственное
-  ограничение по $n$) и проверить, что другие предпосылки HR остаются неизменными
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (pure arithmetic, no oracle involved).
+  B) Natural proofs check: not applicable (no property of functions/lower bounds for circuits).
+  C) Algebrization check: not applicable (no arithmetization/extension oracle).
+- `Next step:` update summary Q43 (keep $n\\ge 20 C n'\\log n'$ as the only
+  constraint on $n$) and check that other HR assumptions remain unchanged
   (Q43.S132-update-summary-dominant-bound).
 
-### 16.275. Исследовательский шаг (reduction/equivalence): сводка HR‑режима с доминирующим условием по $n$
+### 16.275. Exploratory step (reduction/equivalence): summary of HR mode with dominant condition by $n$
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S132-update-summary-dominant-bound):`
-  В HR‑режиме для Q43 можно оставить единственное ограничение по $n$:
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S132-update-summary-dominant-bound):`
+  In HR mode for Q43, you can leave the only $n$ limitation:
   $$n \\ge 20 C n' \\log n',$$
-  поскольку при $A=668$ условие $n\\ge n_0(A)$ автоматически выполняется; остальные предпосылки HR
-  (например $C\\ge 3$, $t\\le s\\le n'/32$, $s\\ge 1$) не меняются.
-- `Обоснование:`
-  По §16.274 $n_0(668)=2$. При $t,s,n'\\in\\mathbb N^+$ и $t\\le s\\le n'/32$ имеем $n'\\ge 2$,
-  поэтому при $C\\ge 3$ минимальный RHS $20 C n' \\log n'$ строго больше 2. Значит
+  since at $A=668$ the condition $n\\ge n_0(A)$ is automatically satisfied; other HR prerequisites
+  (for example $C\\ge 3$, $t\\le s\\le n'/32$, $s\\ge 1$) do not change.
+- `Rationale:`
+  According to Section 16.274 $n_0(668)=2$. For $t,s,n'\\in\\mathbb N^+$ and $t\\le s\\le n'/32$ we have $n'\\ge 2$,
+  therefore, for $C\\ge 3$ the minimum RHS $20 C n' \\log n'$ is strictly greater than 2. This means
   $n\\ge 20 C n'\\log n' \\Rightarrow n\\ge n_0(A)$.
-- `Статус:` reduction/equivalence (сжатие списка предпосылок HR).
+- `Status:` reduction/equivalence (compression of the list of HR prerequisites).
 - `StepID:` Q43.S132-update-summary-dominant-bound.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (чистая арифметика, оракул не участвует).
-  B) Natural proofs check: неприменимо (нет свойства функций/нижних оценок схем).
-  C) Algebrization check: неприменимо (нет арифметизации/extension oracle).
-- `Следующий шаг:` проверить, что прочие предпосылки HR (условия на $t',s,\\Delta$)
-  остаются совместимыми после замены $t\\mapsto(2s+1)t$ (Q43.S133-hr-compatibility-check).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (pure arithmetic, no oracle involved).
+  B) Natural proofs check: not applicable (no property of functions/lower bounds for circuits).
+  C) Algebrization check: not applicable (no arithmetization/extension oracle).
+- `Next step:` check that other HR prerequisites (conditions on $t',s,\\Delta$)
+  remain compatible after replacing $t\\mapsto(2s+1)t$ (Q43.S133-hr-compatibility-check).
 
-### 16.276. Исследовательский шаг (reduction/equivalence): совместимость HR‑предпосылок после $t\\mapsto(2s+1)t$
+### 16.276. Research step (reduction/equivalence): compatibility of HR premises after $t\\mapsto(2s+1)t$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S133-hr-compatibility-check):`
-  В HR‑режиме для flat local‑EF(s), при $M=\\mathrm{poly}(n)$ и $s=\\mathrm{polylog}(n)$,
-  оставшиеся предпосылки Lemma 4.4/4.5 (в частности $t'\\le s_\\eta\\le n'/32$ и
-  $t'(d)\\le n_d/16$) остаются совместимыми после замены
+- `Lens:` Trade-off.
+- `Statement (Q43.S133-hr-compatibility-check):`
+  In HR mode for flat local-EF(s), with $M=\\mathrm{poly}(n)$ and $s=\\mathrm{polylog}(n)$,
+  the remaining premises of Lemma 4.4/4.5 (in particular $t'\\le s_\\eta\\le n'/32$ and
+  $t'(d)\\le n_d/16$) remain compatible after replacement
   $$t'=(2s+1)\\log M.$$
-  Эквивалентно, достаточно проверить, что $t'=\\log^{O(1)}n$, а рекурсия HR даёт
-  $n_\\eta\\ge n/\\mathrm{polylog}(n)^\\eta$ при $\\eta\\le d$.
-- `Обоснование:`
-  При $M=\\mathrm{poly}(n)$ и $s=\\mathrm{polylog}(n)$ имеем $t'=(2s+1)\\log M=\\log^{O(1)}n$.
-  В HR рекурсия $n_\\eta=\\lfloor n_{\\eta-1}/(A t'\\log^{c_1} n_{\\eta-1})\\rfloor$ даёт
-  $n_\\eta\\ge n/(A t'\\log^{c_1}n)^\\eta$. Для $d=O(\\log n/\\log\\log n)$ знаменатель равен
-  $\\mathrm{polylog}(n)^d=n^{o(1)}$, так что $n_\\eta=n^{1-o(1)}$ и, следовательно,
-  $t'(d)\\le n_d/16$ при достаточно большом $n$.
-  Условие $t'\\le s_\\eta$ достигается, выбирая $s_1:=\\max\\{\\log N,t'\\}$ и $s_\\eta=2^{\\eta-1}s_1$
-  (это меняет только polylog‑множитель в доказательстве HR); при $n$ достаточно большом
-  остаётся и $s_\\eta\\le n'/32$.
-- `Toy‑тест:` возьмём $n=2^{60}$, $n'=2^{20}$, $M=n^2$, $s=\\log n$.
-  Тогда $t'\\approx (2\\cdot 41+1)\\cdot(2\\cdot 41)\\approx 6800$,
-  $\\log^4 n\\approx 3\\cdot 10^6$, и $A t'\\log^4 n\\ll n/n'=2^{40}\\approx 10^{12}$,
-  так что $n/n'\\ge A t'\\log^{4} n$ совместимо; также $t'\\ll n_d$ и $t'\\le s_1$.
-- `Статус:` reduction/equivalence (совместимость оставшихся условий).
+  Equivalently, it suffices to check that $t'=\\log^{O(1)}n$, and HR recursion gives
+  $n_\\eta\\ge n/\\mathrm{polylog}(n)^\\eta$ at $\\eta\\le d$.
+- `Rationale:`
+  For $M=\\mathrm{poly}(n)$ and $s=\\mathrm{polylog}(n)$ we have $t'=(2s+1)\\log M=\\log^{O(1)}n$.
+  In HR, the recursion $n_\\eta=\\lfloor n_{\\eta-1}/(A t'\\log^{c_1} n_{\\eta-1})\\rfloor$ gives
+  $n_\\eta\\ge n/(A t'\\log^{c_1}n)^\\eta$. For $d=O(\\log n/\\log\\log n)$ the denominator is
+  $\\mathrm{polylog}(n)^d=n^{o(1)}$, so $n_\\eta=n^{1-o(1)}$ and therefore
+  $t'(d)\\le n_d/16$ for sufficiently large $n$.
+  The condition $t'\\le s_\\eta$ is achieved by choosing $s_1:=\\max\\{\\log N,t'\\}$ and $s_\\eta=2^{\\eta-1}s_1$
+  (this only changes the polylog factor in the HR proof); for $n$ large enough
+  $s_\\eta\\le n'/32$ also remains.
+- `Toy test:` take $n=2^{60}$, $n'=2^{20}$, $M=n^2$, $s=\\log n$.
+  Then $t'\\approx (2\\cdot 41+1)\\cdot(2\\cdot 41)\\approx 6800$,
+  $\\log^4 n\\approx 3\\cdot 10^6$, and $A t'\\log^4 n\\ll n/n'=2^{40}\\approx 10^{12}$,
+  so $n/n'\\ge A t'\\log^{4} n$ is compatible; also $t'\\ll n_d$ and $t'\\le s_1$.
+- `Status:` reduction/equivalence (compatibility of remaining conditions).
 - `StepID:` Q43.S133-hr-compatibility-check.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (чистые оценки параметров, оракул не участвует).
-  B) Natural proofs check: неприменимо (нет свойства функций/нижних оценок схем).
-  C) Algebrization check: неприменимо (нет арифметизации/extension oracle).
-- `Следующий шаг:` проверить, где именно в HR Lemma 4.5 используется $s_1=\\log N$
-  (можно ли формально заменить на $\\max\\{\\log N,t'\\}$ без скрытых побочных эффектов),
-  или зафиксировать точку поломки (Q43.S134-s1-swap-compatibility).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (pure parameter estimates, the oracle is not involved).
+  B) Natural proofs check: not applicable (no property of functions/lower bounds for circuits).
+  C) Algebrization check: not applicable (no arithmetization/extension oracle).
+- `Next step:` check where exactly $s_1=\\log N$ is used in HR Lemma 4.5
+  (can it be formally replaced by $\\max\\{\\log N,t'\\}$ without hidden side effects),
+  or fix the point of failure (Q43.S134-s1-swap-compatibility).
 
-### 16.277. Исследовательский шаг (reduction/equivalence): замена $s_1=\\log N$ на $\\max\\{\\log N,t'\\}$ совместима с HR‑проверками
+### 16.277. Research step (reduction/equivalence): replacing $s_1=\\log N$ with $\\max\\{\\log N,t'\\}$ is compatible with HR checks
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S134-s1-swap-compatibility):`
-  В HR‑параметризации (Proof of Thm. 4.3) можно заменить стартовое значение
-  $$s_1:=\\log N\\quad\\text{на}\\quad s_1:=\\max\\{\\log N,t'\\}$$
-  без изменения корректности проверок Lemma 4.4/4.5: все неравенства по $s_\\eta$
-  и $t(\\eta)$ сохраняются при достаточно большом $n$ в режиме $M=\\mathrm{poly}(n)$,
+- `Lens:` Equivalence.
+- `Statement (Q43.S134-s1-swap-compatibility):`
+  In HR parameterization (Proof of Thm. 4.3), you can replace the starting value
+  $$s_1:=\\log N\\quad\\text{on}\\quad s_1:=\\max\\{\\log N,t'\\}$$
+  without changing the correctness of checks Lemma 4.4/4.5: all inequalities in $s_\\eta$
+  and $t(\\eta)$ are preserved for sufficiently large $n$ in the mode $M=\\mathrm{poly}(n)$,
   $s=\\mathrm{polylog}(n)$.
-- `Обоснование:`
-  1) По §16.166 все параметры HR зависят от $s_\\eta$ только через определения
-     $s_\\eta=2^{\\eta-1}s_1$ и $t(\\eta)=\\sum_{i\\le\\eta}s_i+\\log M$, а условия Lemma 4.4
-     требуют $t'\\le s_\\eta\\le n'/32$.
-  2) Замена $s_1\\rightsquigarrow\\max\\{\\log N,t'\\}$ делает $s_\\eta$ и $t(\\eta)$ **монотонно**
-     больше, поэтому $t'\\le s_\\eta$ автоматически выполняется, а остальные проверки
-     сводятся к контролю $t(\\eta)\\le n_\\eta/16$.
-  3) В режиме §16.276 имеем $t'=(2s+1)\\log M=\\log^{O(1)}n$ и
-     $n_\\eta\\ge n/\\mathrm{polylog}(n)^\\eta$ для $\\eta\\le d=O(\\log n/\\log\\log n)$,
-     значит $t(\\eta)=\\mathrm{polylog}(n)\\ll n_\\eta$ при достаточно большом $n$.
-  Следовательно, замена $s_1$ не нарушает HR‑проверки и лишь усиливает локальную глубину $s_\\eta$.
-- `Toy‑тест:` пусть $n=2^{40}$, $N=n^2$, $M=n^2$, $s=\\log n$; тогда $t'\\approx(2s+1)\\log M\\approx 6400$,
-  $s_1=\\max\\{\\log N,t'\\}=\\max\\{80,6400\\}=6400$, и $s_\\eta=2^{\\eta-1}s_1$ остаётся
-  $\\ll n'/32$ при $n'\\ge n^{0.9}$, а $t(\\eta)=O(2^\\eta s_1)$ всё ещё $\\ll n_\\eta$.
-- `Статус:` reduction/equivalence (корректность замены $s_1$).
+- `Rationale:`
+  1) According to Section 16.166, all HR parameters depend on $s_\\eta$ only through definitions
+     $s_\\eta=2^{\\eta-1}s_1$ and $t(\\eta)=\\sum_{i\\le\\eta}s_i+\\log M$, and the conditions Lemma 4.4
+     require $t'\\le s_\\eta\\le n'/32$.
+  2) Replacing $s_1\\rightsquigarrow\\max\\{\\log N,t'\\}$ makes $s_\\eta$ and $t(\\eta)$ **monotonically**
+     more, so $t'\\le s_\\eta$ is automatically performed, and the rest of the checks
+     are reduced to control $t(\\eta)\\le n_\\eta/16$.
+  3) In the mode Section 16.276 we have $t'=(2s+1)\\log M=\\log^{O(1)}n$ and
+     $n_\\eta\\ge n/\\mathrm{polylog}(n)^\\eta$ for $\\eta\\le d=O(\\log n/\\log\\log n)$,
+     this means $t(\\eta)=\\mathrm{polylog}(n)\\ll n_\\eta$ for a sufficiently large $n$.
+  Consequently, replacing $s_1$ does not violate the HR check and only strengthens the local depth $s_\\eta$.
+- `Toy test:` let $n=2^{40}$, $N=n^2$, $M=n^2$, $s=\\log n$; then $t'\\approx(2s+1)\\log M\\approx 6400$,
+  $s_1=\\max\\{\\log N,t'\\}=\\max\\{80.6400\\}=6400$, and $s_\\eta=2^{\\eta-1}s_1$ remains
+  $\\ll n'/32$ for $n'\\ge n^{0.9}$, and $t(\\eta)=O(2^\\eta s_1)$ is still $\\ll n_\\eta$.
+- `Status:` reduction/equivalence (correctness of replacement $s_1$).
 - `StepID:` Q43.S134-s1-swap-compatibility.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (монотонные оценки параметров, оракул не участвует).
-  B) Natural proofs check: неприменимо (нет свойства функций/нижних оценок схем).
-  C) Algebrization check: неприменимо (нет арифметизации/extension oracle).
-- `Следующий шаг:` локализовать точное место в HR Lemma 4.5, где $s_1=\\log N$
-  используется как **равенство**, а не как нижняя граница, или подтвердить отсутствие
-  такого места (Q43.S135-s1-use-audit).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (monotonic parameter estimates, the oracle is not involved).
+  B) Natural proofs check: not applicable (no property of functions/lower bounds for circuits).
+  C) Algebrization check: not applicable (no arithmetization/extension oracle).
+- `Next step:` localize the exact location in HR Lemma 4.5 where $s_1=\\log N$
+  used as **equality** rather than as a lower bound, or to confirm the absence
+  such a place (Q43.S135-s1-use-audit).
 
-### 16.278. Исследовательский шаг (exact citation): где именно используется $s_1=\\log N$ в Proof of Thm. 4.3
+### 16.278. Research step (exact citation): where exactly is $s_1=\\log N$ used in Proof of Thm. 4.3
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S135-s1-use-audit):`
-  В Proof of Thm. 4.3 (HR’22) параметр $s_1=\\log N$ входит **только** через определение
-  $s_\\eta=2^{\\eta-1}\\log N$ и последующее $t(\\eta)=\\sum_{i\\le\\eta}s_i+\\log M$,
-  а в формулировке Lemma 4.5 используются лишь суммы $\\sum_{i\\le\\eta}s_i$ и условие
-  $t(\\eta)\\le n_\\eta/16$. Поэтому замена $s_1\\to\\max\\{\\log N,t'\\}$ затрагивает только
-  величины $s_\\eta$ и $t(\\eta)$, без иных скрытых зависимостей от $\\log N$.
+- `Lens:` Invariant.
+- `Statement (Q43.S135-s1-use-audit):`
+  In Proof of Thm. 4.3 (HR'22) parameter $s_1=\\log N$ is included **only** through the definition
+  $s_\\eta=2^{\\eta-1}\\log N$ and the subsequent $t(\\eta)=\\sum_{i\\le\\eta}s_i+\\log M$,
+  and in the formulation of Lemma 4.5 only the sums $\\sum_{i\\le\\eta}s_i$ and the condition are used
+  $t(\\eta)\\le n_\\eta/16$. Therefore, the replacement $s_1\\to\\max\\{\\log N,t'\\}$ affects only
+  values $s_\\eta$ and $t(\\eta)$, without other hidden dependencies on $\\log N$.
 - `Exact citation:`
-  В Proof of Thm. 4.3 параметры фиксируются как
+  In Proof of Thm. 4.3 parameters are fixed as
   “The parameter s depends on η and is fixed to s = sη = 2η−1 log N. With these parameters in place we can
-  finally also fix t(η) = ∑i≤η si + log M …” и далее Lemma 4.5 использует глубину
-  $\\sum_{i<\\eta}s_i$ и условие $t(\\eta)\\le n_\\eta/16$
+  finally also fix t() = i<= si + log M ..." and further Lemma 4.5 uses depth
+  $\\sum_{i<\\eta}s_i$ and condition $t(\\eta)\\le n_\\eta/16$
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1099–1109`).
-- `Toy‑тест:` при замене $\\log N$ на $\\max\\{\\log N,t'\\}$ все упоминания $s_\\eta$ и $t(\\eta)$
-  монотонно растут, а других прямых появлений $\\log N$ в Lemma 4.5 нет.
-- `Статус:` exact citation (аудит использования $s_1=\\log N$).
+- `Toy test:` when replacing $\\log N$ with $\\max\\{\\log N,t'\\}$ all mentions of $s_\\eta$ and $t(\\eta)$
+  grow monotonically, and there are no other direct appearances of $\\log N$ in Lemma 4.5.
+- `Status:` exact citation (audit of usage $s_1=\\log N$).
 - `StepID:` Q43.S135-s1-use-audit.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (проверка по тексту, оракул не участвует).
-  B) Natural proofs check: неприменимо (нет свойства функций/нижних оценок схем).
-  C) Algebrization check: неприменимо (нет арифметизации/extension oracle).
-- `Следующий шаг:` просканировать оставшиеся места Proof of Thm. 4.3 и Lemma 4.5 на
-  прямые появления $\\log N$ вне $s_\\eta$/$t(\\eta)$ (Q43.S136-logn-occurrence-scan).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (checking against the text, the oracle is not involved).
+  B) Natural proofs check: not applicable (no property of functions/lower bounds for circuits).
+  C) Algebrization check: not applicable (no arithmetization/extension oracle).
+- `Next step:` scan the remaining Proof of Thm spaces. 4.3 and Lemma 4.5 on
+  direct occurrences of $\\log N$ outside $s_\\eta$/$t(\\eta)$ (Q43.S136-logn-occurrence-scan).
 
-### 16.279. Исследовательский шаг (exact citation): скан $\\log N$ в Proof of Thm. 4.3/Lemma 4.5
+### 16.279. Research step (exact citation): scan $\\log N$ in Proof of Thm. 4.3/Lemma 4.5
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S136-logn-occurrence-scan):`
-  В Proof of Thm. 4.3 и Lemma 4.5 прямые появления $\\log N$ встречаются только
-  в определении $s_\\eta=2^{\\eta-1}\\log N$ и в оценках для $t(\\eta)$/ $t(d)$; других
-  ссылок на $\\log N$ в этих местах нет.
+- `Lens:` Equivalence.
+- `Statement (Q43.S136-logn-occurrence-scan):`
+  In Proof of Thm. 4.3 and Lemma 4.5 direct occurrences of $\\log N$ occur only
+  in the definition of $s_\\eta=2^{\\eta-1}\\log N$ and in the estimates for $t(\\eta)$/ $t(d)$; others
+  there are no references to $\\log N$ in these places.
 - `Exact citation:`
-  В Proof of Thm. 4.3 фиксируется $s_\\eta=2^{\\eta-1}\\log N$ и
+  In Proof of Thm. 4.3 $s_\\eta=2^{\\eta-1}\\log N$ is fixed and
   $t(\\eta)=\\sum_{i\\le\\eta}s_i+\\log M\\le 2^\\eta\\log N+\\log M$,
-  а в Lemma 4.5 используется глубина $\\sum_{i<\\eta}s_i$ и условие
+  and Lemma 4.5 uses the depth $\\sum_{i<\\eta}s_i$ and the condition
   $t(\\eta)\\le n_\\eta/16$ (HR’22, `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1099–1109`).
-  В конце Proof of Thm. 4.3 снова используется $t(d)\\le 2^d\\log N+\\log M$
+  At the end of Proof of Thm. 4.3 $t(d)\\le 2^d\\log N+\\log M$ is used again
   (`…:1232`).
-- `Toy‑тест:` `rg -n "log N" ...` в указанных фрагментах даёт только эти появления;
-  остальные вхождения (например `…:980`) относятся к более ранним доказательствам и не
-  участвуют в Proof of Thm. 4.3/Lemma 4.5.
-- `Статус:` exact citation (аудит прямых вхождений $\\log N$).
+- `Toy test:` `rg -n "log N" ...` in the specified fragments gives only these appearances;
+  other occurrences (for example `…:980`) refer to earlier evidence and are not
+  participate in Proof of Thm. 4.3/Lemma 4.5.
+- `Status:` exact citation (audit of direct occurrences of $\\log N$).
 - `StepID:` Q43.S136-logn-occurrence-scan.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (проверка по тексту).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` просканировать оставшиеся места в §4 (вне Proof of Thm. 4.3/Lemma 4.5)
-  на прямые появления $\\log N$ и уточнить, относятся ли они к Q43 (Q43.S137-logn-remaining-scan).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (text check).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` scan remaining places in Section 4 (outside Proof of Thm. 4.3/Lemma 4.5)
+  on direct occurrences of $\\log N$ and clarify whether they belong to Q43 (Q43.S137-logn-remaining-scan).
 
-### 16.280. Исследовательский шаг (exact citation): оставшиеся $\\log N$ в §4 — это Proof of Thm. 4.1
+### 16.280. Research step (exact citation): the remaining $\\log N$ in Section 4 is the Proof of Thm. 4.1
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S137-logn-remaining-scan):`
-  Оставшиеся прямые вхождения $\\log N$ в §4 (вне Proof of Thm. 4.3/Lemma 4.5)
-  относятся к Proof of Thm. 4.1 (single‑switching): там фиксируется $s=152\\log N$,
-  а также используется $t_d=152\\log N$ и неравенство $\\log N\\le n^{1/d}/(c_1\\log^4 n)$.
-  Эти места не участвуют в Q43‑переносе Lemma 4.5.
+- `Lens:` Invariant.
+- `Statement (Q43.S137-logn-remaining-scan):`
+  Remaining direct occurrences of $\\log N$ in Section 4 (outside Proof of Thm. 4.3/Lemma 4.5)
+  refer to Proof of Thm. 4.1 (singleswitching): $s=152\\log N$ is fixed there,
+  and also uses $t_d=152\\log N$ and the inequality $\\log N\\le n^{1/d}/(c_1\\log^4 n)$.
+  These places are not included in the Q43 port of Lemma 4.5.
 - `Exact citation:`
   Proof of Thm. 4.1: “set $s=152\\log N$ … let $t_i=s$ … $t_d=152\\log N$ … if $\\log N\\le n^{1/d}/(c_1\\log^4 n)$”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:980–1028`).
-- `Toy‑тест:` поиск `log N` вне Proof of Thm. 4.3/Lemma 4.5 даёт только блок 980–1028,
-  и он заканчивается фразой “The claimed lower bound follows. We turn our attention to the main result”
-  перед Theorem 4.3.
-- `Статус:` exact citation (остаточные вхождения $\\log N$ локализованы в Thm. 4.1).
+- `Toy test:` search `log N` outside Proof of Thm. 4.3/Lemma 4.5 gives only block 980-1028,
+  and it ends with the phrase "The claimed lower bound follows. We turn our attention to the main result"
+  before Theorem 4.3.
+- `Status:` exact citation (residual occurrences of $\\log N$ are localized in Thm. 4.1).
 - `StepID:` Q43.S137-logn-remaining-scan.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (проверка по тексту).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` проверить, не используется ли Proof of Thm. 4.1 как под‑шаг в Proof of Thm. 4.3
-  (или зафиксировать, что они независимы) — Q43.S138-logn-nonimpact-check.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (text check).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` check if Proof of Thm is used. 4.1 as a sub-step in Proof of Thm. 4.3
+  (or fix that they are independent) - Q43.S138-logn-nonimpact-check.
 
-### 16.281. Исследовательский шаг (toy): poly‑$M$ vs порог $2^{n^{\\alpha}}$ в Thm. 4.3
+### 16.281. Exploratory step (toy): poly$M$ vs threshold $2^{n^{\\alpha}}$ in Thm. 4.3
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (проверка):` сравнить polynomial‑$M$ с порогом
-  $2^{n^{\\alpha}}$, где $\\alpha=1/d-1/(d(d-1))$ и $d=\\lfloor\\log_2 n/\\log_2\\log_2 n\\rfloor$.
-  Здесь база согласована с $\\log_2$ (HR‑конвенция); переход к $e^x$ даёт лишь множитель $\\ln 2$ в показателе.
-- `Toy‑тест:` скрипт `scripts/toy_q43_s141.py` для $n=2^8,\\dots,2^{32}$ и $k\\in\\{1,2,4,8\\}$
-  показывает, что $n^{\\alpha}\\lesssim\\log n$, поэтому уже при $k=1$ имеем $k\\log n>n^{\\alpha}$
-  (а при $k\\ge 2$ тем более). Значит $M=n^k$ **не** меньше $2^{n^{\\alpha}}$.
-  Пример: $n=2^{16}$, $d=4$, $\\alpha=1/6$, $n^{\\alpha}\\approx 6.35$, а $k\\log n\\approx 22.2$ при $k=2$.
-- `Статус:` toy‑комputation (порог large‑$M$ не автоматически выше polynomial‑$M$ при $d=\\Theta(\\log n/\\log\\log n)$).
+- `Lens:` Trade-off.
+- `Approval (verification):` compare polynomial$M$ with threshold
+  $2^{n^{\\alpha}}$, where $\\alpha=1/d-1/(d(d-1))$ and $d=\\lfloor\\log_2 n/\\log_2\\log_2 n\\rfloor$.
+  Here the base is consistent with $\\log_2$ (HR convention); going to $e^x$ gives only the factor $\\ln 2$ in the exponent.
+- `Toy test:` script `scripts/toy_q43_s141.py` for $n=2^8,\\dots,2^{32}$ and $k\\in\\{1,2,4,8\\}$
+  shows that $n^{\\alpha}\\lesssim\\log n$, so already for $k=1$ we have $k\\log n>n^{\\alpha}$
+  (and even more so for $k\\ge 2$). This means $M=n^k$ is **not** less than $2^{n^{\\alpha}}$.
+  Example: $n=2^{16}$, $d=4$, $\\alpha=1/6$, $n^{\\alpha}\\approx 6.35$, and $k\\log n\\approx 22.2$ for $k=2$.
+- `Status:` toy-computation (threshold large-$M$ is not automatically higher than polynomial-$M$ at $d=\\Theta(\\log n/\\log\\log n)$).
 - `StepID:` Q43.S141-poly-vs-exp-threshold.
 - `InfoGain:` 1.
-- `Следующий шаг:` уточнить параметризацию HR (что именно означает $n$ в пороге)
-  и сравнить с фактическим полиномиальным режимом $M=\\mathrm{poly}(N)$.
+- `Next step:` clarify HR parameterization (what exactly does $n$ mean in the threshold)
+  and compare with the actual polynomial regime $M=\\mathrm{poly}(N)$.
 
-### 16.282. Исследовательский шаг (exact citation): параметры Thm. 4.3 — $n$ это сторона грида, $N$ это длина доказательства
+### 16.282. Research step (exact citation): Thm parameters. 4.3 - $n$ is the side of the grid, $N$ is the length of the proof
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S142-parameter-map-n-vs-bign):`
-  В формулировке HR’22 Theorem 4.3 $n$ — это сторона $n\\times n$ grid в Tseitin($G_n$),
-  $N$ — число строк (length) Frege‑доказательства, а каждая строка имеет размер $M$ и глубину $d$.
-  Нижняя оценка выражается как
+- `Lens:` Trade-off.
+- `Statement (Q43.S142-parameter-map-n-vs-bign):`
+  In the formulation of HR'22 Theorem 4.3, $n$ is the side of the $n\\times n$ grid in Tseitin($G_n$),
+  $N$ is the number of lines (length) of the Frege proof, and each line has size $M$ and depth $d$.
+  The lower bound is expressed as
   $$N\\ \\ge\\ 2^{\\Omega\\left(\\frac{n}{((\\log n)^{O(1)}\\,\\log M)^d}\\right)},$$
-  где $\\log$ — по базе $2$ (HR‑конвенция).
-  В Proof of Thm. 4.3 параметр large‑$M$ формулируется как $M\\le 2^{n^{1/d-1/(d(d-1))}}$,
-  где $n$ — тот же размер стороны грида.
+  where $\\log$ is based on $2$ (HR convention).
+  In Proof of Thm. 4.3 the parameter large$M$ is formulated as $M\\le 2^{n^{1/d-1/(d(d-1))}}$,
+  where $n$ is the same size of the grid side.
 - `Exact citation:`
-  Формулировка Thm. 4.3: “Tseitin($G_n$) with odd charges at all nodes of the $n\\times n$ grid … If each line
+  Thm formulation. 4.3: "Tseitin($G_n$) with odd charges at all nodes of the $n\\times n$ grid ... If each line
   of the refutation is of size $M$ and depth $d$, then the number of lines in the refutation is
-  $\\exp\\,\\Omega\\bigl(n/((\\log n)^{O(1)}\\log M)^d\\bigr)$” и далее “Suppose we are given a Frege refutation …
+  $\\exp\\,\\Omega\\bigl(n/((\\log n)^{O(1)}\\log M)^d\\bigr)$" and further "Suppose we are given a Frege refutation ...
   consisting of $N$ lines” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:939–962`).
-  В Proof of Thm. 4.3: “Suppose we are given a proof of length $N=\\exp(n/((\\log n)^c\\log M)^d)$ …
-  We may assume that $M\\le\\exp(n^{1/d-1/d(d-1)})$” (`…:1104–1106`; `exp` в цитате = $2^x$ по конвенции $\\log_2$ в HR’22).
-- `Статус:` exact citation (фиксация параметров $n,N,M,d$ и базы экспоненты).
+  In Proof of Thm. 4.3: "Suppose we are given a proof of length $N=\\exp(n/((\\log n)^c\\log M)^d)$ ...
+  We may assume that $M\\le\\exp(n^{1/d-1/d(d-1)})$” (`…:1104–1106`; `exp` in the quote = $2^x$ according to the $\\log_2$ convention in HR'22).
+- `Status:` exact citation (fixing parameters $n,N,M,d$ and exponent base).
 - `StepID:` Q43.S142-parameter-map-n-vs-bign.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (проверка по тексту).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` выразить $n$ в терминах размера формулы/числа переменных
-  (например, $|\\mathrm{Tseitin}(G_n)|=\\Theta(n^2)$) и переписать порог large‑$M$
-  в терминах $N$ или $|F|$ для сравнения с poly‑$M$ режимом.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (text check).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` express $n$ in terms of formula size/number of variables
+  (for example, $|\\mathrm{Tseitin}(G_n)|=\\Theta(n^2)$) and rewrite the threshold large$M$
+  in terms of $N$ or $|F|$ for comparison with the poly$M$ mode.
 
-### 16.283. Исследовательский шаг (reduction): перевод параметра $n$ в размер формулы для Tseitin(Grid)
+### 16.283. Exploratory step (reduction): converting parameter $n$ into formula size for Tseitin(Grid)
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S143-translate-n-parameter):`
-  Пусть $G_n$ — $n\\times n$ grid. Тогда $|V|=n^2$ и $|E|=2n(n-1)$.
-  В Tseitin($G_n$) каждая переменная соответствует ребру, так что число переменных
+- `Lens:` Equivalence.
+- `Statement (Q43.S143-translate-n-parameter):`
+  Let $G_n$ be $n\\times n$ grid. Then $|V|=n^2$ and $|E|=2n(n-1)$.
+  In Tseitin($G_n$) each variable corresponds to an edge, so the number of variables
   $$N_{\\mathrm{var}}:=|E|=2n(n-1)=\\Theta(n^2).$$
-  Для стандартной CNF‑кодировки паритета на вершине степени $d$ нужно $2^{d-1}$ клауз,
-  поэтому для grid (степени $2,3,4$) число клауз равно
+  For a standard CNF parity encoding at a vertex of degree $d$, $2^{d-1}$ clauses are needed,
+  therefore, for grid (degrees $2,3,4$) the number of clauses is equal to
   $$2\\cdot 4\\ +\\ 4\\cdot 4(n-2)\\ +\\ 8\\cdot (n-2)^2\\ =\\ 8(n-1)^2\\ =\\ \\Theta(n^2).$$
-  Следовательно, $|F_n|=\\Theta(n^2)$ и
+  Therefore, $|F_n|=\\Theta(n^2)$ and
   $$n=\\Theta(\\sqrt{N_{\\mathrm{var}}})=\\Theta(\\sqrt{|F_n|}).$$
-  Поэтому large‑$M$ порог из HR Thm. 4.3
+  Therefore, large$M$ is the threshold from HR Thm. 4.3
   $$M\\le 2^{n^{\\alpha}},\\qquad \\alpha=1/d-1/(d(d-1)),$$
-  переписывается как
+  rewritten as
   $$M\\le 2^{(N_{\\mathrm{var}})^{\\alpha/2}}=2^{|F_n|^{\\alpha/2}},$$
-  где база согласована с $\\log_2$ (HR‑конвенция).
-- `Toy‑тест:` $n=4$ даёт $|E|=2\\cdot 4\\cdot 3=24$ и $8(n-1)^2=72$ клауз,
-  что согласуется с $\\Theta(n^2)$.
-- `Статус:` reduction/equivalence (связь параметра $n$ с $N_{\\mathrm{var}}$ и $|F_n|$).
+  where the base is consistent with $\\log_2$ (HR convention).
+- `Toy test:` $n=4$ gives $|E|=2\\cdot 4\\cdot 3=24$ and $8(n-1)^2=72$ clauses,
+  which is consistent with $\\Theta(n^2)$.
+- `Status:` reduction/equivalence (relationship of parameter $n$ with $N_{\\mathrm{var}}$ and $|F_n|$).
 - `StepID:` Q43.S143-translate-n-parameter.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (комбинаторный пересчёт).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` подставить $n=\\Theta(\\sqrt{|F|})$ в порог large‑$M$
-  и сравнить с режимом $M=\\mathrm{poly}(|F|)$ при $d=\\Theta(\\log n/\\log\\log n)$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (combinatorial recalculation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` substitute $n=\\Theta(\\sqrt{|F|})$ into the threshold large$M$
+  and compare with the regime $M=\\mathrm{poly}(|F|)$ with $d=\\Theta(\\log n/\\log\\log n)$.
 
-### 16.284. Исследовательский шаг (reduction): large‑$M$ порог vs $M=\\mathrm{poly}(|F|)$ при $d=\\kappa\\,\\log n/\\log\\log n$
+### 16.284. Exploratory step (reduction): large$M$ threshold vs $M=\\mathrm{poly}(|F|)$ at $d=\\kappa\\,\\log n/\\log\\log n$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S144-translate-largem-vs-polyn):`
-  Пусть $d=\\kappa\\,\\frac{\\log n}{\\log\\log n}$ (константа $\\kappa>0$),
-  и large‑$M$ порог из HR Thm. 4.3 записан как
+- `Lens:` Trade-off.
+- `Statement (Q43.S144-translate-largem-vs-polyn):`
+  Let $d=\\kappa\\,\\frac{\\log n}{\\log\\log n}$ (constant $\\kappa>0$),
+  and large$M$ threshold from HR Thm. 4.3 is written as
   $$M\\le 2^{n^{\\alpha}},\\qquad \\alpha=\\frac1d-\\frac1{d(d-1)}.$$
-  Тогда при $n=\\Theta(\\sqrt{|F|})$ получаем
+  Then for $n=\\Theta(\\sqrt{|F|})$ we obtain
   $$n^{\\alpha}=2^{(1+o(1))\\frac{\\log n}{d}}
       =2^{(1+o(1))\\frac{\\log\\log n}{\\kappa}}
       =(\\log n)^{1/\\kappa+o(1)},$$
-  и, поскольку $\\log n=\\tfrac12\\log|F|+O(1)$,
+  and, since $\\log n=\\tfrac12\\log|F|+O(1)$,
   $$2^{n^{\\alpha}}=2^{\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)}.$$
-  Для $M=|F|^k=2^{k\\log|F|}$ сравнение зависит от $\\kappa$:
-  1) $\\kappa<1$: $1/\\kappa>1$, значит $2^{(\\log|F|)^{1/\\kappa}}$ **суперполиномиален**
-     (так как $2^{(\\log n)^p}$ суперполиномиально при $p>1$), и poly‑$M$ остаётся ниже порога.
-  2) $\\kappa=1$: порог $2^{\\Theta(\\log|F|)}=|F|^{\\Theta(1)}$; при точном коэффициенте
-     из $n=\\Theta(\\sqrt{|F|})$ получаем порог $|F|^{1/2+o(1)}$, так что poly‑$M$ с $k>1/2$
-     **превышает** порог.
-  3) $\\kappa>1$: $2^{(\\log|F|)^{1/\\kappa}}=|F|^{o(1)}$ (субполином), поэтому
-     любой $M=|F|^k$ с $k>0$ **превышает** порог.
-- `Toy‑тест:` при $\\kappa=1$ и $|F|=n^2$ имеем порог $M\\lesssim n=|F|^{1/2}$,
-  тогда $M=|F|$ уже попадает в large‑$M$ ветку.
-- `Статус:` reduction (сопоставление large‑$M$ порога с polynomial‑$M$ в терминах $|F|$).
+  For $M=|F|^k=2^{k\\log|F|}$ the comparison depends on $\\kappa$:
+  1) $\\kappa<1$: $1/\\kappa>1$, so $2^{(\\log|F|)^{1/\\kappa}}$ **superpolynomial**
+     (since $2^{(\\log n)^p}$ is superpolynomial for $p>1$), and poly$M$ remains below the threshold.
+  2) $\\kappa=1$: threshold $2^{\\Theta(\\log|F|)}=|F|^{\\Theta(1)}$; at exact coefficient
+     from $n=\\Theta(\\sqrt{|F|})$ we obtain the threshold $|F|^{1/2+o(1)}$, so poly$M$ with $k>1/2$
+     **exceeds** threshold.
+  3) $\\kappa>1$: $2^{(\\log|F|)^{1/\\kappa}}=|F|^{o(1)}$ (subpolynomial), therefore
+     any $M=|F|^k$ with $k>0$ **exceeds** the threshold.
+- `Toy test:` for $\\kappa=1$ and $|F|=n^2$ we have the threshold $M\\lesssim n=|F|^{1/2}$,
+  then $M=|F|$ already falls into the large$M$ branch.
+- `Status:` reduction (comparing large$M$ threshold with polynomial$M$ in terms of $|F|$).
 - `StepID:` Q43.S144-translate-largem-vs-polyn.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (асимптотический пересчёт).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` зафиксировать конкретное значение $\\kappa$ из используемого
-  depth‑режима и сделать вывод, применима ли ветка Theorem 4.1 для $M=\\mathrm{poly}(|F|)$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (asymptotic recalculation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` fix a specific $\\kappa$ value from the one being used
+  depth mode and conclude whether the Theorem 4.1 branch is applicable for $M=\\mathrm{poly}(|F|)$.
 
-### 16.285. Исследовательский шаг (reduction): выбор режима $\\kappa$ ⇒ large‑$M$ ветка для poly‑$M$
+### 16.285. Exploratory step (reduction): mode selection $\\kappa$  large$M$ branch for poly$M$
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S145-kappa-regime-decision):`
-  В целевом режиме глубины $d=\\kappa\\,\\log n/\\log\\log n$ мы фиксируем $\\kappa\\ge 1$
-  (например, $\\kappa=59$ из диапазона Håstad’20 для grid‑LB), тогда
+- `Lens:` Invariant.
+- `Statement (Q43.S145-kappa-regime-decision):`
+  In the target depth mode $d=\\kappa\\,\\log n/\\log\\log n$ we fix $\\kappa\\ge 1$
+  (for example, $\\kappa=59$ from the Hastad'20 range for gridLB), then
   $$2^{n^{\\alpha}}=2^{\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)}
-     =|F|^{o(1)}\\quad\\text{при }\\kappa>1,$$
-  а при $\\kappa=1$ порог имеет вид $|F|^{1/2+o(1)}$.
-  Следовательно, для любого $M=|F|^k$ с $k>0$ мы оказываемся в large‑$M$ ветке
-  (при $\\kappa>1$ всегда, при $\\kappa=1$ — когда $k>1/2$).
-  Для сравнения: при $\\kappa<1$ получаем $2^{(\\log|F|)^{1/\\kappa}}$ с $1/\\kappa>1$,
-  а значит порог суперполиномиален (см. правило: $2^{(\\log n)^p}$ суперполиномиально при $p>1$).
-- `Toy‑тест:` при $\\kappa=1$, $|F|=n^2$, порог $M\\lesssim n=|F|^{1/2}$, так что $M=|F|$
-  уже попадает в large‑$M$ ветку.
-- `Статус:` reduction (фиксирован режим $\\kappa\\ge 1$ и соответствующая ветка large‑$M$).
+     =|F|^{o(1)}\\quad\\text{for }\\kappa>1,$$
+  and for $\\kappa=1$ the threshold has the form $|F|^{1/2+o(1)}$.
+  Consequently, for any $M=|F|^k$ with $k>0$ we find ourselves in the large$M$ branch
+  (for $\\kappa>1$ always, for $\\kappa=1$ - when $k>1/2$).
+  For comparison: for $\\kappa<1$ we get $2^{(\\log|F|)^{1/\\kappa}}$ with $1/\\kappa>1$,
+  which means the threshold is superpolynomial (see rule: $2^{(\\log n)^p}$ is superpolynomial for $p>1$).
+- `Toy test:` for $\\kappa=1$, $|F|=n^2$, threshold $M\\lesssim n=|F|^{1/2}$, so $M=|F|$
+  already falls into the large-$M$ branch.
+- `Status:` reduction (the $\\kappa\\ge 1$ mode and the corresponding large$M$ branch are fixed).
 - `StepID:` Q43.S145-kappa-regime-decision.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (асимптотический пересчёт).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` подтвердить выбранное значение $\\kappa$ из конкретного источника
-  (например, глубинного режима/константы в используемом LB/UB) и зафиксировать вывод
-  о применимости ветки Theorem 4.1 для $M=\\mathrm{poly}(|F|)$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (asymptotic recalculation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` confirm the selected $\\kappa$ value from a specific source
+  (for example, deep mode/constants in the used LB/UB) and fix the output
+  on the applicability of the Theorem 4.1 branch for $M=\\mathrm{poly}(|F|)$.
 
-### 16.286. Исследовательский шаг (exact citation): константа $\\kappa=59$ из Håstad’20 Thm. 6.5
+### 16.286. Research step (exact citation): constant $\\kappa=59$ from Hastad'20 Thm. 6.5
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S146-kappa-constant-source):`
-  В Håstad (2020), Theorem 6.5, глубина ограничена как
+- `Lens:` Invariant.
+- `Statement (Q43.S146-kappa-constant-source):`
+  In Hastad (2020), Theorem 6.5, the depth is limited as
   $$d\\le 59\\,\\frac{\\log n}{\\log\\log n},$$
-  где $n$ — сторона $n\\times n$ grid. Это фиксирует режим $\\kappa=59$ для
-  шкалы $d=\\kappa\\log n/\\log\\log n$.
-  В тексте рядом стоит размерная нижняя оценка вида $2^{(\\cdot)}$; здесь база
-  не влияет на извлечение $\\kappa$, но в наших заметках используем $2^x$
-  (с переходом к $e^x$ через множитель $\\ln 2$ в показателе).
+  where $n$ is the side of the $n\\times n$ grid. This fixes the $\\kappa=59$ mode for
+  scale $d=\\kappa\\log n/\\log\\log n$.
+  In the text nearby there is a dimensional lower bound of the form $2^{(\\cdot)}$; here is the base
+  does not affect the extraction of $\\kappa$, but in our notes we use $2^x$
+  (with transition to $e^x$ through the factor $\\ln 2$ in the exponent).
 - `Exact citation:`
-  В текстовом слое PDF дробь набрана “в столбик”: строка с числителем `log n`
-  непосредственно перед Theorem 6.5 и строка Theorem 6.5 с `d ≤ 59 log log n`
-  (“log n” над “log log n”), что даёт $d\\le 59\\,\\log n/\\log\\log n$
+  In the PDF text layer, the fraction is typed "in a column": line with the numerator `log n`
+  just before Theorem 6.5 and Theorem 6.5 line from `d ≤ 59 log log n`
+  ("log n" over "log log n"), which gives $d\\le 59\\,\\log n/\\log\\log n$
   (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–826`).
-- `Статус:` exact citation (константа $\\kappa=59$ в depth‑режиме).
+- `Status:` exact citation (constant $\\kappa=59$ in depth mode).
 - `StepID:` Q43.S146-kappa-constant-source.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (цитата по тексту).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` применить $\\kappa=59$ в выводе §16.284–§16.285 и
-  зафиксировать, что poly‑$M$ попадает в large‑$M$ ветку Theorem 4.1.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (quote in the text).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` apply $\\kappa=59$ in the output of Section 16.284-Section 16.285 and
+  fix that poly$M$ falls into the large$M$ branch of Theorem 4.1.
 
 -/
 
 /-!
-### 16.287. Исследовательский шаг (reduction): $\\kappa=59$ фиксирует large‑$M$ ветку для poly‑$M$
+### 16.287. Exploratory step (reduction): $\\kappa=59$ commits a large$M$ branch for poly$M$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S147-apply-thm41-branch):`
-  Из §16.285 и $\\kappa=59>1$ (Håstad’20, Thm. 6.5) получаем, что large‑$M$ порог
+- `Lens:` Trade-off.
+- `Statement (Q43.S147-apply-thm41-branch):`
+  From Section 16.285 and $\\kappa=59>1$ (Hastad'20, Thm. 6.5) we obtain that large$M$ threshold
   $$M\\le 2^{\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)}
      =2^{\\Theta\\bigl((\\log|F|)^{1/59}\\bigr)}$$
-  является $|F|^{o(1)}$ (субполином).
-  Поэтому любой $M=|F|^k$ с $k>0$ в итоге **превышает** порог, и в Thm. 4.3
-  для poly‑$M$ всегда выбирается large‑$M$ ветка, то есть переход к Thm. 4.1;
-  малая‑$M$ ветка релевантна лишь при $M$ ниже порога (субполиномиальном при $\\kappa>1$).
-  (Для $\\kappa<1$ порог был бы суперполиномиален, так как
-  $2^{(\\log n)^p}$ суперполиномиально при $p>1$.)
-- `Статус:` reduction (ветка large‑$M$ фиксируется при $\\kappa=59$).
+  is $|F|^{o(1)}$ (subpolynomial).
+  Therefore, any $M=|F|^k$ with $k>0$ eventually **exceeds** the threshold, and in Thm. 4.3
+  for poly$M$ the large$M$ branch is always chosen, that is, the transition to Thm. 4.1;
+  the small-$M$ branch is relevant only when $M$ is below the threshold (subpolynomial for $\\kappa>1$).
+  (For $\\kappa<1$ the threshold would be superpolynomial, since
+  $2^{(\\log n)^p}$ is superpolynomial for $p>1$.)
+- `Status:` reduction (the large$M$ branch is fixed at $\\kappa=59$).
 - `StepID:` Q43.S147-apply-thm41-branch.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (асимптотический пересчёт).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` проверить, где именно в Proof of Thm. 4.3 используется ветка Thm. 4.1,
-  и убедиться, что для poly‑$M$ она не требуется.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (asymptotic recalculation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` check where exactly in Proof of Thm. 4.3 uses the Thm branch. 4.1,
+  and make sure that poly$M$ does not require it.
 
 -/
 
 /-!
-### 16.288. Исследовательский шаг (exact citation): Proof of Thm. 4.3 — Thm. 4.1 применяется при $M$ выше порога
+### 16.288. Research step (exact citation): Proof of Thm. 4.3 - Thm. 4.1 applies when $M$ is above the threshold
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S148-thm41-branch-audit):`
-  В Proof of Theorem 4.3 авторы явно отделяют ветку $M\\le 2^{n^{\\alpha}}$ и пишут,
-  что при $M$ **выше** порога можно применить Theorem 4.1. Напоминание:
-  $2^{(\\log n)^p}$ суперполиномиально при $p>1$, но здесь $p<1$ в режиме
+- `Lens:` Invariant.
+- `Statement (Q43.S148-thm41-branch-audit):`
+  In Proof of Theorem 4.3, the authors explicitly separate the $M\\le 2^{n^{\\alpha}}$ branch and write,
+  that for $M$ **above** the threshold, Theorem 4.1 can be applied. Reminder:
+  $2^{(\\log n)^p}$ is superpolynomial for $p>1$, but here $p<1$ in the mode
   $d=\\kappa\\log n/\\log\\log n$.
 - `Exact citation:`
   Proof of Theorem 4.3: “We may assume that $M\\le \\exp(n^{1/d-1/d(d-1)})$, as otherwise we can
-  apply Theorem 4.1.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`; `exp` в цитате = $2^x$ по конвенции $\\log_2$ в HR’22).
-- `Статус:` exact citation (ветка Thm. 4.1 = случай $M$ выше порога).
+  apply Theorem 4.1.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`; `exp` in the quote = $2^x$ according to the $\\log_2$ convention in HR'22).
+- `Status:` exact citation (thread Thm. 4.1 = case $M$ above threshold).
 - `StepID:` Q43.S148-thm41-branch-audit.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (цитата по тексту).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` выписать явный нижний bound из Thm. 4.1 в режиме $M=\\mathrm{poly}(|F|)$
-  и сопоставить с параметрами $|F|,N$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (quote in the text).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` write out the explicit lower bound from Thm. 4.1 in $M=\\mathrm{poly}(|F|)$ mode
+  and compare with parameters $|F|,N$.
 
 -/
 
 /-!
-### 16.289. Исследовательский шаг (reduction): large‑$M$ ветка Thm. 4.1 в режиме $d=\\kappa\\log n/\\log\\log n$
+### 16.289. Research step (reduction): large$M$ Thm branch. 4.1 in mode $d=\\kappa\\log n/\\log\\log n$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S149-largem-bound-from-thm41):`
-  Thm. 4.1 даёт нижнюю оценку
+- `Lens:` Equivalence.
+- `Statement (Q43.S149-largem-bound-from-thm41):`
+  Thm. 4.1 gives a lower estimate
   $$N\\ \\ge\\ 2^{\\Omega\\bigl(n^{1/d}/\\log^4 n\\bigr)},$$
-  где база согласована с $\\log_2$ (HR‑конвенция).
-  В режиме $d=\\kappa\\,\\log n/\\log\\log n$ имеем
+  where the base is consistent with $\\log_2$ (HR convention).
+  In the mode $d=\\kappa\\,\\log n/\\log\\log n$ we have
   $$n^{1/d}=2^{\\tfrac{\\log n}{d}}
             =2^{\\tfrac{\\log\\log n}{\\kappa}}
             =(\\log n)^{1/\\kappa+o(1)},$$
-  и потому
+  and therefore
   $$N\\ \\ge\\ 2^{\\Omega\\bigl((\\log n)^{1/\\kappa-4+o(1)}\\bigr)}.$$
-  Для $|F|=\\Theta(n^2)$ получаем
+  For $|F|=\\Theta(n^2)$ we get
   $$N\\ \\ge\\ 2^{\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)}.$$
-  При $\\kappa=59$ показатель отрицательный, значит bound субполиномиален:
+  When $\\kappa=59$ the exponent is negative, which means bound is subpolynomial:
   $$N\\ \\ge\\ 2^{\\Omega((\\log|F|)^{-3.98\\ldots})}=|F|^{o(1)}.$$
-  Напоминание: $2^{(\\log n)^p}$ суперполиномиально при $p>1$,
-  но здесь $p=1/\\kappa-4<1$.
+  Reminder: $2^{(\\log n)^p}$ is superpolynomial for $p>1$,
+  but here $p=1/\\kappa-4<1$.
 - `Exact citation:`
   Thm. 4.1: “For $d=O(\\log n/\\log\\log n)$ … requires size $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850`).
-- `Статус:` reduction (перевод bound Thm. 4.1 в параметры $|F|$ и $\\kappa$).
+- `Status:` reduction (translation of bound Thm. 4.1 into parameters $|F|$ and $\\kappa$).
 - `StepID:` Q43.S149-largem-bound-from-thm41.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (асимптотический пересчёт).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` сравнить этот bound с параметрами $N,|F|,M$ в целевой модели
-  и проверить, есть ли режим, где Thm. 4.1 даёт нетривиальную сверхполиномиальность.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (asymptotic recalculation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` compare this bound with the parameters $N,|F|,M$ in the target model
+  and check if there is a mode where Thm. 4.1 gives non-trivial superpolynomiality.
 
 -/
 
 /-!
-### 16.290. Исследовательский шаг (reduction): Thm. 4.1 vs poly‑режим $N,|F|,M$ при $\\kappa=59$
+### 16.290. Research step (reduction): Thm. 4.1 vs polymode $N,|F|,M$ at $\\kappa=59$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S150-thm41-bound-compare):`
-  В целевом режиме $M=|F|^k$ и $N=|F|^C$ (полиномиальные линии и длина доказательства)
-  large‑$M$ ветка Thm. 4.1 даёт
+- `Lens:` Trade-off.
+- `Statement (Q43.S150-thm41-bound-compare):`
+  In target mode $M=|F|^k$ and $N=|F|^C$ (polynomial lines and proof length)
+  large$M$ thread Thm. 4.1 gives
   $$N\\ \\ge\\ 2^{\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)}.$$
-  При $\\kappa=59$ показатель $1/\\kappa-4<0$, поэтому
+  At $\\kappa=59$ the indicator is $1/\\kappa-4<0$, so
   $$N\\ \\ge\\ 2^{\\Omega((\\log|F|)^{-3.98\\ldots})}=|F|^{o(1)},$$
-  то есть bound **субполиномиален** и автоматически выполняется для любого $N=|F|^C$.
-  Более того, чтобы получить сверхполиномиальную нижнюю оценку вида
-  $2^{(\\log|F|)^p}$ с $p>1$, нужно $1/\\kappa-4>1$, то есть $\\kappa<1/5$.
-  Напоминание: $2^{(\\log n)^p}$ суперполиномиально при $p>1$.
+  that is, bound is **subpolynomial** and is automatically satisfied for any $N=|F|^C$.
+  Moreover, to obtain a superpolynomial lower bound of the form
+  $2^{(\\log|F|)^p}$ with $p>1$, you need $1/\\kappa-4>1$, that is, $\\kappa<1/5$.
+  Reminder: $2^{(\\log n)^p}$ is superpolynomial for $p>1$.
 - `Exact citation:`
-  Thm. 4.1 формулируется как $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$ (см.
+  Thm. 4.1 is formulated as $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$ (see.
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850`).
-- `Статус:` reduction (сравнение bound Thm. 4.1 с poly‑режимом).
+- `Status:` reduction (comparing bound Thm. 4.1 with polymode).
 - `StepID:` Q43.S150-thm41-bound-compare.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (асимптотический пересчёт).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` проверить, есть ли реалистичный режим глубины
-  $d=\\kappa\\log n/\\log\\log n$ с $\\kappa<1/5$ (или другой масштаб $d$),
-  где Thm. 4.1 даёт сверхполиномиальность для grid‑Tseitin.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (asymptotic recalculation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` check if there is a realistic depth mode
+  $d=\\kappa\\log n/\\log\\log n$ with $\\kappa<1/5$ (or other scale $d$),
+  where Thm. 4.1 gives superpolynomiality for grid-Tseitin.
 
 -/
 
 /-!
-### 16.291. Исследовательский шаг (barrier certificate): скрытые константы в Lemma 4.2 мешают зафиксировать режим $\\kappa<1/5$
+### 16.291. Research step (barrier certificate): hidden constants in Lemma 4.2 prevent the $\\kappa<1/5$ mode from being fixed
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S151-thm41-nontrivial-regime):`
-  Чтобы получить сверхполиномиальность из Thm. 4.1 в режиме
-  $d=\\kappa\\log n/\\log\\log n$, нужно $\\kappa<1/5$ (см. §16.290),
-  то есть требуются явные константы в условии $d=O(\\log n/\\log\\log n)$.
-  Однако Thm. 4.1 сформулирована с большим‑O без явного коэффициента,
-  а ключевая Lemma 4.2 говорит лишь о существовании абсолютных констант $A,C,n_0$.
-  Поэтому нельзя строго утверждать, что конкретный режим $\\kappa<1/5$ попадает
-  в область применимости теоремы. Это локальный барьер для вывода
-  сверхполиномиальности при poly‑$M$ ($2^{(\\log n)^p}$ суперполиномиально при $p>1$).
+- `Lens:` Invariant.
+- `Statement (Q43.S151-thm41-nontrivial-regime):`
+  To obtain superpolynomiality from Thm. 4.1 mode
+  $d=\\kappa\\log n/\\log\\log n$, you need $\\kappa<1/5$ (see Section 16.290),
+  that is, explicit constants are required in the condition $d=O(\\log n/\\log\\log n)$.
+  However Thm. 4.1 is formulated with bigO without an explicit coefficient,
+  and the key Lemma 4.2 speaks only about the existence of absolute constants $A,C,n_0$.
+  Therefore, it cannot be strictly stated that a particular regime $\\kappa<1/5$ falls within
+  to the domain of applicability of the theorem. This is a local barrier to withdrawal
+  superpolynomiality for poly$M$ ($2^{(\\log n)^p}$ is superpolynomial for $p>1$).
 - `Exact citation:`
   Thm. 4.1: “For $d=O(\\log n/\\log\\log n)$ … requires size $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850`).
   Lemma 4.2: “There are absolute constants $A,C,n_0>0$ …” (`...:858–859`).
-- `Статус:` barrier certificate (неявные константы блокируют проверку режима $\\kappa<1/5$).
+- `Status:` barrier certificate (implicit constants block mode checking $\\kappa<1/5$).
 - `StepID:` Q43.S151-thm41-nontrivial-regime.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` извлечь явные константы из доказательства Lemma 4.2/Thm. 4.1
-  или перейти к явной константе из Håstad’20 Thm. 6.5 для сравнения.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` extract explicit constants from the proof of Lemma 4.2/Thm. 4.1
+  or go to the explicit constant from Hastad'20 Thm. 6.5 for comparison.
 
 -/
 
 /-!
-### 16.292. Исследовательский шаг (exact citation): явные параметры в Proof of Thm. 4.1 (шаг к извлечению констант)
+### 16.292. Exploratory step (exact citation): explicit parameters in Proof of Thm. 4.1 (step to extract constants)
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S152-extract-constants):`
-  В Proof of Thm. 4.1 фиксируются явные параметры индукции:
+- `Lens:` Equivalence.
+- `Statement (Q43.S152-extract-constants):`
+  In Proof of Thm. 4.1 the explicit induction parameters are fixed:
   $$s=152\\log N,\\quad t_i=s,\\quad n_i=\\bigl\\lfloor n_{i-1}/(4A t_{i-1}\\log^4 n_{i-1})\\bigr\\rfloor,$$
-  а также условие
+  and also the condition
   $$\\log N\\le n^{1/d}/(c_1\\log^4 n),$$
-  где $A$ — константа из Lemma 4.2, а $c_1$ — достаточная абсолютная константа.
-  Это единственные явные числовые константы в доказательстве, которые можно
-  использовать для последующего извлечения допустимого коэффициента в
-  $d=O(\\log n/\\log\\log n)$. (Для контекста: $\\exp=e^x$ в нотации HR; смена базы
-  не влияет на проверку допустимого $\\kappa$ здесь.)
+  where $A$ is the constant from Lemma 4.2 and $c_1$ is a sufficient absolute constant.
+  These are the only explicit numerical constants in the proof that can be
+  used for subsequent extraction of the acceptable coefficient in
+  $d=O(\\log n/\\log\\log n)$. (For context: $\\exp=e^x$ in HR notation; change of base
+  does not affect the valid $\\kappa$ check here.)
 - `Exact citation:`
   “We choose $t_0=1$ and $n_0=n$, set $s=152\\log N$, and let $t_i=s$ and
   $n_i=\\lfloor n_{i-1}/(4A t_{i-1}\\log^4 n_{i-1})\\rfloor$ …”  
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:889–891`).
   “Thus if $\\log N\\le n^{1/d}/(c_1\\log^4 n)$ for constant $c_1>0$ large enough, then we
   get a contradiction …” (`...:930–931`).
-- `Статус:` exact citation (зафиксированы явные параметры Proof of Thm. 4.1).
+- `Status:` exact citation (explicit parameters of Proof of Thm. 4.1 are fixed).
 - `StepID:` Q43.S152-extract-constants.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (цитата по тексту).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` на основе этих параметров попытаться вывести явный коэффициент
-  в глубинном режиме $d=\\kappa\\log n/\\log\\log n$ (или показать, что это невозможно без
-  извлечения $A$ из Lemma 4.2).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (quote in the text).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` based on these parameters, try to derive an explicit coefficient
+  in deep mode $d=\\kappa\\log n/\\log\\log n$ (or show that this is impossible without
+  extracting $A$ from Lemma 4.2).
 
 -/
 
 /-!
-### 16.293. Исследовательский шаг (barrier certificate): неявные $A_0,A_1,A_2$ в Proof of Lemma 4.2 блокируют явный $\\kappa$
+### 16.293. Research step (barrier certificate): implicit $A_0,A_1,A_2$ in Proof of Lemma 4.2 blocks explicit $\\kappa$
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S153-kappa-constant-derivation):`
-  Попытка вывести явный коэффициент $\\kappa$ для режима
-  $d=\\kappa\\log n/\\log\\log n$ упирается в неявные константы в Proof of Lemma 4.2.
-  Там вероятность ограничивается через “absolute constant $A$” (из Lemma 6.9) и
-  “appropriate constants $A_0,A_1,A_2$”, без числовых значений. Эти константы входят
-  в экспоненциальные множители вида $A_1^s, A_2^s$ и потому напрямую влияют на
-  допустимый коэффициент в $O(\\log n/\\log\\log n)$. Следовательно, без явного
-  извлечения $A_0,A_1,A_2$ нельзя строго подтвердить режим $\\kappa<1/5$
-  (даже при $\\exp=e^x$; замена на $2^x$ лишь уменьшает пороги).
+- `Lens:` Invariant.
+- `Statement (Q43.S153-kappa-constant-derivation):`
+  An attempt to derive an explicit $\\kappa$ coefficient for the mode
+  $d=\\kappa\\log n/\\log\\log n$ rests on the implicit constants in Proof of Lemma 4.2.
+  There the probability is limited by "absolute constant $A$" (from Lemma 6.9) and
+  "appropriate constants $A_0,A_1,A_2$", without numeric values. These constants are included
+  into exponential factors of the form $A_1^s, A_2^s$ and therefore directly affect
+  admissible coefficient in $O(\\log n/\\log\\log n)$. Therefore, without explicit
+  extracts $A_0,A_1,A_2$ cannot strictly confirm the mode $\\kappa<1/5$
+  (even with $\\exp=e^x$; replacing with $2^x$ only reduces the thresholds).
 - `Exact citation:`
   Proof of Lemma 4.2: “for some absolute constant $A$ …” and “for appropriate constants
   $A_0,A_1,A_2$” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1972–1974, 1996`).
-- `Статус:` barrier certificate (неявные константы блокируют явный $\\kappa$).
+- `Status:` barrier certificate (implicit constants block explicit $\\kappa$).
 - `StepID:` Q43.S153-kappa-constant-derivation.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` попытаться вычислить численные значения $A_0,A_1,A_2$
-  из Proof of Lemma 6.9/6.8 или зафиксировать невозможность без пересчёта всей оценки.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` try to calculate the numerical values of $A_0,A_1,A_2$
+  from Proof of Lemma 6.9/6.8 or fix the impossibility without recalculating the entire estimate.
 
 -/
 
 /-!
-### 16.294. Исследовательский шаг (exact citation): явные константы из Lemma 6.8/6.9
+### 16.294. Exploratory step (exact citation): explicit constants from Lemma 6.8/6.9
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S154-lemma42-constants-extract):`
-  В пределах цепочки Lemma 6.8/6.9 явной численной константой является
-  только оценка $s/64\\le a$ (и $b\\le 3a$), тогда как Lemma 6.9 вводит
-  лишь существование абсолютной константы $A>0$ в верхней границе
-  числа дополнительных бит. Это значит, что из текста непосредственно
-  извлекается только коэффициент $1/64$, а численное значение $A$ не задано.
+- `Lens:` Equivalence.
+- `Statement (Q43.S154-lemma42-constants-extract):`
+  Within the Lemma 6.8/6.9 chain, the explicit numerical constant is
+  only estimate $s/64\\le a$ (and $b\\le 3a$), whereas Lemma 6.9 introduces
+  only the existence of an absolute constant $A>0$ in the upper bound
+  number of additional bits. This means that from the text directly
+  only the coefficient $1/64$ is extracted, and the numerical value $A$ is not specified.
 - `Exact citation:`
   Lemma 6.8: “It holds that $b \\le 3a$, and $s/64 \\le a$.”  
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1944`).
   Lemma 6.9: “There is a constant $A>0$ such that the following holds …”
   (`...:1960`).
-- `Статус:` exact citation (явные константы: только $1/64$, $A$ не задан).
+- `Status:` exact citation (explicit constants: $1/64$ only, $A$ not specified).
 - `StepID:` Q43.S154-lemma42-constants-extract.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (цитата по тексту).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` попытаться оценить $A$ из Proof of Lemma 6.9 (бит‑подсчёт)
-  или зафиксировать, что это требует полного пересчёта конструкции.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (quote in the text).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` try to estimate $A$ from Proof of Lemma 6.9 (bit counting)
+  or record that this requires a complete recalculation of the design.
 
 -/
 
 /-!
-### 16.295. Исследовательский шаг (barrier certificate): в Proof of Lemma 6.9 нет явного числа для $A$
+### 16.295. Research step (barrier certificate): There is no explicit number for $A$ in Proof of Lemma 6.9
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S155-lemma69-constant-extract):`
-  Proof of Lemma 6.9 оперирует “constant number/amount of bits per potential edge” и
-  завершает подсчёт формулой “another $A|S^*_g|$ bits for some constant $A$”, но нигде
-  не даёт численного значения $A$. Следовательно, извлечение явного $A$ требует
-  полного повторного пересчёта конструкции (и всех скрытых “constant number of bits”),
-  что выходит за рамки текущего шага.
+- `Lens:` Invariant.
+- `Statement (Q43.S155-lemma69-constant-extract):`
+  Proof of Lemma 6.9 operates on "constant number/amount of bits per potential edge" and
+  completes the calculation with the formula "another $A|S^*_g|$ bits for some constant $A$", but nowhere
+  does not give a numerical value for $A$. Therefore, retrieving explicit $A$ requires
+  complete recalculation of the design (and all hidden "constant number of bits"),
+  which is beyond the scope of the current step.
 - `Exact citation:`
   “read … a constant number of bits per potential edge” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2066–2069`),
   “read a constant amount of extra information per potential edge” (`...:2108–2110`),
   “we need another $A|S^*_g|$ bits for some constant $A$” (`...:2111–2114`).
-- `Статус:` barrier certificate (явный $A$ не извлекается без полного пересчёта).
+- `Status:` barrier certificate (explicit $A$ is not extracted without a full recalculation).
 - `StepID:` Q43.S155-lemma69-constant-extract.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` зафиксировать этот барьер как постоянный или провести
-  отдельный полный пересчёт Proof of Lemma 6.9 с явными константами.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` fix this barrier as permanent or carry out
+  separate complete recalculation of Proof of Lemma 6.9 with explicit constants.
 
 -/
 
 /-!
-### 16.296. Исследовательский шаг (barrier certificate): полный пересчёт Lemma 6.9 необходим для явного $A$
+### 16.296. Research step (barrier certificate): full recalculation of Lemma 6.9 required for explicit $A$
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S156-lemma69-recount-needed):`
-  В Lemma 6.9 и её proof‑outline стоимость оценивается через “constant number/amount of bits”
-  и множитель $A|S^*_g|$, при этом ни одна из этих констант не параметризована.
-  Это значит, что получить явное числовое значение $A$ можно только через
-  полный пересчёт всей конструкции (включая все «константные» бит‑оценки),
-  что существенно выходит за рамки текущего шага. Мы фиксируем это как
-  постоянный локальный барьер для извлечения явного $\\kappa$ из Thm. 4.1.
+- `Lens:` Invariant.
+- `Statement (Q43.S156-lemma69-recount-needed):`
+  In Lemma 6.9 and its proof-outline, the cost is estimated using "constant number/amount of bits"
+  and the multiplier $A|S^*_g|$, while none of these constants are parameterized.
+  This means that the explicit numeric value of $A$ can only be obtained through
+  complete recalculation of the entire structure (including all "constant" bit estimates),
+  which is significantly beyond the scope of the current step. We record this as
+  constant local barrier to extracting explicit $\\kappa$ from Thm. 4.1.
 - `Exact citation:`
   “constant number of bits per potential edge” and “another $A|S^*_g|$ bits for some constant $A$”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2066–2069, 2111–2114`).
-- `Статус:` barrier certificate (без полного пересчёта явный $A$ не извлекается).
+- `Status:` barrier certificate (explicit $A$ is not extracted without a full recalculation).
 - `StepID:` Q43.S156-lemma69-recount-needed.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` либо принять барьер и переключиться на явные константы
-  из Håstad’20 (Thm. 6.5), либо планировать отдельный полный пересчёт Lemma 6.9.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` or accept the barrier and switch to explicit constants
+  from Hastad'20 (Thm. 6.5), or plan a separate complete recalculation of Lemma 6.9.
 
 -/
 
 /-!
-### 16.297. Исследовательский шаг (exact citation): pivot to Håstad’20 Thm. 6.5 с явным $\\kappa$ и базой $2^x$
+### 16.297. Research step (exact citation): pivot to Hastad'20 Thm. 6.5 with explicit $\\kappa$ and base $2^x$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S157-pivot-hastad20-kappa):`
-  В Håstad (2020), Thm. 6.5, глубина ограничена как
+- `Lens:` Trade-off.
+- `Statement (Q43.S157-pivot-hastad20-kappa):`
+  In Hastad (2020), Thm. 6.5, depth limited as
   $$d\\le 59\\,\\frac{\\log n}{\\log\\log n},$$
-  где $n$ — сторона $n\\times n$ grid, и одновременно утверждается
+  where $n$ is the side of the $n\\times n$ grid, and at the same time it is asserted
   $$\\mathrm{size}\\ge 2^{\\Omega(n^{1/(58(d+1))})}.$$
-  База не влияет на извлечение $\\kappa$, но влияет на пороги:
-  $2^{(\\log n)^p}$ суперполиномиально при $p>1$.
-  Это фиксирует явную константу $\\kappa=59$ для режима $d=\\kappa\\log n/\\log\\log n$,
-  что позволяет перейти от неявных констант HR’22 к явному depth‑порогу.
+  The base does not affect the extraction of $\\kappa$, but it does affect the thresholds:
+  $2^{(\\log n)^p}$ is superpolynomial for $p>1$.
+  This fixes the explicit constant $\\kappa=59$ for the mode $d=\\kappa\\log n/\\log\\log n$,
+  which allows you to move from implicit HR'22 constants to an explicit depth threshold.
 - `Exact citation:`
-  строка с числителем `log n` непосредственно перед Theorem 6.5 и строки
-  `Theorem 6.5. Suppose that d ≤ 59 log log n` и
+  numerator string `log n` just before Theorem 6.5 and the lines
+  `Theorem 6.5. Suppose that d ≤ 59 log log n` and
   `requires size exp(Ω(n 1/58(d +1) ))`
-  (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`; `exp` в цитате = $2^x$, логарифмы — по базе 2).
-- `Статус:` exact citation (явная $\\kappa=59$ и форма exp‑LB).
+  (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`; `exp` in the quote = $2^x$, logarithms - based on base 2).
+- `Status:` exact citation (explicit $\\kappa=59$ and expLB form).
 - `StepID:` Q43.S157-pivot-hastad20-kappa.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (цитата по тексту).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` применить $\\kappa=59$ к порогу large‑$M$ в Thm. 4.3
-  и проверить режим для $M=\\mathrm{poly}(|F|)$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (quote in the text).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` apply $\\kappa=59$ to the large$M$ threshold in Thm. 4.3
+  and check the mode for $M=\\mathrm{poly}(|F|)$.
 
 -/
 
 /-!
-### 16.298. Исследовательский шаг (reduction): при $\\kappa=59$ порог large‑$M$ субполиномиален, значит $M=\\mathrm{poly}(|F|)$ всегда в large‑ветке
+### 16.298. Research step (reduction): at $\\kappa=59$ the threshold large-$M$ is subpolynomial, which means $M=\\mathrm{poly}(|F|)$ is always in the large-branch
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S158-largem-branch-polym-check):`
-  Пусть $d=\\kappa\\log n/\\log\\log n$ с $\\kappa=59$ (Håstad’20, Thm. 6.5) и $|F|=\\Theta(n^2)$ для Tseitin(Grid$_n$).
-  Тогда порог large‑$M$ в Thm. 4.3 имеет вид
+- `Lens:` Equivalence.
+- `Statement (Q43.S158-largem-branch-polym-check):`
+  Let $d=\\kappa\\log n/\\log\\log n$ with $\\kappa=59$ (Hastad'20, Thm. 6.5) and $|F|=\\Theta(n^2)$ for Tseitin(Grid$_n$).
+  Then the threshold is large$M$ in Thm. 4.3 looks like
   $$M\\le 2^{\\Theta\\bigl((\\log|F|)^{1/\\kappa}\\bigr)}
       =2^{\\Theta\\bigl((\\log|F|)^{1/59}\\bigr)},$$
-  Поскольку $(\\log|F|)^{1/59}=o(\\log|F|)$, имеем
+  Since $(\\log|F|)^{1/59}=o(\\log|F|)$, we have
   $$2^{\\Theta((\\log|F|)^{1/59})}=|F|^{o(1)},$$
-  то есть порог субполиномиален. Следовательно, для любого $k>0$ при достаточно больших $|F|$
-  выполняется $|F|^k$ выше порога, и ветка large‑$M$ (то есть переход к Thm. 4.1)
-  применяется ко всем $M=\\mathrm{poly}(|F|)$.
-  Напоминание: $2^{(\\log n)^p}$ суперполиномиально при $p>1$, но здесь $p=1/59<1$.
-- `Toy‑тест:` $|F|=n^2$: порог $2^{(2\\log n)^{1/59}}=n^{o(1)}$, так что $M=|F|$ уже в large‑ветке.
-- `Статус:` reduction (large‑$M$ ветка фиксируется для $M=\\mathrm{poly}(|F|)$ при $\\kappa=59$).
+  that is, the threshold is subpolynomial. Therefore, for any $k>0$ and sufficiently large $|F|$
+  $|F|^k$ is executed above the threshold, and the large$M$ branch (that is, the transition to Thm. 4.1)
+  applies to all $M=\\mathrm{poly}(|F|)$.
+  Reminder: $2^{(\\log n)^p}$ is superpolynomial for $p>1$, but here $p=1/59<1$.
+- `Toy test:` $|F|=n^2$: threshold $2^{(2\\log n)^{1/59}}=n^{o(1)}$, so $M=|F|$ is already in the large branch.
+- `Status:` reduction (large$M$ branch is fixed for $M=\\mathrm{poly}(|F|)$ at $\\kappa=59$).
 - `StepID:` Q43.S158-largem-branch-polym-check.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (асимптотический пересчёт).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` связать large‑ветку Thm. 4.3 с явной оценкой из Thm. 4.1
-  в терминах $|F|$ и $M=\\mathrm{poly}(|F|)$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (asymptotic recalculation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` link large branch Thm. 4.3 with explicit evaluation from Thm. 4.1
+  in terms of $|F|$ and $M=\\mathrm{poly}(|F|)$.
 
 -/
 
 /-!
-### 16.299. Исследовательский шаг (reduction): перевод оценки Thm. 4.1 в термины $|F|$ при poly‑$M$
+### 16.299. Research step (reduction): translation of Thm assessment. 4.1 in terms of $|F|$ for poly$M$
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S159-thm41-bound-translate):`
-  В large‑$M$ ветке (для $M=\\mathrm{poly}(|F|)$) применима Thm. 4.1:
+- `Lens:` Trade-off.
+- `Statement (Q43.S159-thm41-bound-translate):`
+  In the large-$M$ branch (for $M=\\mathrm{poly}(|F|)$) Thm is applicable. 4.1:
   $$N\\ \\ge\\ 2^{\\Omega\\bigl(n^{1/d}/\\log^4 n\\bigr)}.$$
-  Для grid‑Tseitin $|F|=\\Theta(n^2)$, поэтому $\\log n=\\tfrac12\\log|F|+O(1)$ и
+  For grid-Tseitin $|F|=\\Theta(n^2)$, so $\\log n=\\tfrac12\\log|F|+O(1)$ and
   $$n^{1/d}=2^{\\tfrac{\\log n}{d}}
             =2^{\\tfrac{\\log\\log n}{\\kappa}}
             =(\\log n)^{1/\\kappa+o(1)}.$$
-  При $d=\\kappa\\log n/\\log\\log n$ с $\\kappa=59$ получаем
+  For $d=\\kappa\\log n/\\log\\log n$ with $\\kappa=59$ we obtain
   $$N\\ \\ge\\ 2^{\\Omega\\bigl((\\log|F|)^{1/\\kappa-4+o(1)}\\bigr)}
       =2^{\\Omega((\\log|F|)^{-3.98\\ldots})}=|F|^{o(1)}.$$
-  Значит, для любого $N=|F|^C$ bound выполняется автоматически и не запрещает poly‑size.
-  Напоминание: $2^{(\\log n)^p}$ суперполиномиально при $p>1$, но здесь $p<1$.
+  This means that for any $N=|F|^C$ bound is executed automatically and does not prohibit polysize.
+  Reminder: $2^{(\\log n)^p}$ is superpolynomial for $p>1$, but here $p<1$.
 - `Exact citation:`
   Thm. 4.1: “For $d=O(\\log n/\\log\\log n)$ … requires size $\\exp\\,\\Omega(n^{1/d}/\\log^4 n)$”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:846–850`).
-- `Toy‑тест:` $|F|=n^2$ даёт порог $2^{(\\log n)^{1/59}/\\log^4 n}=n^{o(1)}$, так что $N=|F|$
-  уже выше lower bound.
-- `Статус:` reduction (перевод bound Thm. 4.1 в $|F|$ для poly‑$M$).
+- `Toy test:` $|F|=n^2$ gives a threshold of $2^{(\\log n)^{1/59}/\\log^4 n}=n^{o(1)}$, so $N=|F|$
+  already above lower bound.
+- `Status:` reduction (translation of bound Thm. 4.1 into $|F|$ for poly$M$).
 - `StepID:` Q43.S159-thm41-bound-translate.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (асимптотический пересчёт).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` попробовать извлечь явные константы из Lemma 4.2/Proof of Thm. 4.1
-  или зафиксировать невозможность без полного пересчёта.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (asymptotic recalculation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` try to extract explicit constants from Lemma 4.2/Proof of Thm. 4.1
+  or fix the impossibility without a complete recount.
 
 -/
 
 /-!
-### 16.300. Исследовательский шаг (barrier certificate): в Proof Thm. 4.1 константы $c_1,c_2$ заданы лишь как “large/some”
+### 16.300. Research step (barrier certificate): in Proof Thm. 4.1 constants $c_1,c_2$ are specified only as "large/some"
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S160-thm41-const-extract):`
-  В Proof of Thm. 4.1 (HR’22) условия на размер формулируются через
+- `Lens:` Invariant.
+- `Statement (Q43.S160-thm41-const-extract):`
+  In Proof of Thm. 4.1 (HR'22) the conditions for size are formulated through
   $$N\\le \\exp\\bigl(n^{1/d}/(c_1\\log^4 n)\\bigr)$$
-  для “large constant $c_1>0$”, а в конце появляется оценка
+  for "large constant $c_1>0$", and at the end the estimate appears
   $$n_d\\ge n/\\log^{d-1}(N)\\,(c_2\\log^4 n)^d$$
-  для “some constant $c_2>0$”. Ни $c_1$, ни $c_2$ не раскрываются численно,
-  и их связь с константами Lemma 4.2 не параметризована.
-  Следовательно, без полного пересчёта Proof Thm. 4.1 нельзя извлечь
-  явный коэффициент в режиме $d=\\kappa\\log n/\\log\\log n$
-  (база $\\exp=e^x$ в нотации HR; замена на $2^x$ только уменьшает порог).
+  for "some constant $c_2>0$". Neither $c_1$ nor $c_2$ are revealed numerically,
+  and their connection with the Lemma 4.2 constants is not parameterized.
+  Therefore, without a complete recalculation of Proof Thm. 4.1 cannot be removed
+  explicit coefficient in mode $d=\\kappa\\log n/\\log\\log n$
+  (base $\\exp=e^x$ in HR notation; replacing with $2^x$ only reduces the threshold).
 - `Exact citation:`
   “Suppose we have a refutation of size $N\\le \\exp\\, n^{1/d}/(c_1\\log^4 n)$ for some large
   constant $c_1>0$ …” and later
   “Note that $n_d\\ge n/\\log^{d-1}(N)\\,(c_2\\log^4 n)^d$ for some constant $c_2>0$ …”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:874–877, 929–931`).
-- `Статус:` barrier certificate (константы $c_1,c_2$ не извлекаются без полного пересчёта).
+- `Status:` barrier certificate (constants $c_1,c_2$ are not extracted without full recalculation).
 - `StepID:` Q43.S160-thm41-const-extract.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` либо выписать полный пересчёт Proof Thm. 4.1 (с явными $c_1,c_2$),
-  либо принять барьер и переключиться на другие источники/режимы.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` or write out a full recalculation of Proof Thm. 4.1 (with explicit $c_1,c_2$),
+  or accept the barrier and switch to other sources/modes.
 
 -/
 
 /-!
-### 16.301. Исследовательский шаг (reduction): план пересчёта констант Thm. 4.1 через Lemma 4.2 → Lemma 6.9
+### 16.301. Research step (reduction): plan for recalculating Thm constants. 4.1 via Lemma 4.2 -> Lemma 6.9
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S161-thm41-recount-plan):`
-  Чтобы получить явный коэффициент в режиме $d=\\kappa\\log n/\\log\\log n$,
-  нужно явно зафиксировать константы $c_1,c_2$ из Proof Thm. 4.1.
-  Это редуцируется к явной константе $A$ в Lemma 4.2, поскольку $A$
-  входит в рекурсию
+- `Lens:` Equivalence.
+- `Statement (Q43.S161-thm41-recount-plan):`
+  To obtain an explicit coefficient in the mode $d=\\kappa\\log n/\\log\\log n$,
+  you need to explicitly fix the constants $c_1,c_2$ from Proof Thm. 4.1.
+  This reduces to an explicit constant $A$ in Lemma 4.2, since $A$
+  enters into recursion
   $$n_i=\\bigl\\lfloor n_{i-1}/(4A t_{i-1}\\log^4 n_{i-1})\\bigr\\rfloor$$
-  и в оценку вероятности, из которой получается условие
+  and into the probability estimate from which the condition is obtained
   $$\\log N\\le n^{1/d}/(c_1\\log^4 n).$$
-  Константа $A$ из Lemma 4.2 в свою очередь зависит от неявных $A_0,A_1,A_2$
-  в её доказательстве, а эти величины выводятся из бит‑счёта в Lemma 6.9
-  (включая термины $A_1|S^*_g|$ и $A_2|S^*_g|$).
-  Следовательно, минимальный план пересчёта:
-  (i) пересчитать бит‑бюджет Lemma 6.9/6.8 с явными $A_1,A_2$;
-  (ii) собрать явные $A_0,A_1,A_2$ в Proof Lemma 4.2 и получить $A$;
-  (iii) вывести явные $c_1,c_2$ в Proof Thm. 4.1.
-  База $\\exp=e^x$ (HR‑нотация); замена на $2^x$ лишь уменьшает пороги.
+  The constant $A$ from Lemma 4.2 in turn depends on the implicit $A_0,A_1,A_2$
+  in its proof, and these quantities are derived from the bit count in Lemma 6.9
+  (including the terms $A_1|S^*_g|$ and $A_2|S^*_g|$).
+  Therefore, the minimum conversion plan is:
+  (i) recalculate the bit budget of Lemma 6.9/6.8 with explicit $A_1,A_2$;
+  (ii) collect explicit $A_0,A_1,A_2$ in Proof Lemma 4.2 and obtain $A$;
+  (iii) output explicit $c_1,c_2$ to Proof Thm. 4.1.
+  Base $\\exp=e^x$ (HR notation); replacing it with $2^x$ only reduces the thresholds.
 - `Exact citation:`
-  рекурсия $n_i$ и зависимость от $A$ — Proof Thm. 4.1
+  recursion $n_i$ and dependence on $A$ - Proof Thm. 4.1
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:889–891`);
-  неявные $A_0,A_1,A_2$ — Proof Lemma 4.2
-  (`...:1972–1974, 1996`); явные $A_1|S^*_g|, A_2|S^*_g|$ — Proof Lemma 6.9
+  implicit $A_0,A_1,A_2$ -- Proof Lemma 4.2
+  (`...:1972–1974, 1996`); explicit $A_1|S^*_g|, A_2|S^*_g|$ -- Proof Lemma 6.9
   (`...:2336–2341`).
-- `Статус:` reduction (зависимость $c_1,c_2$ от констант Lemma 6.9 выписана).
+- `Status:` reduction (the dependence of $c_1,c_2$ on the Lemma 6.9 constants has been written out).
 - `StepID:` Q43.S161-thm41-recount-plan.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` либо начать пересчёт Lemma 6.9 с явными $A_1,A_2$,
-  либо формально зафиксировать невозможность без полного пересчёта.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` or start recalculating Lemma 6.9 with explicit $A_1,A_2$,
+  or formally record the impossibility without a complete recount.
 
 -/
 
 /-!
-### 16.302. Исследовательский шаг (reduction): пересчёт Lemma 6.9 по $A_1,A_2$ уже выполнен в §16.224–§16.225
+### 16.302. Research step (reduction): recalculation of Lemma 6.9 by $A_1,A_2$ has already been done in Section 16.224-Section 16.225
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S162-recount-lemma69-bits):`
-  Пересчёт бит‑бюджета Lemma 6.9 по константам $A_1,A_2$ уже сделан:
-  в §16.224 получено $A_1^{\\mathrm{tot}}=24$ (или $A_1\\le 15$ без подписей),
-  а в §16.225 получено $A_2\\le 16$ для структур $J_j$ и $I^{*}_{-}$.
-  Поэтому шаг “recount Lemma 6.9 bits” сводится к использованию этих явных
-  оценок и их подстановке в Proof Lemma 4.2 (где фигурируют $A_0,A_1,A_2$).
-  Здесь $\\exp$ в HR‑нотации понимается как $e^x$; смена базы на $2^x$ не влияет
-  на сам факт наличия явных $A_1,A_2$.
+- `Lens:` Invariant.
+- `Statement (Q43.S162-recount-lemma69-bits):`
+  The Lemma 6.9 bit budget has already been recalculated using the constants $A_1,A_2$:
+  in Section 16.224 received $A_1^{\\mathrm{tot}}=24$ (or $A_1\\le 15$ without signatures),
+  and in Section 16.225 $A_2\\le 16$ was obtained for the structures $J_j$ and $I^{*}_{-}$.
+  Therefore, the "recount Lemma 6.9 bits" step comes down to using these explicit
+  estimates and their substitution in Proof Lemma 4.2 (where $A_0,A_1,A_2$ appear).
+  Here $\\exp$ in HR notation is understood as $e^x$; changing the base to $2^x$ has no effect
+  on the very fact of the presence of explicit $A_1,A_2$.
 - `Exact citation:`
-  Lemma 6.9 описывает дополнительные биты $A_1|S^{*}_g|$ и $A_2|S^{*}_g|$
+  Lemma 6.9 describes the additional bits $A_1|S^{*}_g|$ and $A_2|S^{*}_g|$
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2336–2341`);
-  суммирование вкладов Algorithms 2–4 даёт $A_1^{\\mathrm{tot}}=24$ (см. §16.224),
-  а разбор структуры $J_j,I^{*}_{-}$ даёт $A_2\\le 16$ (см. §16.225).
-- `Статус:` reduction (явные $A_1,A_2$ фиксированы; остаётся связать их с $A_0,A_1,A_2$ в Lemma 4.2).
+  summing the contributions of Algorithms 2-4 gives $A_1^{\\mathrm{tot}}=24$ (see Section 16.224),
+  and parsing the structure $J_j,I^{*}_{-}$ gives $A_2\\le 16$ (see Section 16.225).
+- `Status:` reduction (explicit $A_1,A_2$ are fixed; it remains to connect them with $A_0,A_1,A_2$ in Lemma 4.2).
 - `StepID:` Q43.S162-recount-lemma69-bits.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` сопоставить $A_1,A_2$ из Lemma 6.9 с одноимёнными
-  константами в Proof Lemma 4.2 и оценить $A_0$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` compare $A_1,A_2$ from Lemma 6.9 with the ones of the same name
+  constants in Proof Lemma 4.2 and evaluate $A_0$.
 
 -/
 
 /-!
-### 16.303. Исследовательский шаг (reduction): константы $A_0,A_1,A_2$ в Proof Lemma 4.2 и их источники
+### 16.303. Research step (reduction): constants $A_0,A_1,A_2$ in Proof Lemma 4.2 and their sources
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S163-map-lemma42-a0a1a2):`
-  В Proof Lemma 4.2 константы $A_0,A_1,A_2$ появляются как “упаковка” стандартных оценок:
-  1) $A_0$ приходит из Lemma 5.5 при переходе к вероятности в (16), где
-     возникает множитель $(A_0\\log n'/\\Delta)^{a+b}$;
-  2) $A_1$ поглощает абсолютные множители перед геометрическим рядом по $a$
-     (включая $A^s$ из Lemma 6.9 и числовые константы в (16)–(17));
-  3) $A_2$ появляется после подстановки $b\\le 2a$ (Lemma 6.8) и сворачивания
-     суммы $\\sum_b \\log^b n'$ в (18).
-  Таким образом, $A_1,A_2$ можно выразить через явный $A$ из Lemma 6.9
-  и константы из Lemma 5.5; явность уже упирается только в $A_0$.
+- `Lens:` Equivalence.
+- `Statement (Q43.S163-map-lemma42-a0a1a2):`
+  In Proof Lemma 4.2, the constants $A_0,A_1,A_2$ appear as a "package" of standard estimates:
+  1) $A_0$ comes from Lemma 5.5 when passing to the probability in (16), where
+     the multiplier $(A_0\\log n'/\\Delta)^{a+b}$ appears;
+  2) $A_1$ absorbs absolute factors in front of the geometric series in $a$
+     (including $A^s$ from Lemma 6.9 and numerical constants in (16)-(17));
+  3) $A_2$ appears after substitution $b\\le 2a$ (Lemma 6.8) and folding
+     sums $\\sum_b \\log^b n'$ in (18).
+  Thus, $A_1,A_2$ can be expressed in terms of the explicit $A$ from Lemma 6.9
+  and constants from Lemma 5.5; explicitness already rests only on $A_0$.
 - `Exact citation:`
-  Proof Lemma 4.2: “Using Lemma 5.5 we can bound the probability …” и
-  далее (16)–(18) с “for appropriate constants $A_0,A_1,A_2$”
+  Proof Lemma 4.2: "Using Lemma 5.5 we can bound the probability ..." and
+  further (16)-(18) with "for appropriate constants $A_0,A_1,A_2$"
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1975–1979, 1987–1996`);
-  связь с Lemma 6.9 — строка с $t^a\\Delta^b A^s$ (`...:1972–1974`).
-- `Статус:` reduction (происхождение $A_0,A_1,A_2$ локализовано; явность упирается в Lemma 5.5).
+  connection to Lemma 6.9 - line with $t^a\\Delta^b A^s$ (`...:1972–1974`).
+- `Status:` reduction (the origin of $A_0,A_1,A_2$ is localized; explicitness depends on Lemma 5.5).
 - `StepID:` Q43.S163-map-lemma42-a0a1a2.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` извлечь явную константу $A_0$ из Lemma 5.5
-  (или зафиксировать невозможность без полного пересчёта).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` extract explicit constant $A_0$ from Lemma 5.5
+  (or fix the impossibility without a complete recount).
 
 -/
 
 /-!
-### 16.304. Исследовательский шаг (reduction): явный $A_0$ через Lemma 5.5
+### 16.304. Exploratory step (reduction): explicit $A_0$ via Lemma 5.5
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S164-bound-a0-lemma55):`
-  Lemma 5.5 даёт
+- `Lens:` Invariant.
+- `Statement (Q43.S164-bound-a0-lemma55):`
+  Lemma 5.5 gives
   $$\\frac{|R(k-2s,n,n')|}{|R_{\\mathrm{reg}}(k,n,n')|}
     \\le \\Bigl(\\frac{13C\\log n'}{n/n'}\\Bigr)^{2s}.$$
-  Поскольку в той же секции используется $\\Delta\\ge n/(6n')$,
-  имеем
+  Since $\\Delta\\ge n/(6n')$ is used in the same section,
+  we have
   $$\\frac{13C\\log n'}{n/n'}\\le \\frac{78C\\log n'}{\\Delta}.$$
-  Подставляя $2s=a+b$ в оценку Proof Lemma 4.2, можно взять
+  Substituting $2s=a+b$ into the estimate of Proof Lemma 4.2, we can take
   $$A_0:=78C$$
-  в факторе $(A_0\\log n'/\\Delta)^{a+b}$ (при нечётном $a+b$ можно
-  использовать $s=\\lceil(a+b)/2\\rceil$ и поглотить дополнительный
-  множитель в $A_0$). Явность $A_0$ теперь сводится к явности $C$.
+  in the factor $(A_0\\log n'/\\Delta)^{a+b}$ (for odd $a+b$ one can
+  use $s=\\lceil(a+b)/2\\rceil$ and absorb the extra
+  multiplier in $A_0$). The explicitness of $A_0$ now reduces to the explicitness of $C$.
 - `Exact citation:`
-  Lemma 5.5: коэффициент $13C$ в оценке
+  Lemma 5.5: $13C$ coefficient in evaluation
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1353–1363`);
-  нижняя граница $\\Delta\\ge n/(6n')$
+  lower bound $\\Delta\\ge n/(6n')$
   (`...:1401–1402`);
-  использование фактора $(A_0\\log n'/\\Delta)^{a+b}$ в Proof Lemma 4.2
+  using the factor $(A_0\\log n'/\\Delta)^{a+b}$ in Proof Lemma 4.2
   (`...:1975–1979`).
-- `Статус:` reduction (явный $A_0$ выражен через $C$ из Lemma 5.5).
+- `Status:` reduction (explicit $A_0$ expressed via $C$ from Lemma 5.5).
 - `StepID:` Q43.S164-bound-a0-lemma55.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` извлечь численную оценку для $C$ из Lemma 5.5
-  (или зафиксировать барьер на уровне Chernoff/негативной корреляции).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` extract a numerical estimate for $C$ from Lemma 5.5
+  (or fix the barrier at the Chernoff/negative correlation level).
 
 -/
 
 /-!
-### 16.305. Исследовательский шаг (barrier certificate): константа $C$ в Lemma 5.5 остаётся неявной
+### 16.305. Research step (barrier certificate): constant $C$ in Lemma 5.5 remains implicit
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S165-bound-c-lemma55):`
-  В доказательстве Lemma 5.5 константа $C$ выбирается как “large enough” для
-  применения Chernoff‑оценок при отрицательной корреляции и последующего
-  union bound. Численное значение $C$ не фиксируется; следовательно, явная
-  численная оценка для $A_0=78C$ (см. §16.304) недостижима без полного
-  пересчёта Chernoff‑шагов.
+- `Lens:` Invariant.
+- `Statement (Q43.S165-bound-c-lemma55):`
+  In the proof of Lemma 5.5, the constant $C$ is chosen to be "large enough" for
+  application of Chernoff estimates for negative correlation and subsequent
+  union bound. The numerical value of $C$ is not fixed; therefore explicit
+  the numerical estimate for $A_0=78C$ (see Section 16.304) is unattainable without complete
+  recalculation of Chernoff steps.
 - `Exact citation:`
   “Since the Chernoff bounds continue to hold for negatively correlated random variables
   it holds that $X(i,j)\\in(1\\pm0.01)k/n'^2$ except with probability $1/n'^3$ for a large enough
   constant $C>0$.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1348–1350`)
   and the statement of Lemma 5.5 using $C$ (`...:1353–1354`).
-- `Статус:` barrier certificate (явный $C$ не извлекается из текста).
+- `Status:` barrier certificate (explicit $C$ is not extracted from the text).
 - `StepID:` Q43.S165-bound-c-lemma55.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` либо пересчитать Chernoff‑шаги с явными константами,
-  либо принять барьер и заморозить явные численные $A_0$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` or recalculate Chernoff steps with explicit constants,
+  or accept the barrier and freeze the explicit numerical $A_0$.
 
 -/
 
 /-!
-### 16.306. Исследовательский шаг (barrier certificate): явный $C$ в Lemma 5.5 требует полного пересчёта Chernoff‑шага
+### 16.306. Research step (barrier certificate): explicit $C$ in Lemma 5.5 requires a complete recalculation of the Chernoff step
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S166-chernoff-recount):`
-  В Lemma 5.5 константа $C$ задаётся как “large enough” через Chernoff‑оценку
-  для отрицательно коррелированных индикаторов и последующий union bound.
-  Текст не фиксирует численное значение, а извлечь его можно только через
-  полный пересчёт Chernoff‑шагов (включая константы в хвостах для $\delta=0.01$).
-  Следовательно, явный численный $C$ (и $A_0=78C$) недостижим без отдельного
-  полного деривационного шага.
+- `Lens:` Equivalence.
+- `Statement (Q43.S166-chernoff-recount):`
+  In Lemma 5.5, the constant $C$ is specified as "large enough" via the Chernoff estimate
+  for negatively correlated indicators and subsequent union bound.
+  The text does not record the numerical value, and it can only be retrieved through
+  complete recalculation of Chernoff steps (including constants in the tails for $\delta=0.01$).
+  Therefore, an explicit numerical $C$ (and $A_0=78C$) is unattainable without a separate
+  full derivational step.
 - `Exact citation:`
   “Since the Chernoff bounds continue to hold for negatively correlated random variables
   it holds that $X(i,j)\\in(1\\pm0.01)k/n'^2$ except with probability $1/n'^3$ for a large enough
   constant $C>0$.” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1348–1350`).
-- `Статус:` barrier certificate (явный $C$ не фиксируется).
+- `Status:` barrier certificate (explicit $C$ is not captured).
 - `StepID:` Q43.S166-chernoff-recount.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` либо провести полный пересчёт Chernoff‑шага с явными константами,
-  либо зафиксировать $C$ как параметр и закрыть численную часть.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta-constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` or carry out a complete recalculation of the Chernoff step with explicit constants,
+  or fix $C$ as a parameter and close the numerical part.
 
 -/
 
 /-!
-### 16.307. Исследовательский шаг (reduction): заморозить $A_0$ как параметр и продолжить вывод
+### 16.307. Exploratory step (reduction): freeze $A_0$ as a parameter and continue output
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S167-freeze-a0-parameter):`
-  В Proof Lemma 4.2 единственный неявный множитель — $(A_0\\log n'/\\Delta)^{a+b}$,
-  где $A_0=78C$ (см. §16.304). Если принять $A_0$ как внешний параметр,
-  то дальнейшие шаги (суммирование по $a$, подстановка $b\\le 2a$, сворачивание (18))
-  дают явные выражения через $A_0,A_1,A_2$. Следовательно, Thm. 4.1 получается
-  в параметризованной форме с $c_1,c_2$ как функциями от $A_0$ без пересчёта Chernoff‑констант.
+- `Lens:` Equivalence.
+- `Statement (Q43.S167-freeze-a0-parameter):`
+  In Proof Lemma 4.2, the only implicit factor is $(A_0\\log n'/\\Delta)^{a+b}$,
+  where $A_0=78C$ (see Section 16.304). If we take $A_0$ as an external parameter,
+  then further steps (summation over $a$, substitution $b\\le 2a$, folding (18))
+  give explicit expressions through $A_0,A_1,A_2$. Therefore, Thm. 4.1 turns out
+  in a parameterized form with $c_1,c_2$ as functions of $A_0$ without recalculating the Chernoff constants.
 - `Exact citation:`
-  фактор $(A_0\\log n'/\\Delta)^{a+b}$ в Proof Lemma 4.2
+  factor $(A_0\\log n'/\\Delta)^{a+b}$ in Proof Lemma 4.2
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1975–1979`);
-  привязка $A_0=78C$ к Lemma 5.5 — §16.304.
-- `Статус:` reduction (явность сведена к параметру $A_0$).
+  binding $A_0=78C$ to Lemma 5.5 - Section 16.304.
+- `Status:` reduction (explicitness reduced to parameter $A_0$).
 - `StepID:` Q43.S167-freeze-a0-parameter.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (мета‑параметры).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` либо пересчитать Chernoff‑шаг для явного $C$,
-  либо использовать параметризованную версию при дальнейшем анализе.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (meta parameters).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` or recalculate the Chernoff step for explicit $C$,
+  or use the parameterized version for further analysis.
 
 -/
 
 /-!
-### 16.308. Исследовательский шаг (reduction): явный Chernoff‑константный $C$ для Lemma 5.4
+### 16.308. Exploratory step (reduction): explicit Chernoff constant $C$ for Lemma 5.4
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S168-explicit-c-chernoff):`
-  По Prop. 5 (Dubhashi–Ranjan, 1996) Chernoff–Hoeffding применим к отрицательно
-  ассоциированным индикаторам, а Theorem A.16 (Arora–Barak) даёт (exp = $e^x$)
+- `Lens:` Trade-off.
+- `Statement (Q43.S168-explicit-c-chernoff):`
+  According to Prop. 5 (Dubhashi-Ranjan, 1996) Chernoff-Hoeffding applies to negative
+  associated indicators, and Theorem A.16 (Arora-Barak) gives (exp = $e^x$)
   $$\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 2e^{-\\delta^2\\mu/3}\\quad(0<\\delta\\le 1).$$
-  В Lemma 5.4 имеем $\\mu=k/n'^2=C\\log n'$ (лог = $\\ln$) и $\\delta=0.01$, поэтому
+  In Lemma 5.4 we have $\\mu=k/n'^2=C\\log n'$ (log = $\\ln$) and $\\delta=0.01$, so
   $$\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 2e^{-(\\delta^2 C/3)\\log n'}=2\\,n'^{-\\delta^2 C/3}.$$
-  Для $n'\\ge 2$ достаточно взять $C\\ge 12/\\delta^2=120000$, чтобы
-  $\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 1/n'^3$; далее union bound по $n'^2$ квадратам
-  даёт вероятность $\\ge 1-1/n'$. (Если $\\log=\\log_2$, то $C$ умножается на $\\ln 2$.)
+  For $n'\\ge 2$ it is enough to take $C\\ge 12/\\delta^2=120000$ to
+  $\\Pr[|X-\\mu|\\ge\\delta\\mu]\\le 1/n'^3$; then union bound over $n'^2$ squares
+  gives probability $\\ge 1-1/n'$. (If $\\log=\\log_2$, then $C$ is multiplied by $\\ln 2$.)
 - `Exact citation:`
   Dubhashi–Ranjan (1996), Proposition 5 “(−A and Chernoff–Hoeffding Bounds)”
-  (PDF p.7 / printed p.5) — Chernoff для отрицательной ассоциации;
-  Arora–Barak (2009 draft), Theorem A.16 (PDF p.540) — формула Chernoff.
-- `Статус:` reduction (явный $C$ получен).
+  (PDF p.7 / printed p.5) - Chernoff for negative association;
+  Arora-Barak (2009 draft), Theorem A.16 (PDF p.540) - Chernoff formula.
+- `Status:` reduction (explicit $C$ received).
 - `StepID:` Q43.S168-explicit-c-chernoff.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (вероятностные константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` пропагировать явный $C$ в $A_0=78C$ и проверить, как это влияет на
-  параметры Lemma 4.2 / Thm. 4.1.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (probabilistic constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` propagate explicit $C$ to $A_0=78C$ and check how it affects
+  parameters Lemma 4.2 / Thm. 4.1.
 
 -/
 
 /-!
-### 16.309. Исследовательский шаг (reduction): явный $A_0$ и снятие неявных констант
+### 16.309. Exploratory step (reduction): explicit $A_0$ and removal of implicit constants
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S169-propagate-explicit-a0):`
-  Из §16.308 берём $C\\ge 120000$ (для $\\delta=0.01$, $\\log=\\ln$), поэтому
+- `Lens:` Equivalence.
+- `Statement (Q43.S169-propagate-explicit-a0):`
+  From Section 16.308 we take $C\\ge 120000$ (for $\\delta=0.01$, $\\log=\\ln$), so
   $$A_0=78C\\ge 9{,}360{,}000.$$
-  Тогда фактор $(A_0\\log n'/\\Delta)^{a+b}$ в Proof Lemma 4.2 становится численно явным,
-  а вместе с явными $A_1,A_2$ из §16.302-§16.303 это делает константы $c_1,c_2$ в Thm. 4.1
-  полностью выписуемыми (пусть и очень большими) без дополнительных скрытых допущений.
+  Then the factor $(A_0\\log n'/\\Delta)^{a+b}$ in Proof Lemma 4.2 becomes numerically explicit,
+  and together with the explicit $A_1,A_2$ from Section 16.302-Section 16.303 this makes the constants $c_1,c_2$ in Thm. 4.1
+  fully writeable (albeit very large) without additional hidden assumptions.
 - `Exact citation:`
-  $A_0=78C$ из Lemma 5.5 (см. §16.304) + явный $C$ из §16.308;
-  место использования $(A_0\\log n'/\\Delta)^{a+b}$ в Proof Lemma 4.2
+  $A_0=78C$ from Lemma 5.5 (see Section 16.304) + explicit $C$ from Section 16.308;
+  where to use $(A_0\\log n'/\\Delta)^{a+b}$ in Proof Lemma 4.2
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1975–1979`).
-- `Статус:` reduction (неявные константы сняты; осталась рутинная арифметика).
+- `Status:` reduction (implicit constants have been removed; routine arithmetic remains).
 - `StepID:` Q43.S169-propagate-explicit-a0.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (числовые константы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` выписать явные $c_1,c_2$ в формулировке Thm. 4.1 и проверить,
-  что дальнейшие пороги (например, $M>2^{n^\\alpha}$) интерпретируются корректно.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (numerical constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` write down the explicit $c_1,c_2$ in the formulation of Thm. 4.1 and check
+  that further thresholds (for example, $M>2^{n^\\alpha}$) are interpreted correctly.
 
 -/
 
 /-!
-### 16.311. Исследовательский шаг (reduction): база log/exp в пороге large‑$M$
+### 16.311. Exploratory step (reduction): log/exp base at large$M$ threshold
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S171-check-thm41-threshold):`
-  В HR’22 явно сказано, что $\\log$ берётся по базе $2$; значит порог
+- `Lens:` Trade-off.
+- `Statement (Q43.S171-check-thm41-threshold):`
+  HR'22 explicitly states that $\\log$ is taken over base $2$; means threshold
   $$M\\le 2^{n^{\\alpha}},\\qquad \\alpha=\\frac1d-\\frac1{d(d-1)},$$
-  в Proof Thm. 4.3 естественно читать как степень $2^x$.
-  Если использовать $e^x$, то это эквивалентно замене
-  $n^{\\alpha}\\mapsto (\\ln 2)\\,n^{\\alpha}$ (константный множитель в экспоненте),
-  поэтому асимптотические сравнения Q43 сохраняются; для явных констант
-  нужно умножать/делить на $\\ln 2$ при смене базы.
-- `Toy‑тест:` при $\\alpha=1/2$ имеем $2^{\\sqrt n}=e^{(\\ln 2)\\sqrt n}$,
-  то есть различие только в постоянном множителе показателя.
+  in Proof Thm. 4.3 can naturally be read as a power of $2^x$.
+  If we use $e^x$, then this is equivalent to replacing
+  $n^{\\alpha}\\mapsto (\\ln 2)\\,n^{\\alpha}$ (constant factor in the exponent),
+  therefore the asymptotic comparisons Q43 are preserved; for explicit constants
+  you need to multiply/divide by $\\ln 2$ when changing the base.
+- `Toy test:` for $\\alpha=1/2$ we have $2^{\\sqrt n}=e^{(\\ln 2)\\sqrt n}$,
+  that is, the difference is only in the constant factor of the indicator.
 - `Exact citation:`
   “Logarithms are denoted by log and are always with respect to the base 2.”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`);
-  порог $M\\le\\exp(n^{\\alpha})$ — `...:1104–1106` (exp в цитате = $2^x$).
-- `Статус:` reduction (согласование баз логарифма и экспоненты).
+  threshold $M\\le\\exp(n^{\\alpha})$ -- `...:1104–1106` (exp in quote = $2^x$).
+- `Status:` reduction (harmonization of logarithmic and exponential bases).
 - `StepID:` Q43.S171-check-thm41-threshold.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (смена базы — числовая).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` привести все пороги $M>2^{n^\\alpha}$ в Q43 к базе $2$
-  и проверить, что явные $c_1,c_2$ пересчитаны в той же базе.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (change of base - numeric).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` bring all thresholds $M>2^{n^\\alpha}$ in Q43 to base $2$
+  and check that explicit $c_1,c_2$ are recalculated in the same base.
 
 -/
 
 /-!
-### 16.312. Исследовательский шаг (reduction): согласование $\\exp$ как $2^x$ в Q43
+### 16.312. Exploratory step (reduction): matching $\\exp$ as $2^x$ in Q43
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S172-exp2-consistency):`
-  В контексте HR’22 принимаем базу $2$ как стандартный выбор,
-  согласованный с $\\log_2$. При переходе к $e^x$ достаточно заменить
-  $x\\mapsto (\\ln 2)\\,x$, то есть явные константы $c_1,c_2$ и пороги
-  $M>2^{n^\\alpha}$ меняются лишь на фактор $\\ln 2$ в показателе.
-  Это не влияет на сравнения вида “poly vs exp” и на факт, что
-  $2^{(\\log n)^k}$ суперполиномиально при $k>1$.
-- `Toy‑тест:` $2^{(\\log_2 n)^2}=e^{(\\ln 2)(\\log_2 n)^2}$
-  и превосходит $n^c$ для любого фиксированного $c$.
+- `Lens:` Equivalence.
+- `Statement (Q43.S172-exp2-consistency):`
+  In the context of HR'22, we accept the $2$ base as the standard choice,
+  consistent with $\\log_2$. When passing to $e^x$ it is sufficient to replace
+  $x\\mapsto (\\ln 2)\\,x$, that is, explicit constants $c_1,c_2$ and thresholds
+  $M>2^{n^\\alpha}$ change only by a factor of $\\ln 2$ in the exponent.
+  This does not affect comparisons like "poly vs exp" or the fact that
+  $2^{(\\log n)^k}$ is superpolynomial for $k>1$.
+- `Toy test:` $2^{(\\log_2 n)^2}=e^{(\\ln 2)(\\log_2 n)^2}$
+  and exceeds $n^c$ for any fixed $c$.
 - `Exact citation:`
-  определение базы логарифма — `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`;
-  порог large‑$M$ в Proof Thm. 4.3 — `...:1104–1106`.
-- `Статус:` reduction (база экспоненты унифицирована).
+  determining the base of the logarithm - `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`;
+  threshold large$M$ in Proof Thm. 4.3 - `...:1104–1106`.
+- `Status:` reduction (the exponent base is unified).
 - `StepID:` Q43.S172-exp2-consistency.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (числовая смена базы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` пересчитать явные $c_1,c_2$ и все пороги с $2^{(\\cdot)}$
-  в единой базе $2$ (для констант — учесть множители $\\ln 2$).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (numerical change of base).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` recalculate explicit $c_1,c_2$ and all thresholds with $2^{(\\cdot)}$
+  in a single base $2$ (for constants, take into account the factors $\\ln 2$).
 
 -/
 
 /-!
-### 16.313. Исследовательский шаг (reduction): рескейл $c_1,c_2$ под $\\exp_2$
+### 16.313. Exploratory step (reduction): rescaling $c_1,c_2$ under $\\exp_2$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S173-exp2-c1c2-rescale):`
-  Переходим к соглашению $\\exp_2(x):=2^x$ и $\\log=\\log_2$.
-  Тогда явные константы из §16.310 уже согласованы с базой $2$ (они получены
-  из битового кодирования и $\\log_2$), и формула Proof Thm. 4.1 читается как
-  $$N\\le 2^{\\,n^{1/d}/(c_1\\log_2^4 n)}\\qquad\\text{и}\\qquad
+- `Lens:` Equivalence.
+- `Statement (Q43.S173-exp2-c1c2-rescale):`
+  Let's move on to the agreement $\\exp_2(x):=2^x$ and $\\log=\\log_2$.
+  Then the explicit constants from Section 16.310 are already consistent with the $2$ base (they are obtained
+  from bit encoding and $\\log_2$), and the Proof Thm formula. 4.1 reads as
+  $$N\\le 2^{\\,n^{1/d}/(c_1\\log_2^4 n)}\\qquad\\text{and}\\qquad
     n_d\\ge \\frac{n}{\\log_2^{d-1}N\\cdot(c_2\\log_2^4 n)^d}.$$
-  Если требуется использовать $e^x$ и $\\ln$, то константы пересчитываются
-  явно: $c_1^{(e)}=c_1/(\\ln 2)^5$ (с учётом замены $\\log_2^4 n$) и
-  $c_2^{(e)}=c_2/(\\ln 2)^4$ (плюс множитель $(\\ln 2)^{-(d-1)}$,
-  который можно поглотить в $c_2$ при фиксированном $d$).
-  Для асимптотики это эквивалентно; в частности,
-  $\\exp_2((\\log_2 n)^k)=2^{(\\log_2 n)^k}$ суперполиномиальна при $k>1$.
-- `Toy‑тест:` при $d=1$ из $\\log_2 N\\le n/(c_1\\log_2^4 n)$ получаем
-  $N\\le 2^{n/(c_1\\log_2^4 n)}$, а при переходе к $e^x$ показатель меняется
-  на множитель $\\ln 2$.
+  If you need to use $e^x$ and $\\ln$, then the constants are recalculated
+  explicitly: $c_1^{(e)}=c_1/(\\ln 2)^5$ (taking into account the replacement $\\log_2^4 n$) and
+  $c_2^{(e)}=c_2/(\\ln 2)^4$ (plus the factor $(\\ln 2)^{-(d-1)}$,
+  which can be absorbed into $c_2$ for a fixed $d$).
+  For asymptotics this is equivalent; in particular,
+  $\\exp_2((\\log_2 n)^k)=2^{(\\log_2 n)^k}$ is superpolynomial for $k>1$.
+- `Toy test:` for $d=1$ from $\\log_2 N\\le n/(c_1\\log_2^4 n)$ we obtain
+  $N\\le 2^{n/(c_1\\log_2^4 n)}$, and when moving to $e^x$ the indicator changes
+  by the factor $\\ln 2$.
 - `Exact citation:`
-  база логарифмов — `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`;
-  порог large‑$M$ в Proof Thm. 4.3 — `...:1104–1106`.
-- `Статус:` reduction (явные $c_1,c_2$ согласованы с $\\exp_2$).
+  logarithm base - `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`;
+  threshold large$M$ in Proof Thm. 4.3 - `...:1104–1106`.
+- `Status:` reduction (explicit $c_1,c_2$ are consistent with $\\exp_2$).
 - `StepID:` Q43.S173-exp2-c1c2-rescale.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (смена базы — числовая).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` провести единый проход по Q43 и заменить все
-  $2^{(\\cdot)}$ и связанные пороги на единую базу $2$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (change of base - numeric).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` carry out a single pass through Q43 and replace everything
+  $2^{(\\cdot)}$ and related thresholds on a single base $2$.
 
 -/
 
 /-!
-### 16.315. Исследовательский шаг (exact citation): пометки base‑2 в цитатах с `exp`
+### 16.315. Exploratory step (exact citation): base-2 markings in citations with `exp`
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S175-exp2-quote-annotation):`
-  В цитатах HR’22/Håstad’20, где используется `exp(…)`, добавлены явные пометы,
-  что в контексте $\\log_2$ следует читать `exp` как $2^x$; это устраняет
-  неоднозначность базы в местах, где мы сохраняем прямую цитату.
+- `Lens:` Equivalence.
+- `Statement (Q43.S175-exp2-quote-annotation):`
+  In HR'22/Hastad'20 citations where used `exp(…)`, added explicit marks,
+  what should be read in the context of $\\log_2$ `exp` like $2^x$; this eliminates
+  ambiguity of the base in places where we retain a direct quote.
 - `Exact citation:`
   HR’22 Proof Thm. 4.3 (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`)
-  и Håstad’20 Thm. 6.5 (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`).
-- `Статус:` exact citation (пометки к цитатам, без изменения формул).
+  and Hastad'20 Thm. 6.5 (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`).
+- `Status:` exact citation (marks to citations, without changing formulas).
 - `StepID:` Q43.S175-exp2-quote-annotation.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (комментарии к цитатам).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` согласовать аналогичные пометы в других разделах,
-  где сохраняются прямые цитаты с `exp`.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (comments on quotes).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` agree on similar notes in other sections,
+  where are direct quotes saved? `exp`.
 
 -/
 
 /-!
-### 16.316. Исследовательский шаг (exact citation): sweep exp‑цитат с явной базой
+### 16.316. Exploratory step (exact citation): sweep expcitations with an explicit base
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S176-exp2-quote-sweep):`
-  Для всех прямых цитат с `exp(…)` в Q43 теперь явно указана база ($2^x$) рядом с ссылкой,
-  а единственная «экспонента в кавычках» вне Q43 (формула “solve $M=2^{O(n^{1/(d-1)})}$” в §16.142)
-  приведена к форме $2^{(\\cdot)}$ для устранения неоднозначности.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S176-exp2-quote-sweep):`
+  For all direct quotes from `exp(…)` in Q43 the base ($2^x$) is now explicitly indicated next to the link,
+  and the only "exponent in quotes" is outside Q43 (the formula "solve $M=2^{O(n^{1/(d-1)})}$" in Section 16.142)
+  reduced to the form $2^{(\\cdot)}$ to remove ambiguity.
 - `Exact citation:`
   HR’22 Proof Thm. 4.3 (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1104–1106`);
   Håstad’20 Thm. 6.5 (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`).
-- `Статус:` exact citation (явная база для цитат с `exp`).
+- `Status:` exact citation (explicit basis for citations with `exp`).
 - `StepID:` Q43.S176-exp2-quote-sweep.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (комментарии к цитатам).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` проверить, остались ли цитаты с `exp` вне Q43 (например, в Q39/Q16.x),
-  и при необходимости зафиксировать базу рядом с цитированием.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (comments on quotes).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` check if there are any citations left with `exp` outside Q43 (e.g. in Q39/Q16.x),
+  and, if necessary, fix the base next to the citation.
 
 -/
 
 /-!
-### 16.317. Исследовательский шаг (exact citation): scan core‑цитат с `exp` и фиксация базы $2^x$
+### 16.317. Research step (exact citation): scan core citations with `exp` and fixing the base $2^x$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S177-exp2-quote-scan-core):`
-  В §16.92 (`formal/Notes/TseitinCore.lean`) формулировка Thm. 6.5 (Håstad’20)
-  записана в базе $2$ и снабжена пометой “`exp` в источнике = $2^x$”;
-  это закрывает прямую `exp`‑цитату вне Q43 без изменения асимптотики.
+- `Lens:` Equivalence.
+- `Statement (Q43.S177-exp2-quote-scan-core):`
+  In Section 16.92 (`formal/Notes/TseitinCore.lean`) Thm formulation. 6.5 (Hastad'20)
+  recorded in the $2$ database and marked "`exp` in source = $2^x$";
+  this closes the direct `exp`-quote outside Q43 without changing the asymptotics.
 - `Exact citation:`
   Håstad’20 Thm. 6.5 (`resources/text_cache/hastad_2020_small_depth_frege_tseitin_grids.txt:825–827`;
-  см. также `../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`).
-- `Статус:` exact citation (база экспоненты зафиксирована как $2^x$).
+  see also `../../resources/downloads/hastad_2020_small_depth_frege_tseitin_grids.pdf`).
+- `Status:` exact citation (exponent base fixed as $2^x$).
 - `StepID:` Q43.S177-exp2-quote-scan-core.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (комментарии к цитатам).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` проверить, остались ли прямые цитаты с `exp` в `formal/Notes/TseitinCore.lean`
-  и в summary‑файлах, и при необходимости привести к базе $2$ или явно указать $e^x$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (comments on quotes).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` check if direct quotes remain from `exp` V `formal/Notes/TseitinCore.lean`
+  and in summary files, and if necessary, cast to the base $2$ or explicitly specify $e^x$.
 
 -/
 
 /-!
-### 16.318. Исследовательский шаг (exact citation): scan remaining exp‑цитат в core/summary
+### 16.318. Exploratory step (exact citation): scan remaining expcitations in core/summary
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S178-exp2-quote-scan-remaining):`
-  В `formal/Notes/TseitinCore.lean` экспоненциальные оценки, ссылающиеся на
-  Itsykson–Oparin’13 и Razborov’23, приведены к форме $2^{(\cdot)}$,
-  а в summary‑файлах согласованы те же базы. Это фиксирует трактовку `exp`
-  как $2^x$ для соответствующих цитат (смена базы даёт лишь константный множитель в показателе).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S178-exp2-quote-scan-remaining):`
+  IN `formal/Notes/TseitinCore.lean` exponential estimates referring to
+  Itsykson-Oparin'13 and Razborov'23, are reduced to the form $2^{(\cdot)}$,
+  and in the summary files the same databases are consistent. This fixes the interpretation `exp`
+  as $2^x$ for the corresponding quotes (changing the base gives only a constant factor in the indicator).
 - `Exact citation:`
   Itsykson–Oparin 2013, Cor. 1 + Thm. 1
   (`../../resources/downloads/itsykson_oparin_2013_tseitin.pdf`);
   Razborov 2023, Thm. 6.8
-  (`../../resources/downloads/razborov_2023_proof_complexity_ecm.pdf`);
+  (`../../resources/downloads/razborov_2023_proof_complexity_eseepdf`);
   Pitassi–Rossman–Servedio–Tan 2016, Thm. 1
   (`../../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf`).
-- `Статус:` exact citation (база $2^x$ зафиксирована для core/summary‑формул).
+- `Status:` exact citation (base $2^x$ is fixed for core/summary formulas).
 - `StepID:` Q43.S178-exp2-quote-scan-remaining.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (комментарии к цитатам).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` пройти оставшиеся `exp(…)` в `formal/Notes/TseitinCore.lean`
-  (особенно аналитические места с $\\ln$) и явно отметить, где $e^x$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (comments on quotes).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` go through the rest `exp(…)` V `formal/Notes/TseitinCore.lean`
+  (especially analytic places with $\\ln$) and explicitly note where $e^x$.
 
 -/
 
 /-!
-### 16.319. Исследовательский шаг (exact citation): аналитические `exp(…)` → явное $e^x$ в core
+### 16.319. Research step (exact citation): analytical `exp(…)` -> explicit $e^x$ in core
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S179-exp2-quote-scan-analytic):`
-  В аналитических местах `formal/Notes/TseitinCore.lean` (оптимизация $f(d)=dX^{2/d}$)
-  все оставшиеся `exp(…)` заменены на явные $e^{(\cdot)}$, а в доказательстве
-  зафиксировано, что используется натуральный логарифм $\\ln$.
-  Это устраняет неоднозначность базы в асимптотике (особенно в шагах с $\\ln X$).
+- `Lens:` Equivalence.
+- `Statement (Q43.S179-exp2-quote-scan-analytic):`
+  In analytical places `formal/Notes/TseitinCore.lean` (optimization $f(d)=dX^{2/d}$)
+  all the remaining ones `exp(…)` replaced by explicit $e^{(\cdot)}$, and in the proof
+  It is fixed that the natural logarithm $\\ln$ is used.
+  This disambiguates the base in the asymptotics (especially in steps with $\\ln X$).
 - `Exact citation:`
-  Galesi–Itsykson–Riazanov–Sofronova 2019, Claim 28 (раздел 4.3),
+  Galesi-Itsykson-Riazanov-Sofronova 2019, Claim 28 (section 4.3),
   `../../resources/downloads/galesi_itsykson_riazanov_sofronova_2019_bounded_depth_frege_tseitin_all_graphs.pdf`
-  (используется для формулы $\\mathrm{poly}(|T|)\\cdot 2^{O(d\\cdot X^{2/d})}$, далее проводится аналитическая оптимизация).
-- `Статус:` exact citation (база $e^x$ явно указана для аналитических шагов).
+  (used for the formula $\\mathrm{poly}(|T|)\\cdot 2^{O(d\\cdot X^{2/d})}$, then analytical optimization is carried out).
+- `Status:` exact citation (base $e^x$ is explicitly specified for analytical steps).
 - `StepID:` Q43.S179-exp2-quote-scan-analytic.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения в аналитике).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` пройти места с $\\log$ в аналитических разделах и решить,
-  где нужно оставлять $\\log_2$ vs $\\ln$ (без влияния на асимптотику).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation in analytics).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` go through places with $\\log$ in analytical sections and solve
+  where you need to leave $\\log_2$ vs $\\ln$ (without affecting the asymptotics).
 
 -/
 
 /-!
-### 16.320. Исследовательский шаг (exact citation): лог‑база в аналитике GIRS‑upper
+### 16.320. Research step (exact citation): log base in GIRS-upper analytics
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S180-exp2-quote-scan-logbases):`
-  В аналитических местах GIRS‑upper (`formal/Notes/TseitinCore.lean` §16.119–§16.121)
-  база логарифмов сделана явной: в переходах вида $2^{\\log X}=X$ используется $\\log_2$,
-  а в оптимизации через $L:=\\ln X$ сохраняется натуральный логарифм.
+- `Lens:` Equivalence.
+- `Statement (Q43.S180-exp2-quote-scan-logbases):`
+  In analytical places GIRSupper (`formal/Notes/TseitinCore.lean` §16.119–§16.121)
+  the base of logarithms is made explicit: in transitions of the form $2^{\\log X}=X$ $\\log_2$ is used,
+  and in optimization through $L:=\\ln X$ the natural logarithm is preserved.
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` exact citation (база логов отмечена; асимптотика не меняется).
+- `Status:` exact citation (log base is marked; asymptotics does not change).
 - `StepID:` Q43.S180-exp2-quote-scan-logbases.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` просканировать оставшиеся $\\log$ в core и привести к $\\log_2$/$\\ln$ при необходимости.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` scan remaining $\\log$ in core and reduce to $\\log_2$/$\\ln$ if necessary.
 
 -/
 
 /-!
-### 16.321. Исследовательский шаг (exact citation): log_2 в PRST'16 depth-vs-size toy-test
+### 16.321. Exploratory step (exact citation): log_2 in PRST'16 depth-vs-size toy-test
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S181-exp2-quote-scan-logbases-remaining):`
-  В §16.96 (PRST'16 Thm. 1) для выражений вида $2^{(\\log n)^2}$ и $n^{\\Omega((\\log n)/d^2)}$
-  явно зафиксирована база $\\log_2$; это согласуется с явным использованием $\\log_2 n$
-  в PRST'16 (Lemma 2.7), и устраняет неоднозначность в интерпретации $2^{(\\log n)^2}$.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S181-exp2-quote-scan-logbases-remaining):`
+  In Section 16.96 (PRST'16 Thm. 1) for expressions of the form $2^{(\\log n)^2}$ and $n^{\\Omega((\\log n)/d^2)}$
+  the base $\\log_2$ is explicitly fixed; this is consistent with the explicit use of $\\log_2 n$
+  in PRST'16 (Lemma 2.7), and disambiguates the interpretation of $2^{(\\log n)^2}$.
 - `Exact citation:`
   Pitassi-Rossman-Servedio-Tan 2016, Lemma 2.7 uses $\\log_2 n$,
   `../../resources/downloads/pitassi_rossman_servedio_tan_2016_expander_switching_lemma.pdf`.
-- `Toy‑тест:` $2^{(\\log_2 n)^k}$ суперполиномиально при $k>1$; например $2^{(\\log_2 n)^2}=n^{\\log_2 n}$.
-- `Статус:` exact citation (база логов отмечена в toy‑оценке).
+- `Toy test:` $2^{(\\log_2 n)^k}$ is superpolynomial for $k>1$; for example $2^{(\\log_2 n)^2}=n^{\\log_2 n}$.
+- `Status:` exact citation (the log database is noted in the toy evaluation).
 - `StepID:` Q43.S181-exp2-quote-scan-logbases-remaining.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` пройти оставшиеся $\\log$ в core/summary с $2^{(\\cdot)}$ и привести к $\\log_2$/$\\ln$ при необходимости.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` go through the remaining $\\log$ in core/summary with $2^{(\\cdot)}$ and lead to $\\log_2$/$\\ln$ if necessary.
 
 -/
 
 /-!
-### 16.322. Исследовательский шаг (reduction): log_2 в $2^{\\mathrm{poly}(\\log)}$ в core/summary
+### 16.322. Research step (reduction): log_2 in $2^{\\mathrm{poly}(\\log)}$ in core/summary
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S182-exp2-quote-scan-logbases-core-sweep):`
-  В core/summary местах с $2^{\\mathrm{poly}(\\log S)}$ и $2^{O(\\cdot\\log n)}$
-  логарифм явно приведён к $\\log_2$ (в согласии с $\\exp_2$‑конвенцией), а в аналитике
-  оптимизации $f(d)$ остаётся $\\ln$.
-- `Reduction:` по формуле смены базы $\\log_a n=\\log_2 n/\\log_2 a$ любая запись вида
-  $2^{\\mathrm{poly}(\\log_a n)}$ эквивалентна $2^{\\mathrm{poly}(\\log_2 n)}$ с изменением констант.
+- `Lens:` Equivalence.
+- `Statement (Q43.S182-exp2-quote-scan-logbases-core-sweep):`
+  In core/summary places with $2^{\\mathrm{poly}(\\log S)}$ and $2^{O(\\cdot\\log n)}$
+  the logarithm is explicitly reduced to $\\log_2$ (in accordance with the $\\exp_2$convention), and in analytics
+  optimization $f(d)$ remains $\\ln$.
+- `Reduction:` according to the formula for changing the base $\\log_a n=\\log_2 n/\\log_2 a$ any record of the form
+  $2^{\\mathrm{poly}(\\log_a n)}$ is equivalent to $2^{\\mathrm{poly}(\\log_2 n)}$ with changing constants.
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (нормализация базы в экспонентах).
+- `Status:` reduction (normalization of the base in exponents).
 - `StepID:` Q43.S182-exp2-quote-scan-logbases-core-sweep.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` продолжить sweep оставшихся $\\log$ в core/summary вне Q43‑блоков.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` continue sweeping the remaining $\\log$ in core/summary outside Q43blocks.
 
 -/
 
 /-!
-### 16.323. Исследовательский шаг (reduction): log_2 в summary‑сводке `docs/15_proof_complexity.md`
+### 16.323. Exploratory step (reduction): log_2 in summary `docs/15_proof_complexity.md`
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S183-exp2-quote-scan-logbases-summary-sweep):`
-  В summary‑блоках `docs/15_proof_complexity.md` все упоминания $\\log$,
-  входящие в глубинные пороги и HR‑проверки, приведены к $\\log_2$;
-  это синхронизирует summary с $\\exp_2$‑конвенцией и с базой $\\log_2$ в HR’22.
-- `Reduction:` по формуле смены базы $\\log_a n=\\log_2 n/\\log_2 a$ замена $\\log\\to\\log_2$
-  сохраняет асимптотику в режимах $O(\\log n/\\log\\log n)$ и $2^{\\mathrm{poly}(\\log n)}$.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S183-exp2-quote-scan-logbases-summary-sweep):`
+  In summary blocks `docs/15_proof_complexity.md` all mentions of $\\log$,
+  included in the depth thresholds and HR checks are reduced to $\\log_2$;
+  this synchronizes the summary with the $\\exp_2$convention and with the $\\log_2$ base in HR'22.
+- `Reduction:` according to the base change formula $\\log_a n=\\log_2 n/\\log_2 a$ replacement $\\log\\to\\log_2$
+  preserves asymptotics in the $O(\\log n/\\log\\log n)$ and $2^{\\mathrm{poly}(\\log n)}$ modes.
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (нормализация базы в summary).
+- `Status:` reduction (normalization of the base in summary).
 - `StepID:` Q43.S183-exp2-quote-scan-logbases-summary-sweep.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` просканировать remaining summary‑участки вне §15 и при необходимости
-  привести $\\log$ к $\\log_2$/$\\ln$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` scan the remaining summary sections outside Section 15 and, if necessary,
+  bring $\\log$ to $\\log_2$/$\\ln$.
 
 -/
 
 /-!
-### 16.324. Исследовательский шаг (reduction): log_2 в summary вне §15 (switching lemma)
+### 16.324. Research step (reduction): log_2 in summary outside Section 15 (switching lemma)
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S184-exp2-quote-scan-logbases-summary-remaining):`
-  В summary‑разделе `docs/11_switching_lemma_ac0.md` логарифмы в выводе
-  $S\\ge 2^{\\Omega(n^{1/(k-1)})}$ приведены к $\\log_2 S$,
-  чтобы формулы с $2^{(\\cdot)}$ согласовывались с $\\exp_2$‑конвенцией.
-- `Reduction:` замена $\\log\\to\\log_2$ меняет константу в big‑O и не влияет на
-  асимптотику порогов вида $O(\\log n)$ и $2^{\\Omega((\\log n)^k)}$.
+- `Lens:` Equivalence.
+- `Statement (Q43.S184-exp2-quote-scan-logbases-summary-remaining):`
+  In the summary section `docs/11_switching_lemma_ac0.md` logarithms in output
+  $S\\ge 2^{\\Omega(n^{1/(k-1)})}$ are reduced to $\\log_2 S$,
+  so that formulas with $2^{(\\cdot)}$ are consistent with the $\\exp_2$convention.
+- `Reduction:` replacing $\\log\\to\\log_2$ changes the constant in bigO and does not affect
+  asymptotics of thresholds of the form $O(\\log n)$ and $2^{\\Omega((\\log n)^k)}$.
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (нормализация базы в summary).
+- `Status:` reduction (normalization of the base in summary).
 - `StepID:` Q43.S184-exp2-quote-scan-logbases-summary-remaining.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` завершить sweep по оставшимся summary‑файлам вне §15/§11.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` complete the sweep on the remaining summary files outside Section 15/Section 11.
 
 -/
 
 /-!
-### 16.325. Исследовательский шаг (reduction): log_2 в summary вне §15/§11 (PCP, Savitch)
+### 16.325. Research step (reduction): log_2 in summary outside Section 15/Section 11 (PCP, Savitch)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S185-exp2-quote-scan-logbases-summary-final):`
-  В summary‑разделах `docs/16_ip_pcp.md` и `docs/13_savitch.md` логарифмы в оценках,
-  связанных с двоичным счётом и экспонентой, приведены к $\\log_2$ (например,
-  $r(n)=O(\\log_2 n)$ и $\\log_2 M=O(s(n))$).
-- `Reduction:` замена $\\log\\to\\log_2$ сохраняет асимптотику и согласует записи
-  с двоичной интерпретацией $2^{(\\cdot)}$.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S185-exp2-quote-scan-logbases-summary-final):`
+  In summary sections `docs/16_ip_pcp.md` and `docs/13_savitch.md` logarithms in estimates,
+  associated with binary counting and exponent are reduced to $\\log_2$ (for example,
+  $r(n)=O(\\log_2 n)$ and $\\log_2 M=O(s(n))$).
+- `Reduction:` the replacement $\\log\\to\\log_2$ preserves the asymptotics and harmonizes the entries
+  with binary interpretation $2^{(\\cdot)}$.
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (нормализация базы в summary).
+- `Status:` reduction (normalization of the base in summary).
 - `StepID:` Q43.S185-exp2-quote-scan-logbases-summary-final.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` подтвердить отсутствие оставшихся ambiguity по $\\log$ в summary,
-  либо зафиксировать точку, где база несущественна.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` confirm the absence of remaining ambiguity by $\\log$ in summary,
+  or fix a point where the base is unimportant.
 
 -/
 
 /-!
-### 16.326. Исследовательский шаг (reduction): log_2 в summary вне §15/§11 (time hierarchy)
+### 16.326. Research step (reduction): log_2 in summary outside Section 15/Section 11 (time hierarchy)
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S186-exp2-quote-scan-logbases-summary-tail):`
-  В summary‑разделе `docs/12_time_hierarchy.md` логарифмы в оценках
-  универсальной симуляции и теоремы иерархии приведены к $\\log_2$,
-  чтобы согласовать записи с двоичной интерпретацией $2^{(\\cdot)}$.
-- `Reduction:` смена базы $\\log\\to\\log_2$ меняет лишь константы в $O(\\cdot)$
-  и не затрагивает строгость включений.
+- `Lens:` Equivalence.
+- `Statement (Q43.S186-exp2-quote-scan-logbases-summary-tail):`
+  In the summary section `docs/12_time_hierarchy.md` logarithms in estimates
+  universal simulation and hierarchy theorems are reduced to $\\log_2$,
+  to reconcile the entries with the binary interpretation of $2^{(\\cdot)}$.
+- `Reduction:` changing the base $\\log\\to\\log_2$ changes only the constants in $O(\\cdot)$
+  and does not affect the strictness of inclusions.
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (нормализация базы в summary).
+- `Status:` reduction (normalization of the base in summary).
 - `StepID:` Q43.S186-exp2-quote-scan-logbases-summary-tail.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` проверить оставшиеся summary‑файлы на ambiguity по $\\log$,
-  либо зафиксировать, что база везде несущественна.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` check the remaining summary files on ambiguity using $\\log$,
+  or fix that the base is everywhere insignificant.
 
 -/
 
 /-!
-### 16.327. Исследовательский шаг (reduction): log/ln в summary‑audit (circuit complexity)
+### 16.327. Research step (reduction): log/ln in summaryaudit (circuit complexity)
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S187-exp2-quote-scan-logbases-summary-audit):`
-  В summary‑разделе `docs/09_circuit_complexity.md` логарифмы согласованы как
-  $\\ln$ в Razborov’85 нижней оценке (чтобы избежать смешения $\\ln$ и $\\log$).
-- `Reduction:` смена базы логарифма в выражениях вида $m^{C\\log m}$ поглощается
-  в константу $C$, поэтому явное указание $\\ln$ не меняет асимптотику.
+- `Lens:` Equivalence.
+- `Statement (Q43.S187-exp2-quote-scan-logbases-summary-audit):`
+  In the summary section `docs/09_circuit_complexity.md` logarithms are consistent as
+  $\\ln$ in Razborov'85 lower estimate (to avoid mixing $\\ln$ and $\\log$).
+- `Reduction:` changing the logarithm base in expressions of the form $m^{C\\log m}$ is absorbed
+  into the constant $C$, so explicitly specifying $\\ln$ does not change the asymptotics.
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (нормализация базы в summary).
+- `Status:` reduction (normalization of the base in summary).
 - `StepID:` Q43.S187-exp2-quote-scan-logbases-summary-audit.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` завершить аудит summary‑логарифмов и зафиксировать,
-  что оставшиеся базы несущественны.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` complete audit of summary logarithms and commit,
+  that the remaining bases are insignificant.
 
 -/
 
 /-!
-### 16.328. Исследовательский шаг (reduction): log_2 в summary‑audit (basic inclusions)
+### 16.328. Research step (reduction): log_2 in summaryaudit (basic inclusions)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S188-exp2-quote-scan-logbases-summary-closeout):`
-  В summary‑разделе `docs/03_basic_inclusions.md` логарифмы для счётчиков и
-  Savitch‑шаблона приведены к $\\log_2$ (log² → log_2²), согласуя базу с двоичным счётом.
-- `Reduction:` смена базы $\\log\\to\\log_2$ меняет только константы и не влияет
-  на полиномиальность памяти.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S188-exp2-quote-scan-logbases-summary-closeout):`
+  In the summary section `docs/03_basic_inclusions.md` logarithms for counters and
+  Savitch templates are reduced to $\\log_2$ (log2 -> log_22), matching the base with the binary count.
+- `Reduction:` changing the base $\\log\\to\\log_2$ changes only the constants and has no effect
+  on polynomial memory.
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (нормализация базы в summary).
+- `Status:` reduction (normalization of the base in summary).
 - `StepID:` Q43.S188-exp2-quote-scan-logbases-summary-closeout.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` зафиксировать, что оставшиеся $\\log$ в summary несущественны
-  (или отметить исключения).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` state that the remaining $\\log$ in the summary is unimportant
+  (or note exceptions).
 
 -/
 
 /-!
-### 16.329. Исследовательский шаг (reduction): postaudit summary‑логарифмов
+### 16.329. Research step (reduction): postaudit summarylogarithms
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S189-exp2-quote-scan-logbases-summary-postaudit):`
-  В summary‑файлах `docs/03_basic_inclusions.md`, `docs/09_circuit_complexity.md`,
+- `Lens:` Equivalence.
+- `Statement (Q43.S189-exp2-quote-scan-logbases-summary-postaudit):`
+  In summary files `docs/03_basic_inclusions.md`, `docs/09_circuit_complexity.md`,
   `docs/11_switching_lemma_ac0.md`, `docs/12_time_hierarchy.md`,
   `docs/13_savitch.md`, `docs/15_proof_complexity.md`, `docs/16_ip_pcp.md`
-  все оставшиеся логарифмы либо имеют явную базу $\\log_2$, либо стоят в формах
-  $O(\\log n)$/$O(N\\log N)$, где смена базы меняет только константу.
-- `Reduction:` база $\\log$ влияет лишь на мультипликативную константу, поэтому
-  в асимптотиках типа $O(\\log n)$ и $O(N\\log N)$ лог‑база несущественна.
+  all remaining logarithms either have an explicit base $\\log_2$ or are in the forms
+  $O(\\log n)$/$O(N\\log N)$, where changing the base changes only the constant.
+- `Reduction:` the base $\\log$ affects only the multiplicative constant, so
+  in asymptotics of the type $O(\\log n)$ and $O(N\\log N)$ the log base is unimportant.
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (postaudit: remaining logs are base‑agnostic).
+- `Status:` reduction (postaudit: remaining logs are base‑agnostic).
 - `StepID:` Q43.S189-exp2-quote-scan-logbases-summary-postaudit.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` при необходимости закрыть Q43‑аудит лог‑баз
-  или отметить единичные исключения.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` close Q43 log database audit if necessary
+  or note isolated exceptions.
 
 -/
 
 /-!
-### 16.330. Исследовательский шаг (reduction): exit log‑base audit в summary
+### 16.330. Research step (reduction): exit logbase audit to summary
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S190-exp2-quote-scan-logbases-summary-exit):`
-  Postaudit завершён: оставшиеся summary‑оценки используют либо явный $\\log_2$,
-  либо формы $O(\\log n)$/$O(N\\log N)$, где смена базы меняет только константу.
-  При последующих правках любые экспоненциальные формы будут записываться как
-  $2^{(\\cdot)}$ или $e^{(\\cdot)}$.
-- `Reduction:` лог‑аудит завершён; Q43 возвращается к содержательному вопросу
-  про cost‑$t$ evaluations в flat local‑EF(s).
+- `Lens:` Equivalence.
+- `Statement (Q43.S190-exp2-quote-scan-logbases-summary-exit):`
+  Postaudit complete: remaining summary estimates use either explicit $\\log_2$,
+  or the form $O(\\log n)$/$O(N\\log N)$, where changing the base changes only the constant.
+  In subsequent edits, any exponential forms will be written as
+  $2^{(\\cdot)}$ or $e^{(\\cdot)}$.
+- `Reduction:` log audit completed; Q43 returns to the substantive question
+  about cost$t$ evaluations in flat localEF(s).
 - `Exact citation:`
-  HR’22 фиксирует конвенцию `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
+  HR'22 fixes the convention `log=log_2` (“Logarithms are denoted by log and are always with respect to the base 2.”),
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (audit exit).
+- `Status:` reduction (audit exit).
 - `StepID:` Q43.S190-exp2-quote-scan-logbases-summary-exit.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` начать содержательный шаг по Q43: либо схема построения cost‑$t$
-  evaluations для каждой строки, либо точная точка поломки (nesting/глобальная поддержка).
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` start the meaningful step on Q43: either cost$t$ construction scheme
+  evaluations for each line, or the exact point of failure (nesting/global support).
 
 -/
 
 /-!
-### 16.331. Исследовательский шаг (reduction): pivot — размер формулы после развёртывания extension‑переменных
+### 16.331. Research step (reduction): pivot - the size of the formula after expanding the extension variables
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S191-flat-eval-construction-pivot):`
-  В flat local‑EF(s) при развёртывании $p_i\\leftrightarrow\\varphi_i(X)$ в строке $F$
-  размер формулы по $X$ оценивается как
+- `Lens:` Trade-off.
+- `Statement (Q43.S191-flat-eval-construction-pivot):`
+  In flat localEF(s) when expanding $p_i\\leftrightarrow\\varphi_i(X)$ in line $F$
+  the size of the formula in $X$ is estimated as
   $$M(F)\\le |F| + \\sum_{p_i\\in \\mathrm{vars}(F)} \\#_F(p_i)\\cdot|\\varphi_i|.$$
-  Поэтому если для всех $i$ выполнено $|\\varphi_i|\\le \\mathrm{poly}(s)$ и
-  $|F|=\\mathrm{poly}(n)$, то $M(F)\\le \\mathrm{poly}(s)\\cdot \\mathrm{poly}(n)$,
-  а параметр HR $t=\\log_2 M(F)$ остаётся $O(\\log n+\\log s)$.
-- `Reduction:` построение cost‑$t$ evaluations для строк flat local‑EF(s) сводится к
-  контролю размера формул $|\\varphi_i|$ (или к альтернативной оценке $M(F)$ без
-  развёртывания); без такой оценки $M(F)$ может быть сколь угодно большим даже при
+  Therefore, if for all $i$ $|\\varphi_i|\\le \\mathrm{poly}(s)$ holds and
+  $|F|=\\mathrm{poly}(n)$, then $M(F)\\le \\mathrm{poly}(s)\\cdot \\mathrm{poly}(n)$,
+  and the parameter HR $t=\\log_2 M(F)$ remains $O(\\log n+\\log s)$.
+- `Reduction:` constructing cost$t$ evaluations for flat localEF(s) strings reduces to
+  control over the size of formulas $|\\varphi_i|$ (or to an alternative estimate of $M(F)$ without
+  deployment); without such an estimate $M(F)$ can be arbitrarily large even with
   $|\\mathrm{supp}(\\varphi_i)|\\le s$.
-- `Toy‑test:` если $F$ содержит $m$ копий $p$ и $|\\varphi|=2^{(\\log_2 n)^2}$,
-  то $M(F)=m\\cdot 2^{(\\log_2 n)^2}$ и $t=\\log_2 m + (\\log_2 n)^2$
-  (форма $2^{(\\log_2 n)^2}$ суперполиномиальна).
-- `Статус:` reduction (pivot: размер формулы после развёртывания — узкое место).
+- `Toy‑test:` if $F$ contains $m$ copies of $p$ and $|\\varphi|=2^{(\\log_2 n)^2}$,
+  then $M(F)=m\\cdot 2^{(\\log_2 n)^2}$ and $t=\\log_2 m + (\\log_2 n)^2$
+  (the form $2^{(\\log_2 n)^2}$ is superpolynomial).
+- `Status:` reduction (pivot: the size of the formula after expansion is the bottleneck).
 - `StepID:` Q43.S191-flat-eval-construction-pivot.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (чистый подсчёт размера формулы).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` зафиксировать требуемое ограничение на $|\\varphi_i|$
-  (например, $|\\varphi_i|\\le \\mathrm{poly}(s)$ как часть модели local‑EF(s))
-  или предложить eval‑конструкцию, не зависящую от полного развёртывания.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (pure calculation of the size of the formula).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` fix the required constraint on $|\\varphi_i|$
+  (e.g. $|\\varphi_i|\\le \\mathrm{poly}(s)$ as part of the localEF(s) model)
+  or propose an eval design that does not depend on full deployment.
 
 -/
 
 /-!
-### 16.332. Исследовательский шаг (reduction): axiom-size bound через размер линий в flat local-EF(s)
+### 16.332. Exploratory step (reduction): axiom-size bound via line size in flat local-EF(s)
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S192-flat-eval-axiom-size-bound):`
-  Пусть есть flat local-EF(s) доказательство размера $S$, где размер линии измеряется числом
-  символов/литералов и каждая extension-аксиома записана как строка
+- `Lens:` Trade-off.
+- `Statement (Q43.S192-flat-eval-axiom-size-bound):`
+  Let there be a flat local-EF(s) proof of size $S$, where the size of the line is measured by the number
+  characters/literals and each extension axiom is written as a string
   $p_i\\leftrightarrow\\varphi_i(X)$.
-  Тогда для любой строки $F$:
+  Then for any string $F$:
   $$M(F)\\le |F| + \\sum_{p_i\\in\\mathrm{vars}(F)} \\#_F(p_i)\\cdot|\\varphi_i|
            \\le |F| + |F|\\cdot \\max_i |\\varphi_i|
            \\le S + S^2,$$
-  и потому $t=\\log_2 M(F)=O(\\log_2 S)$. Если $S=\\mathrm{poly}(n)$, то $t=O(\\log_2 n)$.
-- `Reduction:` контроль $|\\varphi_i|$ сводится к стандартному ограничению на размер линий;
-  дополнительное условие $|\\varphi_i|\\le \\mathrm{poly}(s)$ нужно только если
-  extension-аксиомы считаются "бесплатными".
-- `Toy-kill:` если аксиомы не учитываются в размере, можно взять
-  $|\\varphi_i|=2^{(\\log_2 n)^2}$ при $|\\mathrm{supp}(\\varphi_i)|\\le s$ и получить
-  $t=(\\log_2 n)^2+O(\\log_2 |F|)$, что суперполиномиально.
-- `Статус:` reduction (axiom-size bound = line-size bound в стандартной метрике).
+  and therefore $t=\\log_2 M(F)=O(\\log_2 S)$. If $S=\\mathrm{poly}(n)$, then $t=O(\\log_2 n)$.
+- `Reduction:` control of $|\\varphi_i|$ is reduced to a standard limit on the size of lines;
+  the additional condition $|\\varphi_i|\\le \\mathrm{poly}(s)$ is needed only if
+  extension axioms are considered "free".
+- `Toy-kill:` if the axioms are not taken into account in size, one can take
+  $|\\varphi_i|=2^{(\\log_2 n)^2}$ for $|\\mathrm{supp}(\\varphi_i)|\\le s$ and get
+  $t=(\\log_2 n)^2+O(\\log_2 |F|)$, which is superpolynomial.
+- `Status:` reduction (axiom-size bound = line-size bound in the standard metric).
 - `StepID:` Q43.S192-flat-eval-axiom-size-bound.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: релятивизуется (чистый подсчет размеров строк/подстановки).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` проверить, учитываются ли extension-аксиомы в размере модели local-EF(s);
-  если нет - зафиксировать это как барьер или усилить модель явным ограничением на
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (pure counting of string/substitution sizes).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` check whether extension axioms are taken into account in the size of the local-EF(s) model;
+  if not, fix it as a barrier or strengthen the model with an explicit restriction on
   $|\\varphi_i|$.
 
 -/
 
 /-!
-### 16.333. Исследовательский шаг (reduction): axiom-size accounting vs line-count в flat local-EF(s)
+### 16.333. Exploratory step (reduction): axiom-size accounting vs line-count in flat local-EF(s)
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S193-flat-eval-axiom-size-accounting):`
-  Если размер доказательства $S$ измеряется суммарным размером строк (сумма длин/литералов),
-  то каждая строка имеет размер $\\le S$, в частности $|\\varphi_i|\\le S$ для любой
-  extension-аксиомы $p_i\\leftrightarrow\\varphi_i(X)$. Тогда $M(F)\\le S+S^2$ и
-  $t=\\log_2 M(F)=O(\\log_2 S)$, как в §16.332.
-  Если же $S$ — только число строк, то $|\\varphi_i|$ не ограничен размером доказательства,
-  и контроль $t$ требует дополнительного ограничения на $|\\varphi_i|$.
-- `Reduction:` Q43 сводится к выбору метрики размера в модели local-EF(s):
-  line-size даёт автоматический bound на $|\\varphi_i|$, line-count требует явного ограничения
-  или отдельного барьера.
-- `Toy-check:` при line-count можно взять доказательство из одной строки
-  $p\\leftrightarrow\\varphi(X)$ с $|\\varphi|=2^{(\\log_2 n)^2}$, и тогда
-  $t=(\\log_2 n)^2$ суперполиномиален.
-- `Статус:` reduction (accounting: line-size vs line-count).
+- `Lens:` Equivalence.
+- `Statement (Q43.S193-flat-eval-axiom-size-accounting):`
+  If the size of the proof $S$ is measured by the total size of the strings (sum of lengths/literals),
+  then each line has size $\\le S$, in particular $|\\varphi_i|\\le S$ for any
+  extension axioms $p_i\\leftrightarrow\\varphi_i(X)$. Then $M(F)\\le S+S^2$ and
+  $t=\\log_2 M(F)=O(\\log_2 S)$, as in Section 16.332.
+  If $S$ is only the number of lines, then $|\\varphi_i|$ is not limited by the size of the proof,
+  and control of $t$ requires an additional constraint on $|\\varphi_i|$.
+- `Reduction:` Q43 comes down to the choice of size metric in the local-EF(s) model:
+  line-size gives an automatic bound on $|\\varphi_i|$, line-count requires an explicit bound
+  or a separate barrier.
+- `Toy-check:` with line-count you can take a proof from one line
+  $p\\leftrightarrow\\varphi(X)$ with $|\\varphi|=2^{(\\log_2 n)^2}$, and then
+  $t=(\\log_2 n)^2$ is superpolynomial.
+- `Status:` reduction (accounting: line-size vs line-count).
 - `StepID:` Q43.S193-flat-eval-axiom-size-accounting.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: релятивизуется (чистый подсчет размера доказательства).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` уточнить, какая метрика размера используется в определения local-EF(s)
-  и в каких местах допускаются "бесплатные" extension-аксиомы.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (pure calculation of the size of the evidence).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` clarify which size metric is used in the definition of local-EF(s)
+  and in what places "free" extension axioms are allowed.
 
 -/
 
 /-!
-### 16.334. Исследовательский шаг (exact citation): line-size M в HR'22 Theorem 4.3
+### 16.334. Research step (exact citation): line-size M in HR'22 Theorem 4.3
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S194-flat-eval-axiom-size-model-check):`
-  В HR'22 параметр $M$ задается как размер строки (формулы), а $N$ - число строк;
-  это фиксирует метрику "line-size" и исключает трактовку "размер = число строк".
+- `Lens:` Invariant.
+- `Statement (Q43.S194-flat-eval-axiom-size-model-check):`
+  In HR'22, the parameter $M$ is specified as the size of the line (formula), and $N$ is the number of lines;
+  this fixes the "line-size" metric and eliminates the "size = number of lines" interpretation.
 - `Exact citation:`
   Håstad–Risse (2022), "Tseitin formulas on the grid are hard for bounded depth Frege",
   Theorem 4.3 (paper p. 16; PDF p. 18): "If each line of the refutation is of size M and depth d..."
-  и далее: "refutation ... consisting of N lines, where each line is a formula of size M".
+  and further: "refutation ... consisting of N lines, where each line is a formula of size M".
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:938-963`.
-  (В статье log = log_2, поэтому exp в формулировке читаем как 2^x.)
-- `Reduction:` для переноса HR-параметров в flat local-EF(s) нужно измерять размер строки
-  по формульному размеру и считать extension-аксиомы строками; line-count не фиксирует $M$.
-- `Статус:` exact citation (size metric pinned).
+  (In the article log = log_2, so exp in the wording is read as 2^x.)
+- `Reduction:` to transfer HR parameters to flat local-EF(s), you need to measure the line size
+  by formula size and consider extension axioms as strings; line-count does not capture $M$.
+- `Status:` exact citation (size metric pinned).
 - `StepID:` Q43.S194-flat-eval-axiom-size-model-check.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: неприменимо (точная цитата).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` явно зафиксировать метрику размера в определении local-EF(s)
-  (line-size vs line-count) или отметить барьер при "free" extension-аксиомах.
+- `Barrier check (A/B/C):`
+  A) Relativization check: not applicable (exact quote).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` explicitly capture the size metric in the definition of local-EF(s)
+  (line-size vs line-count) or mark a barrier with "free" extension axioms.
 
 -/
 
 /-!
-### 16.335. Исследовательский шаг (reduction): size metric для flat local-EF(s)
+### 16.335. Exploratory step (reduction): size metric for flat local-EF(s)
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S195-flat-eval-axiom-size-definition):`
-  Фиксируем метрику размера flat local-EF(s) как пару $(N,M)$, где $N$ — число строк,
-  а $M$ — максимальный размер строки (формулы). Extension-аксиомы
-  $p_i\\leftrightarrow\\varphi_i(X)$ считаются строками, поэтому $|\\varphi_i|\\le M$.
-  Тогда $t=\\log_2 M$, а при общей оценке $S$ на суммарный размер доказательства
-  имеем $M\\le S$ и $t=O(\\log_2 S)$.
-- `Reduction:` это согласует модель с HR'22 Thm. 4.3 (line-size $M$ и line-count $N$)
-  и исключает "free" extension-аксиомы; все шаги Q43 читаются с параметром $M$.
-- `Toy-check:` если учитывать только число строк, то $M$ не контролируется
-  (одна строка с $|\\varphi|=2^{(\\log_2 n)^2}$ даёт $t=(\\log_2 n)^2$).
-- `Статус:` reduction (size metric фиксирована).
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S195-flat-eval-axiom-size-definition):`
+  We fix the size metric flat local-EF(s) as a pair $(N,M)$, where $N$ is the number of lines,
+  and $M$ is the maximum size of the line (formula). Extension axioms
+  $p_i\\leftrightarrow\\varphi_i(X)$ are considered strings, so $|\\varphi_i|\\le M$.
+  Then $t=\\log_2 M$, and with a general estimate of $S$ for the total size of the proof
+  we have $M\\le S$ and $t=O(\\log_2 S)$.
+- `Reduction:` this fits the model with HR'22 Thm. 4.3 (line-size $M$ and line-count $N$)
+  and excludes "free" extension axioms; all Q43 steps are read with the $M$ parameter.
+- `Toy-check:` if we consider only the number of rows, then $M$ is not controlled
+  (one line with $|\\varphi|=2^{(\\log_2 n)^2}$ gives $t=(\\log_2 n)^2$).
+- `Status:` reduction (size metric is fixed).
 - `StepID:` Q43.S195-flat-eval-axiom-size-definition.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: неприменимо (определение метрики).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` при необходимости зафиксировать метрику размера в core-определениях
-  и проверить, как она влияет на формальные формулировки Q43 (t = log_2 M).
+- `Barrier check (A/B/C):`
+  A) Relativization check: not applicable (metric definition).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` if necessary, fix the size metric in the core definitions
+  and check how it affects the formal statements of Q43 (t = log_2 M).
 
 -/
 
 /-!
-### 16.336. Исследовательский шаг (proof): формализация метрики размера (N,M)
+### 16.336. Research step (proof): formalization of the size metric (N,M)
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S196-flat-eval-size-metric-formalize):`
-  В `formal/WIP/Work.lean` введены определения метрик line-size/line-count/line-max
-  и доказана лемма: если строка входит в proof, то ее размер не превышает суммарный
-  размер proof (line-size <= proofSize).
-- `Доказательство (Lean):`
-  определения `Q43_lineSize`, `Q43_proofSize`, `Q43_lineCount`, `Q43_lineMax` и
-  лемма `Q43_lineSize_le_proofSize` (см. `formal/WIP/Work.lean`).
-- `Статус:` proof (Lean-код компилируется).
+- `Lens:` Invariant.
+- `Statement (Q43.S196-flat-eval-size-metric-formalize):`
+  IN `formal/WIP/Work.lean` definitions of metrics line-size/line-count/line-max have been introduced
+  and the lemma is proven: if a string is included in proof, then its size does not exceed the total
+  proof size (line-size <= proofSize).
+- `Proof (Lean):`
+  definitions `Q43_lineSize`, `Q43_proofSize`, `Q43_lineCount`, `Q43_lineMax` and
+  lemma `Q43_lineSize_le_proofSize` (see `formal/WIP/Work.lean`).
+- `Status:` proof (Lean code compiles).
 - `StepID:` Q43.S196-flat-eval-size-metric-formalize.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: неприменимо (определения/арифметика натуральных).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` связать параметры (N,M) с `t=log_2 M` и записать зависимость
-  eval-порогов в терминах этих определений.
+- `Barrier check (A/B/C):`
+  A) Relativization check: not applicable (definitions/arithmetic of naturals).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` associate parameters (N,M) with `t=log_2 M` and write down the dependency
+  eval thresholds in terms of these definitions.
 
 -/
 
 /-!
-### 16.337. Исследовательский шаг (proof): параметр t как log_2 M
+### 16.337. Exploratory step (proof): parameter t as log_2 M
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S197-flat-eval-size-metric-tparam):`
-  В `formal/WIP/Work.lean` введен параметр $t:=\\log_2 M$ как `Nat.log2 M` и доказана
-  базовая оценка $t\\le M$ (лемма `Q43_tParam_le`), что фиксирует связь размера строки
-  и параметра глубины evaluation.
-- `Доказательство (Lean):`
-  определения `Q43_tParam` и лемма `Q43_tParam_le` (см. `formal/WIP/Work.lean`).
-- `Статус:` proof (Lean-код компилируется).
+- `Lens:` Equivalence.
+- `Statement (Q43.S197-flat-eval-size-metric-tparam):`
+  IN `formal/WIP/Work.lean` the parameter $t:=\\log_2 M$ is introduced as `Nat.log2 M` and proven
+  basic estimate $t\\le M$ (Lemma `Q43_tParam_le`), which captures the string size relationship
+  and depth parameter evaluation.
+- `Proof (Lean):`
+  definitions `Q43_tParam` and lemma `Q43_tParam_le` (see `formal/WIP/Work.lean`).
+- `Status:` proof (Lean code compiles).
 - `StepID:` Q43.S197-flat-eval-size-metric-tparam.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: неприменимо (арифметика натуральных).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` использовать $t=\\log_2 M$ в формальных формулировках Q43 и
-  связать $M$ с proofSize через lineMax/lineSize.
+- `Barrier check (A/B/C):`
+  A) Relativization check: not applicable (natural arithmetic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` use $t=\\log_2 M$ in formal formulations of Q43 and
+  associate $M$ with proofSize via lineMax/lineSize.
 
 -/
 
 /-!
-### 16.338. Исследовательский шаг (proof): t=log_2 M <= proofSize
+### 16.338. Research step (proof): t=log_2 M <= proofSize
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S198-flat-eval-tparam-usage):`
-  В `formal/WIP/Work.lean` доказано, что $\\mathrm{lineMax}(\\pi)\\le\\mathrm{proofSize}(\\pi)$,
-  а значит $t=\\log_2(\\mathrm{lineMax}(\\pi))\\le\\mathrm{proofSize}(\\pi)$.
-  Это связывает параметр $t$ с суммарным размером доказательства.
-- `Доказательство (Lean):`
-  леммы `Q43_lineMax_le_proofSize` и `Q43_tParam_le_proofSize` (см. `formal/WIP/Work.lean`).
-- `Статус:` proof (Lean-код компилируется).
+- `Lens:` Equivalence.
+- `Statement (Q43.S198-flat-eval-tparam-usage):`
+  IN `formal/WIP/Work.lean` it has been proven that $\\mathrm{lineMax}(\\pi)\\le\\mathrm{proofSize}(\\pi)$,
+  which means $t=\\log_2(\\mathrm{lineMax}(\\pi))\\le\\mathrm{proofSize}(\\pi)$.
+  This relates the parameter $t$ to the total size of the evidence.
+- `Proof (Lean):`
+  lemmas `Q43_lineMax_le_proofSize` and `Q43_tParam_le_proofSize` (see `formal/WIP/Work.lean`).
+- `Status:` proof (Lean code compiles).
 - `StepID:` Q43.S198-flat-eval-tparam-usage.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: неприменимо (арифметика натуральных).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` использовать эту связь в формальных оценках $t$ для Q43
-  (например, $t=O(\\log_2 S)$ при $S=\\mathrm{proofSize}$).
+- `Barrier check (A/B/C):`
+  A) Relativization check: not applicable (natural arithmetic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` use this connection in formal estimates of $t$ for Q43
+  (for example, $t=O(\\log_2 S)$ with $S=\\mathrm{proofSize}$).
 
 -/
 
 /-!
-### 16.339. Исследовательский шаг (proof): t <= log_2 proofSize
+### 16.339. Research step (proof): t <= log_2 proofSize
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S199-flat-eval-tparam-ologs):`
-  В `formal/WIP/Work.lean` доказано, что $\\log_2$ монотонна на Nat и
-  $t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$; это даёт явную
-  форму связи $t \\le \\log_2 S$ при $S=\\mathrm{proofSize}$.
-- `Доказательство (Lean):`
-  леммы `Q43_log2_mono` и `Q43_tParam_le_log2_proofSize` (см. `formal/WIP/Work.lean`).
-- `Статус:` proof (Lean-код компилируется).
+- `Lens:` Equivalence.
+- `Statement (Q43.S199-flat-eval-tparam-ologs):`
+  IN `formal/WIP/Work.lean` it is proved that $\\log_2$ is monotonic on Nat and
+  $t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$; this gives an explicit
+  the relation $t \\le \\log_2 S$ when $S=\\mathrm{proofSize}$.
+- `Proof (Lean):`
+  lemmas `Q43_log2_mono` and `Q43_tParam_le_log2_proofSize` (see `formal/WIP/Work.lean`).
+- `Status:` proof (Lean code compiles).
 - `StepID:` Q43.S199-flat-eval-tparam-ologs.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: неприменимо (арифметика натуральных).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` при необходимости вывести явный bound $t\\le c\\log_2 n$
-  для полиномиального $S$ и использовать его в Q43-оценках.
+- `Barrier check (A/B/C):`
+  A) Relativization check: not applicable (natural arithmetic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` if necessary, print an explicit bound $t\\le c\\log_2 n$
+  for polynomial $S$ and use it in Q43 estimates.
 
 -/
 
 /-!
-### 16.340. Исследовательский шаг (reduction): t = O(log_2 n) при S = poly(n)
+### 16.340. Research step (reduction): t = O(log_2 n) with S = poly(n)
 
-- `Линза:` Трейд-офф.
-- `Утверждение (Q43.S200-flat-eval-tparam-ologn):`
-  Если суммарный размер доказательства $S(n)$ полиномиален, т.е.
-  $S(n)\\le n^k+1$ для некоторого $k$, то из $t\\le\\log_2 S$ следует
-  $t=O(\\log_2 n)$: при $n\\ge 2$ имеем $S\\le 2n^k$, значит
+- `Lens:` Trade-off.
+- `Statement (Q43.S200-flat-eval-tparam-ologn):`
+  If the total proof size $S(n)$ is polynomial, i.e.
+  $S(n)\\le n^k+1$ for some $k$, then from $t\\le\\log_2 S$ it follows
+  $t=O(\\log_2 n)$: for $n\\ge 2$ we have $S\\le 2n^k$, which means
   $$t\\le\\log_2 S\\le 1 + k\\log_2 n.$$
-- `Reduction:` связка Q43 теперь идет так:
-  line-size $M\\le S$ ⇒ $t=\\log_2 M\\le\\log_2 S$ ⇒ при $S=\\mathrm{poly}(n)$
-  получаем $t=O(\\log_2 n)$ (база логарифма 2).
-- `Toy-check:` при $S=n^k$ получаем ровно $t=\\log_2 S=k\\log_2 n$.
-- `Статус:` reduction (полиномиальный размер ⇒ логарифмический t).
+- `Reduction:` the Q43 link now goes like this:
+  line-size $M\\le S$  $t=\\log_2 M\\le\\log_2 S$  at $S=\\mathrm{poly}(n)$
+  we get $t=O(\\log_2 n)$ (logarithm base 2).
+- `Toy-check:` for $S=n^k$ we obtain exactly $t=\\log_2 S=k\\log_2 n$.
+- `Status:` reduction (polynomial size  logarithmic t).
 - `StepID:` Q43.S200-flat-eval-tparam-ologn.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: неприменимо (асимптотика).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` записать явный параметрический режим $t\\le c\\log_2 n$
-  в формулировках Q43 и проверить совместимость с HR-оценками.
+- `Barrier check (A/B/C):`
+  A) Relativization check: not applicable (asymptotic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` write down the explicit parametric mode $t\\le c\\log_2 n$
+  in the formulations of Q43 and check compatibility with HR assessments.
 
 -/
 
 /-!
-### 16.341. Исследовательский шаг (reduction): polylog t из quasi-poly размера
+### 16.341. Research step (reduction): polylog t of quasi-poly size
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S201-flat-eval-tparam-polylogn):`
-  Если суммарный размер доказательства квази-полиномиален, например
+- `Lens:` Equivalence.
+- `Statement (Q43.S201-flat-eval-tparam-polylogn):`
+  If the total size of the proof is quasi-polynomial, for example
   $$S(n)\\le n^{(\\log_2 n)^c}=2^{(\\log_2 n)^{c+1}},$$
-  то из $t\\le\\log_2 S$ следует
+  then from $t\\le\\log_2 S$ it follows
   $$t\\le (\\log_2 n)^{c+1},$$
-  то есть $t=\\mathrm{polylog}(n)$ (логарифм базы 2).
-  При $c\\ge 1$ рост $2^{(\\log_2 n)^{c+1}}$ суперполиномиален.
-- `Reduction:` режим $S= n^{\\mathrm{polylog}(n)}$ даёт $t=\\mathrm{polylog}(n)$,
-  что совместимо с требованиями Q43 по малым evaluations.
-- `Toy-check:` при $S=2^{(\\log_2 n)^2}$ получаем $t\\le(\\log_2 n)^2$.
-- `Статус:` reduction (quasi-poly size => polylog t).
+  that is, $t=\\mathrm{polylog}(n)$ (base 2 logarithm).
+  For $c\\ge 1$ the growth of $2^{(\\log_2 n)^{c+1}}$ is superpolynomial.
+- `Reduction:` mode $S= n^{\\mathrm{polylog}(n)}$ gives $t=\\mathrm{polylog}(n)$,
+  which is compatible with Q43 requirements for small evaluations.
+- `Toy-check:` for $S=2^{(\\log_2 n)^2}$ we obtain $t\\le(\\log_2 n)^2$.
+- `Status:` reduction (quasi-poly size => polylog t).
 - `StepID:` Q43.S201-flat-eval-tparam-polylogn.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: неприменимо (асимптотика).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` связать polylog-$t$ режим с HR-совместимостью
-  (например, проверить условия $t(d)\\le n_d/16$ при $t=(\\log_2 n)^{O(1)}$).
+- `Barrier check (A/B/C):`
+  A) Relativization check: not applicable (asymptotic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` associate polylog-$t$ mode with HR compatibility
+  (for example, check the conditions $t(d)\\le n_d/16$ for $t=(\\log_2 n)^{O(1)}$).
 
 -/
 
 /-!
-### 16.342. Исследовательский шаг (reduction): polylog-$t$ совместим с HR после $t'=(2s+1)t$
+### 16.342. Exploratory step (reduction): polylog-$t$ is compatible with HR after $t'=(2s+1)t$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S202-flat-eval-hr-compat-polylog):`
-  В flat local‑EF(s) развёртывание $P$‑запросов заменяет параметр глубины
-  $t$ на $t':=(2s+1)t$ (см. §16.165). Если $s(n)$ и $t(n)$ — polylog$(n)$
-  (логарифм базы $2$), то $t'(n)$ остаётся polylog$(n)$, и все HR‑проверки
-  сводятся к контролю порогов вида $t'(n)\\le n/16$, $s(n)\\le n/32$.
-- `Reduction:` HR‑параметры зависят от глубины только через $t$; значит для Q43
-  достаточно связать $t$ и $t'$ и проверить, что polylog‑режим не рушит
-  рекурсию $n_\\eta$ (до polylog‑множителей).
-- `Toy‑check:` $s=0$ даёт $t'=t$; при $s=\\log_2 n$ имеем
+- `Lens:` Equivalence.
+- `Statement (Q43.S202-flat-eval-hr-compat-polylog):`
+  In flat localEF(s), $P$query expansion replaces the depth parameter
+  $t$ by $t':=(2s+1)t$ (see Section 16.165). If $s(n)$ and $t(n)$ are polylog$(n)$
+  (logarithm of base $2$), then $t'(n)$ remains polylog$(n)$, and all HR checks
+  are reduced to monitoring thresholds of the form $t'(n)\\le n/16$, $s(n)\\le n/32$.
+- `Reduction:` HR parameters depend on depth only through $t$; means for Q43
+  it is enough to connect $t$ and $t'$ and check that the polylog mode does not break
+  $n_\\eta$ recursion (up to polylog factors).
+- `Toy‑check:` $s=0$ gives $t'=t$; for $s=\\log_2 n$ we have
   $t'\\le(2\\log_2 n+1)\\,t=O((\\log_2 n)^2)$.
-- `Попытка “убить”:` если $s(n)=2^{\\sqrt{\\log_2 n}}$ (база $2$), то $t'$ уже
-  супер‑polylog и HR‑рекурсия может схлопнуться; значит гипотеза “$s$ polylog”
-  существенна.
-- `Статус:` reduction (polylog‑режим устойчив при $t'=(2s+1)t$).
+- `Attempt to "kill":` if $s(n)=2^{\\sqrt{\\log_2 n}}$ (base $2$), then $t'$ is already
+  super-polylog and HR-recursion may collapse; means the hypothesis "$s$ polylog"
+  significant.
+- `Status:` reduction (polylog mode is stable at $t'=(2s+1)t$).
 - `StepID:` Q43.S202-flat-eval-hr-compat-polylog.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (чистая арифметика параметров).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` проверить точное место в HR Lemma 4.5, где требуется
-  $t(\\eta)\\le n_\\eta/16$, и оценить запас после замены $t\\mapsto t'$.
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (pure parameter arithmetic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` check the exact place in HR Lemma 4.5 where required
+  $t(\\eta)\\le n_\\eta/16$, and estimate the stock after replacing $t\\mapsto t'$.
 
 -/
 
 /-!
-### 16.343. Исследовательский шаг (reduction): HR‑порог $t'\\le n/16$ из polylog‑режима
+### 16.343. Exploratory step (reduction): HR threshold $t'\\le n/16$ from polylog mode
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S203-flat-eval-hr-param-check):`
-  Пусть $t'(n)\\le(\\log_2 n)^a$ и $s(n)\\le(\\log_2 n)^b$ при фиксированных $a,b$.
-  Тогда существует $n_0(a,b)$, что для всех $n\\ge n_0$ выполнены
-  $t'(n)\\le n/16$ и $s(n)\\le n/32$.
-- `Reduction:` проверка HR‑условий $t'\\le n/16$ и $s\\le n/32$ сводится к
-  выбору $n$ достаточно большим и затем к контролю того, что рекурсия $n_\\eta$
-  не опускается ниже $n_0$.
-- `Toy‑check:` для $n=2^{24}$ имеем $\\log_2 n=24$ и при $a\\le4$ получаем
+- `Lens:` Invariant.
+- `Statement (Q43.S203-flat-eval-hr-param-check):`
+  Let $t'(n)\\le(\\log_2 n)^a$ and $s(n)\\le(\\log_2 n)^b$ for fixed $a,b$.
+  Then there exists $n_0(a,b)$ such that for all $n\\ge n_0$
+  $t'(n)\\le n/16$ and $s(n)\\le n/32$.
+- `Reduction:` checking the HR conditions $t'\\le n/16$ and $s\\le n/32$ reduces to
+  choosing $n$ large enough and then checking that the recursion $n_\\eta$
+  does not fall below $n_0$.
+- `Toy‑check:` for $n=2^{24}$ we have $\\log_2 n=24$ and for $a\\le4$ we get
   $24^a\\le 2^{24}/16$.
-- `Попытка “убить”:` если степени polylog не фиксированы (или $s(n)=2^{\\sqrt{\\log_2 n}}$),
-  то условие $t'\\le n/16$ может провалиться; значит фиксирование $a,b$ критично.
-- `Статус:` reduction (пороговые условия сводятся к “$n$ достаточно велико”).
+- `Attempt to "kill":` if the powers of polylog are not fixed (or $s(n)=2^{\\sqrt{\\log_2 n}}$),
+  then the condition $t'\\le n/16$ may fail; this means that fixing $a,b$ is critical.
+- `Status:` reduction (threshold conditions are reduced to "$n$ is large enough").
 - `StepID:` Q43.S203-flat-eval-hr-param-check.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (арифметика параметров).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` провести порог через рекурсию HR $n_\\eta$ и показать, что
-  $t'(\\eta)\\le n_\\eta/16$ сохраняется на всех уровнях.
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (parameter arithmetic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` pass the threshold through the recursion HR $n_\\eta$ and show that
+  $t'(\\eta)\\le n_\\eta/16$ is maintained at all levels.
 
 -/
 
 /-!
-### 16.344. Исследовательский шаг (reduction): порог $t'(\\eta)\\le n_\\eta/16$ через HR‑рекурсию
+### 16.344. Exploratory step (reduction): threshold $t'(\\eta)\\le n_\\eta/16$ via HR recursion
 
-- `Линза:` Трейд‑офф.
-- `Утверждение (Q43.S204-flat-eval-hr-neta-threshold):`
-  В HR‑рекурсии $n_\\eta=\\lfloor n_{\\eta-1}/(A\\,t'\\,\\log_2^{c_1} n_{\\eta-1})\\rfloor$
-  при $t'(n)=\\mathrm{polylog}(n)$ существует $n_0$ и горизонт $\\eta_*$ такой, что
-  для всех $\\eta\\le\\eta_*$ имеем $n_\\eta\\ge n_0$, а значит выполняется
-  $t'(\\eta)\\le n_\\eta/16$ и $s(\\eta)\\le n_\\eta/32$.
-- `Reduction:` HR‑проверки на всех уровнях сводятся к явной нижней границе
-  $n_\\eta\\ge n_0$; это достигается, если рекурсия делит на polylog‑фактор
-  лишь $O(\\log n)$ шагов.
-- `Toy‑check:` при $n=2^{24}$ и $t'(n)=\\log_2^4 n$ имеем
-  $A\\,t'\\,\\log_2^{c_1}n\\le\\log_2^{O(1)}n$, так что $n_1\\ge 2^{24}/\\log_2^{O(1)}n$
-  и порог $t'\\le n_1/16$ сохраняется.
-- `Попытка “убить”:` если $t'(n)=2^{\\sqrt{\\log_2 n}}$ (база $2$), то делитель уже
-  субэкспоненциален, и $n_\\eta$ может упасть ниже $n_0$ за $O(1)$ шагов.
-- `Статус:` reduction (пороговые условия сведены к контролю $n_\\eta$).
+- `Lens:` Trade-off.
+- `Statement (Q43.S204-flat-eval-hr-neta-threshold):`
+  In HR recursion $n_\\eta=\\lfloor n_{\\eta-1}/(A\\,t'\\,\\log_2^{c_1} n_{\\eta-1})\\rfloor$
+  for $t'(n)=\\mathrm{polylog}(n)$ there is $n_0$ and a horizon $\\eta_*$ such that
+  for all $\\eta\\le\\eta_*$ we have $n_\\eta\\ge n_0$, which means
+  $t'(\\eta)\\le n_\\eta/16$ and $s(\\eta)\\le n_\\eta/32$.
+- `Reduction:` HR checks at all levels are reduced to a clear lower limit
+  $n_\\eta\\ge n_0$; this is achieved if the recursion divides by the polylog factor
+  only $O(\\log n)$ steps.
+- `Toy‑check:` for $n=2^{24}$ and $t'(n)=\\log_2^4 n$ we have
+  $A\\,t'\\,\\log_2^{c_1}n\\le\\log_2^{O(1)}n$, so $n_1\\ge 2^{24}/\\log_2^{O(1)}n$
+  and the threshold $t'\\le n_1/16$ is preserved.
+- `Attempt to "kill":` if $t'(n)=2^{\\sqrt{\\log_2 n}}$ (base $2$), then the divisor is already
+  is subexponential, and $n_\\eta$ can fall below $n_0$ in $O(1)$ steps.
+- `Status:` reduction (threshold conditions are reduced to $n_\\eta$ control).
 - `StepID:` Q43.S204-flat-eval-hr-neta-threshold.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (параметрическая рекурсия).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` оформить явную нижнюю оценку $n_\\eta\\ge n/\\log_2^{O(\\eta)} n$
-  и вывести из неё $t'(\\eta)\\le n_\\eta/16$ для всех уровней HR.
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (parametric recursion).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` formalize an explicit lower bound $n_\\eta\\ge n/\\log_2^{O(\\eta)} n$
+  and derive from it $t'(\\eta)\\le n_\\eta/16$ for all HR levels.
 
 -/
 
 /-!
-### 16.345. Исследовательский шаг (reduction): явная нижняя оценка $n_\\eta$
+### 16.345. Exploratory step (reduction): explicit lower bound $n_\\eta$
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S205-flat-eval-hr-neta-recursion):`
-  Пусть $t'(m)\\le(\\log_2 m)^a$ и рекурсия HR имеет вид
+- `Lens:` Invariant.
+- `Statement (Q43.S205-flat-eval-hr-neta-recursion):`
+  Let $t'(m)\\le(\\log_2 m)^a$ and the recursion HR has the form
   $$n_\\eta=\\Bigl\\lfloor\\frac{n_{\\eta-1}}{A\\,t'(n_{\\eta-1})\\,\\log_2^{c_1} n_{\\eta-1}}\\Bigr\\rfloor,$$
-  тогда при $n_{\\eta-1}\\ge 2$ и монотонности $t'$ по $m$ получаем
+  then for $n_{\\eta-1}\\ge 2$ and monotonicity of $t'$ in $m$ we obtain
   $$n_\\eta\\ge \\frac{n_{\\eta-1}}{A\\,\\log_2^{a+c_1} n_{\\eta-1}}
   \\ge \\frac{n}{\\bigl(A\\,\\log_2^{a+c_1} n\\bigr)^\\eta}.$$
-- `Reduction:` достаточно контролировать длину рекурсии:
-  если $\\eta\\le \\frac{\\log_2 n}{2(a+c_1+1)\\log_2\\log_2 n}$, то
-  $n_\\eta\\ge n^{1/2}$ и порог $t'(\\eta)\\le n_\\eta/16$ остаётся выполнимым
-  (при фиксированных $a,c_1$ и $n$ достаточно большом).
-- `Toy‑check:` при $n=2^{24}$ и $a+c_1\\le 6$ получаем
-  $n_2\\ge 2^{24}/24^{12}$, то есть спад за два шага лишь polylog‑факторный.
-- `Попытка “убить”:` если $t'(m)$ растёт быстрее polylog (например $2^{\\sqrt{\\log_2 m}}$),
-  то знаменатель становится субэкспоненциальным и $n_\\eta$ падает слишком быстро.
-- `Статус:` reduction (явная формула нижней оценки $n_\\eta$).
+- `Reduction:` it is enough to control the length of the recursion:
+  if $\\eta\\le \\frac{\\log_2 n}{2(a+c_1+1)\\log_2\\log_2 n}$, then
+  $n_\\eta\\ge n^{1/2}$ and the threshold $t'(\\eta)\\le n_\\eta/16$ remains feasible
+  (for fixed $a,c_1$ and $n$ sufficiently large).
+- `Toy‑check:` for $n=2^{24}$ and $a+c_1\\le 6$ we get
+  $n_2\\ge 2^{24}/24^{12}$, that is, the decline in two steps is only polylog-factorial.
+- `Attempt to "kill":` if $t'(m)$ grows faster than polylog (for example $2^{\\sqrt{\\log_2 m}}$),
+  then the denominator becomes subexponential and $n_\\eta$ falls too quickly.
+- `Status:` reduction (explicit formula for the lower bound $n_\\eta$).
 - `StepID:` Q43.S205-flat-eval-hr-neta-recursion.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (чистая параметрическая рекурсия).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` перейти к явной оценке $n_\\eta\\ge n/\\log_2^{O(\\eta)} n$
-  в Lean‑форме и зафиксировать диапазон $\\eta$ для HR‑параметров.
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (pure parametric recursion).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` go to explicit estimate $n_\\eta\\ge n/\\log_2^{O(\\eta)} n$
+  in Lean form and fix the range $\\eta$ for HR parameters.
 
 -/
 
 /-!
-### 16.346. Исследовательский шаг (reduction): диапазон $\\eta$ для HR‑параметров
+### 16.346. Research step (reduction): $\\eta$ range for HR parameters
 
-- `Линза:` Инвариант.
-- `Утверждение (Q43.S206-flat-eval-hr-neta-range):`
-  Пусть $t'(m)\\le(\\log_2 m)^a$ и
-  $n_\\eta\\ge n/(A\\,\\log_2^{a+c_1} n)^\\eta$ (см. §16.345). Тогда выбор
+- `Lens:` Invariant.
+- `Statement (Q43.S206-flat-eval-hr-neta-range):`
+  Let $t'(m)\\le(\\log_2 m)^a$ and
+  $n_\\eta\\ge n/(A\\,\\log_2^{a+c_1} n)^\\eta$ (see Section 16.345). Then the choice
   $$\\eta\\le \\frac{\\log_2 n}{2(a+c_1+1)\\log_2\\log_2 n}$$
-  гарантирует $n_\\eta\\ge n^{1/2}$ и, следовательно, для $n$ достаточно большого
-  выполняются пороги HR $t'(\\eta)\\le n_\\eta/16$ и $s(\\eta)\\le n_\\eta/32$.
-- `Reduction:` диапазон $\\eta$ сводится к логарифмическому числу уровней;
-  HR‑проверки выдерживают такой горизонт при fixed $a,c_1$ и base‑2 логарифмах.
-- `Toy‑check:` при $n=2^{24}$, $a+c_1\\le 6$ получаем
-  $\\eta\\le 24/(14\\log_2 24)\\approx 0.5$, то есть уже $\\eta\\le 1$
-  обеспечивает $n_\\eta\\ge n^{1/2}$.
-- `Попытка “убить”:` если $a$ или $c_1$ растут с $n$ (нефиксированная polylog‑степень),
-  то диапазон $\\eta$ может схлопнуться до 0; значит фиксированность параметров
-  критична.
-- `Статус:` reduction (явный диапазон $\\eta$ для HR‑параметров).
+  guarantees $n_\\eta\\ge n^{1/2}$ and, therefore, for $n$ sufficiently large
+  HR thresholds $t'(\\eta)\\le n_\\eta/16$ and $s(\\eta)\\le n_\\eta/32$ are met.
+- `Reduction:` the range of $\\eta$ is reduced to the logarithmic number of levels;
+  HR checks can withstand such a horizon with fixed $a,c_1$ and base-2 logarithms.
+- `Toy‑check:` for $n=2^{24}$, $a+c_1\\le 6$ we get
+  $\\eta\\le 24/(14\\log_2 24)\\approx 0.5$, that is, already $\\eta\\le 1$
+  provides $n_\\eta\\ge n^{1/2}$.
+- `Attempt to "kill":` if $a$ or $c_1$ increases with $n$ (unfixed polylogdegree),
+  then the range $\\eta$ can collapse to 0; means fixed parameters
+  critical.
+- `Status:` reduction (explicit $\\eta$ range for HR parameters).
 - `StepID:` Q43.S206-flat-eval-hr-neta-range.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (параметрическая оценка).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` связать полученный диапазон $\\eta$ с реальным числом
-  уровней в Proof Thm. 4.3 (HR’22) и проверить, что рекурсия не выходит
-  за этот горизонт при $s,t'\\!=\\mathrm{polylog}(n)$ (base $\\log_2$).
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (parametric assessment).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` associate the resulting range $\\eta$ with a real number
+  levels in Proof Thm. 4.3 (HR'22) and check that the recursion does not exit
+  beyond this horizon at $s,t'\\!=\\mathrm{polylog}(n)$ (base $\\log_2$).
 
 -/
 
 /-!
-### 16.347. Исследовательский шаг (reduction): число уровней = глубина $d$
+### 16.347. Exploratory step (reduction): number of levels = depth $d$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S207-flat-eval-hr-level-count):`
-  В HR’22 (Section 3.4) явно строится **последовательность** полных ограничений
-  $\\sigma_1,\\dots,\\sigma_d$ для Frege‑доказательства глубины $d$, и все
-  $t(k)$‑evaluations определяются индукцией по $k=1,\\dots,d$. Следовательно,
-  число уровней в конструкции HR равно $d$.
-- `Reduction:` для проверки диапазона $\\eta$ достаточно контролировать глубину
-  $d$ в режиме Thm. 4.3 и убедиться, что $d$ попадает в допустимый диапазон
-  $\\eta\\le \\frac{\\log_2 n}{2(a+c_1+1)\\log_2\\log_2 n}$ (см. §16.346).
+- `Lens:` Equivalence.
+- `Statement (Q43.S207-flat-eval-hr-level-count):`
+  HR'22 (Section 3.4) explicitly builds a **sequence** of complete restrictions
+  $\\sigma_1,\\dots,\\sigma_d$ for Frege-proof of depth $d$, and that's it
+  $t(k)$evaluations are determined by induction on $k=1,\\dots,d$. Hence,
+  the number of levels in the HR construction is $d$.
+- `Reduction:` to check the range of $\\eta$ it is enough to control the depth
+  $d$ in Thm mode. 4.3 and ensure that $d$ falls within the valid range
+  $\\eta\\le \\frac{\\log_2 n}{2(a+c_1+1)\\log_2\\log_2 n}$ (see Section 16.346).
 - `Exact citation:`
   HR’22 Section 3.4: “Consider a Frege proof of depth d … We intend to construct a sequence
   of full restrictions $\\sigma_1,\\sigma_2,\\dots,\\sigma_d$ … From the sequence of restrictions we
   require that all sub‑formulas occurring in the proof of depth at most k have functionally
   equivalent $t(k)$‑evaluations … We construct these $t(k)$‑evaluations by induction on k.”
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:798–823`).
-- `Toy‑check:` при $d=1$ имеем одну рестрикцию и одно $t(1)$‑evaluation, что
-  согласуется с “1 уровень = глубина 1”.
-- `Статус:` reduction (уровни HR = глубина $d$).
+- `Toy‑check:` for $d=1$ we have one restriction and one $t(1)$evaluation, which
+  consistent with "1 level = depth 1".
+- `Status:` reduction (HR levels = depth $d$).
 - `StepID:` Q43.S207-flat-eval-hr-level-count.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (цитирование + параметрическая связь).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` сопоставить глубину $d$ режима Thm. 4.3 с диапазоном $\\eta$
-  из §16.346 и проверить, что $d$ не превышает допустимый горизонт.
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (citation + parametric link).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` compare the depth $d$ of the Thm mode. 4.3 with $\\eta$ range
+  from Section 16.346 and verify that $d$ does not exceed the permissible horizon.
 
 -/
 
 /-!
-### 16.348. Исследовательский шаг (reduction): глубина $d$ vs диапазон $\\eta$
+### 16.348. Exploratory step (reduction): depth $d$ vs range $\\eta$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S208-flat-eval-hr-depth-range):`
-  В режиме Thm. 4.3 глубина $d$ сравнивается с диапазоном $\\eta$ из §16.346.
-  Так как число уровней равно $d$ (см. §16.347), условие
+- `Lens:` Equivalence.
+- `Statement (Q43.S208-flat-eval-hr-depth-range):`
+  In Thm mode. 4.3 compares the depth $d$ with the range $\\eta$ from Section 16.346.
+  Since the number of levels is equal to $d$ (see Section 16.347), the condition
   $$d\\le \\frac{\\log_2 n}{2(a+c_1+1)\\log_2\\log_2 n}$$
-  эквивалентно требованию
-  $$\\kappa\\le \\frac{1}{2(a+c_1+1)}\\qquad\\text{при }\\ d=\\kappa\\,\\frac{\\log_2 n}{\\log_2\\log_2 n}.$$
-- `Reduction:` проверка диапазона $\\eta$ сводится к сравнению коэффициента $\\kappa$
-  с явной константой $1/(2(a+c_1+1))$ из HR‑рекурсии.
-- `Toy‑check:` при $a+c_1\\le 6$ получаем $\\kappa\\le 1/14$; если глубина берётся
-  с $\\kappa\\ge 1$, условие не выполняется.
-- `Попытка “убить”:` без явных констант $a,c_1$ нельзя решить, попадает ли
-  режим глубины $d$ из Thm. 4.3 в допустимый диапазон $\\eta$.
-- `Статус:` reduction (диапазон $\\eta$ переписан через коэффициент $\\kappa$).
+  equivalent to requirement
+  $$\\kappa\\le \\frac{1}{2(a+c_1+1)}\\qquad\\text{at }\\ d=\\kappa\\,\\frac{\\log_2 n}{\\log_2\\log_2 n}.$$
+- `Reduction:` checking the range $\\eta$ comes down to comparing the coefficient $\\kappa$
+  with an explicit constant $1/(2(a+c_1+1))$ from HR recursion.
+- `Toy‑check:` for $a+c_1\\le 6$ we get $\\kappa\\le 1/14$; if the depth is taken
+  with $\\kappa\\ge 1$, the condition is not satisfied.
+- `Attempt to "kill":` without explicit constants $a,c_1$ it is impossible to decide whether
+  depth mode $d$ from Thm. 4.3 into the allowed range $\\eta$.
+- `Status:` reduction (the range $\\eta$ is rewritten through the coefficient $\\kappa$).
 - `StepID:` Q43.S208-flat-eval-hr-depth-range.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (параметрическая оценка).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` извлечь/оценить явные $a,c_1$ из доказательства HR
-  (Lemma 4.2/6.9) и проверить, совместим ли режим $\\kappa$ с полученной границей.
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (parametric assessment).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` extract/evaluate explicit $a,c_1$ from HR proof
+  (Lemma 4.2/6.9) and check whether the $\\kappa$ mode is compatible with the resulting bound.
 
 -/
 
 /-!
-### 16.349. Исследовательский шаг (barrier): константы $a,c_1$ в HR не извлечены
+### 16.349. Exploratory step (barrier): constants $a,c_1$ in HR are not extracted
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S209-flat-eval-hr-depth-range-constants):`
-  Для сравнения $\\kappa$ с $1/(2(a+c_1+1))$ нужны явные константы из HR‑переключающих
-  лемм. В тексте HR эти константы задаются как **существующие** (без численных значений),
-  что делает явное сравнение недоступным без полного пересчёта доказательства.
+- `Lens:` Equivalence.
+- `Statement (Q43.S209-flat-eval-hr-depth-range-constants):`
+  To compare $\\kappa$ with $1/(2(a+c_1+1))$ we need explicit constants from the HR switching
+  lemm. In the HR text these constants are specified as **existing** (without numerical values),
+  which makes an explicit comparison inaccessible without a complete restatement of the proof.
 - `Exact citation:`
-  Lemma 4.2 (Switching Lemma) вводит **абсолютные** константы $A,C,n_0$ без чисел:
+  Lemma 4.2 (Switching Lemma) introduces **absolute** constants $A,C,n_0$ without numbers:
   “There are absolute constants A, C, n0 > 0 …” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1542–1547`).
-  Lemma 6.9 также вводит константу существования:
+  Lemma 6.9 also introduces an existence constant:
   “There is a constant A > 0 …” (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1960–1966`).
-  В доказательстве Lemma 4.2 появляются “appropriate constants $A_0,A_1,A_2$”
-  без значений (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1987–1996`),
-  а в доказательстве Lemma 6.9 — константы $A_1,A_2,A_3,A_4$ “for some constant”
+  In the proof of Lemma 4.2 "appropriate constants $A_0,A_1,A_2$" appear
+  without values (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:1987–1996`),
+  and in the proof of Lemma 6.9 - the constants $A_1,A_2,A_3,A_4$ "for some constant"
   (`resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:2336–2351`).
-- `Barrier certificate:` без явных $A,C,n_0$ и констант из Lemma 6.9 нельзя вычислить
-  численные $a,c_1$ в пороге $\\eta$; сравнение $\\kappa$ остаётся нефиксируемым.
-- `Статус:` barrier (константы неявны).
+- `Barrier certificate:` without explicit $A,C,n_0$ and constants from Lemma 6.9 it is impossible to calculate
+  numerical $a,c_1$ at threshold $\\eta$; the $\\kappa$ comparison remains unfixed.
+- `Status:` barrier (constants are implicit).
 - `StepID:` Q43.S209-flat-eval-hr-depth-range-constants.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (чистая параметрическая связь).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` пересчитать Lemma 6.9/4.2 с явными числами либо зафиксировать
-  диапазон $\\kappa$ через внешние явные константы (если удастся).
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (pure parametric connection).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` recalculate Lemma 6.9/4.2 with explicit numbers or fix
+  range $\\kappa$ via external explicit constants (if possible).
 
 -/
 
 /-!
-### 16.350. Исследовательский шаг (proof): явные верхние оценки для $A_3,A_4$
+### 16.350. Exploratory step (proof): explicit upper bounds for $A_3,A_4$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S210-flat-eval-hr-depth-range-constants-recount):`
-  В доказательстве Lemma 6.9 используются оценки
-  $$s+16t+s/4\\le A_3 s\\qquad\\text{и}\\qquad |S_g^*|\\le s/4+16t\\le A_4 s,$$
-  где $t\\le s$. Отсюда можно зафиксировать явные целые константы
+- `Lens:` Equivalence.
+- `Statement (Q43.S210-flat-eval-hr-depth-range-constants-recount):`
+  The proof of Lemma 6.9 uses the estimates
+  $$s+16t+s/4\\le A_3 s\\qquad\\text{and}\\qquad |S_g^*|\\le s/4+16t\\le A_4 s,$$
+  where $t\\le s$. From here we can fix explicit integer constants
   $$A_3\\le 18,\\qquad A_4\\le 17.$$
-- `Proof:` формально в Lean доказаны неравенства
-  $s+16t+s/4\\le 18s$ и $s/4+16t\\le 17s$ при $t\\le s$
-  (см. `formal/WIP/Work.lean`, Q43_Lemma69_A3_bound, Q43_Lemma69_A4_bound).
-- `Статус:` proof (явные верхние оценки для $A_3,A_4$).
+- `Proof:` the inequalities have been formally proven in Lean
+  $s+16t+s/4\\le 18s$ and $s/4+16t\\le 17s$ at $t\\le s$
+  (see `formal/WIP/Work.lean`, Q43_Lemma69_A3_bound, Q43_Lemma69_A4_bound).
+- `Status:` proof (explicit upper bounds for $A_3,A_4$).
 - `StepID:` Q43.S210-flat-eval-hr-depth-range-constants-recount.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (чистая арифметика параметров).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` извлечь явные $A_1,A_2$ (и затем $A_0$) из Lemma 6.9/4.2.
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (pure parameter arithmetic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` extract explicit $A_1,A_2$ (and then $A_0$) from Lemma 6.9/4.2.
 
 -/
 
 /-!
-### 16.351. Исследовательский шаг (proof): сведение к явным $A_1,A_2$
+### 16.351. Exploratory step (proof): reduction to explicit $A_1,A_2$
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S211-flat-eval-hr-depth-range-constants-a1a2):`
-  Пусть в Lemma 6.9 выполняется $t\\le s$ и существуют константы $A_1,A_2$ в терминах
-  объёма доп. информации. Тогда суммарный вклад блоков размера $|S_g^*|$ и хвоста
-  $s+16t+s/4$ ограничен формулой
+- `Lens:` Equivalence.
+- `Statement (Q43.S211-flat-eval-hr-depth-range-constants-a1a2):`
+  Let $t\\le s$ be satisfied in Lemma 6.9 and there be constants $A_1,A_2$ in terms
+  additional volume information. Then the total contribution of blocks of size $|S_g^*|$ and tail
+  $s+16t+s/4$ is limited by the formula
   $$9|S_g^*| + A_1|S_g^*| + A_2|S_g^*| + (s+16t+s/4)
     \\le (9+A_1+A_2)\\cdot 17s + 18s.$$
-- `Proof:` формально в Lean доказана оценка выше (см. `formal/WIP/Work.lean`,
-  Q43_Lemma69_A12_bound), используя явные верхние оценки $A_3\\le 18$ и $A_4\\le 17$.
-- `Статус:` proof (сведение общего $A$ к $A_1,A_2$).
+- `Proof:` The above estimate is formally proven in Lean (see. `formal/WIP/Work.lean`,
+  Q43_Lemma69_A12_bound), using explicit upper bounds $A_3\\le 18$ and $A_4\\le 17$.
+- `Status:` proof (reducing the total $A$ to $A_1,A_2$).
 - `StepID:` Q43.S211-flat-eval-hr-depth-range-constants-a1a2.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (чистая арифметика параметров).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` извлечь явные $A_1,A_2$ и затем $A_0$ из Lemma 6.9/4.2.
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (pure parameter arithmetic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` extract explicit $A_1,A_2$ and then $A_0$ from Lemma 6.9/4.2.
 
 -/
 
 /-!
-### 16.352. Исследовательский шаг (proof): явная агрегация $A_0$‑фактора
+### 16.352. Exploratory step (proof): explicit aggregation of $A_0$factor
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S212-flat-eval-hr-depth-range-constants-a0):`
-  Лог‑фактор $A_0\\log n'$ умножается на $\\Delta^{a+b}$, и произведение
-  $\\Delta^a\\cdot\\Delta^b$ можно свернуть в $\\Delta^{a+b}$:
+- `Lens:` Equivalence.
+- `Statement (Q43.S212-flat-eval-hr-depth-range-constants-a0):`
+  The log factor $A_0\\log n'$ is multiplied by $\\Delta^{a+b}$, and the product
+  $\\Delta^a\\cdot\\Delta^b$ can be collapsed into $\\Delta^{a+b}$:
   $$(A_0\\log n')\\,\\Delta^a\\,\\Delta^b=(A_0\\log n')\\,\\Delta^{a+b}.$$
-- `Proof:` формальная лемма в Lean использует $\\Delta^{a+b}=\\Delta^a\\cdot\\Delta^b$
-  (см. `formal/WIP/Work.lean`, Q43_Lemma69_A0_bound).
-- `Статус:` proof (агрегация $A_0$‑фактора).
+- `Proof:` the formal lemma in Lean uses $\\Delta^{a+b}=\\Delta^a\\cdot\\Delta^b$
+  (see `formal/WIP/Work.lean`, Q43_Lemma69_A0_bound).
+- `Status:` proof (aggregation of $A_0$ factor).
 - `StepID:` Q43.S212-flat-eval-hr-depth-range-constants-a0.
 - `InfoGain:` 1.
-- `Барьер-чек (A/B/C):`
-  A) Relativization check: да (чистая арифметика).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` извлечь явное значение $A_0$ из Lemma 5.5/4.2.
+- `Barrier check (A/B/C):`
+  A) Relativization check: yes (pure arithmetic).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` extract the explicit value of $A_0$ from Lemma 5.5/4.2.
 
 -/
 
 /-!
-### 16.314. Исследовательский шаг (reduction): sweep exp→$2^{(\\cdot)}$ в Q43
+### 16.314. Research step (reduction): sweep exp->$2^{(\\cdot)}$ in Q43
 
-- `Линза:` Сжатие/канонизация.
-- `Утверждение (Q43.S174-exp2-threshold-sweep):`
-  Во всех Q43‑оценках экспоненциального роста использована форма $2^{(\\cdot)}$
-  (в соответствии с $\\log_2$ из HR’22); для хвостов Чернова и оценок,
-  где явно используется натуральная база, записано $e^{(\\cdot)}$.
-  Оставшиеся упоминания `exp` — только в прямых цитатах источников.
-- `Toy‑тест:` $2^{(\\log n)^k}$ суперполиномиально при $k>1$; например
-  $2^{(\\log_2 n)^2}=n^{\\log_2 n}$ превосходит $n^c$ для любого фиксированного $c$.
+- `Lens:` Compression/canonization.
+- `Statement (Q43.S174-exp2-threshold-sweep):`
+  All Q43 estimates of exponential growth use the form $2^{(\\cdot)}$
+  (according to $\\log_2$ from HR'22); for Chernov tails and estimates,
+  where the natural base is explicitly used, $e^{(\\cdot)}$ is written.
+  Remaining mentions `exp` - only in direct quotes from sources.
+- `Toy test:` $2^{(\\log n)^k}$ is superpolynomial for $k>1$; For example
+  $2^{(\\log_2 n)^2}=n^{\\log_2 n}$ exceeds $n^c$ for any fixed $c$.
 - `Exact citation:`
-  база логарифмов $\\log_2$ в HR’22 — `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
-- `Статус:` reduction (нормализация обозначений).
+  base of logarithms $\\log_2$ in HR'22 -- `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:271`.
+- `Status:` reduction (normalization of notation).
 - `StepID:` Q43.S174-exp2-threshold-sweep.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (обозначения).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` пройти цитаты Q43 и добавить короткие пометы “exp in source = 2^x”
-  там, где это влияет на интерпретацию порогов.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (notation).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` go through Q43 citations and add short notes "exp in source = 2^x"
+  where this affects the interpretation of thresholds.
 
 -/
 
 /-!
-### 16.310. Исследовательский шаг (reduction): явные $c_1,c_2$ в Proof Thm. 4.1
+### 16.310. Research step (reduction): explicit $c_1,c_2$ in Proof Thm. 4.1
 
-- `Линза:` Эквивалентность.
-- `Утверждение (Q43.S170-explicit-c1c2-thm41):`
-  Берём явные константы из §16.302–§16.303 и §16.215:
-  $A_1^{\\mathrm{tot}}=24$, $A_2\\le 16$, $A_3,A_4\\le 18$ (грубое целочисленное
-  округление $69/4$), поэтому можно взять
+- `Lens:` Equivalence.
+- `Statement (Q43.S170-explicit-c1c2-thm41):`
+  We take the explicit constants from Section 16.302-Section 16.303 and Section 16.215:
+  $A_1^{\\mathrm{tot}}=24$, $A_2\\le 16$, $A_3,A_4\\le 18$ (rough integer
+  rounding $69/4$), so you can take
   $$A_{\\mathrm{bits}}:=24+16+18+18=76,\\qquad A:=2^{76}.$$
-  Здесь база $2$ соответствует двоичному счёту бит; при $\\log=\\ln$ можно заменить
-  $2^{76}$ на $e^{76\\ln 2}$ (эквивалентная константа).
-  Тогда в Proof Lemma 4.2 можно зафиксировать константу
+  Here the base $2$ corresponds to the binary bit count; for $\\log=\\ln$ can be replaced
+  $2^{76}$ by $e^{76\\ln 2}$ (equivalent constant).
+  Then in Proof Lemma 4.2 we can fix the constant
   $$c_2:=8\\cdot 152\\cdot A,$$
-  учитывая округления $\\lfloor\\cdot\\rfloor$, и в Proof Thm. 4.1 задать
+  taking into account the rounding of $\\lfloor\\cdot\\rfloor$, and in Proof Thm. 4.1 set
   $$c_1:=16\\cdot 152\\cdot c_2.$$
-  С этими $c_1,c_2$ формула $\\log N\\le n^{1/d}/(c_1\\log^4 n)$ гарантирует
-  $t_d=152\\log N\\le n_d/16$, а рекурсия
-  $n_i=\\lfloor n_{i-1}/(4A t_{i-1}\\log^4 n_{i-1})\\rfloor$ даёт
-  $n_d\\ge n/(\\log^{d-1} N\\cdot(c_2\\log^4 n)^d)$ (грубая, но явная оценка).
-- `Toy‑тест:` при $d=1$ имеем
-  $n_1\\ge n/(8A t\\log^4 n)$ для $n\\ge 2$; тогда с $t=152\\log N$
-  и $c_1=16\\cdot 152\\cdot c_2$ получаем $t_1\\le n_1/16$.
+  With these $c_1,c_2$ the formula $\\log N\\le n^{1/d}/(c_1\\log^4 n)$ guarantees
+  $t_d=152\\log N\\le n_d/16$, and recursion
+  $n_i=\\lfloor n_{i-1}/(4A t_{i-1}\\log^4 n_{i-1})\\rfloor$ gives
+  $n_d\\ge n/(\\log^{d-1} N\\cdot(c_2\\log^4 n)^d)$ (rough but explicit estimate).
+- `Toy test:` for $d=1$ we have
+  $n_1\\ge n/(8A t\\log^4 n)$ for $n\\ge 2$; then with $t=152\\log N$
+  and $c_1=16\\cdot 152\\cdot c_2$ we get $t_1\\le n_1/16$.
 - `Exact citation:`
-  параметры Proof Thm. 4.1 и inequality (5) —
+  Proof Thm parameters. 4.1 and inequality (5) -
   `resources/text_cache/hastad_risse_2022_tseitin_grid_revisited.txt:889–931`.
-- `Статус:` reduction (явные $c_1,c_2$ заданы; скрытые константы устранены).
+- `Status:` reduction (explicit $c_1,c_2$ are specified; hidden constants are eliminated).
 - `StepID:` Q43.S170-explicit-c1c2-thm41.
 - `InfoGain:` 1.
-- `Барьер‑чек (A/B/C):`
-  A) Relativization check: релятивизуется (арифметика констант).
-  B) Natural proofs check: неприменимо.
-  C) Algebrization check: неприменимо.
-- `Следующий шаг:` проверить интерпретацию порога $M>e^{n^\\alpha}$ с этими
-  явными константами и согласовать базу логарифма по всему Q43.
+- `Barrier check (A/B/C):`
+  A) Relativization check: relativized (arithmetic of constants).
+  B) Natural proofs check: not applicable.
+  C) Algebrization check: not applicable.
+- `Next step:` check the interpretation of the threshold $M>e^{n^\\alpha}$ with these
+  explicit constants and agree on the logarithm base throughout Q43.
 
 -/

@@ -1,44 +1,44 @@
-## 8. Линии атаки (выбрать одну и углублять)
+## 8. Lines of attack (select one and deepen)
 
-Рабочая очередь: `open_questions.md`.
+Work queue: `open_questions.md`.
 
-1) **Схемная сложность:** нижние оценки на размер/глубину схем для явных функций (SAT/CLIQUE и т.д.).
-2) **Proof complexity:** нижние оценки на длину доказательств (связь с NP vs coNP).
-3) **Hardness vs Randomness / дерэндомизация:** эквивалентности между нижними оценками и псевдослучайностью.
-4) **Алгебраическая сложность (VP vs VNP) и IPS:** алгебраические схемы/сертификаты;
-   суперполиномиальные нижние оценки IPS ⇒ VP≠VNP (раздел 15.7; известные
-   оценки — для ограниченных подсистем).
-Статус: VP≠VNP и IPS‑нижние оценки открыты; подробнее раздел 9.
-Кратко: VP — семейства многочленов, вычислимые полиномиальными алгебраическими
-схемами; VNP — «NP‑аналоги» по Валианту (полиномиальные суммы от VP).
-Напоминание: IPS — алгебраический proof system, тогда как EF — булевый (раздел 15.7).
-Обзор: Bläser–Ikenmeyer 2025 (`../resources/downloads/blaser_ikenmeyer_2025_gct_intro.pdf`).
-Первоисточник VP/VNP: Valiant 1979 (Bürgisser 2024,
+1) **Circuit complexity:** lower bounds on the size/depth of circuits for explicit functions (SAT/CLIQUE, etc.).
+2) **Proof complexity:** lower bounds for the length of evidence (connection with NP vs coNP).
+3) **Hardness vs Randomness / de-randomization:** equivalence between lower bounds and pseudo-randomness.
+4) **Algebraic complexity (VP vs VNP) and IPS:** algebraic schemes/certificates;
+   superpolynomial lower bounds IPS  VP=VNP (Section 15.7; known
+   estimates - for limited subsystems).
+Status: VP=VNP and IPSlower grades are open; more details section 9.
+Briefly: VP are families of polynomials computable by polynomial algebraic
+diagrams; VNP - "NP-analogs" according to Valiant (polynomial sums of VP).
+Reminder: IPS is an algebraic proof system, while EF is a Boolean proof system (Section 15.7).
+Review: Blaser-Ikenmeyer 2025 (`../resources/downloads/blaser_ikenmeyer_2025_gct_intro.pdf`).
+Original VP/VNP source: Valiant 1979 (Burgisser 2024,
 `../resources/downloads/burgisser_2024_valiant_overview.pdf`).
-**Выбранная линия (текущая): proof complexity.** Цель — понять, где именно
-«упираются» стандартные системы доказательств и как это связано с
+**Selected line (current): proof complexity.** The goal is to understand where exactly
+standard systems of evidence "resist" and how this relates to
 $\mathrm{NP}$ vs $\mathrm{coNP}$.
-Конкретный открытый таргет: показать, что
-$\mathrm{EF}+tt(h_{0,n},2^{n/4},t(n))$ не p‑bounded (раздел 15.7).
+Specific open target: show that
+$\mathrm{EF}+tt(h_{0,n},2^{n/4},t(n))$ is not p-bounded (Section 15.7).
 
-Минимальная цель (выполнено в разделе 15): зафиксировать определения
-(proof system/резолюция), выписать $\mathrm{PHP}$ и проверить на малых $n$,
-**полностью доказать** экспоненциальную нижнюю оценку для резолюции на
-$\mathrm{PHP}$ (Теорема 15.2).
+Minimum goal (done in section 15): fix definitions
+(proof system/resolution), write out $\mathrm{PHP}$ and check on small $n$,
+**completely prove** the exponential lower bound for the resolution on
+$\mathrm{PHP}$ (Theorem 15.2).
 
-Следующий шаг:
-- зафиксировать минимальные факты о сильных системах (PHP легко в Frege/CP,
-  трудно в AC⁰‑Frege) и затем фокусироваться на EF‑нижних оценках из раздела 15.7.
+Next step:
+- capture minimal facts about strong systems (PHP is easy in Frege/CP,
+  difficult in AC0Frege) and then focus on the EFlower bounds from Section 15.7.
 
-**Карта импликаций (аккуратно).**
-- Полиномиально ограниченная proof system для TAUT ⇒ $\mathrm{NP}=\mathrm{coNP}$
-  (Лемма 15.1).
-- Для вывода $\mathrm{P}\ne\mathrm{NP}$ достаточно $\mathrm{NP}\ne\mathrm{coNP}$;
-  эквивалентно: каждая proof system имеет тавтологии с суперполиномиальными доказательствами.
-- Если существует p-оптимальная система и для неё доказаны суперполиномиальные
-  нижние оценки, то $\mathrm{NP}\ne\mathrm{coNP}$ (существование p-оптимальной открыто).
-- Условные результаты (Pich–Santhanam 2023): EF-нижние оценки +
-  $\mathrm{S}^1_2$-формализуемые редукции ⇒ $\mathrm{P}\ne\mathrm{NP}$.
-- Неравномерные vs равномерные: $\mathrm{SIZE}$/$\mathrm{P/poly}$ сильнее
-  $\mathrm{Time}[n^k]/u(n)$; меньший $u(n)$ усиливает вывод; Cor. 2 даёт
-  равномерные нижние оценки при фиксированном $u(n)$ (раздел 15.7).
+**Map of implications (neat).**
+- Polynomial bounded proof system for TAUT  $\mathrm{NP}=\mathrm{coNP}$
+  (Lemma 15.1).
+- To output $\mathrm{P}\ne\mathrm{NP}$, $\mathrm{NP}\ne\mathrm{coNP}$ is sufficient;
+  equivalent: every proof system has tautologies with superpolynomial proofs.
+- If there is a p-optimal system and superpolynomials have been proven for it
+  lower bounds, then $\mathrm{NP}\ne\mathrm{coNP}$ (the existence of a p-optimal is open).
+- Conditional results (Pich-Santhanam 2023): EF-lower estimates +
+  $\mathrm{S}^1_2$-formalizable reductions  $\mathrm{P}\ne\mathrm{NP}$.
+- Uneven vs uniform: $\mathrm{SIZE}$/$\mathrm{P/poly}$ stronger
+  $\mathrm{Time}[n^k]/u(n)$; a smaller $u(n)$ enhances the output; Cor. 2 gives
+  uniform lower bounds for fixed $u(n)$ (Section 15.7).

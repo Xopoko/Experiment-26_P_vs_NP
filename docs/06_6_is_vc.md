@@ -1,41 +1,41 @@
-## 6.6. Ещё две NP‑полные задачи: INDEPENDENT SET и VERTEX COVER
+## 6.6. Two more NP-complete problems: INDEPENDENT SET and VERTEX COVER
 
-**INDEPENDENT SET (IS).** Вход: неориентированный граф $G=(V,E)$ и число $k$.
-Вопрос: существует ли независимое множество вершин размера $\ge k$?
+**INDEPENDENT SET (IS).** Input: undirected graph $G=(V,E)$ and number $k$.
+Question: is there an independent set of vertices of size $\ge k$?
 
-**VERTEX COVER (VC).** Вход: неориентированный граф $G=(V,E)$ и число $k$.
-Вопрос: существует ли вершинное покрытие размера $\le k$
-(множество вершин, инцидентное каждому ребру)?
+**VERTEX COVER (VC).** Input: undirected graph $G=(V,E)$ and number $k$.
+Question: Is there a vertex cover of size $\le k$
+(the set of vertices incident to each edge)?
 
-**Лемма 6.6.1.** $(G,k)\in\mathrm{CLIQUE}$ тогда и только тогда,
-когда $(\overline{G},k)\in\mathrm{IS}$, где $\overline{G}$ — дополнение графа $G$.
+**Lemma 6.6.1.** $(G,k)\in\mathrm{CLIQUE}$ if and only if
+when $(\overline{G},k)\in\mathrm{IS}$, where $\overline{G}$ is the complement of the graph $G$.
 
-*Доказательство.* $S\subseteq V$ — клика в $G$ $\iff$ между любыми двумя разными вершинами из $S$ есть ребро.
-Эквивалентно: между любыми двумя вершинами из $S$ **нет** ребра в $\overline{G}$, значит $S$ независимое. $\square$
+*Proof.* $S\subseteq V$ is a clique in $G$ $\iff$ between any two different vertices from $S$ is an edge.
+Equivalently: there is **no** edge between any two vertices in $S$ in $\overline{G}$, which means $S$ is independent. $\square$
 
-**Лемма 6.6.2.** Для любого графа $G=(V,E)$ множество $S\subseteq V$
-является независимым тогда и только тогда, когда $V\setminus S$
-является вершинным покрытием.
+**Lemma 6.6.2.** For any graph $G=(V,E)$ the set $S\subseteq V$
+is independent if and only if $V\setminus S$
+is a vertex covering.
 
-*Доказательство.* Если $S$ независимое, то ни одно ребро не имеет оба конца в $S$,
-значит каждое ребро имеет конец в $V\setminus S$, то есть $V\setminus S$ — vertex cover.
-Обратно, если $C$ — vertex cover, то в $V\setminus C$ нет ребра (иначе оно непокрыто),
-значит $V\setminus C$ — independent set. $\square$
+*Proof.* If $S$ is independent, then no edge has both ends in $S$,
+this means that each edge ends at $V\setminus S$, that is, $V\setminus S$ is a vertex cover.
+Conversely, if $C$ is a vertex cover, then there is no edge in $V\setminus C$ (otherwise it is uncovered),
+means $V\setminus C$ is independent set. $\square$
 
-**Следствие 6.6.3.** $(G,k)\in\mathrm{IS}$ тогда и только тогда, когда $(G,|V|-k)\in\mathrm{VC}$.
+**Corollary 6.6.3.** $(G,k)\in\mathrm{IS}$ if and only if $(G,|V|-k)\in\mathrm{VC}$.
 
-*Доказательство.* По Лемме 6.6.2 наличие независимого множества размера $\ge k$
-эквивалентно наличию вершинного покрытия размера $\le |V|-k$. $\square$
+*Proof.* By Lemma 6.6.2, the existence of an independent set of size $\ge k$
+is equivalent to having a vertex cover of size $\le |V|-k$. $\square$
 
-**Лемма 6.6.4.** IS $\in\mathrm{NP}$ и VC $\in\mathrm{NP}$.
+**Lemma 6.6.4.** IS $\in\mathrm{NP}$ and VC $\in\mathrm{NP}$.
 
-*Доказательство.* IS: сертификат — список из $k$ вершин; проверяем, что внутри списка нет ребра.
-VC: сертификат — список из $k$ вершин; проверяем, что каждое ребро имеет конец в списке,
-что делается за $O(|E|)$ времени. $\square$
+*Proof.* IS: certificate is a list of $k$ vertices; we check that there is no edge inside the list.
+VC: certificate - a list of $k$ vertices; we check that each edge has an end in the list,
+which is done in $O(|E|)$ time. $\square$
 
-**Следствие 6.6.5.** IS и VC NP‑полны.
+**Corollary 6.6.5.** IS and VC are NPcomplete.
 
-*Доказательство.* CLIQUE NP‑полна (Следствие 6.5).
-По Лемме 6.6.1 имеем CLIQUE $\le_m^p$ IS (построение $\overline{G}$).
-По Следствию 6.6.3 имеем IS $\le_m^p$ VC.
-С Леммой 6.6.4 получаем NP‑полноту IS и VC. $\square$
+*Proof.* CLIQUE is NPcomplete (Corollary 6.5).
+By Lemma 6.6.1 we have CLIQUE $\le_m^p$ IS (construction of $\overline{G}$).
+By Corollary 6.6.3 we have IS $\le_m^p$ VC.
+With Lemma 6.6.4 we obtain NP-completeness of IS and VC. $\square$

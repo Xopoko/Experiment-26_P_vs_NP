@@ -15,5 +15,5 @@
 - Optional: build a local searchable text cache for PDFs (gitignored): `python3 resources/extract_text_cache.py`
 - Then you can `rg` across `resources/text_cache/` instead of running `pdftotext` ad-hoc.
 - Run project checks (no Jupyter): `scripts/verify_all.sh`
-- arXiv metadata snapshot (JSONL): `resources/downloads/arxiv-metadata-oai-snapshot.json`
-- Local arXiv search: `python3 scripts/arxiv_search.py --preset pvnp --out resources/arxiv/pvnp_slice.tsv`
+- arXiv metadata snapshot (JSONL, not committed): place it at `resources/downloads/arxiv-metadata-oai-snapshot.json`
+- Local arXiv search (requires snapshot): `python3 scripts/arxiv_search.py --preset pvnp --out resources/arxiv/pvnp_slice.tsv`

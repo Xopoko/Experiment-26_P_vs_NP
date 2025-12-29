@@ -1,21 +1,21 @@
-## 0. Договор о «формальной проверяемости»
+## 0. Agreement on "formal verifiability"
 
-Под «формально проверяемым» в этом ноутбуке понимается:
+In this notebook, "formally verifiable" means:
 
-1. **Фиксирована модель вычислений** и единая договорённость о полиномиальности
-   (робастность между стандартными моделями оговаривается явно).
-2. Каждое утверждение записано как **теорема/лемма** с явными предпосылками.
-3. Для каждой леммы: **полное доказательство** (или явная пометка *«цитируется»* с точной ссылкой).
-4. Для конструкций/редукций: явный алгоритм и доказательство корректности + оценка времени.
-5. Для «новых идей»: обязательные разделы **контрпримеры/крайние случаи**
-   и **проверка на барьеры** (релятивизация, natural proofs, algebrization).
-6. Для пометок *«цитируется»*: точная ссылка должна быть в Разделе «Источники»
-   и в `../resources/manifest.tsv` (по возможности — скачанный PDF в `../resources/downloads/`).
-7. Для проверочного кода: воспроизводимый прогон без Jupyter: `scripts/verify_all.sh`
-   (включает `verify_notebook.py` и формальный build; по умолчанию требует `lake`,
-   пропуск возможен только с `REQUIRE_LEAN=0`).
-8. Формальный слой живёт в `formal/` (Lean 4).
-9. Внешние утверждения фиксируются только как **точные ссылки** в `docs/sources.md`
-   (без добавления аксиом/стабов).
-10. В Markdown мы пишем **формально изложенные** доказательства (полные и проверяемые руками),
-    но это не считается формальной верификацией до переноса в `formal/`.
+1. **Computation model fixed** and unified agreement on polynomiality
+   (robustness between standard models is specified explicitly).
+2. Each statement is written as a **theorem/lemma** with explicit premises.
+3. For each lemma: **full proof** (or explicitly marked *"cited"* with exact reference).
+4. For constructions/reductions: explicit algorithm and proof of correctness + time estimate.
+5. For "new ideas": required sections **counterexamples/edge cases**
+   and **testing for barriers** (relativization, natural proofs, algebrization).
+6. For notes *"quoted"*: the exact link should be in the "Sources" Section
+   and in `../resources/manifest.tsv` (if possible - downloaded PDF in `../resources/downloads/`).
+7. For test code: reproducible run without Jupyter: `scripts/verify_all.sh`
+   (includes `verify_notebook.py` and formal build; by default requires `lake`,
+   admission is possible only with `REQUIRE_LEAN=0`).
+8. The formal layer lives in `formal/` (Lean 4).
+9. External statements are recorded only as **exact references** in `docs/sources.md`
+   (without adding axioms/stubs).
+10. In Markdown we write **formally stated** proofs (complete and hand-verifiable),
+    but this is not considered formal verification before transfer to `formal/`.

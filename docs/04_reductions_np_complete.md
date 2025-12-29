@@ -1,69 +1,69 @@
-## 4. Редукции и NP‑полнота (минимальный аппарат)
+## 4. Reductions and NPcompleteness (minimal apparatus)
 
-**Определение (полиномиальная many‑one редукция).** Язык $A$ *сводится* к $B$
-(обозначение $A\le_m^p B$), если существует полиномиально вычислимая функция
-$f$ такая, что для всех $x$:
+**Definition (polynomial many-one reduction).** The language $A$ *reduces* to $B$
+(notation $A\le_m^p B$), if there is a polynomial computable function
+$f$ such that for all $x$:
 $$x\in A \iff f(x)\in B.$$
 
-**Lean‑скелет:** определения many‑one редукции и NP‑полноты заведены в `formal/PvNP/Core/Reductions.lean`.
+**Lean-skeleton:** definitions of many-one reduction and NP-completeness are included in `formal/PvNP/Core/Reductions.lean`.
 
-**Определение (NP‑полный).** Язык $B$ NP‑полон, если (i) $B\in\mathrm{NP}$ и (ii) для любого $A\in\mathrm{NP}$ верно $A\le_m^p B$.
+**Definition (NP-complete).** A language $B$ is NP-complete if (i) $B\in\mathrm{NP}$ and (ii) for any $A\in\mathrm{NP}$ $A\le_m^p B$ is true.
 
-**Лемма 4.1.** $\mathrm{SAT}\in\mathrm{NP}$.
+**Lemma 4.1.** $\mathrm{SAT}\in\mathrm{NP}$.
 
-*Доказательство.* Сертификат — присваивание булевых переменных.
-Верификатор за полиномиальное время подставляет его в формулу и проверяет,
-что каждая клауза истинна. $\square$
+*Proof.* Certificate - assignment of Boolean variables.
+The verifier substitutes it into the formula in polynomial time and checks that
+that every clause is true. $\square$
 
-**Теорема 4.2 (Cook–Levin).** SAT NP‑полна.
+**Theorem 4.2 (Cook-Levin).** SAT is NPcomplete.
 
-*Доказательство.* Пусть $L\in\mathrm{NP}$.
-По сертификатной формулировке (Раздел 2) существует полином $p$
-и детерминированный полиномиальный верификатор $V$, такой что
+*Proof.* Let $L\in\mathrm{NP}$.
+According to the certificate formulation (Section 2), there is a polynomial $p$
+and a deterministic polynomial verifier $V$ such that
 $$x\in L \iff \exists y\in\{0,1\}^{p(|x|)}:\ V(x,y)=1.$$
 
-Зафиксируем детерминированную одноленточную МТ $M$, вычисляющую $V$ (робастность модели).
-Для входа $x$ длины $n$ машина $M$ останавливается не более чем за $T(n)$ шагов на всех строках $\langle x,y\rangle$ (где $|y|=p(n)$).
-Заменим $T(n)$ на $T(n)+n+p(n)+2$, чтобы места под вход хватило; дополним $M$ холостыми шагами, чтобы она делала **ровно** $T:=T(n)$ шагов.
+Let us fix a deterministic single-band MT $M$ that calculates $V$ (the robustness of the model).
+For an input $x$ of length $n$, machine $M$ stops in at most $T(n)$ steps on all lines $\langle x,y\rangle$ (where $|y|=p(n)$).
+Let's replace $T(n)$ with $T(n)+n+p(n)+2$ so that there is enough space for the entrance; let's supplement $M$ with idle steps so that it takes **exactly** $T:=T(n)$ steps.
 
-Построим по $x$ CNF‑формулу $\varphi_x$, выполнимую тогда и только тогда,
-когда существует сертификат $y$, при котором $M$ принимает $\langle x,y\rangle$.
+Let us construct, from $x$, a CNF formula $\varphi_x$, satisfiable if and only if
+when there exists a certificate $y$ such that $M$ accepts $\langle x,y\rangle$.
 
-**Переменные.** Пусть $\Gamma$ — алфавит ленты $M$ (включая $0,1,\square,\#,\triangleright$).
-$Q$ — множество состояний; $q_0$ — стартовое, $q_{\mathrm{acc}}$ — принимающее.
-Рассмотрим расширенный алфавит $\Gamma':=\Gamma\cup(Q\times\Gamma)$:
-символ $(q,a)$ означает, что головка стоит в клетке, машина в состоянии $q$,
-и «под головкой» записан $a$.
+**Variables.** Let $\Gamma$ be the alphabet of the tape $M$ (including $0,1,\square,\#,\triangleright$).
+$Q$ is a set of states; $q_0$ is the starting one, $q_{\mathrm{acc}}$ is the receiving one.
+Consider the extended alphabet $\Gamma':=\Gamma\cup(Q\times\Gamma)$:
+the symbol $(q,a)$ means that the head is in a cage, the machine is in state $q$,
+and "under the head" is written $a$.
 
-Положим $W:=T+2$ и рассматриваем клетки $i\in\{0,1,\dots,W\}$ (крайние — границы).
-Для каждого $t\in\{0,1,\dots,T\}$, $i\in\{0,1,\dots,W\}$ и $s\in\Gamma'$
-вводим переменную $X_{t,i,s}$: «в момент $t$ в клетке $i$ записан символ $s$».
+Let us set $W:=T+2$ and consider the cells $i\in\{0,1,\dots,W\}$ (the outermost ones are the boundaries).
+For each $t\in\{0,1,\dots,T\}$, $i\in\{0,1,\dots,W\}$ and $s\in\Gamma'$
+introduce the variable $X_{t,i,s}$: "at moment $t$, the symbol $s$ is written in cell $i$."
 
-**Клаузы (CNF).** Формула $\varphi_x$ — конъюнкция следующих семейств.
+**Clauses (CNF).** The formula $\varphi_x$ is the conjunction of the following families.
 
-(A) *(Ровно один символ в клетке.)* Для каждого $(t,i)$:
-- «хотя бы один» : $\bigvee_{s\in\Gamma'} X_{t,i,s}$;
-- «не более одного» : для всех $s\ne s'$ добавляем $(\neg X_{t,i,s}\lor\neg X_{t,i,s'})$.
+(A) *(Exactly one character per cell.)* For each $(t,i)$:
+- "at least one" : $\bigvee_{s\in\Gamma'} X_{t,i,s}$;
+- "no more than one": for all $s\ne s'$ we add $(\neg X_{t,i,s}\lor\neg X_{t,i,s'})$.
 
-(B) *(Ровно одна позиция головки/состояние.)* Для каждого $t$ требуем, что ровно одна клетка содержит «состоянийный» символ:
+(B) *(Exactly one head position/state.)* For each $t$ we require that exactly one cell contains a "state" symbol:
 - $\bigvee_{i\in\{1,\dots,W-1\},\ q\in Q,\ a\in\Gamma} X_{t,i,(q,a)}$;
-- попарные запреты для разных троек $(i,q,a)$.
+- pairwise prohibitions for different triples $(i,q,a)$.
 
-(C) *(Границы и начальная конфигурация.)* Для всех $t$ фиксируем границы: $X_{t,0,\triangleright}$ и $X_{t,W,\square}$.
-Пусть $x=x_1\dots x_n$. В момент $0$ задаём ленту вида $\triangleright\ x\ \#\ y\ \square\cdots$ и стартовое состояние в первой букве $x$:
+(C) *(Boundaries and initial configuration.)* For all $t$ we fix the boundaries: $X_{t,0,\triangleright}$ and $X_{t,W,\square}$.
+Let $x=x_1\dots x_n$. At moment $0$ we define a tape of the form $\triangleright\ x\ \#\ y\ \square\cdots$ and the starting state in the first letter $x$:
 - $X_{0,1,(q_0,x_1)}$;
-- для $i=2,\dots,n$ : $X_{0,i,x_i}$;
+- for $i=2,\dots,n$ : $X_{0,i,x_i}$;
 - $X_{0,n+1,\#}$;
-- для «сертификатной зоны» $i=n+2,\dots,n+1+p(n)$ : добавляем $(X_{0,i,0}\lor X_{0,i,1})$;
-- для остальных $i>n+1+p(n)$ фиксируем $X_{0,i,\square}$.
+- for the "certificate zone" $i=n+2,\dots,n+1+p(n)$ : add $(X_{0,i,0}\lor X_{0,i,1})$;
+- for the remaining $i>n+1+p(n)$ we fix $X_{0,i,\square}$.
 
-(D) *(Один шаг вычисления, локальные ограничения.)* Для каждого $t<T$
-и $i\in\{1,\dots,W-1\}$ требуем согласование окна $3\times 2$ с переходом $\delta$.
-Формально: рассмотрим все 6‑тройки символов
+(D) *(One computation step, local restrictions.)* For each $t<T$
+and $i\in\{1,\dots,W-1\}$ we require coordination of the window $3\times 2$ with the transition $\delta$.
+Formally: consider all 6 triplets of symbols
 $$(a_{-1},a_0,a_{+1};\ b_{-1},b_0,b_{+1})\in(\Gamma')^6,$$
-которые **не могут** встретиться как
-$$(\text{символы в }(t,i-1),(t,i),(t,i+1);\ \text{символы в }(t+1,i-1),(t+1,i),(t+1,i+1))$$
-в корректном ходе $M$. Для каждой такой 6‑тройки добавляем клаузу, запрещающую её появление:
+who **cannot** meet like
+$$(\text{symbols in }(t,i-1),(t,i),(t,i+1);\ \text{symbols in }(t+1,i-1),(t+1,i),(t+1,i+1))$$
+in the correct move $M$. For each such 6-triple, we add a clause prohibiting its appearance:
 $$(
 eg X_{t,i-1,a_{-1}}\lor
 eg X_{t,i,a_0}\lor
@@ -71,30 +71,30 @@ eg X_{t,i+1,a_{+1}}\lor
 eg X_{t+1,i-1,b_{-1}}\lor
 eg X_{t+1,i,b_0}\lor
 eg X_{t+1,i+1,b_{+1}}).$$
-Так как $M$ фиксирована, $|\Gamma'|$ — константа, поэтому число локальных шаблонов — константа; всего клауз (D) $O(T\cdot W)=O(T^2)$.
+Since $M$ is fixed, $|\Gamma'|$ is a constant, so the number of local patterns is a constant; total clause (D) $O(T\cdot W)=O(T^2)$.
 $$(a_{-1},a_0,a_{+1};\ b_{-1},b_0,b_{+1})\in(\Gamma')^6,$$
-которые **не могут** встретиться как
-$$(\text{символы в }(t,i-1),(t,i),(t,i+1);\ \text{символы в }(t+1,i-1),(t+1,i),(t+1,i+1))$$
-в корректном ходе $M$. Для каждой такой запрещённой 6‑тройки добавляем одну CNF‑клаузу, запрещающую её одновременное появление:
+who **cannot** meet like
+$$(\text{symbols in }(t,i-1),(t,i),(t,i+1);\ \text{symbols in }(t+1,i-1),(t+1,i),(t+1,i+1))$$
+in the correct move $M$. For each such forbidden 6-triple, we add one CNF clause that prohibits its simultaneous occurrence:
 $$(
 \neg X_{t,i-1,a_{-1}}\lor\neg X_{t,i,a_0}\lor\neg X_{t,i+1,a_{+1}}\lor
 \neg X_{t+1,i-1,b_{-1}}\lor\neg X_{t+1,i,b_0}\lor\neg X_{t+1,i+1,b_{+1}}).$$
 
-(E) *(Принятие.)* Требуем, чтобы на шаге $T$ машина была в принимающем состоянии:
+(E) *(Acceptance.)* We require that at step $T$ the machine be in the receiving state:
 $$\bigvee_{i\in\{1,\dots,W-1\},\ a\in\Gamma} X_{T,i,(q_{\mathrm{acc}},a)}.$$
 
-**Оценка размера.** Число переменных $|\{X_{t,i,s}\}|=(T+1)(W+1)|\Gamma'|=O(T^2)$, и число клауз также $O(T^2)$.
-Значит $x\mapsto\varphi_x$ вычисляется за $\mathrm{poly}(|x|)$.
+**Size estimate.** The number of variables is $|\{X_{t,i,s}\}|=(T+1)(W+1)|\Gamma'|=O(T^2)$, and the number of clauses is also $O(T^2)$.
+This means $x\mapsto\varphi_x$ is calculated using $\mathrm{poly}(|x|)$.
 
-**Корректность.**
-- Если $x\in L$, то существует $y$ такое, что $M$ принимает $\langle x,y\rangle$.
-  Таблица вычисления длины $T$ задаёт значения $X_{t,i,s}$; по построению выполняются (A)–(E), значит $\varphi_x$ выполнима.
-- Если $\varphi_x$ выполнима, то из (A),(B) получаем корректное кодирование «ровно одного символа» и «ровно одной головки/состояния».
-  (C) фиксирует вход $x$ и задаёт сертификат $y$ в выделенной зоне, (D) согласует соседние такты с $\delta$.
-  Значит переменные описывают вычисление $M$ на $\langle x,y\rangle$, и по (E) оно принимающее; значит $x\in L$.
+**Correctness.**
+- If $x\in L$, then there exists $y$ such that $M$ takes $\langle x,y\rangle$.
+  The length calculation table $T$ specifies the values $X_{t,i,s}$; by construction, (A)-(E) are satisfied, which means $\varphi_x$ is satisfiable.
+- If $\varphi_x$ is satisfiable, then from (A), (B) we obtain the correct encoding of "exactly one character" and "exactly one head/state".
+  (C) commits input $x$ and sets certificate $y$ in the allocated zone, (D) coordinates neighboring clocks with $\delta$.
+  This means that the variables describe the calculation of $M$ on $\langle x,y\rangle$, and by (E) it is accepting; means $x\in L$.
 
-Итак, для любого $L\in\mathrm{NP}$ имеем $L\le_m^p\mathrm{SAT}$,
-то есть SAT NP‑трудна. Совместно с Леммой 4.1 получаем, что SAT NP‑полна.
+So, for any $L\in\mathrm{NP}$ we have $L\le_m^p\mathrm{SAT}$,
+that is, the SAT is NP-hard. Together with Lemma 4.1 we obtain that SAT is NP-complete.
 $\square$
 
-Ниже — полностью выписанная редукция SAT $\le_m^p$ 3SAT.
+Below is the complete reduction of SAT $\le_m^p$ 3SAT.

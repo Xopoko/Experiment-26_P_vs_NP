@@ -1,90 +1,37 @@
-# P vs NP — verified-first (Lean-first) research log
+# P vs NP Verified Notebook
 
-This repo is a compact, continuously-verified research log aimed at making real progress on **P vs NP** via small, checkable steps (lemmas, counterexamples, exact citations, toy experiments).
+A verified-first research log aimed at small, checkable progress on P vs NP.
+The core principle is: every durable claim must be supported by a formal proof
+or a precise citation.
 
-## Quick start
+## Highlights
+- Lean 4 formalization layer in `formal/`.
+- Strict docs workflow with verifiers and artifact tracking.
+- Single-step agent workflow for reproducible progress.
 
-- Index: `P_vs_NP.md`
-- Current work queue: `docs/open_questions.md`
-- Agent working memory (bounded): `docs/agent_brief.md`
-- Run checks (markdown + formal, no Jupyter needed): `scripts/verify_all.sh`
-- Run the agent: `./agent/run.sh`
-
-## Repository layout
-
-- `P_vs_NP.md` — short index/status with pointers into `docs/`.
-- `docs/` — main text (kept short; history lives in git).
-  - `docs/open_questions.md` — the active research queue; **one run picks exactly one item**.
-  - `docs/agent_brief.md` — bounded “working memory” to prevent loops (Do-not-repeat).
-  - `docs/artifacts.tsv` — append-only artifact log (StepID/type/target/commit).
-- `formal/` — Lean 4 formalization layer.
-  - `formal/PvNP/Core/` — authoritative definitions/lemmas (no `sorry`/`axiom`).
-  - `formal/WIP/` — work-in-progress Lean proofs (non-authoritative).
-  - `formal/Notes/` — long research notes as Lean doc‑comments (Lean-first).
-- `resources/manifest.tsv` + `resources/downloads/` — bibliography + pinned PDFs/HTML (hygiene is checked).
-- `resources/text_cache/` — optional extracted text cache for fast `rg` over PDFs (gitignored).
-- `agent/` — runnable wrappers around Codex CLI, with per-run logs under `agent/logs/` (gitignored).
-- `scripts/verify_all.sh` — project verifier (docs + toy checks + formal build).
-- `scripts/verify_notebook.py` — markdown/toy checks only (used by `verify_all.sh`).
-
-## Verification
-
-Run:
-
+## Quick Start
 ```bash
 scripts/verify_all.sh
 ```
 
-What it does:
-- Verifies `docs/` references to `resources/downloads/` against `resources/manifest.tsv`.
-- Verifies `docs/open_questions.md` structure and `docs/agent_brief.md` boundedness/anti-loop fields.
-- Verifies `docs/artifacts.tsv` header/format.
-- Verifies prompt stays **single-line**: `scripts/agent_prompt.txt`.
-- Runs `lake build PvNP` in `formal/` (fails if `lake` missing unless `REQUIRE_LEAN=0`).
-- Optional: `BUILD_NOTES=1` to build Notes, `BUILD_WIP=1` to build WIP, `CHECK_AXIOMS=1` for core axioms audit.
-- Optional: `RUN_MODE=docs|wip|core` to set sane defaults for verification flags.
+## Project Layout
+- `P_vs_NP.md`: status and index.
+- `docs/`: open questions, agent brief, artifacts log.
+- `formal/`: Lean proofs and notes.
+- `resources/`: bibliography and pinned sources.
+- `scripts/`: verification tooling.
 
-Artifact helper:
+## Verification
+- Run `scripts/verify_all.sh` for markdown structure checks and Lean builds.
+- See `AGENTS.md` for the research protocol and artifact requirements.
+- Resource link checks are skipped when `resources/downloads` is missing; set `SKIP_RESOURCE_CHECKS=1` to skip explicitly.
 
-```bash
-python3 scripts/register_artifact.py --step-id Q39.S27-foo --type Proof --lean-target formal/WIP/Work.lean --info-gain 1
-```
+## Contributing
+Follow `AGENTS.md`, keep docs concise, and run `scripts/verify_all.sh` before committing.
 
-Optional toy checks:
+## Data Notes
+Downloaded PDFs are not committed. Fetch them with the resource scripts described
+in `resources/README.md`.
 
-```bash
-python3 scripts/verify_notebook.py --checks path/to/toy_checks.py
-```
-
-## Agent automation (single WORKER loop)
-
-Run it:
-
-```bash
-./agent/run.sh
-REQUIRE_CLEAN=1 ./agent/run.sh
-```
-
-Logs:
-- Written to `agent/logs/` (symlink: `agent/logs/latest.log`).
-
-Prompt (single-line):
-- `scripts/agent_prompt.txt`
-
-Runner docs: `agent/README.md`
-
-## Resources workflow
-
-List / download by category:
-
-```bash
-python3 resources/download_resources.py --list
-python3 resources/download_resources.py --category proof_complexity
-```
-
-Build/refresh the local text cache for fast search across PDFs:
-
-```bash
-python3 resources/extract_text_cache.py
-rg -n "Lemma 4\\.4" resources/text_cache/
-```
+## Status
+Active research notebook with formal verification gates.

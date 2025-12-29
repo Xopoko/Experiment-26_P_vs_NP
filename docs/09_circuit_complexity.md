@@ -1,77 +1,77 @@
-## 9. Схемная сложность: базовые определения
-Также IPS и связь с VP vs VNP — в разделе 15.7.
-IPS работает с алгебраическими схемами, а не с булевыми.
-Замечание: в алгебраических схемах размер — число операций $+$/\times,
-в булевых — число логических элементов.
-Мини‑определения (алгебраические классы):
-VP — семейства полиномов p‑ограниченной степени, вычислимые полиномиальными
-алгебраическими схемами;
-VNP — семейства вида $f_n(x)=\sum_{y\in\{0,1\}^{m(n)}} g_n(x,y)$
-с $g_n\in\mathrm{VP}$ (Валиант).
-Фиксируем поле $\mathbb{F}$ (например, $\mathbb{Q}$ или $\mathbb{F}_p$);
-определения VP/VNP зависят от выбранного поля.
-Примеры: $\det$ в VP, $\mathrm{perm}$ VNP‑полон (Valiant 1979).
-Статус: VP≠VNP — открытая проблема; сверхполиномиальные нижние оценки известны лишь для ограниченных моделей.
-См. обзор: Saptharishi 2016 (`../resources/downloads/saptharishi_2016_arithmetic_circuit_survey.pdf`).
-Для техники нижних оценок в алгебраической модели: Saptharishi 2016 (обзор методов).
+## 9. Circuit complexity: basic definitions
+Also IPS and communication with VP vs VNP - in section 15.7.
+IPS works with algebraic circuits, not Boolean ones.
+Note: in algebraic schemes the size is the number of operations $+$/\times,
+in Boolean - the number of logical elements.
+Mini-definitions (algebraic classes):
+VP - families of polynomials of pbounded degree, computable by polynomial
+algebraic schemes;
+VNP - families of the form $f_n(x)=\sum_{y\in\{0,1\}^{m(n)}} g_n(x,y)$
+with $g_n\in\mathrm{VP}$ (Valiant).
+We fix the field $\mathbb{F}$ (for example, $\mathbb{Q}$ or $\mathbb{F}_p$);
+VP/VNP definitions depend on the selected field.
+Examples: $\det$ in VP, $\mathrm{perm}$ VNP is complete (Valiant 1979).
+Status: VP=VNP - open issue; superpolynomial lower bounds are known only for limited models.
+See review: Saptharishi 2016 (`../resources/downloads/saptharishi_2016_arithmetic_circuit_survey.pdf`).
+For the technique of lower bounds in an algebraic model: Saptharishi 2016 (review of methods).
 
-Здесь фиксируем минимальный язык для разговоров о нижних оценках на булевые схемы.
+Here we fix a minimal language for talking about lower bounds for Boolean circuits.
 
-**Булева функция/семейство.** Рассматриваем семейство $f=\{f_n\}_{n\ge 1}$, где $f_n:\{0,1\}^n\to\{0,1\}$.
+**Boolean function/family.** Consider the family $f=\{f_n\}_{n\ge 1}$, where $f_n:\{0,1\}^n\to\{0,1\}$.
 
-**Схема (circuit).** Булева схема $C$ — ориентированный ациклический граф
-с входами $x_1,\dots,x_n$ и элементами AND/OR/NOT, вычисляющий булеву функцию.
+**Circuit.** Boolean circuit $C$ - directed acyclic graph
+with inputs $x_1,\dots,x_n$ and AND/OR/NOT elements, calculating a Boolean function.
 
-**Размер** $|C|$ — число логических элементов; **глубина** $\mathrm{depth}(C)$ — длина максимального пути от входа до выхода.
+**Size** $|C|$ -- number of logical elements; **depth** $\mathrm{depth}(C)$ is the length of the maximum path from input to output.
 
-**Неограниченный fan-in.** В моделях AC⁰ разрешаем AND/OR с произвольным
-числом входов (unbounded fan-in).
-Отрицания удобно считать стоящими только на входах; проталкивание NOT
-по законам де Моргана сохраняет постоянную глубину с увеличением на константу.
+**Unlimited fan-in.** In AC0 models we allow AND/OR with arbitrary
+number of inputs (unbounded fan-in).
+It is convenient to consider negations as standing only at inputs; pushing NOT
+according to De Morgan's laws, it maintains a constant depth with an increase by a constant.
 
-**Класс P/poly (неформально).** Язык в $\mathrm{P/poly}$, если существует
-семейство булевых схем полиномиального размера, вычисляющих его, или
-эквивалентно: существует детерминированный полиномиальный алгоритм
-с полиномиальным советом $a_n$ длины $n^{O(1)}$, зависящим только от $n$.
+**Class P/poly (informal).** Language in $\mathrm{P/poly}$, if exists
+a family of polynomial-sized Boolean circuits that compute it, or
+equivalent: there is a deterministic polynomial algorithm
+with a polynomial advice $a_n$ of length $n^{O(1)}$ depending only on $n$.
 
-**Обозначение (SIZE).** $\mathrm{SIZE}(s(n))$ — языки, распознаваемые семейством булевых схем размера $O(s(n))$ (неравномерно).
+**Notation (SIZE).** $\mathrm{SIZE}(s(n))$ are languages recognized by a family of Boolean circuits of size $O(s(n))$ (unevenly).
 
-**Обозначение (Circuit).** $\mathrm{Circuit}(s(n))$ — тот же класс, что $\mathrm{SIZE}(s(n))$.
-Используется взаимозаменяемо с $\mathrm{SIZE}(s)$ (раздел 15.7, Cor. 2).
+**Notation (Circuit).** $\mathrm{Circuit}(s(n))$ is the same class as $\mathrm{SIZE}(s(n))$.
+Used interchangeably with $\mathrm{SIZE}(s)$ (Section 15.7, Cor. 2).
 
-См. раздел 8 и раздел 15.7 (Cor. 2) для связи с нижними оценками.
+See Section 8 and Section 15.7 (Cor. 2) for connections to lower bounds.
 
-**Определение (Time[n^k]/u(n), грубо).** Это классы языков, решаемых
-детерминированными алгоритмами за $O(n^k)$ с советом длины $u(n)$,
-зависящим только от $n$.
+**Definition (Time[n^k]/u(n), roughly).** These are the classes of languages solved
+deterministic algorithms in $O(n^k)$ with advice of length $u(n)$,
+depending only on $n$.
 
-См. раздел 15.7 (Cor. 2) для последствий по SAT и схеме $w_{n,k,u}(f)$.
+See Section 15.7 (Cor. 2) for consequences under SAT and the $w_{n,k,u}(f)$ scheme.
 
-**Класс AC⁰.** Семейство $f$ лежит в AC⁰, если существует константа $d$
-и семейство схем $\{C_n\}$ такое, что $\mathrm{depth}(C_n)\le d$,
-размер $|C_n|\le n^{O(1)}$, и $C_n(x)=f_n(x)$ для всех $x\in\{0,1\}^n$.
+**Class AC0.** Family $f$ lies in AC0 if constant $d$ exists
+and a family of circuits $\{C_n\}$ such that $\mathrm{depth}(C_n)\le d$,
+size $|C_n|\le n^{O(1)}$, and $C_n(x)=f_n(x)$ for all $x\in\{0,1\}^n$.
 
-**DNF/CNF как частный случай.** DNF — схема глубины 2 вида OR от AND‑термов; CNF — AND от OR‑клауз.
+**DNF/CNF as a special case.** DNF - depth scheme of 2 types OR from AND terms; CNF - AND from OR clauses.
 
-Задача схемных нижних оценок: доказать, что для явного семейства функций
-(например, SAT/CLIQUE/PARITY) *любой* представитель из выбранного класса
-должен иметь большой размер/глубину.
+The problem of circuit lower bounds: prove that for an explicit family of functions
+(e.g. SAT/CLIQUE/PARITY) *any* representative from the selected class
+must be large in size/depth.
 
-**Монотонные схемы.** Функция $f$ монотонна, если $x\le x'$ покоординатно
-влечёт $f(x)\le f(x')$. Для монотонной $f$ рассмотрим схемы без NOT
-(только AND/OR); минимальный размер обозначим $L_f^+$.
-Очевидно $L_f\le L_f^+$.
+**Monotone schemes.** The function $f$ is monotone if $x\le x'$ is coordinatewise
+implies $f(x)\le f(x')$. For monotonic $f$, consider schemes without NOT
+(AND/OR only); Let's denote the minimum size by $L_f^+$.
+Obviously $L_f\le L_f^+$.
 
-**Теорема 9.1 (Razborov, 1985, цитируется).** Пусть $f_{m,s}$ — функция
-на $n_m=\binom m2$ битах, равная 1 тогда и только тогда, когда граф на $m$
-вершинах содержит клику размера $\ge s$. Тогда:
+**Theorem 9.1 (Razborov, 1985, cited).** Let $f_{m,s}$ be a function
+on $n_m=\binom m2$ bits, equal to 1 if and only if the graph is on $m$
+vertices contains a clique of size $\ge s$. Then:
 
-- при $s=\lfloor \tfrac14\ln m\rfloor$ имеем $L_{f_{m,s}}^+\ge m^{C\ln m}$ для некоторой константы $C>0$;
-- при фиксированном $s$ имеем $L_{f_{m,s}}^+\ge \Omega\big(m^s/(\ln m)^{2s}\big)$.
+- for $s=\lfloor \tfrac14\ln m\rfloor$ we have $L_{f_{m,s}}^+\ge m^{C\ln m}$ for some constant $C>0$;
+- for fixed $s$ we have $L_{f_{m,s}}^+\ge \Omega\big(m^s/(\ln m)^{2s}\big)$.
 
-Замечание: это нижняя оценка именно в **монотонной** модели (без NOT),
-и потому сама по себе не даёт нижних оценок для общих булевых схем.
+Note: this is the lower bound in the **monotonic** model (without NOT),
+and therefore does not itself provide lower bounds for general Boolean circuits.
 
-**Современный контекст.** Grewal-Kumar (2024) показывают, что ряд AC^0[p]-
-нижних оценок переносится на расширенный класс GC^0[p], давая
-экспоненциальные нижние оценки для MAJ.
+**Modern context.** Grewal-Kumar (2024) show that the series AC^0[p]-
+lower bounds carry over to the extended class GC^0[p], giving
+exponential lower bounds for MAJ.

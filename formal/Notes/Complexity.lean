@@ -2,957 +2,957 @@ import Paperproof
 
 /-!
 
-# P vs NP — исследовательские шаги 16.3–16.36
+# P vs NP - research steps 16.3-16.36
 
-Главный индекс: `P_vs_NP.md`.
+Main index: `P_vs_NP.md`.
 
-### 16.3. Исследовательский шаг: decision vs search для SAT
+### 16.3. Research step: decision vs search for SAT
 
-**Вопрос («А что если…?»).** Может ли SAT решаться в полиномиальное время,
-а задача поиска удовлетворяющего присваивания оставаться существенно труднее?
+**Question ("What if...?").** Can SAT be solved in polynomial time,
+and the task of finding a satisfying assignment remains significantly more difficult?
 
-**Определение (SAT‑SEARCH).** По входу CNF‑формулы $\varphi$: если $\varphi$ выполнима,
-выдать удовлетворяющее присваивание; иначе вывести $\bot$.
+**Definition (SATSEARCH).** Given the input of the CNF formula $\varphi$: if $\varphi$ is satisfiable,
+issue a satisfying assignment; otherwise print $\bot$.
 
-**Лемма 16.3.** Существует полиномиальный алгоритм, который решает SAT‑SEARCH,
-используя $O(n)$ вызовов решения SAT (где $n$ — число переменных).
-В частности, если $\mathrm{SAT}\in\mathrm{P}$, то SAT‑SEARCH $\in\mathrm{FP}$.
+**Lemma 16.3.** There is a polynomial algorithm that solves SATSEARCH,
+using $O(n)$ calls to solve the SAT (where $n$ is the number of variables).
+In particular, if $\mathrm{SAT}\in\mathrm{P}$, then SATSEARCH $\in\mathrm{FP}$.
 
-*Доказательство.* Сначала одним вызовом проверяем, выполнима ли $\varphi$.
-Если нет — возвращаем $\bot$.
-Иначе последовательно фиксируем переменные: для $i=1..n$ проверяем выполнимость
-$\varphi\upharpoonright (x_i=0)$. Если выполнима — ставим $x_i:=0$,
-иначе $x_i:=1$ (при этом $\varphi\upharpoonright (x_i=1)$ обязана быть выполнима,
-иначе исходная $\varphi$ невыполнима). Индукцией по $i$ сохраняется выполнимость,
-и после $n$ шагов получаем удовлетворяющее присваивание.
-Время — $O(n)$ вызовов SAT и полиномиальные подстановки. $\square$
+*Proof.* First, we check with one call whether $\varphi$ is executable.
+If not, return $\bot$.
+Otherwise, we fix the variables sequentially: for $i=1..n$ we check the satisfiability
+$\varphi\upharpoonright (x_i=0)$. If feasible, set $x_i:=0$,
+otherwise $x_i:=1$ (in this case $\varphi\upharpoonright (x_i=1)$ must be satisfiable,
+otherwise the original $\varphi$ is unsatisfiable). By induction on $i$ satisfiability is preserved,
+and after $n$ steps we obtain a satisfying assignment.
+Time - $O(n)$ of SAT calls and polynomial substitutions. $\square$
 
-**Вывод.** Попытка разделить P и NP через «decision проще, чем search»
-для SAT не работает: SAT саморедуцируем.
+**Conclusion.** An attempt to separate P and NP through "decision is simpler than search"
+does not work for SAT: SAT is self-reducing.
 
-**Барьер‑чек.**
-- *Релятивизация:* да, алгоритм оракульный (тот же аргумент для $\mathrm{SAT}^A$).
-- *Natural proofs:* неприменимо (нет схемных нижних оценок).
-- *Algebrization:* неприменимо (нет алгебраизации/полиномов; чисто комбинаторика).
+**Barrier check.**
+- *Relativization:* yes, the algorithm is oracle (same argument for $\mathrm{SAT}^A$).
+- *Natural proofs:* not applicable (no schematic lower estimates).
+- *Algebrization:* not applicable (no algebraization/polynomials; purely combinatorics).
 
-### 16.4. Исследовательский шаг: sparse NP‑полный ⇒ P=NP
+### 16.4. Research step: sparse NPcomplete  P=NP
 
-**Вопрос («А что если…?»).** Что если у NP есть разреженный (sparse) NP‑полный язык?
+**Question ("What if...?").** What if NP has a sparse NP-complete language?
 
-**Определение (sparse).** Язык $S$ разрежен, если существует полином $p$, что
-$|S\cap \Sigma^{\le m}|\le p(m)$ для всех $m$.
+**Definition (sparse).** A language $S$ is sparse if there exists a polynomial $p$ such that
+$|S\cap \Sigma^{\le m}|\le p(m)$ for all $m$.
 
-**Лемма 16.4 (Мэхэни).** Если существует разреженный NP‑полный язык
-относительно $\le_m^p$, то $\mathrm{P}=\mathrm{NP}$.
+**Lemma 16.4 (Mahany).** If there is a sparse NP-complete language
+relative to $\le_m^p$, then $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Пусть $S$ sparse и $\mathrm{SAT}\le_m^p S$ через $f$.
-Зафиксируем полином $p$ для sparsity и полином $q$, ограничивающий длину $f(\psi)$
-на формулах $\psi$ размера $\mathrm{poly}(|\varphi|)$.
-Положим $K:=p(q(|\varphi|))$. Построим алгоритм SAT.
+*Proof.* Let $S$ sparse and $\mathrm{SAT}\le_m^p S$ through $f$.
+Let us fix a polynomial $p$ for sparsity and a polynomial $q$ limiting the length $f(\psi)$
+on formulas $\psi$ of size $\mathrm{poly}(|\varphi|)$.
+Let $K:=p(q(|\varphi|))$. Let's build the SAT algorithm.
 
-Поддерживаем список $L$ формул с инвариантом:
-(i) $|L|\le K$, (ii) если $\varphi$ выполнима, то выполнима хотя бы одна формула из $L$.
-Старт: $L=\{\varphi\}$. Для переменной $x_i$ каждую $\psi\in L$ заменяем
-на $\psi\upharpoonright(x_i=0)$ и $\psi\upharpoonright(x_i=1)$,
-получая $L'$, затем применяем «подрезку».
-(Если нужно оставаться в CNF, используем стандартное полиномиальное Tseitin‑кодирование дизъюнкций.)
+We support a list of $L$ formulas with an invariant:
+(i) $|L|\le K$, (ii) if $\varphi$ is satisfiable, then at least one formula from $L$ is satisfiable.
+Start: $L=\{\varphi\}$. For the variable $x_i$ we replace each $\psi\in L$
+on $\psi\upharpoonright(x_i=0)$ and $\psi\upharpoonright(x_i=1)$,
+getting $L'$, then we apply "pruning".
+(If we need to stay in CNF, we use standard Tseitin polynomial encoding of disjunctions.)
 
-**Pruning‑лемма.** Для списка $\varphi_1,\dots,\varphi_k$ (где $k> K$) можно за полиномиальное
-время удалить хотя бы одну формулу, сохранив (ii).
+**Pruning lemma.** For the list $\varphi_1,\dots,\varphi_k$ (where $k> K$) we can use the polynomial
+time to remove at least one formula, keeping (ii).
 
-Доказательство pruning: положим $\psi_i:=\varphi_1\lor\cdots\lor\varphi_i$ и $y_i:=f(\psi_i)$.
-- Если найдены $i<j$ с $y_i=y_j$, то $\psi_i$ и $\psi_j$ имеют одинаковую выполнимость,
-  поэтому удаление $\varphi_{i+1},\dots,\varphi_j$ сохраняет (ii).
-- Иначе все $y_i$ различны. Тогда среди $\psi_i$ выполнимых $\le K$ (иначе в $S$ было бы
-  $>K$ различных строк). Выполнимые $\psi_i$ образуют суффикс, значит при наличии
-  выполнимой формулы она среди последних $K$; удаляем первые $k-K$.
+Proof pruning: put $\psi_i:=\varphi_1\lor\cdots\lor\varphi_i$ and $y_i:=f(\psi_i)$.
+- If $i<j$ with $y_i=y_j$ are found, then $\psi_i$ and $\psi_j$ have the same satisfiability,
+  so removing $\varphi_{i+1},\dots,\varphi_j$ preserves (ii).
+- Otherwise, all $y_i$ are different. Then among $\psi_i$ satisfiable $\le K$ (otherwise in $S$ there would be
+  $>K$ different lines). Satisfiable $\psi_i$ form a suffix, which means that if there is
+  of a satisfiable formula it is among the last $K$; remove the first $k-K$.
 
-Повторяя pruning, держим $|L|\le K$. После обработки всех переменных все формулы в $L$
-константны; проверяем, есть ли истинная. Это полиномиально, значит $\mathrm{SAT}\in\mathrm{P}$,
-следовательно $\mathrm{P}=\mathrm{NP}$. $\square$
+Repeating pruning, hold $|L|\le K$. After processing all variables, all formulas in $L$
+constant; we check whether it is true. This is polynomial, which means $\mathrm{SAT}\in\mathrm{P}$,
+hence $\mathrm{P}=\mathrm{NP}$. $\square$
 
-**Барьер‑чек.**
-- *Релятивизация:* да (аргумент остаётся верным с оракулом).
-- *Natural proofs:* неприменимо (не о схемных нижних оценках).
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument remains true with the oracle).
+- *Natural proofs:* not applicable (not about schematic lower bounds).
+- *Algebrization:* not applicable.
 
-### 16.5. Исследовательский шаг: p‑bounded резолюция?
+### 16.5. Research step: pbounded resolution?
 
-**Вопрос («А что если…?»).** Может ли резолюция быть p‑bounded для всех
-невыполнимых CNF‑формул?
+**Question ("What if...?").** Can a resolution be p-bounded for everyone
+unsatisfiable CNF formulas?
 
-**Лемма 16.5.** Если резолюция p‑bounded, то $\mathrm{NP}=\mathrm{coNP}$.
+**Lemma 16.5.** If the resolution is p-bounded, then $\mathrm{NP}=\mathrm{coNP}$.
 
-*Доказательство.* При p‑bounded резолюции каждая невыполнимая CNF
-имеет полиномиальную рефутацию. Проверка корректности резолюционного вывода
-полиномиальна, значит $\mathrm{UNSAT}\in\mathrm{NP}$.
-Так как $\mathrm{UNSAT}$ coNP‑полна, получаем $\mathrm{coNP}\subseteq\mathrm{NP}$,
-а значит $\mathrm{NP}=\mathrm{coNP}$. $\square$
+*Proof.* With a pbounded resolution, every unsatisfiable CNF
+has a polynomial refutation. Checking the correctness of the resolution conclusion
+is polynomial, which means $\mathrm{UNSAT}\in\mathrm{NP}$.
+Since $\mathrm{UNSAT}$ is coNP-complete, we obtain $\mathrm{coNP}\subseteq\mathrm{NP}$,
+which means $\mathrm{NP}=\mathrm{coNP}$. $\square$
 
-**Контрпример к предпосылке.** Формулы $\mathrm{PHP}^{n}_{n+1}$ требуют
-экспоненциальных резолюционных рефутаций (Теорема 15.2),
-так что резолюция не является p‑bounded в общем случае.
+**Counterexample to the premise.** Formulas $\mathrm{PHP}^{n}_{n+1}$ require
+exponential resolution refutations (Theorem 15.2),
+so the resolution is not p-bounded in general.
 
-**Барьер‑чек.**
-- *Релятивизация:* неприменимо (утверждение о фиксированной proof‑system).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* not applicable (statement about a fixed proofsystem).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.6. Исследовательский шаг: резолюция vs CP (p‑симуляция)
+### 16.6. Exploratory step: resolution vs CP (psimulation)
 
-**Вопрос («А что если…?»).** Может ли резолюция p‑симулировать систему Cutting Planes (CP)?
+**Question ("What if...?").** Can resolution psimulate a Cutting Planes (CP) system?
 
-**Лемма 16.6.** Резолюция не p‑симулирует CP.
+**Lemma 16.6.** Resolution does not p-simulate CP.
 
-*Доказательство (контрпример).* Предположим, что резолюция p‑симулирует CP.
-Тогда любую CP‑рефутацию размера $\mathrm{poly}(n)$ можно преобразовать
-в резолюционную рефутацию размера $\mathrm{poly}(n)$.
-По Теореме 15.8 формулы $\mathrm{PHP}^{n}_{n+1}$ имеют полиномиальные CP‑рефутации,
-а по Теореме 15.2 любая резолюционная рефутация $\mathrm{PHP}^{n}_{n+1}$
-имеет экспоненциальный размер. Противоречие. $\square$
+*Proof (counterexample).* Suppose that resolution psimulates CP.
+Then any CP refutation of size $\mathrm{poly}(n)$ can be transformed
+into a resolution refutation of size $\mathrm{poly}(n)$.
+By Theorem 15.8, the formulas $\mathrm{PHP}^{n}_{n+1}$ have polynomial CP refutations,
+and by Theorem 15.2 any resolution refutation $\mathrm{PHP}^{n}_{n+1}$
+has exponential size. Contradiction. $\square$
 
-**Барьер‑чек.**
-- *Релятивизация:* неприменимо (утверждение о конкретных proof‑system).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* not applicable (statement about a specific proofsystem).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.7. Исследовательский шаг: приближение MAX‑3SAT
+### 16.7. Exploratory Step: Approaching MAX3SAT
 
-**Вопрос («А что если…?»).** Что если существует полиномиальный алгоритм,
-который отличает выполнимые 3CNF от формул, где нельзя удовлетворить
-более чем $(1-\varepsilon)$ долю клауз (для некоторого константного $\varepsilon>0$)?
+**Question ("What if...?").** What if there is a polynomial algorithm,
+which distinguishes satisfiable 3CNFs from formulas where it cannot be satisfied
+more than $(1-\varepsilon)$ fraction of clauses (for some constant $\varepsilon>0$)?
 
-**Определение (GAP‑3SAT$_\varepsilon$).** Вход — 3CNF $\varphi$.
-YES: $\varphi$ выполнима. NO: любая подстановка удовлетворяет
-не более $(1-\varepsilon)$ доли клауз.
+**Definition (GAP3SAT$_\varepsilon$).** Input - 3CNF $\varphi$.
+YES: $\varphi$ is feasible. NO: any substitution satisfies
+no more than $(1-\varepsilon)$ fraction of clauses.
 
-**Лемма 16.7.** Если для некоторого $\varepsilon>0$ задача GAP‑3SAT$_\varepsilon$
-решается за полиномиальное время, то $\mathrm{P}=\mathrm{NP}$.
+**Lemma 16.7.** If for some $\varepsilon>0$ the problem GAP-3SAT$_\varepsilon$
+is solved in polynomial time, then $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* По теореме PCP (Раздел 16.2) существует константа
-$\varepsilon>0$, для которой GAP‑3SAT$_\varepsilon$ NP‑трудна.
-Если бы она решалась за полиномиальное время, то решалась бы SAT,
-следовательно $\mathrm{P}=\mathrm{NP}$. $\square$
+*Proof.* By the PCP theorem (Section 16.2), there is a constant
+$\varepsilon>0$, for which GAP-3SAT$_\varepsilon$ is NP-hard.
+If it were solved in polynomial time, then SAT would be solved,
+hence $\mathrm{P}=\mathrm{NP}$. $\square$
 
-**Барьер‑чек.**
-- *Релятивизация:* не обязано релятивизировать (PCP использует аритметизацию).
-- *Natural proofs:* неприменимо (это не схемные нижние оценки).
-- *Algebrization:* не ясно; доказательство PCP не сводится к чистой алгебризации.
+**Barrier check.**
+- *Relativization:* does not have to relativize (PCP uses arrhythmeticization).
+- *Natural proofs:* not applicable (these are not schematic lower bounds).
+- *Algebrization:* not clear; the proof of PCP does not reduce to pure algebrization.
 
-### 16.8. Исследовательский шаг: NP‑ и coNP‑полнота одного языка
+### 16.8. Research step: NP and coNPcompleteness of one language
 
-**Вопрос («А что если…?»).** Может ли существовать язык $L$, который
-NP‑полон и coNP‑полон (по $\le_m^p$)?
+**Question ("What if...?").** Could there be a language $L$ that
+Is NPcomplete and coNPcomplete (by $\le_m^p$)?
 
-**Лемма 16.8.** Если существует язык, который одновременно NP‑полон и coNP‑полон
-(по $\le_m^p$), то $\mathrm{NP}=\mathrm{coNP}$.
+**Lemma 16.8.** If there is a language that is both NP-complete and coNP-complete
+(by $\le_m^p$), then $\mathrm{NP}=\mathrm{coNP}$.
 
-*Доказательство.* Пусть $L$ — такой язык. Тогда $L\in\mathrm{NP}\cap\mathrm{coNP}$.
-Для любого $A\in\mathrm{NP}$ существует полиномиальная редукция $f$ такая, что
-$x\in A \iff f(x)\in L$. Тогда
+*Proof.* Let $L$ be such a language. Then $L\in\mathrm{NP}\cap\mathrm{coNP}$.
+For any $A\in\mathrm{NP}$ there is a polynomial reduction of $f$ such that
+$x\in A \iff f(x)\in L$. Then
 $$x\in A^c \iff f(x)\in L^c.$$
-Поскольку $L\in\mathrm{coNP}$, имеем $L^c\in\mathrm{NP}$, значит $A^c\in\mathrm{NP}$,
-то есть $A\in\mathrm{coNP}$. Следовательно, $\mathrm{NP}\subseteq\mathrm{coNP}$.
-Симметрично, из coNP‑полноты $L$ и того, что $L\in\mathrm{NP}$, получаем
-$\mathrm{coNP}\subseteq\mathrm{NP}$. Итак, $\mathrm{NP}=\mathrm{coNP}$. $\square$
+Since $L\in\mathrm{coNP}$, we have $L^c\in\mathrm{NP}$, therefore $A^c\in\mathrm{NP}$,
+that is, $A\in\mathrm{coNP}$. Therefore, $\mathrm{NP}\subseteq\mathrm{coNP}$.
+Symmetrically, from the coNP-completeness of $L$ and the fact that $L\in\mathrm{NP}$, we obtain
+$\mathrm{coNP}\subseteq\mathrm{NP}$. So $\mathrm{NP}=\mathrm{coNP}$. $\square$
 
-**Барьер‑чек.**
-- *Релятивизация:* да (аргумент сохраняется для оракулов).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is preserved for oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.9. Исследовательский шаг: SAT ≤ UNSAT?
+### 16.9. Research step: SAT <= UNSAT?
 
-**Вопрос («А что если…?»).** Может ли SAT полиномиально сводиться к UNSAT?
+**Question ("What if...?").** Can SAT be polynomially reduced to UNSAT?
 
-**Лемма 16.9.** Если $\mathrm{SAT}\le_m^p\mathrm{UNSAT}$, то $\mathrm{NP}=\mathrm{coNP}$.
+**Lemma 16.9.** If $\mathrm{SAT}\le_m^p\mathrm{UNSAT}$, then $\mathrm{NP}=\mathrm{coNP}$.
 
-*Доказательство.* Пусть $f$ — редукция SAT к UNSAT.
-Тогда SAT принадлежит coNP (coNP замкнут по $\le_m^p$‑редукциям).
-Так как SAT NP‑полна, получаем $\mathrm{NP}\subseteq\mathrm{coNP}$.
-Берём дополнения: $\mathrm{coNP}\subseteq\mathrm{NP}$. Следовательно, $\mathrm{NP}=\mathrm{coNP}$. $\square$
+*Proof.* Let $f$ be the reduction of SAT to UNSAT.
+Then SAT belongs to coNP (coNP is closed under $\le_m^p$-reductions).
+Since SAT is NP-complete, we obtain $\mathrm{NP}\subseteq\mathrm{coNP}$.
+We take the additions: $\mathrm{coNP}\subseteq\mathrm{NP}$. Therefore, $\mathrm{NP}=\mathrm{coNP}$. $\square$
 
-**Барьер‑чек.**
-- *Релятивизация:* да (аргумент сохраняется для оракулов).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is preserved for oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.10. Исследовательский шаг: Unique-SAT и рандомизация
+### 16.10. Exploratory Step: Unique-SAT and Randomization
 
-**Вопрос («А что если…?»).** Что если Unique-SAT решается за полиномиальное время — следует ли $\mathrm{P}=\mathrm{NP}$?
+**Question ("What if...?").** What if Unique-SAT is solved in polynomial time - should $\mathrm{P}=\mathrm{NP}$?
 
-**Определение (Unique-SAT, promise).** Вход: CNF‑формула $\varphi$ над $n$ переменными.
-YES: $\varphi$ имеет ровно одно удовлетворяющее присваивание.
-NO: $\varphi$ не имеет удовлетворяющих присваиваний.
-(Иные случаи не обязаны обрабатываться корректно.)
+**Definition (Unique-SAT, promise).** Input: CNF formula $\varphi$ over $n$ variables.
+YES: $\varphi$ has exactly one satisfying assignment.
+NO: $\varphi$ has no satisfying assignments.
+(Other cases do not need to be handled correctly.)
 
-**Лемма 16.10 (Valiant-Vazirani).** Существует вероятностная полиномиальная редукция,
-которая по формуле $\varphi$ строит CNF‑формулу $\varphi'$ такую, что:
-- если $\varphi$ невыполнима, то $\varphi'$ невыполнима всегда;
-- если $\varphi$ выполнима, то с вероятностью $\ge 3/(16(n{+}1))=\Omega(1/n)$ $\varphi'$ имеет ровно одно решение.
+**Lemma 16.10 (Valiant-Vazirani).** There is a probabilistic polynomial reduction,
+which, using the formula $\varphi$, constructs a CNF formula $\varphi'$ such that:
+- if $\varphi$ is unsatisfiable, then $\varphi'$ is always unsatisfiable;
+- if $\varphi$ is satisfiable, then with probability $\ge 3/(16(n{+}1))=\Omega(1/n)$ $\varphi'$ has exactly one solution.
 
-В частности, если Unique-SAT $\in\mathrm{P}$, то $\mathrm{SAT}\in\mathrm{RP}$.
+In particular, if Unique-SAT $\in\mathrm{P}$ then $\mathrm{SAT}\in\mathrm{RP}$.
 
-*Доказательство.* Пусть $S\subseteq\{0,1\}^n$ — множество решений $\varphi$, $s=|S|$.
-Выбираем $m\in\{1,\dots,n{+}1\}$, случайную попарно независимую хэш‑функцию
-$h:\{0,1\}^n\to\{0,1\}^m$ (например, $h(x)=Ax\oplus b$ над $\mathbb{F}_2$)
-и случайный $t\in\{0,1\}^m$. Строим
+*Proof.* Let $S\subseteq\{0,1\}^n$ be the set of solutions to $\varphi$, $s=|S|$.
+We choose $m\in\{1,\dots,n{+}1\}$, a random pairwise independent hash function
+$h:\{0,1\}^n\to\{0,1\}^m$ (for example, $h(x)=Ax\oplus b$ over $\mathbb{F}_2$)
+and random $t\in\{0,1\}^m$. We are building
 $$\varphi' := \varphi\land (h(x)=t),$$
-кодируя $m$ линейных уравнений в CNF с полиномиальным ростом (кодирование Тсейтина).
-Если $\varphi$ невыполнима, то $\varphi'$ тоже.
+encoding $m$ linear equations in CNF with polynomial growth (Tseitin encoding).
+If $\varphi$ is unsatisfiable, then so is $\varphi'$.
 
-Пусть $s\ge 1$. Существует $m$ такое, что $2^{m-2}< s\le 2^{m-1}$.
-Положим $Z=|S\cap h^{-1}(t)|=\sum_{x\in S} I_x$, где $I_x=[h(x)=t]$.
-Тогда $\mu=\mathbb{E}[Z]=s/2^m\in(1/4,1/2]$ и по попарной независимости
+Let $s\ge 1$. There is $m$ such that $2^{m-2}< s\le 2^{m-1}$.
+Let $Z=|S\cap h^{-1}(t)|=\sum_{x\in S} I_x$, where $I_x=[h(x)=t]$.
+Then $\mu=\mathbb{E}[Z]=s/2^m\in(1/4,1/2]$ and by pairwise independence
 $$\mathbb{E}[Z(Z-1)]=\sum_{x\ne y}\Pr[I_x=I_y=1]=\frac{s(s-1)}{2^{2m}}\le \mu^2.$$
-Так как при $Z\ge 2$ выполнено $Z(Z-1)\ge Z$, получаем
+Since for $Z\ge 2$ $Z(Z-1)\ge Z$ holds, we obtain
 $$\Pr[Z=1]\ge \mu-\mathbb{E}[Z(Z-1)]\ge \mu-\mu^2\ge 3/16.$$
-Следовательно, для «правильного» $m$ вероятность уникальности $\ge 3/16$.
-При равномерном выборе $m\in\{1,\dots,n{+}1\}$ получаем успех
+Therefore, for the "correct" $m$ the probability of uniqueness is $\ge 3/16$.
+With a uniform choice of $m\in\{1,\dots,n{+}1\}$ we obtain success
 $$\Pr[\text{unique}]\ \ge\ \frac{3}{16(n+1)}=\Omega(1/n).$$
-Повторением (усилением) получаем RP-алгоритм при наличии решателя Unique-SAT. $\square$
+By repetition (strengthening) we obtain the RP algorithm in the presence of the Unique-SAT solver. $\square$
 
-**Вывод/провал.** Unique-SAT $\in\mathrm{P}$ даёт лишь $\mathrm{SAT}\in\mathrm{RP}$.
-Чтобы получить $\mathrm{P}=\mathrm{NP}$, нужна дерэндомизация (например, $\mathrm{RP}=\mathrm{P}$)
-или детерминированная «изоляция» решений.
+**Output/failure.** Unique-SAT $\in\mathrm{P}$ gives only $\mathrm{SAT}\in\mathrm{RP}$.
+To get $\mathrm{P}=\mathrm{NP}$, we need derandomization (for example, $\mathrm{RP}=\mathrm{P}$)
+or deterministic "isolation" of decisions.
 
-**Барьер‑чек.**
-- *Релятивизация:* да (редукция комбинаторная и переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо/неочевидно.
+**Barrier check.**
+- *Relativization:* yes (the reduction is combinatorial and transfers to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable/not obvious.
 
-### 16.11. Исследовательский шаг: NP ⊆ BPP ⇒ коллапс PH
+### 16.11. Exploratory step: NP  BPP  PH collapse
 
-**Вопрос («А что если…?»).** Что если SAT (или весь NP) решается в BPP — следует ли коллапс полиномиальной иерархии?
+**Question ("What if...?").** What if SAT (or the entire NP) is solved in BPP - does polynomial hierarchy collapse follow?
 
-**Определение (BPP).** Язык $L\in\mathrm{BPP}$, если существует вероятностная
-полиномиальная машина $A$, что для всех $x$:
+**Definition (BPP).** Language $L\in\mathrm{BPP}$ if there is a probabilistic
+polynomial machine $A$, which for all $x$:
 $$x\in L\Rightarrow \Pr[A(x)=1]\ge 2/3,\quad x\notin L\Rightarrow \Pr[A(x)=0]\ge 2/3.$$
 
-**Лемма 16.11.** Если $\mathrm{NP}\subseteq\mathrm{BPP}$, то $\mathrm{PH}\subseteq\mathrm{BPP}$.
-(В частности, если $\mathrm{SAT}\in\mathrm{BPP}$, то $\mathrm{PH}$ коллапсирует в BPP.)
+**Lemma 16.11.** If $\mathrm{NP}\subseteq\mathrm{BPP}$, then $\mathrm{PH}\subseteq\mathrm{BPP}$.
+(In particular, if $\mathrm{SAT}\in\mathrm{BPP}$, then $\mathrm{PH}$ collapses into BPP.)
 
-*Доказательство.* Сначала покажем $\mathrm{BPP}^{\mathrm{BPP}}=\mathrm{BPP}$.
-Пусть $M^{O}$ — BPP‑машина, делающая не более $q(n)$ запросов к оракулу $O\in\mathrm{BPP}$.
-Без потери общности усилим $M$ (стандартным повторением и большинством) так, что при идеальном оракуле
-ошибка $M$ становится $\le 1/10$; число запросов при этом возрастает лишь в $O(1)$ раз и поглощается в $q(n)$.
-Каждый запрос $y$ симулируем алгоритмом $A_O(y)$, усиливая его до ошибки
-$\delta:=1/(10q(n))$ повторением $O(\log q(n))$ раз и мажоритарным голосованием.
-По объединённой вероятности (union bound) шанс, что хоть один из ответов оракула
-ошибочен, не превосходит $q(n)\cdot\delta\le 1/10$.
-Условно на правильных ответах оракула $M$ ошибается с вероятностью $\le 1/10$.
-Итого общая ошибка $\le 1/5<1/3$, а время остаётся полиномиальным.
-Следовательно, $\mathrm{BPP}^{\mathrm{BPP}}\subseteq\mathrm{BPP}$;
-обратное включение тривиально.
+*Proof.* First we show $\mathrm{BPP}^{\mathrm{BPP}}=\mathrm{BPP}$.
+Let $M^{O}$ be a BPP machine making at most $q(n)$ requests to the oracle $O\in\mathrm{BPP}$.
+Without loss of generality, let us strengthen $M$ (by standard repetition and majority) so that with an ideal oracle
+the error $M$ becomes $\le 1/10$; the number of requests in this case increases only by $O(1)$ times and is absorbed by $q(n)$.
+Each request $y$ is simulated by the algorithm $A_O(y)$, strengthening it to the point of error
+$\delta:=1/(10q(n))$ by repeating $O(\log q(n))$ times and majority voting.
+By union bound, the chance that at least one of the oracle's answers
+is erroneous and does not exceed $q(n)\cdot\delta\le 1/10$.
+Conventionally, given the correct answers of the oracle, $M$ is wrong with probability $\le 1/10$.
+In total, the total error is $\le 1/5<1/3$, and the time remains polynomial.
+Therefore, $\mathrm{BPP}^{\mathrm{BPP}}\subseteq\mathrm{BPP}$;
+the reverse inclusion is trivial.
 
-Теперь индукция по $k$ для $\Sigma_k^p$.
-База: $\Sigma_1^p=\mathrm{NP}\subseteq\mathrm{BPP}$ по предположению.
-Переход: если $\Sigma_k^p\subseteq\mathrm{BPP}$, то
+Now induction on $k$ for $\Sigma_k^p$.
+Base: $\Sigma_1^p=\mathrm{NP}\subseteq\mathrm{BPP}$ by assumption.
+Transition: if $\Sigma_k^p\subseteq\mathrm{BPP}$, then
 $$\Sigma_{k+1}^p=\mathrm{NP}^{\Sigma_k^p}\subseteq\mathrm{BPP}^{\mathrm{BPP}}=\mathrm{BPP}.$$
-Значит все уровни PH лежат в BPP, т.е. $\mathrm{PH}\subseteq\mathrm{BPP}$. $\square$
+This means that all PH levels lie in BPP, i.e. $\mathrm{PH}\subseteq\mathrm{BPP}$. $\square$
 
-**Вывод/провал.** Предположение $\mathrm{SAT}\in\mathrm{BPP}$ не даёт $\mathrm{P}=\mathrm{NP}$,
-а лишь коллапс PH в BPP. Для $\mathrm{P}=\mathrm{NP}$ нужна дерэндомизация
-(например, $\mathrm{BPP}=\mathrm{P}$).
+**Conclusion/failure.** Assumption $\mathrm{SAT}\in\mathrm{BPP}$ does not give $\mathrm{P}=\mathrm{NP}$,
+but only the collapse of PH in BPP. For $\mathrm{P}=\mathrm{NP}$ derandomization is needed
+(for example, $\mathrm{BPP}=\mathrm{P}$).
 
-**Барьер‑чек.**
-- *Релятивизация:* да (аргумент сохраняется с оракулами).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (argument persists with oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.12. Исследовательский шаг: BPP in Sigma2 cap Pi2 (Sipser-Gacs-Lautemann)
+### 16.12. Research step: BPP in Sigma2 cap Pi2 (Sipser-Gacs-Lautemann)
 
-**Вопрос ("А что если...?").** Можно ли поместить BPP на втором уровне PH?
+**Question ("What if...?").** Is it possible to place BPP on the second PH level?
 
-**Лемма 16.12 (Sipser-Gacs-Lautemann).** $\mathrm{BPP}\subseteq\Sigma_2^p\cap\Pi_2^p$.
+**Lemma 16.12 (Sipser-Gacs-Lautemann).** $\mathrm{BPP}\subseteq\Sigma_2^p\cap\Pi_2^p$.
 
-*Доказательство.* Пусть $L\in\mathrm{BPP}$. Существует вероятностная машина $R(x,r)$,
-работающая за $\mathrm{poly}(|x|)$ и использующая $m$ случайных бит, такая что
-ошибка $\le 1/3$. Усилим (повторением и большинством) до ошибки
-$\varepsilon:=2^{-2n}$, где $n=|x|$; это даёт новое $m=\mathrm{poly}(n)$.
-Положим $G_x:=\{r\in\{0,1\}^m:\ R(x,r)=1\}$.
-Тогда
+*Proof.* Let $L\in\mathrm{BPP}$. There is a probabilistic machine $R(x,r)$,
+running for $\mathrm{poly}(|x|)$ and using $m$ random bits, such that
+error $\le 1/3$. Strengthen (repetition and majority) to the point of error
+$\varepsilon:=2^{-2n}$, where $n=|x|$; this gives the new $m=\mathrm{poly}(n)$.
+Let us set $G_x:=\{r\in\{0,1\}^m:\ R(x,r)=1\}$.
+Then
 $$x\in L\Rightarrow |G_x|\ge (1-\varepsilon)2^m,\quad x\notin L\Rightarrow |G_x|\le \varepsilon 2^m.$$
 
-Зафиксируем $k:=m+1$. Для $r_1,\dots,r_k\in\{0,1\}^m$ рассмотрим
+Let us fix $k:=m+1$. For $r_1,\dots,r_k\in\{0,1\}^m$, consider
 $$U:=\bigcup_{i=1}^k (G_x\oplus r_i),$$
-где $\oplus$ — поразрядное XOR.
+where $\oplus$ is a bitwise XOR.
 
-(1) Пусть $x\in L$. Выберем $r_i$ равномерно и независимо. Для фиксированного $z$
+(1) Let $x\in L$. Let us choose $r_i$ uniformly and independently. For fixed $z$
 $$\Pr[z\notin U]=(1-|G_x|/2^m)^k\le \varepsilon^k.$$
-По объединённой вероятности
+By joint probability
 $$\Pr[U\ne\{0,1\}^m]\le 2^m\varepsilon^k\le 2^m\cdot 2^{-2n(m+1)}<1.$$
-Следовательно, существует набор $r_1,\dots,r_k$ с $U=\{0,1\}^m$.
+Therefore, there is a set $r_1,\dots,r_k$ with $U=\{0,1\}^m$.
 
-(2) Пусть $x\notin L$. Тогда для любых $r_1,\dots,r_k$ имеем
-$|U|\le k|G_x|\le k\varepsilon 2^m<2^m$ (так как $k=\mathrm{poly}(n)$ и $\varepsilon=2^{-2n}$; малые $n$ можно хардкодить),
-значит существует $z$ с $z\notin U$.
+(2) Let $x\notin L$. Then for any $r_1,\dots,r_k$ we have
+$|U|\le k|G_x|\le k\varepsilon 2^m<2^m$ (since $k=\mathrm{poly}(n)$ and $\varepsilon=2^{-2n}$; small $n$ can be hardcoded),
+then there is $z$ with $z\notin U$.
 
-Итак,
+So,
 $$x\in L\iff \exists r_1,\dots,r_k\ \forall z\ \bigvee_{i=1}^k R(x,z\oplus r_i)=1,$$
-что есть $\Sigma_2^p$-формула (так как $k,m=\mathrm{poly}(n)$).
-Так как $\mathrm{BPP}$ замкнут по дополнению, получаем также
-$L\in\Pi_2^p$. Значит $\mathrm{BPP}\subseteq\Sigma_2^p\cap\Pi_2^p$. $\square$
+that there is a $\Sigma_2^p$-formula (since $k,m=\mathrm{poly}(n)$).
+Since $\mathrm{BPP}$ is closed by complement, we also obtain
+$L\in\Pi_2^p$. So $\mathrm{BPP}\subseteq\Sigma_2^p\cap\Pi_2^p$. $\square$
 
-**Вывод/провал.** Лемма лишь помещает $\mathrm{BPP}$ во второй уровень PH;
-сама по себе она не даёт $\mathrm{P}=\mathrm{NP}$.
+**Conclusion/failure.** The lemma only places $\mathrm{BPP}$ in the second level of PH;
+by itself it does not give $\mathrm{P}=\mathrm{NP}$.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент комбинаторный, переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is combinatorial, transferable to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.13. Исследовательский шаг: NP in BPP => PH = Sigma2^p
+### 16.13. Exploratory step: NP in BPP => PH = Sigma2^p
 
-**Вопрос ("А что если...?").** Если $\mathrm{NP}\subseteq\mathrm{BPP}$, коллапсирует ли PH на втором уровне?
+**Question ("What if...?").** If $\mathrm{NP}\subseteq\mathrm{BPP}$, does PH collapse at the second level?
 
-**Лемма 16.13.** Если $\mathrm{NP}\subseteq\mathrm{BPP}$, то
+**Lemma 16.13.** If $\mathrm{NP}\subseteq\mathrm{BPP}$, then
 $$\mathrm{PH}=\Sigma_2^p=\Pi_2^p.$$
 
-*Доказательство.* По Лемме 16.11 получаем $\mathrm{PH}\subseteq\mathrm{BPP}$.
-По Лемме 16.12 имеем $\mathrm{BPP}\subseteq\Sigma_2^p\cap\Pi_2^p$.
-Следовательно,
+*Proof.* By Lemma 16.11 we obtain $\mathrm{PH}\subseteq\mathrm{BPP}$.
+By Lemma 16.12 we have $\mathrm{BPP}\subseteq\Sigma_2^p\cap\Pi_2^p$.
+Hence,
 $$\mathrm{PH}\subseteq\Sigma_2^p\cap\Pi_2^p\subseteq\Sigma_2^p.$$
-Но $\Sigma_2^p\subseteq\mathrm{PH}$ по определению, значит
-$\mathrm{PH}=\Sigma_2^p$. Аналогично $\mathrm{PH}=\Pi_2^p$.
-Следовательно, $\Sigma_2^p=\Pi_2^p$. $\square$
+But $\Sigma_2^p\subseteq\mathrm{PH}$ by definition, means
+$\mathrm{PH}=\Sigma_2^p$. Similar to $\mathrm{PH}=\Pi_2^p$.
+Therefore, $\Sigma_2^p=\Pi_2^p$. $\square$
 
-**Вывод/провал.** Даже при $\mathrm{NP}\subseteq\mathrm{BPP}$ получаем лишь коллапс PH
-на уровне 2; до $\mathrm{P}=\mathrm{NP}$ это не доводит без дерэндомизации
-(например, $\mathrm{BPP}=\mathrm{P}$).
+**Conclusion/failure.** Even with $\mathrm{NP}\subseteq\mathrm{BPP}$ we only get PH collapse
+at level 2; this does not lead to $\mathrm{P}=\mathrm{NP}$ without derandomization
+(for example, $\mathrm{BPP}=\mathrm{P}$).
 
-**Барьер-чек.**
-- *Релятивизация:* да (используются релятивизирующие шаги 16.11 и 16.12).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (relativizing steps 16.11 and 16.12 are used).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.14. Исследовательский шаг: SAT в RP => NP = RP
+### 16.14. Research Step: SAT to RP => NP = RP
 
-**Вопрос ("А что если...?").** Что если SAT решается в RP — следует ли равенство $\mathrm{NP}=\mathrm{RP}$?
+**Question ("What if...?").** What if SAT is solved in RP - does $\mathrm{NP}=\mathrm{RP}$ follow?
 
-**Определение (RP).** Язык $L\in\mathrm{RP}$, если существует вероятностная
-полиномиальная машина $A$, что для всех $x$:
+**Definition (RP).** Language $L\in\mathrm{RP}$, if there is a probabilistic
+polynomial machine $A$, which for all $x$:
 $$x\in L\Rightarrow \Pr[A(x)=1]\ge 1/2,\quad x\notin L\Rightarrow \Pr[A(x)=1]=0.$$
 
-**Лемма 16.14.** Если $\mathrm{SAT}\in\mathrm{RP}$, то $\mathrm{NP}=\mathrm{RP}$.
+**Lemma 16.14.** If $\mathrm{SAT}\in\mathrm{RP}$, then $\mathrm{NP}=\mathrm{RP}$.
 
-*Доказательство.* (1) $\mathrm{RP}\subseteq\mathrm{NP}$: пусть $A$ использует $m(n)$ случайных бит.
-НМТ угадывает строку $r\in\{0,1\}^{m(n)}$ и принимает тогда и только тогда,
-когда $A(x,r)=1$. Если $x\in L$, существует принимающий $r$;
-если $x\notin L$, принимающих $r$ нет.
+*Proof.* (1) $\mathrm{RP}\subseteq\mathrm{NP}$: Let $A$ use $m(n)$ random bits.
+NMT guesses the string $r\in\{0,1\}^{m(n)}$ and accepts if and only if
+when $A(x,r)=1$. If $x\in L$, there is a receiving $r$;
+if $x\notin L$, there are no acceptors of $r$.
 
-(2) $\mathrm{NP}\subseteq\mathrm{RP}$ при $\mathrm{SAT}\in\mathrm{RP}$:
-пусть $L\in\mathrm{NP}$ и $f$ — полиномиальная many-one редукция $L\le_m^p\mathrm{SAT}$.
-Алгоритм для $L$ вычисляет $y=f(x)$ и запускает RP-алгоритм для SAT на $y$.
-Если $x\notin L$, то $y$ невыполним и RP-алгоритм всегда отвергает.
-Если $x\in L$, то $y$ выполним и RP-алгоритм принимает с вероятностью $\ge 1/2$.
-Значит $L\in\mathrm{RP}$.
+(2) $\mathrm{NP}\subseteq\mathrm{RP}$ for $\mathrm{SAT}\in\mathrm{RP}$:
+let $L\in\mathrm{NP}$ and $f$ be a polynomial many-one reduction of $L\le_m^p\mathrm{SAT}$.
+The algorithm for $L$ computes $y=f(x)$ and runs the RP algorithm for SAT on $y$.
+If $x\notin L$, then $y$ is unsatisfiable and the RP algorithm always rejects.
+If $x\in L$, then $y$ is feasible and the RP algorithm accepts with probability $\ge 1/2$.
+So $L\in\mathrm{RP}$.
 
-Итак, $\mathrm{NP}=\mathrm{RP}$. $\square$
+So $\mathrm{NP}=\mathrm{RP}$. $\square$
 
-**Вывод/провал.** Даже если SAT в RP, получаем лишь $\mathrm{NP}=\mathrm{RP}$,
-а не $\mathrm{P}=\mathrm{NP}$ без дерэндомизации (например, $\mathrm{RP}=\mathrm{P}$).
+**Conclusion/failure.** Even if SAT is in RP, we only get $\mathrm{NP}=\mathrm{RP}$,
+rather than $\mathrm{P}=\mathrm{NP}$ without derandomization (e.g. $\mathrm{RP}=\mathrm{P}$).
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.15. Исследовательский шаг: P-uniform схемы для SAT
+### 16.15. Research Step: P-uniform Schemes for SAT
 
-**Вопрос ("А что если...?").** Что если SAT имеет полиномиальные P-uniform схемы?
+**Question ("What if...?").** What if SAT has polynomial P-uniform circuits?
 
-**Определение (P-uniform).** Семейство схем $\{C_n\}$ называется P-uniform, если
-существует детерминированная полиномиальная машина $U$, которая по входу $1^n$
-выводит описание схемы $C_n$.
+**Definition (P-uniform).** A family of circuits $\{C_n\}$ is called P-uniform if
+there is a deterministic polynomial machine $U$ whose input is $1^n$
+displays a description of the $C_n$ circuit.
 
-**Лемма 16.15.** Если SAT имеет P-uniform семейство схем полиномиального размера,
-то $\mathrm{P}=\mathrm{NP}$.
+**Lemma 16.15.** If SAT has a P-uniform family of circuits of polynomial size,
+then $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Пусть $U$ строит $C_n$ за $\mathrm{poly}(n)$.
-На входе формулы $\varphi$ длины $n$ вычисляем $C_n$ с помощью $U$ и затем
-вычисляем $C_n(\varphi)$ за время $\mathrm{poly}(n)$ (размер схемы полиномиален).
-Следовательно, $\mathrm{SAT}\in\mathrm{P}$, а значит $\mathrm{P}=\mathrm{NP}$. $\square$
+*Proof.* Let $U$ construct $C_n$ for $\mathrm{poly}(n)$.
+At the input of a formula $\varphi$ of length $n$, we evaluate $C_n$ using $U$ and then
+calculate $C_n(\varphi)$ in time $\mathrm{poly}(n)$ (the size of the circuit is polynomial).
+Therefore, $\mathrm{SAT}\in\mathrm{P}$, which means $\mathrm{P}=\mathrm{NP}$. $\square$
 
-**Контрпример к усилению.** Нельзя заменить P-uniform на $\mathrm{P/poly}$.
-Существует tally-язык $L\subseteq\{1\}^*$, не лежащий в $\mathrm{P}$
-(диагонализация как в теореме иерархии по времени, Раздел 12).
-Для каждого $n$ неравномерная схема может «зашить» бит $b_n=[1^n\in L]$ и проверить,
-равен ли вход $1^n$ (например, AND всех $n$ битов), поэтому $L$ решается схемой размера $O(n)$ на длине $n$.
-Следовательно, $L\in\mathrm{P/poly}$, но $L\notin\mathrm{P}$.
+**Counterexample to the gain.** You cannot replace P-uniform with $\mathrm{P/poly}$.
+There is a tally language $L\subseteq\{1\}^*$ that is not in $\mathrm{P}$
+(diagonalization as in the time hierarchy theorem, Section 12).
+For each $n$, the non-uniform circuit can hardwire the bit $b_n=[1^n\in L]$ and check whether
+whether the input is equal to $1^n$ (e.g. AND all $n$ bits), so $L$ is solved by a circuit of size $O(n)$ over length $n$.
+Therefore, $L\in\mathrm{P/poly}$, but $L\notin\mathrm{P}$.
 
-**Вывод/провал.** Полиномиальные неравномерные схемы не дают $\mathrm{P}=\mathrm{NP}$;
-критична униформность построения.
+**Conclusion/failure.** Polynomial non-uniform schemes do not produce $\mathrm{P}=\mathrm{NP}$;
+uniformity of construction is critical.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент - симуляция и диагонализация).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (argument - simulation and diagonalization).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.16. Исследовательский шаг: P-immune в NP
+### 16.16. Research step: P-immune in NP
 
-**Вопрос ("А что если...?").** Что если в NP существует P-immune язык?
+**Question ("What if...?").** What if there is a P-immune language in NP?
 
-**Определение (P-immune).** Бесконечный язык $L$ называется P-immune, если у него нет
-бесконечного подмножества в $\mathrm{P}$.
+**Definition (P-immune).** An infinite language $L$ is called a P-immune if it does not have
+infinite subset in $\mathrm{P}$.
 
-**Лемма 16.16.** Если существует P-immune язык $L\in\mathrm{NP}$, то $\mathrm{P}\ne\mathrm{NP}$.
+**Lemma 16.16.** If there is a P-immune language $L\in\mathrm{NP}$, then $\mathrm{P}\ne\mathrm{NP}$.
 
-*Доказательство.* Предположим противное: $\mathrm{P}=\mathrm{NP}$. Тогда $L\in\mathrm{P}$.
-Но тогда $L$ само является бесконечным подмножеством $L$, лежащим в $\mathrm{P}$,
-что противоречит P-иммунности. Следовательно, $\mathrm{P}\ne\mathrm{NP}$. $\square$
+*Proof.* Assume the opposite: $\mathrm{P}=\mathrm{NP}$. Then $L\in\mathrm{P}$.
+But then $L$ is itself an infinite subset of $L$ lying in $\mathrm{P}$,
+which contradicts P-immunity. Therefore, $\mathrm{P}\ne\mathrm{NP}$. $\square$
 
-**Контрпример к усилению.** NP-полнота не означает P-immune. Например, SAT имеет
-бесконечное подмножество в $\mathrm{P}$: формулы вида
+**Counterexample to gain.** NP-completeness does not mean P-immune. For example, the SAT has
+infinite subset in $\mathrm{P}$: formulas of the form
 $$\bigwedge_{i=1}^m (x_i\lor\neg x_i)$$
-всегда выполнимы и распознаются за полиномиальное время. Следовательно, SAT не P-immune.
+are always feasible and can be recognized in polynomial time. Therefore, SAT is not P-immune.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент сохраняется с оракулами).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (argument persists with oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.17. Исследовательский шаг: P-bi-immune в NP
+### 16.17. Research step: P-bi-immune in NP
 
-**Вопрос ("А что если...?").** Что если в NP существует P-bi-immune язык?
+**Question ("What if...?").** What if there is a P-bi-immune language in NP?
 
-**Определение (P-bi-immune).** Бесконечный язык $L$ называется P-bi-immune, если
-$L$ и $\overline{L}$ являются P-immune.
+**Definition (P-bi-immune).** An infinite language $L$ is called P-bi-immune if
+$L$ and $\overline{L}$ are P-immune.
 
-**Лемма 16.17.** Если существует P-bi-immune язык $L\in\mathrm{NP}$, то $\mathrm{P}\ne\mathrm{NP}$.
+**Lemma 16.17.** If there is a P-bi-immune language $L\in\mathrm{NP}$, then $\mathrm{P}\ne\mathrm{NP}$.
 
-*Доказательство.* Предположим противное: $\mathrm{P}=\mathrm{NP}$. Тогда $L\in\mathrm{P}$.
-Так как $\mathrm{P}$ замкнут по дополнению, имеем $\overline{L}\in\mathrm{P}$.
-Но тогда и $L$, и $\overline{L}$ содержат бесконечные подмножества в $\mathrm{P}$
-(они сами), что противоречит P-immune. Следовательно, $\mathrm{P}\ne\mathrm{NP}$. $\square$
+*Proof.* Assume the opposite: $\mathrm{P}=\mathrm{NP}$. Then $L\in\mathrm{P}$.
+Since $\mathrm{P}$ is closed by complement, we have $\overline{L}\in\mathrm{P}$.
+But then both $L$ and $\overline{L}$ contain infinite subsets in $\mathrm{P}$
+(themselves), which contradicts P-immune. Therefore, $\mathrm{P}\ne\mathrm{NP}$. $\square$
 
-**Контрпример к усилению.** NP-полнота не означает P-bi-immune. Для SAT есть
-бесконечное подмножество в $\mathrm{P}$, например формулы
+**Counterexample to amplification.** NP-completeness does not mean P-bi-immune. For SAT there is
+an infinite subset in $\mathrm{P}$, for example formulas
 $$\bigwedge_{i=1}^m (x_i\lor\neg x_i),$$
-а для $\overline{\mathrm{SAT}}$ есть бесконечное подмножество в $\mathrm{P}$, например
+and for $\overline{\mathrm{SAT}}$ there is an infinite subset in $\mathrm{P}$, for example
 $$\bigwedge_{i=1}^m (x_i\land\neg x_i).$$
-Следовательно, SAT не P-bi-immune.
+Therefore, SAT is not P-bi-immune.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.18. Исследовательский шаг: NP-hard P-selective
+### 16.18. Exploratory step: NP-hard P-selective
 
-**Вопрос ("А что если...?").** Что если существует P-selective язык, NP-трудный по $\le_m^p$?
+**Question ("What if...?").** What if there is a P-selective language that is NP-hard in $\le_m^p$?
 
-**Определение (P-selective).** Язык $S$ называется P-selective, если существует
-детерминированная полиномиальная функция $s(x,y)$, возвращающая $x$ или $y$, такая что
-если $x\in S$ или $y\in S$, то $s(x,y)\in S$.
+**Definition (P-selective).** A language $S$ is called P-selective if it exists
+deterministic polynomial function $s(x,y)$ returning $x$ or $y$ such that
+if $x\in S$ or $y\in S$, then $s(x,y)\in S$.
 
-**Лемма 16.18.** Если существует P-selective язык $S$ и $\mathrm{SAT}\le_m^p S$,
-то $\mathrm{SAT}\in\mathrm{P}$, следовательно $\mathrm{P}=\mathrm{NP}$.
+**Lemma 16.18.** If there is a P-selective language $S$ and $\mathrm{SAT}\le_m^p S$,
+then $\mathrm{SAT}\in\mathrm{P}$, therefore $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Пусть $f$ - полиномиальная редукция SAT к $S$ и $s$ - селектор для $S$.
-Для формулы $\varphi$ последовательно фиксируем переменные. На шаге $i$ строим
-$\varphi_0=\varphi\upharpoonright(x_i=0)$ и $\varphi_1=\varphi\upharpoonright(x_i=1)$,
-вычисляем $f(\varphi_0), f(\varphi_1)$ и берём
+*Proof.* Let $f$ be the polynomial reduction of SAT to $S$ and $s$ be the selector for $S$.
+For the formula $\varphi$ we fix the variables sequentially. At step $i$ we build
+$\varphi_0=\varphi\upharpoonright(x_i=0)$ and $\varphi_1=\varphi\upharpoonright(x_i=1)$,
+calculate $f(\varphi_0), f(\varphi_1)$ and take
 $$w:=s(f(\varphi_0), f(\varphi_1)).$$
-Если $w=f(\varphi_0)$, ставим $x_i:=0$, иначе $x_i:=1$ (если оба равны, выбор не важен).
-Если $\varphi$ выполнима, то хотя бы одна из $\varphi_0,\varphi_1$ выполнима,
-значит соответствующий образ лежит в $S$, и селектор выбирает выполнимую ветвь.
-Индукцией после всех шагов получаем удовлетворяющее присваивание, которое проверяем.
-Если $\varphi$ невыполнима, любая ветвь приведёт к ложному присваиванию, проверка отвергнет.
-Время полиномиально. Значит $\mathrm{SAT}\in\mathrm{P}$ и $\mathrm{P}=\mathrm{NP}$. $\square$
+If $w=f(\varphi_0)$, set $x_i:=0$, otherwise $x_i:=1$ (if both are equal, the choice is not important).
+If $\varphi$ is satisfiable, then at least one of $\varphi_0,\varphi_1$ is satisfiable,
+this means that the corresponding image lies in $S$, and the selector selects an executable branch.
+By induction, after all the steps, we obtain a satisfying assignment, which we check.
+If $\varphi$ is not satisfiable, any branch will result in a false assignment and the check will fail.
+Time is polynomial. This means $\mathrm{SAT}\in\mathrm{P}$ and $\mathrm{P}=\mathrm{NP}$. $\square$
 
-**Контрпример к усилению.** P-selective само по себе не означает трудность.
-Например, язык $L=\{x: x_1=1\}$ находится в $\mathrm{P}$ и P-selective,
-но не NP-труден (если $\mathrm{P}\ne\mathrm{NP}$).
+**Counterexample to gain.** P-selective by itself does not mean difficulty.
+For example, the language $L=\{x: x_1=1\}$ is in $\mathrm{P}$ and P-selective,
+but not NP-hard (if $\mathrm{P}\ne\mathrm{NP}$).
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.19. Исследовательский шаг: SAT в coRP => NP = coNP
+### 16.19. Research step: SAT to coRP => NP = coNP
 
-**Вопрос ("А что если...?").** Что если SAT решается в coRP - следует ли $\mathrm{NP}=\mathrm{coNP}$?
+**Question ("What if...?").** What if SAT is solved in coRP - should $\mathrm{NP}=\mathrm{coNP}$?
 
-**Определение (coRP).** Язык $L\in\mathrm{coRP}$, если существует вероятностная
-полиномиальная машина $A$, что для всех $x$:
+**Definition (coRP).** Language $L\in\mathrm{coRP}$ if there is a probabilistic
+polynomial machine $A$, which for all $x$:
 $$x\in L\Rightarrow \Pr[A(x)=1]=1,\quad x\notin L\Rightarrow \Pr[A(x)=1]\le 1/2.$$
 
-**Лемма 16.19.** Если $\mathrm{SAT}\in\mathrm{coRP}$, то $\mathrm{NP}=\mathrm{coNP}$.
+**Lemma 16.19.** If $\mathrm{SAT}\in\mathrm{coRP}$, then $\mathrm{NP}=\mathrm{coNP}$.
 
-*Доказательство.* (1) $\mathrm{coRP}\subseteq\mathrm{coNP}$: если $L\in\mathrm{coRP}$,
-то $\overline{L}\in\mathrm{RP}$, а $\mathrm{RP}\subseteq\mathrm{NP}$ (угадать случайные биты).
-Значит $L\in\mathrm{coNP}$.
+*Proof.* (1) $\mathrm{coRP}\subseteq\mathrm{coNP}$: if $L\in\mathrm{coRP}$,
+then $\overline{L}\in\mathrm{RP}$, and $\mathrm{RP}\subseteq\mathrm{NP}$ (guess random bits).
+So $L\in\mathrm{coNP}$.
 
-(2) coRP замкнут по детерминированным $\le_m^p$-редукциям: если $L\le_m^p A$ и
-$A\in\mathrm{coRP}$, то алгоритм для $A$ на входе $f(x)$ даёт корректную coRP
-процедуру для $L$.
+(2) coRP is closed under deterministic $\le_m^p$-reductions: if $L\le_m^p A$ and
+$A\in\mathrm{coRP}$, then the algorithm for $A$ at input $f(x)$ gives the correct coRP
+procedure for $L$.
 
-Так как SAT NP-полон, из $\mathrm{SAT}\in\mathrm{coRP}$ получаем
-$\mathrm{NP}\subseteq\mathrm{coRP}\subseteq\mathrm{coNP}$, значит $\mathrm{NP}=\mathrm{coNP}$. $\square$
+Since SAT is NP-complete, from $\mathrm{SAT}\in\mathrm{coRP}$ we obtain
+$\mathrm{NP}\subseteq\mathrm{coRP}\subseteq\mathrm{coNP}$, means $\mathrm{NP}=\mathrm{coNP}$. $\square$
 
-**Контрпример к усилению.** coRP само по себе не означает NP-трудность.
-Например, язык $\Sigma^*$ лежит в $\mathrm{coRP}\cap\mathrm{P}$ и не может быть
-NP-трудным по $\le_m^p$, иначе следовало бы $\mathrm{P}=\mathrm{NP}$.
+**Counterexample to amplification.** coRP by itself does not mean NP-hard.
+For example, the language $\Sigma^*$ lies in $\mathrm{coRP}\cap\mathrm{P}$ and cannot be
+NP-hard in $\le_m^p$, otherwise $\mathrm{P}=\mathrm{NP}$ would follow.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.20. Исследовательский шаг: точный подсчет решений SAT
+### 16.20. Exploratory Step: Accurately Counting SAT Solutions
 
-**Вопрос ("А что если...?").** Что если #SAT вычислима за полиномиальное время?
+**Question ("What if...?").** What if #SAT is computable in polynomial time?
 
-**Определение (#SAT).** Для CNF-формулы $\varphi$ функция $\#\mathrm{SAT}(\varphi)$
-равна числу удовлетворяющих присваиваний.
+**Definition (#SAT).** For a CNF formula $\varphi$, the function $\#\mathrm{SAT}(\varphi)$
+equal to the number of satisfying assignments.
 
-**Лемма 16.20.** Если $\#\mathrm{SAT}$ вычислима за полиномиальное время,
-то $\mathrm{SAT}\in\mathrm{P}$, следовательно $\mathrm{P}=\mathrm{NP}$.
+**Lemma 16.20.** If $\#\mathrm{SAT}$ is computable in polynomial time,
+then $\mathrm{SAT}\in\mathrm{P}$, therefore $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* На входе формулы $\varphi$ вычисляем $\#\mathrm{SAT}(\varphi)$.
-Если значение больше нуля, то $\varphi$ выполнима, иначе нет.
-Это решает SAT за полиномиальное время, значит $\mathrm{P}=\mathrm{NP}$. $\square$
+*Proof.* At the input of the formula $\varphi$ we calculate $\#\mathrm{SAT}(\varphi)$.
+If the value is greater than zero, then $\varphi$ is feasible, otherwise it is not.
+This solves SAT in polynomial time, so $\mathrm{P}=\mathrm{NP}$. $\square$
 
-**Контрпример к усилению.** Нельзя заменить точный подсчет на подсчет по модулю 2.
-Формула
+**Counterexample to gain.** It is impossible to replace exact counting with modulo 2 counting.
+Formula
 $$\psi=(x_1\lor x_2)\land(\neg x_1\lor \neg x_2)$$
-имеет ровно 2 решения (четность 0), а формула
+has exactly 2 solutions (parity 0), and the formula
 $$\theta=(x_1\land\neg x_1)$$
-имеет 0 решений (четность 0). Следовательно, знание $\#\mathrm{SAT}(\cdot)\bmod 2$
-не позволяет решать SAT в общем случае.
+has 0 solutions (parity 0). Therefore, knowledge of $\#\mathrm{SAT}(\cdot)\bmod 2$
+does not allow you to solve SAT in the general case.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент - прямое вычисление числа решений).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (argument - direct calculation of the number of solutions).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.21. Исследовательский шаг: FPRAS для #SAT
+### 16.21. Exploratory step: FPRAS for #SAT
 
-**Вопрос ("А что если...?").** Что если существует FPRAS для #SAT?
+**Question ("What if...?").** What if there was an FPRAS for #SAT?
 
-**Определение (FPRAS для #SAT).** Рандомизированный алгоритм $A$ — FPRAS для
-$\#\mathrm{SAT}$, если для любой формулы $\varphi$, параметров $\varepsilon\in(0,1)$ и
-$\delta\in(0,1)$ он работает за $\mathrm{poly}(|\varphi|,1/\varepsilon,\log(1/\delta))$ и
-с вероятностью $\ge 1-\delta$ возвращает число $\widetilde{N}$, такое что
+**Definition (FPRAS for #SAT).** Randomized Algorithm $A$ - FPRAS for
+$\#\mathrm{SAT}$ if for any formula $\varphi$, parameters $\varepsilon\in(0,1)$ and
+$\delta\in(0,1)$ it works for $\mathrm{poly}(|\varphi|,1/\varepsilon,\log(1/\delta))$ and
+with probability $\ge 1-\delta$ returns a number $\widetilde{N}$ such that
 $$ (1-\varepsilon)\#\mathrm{SAT}(\varphi)\le \widetilde{N}\le (1+\varepsilon)\#\mathrm{SAT}(\varphi). $$
 
-**Лемма 16.21.** Если для $\#\mathrm{SAT}$ существует FPRAS, то $\mathrm{SAT}\in\mathrm{RP}$,
-следовательно $\mathrm{NP}=\mathrm{RP}$.
+**Lemma 16.21.** If there is an FPRAS for $\#\mathrm{SAT}$, then $\mathrm{SAT}\in\mathrm{RP}$,
+hence $\mathrm{NP}=\mathrm{RP}$.
 
-*Доказательство.* Используем саморедукцию поиска (шаг 16.3), заменив вызовы SAT
-на FPRAS для $\#\mathrm{SAT}$.
+*Proof.* Use self-reduction search (step 16.3), replacing SAT calls
+on FPRAS for $\#\mathrm{SAT}$.
 
-Пусть $\varphi$ над $n$ переменными. Для $i=1..n$ рассмотрим
-$\varphi_0:=\varphi\upharpoonright(x_i=0)$ и $\varphi_1:=\varphi\upharpoonright(x_i=1)$ и
-запустим FPRAS на обеих формулах с $\varepsilon=1/2$ и $\delta:=1/(10n)$. Если обе оценки равны 0,
-отвергаем; иначе выбираем ветвь с ненулевой оценкой и продолжаем. В конце получаем присваивание $a$
-и детерминированно проверяем $\varphi(a)=1$; принимаем тогда и только тогда, когда проверка проходит.
+Let $\varphi$ be over $n$ variables. For $i=1..n$ consider
+$\varphi_0:=\varphi\upharpoonright(x_i=0)$ and $\varphi_1:=\varphi\upharpoonright(x_i=1)$ and
+Let's run FPRAS on both formulas with $\varepsilon=1/2$ and $\delta:=1/(10n)$. If both scores are 0,
+reject; otherwise, we select the branch with a non-zero score and continue. At the end we get the assignment $a$
+and deterministically check $\varphi(a)=1$; We accept it if and only if the check passes.
 
-Если $\varphi$ невыполнима, то проверка никогда не пройдёт, значит мы всегда отвергаем.
-Если $\varphi$ выполнима, то при успешных вызовах FPRAS нулевая оценка появляется тогда и только тогда,
-когда соответствующая ветвь имеет 0 решений, поэтому мы всегда можем выбрать ветвь с хотя бы одним решением
-и дойти до удовлетворяющего $a$. По объединённой вероятности все $2n$ вызовов успешны с вероятностью
-$\ge 1-2n\delta\ge 4/5$, значит принимаем с вероятностью $\ge 1/2$.
-Итак, $\mathrm{SAT}\in\mathrm{RP}$, а по Лемме 16.14 $\mathrm{NP}=\mathrm{RP}$. $\square$
+If $\varphi$ is unsatisfiable, then the test will never pass, so we always reject.
+If $\varphi$ is satisfiable, then successful calls to FPRAS result in a score of zero if and only if
+when the corresponding branch has 0 solutions, so we can always choose a branch with at least one solution
+and reach a satisfying $a$. By joint probability, all $2n$ calls are successful with probability
+$\ge 1-2n\delta\ge 4/5$, which means we accept with probability $\ge 1/2$.
+So, $\mathrm{SAT}\in\mathrm{RP}$, and by Lemma 16.14 $\mathrm{NP}=\mathrm{RP}$. $\square$
 
-**Контрпример к усилению.** Знание $\#\mathrm{SAT}(\varphi)\bmod 2$ не решает SAT
-(см. контрпример в шаге 16.20), значит «аппроксимация» без гарантии
-мультипликативной точности может быть недостаточна.
+**Counterexample to gain.** Knowing $\#\mathrm{SAT}(\varphi)\bmod 2$ does not solve SAT
+(see counterexample in step 16.20), means "approximation" without guarantee
+multiplicative precision may not be sufficient.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент комбинаторный и переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is combinatorial and transfers to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.22. Исследовательский шаг: SAT в ZPP => NP = ZPP
+### 16.22. Research Step: SAT to ZPP => NP = ZPP
 
-**Вопрос ("А что если...?").** Что если SAT решается в ZPP - следует ли равенство $\mathrm{NP}=\mathrm{ZPP}$?
+**Question ("What if...?").** What if SAT is solved in ZPP - does the equality follow $\mathrm{NP}=\mathrm{ZPP}$?
 
-**Определение (ZPP).** $\mathrm{ZPP}=\mathrm{RP}\cap\mathrm{coRP}$; эквивалентно,
-это класс языков, распознаваемых рандомизированными алгоритмами ожидаемого
-полиномиального времени без ошибок (Las Vegas).
+**Definition (ZPP).** $\mathrm{ZPP}=\mathrm{RP}\cap\mathrm{coRP}$; equivalent,
+is a class of languages recognized by randomized expected algorithms
+polynomial time without errors (Las Vegas).
 
-**Лемма 16.22.** Если $\mathrm{SAT}\in\mathrm{ZPP}$, то $\mathrm{NP}=\mathrm{ZPP}$.
+**Lemma 16.22.** If $\mathrm{SAT}\in\mathrm{ZPP}$, then $\mathrm{NP}=\mathrm{ZPP}$.
 
-*Доказательство.* Так как SAT NP-полна и ZPP замкнут по детерминированным
-$\le_m^p$-редукциям, из $\mathrm{SAT}\in\mathrm{ZPP}$ следует
-$\mathrm{NP}\subseteq\mathrm{ZPP}$. С другой стороны, $\mathrm{ZPP}\subseteq\mathrm{RP}\subseteq\mathrm{NP}$.
-Следовательно, $\mathrm{NP}=\mathrm{ZPP}$. $\square$
+*Proof.* Since SAT is NP-complete and ZPP is closed in deterministic
+$\le_m^p$-reductions, from $\mathrm{SAT}\in\mathrm{ZPP}$ it follows
+$\mathrm{NP}\subseteq\mathrm{ZPP}$. On the other hand, $\mathrm{ZPP}\subseteq\mathrm{RP}\subseteq\mathrm{NP}$.
+Therefore, $\mathrm{NP}=\mathrm{ZPP}$. $\square$
 
-**Вывод/провал.** Равенство $\mathrm{NP}=\mathrm{ZPP}$ само по себе не даёт
-$\mathrm{P}=\mathrm{NP}$ без дерэндомизации $\mathrm{ZPP}=\mathrm{P}$.
+**Conclusion/failure.** The equality $\mathrm{NP}=\mathrm{ZPP}$ by itself does not give
+$\mathrm{P}=\mathrm{NP}$ without derandomization $\mathrm{ZPP}=\mathrm{P}$.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.23. Исследовательский шаг: SAT почти всюду в P
+### 16.23. Exploratory step: SAT almost everywhere in P
 
-**Вопрос ("А что если...?").** Что если SAT решается за полиномиальное время на всех достаточно больших длинах входа?
+**Question ("What if...?").** What if SAT is solved in polynomial time for all sufficiently large input lengths?
 
-**Определение (a.e.-P).** Язык $L$ называется *почти всюду* в $\mathrm{P}$, если
-существует $n_0$ и полиномиальный алгоритм $A$, такой что для всех $x$ с $|x|\ge n_0$:
-$A(x)$ решает принадлежность $x\in L$.
+**Definition (a.e.-P).** A language $L$ is called *almost everywhere* in $\mathrm{P}$ if
+there is $n_0$ and a polynomial algorithm $A$ such that for all $x$ with $|x|\ge n_0$:
+$A(x)$ decides the membership of $x\in L$.
 
-**Лемма 16.23.** Если SAT почти всюду в $\mathrm{P}$, то $\mathrm{P}=\mathrm{NP}$.
+**Lemma 16.23.** If SAT is almost everywhere in $\mathrm{P}$, then $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Пусть $A$ корректен для всех длины $\ge n_0$.
-Для длин $<n_0$ заранее вычислим ответы (это конечное множество строк) и
-зашьем их в алгоритм. Тогда получаем полиномиальный алгоритм, решающий SAT на всех входах.
-Следовательно, $\mathrm{SAT}\in\mathrm{P}$ и $\mathrm{P}=\mathrm{NP}$. $\square$
+*Proof.* Let $A$ be correct for all lengths $\ge n_0$.
+For lengths $<n_0$, we calculate the answers in advance (this is a finite set of strings) and
+let's sew them into the algorithm. Then we get a polynomial algorithm that solves SAT on all inputs.
+Therefore, $\mathrm{SAT}\in\mathrm{P}$ and $\mathrm{P}=\mathrm{NP}$. $\square$
 
-**Контрпример к усилению.** Условие "в $\mathrm{P}$ на бесконечном числе длин" недостаточно.
-Пусть $H\in\mathrm{DTIME}(2^n)\setminus\mathrm{P}$ (существует по теореме иерархии по времени).
-Определим
-$$L:=\{z:\ |z|\ \text{четно}\}\ \cup\ \{1^{|x|}0x:\ x\in H\}.$$
-Тогда $L$ тривиален на всех четных длинах (значит "легок" на бесконечно многих длинах),
-но $H\le_m^p L$ по редукции $x\mapsto 1^{|x|}0x$ (длина $2|x|+1$), поэтому из $L\in\mathrm{P}$
-следовало бы $H\in\mathrm{P}$ — противоречие. Значит условие "на бесконечно многих длинах" не даёт $\mathrm{P}$.
+**Counterexample to strengthening.** The condition "in $\mathrm{P}$ on an infinite number of lengths" is not sufficient.
+Let $H\in\mathrm{DTIME}(2^n)\setminus\mathrm{P}$ (exists by the time hierarchy theorem).
+Let's define
+$$L:=\{z:\ |z|\ \text{even}\}\ \cup\ \{1^{|x|}0x:\ x\in H\}.$$
+Then $L$ is trivial on all even lengths (meaning "light" on infinitely many lengths),
+but $H\le_m^p L$ by reduction $x\mapsto 1^{|x|}0x$ (length $2|x|+1$), so from $L\in\mathrm{P}$
+$H\in\mathrm{P}$ would follow--a contradiction. This means that the condition "at infinitely many lengths" does not give $\mathrm{P}$.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.24. Исследовательский шаг: SAT в RP с O(log n) случайных битов
+### 16.24. Exploratory step: SAT to RP with O(log n) random bits
 
-**Вопрос ("А что если...?").** Что если SAT решается в RP, используя лишь $O(\log n)$ случайных бит?
+**Question ("What if...?")** What if SAT is solved in RP using only $O(\log n)$ random bits?
 
-**Определение (RP$_{\log}$).** Язык $L\in\mathrm{RP}_{\log}$, если существует RP-машина,
-которая на входах длины $n$ использует не более $c\log n$ случайных битов.
+**Definition (RP$_{\log}$).** Language $L\in\mathrm{RP}_{\log}$, if there is an RP machine,
+which uses at most $c\log n$ random bits on inputs of length $n$.
 
-**Лемма 16.24.** Если $\mathrm{SAT}\in\mathrm{RP}_{\log}$, то $\mathrm{SAT}\in\mathrm{P}$,
-следовательно $\mathrm{P}=\mathrm{NP}$.
+**Lemma 16.24.** If $\mathrm{SAT}\in\mathrm{RP}_{\log}$, then $\mathrm{SAT}\in\mathrm{P}$,
+hence $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Пусть $A$ - RP-алгоритм для SAT с $m(n)\le c\log n$ случайных битов.
-Для входа $\varphi$ длины $n$ переберем все $2^{m(n)}\le n^c$ случайные строки $r$ и
-запустим $A(\varphi,r)$.
-Если $\varphi$ невыполнима, то $A$ никогда не принимает, значит мы отвергаем.
-Если $\varphi$ выполнима, существует хотя бы один $r$ с принятием, значит мы принимаем.
-Время полиномиально. $\square$
+*Proof.* Let $A$ be an RP algorithm for SAT with $m(n)\le c\log n$ random bits.
+For an input $\varphi$ of length $n$, we go through all $2^{m(n)}\le n^c$ random strings $r$ and
+let's run $A(\varphi,r)$.
+If $\varphi$ is unsatisfiable, then $A$ never accepts, so we reject.
+If $\varphi$ is satisfiable and there is at least one $r$ with acceptance, then we accept.
+Time is polynomial. $\square$
 
-**Контрпример к усилению.** При $m(n)=\Theta(n)$ полный перебор случайных строк
-занимает $2^{\Theta(n)}$ времени, поэтому аргумент не переносится на общий RP.
-Следовательно, ограничение $O(\log n)$ существенно.
+**Counterexample to strengthening.** For $m(n)=\Theta(n)$ full search of random strings
+takes $2^{\Theta(n)}$ time, so the argument does not carry over to the general RP.
+Therefore, the $O(\log n)$ constraint is essential.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.25. Исследовательский шаг: NP-полный язык в io-P
+### 16.25. Exploratory step: NP-complete language in io-P
 
-**Вопрос ("А что если...?").** Если NP-полный язык решается за полиномиальное время
-на бесконечно многих длинах входа, следует ли $\mathrm{P}=\mathrm{NP}$?
+**Question ("What if...?").** If an NP-complete language is solved in polynomial time
+on infinitely many input lengths, does $\mathrm{P}=\mathrm{NP}$?
 
-**Определение (io-P).** Язык $L$ принадлежит io-P, если существует полиномиальный
-алгоритм $A$ и бесконечное множество длин $N\subseteq\mathbb{N}$, такое что для всех
-$n\in N$ и всех строк $x$ длины $n$ выполняется $A(x)=1\iff x\in L$.
+**Definition (io-P).** A language $L$ belongs to io-P if there is a polynomial
+algorithm $A$ and an infinite set of lengths $N\subseteq\mathbb{N}$, such that for all
+$n\in N$ and all strings $x$ of length $n$ satisfy $A(x)=1\iff x\in L$.
 
-**Лемма 16.25 (контрпример).** Существует NP-полный язык $L'$ такой, что $L'\in$ io-P.
+**Lemma 16.25 (counterexample).** There is an NP-complete language $L'$ such that $L'\in$ io-P.
 
-*Доказательство.* Пусть $p(n)=n^2$ и
+*Proof.* Let $p(n)=n^2$ and
 $$L' = \{x0^{p(|x|)-|x|}: x\in\mathrm{SAT}\}.$$ 
-Тогда любая строка из $L'$ имеет длину $n^2$. Редукция $x\mapsto x0^{n^2-n}$
-полиномиальна, значит $L'$ NP-полон. Для любой длины $m$, не являющейся квадратом,
-в $L'$ нет строк, поэтому алгоритм, всегда отвергающий на таких длинах,
-решает $L'$ за полиномиальное время. Неквадратных длин бесконечно много, значит
-$L'\in$ io-P. Следовательно, условие "NP-полный и легок на бесконечно многих длинах"
-не влечет $\mathrm{P}=\mathrm{NP}$. $\square$
+Then any string from $L'$ has length $n^2$. Reduction $x\mapsto x0^{n^2-n}$
+is polynomial, which means $L'$ is NP-complete. For any length $m$ that is not a square,
+there are no strings in $L'$, so an algorithm that always rejects at such lengths
+solves $L'$ in polynomial time. There are infinitely many non-square lengths, which means
+$L'\in$ io-P. Hence the condition "NP-complete and light on infinitely many lengths"
+does not imply $\mathrm{P}=\mathrm{NP}$. $\square$
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.26. Исследовательский шаг: NP-полный язык легок на плотности 1 длин
+### 16.26. Exploratory step: NP-full language is easy at density 1 length
 
-**Вопрос ("А что если...?").** Если NP-полный язык решается за полиномиальное время
-на множестве длин плотности 1, следует ли $\mathrm{P}=\mathrm{NP}$?
+**Question ("What if...?").** If an NP-complete language is solved in polynomial time
+on the set of lengths of density 1, does $\mathrm{P}=\mathrm{NP}$?
 
-**Определение (плотность 1 по длинам).** Множество длин $N\subseteq\mathbb{N}$ имеет
-плотность 1, если
+**Definition (density 1 over lengths).** The set of lengths $N\subseteq\mathbb{N}$ has
+density 1 if
 $$\lim_{m\to\infty} \frac{|N\cap\{1,\dots,m\}|}{m}=1.$$
-Язык $L$ называется *легким на длинах из $N$*, если существует полиномиальный
-алгоритм $A$, корректный для всех строк $x$ с $|x|\in N$.
+A language $L$ is said to be *easy on lengths of $N$* if there exists a polynomial
+algorithm $A$, correct for all strings $x$ with $|x|\in N$.
 
-**Лемма 16.26 (контрпример).** Существует NP-полный язык $L'$ и множество длин $N$
-плотности 1, такое что $L'$ легок на длинах из $N$.
+**Lemma 16.26 (counterexample).** There is an NP-complete language $L'$ and a set of lengths $N$
+density 1 such that $L'$ is light on lengths of $N$.
 
-*Доказательство.* Положим $p(n)=n^2$ и
+*Proof.* Set $p(n)=n^2$ and
 $$L' = \{x0^{p(|x|)-|x|}: x\in\mathrm{SAT}\}.$$
-Редукция $x\mapsto x0^{n^2-n}$ полиномиальна, значит $L'$ NP-полон.
-Любая строка из $L'$ имеет длину квадрат; на длинах, не являющихся квадратами,
-$L'$ пуст, и алгоритм, всегда отвергающий, корректен. Пусть $N$ - множество
-неквадратных длин. Тогда $|N\cap\{1,\dots,m\}|=m-\lfloor\sqrt{m}\rfloor$, поэтому
-$N$ имеет плотность 1. Значит $L'$ легок на длинах из $N$. $\square$
+The reduction $x\mapsto x0^{n^2-n}$ is polynomial, which means $L'$ is NP-complete.
+Any string from $L'$ has length square; at lengths that are not squares,
+$L'$ is empty, and the always rejecting algorithm is correct. Let $N$ be a set
+non-square lengths. Then $|N\cap\{1,\dots,m\}|=m-\lfloor\sqrt{m}\rfloor$, so
+$N$ has density 1. Hence $L'$ is light on lengths of $N$. $\square$
 
-**Вывод/провал.** Свойство "NP-полный язык легок на плотности 1 длин" слишком слабое:
-оно уже достигается простой паддинг-конструкцией и не ведет к $\mathrm{P}=\mathrm{NP}$
-без дополнительных идей.
+**Conclusion/failure.** The property "NP-full language is light at density 1 length" is too weak:
+it is already achieved by a simple padding construction and does not lead to $\mathrm{P}=\mathrm{NP}$
+no additional ideas.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.27. Исследовательский шаг: SAT в BPP => SAT в P/poly
+### 16.27. Research step: SAT to BPP => SAT to P/poly
 
-**Вопрос ("А что если...?").** Если SAT решается в BPP, следует ли из этого
-существование полиномиальных схем?
+**Question ("What if...?").** If SAT is decided in BPP, does it follow that
+existence of polynomial circuits?
 
-**Лемма 16.27 (Adleman).** Если $\mathrm{SAT}\in\mathrm{BPP}$, то $\mathrm{SAT}\in\mathrm{P/poly}$.
+**Lemma 16.27 (Adleman).** If $\mathrm{SAT}\in\mathrm{BPP}$ then $\mathrm{SAT}\in\mathrm{P/poly}$.
 
-*Доказательство.* Пусть $A$ - BPP-алгоритм для SAT, использующий $m(n)$ случайных битов.
-Усилим его повторением до ошибки $\varepsilon=2^{-2n}$, получив алгоритм $A'$
-(время и число битов остаются полиномиальными).
-Для фиксированной длины $n$ обозначим через $B_x$ множество случайных строк $r$
-длины $m(n)$, на которых $A'(x,r)$ ошибается. Тогда $|B_x|\le \varepsilon 2^{m(n)}$.
-Объединение по всем $x\in\{0,1\}^n$ имеет размер
+*Proof.* Let $A$ be a BPP algorithm for SAT using $m(n)$ random bits.
+Let's strengthen it by repeating it until the error $\varepsilon=2^{-2n}$, obtaining the algorithm $A'$
+(time and number of bits remain polynomial).
+For a fixed length $n$, let $B_x$ denote the set of random strings $r$
+lengths $m(n)$ on which $A'(x,r)$ is wrong. Then $|B_x|\le \varepsilon 2^{m(n)}$.
+The union over all $x\in\{0,1\}^n$ has the size
 $$\left|\bigcup_{x} B_x\right|\le 2^n\cdot \varepsilon 2^{m(n)}<2^{m(n)},$$
-поэтому существует строка $r_n$, на которой $A'$ корректен для всех входов длины $n$.
-Жестко зашив $r_n$ в схему, получаем семейство схем полиномиального размера,
-решающее SAT на каждой длине $n$. Значит $\mathrm{SAT}\in\mathrm{P/poly}$. $\square$
+therefore there is a string $r_n$ on which $A'$ is valid for all inputs of length $n$.
+By hard-wiring $r_n$ into the circuit, we obtain a family of circuits of polynomial size,
+decisive SAT on every length $n$. So $\mathrm{SAT}\in\mathrm{P/poly}$. $\square$
 
-**Вывод/провал.** Из SAT $\in\mathrm{BPP}$ следует лишь неравномерность
-($\mathrm{SAT}\in\mathrm{P/poly}$) и, по Karp-Lipton, коллапс PH до $\Sigma_2^p$;
-это не дает $\mathrm{P}=\mathrm{NP}$ без дополнительных идей о униформности.
+**Conclusion/failure.** From SAT $\in\mathrm{BPP}$ only unevenness follows
+($\mathrm{SAT}\in\mathrm{P/poly}$) and, according to Karp-Lipton, PH collapse to $\Sigma_2^p$;
+this does not give $\mathrm{P}=\mathrm{NP}$ without additional ideas about uniformity.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент переносится на оракулы).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is transferred to oracles).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.28. Исследовательский шаг: NP ⊆ AC^0?
+### 16.28. Research step: NP  AC^0?
 
-**Вопрос ("А что если...?").** Что если весь $\mathrm{NP}$ лежит в $\mathrm{AC}^0$?
+**Question ("What if...?").** What if all $\mathrm{NP}$ lies in $\mathrm{AC}^0$?
 
-**Лемма 16.28 (контрпример).** $\mathrm{NP}\not\subseteq\mathrm{AC}^0$.
+**Lemma 16.28 (counterexample).** $\mathrm{NP}\not\subseteq\mathrm{AC}^0$.
 
-*Доказательство.* Функция $\mathrm{PARITY}$ принадлежит $\mathrm{P}\subseteq\mathrm{NP}$.
-По разделу 11.3, $\mathrm{PARITY}\notin\mathrm{AC}^0$.
-Значит существует язык из $\mathrm{NP}$, не лежащий в $\mathrm{AC}^0$, то есть
+*Proof.* The function $\mathrm{PARITY}$ belongs to $\mathrm{P}\subseteq\mathrm{NP}$.
+By Section 11.3, $\mathrm{PARITY}\notin\mathrm{AC}^0$.
+This means there is a language from $\mathrm{NP}$ that does not lie in $\mathrm{AC}^0$, that is
 $\mathrm{NP}\not\subseteq\mathrm{AC}^0$. $\square$
 
-**Вывод/провал.** Утверждение $\mathrm{NP}\subseteq\mathrm{AC}^0$ слишком сильное:
-оно уже опровергается классическими нижними оценками для $\mathrm{AC}^0$.
+**Conclusion/failure.** The statement $\mathrm{NP}\subseteq\mathrm{AC}^0$ is too strong:
+it is already refuted by classical lower bounds for $\mathrm{AC}^0$.
 
-**Барьер-чек.**
-- *Релятивизация:* неприменимо (утверждение о неравномерных схемах).
-- *Natural proofs:* не препятствует; нижние оценки для $\mathrm{AC}^0$ известны.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* not applicable (statement about uneven patterns).
+- *Natural proofs:* does not interfere; lower bounds for $\mathrm{AC}^0$ are known.
+- *Algebrization:* not applicable.
 
-### 16.29. Исследовательский шаг: средняя легкость NP-полного языка
+### 16.29. Exploratory step: average ease of NP-complete language
 
-**Вопрос ("А что если...?").** Если NP-полный язык решается полиномиально
-на почти всех входах каждой длины (равномерно по $\{0,1\}^n$), следует ли $\mathrm{P}=\mathrm{NP}$?
+**Question ("What if...?").** If an NP-complete language is solved polynomially
+on almost all inputs of each length (uniformly across $\{0,1\}^n$), does $\mathrm{P}=\mathrm{NP}$ follow?
 
-**Определение (ошибка на длине $n$).** Алгоритм $A$ имеет ошибку $\varepsilon(n)$ на языке $L$,
-если $\Pr_{x\in\{0,1\}^n}[A(x)\ne L(x)]\le \varepsilon(n)$.
+**Definition (error on length $n$).** Algorithm $A$ has error $\varepsilon(n)$ in language $L$,
+if $\Pr_{x\in\{0,1\}^n}[A(x)\ne L(x)]\le \varepsilon(n)$.
 
-**Лемма 16.29 (контрпример).** Существует NP-полный язык $L'$ и полиномиальный алгоритм $A$,
-для которого ошибка на длине $n$ не превосходит $2^{-\Omega(n)}$.
+**Lemma 16.29 (counterexample).** There is an NP-complete language $L'$ and a polynomial algorithm $A$,
+for which the error on length $n$ does not exceed $2^{-\Omega(n)}$.
 
-*Доказательство.* Возьмем $p(m)=m^2$ и определим
+*Proof.* Take $p(m)=m^2$ and define
 $$L' = \{x0^{p(|x|)} : x\in\mathrm{SAT}\}.$$
-Редукция $x\mapsto x0^{p(|x|)}$ полиномиальна, значит $L'$ NP-полон.
-Если длина $n$ имеет вид $n=m+p(m)=m+m^2$, то в $\{0,1\}^n$ не более $2^m$ строк из $L'$,
-поэтому доля принимающих не превосходит $2^m/2^{m+m^2}=2^{-m^2}=2^{-\Theta(n)}$.
-Если длина $n$ не такого вида, то $L'\cap\{0,1\}^n=\varnothing$.
-Алгоритм $A$, всегда отвергающий, имеет ошибку не более $2^{-\Theta(n)}$ на каждой длине.
+The reduction $x\mapsto x0^{p(|x|)}$ is polynomial, which means $L'$ is NP-complete.
+If the length of $n$ has the form $n=m+p(m)=m+m^2$, then $\{0,1\}^n$ contains at most $2^m$ rows from $L'$,
+therefore, the share of recipients does not exceed $2^m/2^{m+m^2}=2^{-m^2}=2^{-\Theta(n)}$.
+If the length $n$ is not of this form, then $L'\cap\{0,1\}^n=\varnothing$.
+Algorithm $A$, always rejecting, has an error of at most $2^{-\Theta(n)}$ on each length.
 $\square$
 
-**Вывод/провал.** Наличие NP-полного языка, легкого на почти всех входах каждой длины,
-не влечет $\mathrm{P}=\mathrm{NP}$: это достигается простым паддингом.
+**Output/failure.** Having an NP-complete language that is light on almost all inputs of every length,
+does not imply $\mathrm{P}=\mathrm{NP}$: this is achieved by simple padding.
 
-**Барьер-чек.**
-- *Релятивизация:* да (паддинг и оценка доли сохраняются с оракулом).
-- *Natural proofs:* неприменимо (не о схемных нижних оценках).
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (padding and share estimation are preserved with the oracle).
+- *Natural proofs:* not applicable (not about schematic lower bounds).
+- *Algebrization:* not applicable.
 
-### 16.30. Исследовательский шаг: NP-полный язык в субэкспоненциальном времени?
+### 16.30. Exploratory step: NP-complete language in subexponential time?
 
-**Вопрос ("А что если...?").** Если существует NP-полный язык, решаемый за
-время $2^{n^\varepsilon}$ (для некоторого $0<\varepsilon<1$), следует ли $\mathrm{P}=\mathrm{NP}$?
+**Question ("What if...?").** If there is an NP-complete language that can be solved in
+time $2^{n^\varepsilon}$ (for some $0<\varepsilon<1$), does $\mathrm{P}=\mathrm{NP}$ follow?
 
-**Лемма 16.30 (контрпример).** Существует NP-полный язык $L'$ в
-$\mathrm{DTIME}(2^{O(\sqrt{n})})$ (то есть за субэкспоненциальное время).
+**Lemma 16.30 (counterexample).** There is an NP-complete language $L'$ in
+$\mathrm{DTIME}(2^{O(\sqrt{n})})$ (that is, in sub-exponential time).
 
-*Доказательство.* Определим
+*Proof.* Define
 $$L' = \{x0^{|x|^2-|x|} : x\in\mathrm{SAT}\}.$$
-Редукция $x\mapsto x0^{|x|^2-|x|}$ полиномиальна, значит $L'$ NP-полон.
-Для входа длины $n$ проверим, является ли $n$ квадратом $m^2$ и что последние
-$n-m$ битов нулевые; иначе отвергаем. Если $n=m^2$, берём первые $m$ битов как $x$
-и решаем SAT полным перебором за $2^{O(m)}=2^{O(\sqrt{n})}$.
-Следовательно, $L'\in\mathrm{DTIME}(2^{O(\sqrt{n})})$. $\square$
+The reduction $x\mapsto x0^{|x|^2-|x|}$ is polynomial, which means $L'$ is NP-complete.
+For an input of length $n$, check whether $n$ is a square of $m^2$ and that the last
+$n-m$ bits are zero; otherwise we reject. If $n=m^2$, take the first $m$ bits as $x$
+and solve SAT by exhaustive search for $2^{O(m)}=2^{O(\sqrt{n})}$.
+Therefore, $L'\in\mathrm{DTIME}(2^{O(\sqrt{n})})$. $\square$
 
-**Вывод/провал.** Наличие NP-полного языка в субэкспоненциальном времени
-не влечет $\mathrm{P}=\mathrm{NP}$: это достигается паддингом.
+**Conclusion/failure.** Having an NP-complete language in sub-exponential time
+does not imply $\mathrm{P}=\mathrm{NP}$: this is achieved by padding.
 
-**Барьер-чек.**
-- *Релятивизация:* да (паддинг сохраняется с оракулом).
-- *Natural proofs:* неприменимо (не о схемных нижних оценках).
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (padding is preserved with the oracle).
+- *Natural proofs:* not applicable (not about schematic lower bounds).
+- *Algebrization:* not applicable.
 
-### 16.31. Исследовательский шаг: p-bounded proof system?
+### 16.31. Research step: p-bounded proof system?
 
-**Вопрос ("А что если...?").** Что если существует полиномиально ограниченная
-пропозициональная система доказательств?
+**Question ("What if...?").** What if there is a polynomial bounded
+propositional evidence system?
 
-**Определение (p-bounded).** Доказательная система $P$ (в смысле Cook-Reckhow)
-p-bounded, если существует полином $p$, что каждая тавтология $\varphi$
-имеет $P$-доказательство длины $\le p(|\varphi|)$.
+**Definition (p-bounded).** Proof system $P$ (in the sense of Cook-Reckhow)
+p-bounded if there is a polynomial $p$ such that every tautology $\varphi$
+has $P$-proof of length $\le p(|\varphi|)$.
 
-**Лемма 16.31.** Если существует p-bounded доказательная система, то
+**Lemma 16.31.** If there is a p-bounded proof system, then
 $\mathrm{NP}=\mathrm{coNP}$.
 
-*Доказательство.* Пусть $P$ p-bounded. НП-машина по входу $\varphi$
-угадывает строку длины $\le p(|\varphi|)$ и проверяет, что это корректное
-$P$-доказательство $\varphi$ (проверка полиномиальна по определению proof system).
-Значит $\mathrm{TAUT}\in\mathrm{NP}$. Так как $\mathrm{TAUT}$ coNP-полна,
-получаем $\mathrm{coNP}\subseteq\mathrm{NP}$, и следовательно
+*Proof.* Let $P$ be p-bounded. NP machine based on input $\varphi$
+guesses a string of length $\le p(|\varphi|)$ and checks that it is correct
+$P$-proof $\varphi$ (the test is polynomial by definition of the proof system).
+So $\mathrm{TAUT}\in\mathrm{NP}$. Since $\mathrm{TAUT}$ is coNP-complete,
+we get $\mathrm{coNP}\subseteq\mathrm{NP}$, and therefore
 $\mathrm{NP}=\mathrm{coNP}$. $\square$
 
-**Вывод/провал.** p-boundedness: чрезвычайно сильное требование:
-оно сразу влечет коллапс $\mathrm{NP}$ и $\mathrm{coNP}$.
+**Conclusion/failure.** p-boundedness: extremely strong requirement:
+it immediately entails the collapse of $\mathrm{NP}$ and $\mathrm{coNP}$.
 
-**Барьер-чек.**
-- *Релятивизация:* неприменимо (утверждение о proof systems).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* not applicable (statement about proof systems).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.32. Исследовательский шаг: SAT в BPP с O(log n) случайных битов
+### 16.32. Exploratory step: SAT in BPP with O(log n) random bits
 
-**Вопрос ("А что если...?").** Что если SAT решается в BPP, используя лишь
-$O(\log n)$ случайных битов?
+**Question ("What if...?").** What if SAT is solved in BPP using only
+$O(\log n)$ random bits?
 
-**Определение (BPP$_{\log}$).** Язык $L\in\mathrm{BPP}_{\log}$, если существует
-BPP-алгоритм, использующий не более $c\log n$ случайных битов на входах длины $n$.
+**Definition (BPP$_{\log}$).** Language $L\in\mathrm{BPP}_{\log}$, if exists
+BPP algorithm using at most $c\log n$ random bits on inputs of length $n$.
 
-**Лемма 16.32.** Если $\mathrm{SAT}\in\mathrm{BPP}_{\log}$, то $\mathrm{SAT}\in\mathrm{P}$,
-следовательно $\mathrm{P}=\mathrm{NP}$.
+**Lemma 16.32.** If $\mathrm{SAT}\in\mathrm{BPP}_{\log}$, then $\mathrm{SAT}\in\mathrm{P}$,
+hence $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Пусть $A$ — BPP-алгоритм для SAT, использующий $m(n)\le c\log n$
-случайных битов. Для формулы $\varphi$ длины $n$ переберем все $2^{m(n)}\le n^c$
-случайные строки $r$ и вычислим долю принятий $A(\varphi,r)$.
-Если $\varphi$ выполнима, эта доля $\ge 2/3$, иначе $\le 1/3$.
-Сравнение с порогом $1/2$ дает детерминированное решение за полиномиальное время.
+*Proof.* Let $A$ be a BPP algorithm for SAT using $m(n)\le c\log n$
+random bits. For a formula $\varphi$ of length $n$, consider all $2^{m(n)}\le n^c$
+random strings $r$ and calculate the acceptance rate $A(\varphi,r)$.
+If $\varphi$ is satisfiable, this fraction is $\ge 2/3$, otherwise $\le 1/3$.
+Comparison with the $1/2$ threshold gives a deterministic solution in polynomial time.
 $\square$
 
-**Контрпример к усилению.** При $m(n)=\Theta(n)$ полный перебор случайных строк
-требует $2^{\Theta(n)}$ времени, поэтому аргумент не переносится на общий BPP.
+**Counterexample to strengthening.** For $m(n)=\Theta(n)$ full search of random strings
+takes $2^{\Theta(n)}$ time, so the argument does not carry over to the general BPP.
 
-**Барьер-чек.**
-- *Релятивизация:* да (перебор случайных строк сохраняется с оракулом).
-- *Natural proofs:* неприменимо (не о схемных нижних оценках).
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (random string search is saved with the oracle).
+- *Natural proofs:* not applicable (not about schematic lower bounds).
+- *Algebrization:* not applicable.
 
-### 16.33. Исследовательский шаг: SAT разрежен?
+### 16.33. Exploratory Step: Is the SAT Sparse?
 
-**Вопрос ("А что если...?").** Может ли SAT быть разреженным языком?
+**Question ("What if...?").** Can the SAT be a sparse language?
 
-**Определение (sparse).** Язык $L$ разрежен, если существует полином $p$, что
-$|L\cap\Sigma^{\le n}|\le p(n)$ для всех $n$.
+**Definition (sparse).** A language $L$ is sparse if there exists a polynomial $p$ such that
+$|L\cap\Sigma^{\le n}|\le p(n)$ for all $n$.
 
-**Лемма 16.33 (контрпример).** SAT не является разреженным языком.
+**Lemma 16.33 (counterexample).** SAT is not a sparse language.
 
-*Доказательство.* Для каждого $m$ и каждого присваивания $a\in\{0,1\}^m$ рассмотрим формулу
+*Proof.* For each $m$ and each assignment $a\in\{0,1\}^m$ consider the formula
 $$\varphi_a:=\bigwedge_{i=1}^m \ell_i,$$
-где $\ell_i=x_i$ при $a_i=1$ и $\ell_i=\neg x_i$ при $a_i=0$.
-Каждая $\varphi_a$ выполнима (единственным образом) и имеет длину $\mathrm{poly}(m)$
-(при любом стандартном кодировании входа).
-Формулы $\varphi_a$ различны, поэтому среди строк длины $\le \mathrm{poly}(m)$ есть как минимум $2^m$
-выполнимых формул. Так как $2^m$ перерастает любой полином от $\mathrm{poly}(m)$,
-SAT не разрежен. $\square$
+where $\ell_i=x_i$ for $a_i=1$ and $\ell_i=\neg x_i$ for $a_i=0$.
+Each $\varphi_a$ is satisfiable (uniquely) and has length $\mathrm{poly}(m)$
+(with any standard input coding).
+The formulas $\varphi_a$ are different, so among the strings of length $\le \mathrm{poly}(m)$ there are at least $2^m$
+feasible formulas. Since $2^m$ outgrows any polynomial in $\mathrm{poly}(m)$,
+SAT is not sparse. $\square$
 
-**Вывод/провал.** Попытка использовать разреженность SAT как путь к $\mathrm{P}\ne\mathrm{NP}$
-обрывается на элементарном счете: SAT слишком плотен.
+**Conclusion/failure.** Trying to use SAT sparsity as a path to $\mathrm{P}\ne\mathrm{NP}$
+breaks off at a rudimentary score: the SAT is too dense.
 
-**Барьер-чек.**
-- *Релятивизация:* неприменимо (утверждение о фиксированном языке).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* not applicable (fixed language statement).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.34. Исследовательский шаг: SAT с логарифмическими сертификатами
+### 16.34. Research Step: SAT with Logarithmic Certificates
 
-**Вопрос ("А что если...?").** Если SAT имеет сертификаты длины $O(\log n)$,
-следует ли $\mathrm{P}=\mathrm{NP}$?
+**Question ("What if...?").** If SAT has certificates of length $O(\log n)$,
+should $\mathrm{P}=\mathrm{NP}$?
 
-**Определение (NP$_{\log}$).** Язык $L\in\mathrm{NP}_{\log}$, если существует
-полиномиальный верификатор $V(x,y)$ и константа $c$ такие, что для всех $x$:
+**Definition (NP$_{\log}$).** Language $L\in\mathrm{NP}_{\log}$, if exists
+a polynomial verifier $V(x,y)$ and a constant $c$ such that for all $x$:
 $$x\in L\iff \exists y\in\{0,1\}^{\le c\log|x|}: V(x,y)=1.$$
 
-**Лемма 16.34.** Если $\mathrm{SAT}\in\mathrm{NP}_{\log}$, то $\mathrm{SAT}\in\mathrm{P}$,
-следовательно $\mathrm{P}=\mathrm{NP}$.
+**Lemma 16.34.** If $\mathrm{SAT}\in\mathrm{NP}_{\log}$, then $\mathrm{SAT}\in\mathrm{P}$,
+hence $\mathrm{P}=\mathrm{NP}$.
 
-*Доказательство.* Пусть для SAT существует верификатор с сертификатом длины
-не более $c\log n$. Тогда на входе длины $n$ можно перебрать все
-$2^{c\log n}=n^c$ сертификатов $y$ и проверить $V(x,y)$.
-Это детерминированное полиномиальное время. $\square$
+*Proof.* Let there be a verifier for SAT with a length certificate
+at most $c\log n$. Then, at an input of length $n$, we can enumerate all
+$2^{c\log n}=n^c$ certificates $y$ and check $V(x,y)$.
+This is deterministic polynomial time. $\square$
 
-**Контрпример к усилению.** При длине сертификата $\Theta(n)$ полный перебор
-требует $2^{\Theta(n)}$ времени, поэтому аргумент не переносится на общий NP.
+**Counterexample to the gain.** With a certificate length of $\Theta(n)$, exhaustive search
+requires $2^{\Theta(n)}$ time, so the argument does not carry over to the general NP.
 
-**Барьер-чек.**
-- *Релятивизация:* да (перебор сертификатов сохраняется с оракулом).
-- *Natural proofs:* неприменимо (не о схемных нижних оценках).
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (certificate enumeration is saved with the oracle).
+- *Natural proofs:* not applicable (not about schematic lower bounds).
+- *Algebrization:* not applicable.
 
-### 16.35. Исследовательский шаг: односторонние функции
+### 16.35. Exploratory step: one-way functions
 
-**Вопрос ("А что если...?").** Что если существуют односторонние функции?
+**Question ("What if...?").** What if there are one-way functions?
 
-**Определение (OWF).** Функция $f:\{0,1\}^*\to\{0,1\}^*$ односторонняя, если
-существует полиномиально вычислимое семейство $f_n:\{0,1\}^n\to\{0,1\}^{\mathrm{poly}(n)}$,
-такое что для любого полиномиального алгоритма $A$ вероятность
+**Definition (OWF).** The function $f:\{0,1\}^*\to\{0,1\}^*$ is one-way if
+there is a polynomial computable family $f_n:\{0,1\}^n\to\{0,1\}^{\mathrm{poly}(n)}$,
+such that for any polynomial algorithm $A$ the probability
 $$\Pr_{x\leftarrow\{0,1\}^n}\bigl[f_n(A(1^n,f_n(x)))=f_n(x)\bigr]$$
-пренебрежимо мала.
+negligible.
 
-**Лемма 16.35.** Если существуют OWF, то $\mathrm{P}\ne\mathrm{NP}$.
+**Lemma 16.35.** If OWFs exist, then $\mathrm{P}\ne\mathrm{NP}$.
 
-*Доказательство.* Предположим, что $\mathrm{P}=\mathrm{NP}$. Зафиксируем
-полиномиально вычислимую OWF $f_n$. Для данного $n$ и $y$ будем по битам восстанавливать
-прообраз $x\in\{0,1\}^n$: на шаге $i$ проверяем, существует ли строка $x$ длины $n$ с заданным префиксом
-длины $i$ такая, что $f_n(x)=y$. Это NP-вопрос, значит при $\mathrm{P}=\mathrm{NP}$ решается за $\mathrm{poly}(n)$.
-После $n$ шагов получаем $x$ с $f_n(x)=y$. Следовательно, $f_n$ инвертируема за полиномиальное время,
-противоречие односторонности. Значит существование OWF влечёт $\mathrm{P}\ne\mathrm{NP}$. $\square$
+*Proof.* Assume that $\mathrm{P}=\mathrm{NP}$. Let's fix it
+polynomial computable OWF $f_n$. For a given $n$ and $y$ we will restore bit by bit
+preimage $x\in\{0,1\}^n$: at step $i$ we check whether there is a string $x$ of length $n$ with the given prefix
+length $i$ such that $f_n(x)=y$. This is an NP question, which means that for $\mathrm{P}=\mathrm{NP}$ it is solved in $\mathrm{poly}(n)$.
+After $n$ steps we get $x$ with $f_n(x)=y$. Therefore, $f_n$ is invertible in polynomial time,
+the contradiction of one-sidedness. This means that the existence of OWF implies $\mathrm{P}\ne\mathrm{NP}$. $\square$
 
-**Вывод/провал.** Доказать существование OWF достаточно для $\mathrm{P}\ne\mathrm{NP}$,
-но это не проще исходной задачи.
+**Conclusion/failure.** Proving the existence of OWF is sufficient for $\mathrm{P}\ne\mathrm{NP}$,
+but this is no simpler than the original problem.
 
-**Барьер-чек.**
-- *Релятивизация:* да (аргумент сохраняется с оракулом).
-- *Natural proofs:* неприменимо.
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (the argument is preserved with the oracle).
+- *Natural proofs:* not applicable.
+- *Algebrization:* not applicable.
 
-### 16.36. Исследовательский шаг: PRG с логарифмическим seed
+### 16.36. Exploratory step: PRG with logarithmic seed
 
-**Вопрос ("А что если...?").** Что если существует PRG с seed длины $O(\log n)$,
-который обманывает все BPP-алгоритмы?
+**Question ("What if...?").** What if there is a PRG with a seed of length $O(\log n)$,
+which fools all BPP algorithms?
 
-**Определение (PRG для BPP).** Семейство $g_n:\{0,1\}^{s(n)}\to\{0,1\}^{m(n)}$
-c $s(n)=O(\log n)$ и $m(n)=\mathrm{poly}(n)$, вычислимое за полиномиальное время,
-такое что для любого полиномиального алгоритма $A$ и всех $n$:
+**Definition (PRG for BPP).** Family $g_n:\{0,1\}^{s(n)}\to\{0,1\}^{m(n)}$
+with $s(n)=O(\log n)$ and $m(n)=\mathrm{poly}(n)$, computable in polynomial time,
+such that for any polynomial algorithm $A$ and all $n$:
 $$\left|\Pr[A(g_n(U_{s(n)}))=1]-\Pr[A(U_{m(n)})=1]\right|\le 1/10.$$
 
-**Лемма 16.36.** Если такой PRG существует, то $\mathrm{BPP}=\mathrm{P}$.
+**Lemma 16.36.** If such a PRG exists, then $\mathrm{BPP}=\mathrm{P}$.
 
-*Доказательство.* Пусть $L\in\mathrm{BPP}$ и $A$ — его вероятностный полиномиальный
-алгоритм с $m(n)$ случайными битами и ошибкой $\le 1/3$.
-Для входа $x$ длины $n$ переберем все $2^{s(n)}=\mathrm{poly}(n)$ seed'ы $r$,
-посчитаем долю принятий $A(x,g_n(r))$ и сравним с порогом $1/2$.
-Так как PRG сохраняет вероятность с точностью $1/10$, то при $x\in L$ среднее
-$\ge 2/3-1/10>1/2$, а при $x\notin L$ среднее $\le 1/3+1/10<1/2$.
-Получаем детерминированный полиномиальный алгоритм. $\square$
+*Proof.* Let $L\in\mathrm{BPP}$ and $A$ be its probabilistic polynomial
+algorithm with $m(n)$ random bits and error $\le 1/3$.
+For an input $x$ of length $n$, let's go through all $2^{s(n)}=\mathrm{poly}(n)$ seeds $r$,
+Let's calculate the acceptance rate $A(x,g_n(r))$ and compare it with the threshold $1/2$.
+Since PRG preserves the probability with an accuracy of $1/10$, then for $x\in L$ the average
+$\ge 2/3-1/10>1/2$, and for $x\notin L$ the average is $\le 1/3+1/10<1/2$.
+We obtain a deterministic polynomial algorithm. $\square$
 
-**Контрпример к усилению.** Если $s(n)=\Theta(n)$, то полный перебор seed'ов
-занимает $2^{\Theta(n)}$ времени и доказательство не работает.
+**Counterexample to gain.** If $s(n)=\Theta(n)$, then complete search of seeds
+takes $2^{\Theta(n)}$ time and the proof does not work.
 
-**Барьер-чек.**
-- *Релятивизация:* да (перебор seed'ов сохраняется с оракулом).
-- *Natural proofs:* неприменимо (не о схемных нижних оценках).
-- *Algebrization:* неприменимо.
+**Barrier check.**
+- *Relativization:* yes (seed search is saved with the oracle).
+- *Natural proofs:* not applicable (not about schematic lower bounds).
+- *Algebrization:* not applicable.
 
 -/

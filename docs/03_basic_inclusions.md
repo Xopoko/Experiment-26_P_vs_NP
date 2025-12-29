@@ -1,26 +1,26 @@
-## 3. Базовые включения (полные доказательства)
+## 3. Basic inclusions (complete proofs)
 
-**Лемма 3.1.** $\mathrm{P}\subseteq\mathrm{NP}$.
+**Lemma 3.1.** $\mathrm{P}\subseteq\mathrm{NP}$.
 
-*Доказательство.* Детерминированная машина — частный случай недетерминированной (без ветвлений).
-Если $L$ решается за полиномиальное время детерминированно, то он решается за то же время и недетерминированно. $\square$
+*Proof.* A deterministic machine is a special case of a non-deterministic machine (without branches).
+If $L$ is solved deterministically in polynomial time, then it is solved nondeterministically in the same time. $\square$
 
-**Лемма 3.2.** $\mathrm{NP}\subseteq\mathrm{PSPACE}$.
+**Lemma 3.2.** $\mathrm{NP}\subseteq\mathrm{PSPACE}$.
 
-*Доказательство (классическое).* Пусть $L\in\mathrm{NP}$ распознаётся НМТ $N$ за $n^k$.
-Рассмотрим граф конфигураций $G_x$ для входа $x$: вершины — конфигурации $N$ на $x$, ребро — один шаг вычисления.
-Число конфигураций $\le 2^{O(n^k)}$, но каждая конфигурация занимает $O(n^k)$ памяти.
+*Proof (classical).* Let $L\in\mathrm{NP}$ be recognized by the NMT $N$ for $n^k$.
+Consider the graph of configurations $G_x$ for input $x$: vertices are configurations $N$ on $x$, edge is one computation step.
+The number of configurations is $\le 2^{O(n^k)}$, but each configuration takes up $O(n^k)$ of memory.
 
-Детерминированная машина проверяет путь от стартовой конфигурации к принимающей, используя DFS по длине пути
-(или достижимость Сэвича для NL⊆SPACE(log_2²) как общий шаблон).
-Можно перебирать ветви «вглубь», храня текущую конфигурацию и счётчик шагов до $n^k$.
-Это требует $O(n^k)$ памяти для конфигурации и $O(\log_2 n)$ для счётчиков, т.е. полиномиальную память.
-Следовательно, $L\in\mathrm{PSPACE}$. $\square$
+A deterministic machine checks the path from the starting configuration to the receiving configuration using DFS along the path length
+(or Savich reachability for NLSPACE(log_22) as a general pattern).
+You can iterate branches "in depth", storing the current configuration and the step counter up to $n^k$.
+This requires $O(n^k)$ memory for configuration and $O(\log_2 n)$ for counters, i.e.  .
+Therefore, $L\in\mathrm{PSPACE}$. $\square$
 
-**Лемма 3.3.** Если $\mathrm{P}=\mathrm{NP}$, то $\mathrm{NP}=\mathrm{coNP}$.
+**Lemma 3.3.** If $\mathrm{P}=\mathrm{NP}$, then $\mathrm{NP}=\mathrm{coNP}$.
 
-*Доказательство.* Из $\mathrm{P}=\mathrm{NP}$ следует $\mathrm{NP}=\mathrm{P}$.
-$\mathrm{P}$ замкнут по дополнению: если $M$ решает $L$ за полиномиальное время, то
-машина, меняющая accept/reject, решает $\overline{L}$ за то же время.
-Значит $\overline{L}\in\mathrm{P}=\mathrm{NP}$ для любого $L\in\mathrm{NP}$, то есть $\mathrm{coNP}\subseteq\mathrm{NP}$.
-Обратное включение $\mathrm{NP}\subseteq\mathrm{coNP}$ симметрично. $\square$
+*Proof.* From $\mathrm{P}=\mathrm{NP}$ it follows $\mathrm{NP}=\mathrm{P}$.
+$\mathrm{P}$ is closed by complement: if $M$ solves $L$ in polynomial time, then
+a machine changing accept/reject solves $\overline{L}$ in the same time.
+This means $\overline{L}\in\mathrm{P}=\mathrm{NP}$ for any $L\in\mathrm{NP}$, that is, $\mathrm{coNP}\subseteq\mathrm{NP}$.
+The reverse inclusion $\mathrm{NP}\subseteq\mathrm{coNP}$ is symmetric. $\square$

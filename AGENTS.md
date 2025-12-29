@@ -1,257 +1,257 @@
 # AGENTS.md
 
-# P vs NP — Verified-First Research Notebook
+# P vs NP - Verified-First Research Notebook
 
-## Миссия
+## Mission
 
-Цель проекта — доказать или опровергнуть гипотезу **P ≠ NP** в стандартной модели вычислений
-(полиномиальное время на детерминированной Тьюринг‑машине vs недетерминированной),
-с приведением результата к **строго проверяемому ядру**.
+The goal of the project is to prove or refute the hypothesis **P != NP** in the standard computing model
+(polynomial time on a deterministic Turing machine vs nondeterministic),
+with the result reduced to a **strictly verified kernel**.
 
-**Критерий “решено”:**
+**Solved criterion:**
 
-- В репозитории существует главный формальный файл (см. `formal/`) с теоремой вида:
-  - `theorem P_ne_NP : P ≠ NP` (или `P_eq_NP : P = NP`),
-  - которая **компилируется** в proof assistant’е (Lean/Coq/Isabelle — выбрать один),
-  - и зависит только от лемм, которые:
-    1) доказаны формально в этом же дереве, или
-    2) импортированы из официальной стандартной библиотеки (mathlib/Coq stdlib/…).
+- There is a main formal file in the repository (see `formal/`) with a theorem of the form:
+  - `theorem P_ne_NP : P ≠ NP` (or `P_eq_NP : P = NP`),
+  - which **compiles** in the proof assistant (Lean/Coq/Isabelle - choose one),
+  - and depends only on lemmas that:
+    1) formally proved in the same tree, or
+    2) imported from the official standard library (mathlib/Coq stdlib/...).
 
-Markdown‑текст (`docs/`) — это **читаемая навигация и объяснение**, но **истина — в `formal/`**.
-Doc‑comments в `formal/Notes/*.lean` — это **заметки**, не формальные доказательства.
+Markdown text (`docs/`) is **readable navigation and explanation**, but **the truth is in `formal/`**.
+Doc-comments in `formal/Notes/*.lean` - these are **notes**, not formal evidence.
 
 ---
 
-## Репозиторий: минимальная структура
+## Repository: minimal structure
 
-- `P_vs_NP.md` — короткий статус и ссылки (не более 1–2 экранов).
+- `P_vs_NP.md` -- short status and links (no more than 1-2 screens).
 - `docs/`
-  - `roadmap.md` — выбранные треки и “дерево зависимостей”.
-  - `open_questions.md` — активный backlog микро‑вопросов (с NextStepID).
-  - `agent_brief.md` — оперативная память проекта (с Do-not-repeat).
-  - `sources.md` — ровно те источники, на которые реально опираемся.
+  - `roadmap.md` -- selected tracks and "dependency tree".
+  - `open_questions.md` -- active backlog of micro-issues (with NextStepID).
+  - `agent_brief.md` -- project RAM (with Do-not-repeat).
+  - `sources.md` - exactly those sources that we actually rely on.
 - `formal/`
-- `PvNP/Core/` — определения и доказательства.
-  - `Notes/` — длинные исследовательские заметки в Lean (doc‑comments, Lean-first).
+- `PvNP/Core/` -- definitions and evidence.
+  - `Notes/` - long research notes in Lean (doccomments, Lean-first).
 - `scripts/`
-  - `verify_notebook.py` — проверка структуры md (если есть).
-  - `verify_all.sh` — общий CI‑гейт: markdown + формализация.
-- `agent/logs/` — логи прогонов (опционально).
+  - `verify_notebook.py` -- checking the md structure (if any).
+  - `verify_all.sh` -- general CI gate: markdown + formalization.
+- `agent/logs/` -- run logs (optional).
 
 ---
 
-## Модель доверия
+## Trust model
 
-Любой артефакт типа `Proof` считается “принятым”, только если:
+Any artifact type `Proof` is considered "accepted" only if:
 
-- есть Lean‑доказательство (формально компилируется), либо
-- это тривиальный шаг, который можно проверить компилятором (например, рефактор определения).
+- there is a Lean-proof (formally compiled), or
+is a trivial step that can be checked by the compiler (like a definition refactor).
 
-Внешние утверждения фиксируются **только** как точные ссылки в `docs/sources.md`
-и/или в заметках `formal/Notes/*.lean` (без добавления аксиом).
-
----
-
-## Роль: WORKER
-
-В каждом запуске ты — WORKER.
-Делаешь **ровно 1 исследовательский шаг** и доводишь до проверяемого артефакта
-(см. “Артефакты”).
-
-Обязательные действия:
-
-- обновить один пункт `docs/open_questions.md` (статус + NextStepID),
-- обновить `docs/agent_brief.md` (коротко, без роста),
-- прогнать `scripts/verify_all.sh`,
-- сделать 1 commit с осмысленным сообщением.
-
-Примечание: активные вопросы в `docs/open_questions.md` обязаны иметь `LeanTarget:`
-для привязки Proof‑шагов к конкретному Lean‑файлу.
+External statements are captured **only** as exact references in `docs/sources.md`
+and/or in notes `formal/Notes/*.lean` (without adding axioms).
 
 ---
 
-## Режим исследования: 1 запуск = 1 артефакт
+## Role: WORKER
 
-### Шаги WORKER (строгий протокол)
+In every launch you are a WORKER.
+You take **exactly 1 research step** and get to the artifact you are checking
+(See "Artifacts").
 
-0) Прочитай `docs/agent_brief.md` и проверь Do-not-repeat.
-1) Выбери 1 активный пункт из `docs/open_questions.md`.
-2) Выбери **одну** линзу (см. ниже) — не повторяй линзу 2 прогона подряд.
-3) Сформулируй **формальное утверждение** (определения + кванторы).
-4) Сделай toy‑тест/ограниченный случай и сначала попробуй **убить** идею:
-   - контрпример,
-   - сведение к известному,
-   - упор в барьер.
-5) Если выжило: доведи до одного артефакта (ниже).
-6) Обязательный barrier‑протокол: relativization / natural proofs / algebrization (не словами, а по шаблону).
-7) Обнови `open_questions.md` и `agent_brief.md`.
-8) `scripts/verify_all.sh` → commit.
+Required actions:
 
-Примечание: если не можешь добавить Lean‑код, выбирай артефакт **не Proof**.
+- update one item `docs/open_questions.md` (status + NextStepID),
+- update `docs/agent_brief.md` (short, without growth),
+- drive away `scripts/verify_all.sh`,
+- make 1 commit with a meaningful message.
+
+Note: active questions in `docs/open_questions.md` must have `LeanTarget:`
+to link Proof steps to a specific Lean file.
 
 ---
 
-## Артефакты (ровно один на запуск)
+## Research mode: 1 run = 1 artifact
 
-Выбери один тип и произведи его полностью.
+### WORKER steps (strict protocol)
+
+0) Read `docs/agent_brief.md` and check Do-not-repeat.
+1) Select 1 active item from `docs/open_questions.md`.
+2) Pick **one** lens (see below) - don't repeat a lens 2 runs in a row.
+3) Formulate a **formal statement** (definitions + quantifiers).
+4) Do a toy test/limited case and try to **kill** the idea first:
+   - counterexample,
+   - reduction to the known,
+   - emphasis on the barrier.
+5) If you survived: bring it to one artifact (below).
+6) Mandatory barrier protocol: relativization / natural proofs / algebrization (not in words, but according to a template).
+7) Update `open_questions.md` And `agent_brief.md`.
+8) `scripts/verify_all.sh` -> commit.
+
+Note: if you cannot add Lean code, choose an artifact **not Proof**.
+
+---
+
+## Artifacts (exactly one per launch)
+
+Choose one type and produce it completely.
 
 ### 1) Proof
 
-- Обязательно содержит **реальный Lean‑код** (не только текст в doc‑comments).
-- Добавь или измени `def`/`theorem` в `formal/PvNP/Core/*.lean` (или другом ядре `formal/`).
-- Файл компилируется, `scripts/verify_all.sh` проходит.
-- В `docs/` добавь краткий “человеческий” комментарий на 5–15 строк и ссылку на файл.
+- Must contain **real Lean code** (not just the text in doc-comments).
+- Add or change `def`/`theorem` V `formal/PvNP/Core/*.lean` (or another kernel `formal/`).
+- The file is compiled, `scripts/verify_all.sh` passes.
+- IN `docs/` add a short "human" comment of 5-15 lines and a link to the file.
 
 ### 2) Counterexample
 
-- Явный контрпример/оракул/конструкция.
-- Если возможно — формализуй как маленький лемматический факт или хотя бы toy‑код.
-- В `docs/` фиксируй: что именно опровергнуто, какие условия нужны.
+- Explicit counterexample/oracle/construction.
+- If possible, formalize it as a small lemmatic fact or at least a toy code.
+- IN `docs/` record: what exactly is refuted, what conditions are needed.
 
 ### 3) Exact citation
 
-- Не переписывай “фольклор”.
-- Дай точный первоисточник: авторы, год, название, **номер теоремы/леммы/страница**.
-- В `docs/` добавь 2–6 строк: как это закрывает/исправляет пункт open_questions.
+- Don't rewrite "folklore".
+- Give the exact source: authors, year, title, **theorem/lemma number/page**.
+- IN `docs/` add 2-6 lines: how this closes/corrects the open_questions item.
 
 ### 4) Toy computation
 
-- Малый эксперимент/перебор/скрипт, который проверяет ограниченный случай.
-- Результат должен быть воспроизводимым (фиксированный seed, входы сохранены).
+- Small experiment/brute force/script that tests a limited case.
+- The result must be reproducible (fixed seed, inputs preserved).
 
 ### 5) Reduction/Equivalence (Exact)
 
-- Формально записанная редукция/эквивалентность между утверждениями.
-- Идеально: формализована как теорема.
-- В `docs/` — ровно 5–10 строк смысла + зависимости.
+- Formally written reduction/equivalence between statements.
+- Ideal: formalized as a theorem.
+- IN `docs/` -- exactly 5-10 lines of meaning + dependencies.
 
 ### 6) Barrier certificate
 
-- Короткий документ, что выбранная линия неизбежно упирается в барьер при данных предпосылках.
-- Обязательно: точный источник (Exact citation) и явная привязка к вашему шагу.
+- A short document that the chosen line inevitably runs into a barrier under these conditions.
+- Required: exact source (Exact citation) and explicit link to your step.
 
 ---
 
-## Линзы (выбери одну)
+## Lenses (choose one)
 
-1) Эквивалентность (перевод в другой объект/формулировку)
-2) Сжатие/канонизация (эффективная нормализация)
-3) Инвариант (монотонный параметр)
-4) Двойственность (NP vs coNP, search vs decision)
-5) Трейд‑офф (time–space, depth–size, randomness–advice)
-6) Коммуникация/ранг (матрицы, протоколы, lower bounds)
-7) Алгебраизация (IPS/PC, арифметизация, идеалы)
-8) Модельный стресс‑тест (оракулы/релятивизация)
+1) Equivalence (translation to another object/formulation)
+2) Compression/canonization (effective normalization)
+3) Invariant (monotonic parameter)
+4) Duality (NP vs coNP, search vs decision)
+5) Trade-off (time-space, depth-size, randomness-advice)
+6) Communication/rank (matrices, protocols, lower bounds)
+7) Algebraization (IPS/PC, arithmetization, ideals)
+8) Model stress test (oracles/relativization)
 
 ---
 
-## Барьер‑протокол (обязательный, по шаблону)
+## Barrier protocol (mandatory, according to template)
 
-В конце каждого шага (в заметке шага в `formal/Notes/*.lean` или кратко в `docs/open_questions.md`) заполни:
+At the end of each step (in the step note in `formal/Notes/*.lean` or briefly in `docs/open_questions.md`) fill in:
 
 ### A) Relativization check
 
-- `Relativizes?` да/нет/не уверен.
-- Если “нет”: укажи **конкретный шаг**, который ломается при добавлении оракула (что именно использует “нерелятивизирующую” информацию).
-- Если “да/не уверен”: попробуй сформулировать оракульный вариант и проверь,
-  не появляется ли известный оракул‑контрпример.
+- `Relativizes?` yes/no/not sure.
+- If "no": indicate the **specific step** that breaks when adding an oracle (what exactly uses "non-relativizing" information).
+- If "yes/not sure": try to formulate an oracle option and check if
+  whether a well-known counterexample oracle appears.
 
 ### B) Natural proofs check
 
-Если шаг касается **схемных нижних оценок через свойство функций**, оцени:
+If the step concerns **schematic lower bounds via a property of functions**, evaluate:
 
-- `Largeness`: свойство имеет плотность ≥ 2^{-poly(n)}? (или “редкое”?)
-- `Constructivity`: распознаётся за poly(2^n) по таблице истинности?
-- `Usefulness`: отделяет ли класс схем C от случайной функции?
-  И укажи: **где именно вы выходите** из рамок natural proofs (если выходите).
+- `Largeness`: property has density >= 2^{-poly(n)}? (or "rare"?)
+- `Constructivity`: recognized as poly(2^n) by truth table?
+- `Usefulness`: Does the circuit class C separate from the random function?
+  And indicate: **where exactly you leave** the framework of natural proofs (if you do).
 
 ### C) Algebrization check
 
-Если используется арифметизация/полиномиальные расширения:
+If arithmetization/polynomial extensions are used:
 
-- Укажи, является ли метод “алгебраизирующим”.
-- Если нет: объясни конкретно, что не сохраняется при “extension oracle”.
-- Если да/не уверен: попробуй свести к известному барьеру.
-
----
-
-## Стратегия (обязательна: выбираем трек и держимся его)
-
-Проект выбирает **1 основной трек** и максимум **1 вспомогательный**.
-Это фиксируется в `docs/roadmap.md` и кратко в `docs/agent_brief.md`.
-
-Рекомендуемые треки (пример):
-
-- Трек A: Circuit lower bounds (NP ⊄ P/poly) + обход natural proofs
-- Трек B: Proof complexity / IPS / lower bounds → перенос на схемы
-- Трек C: Алгоритмический подход “из P=NP вывести неожиданно быстрые алгоритмы”
-- Трек D: Алгебраическая сложность / GCT (если есть компетенция)
-
-**Правило:** 80% шагов должны быть в основном треке. Иначе — дрейф и нет прогресса.
+- Indicate whether the method is "algebraizing".
+- If not: explain specifically what is not saved with "extension oracle".
+- If yes/not sure: try to reduce it to a known barrier.
 
 ---
 
-## Контрольные задачи (чтобы убедиться, что конвейер работает)
+## Strategy (required: choose a track and stick to it)
 
-До “настоящего прорыва” обязателен прогон на 3 известных фактах:
+The project selects **1 main track** and a maximum of **1 auxiliary**.
+This is recorded in `docs/roadmap.md` and briefly in `docs/agent_brief.md`.
 
-1) Релятивизация: оформить как Barrier certificate + Exact citation.
-2) Natural proofs: оформить определения + барьер как Exact citation и краткий вывод.
-3) Algebrization: оформить как Exact citation + toy‑пример “почему арифметизация не спасает”.
+Recommended tracks (example):
 
-Эти 3 должны быть верифицированы пайплайном (verify_all + понятные ссылки).
+- Track A: Circuit lower bounds (NP  P/poly) + bypass natural proofs
+- Track B: Proof complexity / IPS / lower bounds -> transfer to diagrams
+- Track C: Algorithmic approach "derive unexpectedly fast algorithms from P=NP"
+- Track D: Algebraic Complexity / GCT (if competent)
 
----
-
-## Политика источников и поиск
-
-- Любое “известно” → либо `Exact citation`, либо не писать.
-- Ссылки должны быть первоисточниками (статья/книга), не блогами, если возможно.
-- Каждый реально используемый источник фиксируется в `docs/sources.md`
-  и (если есть) кладётся в `resources/` с manifest’ом.
+**Rule:** 80% of the steps must be in the main track. Otherwise, there is drift and no progress.
 
 ---
 
-## Политика текста (чтобы репозиторий не раздувался)
+## Control tasks (to make sure the pipeline is running)
 
-- `P_vs_NP.md` — очень короткий, только статус и ссылки на ключевые файлы.
-- В `docs/` пишем только новое математическое содержание.
-- Длинные рассуждения — в `formal/Notes/<Topic>.lean` (doc‑comments).
-- Если файл > 4000 строк или > 300KB — дробим по темам.
+Before a "real breakthrough", it is necessary to run on 3 known facts:
+
+1) Relativization: issue it as Barrier certificate + Exact citation.
+2) Natural proofs: format definitions + barrier as Exact citation and short conclusion.
+3) Algebrization: format it as Exact citation + toy example "why arithmetization doesn't save."
+
+These 3 must be verified by the pipeline (verify_all + clear links).
+
+---
+
+## Source policy and search
+
+- Any "known" -> either `Exact citation`, or don't write.
+- Links should be primary sources (article/book), not blogs, if possible.
+- Each source actually used is recorded in `docs/sources.md`
+  and (if any) is placed in `resources/` with manifest.
+
+---
+
+## Text policy (to prevent the repository from becoming bloated)
+
+- `P_vs_NP.md` - very short, only status and links to key files.
+- IN `docs/` We write only new mathematical content.
+- Long discussions - in `formal/Notes/<Topic>.lean` (doc-comments).
+- If the file is > 4000 lines or > 300KB, we split it into topics.
 
 ---
 
 ## Anti-loop & progress gate
 
-Каждый прогон заканчивается:
+Each run ends:
 
-- `StepID: Qxx.Sy.slug` (уникален)
+- `StepID: Qxx.Sy.slug` (unique)
 - `InfoGain: 0/1/2`
-- и ровно одним артефактом.
+- and exactly one artifact.
 
-Запрещено:
+Forbidden:
 
-- повторять StepID из `Do-not-repeat` в `docs/agent_brief.md`,
-- делать “косметические” правки без артефакта,
-- делать 2 артефакта за прогон.
+- repeat StepID from `Do-not-repeat` V `docs/agent_brief.md`,
+- make "cosmetic" edits without an artifact,
+- make 2 artifacts per run.
 
-Если не получилось:
+If it doesn't work:
 
-- пометь пункт как `BLOCKED`,
-- запиши 1 строку “blocker”,
-- назначь новый NextStepID,
-- остановись.
+- mark the item as `BLOCKED`,
+- write 1 line "blocker",
+- assign a new NextStepID,
+- stop.
 
 ---
 
-## Git и CI
+## Git and CI
 
-Перед коммитом:
+Before commit:
 
 - `scripts/verify_all.sh`
 
-Коммит‑сообщение:
+Commit message:
 
-- `<StepID>: <тип артефакта> — <суть в 1 строке>`
+- `<StepID>: <artifact type> - <one-line summary>`
 
 ---

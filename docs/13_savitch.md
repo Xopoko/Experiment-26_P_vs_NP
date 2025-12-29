@@ -1,61 +1,61 @@
-## 13. Теорема Сэвича: NSPACE ⊆ SPACE (полное доказательство)
+## 13. Savich's theorem: NSPACE  SPACE (complete proof)
 
-**Определение (SPACE/NSPACE).** Для функции $s(n)$ класс
-$\mathrm{SPACE}(s(n))$ — языки, решаемые детерминированной МТ,
-использующей $O(s(n))$ рабочих ячеек на входе длины $n$.
-Аналогично $\mathrm{NSPACE}(s(n))$ — для недетерминированной МТ.
+**Definition (SPACE/NSPACE).** For the function $s(n)$ class
+$\mathrm{SPACE}(s(n))$ -- languages solved by deterministic MT,
+using $O(s(n))$ work cells at the input of length $n$.
+Similarly $\mathrm{NSPACE}(s(n))$ - for non-deterministic MT.
 
-Рабочая память не включает входную ленту (вход только читается).
+Working memory does not include input tape (input is read only).
 
-**Теорема 13.1 (Savitch).** Для любой $s(n)\ge \log_2 n$ верно
+**Theorem 13.1 (Savitch).** For any $s(n)\ge \log_2 n$ is true
 $$\mathrm{NSPACE}(s(n))\subseteq\mathrm{SPACE}(s(n)^2).$$
 
-*Доказательство.* Пусть язык $L$ распознаётся недетерминированной МТ $N$
-с использованием $s(n)$ памяти. Зафиксируем вход $x$ длины $n$.
+*Proof.* Let the language $L$ be recognized by a non-deterministic MT $N$
+using $s(n)$ memory. Let us fix an input $x$ of length $n$.
 
-Рассмотрим **граф конфигураций** $G_x$: вершины — конфигурации $N$
-на входе $x$ (содержимое рабочих лент, позиции головок, состояние),
-а ребро $c\to c'$ существует, если $N$ может за один шаг перейти из $c$ в $c'$.
+Consider the **configuration graph** $G_x$: vertices are configurations $N$
+at input $x$ (contents of working tapes, head positions, state),
+and an edge $c\to c'$ exists if $N$ can go from $c$ to $c'$ in one step.
 
-Так как память ограничена $s(n)$, длина описания конфигурации равна
-$O(s(n))$, а число конфигураций ограничено
+Since memory is limited by $s(n)$, the length of the configuration description is
+$O(s(n))$, and the number of configurations is limited
 $$|V(G_x)|\le 2^{O(s(n))}=:M.$$
 
-Вход $x$ принимается тогда и только тогда, когда в $G_x$ существует путь
-из стартовой конфигурации $c_{\mathrm{start}}$ в некоторую принимающую
-конфигурацию $c_{\mathrm{acc}}$.
+Input $x$ is accepted if and only if a path exists in $G_x$
+from the starting configuration $c_{\mathrm{start}}$ to some receiving configuration
+configuration $c_{\mathrm{acc}}$.
 
-Ключевой подалгоритм — процедура $\mathrm{REACH}(c_1,c_2,\ell)$:
-существует ли путь из $c_1$ в $c_2$ длины $\le \ell$.
+The key subalgorithm is the procedure $\mathrm{REACH}(c_1,c_2,\ell)$:
+whether there is a path from $c_1$ to $c_2$ of length $\le \ell$.
 
-- База: $\ell=0$ — ответ «да» тогда и только тогда, когда $c_1=c_2$.
-- Переход: для $\ell>0$ положим $m=\lceil \ell/2\rceil$ и проверим
+- Base: $\ell=0$ - the answer is "yes" if and only if $c_1=c_2$.
+- Transition: for $\ell>0$ we set $m=\lceil \ell/2\rceil$ and check
 $$\exists c\in V(G_x):\ \mathrm{REACH}(c_1,c,m)\ \wedge\ \mathrm{REACH}(c,c_2,m).$$
 
-Если путь длины $\le \ell$ существует, то на его середине есть вершина $c$,
-разбивающая путь на две части длины $\le m$.
-Обратно, если существуют обе половины, их конкатенация даёт путь длины
+If a path of length $\le \ell$ exists, then there is a vertex $c$ in its middle,
+splitting the path into two parts of length $\le m$.
+Conversely, if both halves exist, concatenating them gives a path of length
 $\le 2m\ge\ell$.
 
-Чтобы решить достижимость в $G_x$, достаточно проверить
-$\mathrm{REACH}(c_{\mathrm{start}},c_{\mathrm{acc}},M)$ для всех $c_{\mathrm{acc}}$.
+To solve reachability in $G_x$, it is enough to check
+$\mathrm{REACH}(c_{\mathrm{start}},c_{\mathrm{acc}},M)$ for all $c_{\mathrm{acc}}$.
 
-**Оценка памяти.** Одна конфигурация кодируется $O(s(n))$ битами.
-В каждом рекурсивном вызове храним $(c_1,c_2,\ell)$ и текущего кандидата $c$ —
-это $O(s(n))$ памяти. Глубина рекурсии равна $O(\log_2 M)=O(s(n))$,
-значит суммарная память $O(s(n)\cdot s(n))=O(s(n)^2)$.
+**Memory estimate.** One configuration is encoded in $O(s(n))$ bits.
+In each recursive call we store $(c_1,c_2,\ell)$ and the current candidate $c$ -
+this is $O(s(n))$ of memory. The recursion depth is $O(\log_2 M)=O(s(n))$,
+this means the total memory is $O(s(n)\cdot s(n))=O(s(n)^2)$.
 
-Таким образом, достижимость в $G_x$ решается детерминированно в
-$O(s(n)^2)$ памяти, и значит $L\in\mathrm{SPACE}(s(n)^2)$. $\square$
+Thus, reachability in $G_x$ is solved deterministically in
+$O(s(n)^2)$ of memory, and therefore $L\in\mathrm{SPACE}(s(n)^2)$. $\square$
 
-**Следствие 13.2.** $\mathrm{NPSPACE}=\mathrm{PSPACE}$.
+**Corollary 13.2.** $\mathrm{NPSPACE}=\mathrm{PSPACE}$.
 
-*Доказательство.* Очевидно $\mathrm{PSPACE}\subseteq\mathrm{NPSPACE}$.
-Обратно, применяем Теорему 13.1 к $s(n)=n^k$ и получаем
+*Proof.* Obviously $\mathrm{PSPACE}\subseteq\mathrm{NPSPACE}$.
+Conversely, we apply Theorem 13.1 to $s(n)=n^k$ and get
 $\mathrm{NPSPACE}\subseteq\mathrm{PSPACE}$. $\square$
 
-**Следствие 13.3.** $\mathrm{NP}\subseteq\mathrm{PSPACE}$.
+**Corollary 13.3.** $\mathrm{NP}\subseteq\mathrm{PSPACE}$.
 
-*Доказательство.* $\mathrm{NP}\subseteq\mathrm{NPSPACE}$
-(недетерминированное полиномиальное время использует не больше
-полиномиальной памяти), а затем Следствие 13.2. $\square$
+*Proof.* $\mathrm{NP}\subseteq\mathrm{NPSPACE}$
+(nondeterministic polynomial time uses at most
+polynomial memory), and then Corollary 13.2. $\square$
