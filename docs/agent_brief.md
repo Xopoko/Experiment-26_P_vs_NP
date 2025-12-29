@@ -6,13 +6,13 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S271-gap-min-ratio-recdepth
-- `Do-not-repeat (next 2 runs):` Q43.S271-gap-min-ratio-recdepth, Q39.S140-globalfixedpair-fixedorientation-contiguous-shift-alt53
+- `LastStepID:` Q43.S272-gap-min-ratio-recdepth-raise
+- `Do-not-repeat (next 2 runs):` Q43.S272-gap-min-ratio-recdepth-raise, Q43.S271-gap-min-ratio-recdepth
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
-Q43: gap list scan compiles; next define n_k via Q43_floorSqrt and show the log2 jump at n_k^2.
+Q43: gap list scan compiles under higher maxRecDepth; next define n_k via Q43_floorSqrt and show the log2 jump at n_k^2.
 Q39: alt53shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt54shift.
 
 ## What has already been done (do not repeat)
@@ -41,4 +41,4 @@ Q39: alt53shift for contiguous blocks with fixedorientation still gives rank 2; 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Communication/Rank->Communication/Rank->Equivalence->Compression/canonization
+Latest:Communication/Rank->Communication/Rank->Equivalence->Compression/canonization->Invariant

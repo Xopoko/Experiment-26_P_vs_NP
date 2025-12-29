@@ -37,8 +37,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S271-gap-min-ratio-recdepth
-  - `NextStepID:` Q43.S272-log2-jump-nk
+  - `LastStepID:` Q43.S272-gap-min-ratio-recdepth-raise
+  - `NextStepID:` Q43.S273-log2-jump-nk
   - `LeanTarget:` formal/WIP/Work.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
@@ -52,9 +52,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Compression/canonization (canonical floor-sqrt bounds).
   - `Artifact:` Proof.
-  - `Update:` localized `maxRecDepth` for the gap list scan so the
-    `decide` proofs for `Q43_gap_min_ratio_le_all` and
-    `Q43_gap_min_ratio_le_all_k12` compile (range length 1024).
+  - `Update:` raised the local `maxRecDepth` for the gap list scan;
+    `decide` still hit recursion depth at 2000, so both gap-min proofs
+    now compile under the higher bound.
   - `Use:` define `n_k` via `Q43_floorSqrt` and show the log2 jump at `n_k^2`.
   - `BarrierCheck:` A) Relativization check: yes (arithmetic + floor log2).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.

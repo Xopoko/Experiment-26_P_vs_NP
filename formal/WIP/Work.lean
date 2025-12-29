@@ -2483,7 +2483,7 @@ def Q43_gap_range_list : List Nat := Q43_gap_range_list_k Q43_gap_k
 def Q43_gap_min_ratio : Nat := Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ
 
 -- `decide` recurses through the 1024-element gap list; bump recursion depth locally.
-set_option maxRecDepth 2000 in
+set_option maxRecDepth 8000 in
 theorem Q43_gap_min_ratio_le_all :
     ∀ n, n ∈ Q43_gap_range_list → Q43_gap_min_ratio <= Q43_grid_ratio n := by
   decide
@@ -2491,7 +2491,7 @@ theorem Q43_gap_min_ratio_le_all :
 -- Q43.S252-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
 -- apply-params-poly-n0-ratio-lift-piecewise-gap-bound-generalize:
 -- parameterized gap scan instantiated at k=12.
-set_option maxRecDepth 2000 in
+set_option maxRecDepth 8000 in
 theorem Q43_gap_min_ratio_le_all_k12 :
     ∀ n, n ∈ Q43_gap_range_list_k Q43_gap_k →
       Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ <= Q43_grid_ratio n := by
