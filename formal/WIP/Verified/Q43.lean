@@ -3371,11 +3371,20 @@ theorem Q43_gap_min_ratio_drop_global :
   have hdrop := Q43_gap_min_ratio_drop_nk (k := Q43_gap_k) hk
   simpa [Q43_gap_min_ratio, Q43_gap_k, Q43_nk_eq_gap_n12, Q43_gap_n_succ_eq] using hdrop
 
+-- Q43.S282-gap-min-global-use:
+-- lift the global drop to a +1 bound in grid_ratio form.
+theorem Q43_gap_min_ratio_drop_global_grid_succ_le :
+    Q43_gap_min_ratio + 1 <= Q43_grid_ratio Q43_gap_n := by
+  have h :
+      Q43_gap_min_ratio < Q43_grid_ratio Q43_gap_n := by
+    simpa [Q43_gap_min_ratio_k] using Q43_gap_min_ratio_drop_global
+  exact (Nat.succ_le_iff).2 h
+
 -- Q43.S280-gap-min-global-cleanup:
 -- expose the global drop as a grid_ratio inequality.
 theorem Q43_gap_min_ratio_drop_global_grid :
     Q43_gap_min_ratio < Q43_grid_ratio Q43_gap_n := by
-  simpa [Q43_gap_min_ratio_k] using Q43_gap_min_ratio_drop_global
+  exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _) Q43_gap_min_ratio_drop_global_grid_succ_le
 
 -- TODO(Q43.S137-logn-remaining-scan): add the formal flat local-EF(s) evaluation statement.
 

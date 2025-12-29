@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S281-gap-drop-nk-k31-k104
-- `Do-not-repeat (next 2 runs):` Q43.S281-gap-drop-nk-k31-k104, Q39.S143-contiguous-alt-rank2-k117
+- `LastStepID:` Q43.S282-gap-min-global-use
+- `Do-not-repeat (next 2 runs):` Q43.S282-gap-min-global-use, Q43.S281-gap-drop-nk-k31-k104
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: n_k gap-drop counterexamples now cover k=12..104; next wire gap-min uses to the global grid_ratio lemma.
+Q43: global gap-min drop now yields a +1 grid_ratio bound; next route remaining uses through that corollary.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: n_k gap-drop counterexamples now cover k=12..104; next wire gap-min uses to
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Communication/rank->Invariant->Equivalence->Invariant->Compression/canonization
+Latest:Invariant->Equivalence->Invariant->Compression/canonization->Invariant
