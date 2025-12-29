@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S269-define-floor-sqrt-lean
-- `Do-not-repeat (next 2 runs):` Q43.S269-define-floor-sqrt-lean, Q39.S139-globalfixedpair-fixedorientation-contiguous-shift-alt52
+- `LastStepID:` Q39.S140-globalfixedpair-fixedorientation-contiguous-shift-alt53
+- `Do-not-repeat (next 2 runs):` Q39.S140-globalfixedpair-fixedorientation-contiguous-shift-alt53, Q43.S269-define-floor-sqrt-lean
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q43: floor-sqrt defined with upper bound; next is the lower bound to connect to n_k.
-Q39: alt52shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt53shift.
+Q39: alt53shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt54shift.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q39: alt52shift for contiguous blocks with fixedorientation still gives rank 2; 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Communication/Rank->Communication/Rank->Equivalence->Communication/Rank
+Latest:Communication/Rank->Invariant->Communication/Rank->Communication/Rank->Equivalence

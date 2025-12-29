@@ -210,3 +210,4 @@ Q43.S268-nk-sqrt-bounds	Exact citation	formal/WIP/Work.lean	PENDING	Python math.
 Q39.S138-globalfixedpair-fixedorientation-contiguous-shift-alt51	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt51-shift still give rank 2
 Q39.S139-globalfixedpair-fixedorientation-contiguous-shift-alt52	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt52-shift still give rank 2
 Q43.S269-define-floor-sqrt-lean	Proof	formal/WIP/Work.lean	PENDING	define floorSqrt and prove upper bound n < (a+1)^2
+Q39.S140-globalfixedpair-fixedorientation-contiguous-shift-alt53	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt53-shift still give rank 2
