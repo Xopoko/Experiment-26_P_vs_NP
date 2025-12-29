@@ -3,7 +3,8 @@
 Rule: **each agent run selects exactly 1 item below** and makes measurable progress:
 `Proof` / `Counterexample` / `Exact citation` / `Toy` / `Reduction` / `Barrier` + barrier check.
 Then it updates the item.
-Each active item contains `Success`, `PublicSurface` and `LeanTarget`.
+Each active item contains `Success`, `PublicSurface`, `LeanTarget`, and oracle fields
+(`Oracle`, `OraclePass`, `StopRule`) unless it is an `Exact citation`.
 If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
 ## Active
@@ -13,18 +14,19 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Status:` ACTIVE
   - `LastStepID:` Q39.S142-toy-alt54-rank2-oracle
   - `NextStepID:` Q39.S143-contiguous-alt-rank2-classify-or-barrier
-  - `LeanTarget:` formal/WIP/Work.lean
+  - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Communication/rank (projection rank witness).
   - `Artifact:` Toy.
+  - `Oracle:` `python3 scripts/toy_q39_rank2.py --alt 54`
+  - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
+  - `StopRule:` if >=5 consecutive contiguous alt-shifts keep rank=2, switch to classification
+    (lemma: contiguous alt-shifts preserve rank-2) or a barrier certificate; if rank!=2, record the failure and stop.
   - `Update:` added oracle `scripts/toy_q39_rank2.py` that parses the latest contiguous alt-shift
-    vectors from `formal/WIP/Work.lean`, computes the next shift (alt54), and checks rank=2.
+    vectors from `formal/WIP/Verified/Q39.lean`, computes the next shift (alt54), and checks rank=2.
     The alt54 witness remains rank-2 (nonzero distinct vectors), so the contiguous alt-shift
     search continues to yield counterexamples and is now reproducible.
-  - `Use:` run `python3 scripts/toy_q39_rank2.py --alt 54`.
-    Stop-rule: if ≥5 consecutive contiguous alt-shifts keep rank=2, switch to classification
-    (lemma: contiguous alt-shifts preserve rank-2) or a barrier certificate (no further alt++ steps).
-  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Work.lean`
+  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
     (contiguous alt-shift vectors up to alt53).
   - `File:` `scripts/toy_q39_rank2.py`. `InfoGain:` 1.
   - `BarrierCheck:`
@@ -33,7 +35,7 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     - `C) Algebrization check:` N/A (no arithmetization/polynomial extensions).
   - `Success:` either an explicit upper at depth $O(\log N/\log\log N)$, or a barrier/counterexample for the "XOR step" in bounded-depth Frege
   Context: node - syntactically simulate Gaussian elimination step; fixed partitions break, even-batching does not help.
-  Note: the orientation invariance of the frontier is fixed in `formal/WIP/Work.lean`.
+  Note: the orientation invariance of the frontier is fixed in `formal/WIP/Verified/Q39.lean`.
   Details: `formal/Notes/TseitinQ39.lean` (Section 16.153-Section 16.177) and summary in `formal/Notes/TseitinLocalEF.lean` §16.187.
 
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
@@ -41,12 +43,14 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Status:` ACTIVE
   - `LastStepID:` Q43.S275-gap-drop-nk-k26-k30
   - `NextStepID:` Q43.S276-gap-drop-nk-uniform-kge12
-  - `LeanTarget:` formal/WIP/Work.lean
+  - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
+  - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0).
+  - `StopRule:` if any k fails, record the counterexample and stop; if all pass, proceed to uniform k>=12 lemma.
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
     then derive a general gap-drop lemma from the jump.
   - `BarrierCheckRequired:` no
-  - `PublicSurface:` `formal/WIP/Work.lean`
+  - `PublicSurface:` `formal/WIP/Verified/Q43.lean`
     (Q43_grid_ratio_drop_gap_k23..Q43_grid_ratio_drop_gap_k30,
      Q43_gap_min_ratio_le_all, Q43_gap_min_ratio_le_all_k12,
      Q43_nk, Q43_log2_jump_nk, Q43_nk_eq_gap_n12..Q43_nk_eq_gap_n30, Q43_gap_ks,

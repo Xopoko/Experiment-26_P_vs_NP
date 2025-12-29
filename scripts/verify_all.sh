@@ -8,6 +8,10 @@ fi
 python3 scripts/verify_notebook.py "${verify_args[@]}"
 
 if [ -d formal ] && [ -f formal/lakefile.lean ]; then
+  if [ "${FORMAL_SKIP:-}" = "1" ] && [ "${ALLOW_FORMAL_SKIP:-}" != "1" ]; then
+    echo "FAIL: FORMAL_SKIP=1 requires ALLOW_FORMAL_SKIP=1" >&2
+    exit 1
+  fi
   if [ "${FORMAL_SKIP:-}" = "1" ]; then
     echo "SKIP: FORMAL_SKIP=1"
     exit 0
@@ -46,6 +50,31 @@ if [ -d formal ] && [ -f formal/lakefile.lean ]; then
       ;;
   esac
 
+  changed=""
+  if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    changed="$(
+      {
+        git diff --name-only
+        git diff --name-only --cached
+        git ls-files --others --exclude-standard
+      } 2>/dev/null | sort -u
+    )"
+    if printf '%s\n' "$changed" | grep -q '^formal/WIP/'; then
+      set_default BUILD_WIP 1
+    fi
+    if printf '%s\n' "$changed" | grep -q '^formal/Notes/'; then
+      set_default BUILD_NOTES 1
+    fi
+  fi
+  if [ "${REQUIRE_LEAN:-}" = "0" ] && [ -n "$changed" ]; then
+    if printf '%s\n' "$changed" | grep -q '^formal/'; then
+      if [ "${ALLOW_REQUIRE_LEAN_SKIP:-}" != "1" ]; then
+        echo "FAIL: REQUIRE_LEAN=0 for formal changes requires ALLOW_REQUIRE_LEAN_SKIP=1" >&2
+        exit 1
+      fi
+    fi
+  fi
+
   if command -v lake >/dev/null 2>&1; then
     scan_for_pattern() {
       local pattern="$1"
@@ -71,6 +100,17 @@ if [ -d formal ] && [ -f formal/lakefile.lean ]; then
       fi
       if scan_for_pattern "(^|[^[:alnum:]_])axiom([^[:alnum:]_]|$)" "$core_dir"; then
         echo "FAIL: found axiom in $core_dir" >&2
+        exit 1
+      fi
+    fi
+    wip_verified_dir="formal/WIP/Verified"
+    if [ -d "$wip_verified_dir" ]; then
+      if scan_for_pattern "(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)" "$wip_verified_dir"; then
+        echo "FAIL: found sorry/admit in $wip_verified_dir" >&2
+        exit 1
+      fi
+      if scan_for_pattern "(^|[^[:alnum:]_])axiom([^[:alnum:]_]|$)" "$wip_verified_dir"; then
+        echo "FAIL: found axiom in $wip_verified_dir" >&2
         exit 1
       fi
     fi

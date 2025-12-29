@@ -5,7 +5,8 @@ Markdown proofs in `docs/` are **not** formal proofs; they are candidates to be 
 
 Layout:
 - `PvNP/Core/`   Authoritative definitions and lemmas (no `sorry`/`axiom`).
-- `WIP/`         Work-in-progress Lean proofs (can contain placeholders).
+- `WIP/Verified/` Work-in-progress Lean proofs (no `sorry`/`axiom`).
+- `WIP/Scratch/`  Scratch space (placeholders allowed; not proof artifacts).
 - `Notes/`       Long research notes kept as Lean doc-comments.
 - `Checks/`      Lean checks (axioms audit).
 

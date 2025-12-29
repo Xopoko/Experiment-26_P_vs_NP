@@ -1,2 +1,2 @@
 import Paperproof
-import WIP.Work
+import WIP.Verified.Work

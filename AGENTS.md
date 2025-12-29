@@ -33,7 +33,9 @@ Doc-comments in `formal/Notes/*.lean` are notes, not formal proofs.
   - `artifacts.tsv` -- completed artifact log (Commit = git hash).
   - `sources.md` -- exactly the sources we actually rely on.
 - `formal/`
-- `PvNP/Core/` -- definitions and proofs.
+  - `PvNP/Core/` -- authoritative definitions and proofs (no `sorry`/`axiom`).
+  - `WIP/Verified/` -- WIP proofs (no `sorry`/`axiom`).
+  - `WIP/Scratch/` -- scratch space (placeholders allowed; not proof artifacts).
   - `Notes/` -- long research notes in Lean (doc-comments, Lean-first).
 - `scripts/`
   - `verify_notebook.py` -- checks markdown structure (if present).
@@ -48,6 +50,7 @@ Any artifact of type `Proof` is considered "accepted" only if:
 
 - there is a Lean proof (formally compiled), or
 - it is a trivial step that can be checked by the compiler (like a definition refactor).
+- in `formal/WIP/Verified/` and `formal/PvNP/Core/` there are no `sorry`/`admit`/`axiom`.
 
 External statements are captured **only** as exact references in `docs/sources.md`
 and/or as notes in `formal/Notes/*.lean` (without adding axioms).
@@ -108,7 +111,8 @@ Artifact logs:
 ### 1) Proof
 
 - Must contain **real Lean code** (not just the text in doc-comments).
-- Add or change `def`/`theorem` V `formal/PvNP/Core/*.lean` (or another kernel `formal/`).
+- Add or change `def`/`theorem` in `formal/PvNP/Core/*.lean` (authoritative) or
+  `formal/WIP/Verified/*.lean` (non-authoritative WIP).
 - The file is compiled, `scripts/verify_all.sh` passes.
 - IN `docs/` add a short "human" comment of 5-15 lines and a link to the file.
 

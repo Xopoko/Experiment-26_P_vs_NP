@@ -1641,7 +1641,7 @@ Main index: `P_vs_NP.md`.
   $$p(\\delta(U_2))=(1100,1100),\\qquad p(\\delta(U_3))=(0011,0011),$$
   which is linearly independent, which means the projection rank of the internal nodes is 2.
 - `Toy test:` $n=4$, $j=2$: local blocks on both lanes  rank 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_local_block).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_local_block).
 - `Status:` counterexample (toy, $k=2$): a local block on both lanes does not reduce the rank.
 - `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
 - `Next step:` strengthen condition: require **monotonic order** of blocks
@@ -1668,7 +1668,7 @@ Main index: `P_vs_NP.md`.
   $$p(\\delta(U_2))=(1100,1100),\\qquad p(\\delta(U_3))=(0011,0011),$$
   which is linearly independent, which means the projection rank of the internal nodes is 2.
 - `Toy test:` $n=4$, $j=2$: monotonic block order  rank 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_monotone_block).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_monotone_block).
 - `Status:` counterexample (toy, $k=2$): monotonic block order does not reduce rank.
 - `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
 - `Next step:` strengthen condition: require **strictly increasing** blocks
@@ -1695,7 +1695,7 @@ Main index: `P_vs_NP.md`.
   $$p(\\delta(U_2))=(1100,1100),\\qquad p(\\delta(U_3))=(0011,0011),$$
   which is linearly independent, which means the projection rank of the internal nodes is 2.
 - `Toy test:` $n=4$, $j=2$: two-dimensional monotonicity  rank 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_monotone2d).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_monotone2d).
 - `Status:` counterexample (toy, $k=2$): two-dimensional monotonicity does not reduce the rank.
 - `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
 - `Next step:` strengthen condition: require **strictly increasing** blocks
@@ -1722,7 +1722,7 @@ Main index: `P_vs_NP.md`.
   $$p(\\delta(U_2))=(001100,001100),\\qquad p(\\delta(U_3))=(000011,000011),$$
   which is linearly independent, which means the projection rank of the internal nodes is 2.
 - `Toy test:` $n=6$, $j=3$: strict 2D monotonicity  rank 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_monotone2d_strict).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_monotone2d_strict).
 - `Status:` counterexample (toy, $k=2$): strict 2D monotonicity does not reduce rank.
 - `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
 - `Next step:` strengthen the condition: require blocks to be **strictly increasing**
@@ -1747,7 +1747,7 @@ Main index: `P_vs_NP.md`.
   $$p(\\delta(U_2))=(111100,111100),\\qquad p(\\delta(U_3))=(111110,111110),$$
   which is linearly independent, which means the projection rank of the internal nodes is 2.
 - `Toy test:` $n=6$, $j=3$: strict 2D prefix chain gives rank 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_monotone2d_strict_prefix).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_monotone2d_strict_prefix).
 - `Status:` counterexample (toy, $k=2$): strict 2Dprefixmonotonicity does not reduce the rank.
 - `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
 - `Next step:` strengthen the condition: require that intersections with stripes
@@ -1771,7 +1771,7 @@ Main index: `P_vs_NP.md`.
   $$p_{\\mathrm{fr}}(U_2)=(011000,011000),\\qquad p_{\\mathrm{fr}}(U_3)=(000111,000111),$$
   which is linearly independent, which means the projection rank of the internal nodes is 2.
 - `Toy test:` $n=6$, $j=3$: frontier blocks give rank 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_frontier_block).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_frontier_block).
 - `Status:` counterexample (toy, $k=2$): frontier blocks do not reduce rank.
 - `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
 - `Next step:` strengthen condition: require frontier block to have **length 1**
@@ -1794,7 +1794,7 @@ Main index: `P_vs_NP.md`.
   $$p_{\\mathrm{fr}}(U_2)=(001000,001000),\\qquad p_{\\mathrm{fr}}(U_3)=(000100,000100),$$
   which is linearly independent, which means the projection rank of the internal nodes is 2.
 - `Toy test:` $n=6$, $j=3$: unitfrontier gives rank 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_unit_frontier).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_unit_frontier).
 - `Status:` counterexample (toy, $k=2$): unitfrontier does not reduce rank.
 - `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
 - `Next step:` strengthen the condition: allow unitfrontier only on **one** lane
@@ -1817,7 +1817,7 @@ Main index: `P_vs_NP.md`.
   $$p_{\\mathrm{fr}}(U_2)=(001000,000000),\\qquad p_{\\mathrm{fr}}(U_3)=(000100,000000),$$
   which is linearly independent, which means the projection rank of the internal nodes is 2.
 - `Toy test:` $n=6$, $j=3$: onestrip unitfrontier gives rank 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_onestrip).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_unit_frontier_onestrip).
 - `Status:` counterexample (toy, $k=2$): onestrip unitfrontier does not reduce rank.
 - `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
 - `Next step:` strengthen the condition: require **alternation of lanes**
@@ -1841,7 +1841,7 @@ Main index: `P_vs_NP.md`.
   $$p_{\\mathrm{fr}}(U_2)=(000100,000000),\\qquad p_{\\mathrm{fr}}(U_3)=(000000,001000),$$
   which is linearly independent, which means the projection rank of the internal nodes is 2.
 - `Toy test:` $n=6$, $j=3$: alternating unitfrontier gives rank 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_alternating).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_unit_frontier_alternating).
 - `Status:` counterexample (toy, $k=2$): alternating unitfrontier does not reduce rank.
 - `Barrier check:` r - not applicable, NP - not applicable, alg - not applicable.
 - `Next step:` strengthen condition: require frontier to alternate **and**
@@ -1857,7 +1857,7 @@ Main index: `P_vs_NP.md`.
 - `Assertion (attempt):` if in the anchored step the blocks are "balanced" between the stripes,
   then the projection rank can drop to 1.
 - `Counterexample (toy):` two balanced 12bit projections remain distinguishable and non-zero,
-  therefore the rank of internal nodes is 2 (see. `formal/WIP/Work.lean`,
+  therefore the rank of internal nodes is 2 (see. `formal/WIP/Verified/Q39.lean`,
   Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced).
 - `Status:` counterexample (toy, $k=2$).
 - `Barrier check (A/B/C):`
@@ -1877,7 +1877,7 @@ Main index: `P_vs_NP.md`.
 - `Assertion (attempt):` if each step is symmetrical along the stripes
   (row/column swap), then the projection rank can drop to 1.
 - `Counterexample (toy):` two strip-symmetric 12-bit projections remain distinguishable
-  and non-zero, so the rank of internal nodes is 2 (see. `formal/WIP/Work.lean`,
+  and non-zero, so the rank of internal nodes is 2 (see. `formal/WIP/Verified/Q39.lean`,
   Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap).
 - `Status:` counterexample (toy, $k=2$).
 - `Barrier check (A/B/C):`
@@ -1898,7 +1898,7 @@ Main index: `P_vs_NP.md`.
   (fixedpair) and require row/column swap at each step, then the projection rank can drop to 1.
 - `Counterexample (toy):` two fixed-pair strip-symmetric 12-bit projections remain
   distinguishable and non-zero, which means the rank of internal nodes is 2
-  (see `formal/WIP/Work.lean`, Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair).
+  (see `formal/WIP/Verified/Q39.lean`, Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair).
 - `Status:` counterexample (toy, $k=2$).
 - `Barrier check (A/B/C):`
   A) Relativization check: yes (toy-rank, combinatorics).
@@ -1917,7 +1917,7 @@ Main index: `P_vs_NP.md`.
 - `Assertion (attempt):` if you fix a pair of rows/columns and require the same order
   in both stripes (same-order), then the projection rank can drop to 1.
 - `Counterexample (toy):` two sameorder 12bit projections remain distinguishable and non-zero,
-  This means that the rank of internal nodes is 2 (see `formal/WIP/Work.lean`,
+  This means that the rank of internal nodes is 2 (see `formal/WIP/Verified/Q39.lean`,
   Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder).
 - `Status:` counterexample (toy, $k=2$).
 - `Barrier check (A/B/C):`
@@ -1937,7 +1937,7 @@ Main index: `P_vs_NP.md`.
 - `Assertion (attempt):` if you fix the same pair of rows/columns
   on the entire chain (global fixed-pair), then the projection rank can drop to 1.
 - `Counterexample (toy):` two globalfixedpair 12bit projections remain distinguishable
-  and non-zero, which means the rank of internal nodes is 2 (see. `formal/WIP/Work.lean`,
+  and non-zero, which means the rank of internal nodes is 2 (see. `formal/WIP/Verified/Q39.lean`,
   Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder_globalfixedpair).
 - `Status:` counterexample (toy, $k=2$).
 - `Barrier check (A/B/C):`

@@ -116,7 +116,7 @@ def main() -> None:
     parser.add_argument(
         "--lean",
         type=Path,
-        default=Path("formal/WIP/Work.lean"),
+        default=Path("formal/WIP/Verified/Q39.lean"),
         help="Path to the Lean file with Q39 alt vectors.",
     )
     args = parser.parse_args()

@@ -14,19 +14,19 @@ Q43 reduction update (Q43.S202):
 - If `s,t` are polylog(n) with log base 2, then `t'` stays polylog(n).
 - HR parameter checks reduce to `t'<=n/16` and `s<=n/32` under the same `n_eta` recursion.
 - Depends on §16.165 and §16.342 in `formal/Notes/TseitinLocalEF.lean`.
-- Lean anchor: `formal/WIP/Work.lean` (Q43_tPrime).
+- Lean anchor: `formal/WIP/Verified/Q43.lean` (Q43_tPrime).
 
 Q43 log2 threshold asymptotic check (Q43.S221):
 - For grid size |F|=n^2, `log2 |F| >= 1` holds once `n >= 2`.
 - This clears the side condition in the multiplicative threshold form.
-- Lean anchor: `formal/WIP/Work.lean` (Q43_log2_grid_ge_one).
+- Lean anchor: `formal/WIP/Verified/Q43.lean` (Q43_log2_grid_ge_one).
 - Next: apply it in the regime-d inequality to remove division.
 
 Q43 log2 monotonicity in n (Q43.S239):
 - For |F|=n^2, prove `log2 |F|` is monotone in n.
 - Reduces to grid-size monotonicity plus `log2` monotonicity.
 - Supports lifting the regime-d threshold from n0 to larger n.
-- Lean anchor: `formal/WIP/Work.lean` (Q43_log2_grid_size_mono).
+- Lean anchor: `formal/WIP/Verified/Q43.lean` (Q43_log2_grid_size_mono).
 
 Key dependencies:
 - HR'22 switching lemma framework and evaluation definitions.

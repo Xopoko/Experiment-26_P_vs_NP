@@ -394,16 +394,16 @@ With an explicit expander family, this gives an explicit bounded-occ family 3-CN
 For Tseitin(Grid$_{n,n}$) (where the number of variables $N=\Theta(n^2)$) in boundeddepth Frege only spaced boundaries for polynomialsize are known:
 depth $=\Omega(\log_2 N/\log_2\log_2 N)$ (Hastad'20, Cor. 6.6) and depth $=O(\log_2 N)$ (upper from GIRS'19; see Section 16.92+Section 16.115+Section 16.116+Section 16.120).
 **Q39 (frontier as undirected slice).**
-IN `formal/WIP/Work.lean` introduced `frontier` as a union of oriented boundaries.
+IN `formal/WIP/Verified/Q39.lean` introduced `frontier` as a union of oriented boundaries.
 Invariance has been proven for symmetric graphs `frontier` when replacing $S$ with $\\neg S$.
 This allows frontiers to be viewed in two-lane increments without orientational ambiguity.
-Lemma: `Q39_frontier_compl` (see `formal/WIP/Work.lean`).
+Lemma: `Q39_frontier_compl` (see `formal/WIP/Verified/Q39.lean`).
 **Q39 (frontier → adjacency).**
 For symmetric graphs it has been proven that any `frontier`- the edge is really
 is an edge of the graph (in the undirected sense).
 This removes the technical difference between orientation in `boundary` and the edge of the cut
 when moving to rank/interval estimates.
-Lemma: `Q39_frontier_adj` (see `formal/WIP/Work.lean`).
+Lemma: `Q39_frontier_adj` (see `formal/WIP/Verified/Q39.lean`).
 **Q39 (two‑strip toy rank).**
 Toy for $n=4$: even if each internal node has
 $|S_j\\cap\\delta(U)|\\le 2$ and $|S_{j+1}\\cap\\delta(U)|\\le 2$, projection rank on two blocks
@@ -412,57 +412,57 @@ See `formal/Notes/TseitinQ39.lean` §16.167 (Q39.S23-2k-two-strip-rank-toy).
 **Q39 (balanced anchored blocks).**
 Toy at $k=2$: even with "balanced" anchor blocks in a fixed schedule
 two different non-zero projections remain distinguishable, so the rank does not fall below 2.
-IN `formal/WIP/Work.lean` two balanced 12bit projections are recorded
+IN `formal/WIP/Verified/Q39.lean` two balanced 12bit projections are recorded
 and lemma `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced`.
 This closes the attempt to "balance" the anchored steps in the two-way model.
 **Q39 (row/column swap symmetry).**
 Toy at $k=2$: even with symmetry between stripes (row/column swap)
 the two strip-symmetric nonzero projections remain distinguishable, so rank 2 is preserved.
-IN `formal/WIP/Work.lean` two such projections and the lemma are fixed
+IN `formal/WIP/Verified/Q39.lean` two such projections and the lemma are fixed
 `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap`.
 This rules out simple strip symmetrization as a rank reduction mechanism.
 **Q39 (fixed‑pair row/column swap).**
 Toy for $k=2$: even with a fixed row/column pair and mandatory row/column swap
 the two non-zero projections remain distinguishable, so rank 2 is preserved.
-IN `formal/WIP/Work.lean` such projections and lemma are fixed
+IN `formal/WIP/Verified/Q39.lean` such projections and lemma are fixed
 `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair`.
 This rules out "fixed-pair swap" as an easy path to rank 1.
 **Q39 (fixed‑pair + same‑order).**
 Toy for $k=2$: even with a fixedpair and the same order in both stripes
 the two non-zero projections remain distinguishable, so rank 2 is preserved.
-IN `formal/WIP/Work.lean` such projections and lemma are fixed
+IN `formal/WIP/Verified/Q39.lean` such projections and lemma are fixed
 `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder`.
 This rules out same-order as a simple rank reduction mechanism in fixed-pair mode.
 **Q39 (global fixed‑pair).**
 Toy for $k=2$: even with a fixed pair on the entire chain
 the two non-zero projections remain distinguishable, so rank 2 is preserved.
-IN `formal/WIP/Work.lean` such projections and lemma are fixed
+IN `formal/WIP/Verified/Q39.lean` such projections and lemma are fixed
 `Q39_rank2_unit_frontier_blocks_anchored_shifted_balanced_rowcolswap_fixedpair_sameorder_globalfixedpair`.
 This rules out global fixed-pair as an easy path to rank 1.
 **Q39 (contiguous shift alt8).**
 Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
 still gives two different non-zero projections, so the rank remains 2.
-See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt8`).
+See `formal/WIP/Verified/Q39.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt8`).
 **Q39 (contiguous shift alt9).**
 Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
 still gives two different non-zero projections, so the rank remains 2.
-See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt9`).
+See `formal/WIP/Verified/Q39.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt9`).
 **Q39 (contiguous shift alt10).**
 Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
 still gives two different non-zero projections, so the rank remains 2.
-See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt10`).
+See `formal/WIP/Verified/Q39.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt10`).
 **Q39 (contiguous shift alt11).**
 Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
 still gives two different non-zero projections, so the rank remains 2.
-See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt11`).
+See `formal/WIP/Verified/Q39.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt11`).
 **Q39 (contiguous shift alt12).**
 Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
 still gives two different non-zero projections, so the rank remains 2.
-See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt12`).
+See `formal/WIP/Verified/Q39.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt12`).
 **Q39 (contiguous shift alt13).**
 Toy with $k=2$: next cyclic shift of contiguous blocks with fixed orientation
 still gives two different non-zero projections, so the rank remains 2.
-See `formal/WIP/Work.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt13`).
+See `formal/WIP/Verified/Q39.lean` (`Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt13`).
 **Q43 (flat local-EF(s), parameter-summary).**
 With explicit $A\le 668$ from HR'22 we obtain $n_0(A)=2$, therefore in HR mode
 condition $n\ge n_0(A)$ is redundant compared to $n\ge 20 C n' \log_2 n'$
@@ -484,26 +484,26 @@ If the axioms are not taken into account in size, one can take $|\varphi_i|=2^{(
 $|\mathrm{supp}(\varphi_i)|\le s$, and then $t$ becomes superpolynomial.
 See `formal/Notes/TseitinLocalEF.lean` §16.332 (Q43.S192-flat-eval-axiom-size-bound).
 **Q43 (size metric formalized).**
-IN `formal/WIP/Work.lean` definitions of line-size/line-count/line-max are fixed
+IN `formal/WIP/Verified/Q43.lean` definitions of line-size/line-count/line-max are fixed
 and lemma: if a string is included in proof, then its size does not exceed the total size of proof.
 This provides a formal kernel for the $(N,M)$ metric and for controlling $M$ through the total size.
-See `formal/WIP/Work.lean` (Q43_lineSize/Q43_proofSize/Q43_lineSize_le_proofSize).
+See `formal/WIP/Verified/Q43.lean` (Q43_lineSize/Q43_proofSize/Q43_lineSize_le_proofSize).
 **Q43 (t parameter formalized).**
-IN `formal/WIP/Work.lean` the parameter $t:=\\log_2 M$ is introduced as `Nat.log2 M` and
+IN `formal/WIP/Verified/Q43.lean` the parameter $t:=\\log_2 M$ is introduced as `Nat.log2 M` and
 the estimate $t\\le M$ is proved (lemma `Q43_tParam_le`). This fixes the basic
 relationship between line-size $M$ and depth of evaluations in Q43.
-See `formal/WIP/Work.lean` (Q43_tParam/Q43_tParam_le).
+See `formal/WIP/Verified/Q43.lean` (Q43_tParam/Q43_tParam_le).
 **Q43 (t bounded by proof size).**
-IN `formal/WIP/Work.lean` it has been proven that `lineMax` does not exceed the total
+IN `formal/WIP/Verified/Q43.lean` it has been proven that `lineMax` does not exceed the total
 proof size (`Q43_lineMax_le_proofSize`), which means
 $t=\\log_2(\\mathrm{lineMax})\\le\\mathrm{proofSize}$ via `Q43_tParam_le_proofSize`.
 This gives a formal connection between $t$ and the general size metric.
-See `formal/WIP/Work.lean` (Q43_lineMax_le_proofSize/Q43_tParam_le_proofSize).
+See `formal/WIP/Verified/Q43.lean` (Q43_lineMax_le_proofSize/Q43_tParam_le_proofSize).
 **Q43 (t <= log_2 S).**
-IN `formal/WIP/Work.lean` the monotonicity of $\\log_2$ on Nat is proved and the lemma
+IN `formal/WIP/Verified/Q43.lean` the monotonicity of $\\log_2$ on Nat is proved and the lemma
 $t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$.
 This formalizes the relationship $t \\le \\log_2 S$ with $S=\\mathrm{proofSize}$ (logarithm of base 2).
-See `formal/WIP/Work.lean` (Q43_log2_mono/Q43_tParam_le_log2_proofSize).
+See `formal/WIP/Verified/Q43.lean` (Q43_log2_mono/Q43_tParam_le_log2_proofSize).
 **Q43 (t = O(log_2 n) for poly-size).**
 If the total size of $S(n)$ is polynomial, $S(n)\\le n^k+1$, then for $n\\ge 2$
 we have $S\\le 2n^k$ and $t\\le\\log_2 S\\le 1+k\\log_2 n$, i.e. $t=O(\\log_2 n)$.
@@ -531,27 +531,27 @@ The remaining $\log_2 N$ in Section 4 refers to Proof of Thm. 4.1 (singleswitchi
 there $s=152\log_2 N$ is fixed and $t_d=152\log_2 N$ is used, but this is not included
 in Proof of Thm. 4.3/Lemma 4.5 (see Section 16.280, Q43.S137-logn-remaining-scan).
 **Q43 (explicit $A_0$ via $C$ from Lemma 5.5).**
-IN `formal/WIP/Work.lean` definition fixed `Q43_A0_from_C C := 78*C`.
+IN `formal/WIP/Verified/Q43.lean` definition fixed `Q43_A0_from_C C := 78*C`.
 This links "appropriate $A_0$" in Proof Lemma 4.2 to the constant $C$ from Lemma 5.5.
 Lemma `Q43_A0_from_C_bound` reuses aggregation
 $(A_0\\log n')\\,\\Delta^a\\,\\Delta^b=(A_0\\log n')\\,\\Delta^{a+b}$ for this choice $A_0$.
 The next step is to make $C$ numeric (Chernoff constant), otherwise $A_0$ remains a parameter.
-See `formal/WIP/Work.lean`.
+See `formal/WIP/Verified/Q43.lean`.
 **Q43 (explicit $C$ and $A_0$ in Lean).**
-IN `formal/WIP/Work.lean` fixed Chernoff-constant `C=120000`
+IN `formal/WIP/Verified/Q43.lean` fixed Chernoff-constant `C=120000`
 for the assessment from Section 16.308 when `exp=e^x` and `log=ln`.
 From here `A0=78*C=9,360,000`, which is formalized as `Q43_A0_chernoff_ln`
 and lemma `Q43_A0_chernoff_ln_eval`.
 If `log=log2`, then $C$ is scaled by `ln 2`, therefore numerical
 the meaning changes (the order is maintained).
-See `formal/WIP/Work.lean`.
+See `formal/WIP/Verified/Q43.lean`.
 **Q43 (pushing explicit $A_0$ into log factor).**
 Lemma `Q43_A0_chernoff_ln_bound_explicit` rewrites the factor
 $(A_0\\log n')\\,\\Delta^a\\,\\Delta^b$ in the form
 $(9{,}360{,}000\\cdot\\log n')\\,\\Delta^{a+b}$.
 This fixes the numerical value at the location where A0 comes into Proof Lemma 4.2.
 and allows further convolution of the constants $c_1,c_2$ without hidden factors.
-See `formal/WIP/Work.lean`.
+See `formal/WIP/Verified/Q43.lean`.
 **Q43 (explicit $c_1,c_2$ in Thm. 4.1).**
 From Section 16.302-Section 16.303 and Section 16.215 we take $A_{\\mathrm{bits}}=76$, which means $A=2^{76}$
 (for binary counting; when moving to $\\ln$, replace with $e^{76\\ln 2}$).
@@ -561,59 +561,59 @@ Recursion $n_i=\\lfloor n_{i-1}/(4A t\\log_2^4 n_{i-1})\\rfloor$ gives
 $n_d\\ge n/(\\log_2^{d-1} N\\cdot(c_2\\log_2^4 n)^d)$ at $t=152\\log_2 N$.
 The condition $\\log_2 N\\le n^{1/d}/(c_1\\log_2^4 n)$ provides $t_d\\le n_d/16$,
 and Proof Thm. 4.1 completes the transition to Lemma 2.13; see Section 16.310 and
-`formal/WIP/Work.lean`.
+`formal/WIP/Verified/Q43.lean`.
 **Q43 (explicit $c_1,c_2$ with numerical $A_0$).**
-IN `formal/WIP/Work.lean` values are fixed `c2` and `c1` when choosing
+IN `formal/WIP/Verified/Q43.lean` values are fixed `c2` and `c1` when choosing
 `A0=9,360,000` (from `C=120000` at `exp=e^x` and `log=ln`):
 `c2=11,381,760,000` and `c1=27,680,440,320,000`.
 This makes the formulas more specific `c2:=8*A0*152` and `c1:=16*152*c2` no hidden
 multipliers; when moving to `log2` the numbers are scaled, but the scoring structure is the same.
-See `formal/WIP/Work.lean`.
+See `formal/WIP/Verified/Q43.lean`.
 **Q43 (log2 threshold Thm. 4.1 with explicit $c_1$).**
-IN `formal/WIP/Work.lean` predicate introduced
+IN `formal/WIP/Verified/Q43.lean` predicate introduced
 $\\log_2 n\\le n/(c_1\\log_2^4 n)$ with explicit numerical substitution
 `c1=27,680,440,320,000`, and the multiplier is also fixed `c2` in the denominator.
 This fixes log2 mode without hidden constants and prepares the check
 bounds for the selected range $d$.
 **Q43 (translation of $\\log_2 n$ to $|F|$ for grid).**
 For grid-Tseitin we take $|F|=n^2$ and fix the definition `Q43_grid_size n := n^2`.
-IN `formal/WIP/Work.lean` it has been proven that for $n\\ge 1$ the following holds true:
+IN `formal/WIP/Verified/Q43.lean` it has been proven that for $n\\ge 1$ the following holds true:
 $\\log_2 n\\le \\log_2 |F|$, so the log2 threshold can be expressed in terms of $|F|$.
 Here exactly $\\log_2$ is used (without `exp`; the exhibitor base is not used).
-See `formal/WIP/Work.lean` (Q43_log2_le_log2_grid_size).
+See `formal/WIP/Verified/Q43.lean` (Q43_log2_le_log2_grid_size).
 **Q43 (log2threshold in terms of $|F|=n^2$).**
-IN `formal/WIP/Work.lean` the predicate log2threshold Thm was introduced. 4.1 with replacement $n\\mapsto|F|$
+IN `formal/WIP/Verified/Q43.lean` the predicate log2threshold Thm was introduced. 4.1 with replacement $n\\mapsto|F|$
 and explicit `c1=27,680,440,320,000`:
 $\\log_2 |F|\\le |F|/(c_1\\log_2^4 |F|)$.
 This fixes the final form of the threshold in the grid parameter without hidden constants
 (using $\\log_2$ base, `exp` does not participate).
-See `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_explicit).
+See `formal/WIP/Verified/Q43.lean` (Q43_thm41_log2_threshold_c1_grid_explicit).
 **Q43 (multiplied form of threshold).**
-IN `formal/WIP/Work.lean` threshold $\\log_2 |F|\\le |F|/(c_1\\log_2^4 |F|)$
+IN `formal/WIP/Verified/Q43.lean` threshold $\\log_2 |F|\\le |F|/(c_1\\log_2^4 |F|)$
 rewritten into equivalent multiplicative form
 $\\log_2 |F|\\cdot c_1\\log_2^4 |F|\\le |F|$ for $\\log_2 |F|\\ge 1$.
 This is convenient for checking the $d$ mode without division (all estimates remain in the $\\log_2$ base).
-See `formal/WIP/Work.lean` (Q43_thm41_log2_threshold_c1_grid_iff_mul).
+See `formal/WIP/Verified/Q43.lean` (Q43_thm41_log2_threshold_c1_grid_iff_mul).
 **Q43 (regime-d bundle + poly N/M bounds).**
-In `formal/WIP/Work.lean` the lemma `Q43_regime_d_ok_polyNM_bounds` is added.
+In `formal/WIP/Verified/Q43.lean` the lemma `Q43_regime_d_ok_polyNM_bounds` is added.
 It packages the log2^5 regime-d criterion (via `Q43_thm41_regime_d_ok_of_pow5`)
 with the poly N/M log2 bounds from `Q43_polyNM_log2_bounds`.
 This separates the regime-d hypothesis from the polynomial-size assumptions,
 so the next step is to compare `log2 ((|F|)^C)` with `|F|/(c1 log2^4 |F|)`.
 **Q43 (log2(|F|^C) bound).**
-In `formal/WIP/Work.lean` the lemma `Q43_log2_grid_pow_le_mul_succ` shows
+In `formal/WIP/Verified/Q43.lean` the lemma `Q43_log2_grid_pow_le_mul_succ` shows
 `log2(|F|^C) <= (log2|F| + 1) * C` for `|F| = Q43_grid_size n`.
 This uses only base‑2 `log2` and no `exp`, so the comparison reduces to a
 polynomial factor in `log2|F|` before applying the log2^5 regime criterion.
 Next step: use `log2|F| >= 1` (for `n >= 2`) to replace `log2|F| + 1` by `2 log2|F|`.
 **Q43 (scaled log2^5 threshold for |F|^C).**
-In `formal/WIP/Work.lean` the lemma `Q43_thm41_log2_threshold_c1_grid_powC_of_scaled`
+In `formal/WIP/Verified/Q43.lean` the lemma `Q43_thm41_log2_threshold_c1_grid_powC_of_scaled`
 derives `log2(|F|^C) <= |F|/(c1 log2^4|F|)` from a scaled log2^5 criterion
 `(2 log2|F| * C) * (c1 log2^4|F|) <= |F|`, still in base‑2 `log2`.
 This isolates the remaining task to an explicit threshold `|F| >= n0(C)` and
 the algebraic rewrite to the standard `2C·c1·log2^5|F| <= |F|`.
 **Q43 (scaled log2^5 rewrite).**
-In `formal/WIP/Work.lean` the lemma
+In `formal/WIP/Verified/Q43.lean` the lemma
 `Q43_thm41_log2_threshold_c1_grid_pow5_scaled_iff_simple` rewrites the scaled
 condition into the compact form `2C·c1·log2^5|F| <= |F|` (still base‑2 `log2`).
 This makes the remaining task purely a threshold choice `|F| >= n0(C)`.

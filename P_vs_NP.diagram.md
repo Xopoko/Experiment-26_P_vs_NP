@@ -21,9 +21,9 @@ flowchart TD
 
   C --> Q["Open questions (active)"]
   Q --> Q39["Q39: two-strip frontier/rank\nNotes/TseitinQ39.lean"]
-  Q39 --> Q39w["Frontier lemmas in WIP\nformal/WIP/Work.lean"]
+  Q39 --> Q39w["Frontier lemmas in WIP\nformal/WIP/Verified/Q39.lean"]
   Q --> Q43["Q43: flat local-EF(s) evals\nNotes/TseitinLocalEF.lean"]
-  Q43 --> Q43w["WIP placeholders\nformal/WIP/Work.lean"]
+  Q43 --> Q43w["WIP placeholders\nformal/WIP/Verified/Q43.lean"]
 
   C --> D["Barrier checks"]
   D --> D1["Relativization"]

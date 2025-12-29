@@ -195,7 +195,10 @@ graph TD
 
 - `formal/PvNP/Main.lean` — entry point for authoritative core.
 - `formal/PvNP/Core/*.lean` — authoritative definitions/lemmas (no `sorry`/`axiom`).
-- `formal/WIP/Work.lean` — WIP proof file and placeholders for active tasks.
+- `formal/WIP/Verified/Q39.lean` — Q39 WIP proofs (no `sorry`/`axiom`).
+- `formal/WIP/Verified/Q43.lean` — Q43 WIP proofs (no `sorry`/`axiom`).
+- `formal/WIP/Verified/Work.lean` — aggregator module importing verified WIP files.
+- `formal/WIP/Scratch/` — scratchpad space (may contain `sorry`/`axiom`, not proof artifacts).
 - `formal/Notes.lean` — imports all note modules.
 - `formal/Notes/*.lean` — long research notes (doc-comments, not proof terms).
 - `formal/Checks/AxiomsCheck.lean` — axioms audit list for core theorems.
@@ -207,12 +210,13 @@ graph TD
 - `scripts/agent_prompt.txt`: single-line prompt, easiest high-leverage change.
 - `docs/open_questions.md`: quality of StepID + Success criteria determines progress.
 - `formal/PvNP/Core/`: authoritative zone (no `sorry`/`axiom`).
-- `formal/WIP/Work.lean`: current proof surface for new Lean facts.
+- `formal/WIP/Verified/*.lean`: current proof surface for new Lean facts.
 - `scripts/verify_notebook.py`: structural invariants for stability.
 
 ## Operating assumptions
 
-- Lean build is required by default; set `REQUIRE_LEAN=0` to skip if needed.
+- Lean build is required by default; `REQUIRE_LEAN=0` now requires `ALLOW_REQUIRE_LEAN_SKIP=1` when formal files change.
+- `FORMAL_SKIP=1` requires `ALLOW_FORMAL_SKIP=1`.
 - Core builds always; `BUILD_NOTES=1`/`BUILD_WIP=1` opt into Notes/WIP builds.
 - Docs are short and curated; long reasoning goes into `formal/Notes/`.
 - Only `formal/PvNP/Core/` proofs are considered authoritative.
@@ -221,11 +225,11 @@ graph TD
 
 - Add new research question: edit `docs/open_questions.md` with `LeanTarget`.
 - Add authoritative Lean fact: implement in `formal/PvNP/Core/` and import via `formal/PvNP/Main.lean`.
-- Add WIP Lean fact: implement in `formal/WIP/` (non-authoritative).
+- Add WIP Lean fact: implement in `formal/WIP/Verified/` (non-authoritative).
 - Add new resource: append to `resources/manifest.tsv`, download to `resources/downloads/`.
 - Add new check: implement a small `toy_checks.py` and wire through `--checks`.
 
 ## Known hot spots
 
 - Q39 and Q43 are active research items (see `docs/open_questions.md`).
-- `formal/WIP/Work.lean` contains placeholders for current formal targets.
+- `formal/WIP/Verified/Q39.lean` and `formal/WIP/Verified/Q43.lean` contain current formal targets.

@@ -77,6 +77,16 @@ def _parse_infogain(value: str, *, context: str) -> int:
     return int(raw)
 
 
+def _parse_artifact(value: str, *, context: str) -> str:
+    raw = value.strip()
+    if not raw:
+        raise AssertionError(f"{context}: missing Artifact value")
+    for art in sorted(_ARTIFACT_TYPES, key=len, reverse=True):
+        if raw.startswith(art):
+            return art
+    raise AssertionError(f"{context}: invalid Artifact {raw!r} (expected one of {sorted(_ARTIFACT_TYPES)})")
+
+
 def _extract_backticked_meta(lines: list[str], *, key: str) -> str | None:
     needle = f"`{key}:`"
     for line in lines:
@@ -218,6 +228,11 @@ def _verify_open_questions_structure(*, path: Path) -> None:
         if st not in {"ACTIVE", "BLOCKED", "DONE"}:
             raise AssertionError(f"{path}: {qid}: invalid Status {st!r} (expected ACTIVE/BLOCKED/DONE)")
 
+        artifact = _extract_backticked_meta(item, key="Artifact")
+        if artifact is None:
+            raise AssertionError(f"{path}: {qid}: missing `Artifact:`")
+        art = _parse_artifact(artifact, context=f"{path}: {qid}: Artifact")
+
         next_step = _extract_backticked_meta(item, key="NextStepID")
         if next_step is None:
             raise AssertionError(f"{path}: {qid}: missing `NextStepID:`")
@@ -240,6 +255,17 @@ def _verify_open_questions_structure(*, path: Path) -> None:
             raise AssertionError(f"{path}: {qid}: missing `LeanTarget:`")
         if not lean_target.strip():
             raise AssertionError(f"{path}: {qid}: empty `LeanTarget:`")
+
+        if st == "ACTIVE" and art != "Exact citation":
+            oracle = _extract_backticked_meta(item, key="Oracle")
+            if oracle is None or not oracle.strip():
+                raise AssertionError(f"{path}: {qid}: missing `Oracle:` for ACTIVE item")
+            oracle_pass = _extract_backticked_meta(item, key="OraclePass")
+            if oracle_pass is None or not oracle_pass.strip():
+                raise AssertionError(f"{path}: {qid}: missing `OraclePass:` for ACTIVE item")
+            stop_rule = _extract_backticked_meta(item, key="StopRule")
+            if stop_rule is None or not stop_rule.strip():
+                raise AssertionError(f"{path}: {qid}: missing `StopRule:` for ACTIVE item")
 
         last_step = _extract_backticked_meta(item, key="LastStepID")
         if last_step is not None and last_step.strip():

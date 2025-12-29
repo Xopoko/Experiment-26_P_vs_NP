@@ -1,213 +1,213 @@
 StepID	Type	LeanTarget	Commit	Notes
-Q39.S24-2k-two-strip-interval-obstruction	Proof	formal/WIP/Work.lean	PENDING	frontier swap invariance lemma
-Q39.S25-2k-two-strip-interval-rank-check	Proof	formal/WIP/Work.lean	PENDING	frontier cut separation lemma
-Q39.S26-2k-two-strip-frontier-adj	Proof	formal/WIP/Work.lean	PENDING	frontier edges imply adjacency in symmetric graphs
-Q43.S138-logn-nonimpact-check	Exact citation	formal/WIP/Work.lean	PENDING	HR'22: Thm 4.3 uses Thm 4.1 only for large M
+Q39.S24-2k-two-strip-interval-obstruction	Proof	formal/WIP/Verified/Q39.lean	PENDING	frontier swap invariance lemma
+Q39.S25-2k-two-strip-interval-rank-check	Proof	formal/WIP/Verified/Q39.lean	PENDING	frontier cut separation lemma
+Q39.S26-2k-two-strip-frontier-adj	Proof	formal/WIP/Verified/Q39.lean	PENDING	frontier edges imply adjacency in symmetric graphs
+Q43.S138-logn-nonimpact-check	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	HR'22: Thm 4.3 uses Thm 4.1 only for large M
 Q39.S27-2k-two-strip-interval-rank-bound	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	two-strip row-interval rank counterexample
-Q39.S28-2k-two-strip-linked-intervals	Counterexample	formal/WIP/Work.lean	PENDING	linked two-strip row-intervals still give rank 2 (see formal/Notes/TseitinQ39.lean §16.169)
+Q39.S28-2k-two-strip-linked-intervals	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	linked two-strip row-intervals still give rank 2 (see formal/Notes/TseitinQ39.lean §16.169)
 Q39.S29-2k-two-strip-rectangular-geometry	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	two-strip rectangular geometry in a 2-column slab still gives rank 2
 Q39.S30-2k-two-strip-anchored-rectangles	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	two-strip anchored rectangles (prefix rows) still give rank 2
 Q39.S31-2k-two-strip-prefix-chain	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	prefix-chain of anchored rectangles still gives rank 2
 Q39.S32-2k-two-strip-alternating-strip	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	alternating-strip XOR step still gives rank 2
-Q39.S33-2k-two-strip-single-row-change	Counterexample	formal/WIP/Work.lean	PENDING	single-row change on both strips still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.174)
+Q39.S33-2k-two-strip-single-row-change	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	single-row change on both strips still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.174)
 Q39.S34-2k-two-strip-laminar-rows	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	laminar rows on both strips still give rank 2
 Q39.S35-2k-two-strip-equal-rows	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	equal rows on both strips still give rank 2
 Q39.S36-2k-two-strip-equal-rows-single-change	Counterexample	formal/Notes/TseitinQ39.lean	PENDING	equal rows plus single-row change still give rank 2
-Q39.S37-2k-two-strip-equal-rows-single-change-chain	Counterexample	formal/WIP/Work.lean	PENDING	chain of single-row equal-rows XOR steps still gives rank 2
-Q39.S38-2k-two-strip-chain-block-alignment	Counterexample	formal/WIP/Work.lean	PENDING	block-aligned chain still gives rank 2
-Q39.S39-2k-two-strip-chain-block-consistency	Counterexample	formal/WIP/Work.lean	PENDING	one-strip block-consistent updates still give rank 2 (see formal/Notes/TseitinQ39.lean §16.180)
-Q39.S40-2k-two-strip-chain-lockstep-blocks	Counterexample	formal/WIP/Work.lean	PENDING	lock-step block updates still give rank 2 (see formal/Notes/TseitinQ39.lean §16.181)
-Q39.S41-2k-two-strip-chain-lockstep-dyadic-blocks	Counterexample	formal/WIP/Work.lean	PENDING	lock-step dyadic blocks in fixed order still give rank 2 (see formal/Notes/TseitinQ39.lean §16.182)
-Q39.S42-2k-two-strip-chain-dyadic-prefix-stepwise	Counterexample	formal/WIP/Work.lean	PENDING	stepwise dyadic-prefix chain still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.183)
-Q39.S43-2k-two-strip-chain-dyadic-carry-microsteps	Counterexample	formal/WIP/Work.lean	PENDING	dyadic-carry microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.184)
-Q39.S44-2k-two-strip-chain-dyadic-microsteps-distinct-support	Counterexample	formal/WIP/Work.lean	PENDING	distinct-support microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.185)
-Q39.S46-2k-two-strip-chain-strip-support-synchronized	Counterexample	formal/WIP/Work.lean	PENDING	synchronized strip template still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.187)
-Q39.S47-2k-two-strip-chain-strip-support-global-schedule	Counterexample	formal/WIP/Work.lean	PENDING	global block order still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.188)
-Q39.S48-2k-two-strip-chain-strip-support-global-synchronous	Counterexample	formal/WIP/Work.lean	PENDING	global synchronous step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.189)
-Q39.S49-2k-two-strip-chain-strip-support-rowcol-lockstep	Counterexample	formal/WIP/Work.lean	PENDING	row/column lock-step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.190)
-Q39.S50-2k-two-strip-chain-strip-support-rowcol-contiguous	Counterexample	formal/WIP/Work.lean	PENDING	row/column contiguous rectangle still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.191)
-Q39.S51-2k-two-strip-chain-strip-support-rowcol-nested	Counterexample	formal/WIP/Work.lean	PENDING	row/column nested rectangles still give rank 2 (see formal/Notes/TseitinQ39.lean §16.192)
-Q39.S52-2k-two-strip-chain-strip-support-rowcol-2d-prefix	Counterexample	formal/WIP/Work.lean	PENDING	2D-prefix chain still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.193)
-Q39.S53-2k-two-strip-chain-strip-support-rowcol-2d-prefix-microsteps	Counterexample	formal/WIP/Work.lean	PENDING	2D-prefix microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.194)
-Q39.S54-2k-two-strip-chain-strip-support-rowcol-2d-prefix-lockstep	Counterexample	formal/WIP/Work.lean	PENDING	global 2D-prefix lock-step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.195)
-Q39.S55-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order	Counterexample	formal/WIP/Work.lean	PENDING	global block order still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.196)
-Q39.S56-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps	Counterexample	formal/WIP/Work.lean	PENDING	global block-order microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.197)
-Q39.S57-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating	Counterexample	formal/WIP/Work.lean	PENDING	alternating row/column microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.198)
-Q39.S58-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips	Counterexample	formal/WIP/Work.lean	PENDING	both strips active still give rank 2 (see formal/Notes/TseitinQ39.lean §16.199)
-Q39.S59-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-distinct-strips	Counterexample	formal/WIP/Work.lean	PENDING	distinct strip supports still give rank 2 (see formal/Notes/TseitinQ39.lean §16.200)
-Q39.S60-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct	Counterexample	formal/WIP/Work.lean	PENDING	both strips active + distinct supports still give rank 2 (see formal/Notes/TseitinQ39.lean §16.201)
-Q39.S61-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct-support-per-step	Counterexample	formal/WIP/Work.lean	PENDING	both strips change each step still give rank 2 (see formal/Notes/TseitinQ39.lean §16.202)
-Q39.S62-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-change-per-step	Counterexample	formal/WIP/Work.lean	PENDING	alternating + both strips change still give rank 2 (see formal/Notes/TseitinQ39.lean §16.203)
-Q39.S65-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone	Counterexample	formal/WIP/Work.lean	PENDING	monotone block order still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.206)
-Q39.S68-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix	Counterexample	formal/WIP/Work.lean	PENDING	strict 2D-prefix blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.209)
-Q39.S69-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier	Counterexample	formal/WIP/Work.lean	PENDING	frontier blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.210)
-Q39.S70-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit	Counterexample	formal/WIP/Work.lean	PENDING	unit frontier blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.211)
-Q39.S71-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip	Counterexample	formal/WIP/Work.lean	PENDING	one-strip unit frontier still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.212)
-Q39.S72-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating	Counterexample	formal/WIP/Work.lean	PENDING	alternating unit frontier still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.213)
-Q39.S73-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order	Counterexample	formal/WIP/Work.lean	PENDING	global order with alternating unit frontier still gives rank 2
-Q39.S74-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule	Counterexample	formal/WIP/Work.lean	PENDING	fixed alternating schedule still gives rank 2
-Q39.S75-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase	Counterexample	formal/WIP/Work.lean	PENDING	two-phase fixed schedule still gives rank 2
-Q39.S76-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks	Counterexample	formal/WIP/Work.lean	PENDING	two-phase fixed block lengths still give rank 2
-Q39.S77-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved	Counterexample	formal/WIP/Work.lean	PENDING	interleaved blocks still give rank 2
-Q39.S78-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored	Counterexample	formal/WIP/Work.lean	PENDING	anchored interleaved blocks still give rank 2
-Q39.S79-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted	Counterexample	formal/WIP/Work.lean	PENDING	shifted anchored blocks still give rank 2
-Q39.S80-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced	Counterexample	formal/WIP/Work.lean	PENDING	balanced anchored blocks still give rank 2
-Q39.S81-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap	Counterexample	formal/WIP/Work.lean	PENDING	row/column swap symmetry still gives rank 2
-Q39.S82-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair	Counterexample	formal/WIP/Work.lean	PENDING	fixed-pair row/column swap symmetry still gives rank 2
-Q39.S83-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair-sameorder	Counterexample	formal/WIP/Work.lean	PENDING	fixed-pair + same-order still gives rank 2
-Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-cover	Proof	formal/WIP/Work.lean	PENDING	upper plateau log2|F|=2k+1 gives ratio monotone on [3*2^(k-1), 2^(k+1))
-Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bridge	Counterexample	formal/WIP/Work.lean	PENDING	ratio drops at n=5792->5793 inside gap [5*2^(k-2), 3*2^(k-1)) for k=12
-Q39.S118-globalfixedpair-fixedorientation-contiguous-shift-alt31	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt31-shift still give rank 2
-Q39.S120-globalfixedpair-fixedorientation-contiguous-shift-alt33	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt33-shift still give rank 2
-Q39.S121-globalfixedpair-fixedorientation-contiguous-shift-alt34	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt34-shift still give rank 2
-Q39.S122-globalfixedpair-fixedorientation-contiguous-shift-alt35	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt35-shift still give rank 2
-Q39.S123-globalfixedpair-fixedorientation-contiguous-shift-alt36	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt36-shift still give rank 2
-Q39.S124-globalfixedpair-fixedorientation-contiguous-shift-alt37	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt37-shift still give rank 2
-Q39.S125-globalfixedpair-fixedorientation-contiguous-shift-alt38	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt38-shift still give rank 2
-Q39.S126-globalfixedpair-fixedorientation-contiguous-shift-alt39	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt39-shift still give rank 2
-Q39.S127-globalfixedpair-fixedorientation-contiguous-shift-alt40	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt40-shift still give rank 2
-Q39.S128-globalfixedpair-fixedorientation-contiguous-shift-alt41	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt41-shift still give rank 2
-Q39.S129-globalfixedpair-fixedorientation-contiguous-shift-alt42	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt42-shift still give rank 2
-Q39.S130-globalfixedpair-fixedorientation-contiguous-shift-alt43	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt43-shift still give rank 2
-Q39.S131-globalfixedpair-fixedorientation-contiguous-shift-alt44	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt44-shift still give rank 2
-Q39.S132-globalfixedpair-fixedorientation-contiguous-shift-alt45	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt45-shift still give rank 2
-Q39.S133-globalfixedpair-fixedorientation-contiguous-shift-alt46	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt46-shift still give rank 2
-Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-alternative	Toy	formal/WIP/Work.lean	PENDING	gap endpoint check: ratio at 5*2^(k-2) <= ratio at 3*2^(k-1) for k=12
-Q43.S251-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bound	Toy	formal/WIP/Work.lean	PENDING	gap scan k=12: lower bound across [5*2^(k-2), 3*2^(k-1)) via n=5793
-Q43.S252-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bound-generalize	Toy	formal/WIP/Work.lean	PENDING	parameterized gap scan instantiated at k=12
-Q43.S253-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k13	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=13: n=11585->11586
-Q43.S254-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k14	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=14: n=23170->23171
-Q43.S255-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k15	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=15: n=46340->46341
-Q43.S256-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k16	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=16: n=92681->92682
-Q43.S257-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k17	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=17: n=185363->185364
-Q43.S258-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k18	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=18: n=370727->370728
-Q43.S259-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k19	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=19: n=741455->741456
-Q43.S260-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k20	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=20: n=1482910->1482911
-Q43.S261-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k21	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=21: n=2965820->2965821
-Q43.S262-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k22	Counterexample	formal/WIP/Work.lean	PENDING	gap drop at k=22: n=5931641->5931642
-Q39.S98-globalfixedpair-fixedorientation-contiguous-shift-alt11	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt11-shift still give rank 2
-Q39.S99-globalfixedpair-fixedorientation-contiguous-shift-alt12	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt12-shift still give rank 2
-Q39.S100-globalfixedpair-fixedorientation-contiguous-shift-alt13	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt13-shift still give rank 2
-Q39.S101-globalfixedpair-fixedorientation-contiguous-shift-alt14	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt14-shift still give rank 2
-Q39.S102-globalfixedpair-fixedorientation-contiguous-shift-alt15	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt15-shift still give rank 2
-Q39.S103-globalfixedpair-fixedorientation-contiguous-shift-alt16	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt16-shift still give rank 2
-Q39.S104-globalfixedpair-fixedorientation-contiguous-shift-alt17	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt17-shift still give rank 2
-Q39.S105-globalfixedpair-fixedorientation-contiguous-shift-alt18	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt18-shift still give rank 2
-Q39.S106-globalfixedpair-fixedorientation-contiguous-shift-alt19	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt19-shift still give rank 2
-Q39.S107-globalfixedpair-fixedorientation-contiguous-shift-alt20	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt20-shift still give rank 2
-Q39.S108-globalfixedpair-fixedorientation-contiguous-shift-alt21	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt21-shift still give rank 2
-Q39.S109-globalfixedpair-fixedorientation-contiguous-shift-alt22	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt22-shift still give rank 2
-Q39.S110-globalfixedpair-fixedorientation-contiguous-shift-alt23	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt23-shift still give rank 2
-Q39.S111-globalfixedpair-fixedorientation-contiguous-shift-alt24	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt24-shift still give rank 2
-Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Work.lean	PENDING	IsPoly monotone under pointwise <=
-Q43.S140-polym-below-threshold	Proof	formal/WIP/Work.lean	PENDING	IsPoly from explicit polynomial bound
-Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Work.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold
-Q43.S142-parameter-map-n-vs-bign	Exact citation	formal/WIP/Work.lean	PENDING	HR Thm 4.3 parameters: n grid side, N proof length, M line size (exp=e^x)
-Q43.S143-translate-n-parameter	Reduction	formal/WIP/Work.lean	PENDING	n parameter maps to |F|=Theta(n^2) for Tseitin grid
-Q43.S144-translate-largem-vs-polyn	Reduction	formal/WIP/Work.lean	PENDING	compare exp(n^alpha) large-M threshold to poly(|F|) for d=k log n/log log n
-Q43.S145-kappa-regime-decision	Reduction	formal/WIP/Work.lean	PENDING	fix kappa>=1 implies poly(|F|) in large-M branch
-Q43.S146-kappa-constant-source	Exact citation	formal/WIP/Work.lean	PENDING	Hastad'20 Thm 6.5 sets kappa=59 for d<=59 log n/log log n
-Q43.S147-apply-thm41-branch	Reduction	formal/WIP/Work.lean	PENDING	kappa=59 forces large-M branch for poly M in Thm 4.3
-Q43.S148-thm41-branch-audit	Exact citation	formal/WIP/Work.lean	PENDING	Proof Thm 4.3: if M > exp(n^alpha) apply Thm 4.1
-Q43.S149-largem-bound-from-thm41	Reduction	formal/WIP/Work.lean	PENDING	Thm 4.1 bound translated to |F| (subpoly for kappa=59)
-Q43.S150-thm41-bound-compare	Reduction	formal/WIP/Work.lean	PENDING	compare Thm 4.1 bound with poly N,M (subpoly for kappa=59)
-Q43.S151-thm41-nontrivial-regime	Barrier	formal/WIP/Work.lean	PENDING	hidden constants in Lemma 4.2 block explicit kappa<1/5 regime
-Q43.S152-extract-constants	Exact citation	formal/WIP/Work.lean	PENDING	Proof Thm 4.1 parameters s=152 log N and ni recurrence
-Q43.S153-kappa-constant-derivation	Barrier	formal/WIP/Work.lean	PENDING	implicit A0/A1/A2 in Lemma 4.2 block explicit kappa
-Q43.S154-lemma42-constants-extract	Exact citation	formal/WIP/Work.lean	PENDING	Lemma 6.8 gives s/64<=a; Lemma 6.9 only existential A
-Q43.S155-lemma69-constant-extract	Barrier	formal/WIP/Work.lean	PENDING	"Proof Lemma 6.9 uses ""constant number of bits"" and leaves A implicit"
-Q43.S156-lemma69-recount-needed	Barrier	formal/WIP/Work.lean	PENDING	full recount of Lemma 6.9 needed to extract A
-Q43.S157-pivot-hastad20-kappa	Exact citation	formal/WIP/Work.lean	PENDING	Hastad'20 Thm 6.5 depth regime + exp-LB (exp=e^x, kappa=59)
-Q43.S158-largem-branch-polym-check	Reduction	formal/WIP/Work.lean	PENDING	kappa=59 makes large-M threshold subpoly, so poly M picks Thm 4.1 branch (exp=e^x)
-Q43.S159-thm41-bound-translate	Reduction	formal/WIP/Work.lean	PENDING	Thm 4.1 bound rewritten in |F| terms; for kappa=59 it is subpoly (exp=e^x)
-Q43.S160-thm41-const-extract	Barrier	formal/WIP/Work.lean	PENDING	Proof Thm 4.1 uses unspecified c1/c2; explicit constants require full recount
-Q43.S161-thm41-recount-plan	Reduction	formal/WIP/Work.lean	PENDING	Explicit c1/c2 reduces to extracting A from Lemma 4.2 and A0/A1/A2 from Lemma 6.9
-Q43.S162-recount-lemma69-bits	Reduction	formal/WIP/Work.lean	PENDING	Explicit A1/A2 for Lemma 6.9 already fixed (A1tot=24, A2<=16); map to Lemma 4.2 constants
-Q43.S163-map-lemma42-a0a1a2	Reduction	formal/WIP/Work.lean	PENDING	A0 from Lemma 5.5; A1/A2 absorb Lemma 6.9 constant A and geometric series in Lemma 4.2
-Q43.S164-bound-a0-lemma55	Reduction	formal/WIP/Work.lean	PENDING	A0 can be taken as 78C via Lemma 5.5 and Δ≥n/(6n')
-Q43.S165-bound-c-lemma55	Barrier	formal/WIP/Work.lean	PENDING	"C in Lemma 5.5 chosen ""large enough"" via Chernoff; numeric value not fixed"
-Q43.S166-chernoff-recount	Barrier	formal/WIP/Work.lean	PENDING	Chernoff step for negative correlation needs full constant derivation; C remains implicit
-Q43.S167-freeze-a0-parameter	Reduction	formal/WIP/Work.lean	PENDING	parameterize Lemma 4.2/Thm 4.1 by A0 (see formal/Notes/TseitinLocalEF.lean §16.307)
-Q43.S168-explicit-c-chernoff	Reduction	formal/WIP/Work.lean	PENDING	explicit C via Chernoff for negative association (see formal/Notes/TseitinLocalEF.lean §16.308)
-Q43.S169-propagate-explicit-a0	Reduction	formal/WIP/Work.lean	PENDING	explicit A0 propagates to Thm 4.1 constants (see formal/Notes/TseitinLocalEF.lean §16.309)
-Q43.S170-explicit-c1c2-thm41	Reduction	formal/WIP/Work.lean	PENDING	explicit c1,c2 for Thm 4.1 (see formal/Notes/TseitinLocalEF.lean §16.310)
-Q43.S171-check-thm41-threshold	Reduction	formal/WIP/Work.lean	PENDING	log base 2 ⇒ exp = 2^x for large-M threshold (see formal/Notes/TseitinLocalEF.lean §16.311)
-Q43.S172-exp2-consistency	Reduction	formal/WIP/Work.lean	PENDING	unify exp as 2^x in Q43 (see formal/Notes/TseitinLocalEF.lean §16.312)
-Q43.S173-exp2-c1c2-rescale	Reduction	formal/WIP/Work.lean	PENDING	rescale c1,c2 to exp2 conventions (see formal/Notes/TseitinLocalEF.lean §16.313)
-Q43.S174-exp2-threshold-sweep	Reduction	formal/WIP/Work.lean	PENDING	normalize exp to 2^{·} across Q43 (see formal/Notes/TseitinLocalEF.lean §16.314)
-Q43.S175-exp2-quote-annotation	Exact citation	formal/WIP/Work.lean	PENDING	annotate exp quotes as base 2 (see formal/Notes/TseitinLocalEF.lean §16.315)
-Q43.S176-exp2-quote-sweep	Exact citation	formal/WIP/Work.lean	PENDING	sweep exp quotes with base-2 notes (see formal/Notes/TseitinLocalEF.lean §16.316)
-Q43.S177-exp2-quote-scan-core	Exact citation	formal/WIP/Work.lean	PENDING	scan core exp quotes and fix base (see formal/Notes/TseitinLocalEF.lean §16.317)
-Q43.S178-exp2-quote-scan-remaining	Exact citation	formal/WIP/Work.lean	PENDING	scan remaining exp citations in core/summary (see formal/Notes/TseitinLocalEF.lean §16.318)
-Q43.S179-exp2-quote-scan-analytic	Exact citation	formal/WIP/Work.lean	PENDING	mark analytic exp as e^x (see formal/Notes/TseitinLocalEF.lean §16.319)
-Q43.S180-exp2-quote-scan-logbases	Exact citation	formal/WIP/Work.lean	PENDING	log_2 vs ln made explicit in GIRS-analytic steps (see formal/Notes/TseitinLocalEF.lean §16.320)
-Q43.S181-exp2-quote-scan-logbases-remaining	Exact citation	formal/WIP/Work.lean	PENDING	log_2 fixed in PRST'16 toy-test bounds (see formal/Notes/TseitinLocalEF.lean §16.321)
-Q43.S182-exp2-quote-scan-logbases-core-sweep	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in core/summary 2^{poly(log)} bounds (see formal/Notes/TseitinLocalEF.lean §16.322)
-Q43.S183-exp2-quote-scan-logbases-summary-sweep	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in docs/15_proof_complexity summary (see formal/Notes/TseitinLocalEF.lean §16.323)
-Q43.S184-exp2-quote-scan-logbases-summary-remaining	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in docs/11_switching_lemma_ac0 summary (see formal/Notes/TseitinLocalEF.lean §16.324)
-Q43.S185-exp2-quote-scan-logbases-summary-final	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in PCP/Savitch summaries (see formal/Notes/TseitinLocalEF.lean §16.325)
-Q43.S186-exp2-quote-scan-logbases-summary-tail	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in time-hierarchy summary (see formal/Notes/TseitinLocalEF.lean §16.326)
-Q43.S187-exp2-quote-scan-logbases-summary-audit	Reduction	formal/WIP/Work.lean	PENDING	ln/log aligned in circuit-complexity summary (see formal/Notes/TseitinLocalEF.lean §16.327)
-Q43.S188-exp2-quote-scan-logbases-summary-closeout	Reduction	formal/WIP/Work.lean	PENDING	log_2 normalized in basic inclusions summary (see formal/Notes/TseitinLocalEF.lean §16.328)
-Q43.S189-exp2-quote-scan-logbases-summary-postaudit	Reduction	formal/WIP/Work.lean	PENDING	postaudit: remaining summary logs are base-agnostic (see formal/Notes/TseitinLocalEF.lean §16.329)
-Q43.S190-exp2-quote-scan-logbases-summary-exit	Reduction	formal/WIP/Work.lean	PENDING	audit exit: summary log bases settled (see formal/Notes/TseitinLocalEF.lean §16.330)
-Q43.S191-flat-eval-construction-pivot	Reduction	formal/WIP/Work.lean	PENDING	pivot: bound expanded formula size to control t (see formal/Notes/TseitinLocalEF.lean §16.331)
-Q43.S192-flat-eval-axiom-size-bound	Reduction	formal/WIP/Work.lean	PENDING	axiom-size bound via line-size accounting (see formal/Notes/TseitinLocalEF.lean 16.332)
-Q43.S193-flat-eval-axiom-size-accounting	Reduction	formal/WIP/Work.lean	PENDING	line-size vs line-count accounting for axiom size (see formal/Notes/TseitinLocalEF.lean 16.333)
-Q43.S194-flat-eval-axiom-size-model-check	Exact citation	formal/WIP/Work.lean	PENDING	HR'22 Thm 4.3 defines line size M and line count N (see formal/Notes/TseitinLocalEF.lean 16.334)
-Q43.S195-flat-eval-axiom-size-definition	Reduction	formal/WIP/Work.lean	PENDING	define size metric (N,M) for flat local-EF(s) (see formal/Notes/TseitinLocalEF.lean 16.335)
-Q43.S196-flat-eval-size-metric-formalize	Proof	formal/WIP/Work.lean	PENDING	formalize line-size metrics and lineSize<=proofSize lemma (see formal/Notes/TseitinLocalEF.lean 16.336)
-Q43.S197-flat-eval-size-metric-tparam	Proof	formal/WIP/Work.lean	PENDING	define t=log2 M and bound t<=M (see formal/Notes/TseitinLocalEF.lean 16.337)
-Q43.S198-flat-eval-tparam-usage	Proof	formal/WIP/Work.lean	PENDING	derive t<=proofSize via lineMax (see formal/Notes/TseitinLocalEF.lean 16.338)
-Q43.S199-flat-eval-tparam-ologs	Proof	formal/WIP/Work.lean	PENDING	log2 monotone gives t<=log2 proofSize (see formal/Notes/TseitinLocalEF.lean 16.339)
-Q43.S200-flat-eval-tparam-ologn	Reduction	formal/WIP/Work.lean	PENDING	poly-size implies t=O(log_2 n) (see formal/Notes/TseitinLocalEF.lean 16.340)
-Q43.S207-flat-eval-hr-level-count	Reduction	formal/WIP/Work.lean	PENDING	level count equals depth d in HR construction (see formal/Notes/TseitinLocalEF.lean 16.347)
-Q43.S208-flat-eval-hr-depth-range	Reduction	formal/WIP/Work.lean	PENDING	depth coefficient kappa bound from eta range (see formal/Notes/TseitinLocalEF.lean 16.348)
-Q43.S209-flat-eval-hr-depth-range-constants	Barrier	formal/WIP/Work.lean	PENDING	implicit constants in HR Lemma 4.2/6.9 block explicit kappa (see formal/Notes/TseitinLocalEF.lean 16.349)
-Q43.S210-flat-eval-hr-depth-range-constants-recount	Proof	formal/WIP/Work.lean	PENDING	explicit A3/A4 bounds from Lemma 6.9 algebra (see formal/Notes/TseitinLocalEF.lean 16.350)
-Q43.S211-flat-eval-hr-depth-range-constants-a1a2	Proof	formal/WIP/Work.lean	PENDING	reduce A to A1/A2 using explicit A3/A4 (see formal/Notes/TseitinLocalEF.lean 16.351)
-Q43.S212-flat-eval-hr-depth-range-constants-a0	Proof	formal/WIP/Work.lean	PENDING	aggregate A0 log term with Delta^{a+b} (see formal/Notes/TseitinLocalEF.lean 16.352)
-Q43.S213-flat-eval-hr-depth-range-constants-a0-extract	Proof	formal/WIP/Work.lean	PENDING	define A0=78*C and specialize the A0 log term
-Q43.S214-flat-eval-hr-depth-range-constants-a0-explicit-c	Proof	formal/WIP/Work.lean	PENDING	explicit Chernoff C=120000 (exp=e^x, log=ln) and A0=78*C
-Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0	Proof	formal/WIP/Work.lean	PENDING	rewrite A0 log factor using 9,360,000
-Q43.S216-flat-eval-hr-depth-range-constants-a0-c1c2-explicit	Proof	formal/WIP/Work.lean	PENDING	explicit c1,c2 from numeric A0
-Q43.S217-flat-eval-hr-depth-range-constants-a0-c1c2-apply-thm41	Proof	formal/WIP/Work.lean	PENDING	log2 threshold with explicit c1,c2
-Q43.S218-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime	Proof	formal/WIP/Work.lean	PENDING	log2 n <= log2 |F| for |F|=n^2
-Q43.S219-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-final	Proof	formal/WIP/Work.lean	PENDING	log2 threshold rewritten in |F| with explicit c1
-Q43.S230-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m-link	Proof	formal/WIP/Work.lean	PENDING	combine poly N/M regimes and log2 bounds
-Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold	Proof	formal/WIP/Work.lean	PENDING	bundle regime-d criterion with poly N/M log2 bounds
-Q43.S232-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare	Proof	formal/WIP/Work.lean	PENDING	log2(|F|^C) <= (log2|F|+1)C for |F|=n^2
-Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold	Proof	formal/WIP/Work.lean	PENDING	scaled log2^5 implies log2(|F|^C) <= |F|/(c1 log2^4|F|)
-Q43.S234-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-final	Proof	formal/WIP/Work.lean	PENDING	rewrite scaled log2^5 as 2C*c1*log2^5|F| <= |F|
-Q43.S235-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0	Proof	formal/WIP/Work.lean	PENDING	toy n0=2^40 for C=1 satisfies 2*c1*log2^5|F| <= |F|
-Q43.S236-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-general	Proof	formal/WIP/Work.lean	PENDING	monotonicity in C for the scaled log2^5 threshold
-Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula	Proof	formal/WIP/Work.lean	PENDING	n0=2^40 works for all C<=1024 via monotonicity in C
-Q43.S239-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-log2	Proof	formal/WIP/Work.lean	PENDING	log2 |F| monotone in n for |F|=n^2
-Q43.S240-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-log2-lift	Proof	formal/WIP/Work.lean	PENDING	log2^5 |F| monotone in n for |F|=n^2
-Q43.S241-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift	Proof	formal/WIP/Work.lean	PENDING	scaled log2^5 LHS monotone in n for |F|=n^2
-Q43.S242-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-combine	Proof	formal/WIP/Work.lean	PENDING	bundle LHS/RHS monotonicity for scaled log2^5 threshold
-Q43.S243-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-finish	Proof	formal/WIP/Work.lean	PENDING	rewrite scaled log2^5 threshold as ratio bound
-Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048	Counterexample	formal/WIP/Work.lean	PENDING	Nat.log2 floor breaks ratio monotonicity (2047->2048)
-Q39.S112-globalfixedpair-fixedorientation-contiguous-shift-alt25	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt25-shift still give rank 2
-Q43.S245-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-log2-jump	Proof	formal/WIP/Work.lean	PENDING	monotonicity of ratio under equal log2 |F|
-Q39.S113-globalfixedpair-fixedorientation-contiguous-shift-alt26	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt26-shift still give rank 2
-Q39.S114-globalfixedpair-fixedorientation-contiguous-shift-alt27	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt27-shift still give rank 2
-Q39.S115-globalfixedpair-fixedorientation-contiguous-shift-alt28	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt28-shift still give rank 2
-Q43.S246-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals	Proof	formal/WIP/Work.lean	PENDING	plateau log2|F|=2k on n in [2^k,5·2^(k-2)]
-Q39.S116-globalfixedpair-fixedorientation-contiguous-shift-alt29	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt29-shift still give rank 2
-Q43.S247-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-apply	Proof	formal/WIP/Work.lean	PENDING	apply plateau to ratio monotonicity on sub-interval
-Q39.S117-globalfixedpair-fixedorientation-contiguous-shift-alt30	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt30-shift still give rank 2
-Q43.S263-gap-drop-k23-k25	Counterexample	formal/WIP/Work.lean	PENDING	gap drops at k=23..25 inside [5*2^(k-2), 3*2^(k-1))
-Q39.S134-globalfixedpair-fixedorientation-contiguous-shift-alt47	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt47-shift still give rank 2
-Q43.S264	Toy	formal/WIP/Work.lean	PENDING	log2 jump at n_k=floor(sqrt(2^(2k+1)-1)) matches gap drop for k=12..25 (script)
-Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt48-shift still give rank 2
-Q43.S265-gap-drop-k26-k30	Toy	formal/WIP/Work.lean	PENDING	extend gap-drop check to k=26..30 (script)
-Q43.S266-bitlength-log2-doc	Exact citation	formal/WIP/Work.lean	PENDING	Python int.bit_length gives 2**(k-1) <= |x| < 2**k
-Q39.S136-globalfixedpair-fixedorientation-contiguous-shift-alt49	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt49-shift still give rank 2
-Q43.S267-log2-jump-lemma	Proof	formal/WIP/Work.lean	PENDING	log2 jump from explicit bounds on n^2 and (n+1)^2
-Q39.S137-globalfixedpair-fixedorientation-contiguous-shift-alt50	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt50-shift still give rank 2
-Q43.S268-nk-sqrt-bounds	Exact citation	formal/WIP/Work.lean	PENDING	Python math.isqrt floor sqrt bound (a^2 <= n)
-Q39.S138-globalfixedpair-fixedorientation-contiguous-shift-alt51	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt51-shift still give rank 2
-Q39.S139-globalfixedpair-fixedorientation-contiguous-shift-alt52	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt52-shift still give rank 2
-Q43.S269-define-floor-sqrt-lean	Proof	formal/WIP/Work.lean	PENDING	define floorSqrt and prove upper bound n < (a+1)^2
-Q39.S140-globalfixedpair-fixedorientation-contiguous-shift-alt53	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt53-shift still give rank 2
+Q39.S37-2k-two-strip-equal-rows-single-change-chain	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	chain of single-row equal-rows XOR steps still gives rank 2
+Q39.S38-2k-two-strip-chain-block-alignment	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	block-aligned chain still gives rank 2
+Q39.S39-2k-two-strip-chain-block-consistency	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	one-strip block-consistent updates still give rank 2 (see formal/Notes/TseitinQ39.lean §16.180)
+Q39.S40-2k-two-strip-chain-lockstep-blocks	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	lock-step block updates still give rank 2 (see formal/Notes/TseitinQ39.lean §16.181)
+Q39.S41-2k-two-strip-chain-lockstep-dyadic-blocks	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	lock-step dyadic blocks in fixed order still give rank 2 (see formal/Notes/TseitinQ39.lean §16.182)
+Q39.S42-2k-two-strip-chain-dyadic-prefix-stepwise	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	stepwise dyadic-prefix chain still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.183)
+Q39.S43-2k-two-strip-chain-dyadic-carry-microsteps	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	dyadic-carry microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.184)
+Q39.S44-2k-two-strip-chain-dyadic-microsteps-distinct-support	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	distinct-support microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.185)
+Q39.S46-2k-two-strip-chain-strip-support-synchronized	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	synchronized strip template still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.187)
+Q39.S47-2k-two-strip-chain-strip-support-global-schedule	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	global block order still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.188)
+Q39.S48-2k-two-strip-chain-strip-support-global-synchronous	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	global synchronous step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.189)
+Q39.S49-2k-two-strip-chain-strip-support-rowcol-lockstep	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	row/column lock-step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.190)
+Q39.S50-2k-two-strip-chain-strip-support-rowcol-contiguous	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	row/column contiguous rectangle still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.191)
+Q39.S51-2k-two-strip-chain-strip-support-rowcol-nested	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	row/column nested rectangles still give rank 2 (see formal/Notes/TseitinQ39.lean §16.192)
+Q39.S52-2k-two-strip-chain-strip-support-rowcol-2d-prefix	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	2D-prefix chain still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.193)
+Q39.S53-2k-two-strip-chain-strip-support-rowcol-2d-prefix-microsteps	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	2D-prefix microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.194)
+Q39.S54-2k-two-strip-chain-strip-support-rowcol-2d-prefix-lockstep	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	global 2D-prefix lock-step still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.195)
+Q39.S55-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	global block order still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.196)
+Q39.S56-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	global block-order microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.197)
+Q39.S57-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	alternating row/column microsteps still give rank 2 (see formal/Notes/TseitinQ39.lean §16.198)
+Q39.S58-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	both strips active still give rank 2 (see formal/Notes/TseitinQ39.lean §16.199)
+Q39.S59-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-distinct-strips	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	distinct strip supports still give rank 2 (see formal/Notes/TseitinQ39.lean §16.200)
+Q39.S60-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	both strips active + distinct supports still give rank 2 (see formal/Notes/TseitinQ39.lean §16.201)
+Q39.S61-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-distinct-support-per-step	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	both strips change each step still give rank 2 (see formal/Notes/TseitinQ39.lean §16.202)
+Q39.S62-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-change-per-step	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	alternating + both strips change still give rank 2 (see formal/Notes/TseitinQ39.lean §16.203)
+Q39.S65-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	monotone block order still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.206)
+Q39.S68-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	strict 2D-prefix blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.209)
+Q39.S69-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	frontier blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.210)
+Q39.S70-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	unit frontier blocks still give rank 2 (see formal/Notes/TseitinQ39.lean §16.211)
+Q39.S71-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	one-strip unit frontier still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.212)
+Q39.S72-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	alternating unit frontier still gives rank 2 (see formal/Notes/TseitinQ39.lean §16.213)
+Q39.S73-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	global order with alternating unit frontier still gives rank 2
+Q39.S74-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	fixed alternating schedule still gives rank 2
+Q39.S75-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	two-phase fixed schedule still gives rank 2
+Q39.S76-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	two-phase fixed block lengths still give rank 2
+Q39.S77-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	interleaved blocks still give rank 2
+Q39.S78-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	anchored interleaved blocks still give rank 2
+Q39.S79-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	shifted anchored blocks still give rank 2
+Q39.S80-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	balanced anchored blocks still give rank 2
+Q39.S81-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	row/column swap symmetry still gives rank 2
+Q39.S82-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	fixed-pair row/column swap symmetry still gives rank 2
+Q39.S83-2k-two-strip-chain-strip-support-rowcol-2d-prefix-global-order-microsteps-alternating-bothstrips-local-block-monotone-2d-strict-prefix-frontier-unit-onestrip-alternating-global-order-fixed-schedule-two-phase-blocks-interleaved-anchored-shifted-balanced-rowcol-swap-fixedpair-sameorder	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	fixed-pair + same-order still gives rank 2
+Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-cover	Proof	formal/WIP/Verified/Q43.lean	PENDING	upper plateau log2|F|=2k+1 gives ratio monotone on [3*2^(k-1), 2^(k+1))
+Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bridge	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	ratio drops at n=5792->5793 inside gap [5*2^(k-2), 3*2^(k-1)) for k=12
+Q39.S118-globalfixedpair-fixedorientation-contiguous-shift-alt31	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt31-shift still give rank 2
+Q39.S120-globalfixedpair-fixedorientation-contiguous-shift-alt33	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt33-shift still give rank 2
+Q39.S121-globalfixedpair-fixedorientation-contiguous-shift-alt34	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt34-shift still give rank 2
+Q39.S122-globalfixedpair-fixedorientation-contiguous-shift-alt35	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt35-shift still give rank 2
+Q39.S123-globalfixedpair-fixedorientation-contiguous-shift-alt36	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt36-shift still give rank 2
+Q39.S124-globalfixedpair-fixedorientation-contiguous-shift-alt37	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt37-shift still give rank 2
+Q39.S125-globalfixedpair-fixedorientation-contiguous-shift-alt38	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt38-shift still give rank 2
+Q39.S126-globalfixedpair-fixedorientation-contiguous-shift-alt39	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt39-shift still give rank 2
+Q39.S127-globalfixedpair-fixedorientation-contiguous-shift-alt40	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt40-shift still give rank 2
+Q39.S128-globalfixedpair-fixedorientation-contiguous-shift-alt41	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt41-shift still give rank 2
+Q39.S129-globalfixedpair-fixedorientation-contiguous-shift-alt42	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt42-shift still give rank 2
+Q39.S130-globalfixedpair-fixedorientation-contiguous-shift-alt43	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt43-shift still give rank 2
+Q39.S131-globalfixedpair-fixedorientation-contiguous-shift-alt44	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt44-shift still give rank 2
+Q39.S132-globalfixedpair-fixedorientation-contiguous-shift-alt45	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt45-shift still give rank 2
+Q39.S133-globalfixedpair-fixedorientation-contiguous-shift-alt46	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt46-shift still give rank 2
+Q43.S250-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-alternative	Toy	formal/WIP/Verified/Q43.lean	PENDING	gap endpoint check: ratio at 5*2^(k-2) <= ratio at 3*2^(k-1) for k=12
+Q43.S251-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bound	Toy	formal/WIP/Verified/Q43.lean	PENDING	gap scan k=12: lower bound across [5*2^(k-2), 3*2^(k-1)) via n=5793
+Q43.S252-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-bound-generalize	Toy	formal/WIP/Verified/Q43.lean	PENDING	parameterized gap scan instantiated at k=12
+Q43.S253-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k13	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=13: n=11585->11586
+Q43.S254-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k14	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=14: n=23170->23171
+Q43.S255-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k15	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=15: n=46340->46341
+Q43.S256-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k16	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=16: n=92681->92682
+Q43.S257-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k17	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=17: n=185363->185364
+Q43.S258-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k18	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=18: n=370727->370728
+Q43.S259-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k19	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=19: n=741455->741456
+Q43.S260-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k20	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=20: n=1482910->1482911
+Q43.S261-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k21	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=21: n=2965820->2965821
+Q43.S262-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-gap-drop-k22	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drop at k=22: n=5931641->5931642
+Q39.S98-globalfixedpair-fixedorientation-contiguous-shift-alt11	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt11-shift still give rank 2
+Q39.S99-globalfixedpair-fixedorientation-contiguous-shift-alt12	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt12-shift still give rank 2
+Q39.S100-globalfixedpair-fixedorientation-contiguous-shift-alt13	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt13-shift still give rank 2
+Q39.S101-globalfixedpair-fixedorientation-contiguous-shift-alt14	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt14-shift still give rank 2
+Q39.S102-globalfixedpair-fixedorientation-contiguous-shift-alt15	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt15-shift still give rank 2
+Q39.S103-globalfixedpair-fixedorientation-contiguous-shift-alt16	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt16-shift still give rank 2
+Q39.S104-globalfixedpair-fixedorientation-contiguous-shift-alt17	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt17-shift still give rank 2
+Q39.S105-globalfixedpair-fixedorientation-contiguous-shift-alt18	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt18-shift still give rank 2
+Q39.S106-globalfixedpair-fixedorientation-contiguous-shift-alt19	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt19-shift still give rank 2
+Q39.S107-globalfixedpair-fixedorientation-contiguous-shift-alt20	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt20-shift still give rank 2
+Q39.S108-globalfixedpair-fixedorientation-contiguous-shift-alt21	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt21-shift still give rank 2
+Q39.S109-globalfixedpair-fixedorientation-contiguous-shift-alt22	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt22-shift still give rank 2
+Q39.S110-globalfixedpair-fixedorientation-contiguous-shift-alt23	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt23-shift still give rank 2
+Q39.S111-globalfixedpair-fixedorientation-contiguous-shift-alt24	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt24-shift still give rank 2
+Q43.S139-polym-avoids-thm41-branch	Proof	formal/WIP/Verified/Q43.lean	PENDING	IsPoly monotone under pointwise <=
+Q43.S140-polym-below-threshold	Proof	formal/WIP/Verified/Q43.lean	PENDING	IsPoly from explicit polynomial bound
+Q43.S141-poly-vs-exp-threshold	Toy	formal/WIP/Verified/Q43.lean	PENDING	toy check: poly M vs exp(n^alpha) threshold
+Q43.S142-parameter-map-n-vs-bign	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	HR Thm 4.3 parameters: n grid side, N proof length, M line size (exp=e^x)
+Q43.S143-translate-n-parameter	Reduction	formal/WIP/Verified/Q43.lean	PENDING	n parameter maps to |F|=Theta(n^2) for Tseitin grid
+Q43.S144-translate-largem-vs-polyn	Reduction	formal/WIP/Verified/Q43.lean	PENDING	compare exp(n^alpha) large-M threshold to poly(|F|) for d=k log n/log log n
+Q43.S145-kappa-regime-decision	Reduction	formal/WIP/Verified/Q43.lean	PENDING	fix kappa>=1 implies poly(|F|) in large-M branch
+Q43.S146-kappa-constant-source	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	Hastad'20 Thm 6.5 sets kappa=59 for d<=59 log n/log log n
+Q43.S147-apply-thm41-branch	Reduction	formal/WIP/Verified/Q43.lean	PENDING	kappa=59 forces large-M branch for poly M in Thm 4.3
+Q43.S148-thm41-branch-audit	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	Proof Thm 4.3: if M > exp(n^alpha) apply Thm 4.1
+Q43.S149-largem-bound-from-thm41	Reduction	formal/WIP/Verified/Q43.lean	PENDING	Thm 4.1 bound translated to |F| (subpoly for kappa=59)
+Q43.S150-thm41-bound-compare	Reduction	formal/WIP/Verified/Q43.lean	PENDING	compare Thm 4.1 bound with poly N,M (subpoly for kappa=59)
+Q43.S151-thm41-nontrivial-regime	Barrier	formal/WIP/Verified/Q43.lean	PENDING	hidden constants in Lemma 4.2 block explicit kappa<1/5 regime
+Q43.S152-extract-constants	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	Proof Thm 4.1 parameters s=152 log N and ni recurrence
+Q43.S153-kappa-constant-derivation	Barrier	formal/WIP/Verified/Q43.lean	PENDING	implicit A0/A1/A2 in Lemma 4.2 block explicit kappa
+Q43.S154-lemma42-constants-extract	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	Lemma 6.8 gives s/64<=a; Lemma 6.9 only existential A
+Q43.S155-lemma69-constant-extract	Barrier	formal/WIP/Verified/Q43.lean	PENDING	"Proof Lemma 6.9 uses ""constant number of bits"" and leaves A implicit"
+Q43.S156-lemma69-recount-needed	Barrier	formal/WIP/Verified/Q43.lean	PENDING	full recount of Lemma 6.9 needed to extract A
+Q43.S157-pivot-hastad20-kappa	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	Hastad'20 Thm 6.5 depth regime + exp-LB (exp=e^x, kappa=59)
+Q43.S158-largem-branch-polym-check	Reduction	formal/WIP/Verified/Q43.lean	PENDING	kappa=59 makes large-M threshold subpoly, so poly M picks Thm 4.1 branch (exp=e^x)
+Q43.S159-thm41-bound-translate	Reduction	formal/WIP/Verified/Q43.lean	PENDING	Thm 4.1 bound rewritten in |F| terms; for kappa=59 it is subpoly (exp=e^x)
+Q43.S160-thm41-const-extract	Barrier	formal/WIP/Verified/Q43.lean	PENDING	Proof Thm 4.1 uses unspecified c1/c2; explicit constants require full recount
+Q43.S161-thm41-recount-plan	Reduction	formal/WIP/Verified/Q43.lean	PENDING	Explicit c1/c2 reduces to extracting A from Lemma 4.2 and A0/A1/A2 from Lemma 6.9
+Q43.S162-recount-lemma69-bits	Reduction	formal/WIP/Verified/Q43.lean	PENDING	Explicit A1/A2 for Lemma 6.9 already fixed (A1tot=24, A2<=16); map to Lemma 4.2 constants
+Q43.S163-map-lemma42-a0a1a2	Reduction	formal/WIP/Verified/Q43.lean	PENDING	A0 from Lemma 5.5; A1/A2 absorb Lemma 6.9 constant A and geometric series in Lemma 4.2
+Q43.S164-bound-a0-lemma55	Reduction	formal/WIP/Verified/Q43.lean	PENDING	A0 can be taken as 78C via Lemma 5.5 and Δ≥n/(6n')
+Q43.S165-bound-c-lemma55	Barrier	formal/WIP/Verified/Q43.lean	PENDING	"C in Lemma 5.5 chosen ""large enough"" via Chernoff; numeric value not fixed"
+Q43.S166-chernoff-recount	Barrier	formal/WIP/Verified/Q43.lean	PENDING	Chernoff step for negative correlation needs full constant derivation; C remains implicit
+Q43.S167-freeze-a0-parameter	Reduction	formal/WIP/Verified/Q43.lean	PENDING	parameterize Lemma 4.2/Thm 4.1 by A0 (see formal/Notes/TseitinLocalEF.lean §16.307)
+Q43.S168-explicit-c-chernoff	Reduction	formal/WIP/Verified/Q43.lean	PENDING	explicit C via Chernoff for negative association (see formal/Notes/TseitinLocalEF.lean §16.308)
+Q43.S169-propagate-explicit-a0	Reduction	formal/WIP/Verified/Q43.lean	PENDING	explicit A0 propagates to Thm 4.1 constants (see formal/Notes/TseitinLocalEF.lean §16.309)
+Q43.S170-explicit-c1c2-thm41	Reduction	formal/WIP/Verified/Q43.lean	PENDING	explicit c1,c2 for Thm 4.1 (see formal/Notes/TseitinLocalEF.lean §16.310)
+Q43.S171-check-thm41-threshold	Reduction	formal/WIP/Verified/Q43.lean	PENDING	log base 2 ⇒ exp = 2^x for large-M threshold (see formal/Notes/TseitinLocalEF.lean §16.311)
+Q43.S172-exp2-consistency	Reduction	formal/WIP/Verified/Q43.lean	PENDING	unify exp as 2^x in Q43 (see formal/Notes/TseitinLocalEF.lean §16.312)
+Q43.S173-exp2-c1c2-rescale	Reduction	formal/WIP/Verified/Q43.lean	PENDING	rescale c1,c2 to exp2 conventions (see formal/Notes/TseitinLocalEF.lean §16.313)
+Q43.S174-exp2-threshold-sweep	Reduction	formal/WIP/Verified/Q43.lean	PENDING	normalize exp to 2^{·} across Q43 (see formal/Notes/TseitinLocalEF.lean §16.314)
+Q43.S175-exp2-quote-annotation	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	annotate exp quotes as base 2 (see formal/Notes/TseitinLocalEF.lean §16.315)
+Q43.S176-exp2-quote-sweep	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	sweep exp quotes with base-2 notes (see formal/Notes/TseitinLocalEF.lean §16.316)
+Q43.S177-exp2-quote-scan-core	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	scan core exp quotes and fix base (see formal/Notes/TseitinLocalEF.lean §16.317)
+Q43.S178-exp2-quote-scan-remaining	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	scan remaining exp citations in core/summary (see formal/Notes/TseitinLocalEF.lean §16.318)
+Q43.S179-exp2-quote-scan-analytic	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	mark analytic exp as e^x (see formal/Notes/TseitinLocalEF.lean §16.319)
+Q43.S180-exp2-quote-scan-logbases	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	log_2 vs ln made explicit in GIRS-analytic steps (see formal/Notes/TseitinLocalEF.lean §16.320)
+Q43.S181-exp2-quote-scan-logbases-remaining	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	log_2 fixed in PRST'16 toy-test bounds (see formal/Notes/TseitinLocalEF.lean §16.321)
+Q43.S182-exp2-quote-scan-logbases-core-sweep	Reduction	formal/WIP/Verified/Q43.lean	PENDING	log_2 normalized in core/summary 2^{poly(log)} bounds (see formal/Notes/TseitinLocalEF.lean §16.322)
+Q43.S183-exp2-quote-scan-logbases-summary-sweep	Reduction	formal/WIP/Verified/Q43.lean	PENDING	log_2 normalized in docs/15_proof_complexity summary (see formal/Notes/TseitinLocalEF.lean §16.323)
+Q43.S184-exp2-quote-scan-logbases-summary-remaining	Reduction	formal/WIP/Verified/Q43.lean	PENDING	log_2 normalized in docs/11_switching_lemma_ac0 summary (see formal/Notes/TseitinLocalEF.lean §16.324)
+Q43.S185-exp2-quote-scan-logbases-summary-final	Reduction	formal/WIP/Verified/Q43.lean	PENDING	log_2 normalized in PCP/Savitch summaries (see formal/Notes/TseitinLocalEF.lean §16.325)
+Q43.S186-exp2-quote-scan-logbases-summary-tail	Reduction	formal/WIP/Verified/Q43.lean	PENDING	log_2 normalized in time-hierarchy summary (see formal/Notes/TseitinLocalEF.lean §16.326)
+Q43.S187-exp2-quote-scan-logbases-summary-audit	Reduction	formal/WIP/Verified/Q43.lean	PENDING	ln/log aligned in circuit-complexity summary (see formal/Notes/TseitinLocalEF.lean §16.327)
+Q43.S188-exp2-quote-scan-logbases-summary-closeout	Reduction	formal/WIP/Verified/Q43.lean	PENDING	log_2 normalized in basic inclusions summary (see formal/Notes/TseitinLocalEF.lean §16.328)
+Q43.S189-exp2-quote-scan-logbases-summary-postaudit	Reduction	formal/WIP/Verified/Q43.lean	PENDING	postaudit: remaining summary logs are base-agnostic (see formal/Notes/TseitinLocalEF.lean §16.329)
+Q43.S190-exp2-quote-scan-logbases-summary-exit	Reduction	formal/WIP/Verified/Q43.lean	PENDING	audit exit: summary log bases settled (see formal/Notes/TseitinLocalEF.lean §16.330)
+Q43.S191-flat-eval-construction-pivot	Reduction	formal/WIP/Verified/Q43.lean	PENDING	pivot: bound expanded formula size to control t (see formal/Notes/TseitinLocalEF.lean §16.331)
+Q43.S192-flat-eval-axiom-size-bound	Reduction	formal/WIP/Verified/Q43.lean	PENDING	axiom-size bound via line-size accounting (see formal/Notes/TseitinLocalEF.lean 16.332)
+Q43.S193-flat-eval-axiom-size-accounting	Reduction	formal/WIP/Verified/Q43.lean	PENDING	line-size vs line-count accounting for axiom size (see formal/Notes/TseitinLocalEF.lean 16.333)
+Q43.S194-flat-eval-axiom-size-model-check	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	HR'22 Thm 4.3 defines line size M and line count N (see formal/Notes/TseitinLocalEF.lean 16.334)
+Q43.S195-flat-eval-axiom-size-definition	Reduction	formal/WIP/Verified/Q43.lean	PENDING	define size metric (N,M) for flat local-EF(s) (see formal/Notes/TseitinLocalEF.lean 16.335)
+Q43.S196-flat-eval-size-metric-formalize	Proof	formal/WIP/Verified/Q43.lean	PENDING	formalize line-size metrics and lineSize<=proofSize lemma (see formal/Notes/TseitinLocalEF.lean 16.336)
+Q43.S197-flat-eval-size-metric-tparam	Proof	formal/WIP/Verified/Q43.lean	PENDING	define t=log2 M and bound t<=M (see formal/Notes/TseitinLocalEF.lean 16.337)
+Q43.S198-flat-eval-tparam-usage	Proof	formal/WIP/Verified/Q43.lean	PENDING	derive t<=proofSize via lineMax (see formal/Notes/TseitinLocalEF.lean 16.338)
+Q43.S199-flat-eval-tparam-ologs	Proof	formal/WIP/Verified/Q43.lean	PENDING	log2 monotone gives t<=log2 proofSize (see formal/Notes/TseitinLocalEF.lean 16.339)
+Q43.S200-flat-eval-tparam-ologn	Reduction	formal/WIP/Verified/Q43.lean	PENDING	poly-size implies t=O(log_2 n) (see formal/Notes/TseitinLocalEF.lean 16.340)
+Q43.S207-flat-eval-hr-level-count	Reduction	formal/WIP/Verified/Q43.lean	PENDING	level count equals depth d in HR construction (see formal/Notes/TseitinLocalEF.lean 16.347)
+Q43.S208-flat-eval-hr-depth-range	Reduction	formal/WIP/Verified/Q43.lean	PENDING	depth coefficient kappa bound from eta range (see formal/Notes/TseitinLocalEF.lean 16.348)
+Q43.S209-flat-eval-hr-depth-range-constants	Barrier	formal/WIP/Verified/Q43.lean	PENDING	implicit constants in HR Lemma 4.2/6.9 block explicit kappa (see formal/Notes/TseitinLocalEF.lean 16.349)
+Q43.S210-flat-eval-hr-depth-range-constants-recount	Proof	formal/WIP/Verified/Q43.lean	PENDING	explicit A3/A4 bounds from Lemma 6.9 algebra (see formal/Notes/TseitinLocalEF.lean 16.350)
+Q43.S211-flat-eval-hr-depth-range-constants-a1a2	Proof	formal/WIP/Verified/Q43.lean	PENDING	reduce A to A1/A2 using explicit A3/A4 (see formal/Notes/TseitinLocalEF.lean 16.351)
+Q43.S212-flat-eval-hr-depth-range-constants-a0	Proof	formal/WIP/Verified/Q43.lean	PENDING	aggregate A0 log term with Delta^{a+b} (see formal/Notes/TseitinLocalEF.lean 16.352)
+Q43.S213-flat-eval-hr-depth-range-constants-a0-extract	Proof	formal/WIP/Verified/Q43.lean	PENDING	define A0=78*C and specialize the A0 log term
+Q43.S214-flat-eval-hr-depth-range-constants-a0-explicit-c	Proof	formal/WIP/Verified/Q43.lean	PENDING	explicit Chernoff C=120000 (exp=e^x, log=ln) and A0=78*C
+Q43.S215-flat-eval-hr-depth-range-constants-a0-propagate-explicit-a0	Proof	formal/WIP/Verified/Q43.lean	PENDING	rewrite A0 log factor using 9,360,000
+Q43.S216-flat-eval-hr-depth-range-constants-a0-c1c2-explicit	Proof	formal/WIP/Verified/Q43.lean	PENDING	explicit c1,c2 from numeric A0
+Q43.S217-flat-eval-hr-depth-range-constants-a0-c1c2-apply-thm41	Proof	formal/WIP/Verified/Q43.lean	PENDING	log2 threshold with explicit c1,c2
+Q43.S218-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime	Proof	formal/WIP/Verified/Q43.lean	PENDING	log2 n <= log2 |F| for |F|=n^2
+Q43.S219-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-final	Proof	formal/WIP/Verified/Q43.lean	PENDING	log2 threshold rewritten in |F| with explicit c1
+Q43.S230-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-m-link	Proof	formal/WIP/Verified/Q43.lean	PENDING	combine poly N/M regimes and log2 bounds
+Q43.S231-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-threshold	Proof	formal/WIP/Verified/Q43.lean	PENDING	bundle regime-d criterion with poly N/M log2 bounds
+Q43.S232-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare	Proof	formal/WIP/Verified/Q43.lean	PENDING	log2(|F|^C) <= (log2|F|+1)C for |F|=n^2
+Q43.S233-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-threshold	Proof	formal/WIP/Verified/Q43.lean	PENDING	scaled log2^5 implies log2(|F|^C) <= |F|/(c1 log2^4|F|)
+Q43.S234-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-compare-final	Proof	formal/WIP/Verified/Q43.lean	PENDING	rewrite scaled log2^5 as 2C*c1*log2^5|F| <= |F|
+Q43.S235-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0	Proof	formal/WIP/Verified/Q43.lean	PENDING	toy n0=2^40 for C=1 satisfies 2*c1*log2^5|F| <= |F|
+Q43.S236-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-general	Proof	formal/WIP/Verified/Q43.lean	PENDING	monotonicity in C for the scaled log2^5 threshold
+Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula	Proof	formal/WIP/Verified/Q43.lean	PENDING	n0=2^40 works for all C<=1024 via monotonicity in C
+Q43.S239-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-log2	Proof	formal/WIP/Verified/Q43.lean	PENDING	log2 |F| monotone in n for |F|=n^2
+Q43.S240-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-log2-lift	Proof	formal/WIP/Verified/Q43.lean	PENDING	log2^5 |F| monotone in n for |F|=n^2
+Q43.S241-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift	Proof	formal/WIP/Verified/Q43.lean	PENDING	scaled log2^5 LHS monotone in n for |F|=n^2
+Q43.S242-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-combine	Proof	formal/WIP/Verified/Q43.lean	PENDING	bundle LHS/RHS monotonicity for scaled log2^5 threshold
+Q43.S243-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-finish	Proof	formal/WIP/Verified/Q43.lean	PENDING	rewrite scaled log2^5 threshold as ratio bound
+Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	Nat.log2 floor breaks ratio monotonicity (2047->2048)
+Q39.S112-globalfixedpair-fixedorientation-contiguous-shift-alt25	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt25-shift still give rank 2
+Q43.S245-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-log2-jump	Proof	formal/WIP/Verified/Q43.lean	PENDING	monotonicity of ratio under equal log2 |F|
+Q39.S113-globalfixedpair-fixedorientation-contiguous-shift-alt26	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt26-shift still give rank 2
+Q39.S114-globalfixedpair-fixedorientation-contiguous-shift-alt27	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt27-shift still give rank 2
+Q39.S115-globalfixedpair-fixedorientation-contiguous-shift-alt28	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt28-shift still give rank 2
+Q43.S246-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals	Proof	formal/WIP/Verified/Q43.lean	PENDING	plateau log2|F|=2k on n in [2^k,5·2^(k-2)]
+Q39.S116-globalfixedpair-fixedorientation-contiguous-shift-alt29	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt29-shift still give rank 2
+Q43.S247-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-lift-piecewise-intervals-apply	Proof	formal/WIP/Verified/Q43.lean	PENDING	apply plateau to ratio monotonicity on sub-interval
+Q39.S117-globalfixedpair-fixedorientation-contiguous-shift-alt30	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt30-shift still give rank 2
+Q43.S263-gap-drop-k23-k25	Counterexample	formal/WIP/Verified/Q43.lean	PENDING	gap drops at k=23..25 inside [5*2^(k-2), 3*2^(k-1))
+Q39.S134-globalfixedpair-fixedorientation-contiguous-shift-alt47	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt47-shift still give rank 2
+Q43.S264	Toy	formal/WIP/Verified/Q43.lean	PENDING	log2 jump at n_k=floor(sqrt(2^(2k+1)-1)) matches gap drop for k=12..25 (script)
+Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt48-shift still give rank 2
+Q43.S265-gap-drop-k26-k30	Toy	formal/WIP/Verified/Q43.lean	PENDING	extend gap-drop check to k=26..30 (script)
+Q43.S266-bitlength-log2-doc	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	Python int.bit_length gives 2**(k-1) <= |x| < 2**k
+Q39.S136-globalfixedpair-fixedorientation-contiguous-shift-alt49	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt49-shift still give rank 2
+Q43.S267-log2-jump-lemma	Proof	formal/WIP/Verified/Q43.lean	PENDING	log2 jump from explicit bounds on n^2 and (n+1)^2
+Q39.S137-globalfixedpair-fixedorientation-contiguous-shift-alt50	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt50-shift still give rank 2
+Q43.S268-nk-sqrt-bounds	Exact citation	formal/WIP/Verified/Q43.lean	PENDING	Python math.isqrt floor sqrt bound (a^2 <= n)
+Q39.S138-globalfixedpair-fixedorientation-contiguous-shift-alt51	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt51-shift still give rank 2
+Q39.S139-globalfixedpair-fixedorientation-contiguous-shift-alt52	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt52-shift still give rank 2
+Q43.S269-define-floor-sqrt-lean	Proof	formal/WIP/Verified/Q43.lean	PENDING	define floorSqrt and prove upper bound n < (a+1)^2
+Q39.S140-globalfixedpair-fixedorientation-contiguous-shift-alt53	Counterexample	formal/WIP/Verified/Q39.lean	PENDING	contiguous blocks alt53-shift still give rank 2

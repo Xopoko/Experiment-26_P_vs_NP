@@ -4815,12 +4815,12 @@ Main index: `P_vs_NP.md`.
 
 - `Lens:` Invariant.
 - `Statement (Q43.S196-flat-eval-size-metric-formalize):`
-  IN `formal/WIP/Work.lean` definitions of metrics line-size/line-count/line-max have been introduced
+  IN `formal/WIP/Verified/Q43.lean` definitions of metrics line-size/line-count/line-max have been introduced
   and the lemma is proven: if a string is included in proof, then its size does not exceed the total
   proof size (line-size <= proofSize).
 - `Proof (Lean):`
   definitions `Q43_lineSize`, `Q43_proofSize`, `Q43_lineCount`, `Q43_lineMax` and
-  lemma `Q43_lineSize_le_proofSize` (see `formal/WIP/Work.lean`).
+  lemma `Q43_lineSize_le_proofSize` (see `formal/WIP/Verified/Q43.lean`).
 - `Status:` proof (Lean code compiles).
 - `StepID:` Q43.S196-flat-eval-size-metric-formalize.
 - `InfoGain:` 1.
@@ -4838,11 +4838,11 @@ Main index: `P_vs_NP.md`.
 
 - `Lens:` Equivalence.
 - `Statement (Q43.S197-flat-eval-size-metric-tparam):`
-  IN `formal/WIP/Work.lean` the parameter $t:=\\log_2 M$ is introduced as `Nat.log2 M` and proven
+  IN `formal/WIP/Verified/Q43.lean` the parameter $t:=\\log_2 M$ is introduced as `Nat.log2 M` and proven
   basic estimate $t\\le M$ (Lemma `Q43_tParam_le`), which captures the string size relationship
   and depth parameter evaluation.
 - `Proof (Lean):`
-  definitions `Q43_tParam` and lemma `Q43_tParam_le` (see `formal/WIP/Work.lean`).
+  definitions `Q43_tParam` and lemma `Q43_tParam_le` (see `formal/WIP/Verified/Q43.lean`).
 - `Status:` proof (Lean code compiles).
 - `StepID:` Q43.S197-flat-eval-size-metric-tparam.
 - `InfoGain:` 1.
@@ -4860,11 +4860,11 @@ Main index: `P_vs_NP.md`.
 
 - `Lens:` Equivalence.
 - `Statement (Q43.S198-flat-eval-tparam-usage):`
-  IN `formal/WIP/Work.lean` it has been proven that $\\mathrm{lineMax}(\\pi)\\le\\mathrm{proofSize}(\\pi)$,
+  IN `formal/WIP/Verified/Q43.lean` it has been proven that $\\mathrm{lineMax}(\\pi)\\le\\mathrm{proofSize}(\\pi)$,
   which means $t=\\log_2(\\mathrm{lineMax}(\\pi))\\le\\mathrm{proofSize}(\\pi)$.
   This relates the parameter $t$ to the total size of the evidence.
 - `Proof (Lean):`
-  lemmas `Q43_lineMax_le_proofSize` and `Q43_tParam_le_proofSize` (see `formal/WIP/Work.lean`).
+  lemmas `Q43_lineMax_le_proofSize` and `Q43_tParam_le_proofSize` (see `formal/WIP/Verified/Q43.lean`).
 - `Status:` proof (Lean code compiles).
 - `StepID:` Q43.S198-flat-eval-tparam-usage.
 - `InfoGain:` 1.
@@ -4882,11 +4882,11 @@ Main index: `P_vs_NP.md`.
 
 - `Lens:` Equivalence.
 - `Statement (Q43.S199-flat-eval-tparam-ologs):`
-  IN `formal/WIP/Work.lean` it is proved that $\\log_2$ is monotonic on Nat and
+  IN `formal/WIP/Verified/Q43.lean` it is proved that $\\log_2$ is monotonic on Nat and
   $t=\\log_2(\\mathrm{lineMax})\\le\\log_2(\\mathrm{proofSize})$; this gives an explicit
   the relation $t \\le \\log_2 S$ when $S=\\mathrm{proofSize}$.
 - `Proof (Lean):`
-  lemmas `Q43_log2_mono` and `Q43_tParam_le_log2_proofSize` (see `formal/WIP/Work.lean`).
+  lemmas `Q43_log2_mono` and `Q43_tParam_le_log2_proofSize` (see `formal/WIP/Verified/Q43.lean`).
 - `Status:` proof (Lean code compiles).
 - `StepID:` Q43.S199-flat-eval-tparam-ologs.
 - `InfoGain:` 1.
@@ -5198,7 +5198,7 @@ Main index: `P_vs_NP.md`.
   $$A_3\\le 18,\\qquad A_4\\le 17.$$
 - `Proof:` the inequalities have been formally proven in Lean
   $s+16t+s/4\\le 18s$ and $s/4+16t\\le 17s$ at $t\\le s$
-  (see `formal/WIP/Work.lean`, Q43_Lemma69_A3_bound, Q43_Lemma69_A4_bound).
+  (see `formal/WIP/Verified/Q43.lean`, Q43_Lemma69_A3_bound, Q43_Lemma69_A4_bound).
 - `Status:` proof (explicit upper bounds for $A_3,A_4$).
 - `StepID:` Q43.S210-flat-eval-hr-depth-range-constants-recount.
 - `InfoGain:` 1.
@@ -5220,7 +5220,7 @@ Main index: `P_vs_NP.md`.
   $s+16t+s/4$ is limited by the formula
   $$9|S_g^*| + A_1|S_g^*| + A_2|S_g^*| + (s+16t+s/4)
     \\le (9+A_1+A_2)\\cdot 17s + 18s.$$
-- `Proof:` The above estimate is formally proven in Lean (see. `formal/WIP/Work.lean`,
+- `Proof:` The above estimate is formally proven in Lean (see. `formal/WIP/Verified/Q43.lean`,
   Q43_Lemma69_A12_bound), using explicit upper bounds $A_3\\le 18$ and $A_4\\le 17$.
 - `Status:` proof (reducing the total $A$ to $A_1,A_2$).
 - `StepID:` Q43.S211-flat-eval-hr-depth-range-constants-a1a2.
@@ -5242,7 +5242,7 @@ Main index: `P_vs_NP.md`.
   $\\Delta^a\\cdot\\Delta^b$ can be collapsed into $\\Delta^{a+b}$:
   $$(A_0\\log n')\\,\\Delta^a\\,\\Delta^b=(A_0\\log n')\\,\\Delta^{a+b}.$$
 - `Proof:` the formal lemma in Lean uses $\\Delta^{a+b}=\\Delta^a\\cdot\\Delta^b$
-  (see `formal/WIP/Work.lean`, Q43_Lemma69_A0_bound).
+  (see `formal/WIP/Verified/Q43.lean`, Q43_Lemma69_A0_bound).
 - `Status:` proof (aggregation of $A_0$ factor).
 - `StepID:` Q43.S212-flat-eval-hr-depth-range-constants-a0.
 - `InfoGain:` 1.
