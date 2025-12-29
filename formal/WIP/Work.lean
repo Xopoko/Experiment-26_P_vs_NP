@@ -2237,7 +2237,7 @@ def Q43_gap_end_lo_k (k : Nat) : Nat := 5 * 2 ^ (k - 2)
 def Q43_gap_end_hi_k (k : Nat) : Nat := 3 * 2 ^ (k - 1)
 def Q43_gap_range_list_k (k : Nat) : List Nat :=
   (List.range (Q43_gap_end_hi_k k - Q43_gap_end_lo_k k)).map (fun i => Q43_gap_end_lo_k k + i)
-def Q43_gap_min_ratio_k (k n0 : Nat) : Nat := Q43_grid_ratio n0
+def Q43_gap_min_ratio_k (_k n0 : Nat) : Nat := Q43_grid_ratio n0
 
 theorem Q43_gap_range :
     5 * 2 ^ (Q43_gap_k - 2) <= Q43_gap_n ∧
@@ -2482,17 +2482,19 @@ def Q43_gap_range_list : List Nat := Q43_gap_range_list_k Q43_gap_k
 
 def Q43_gap_min_ratio : Nat := Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ
 
+-- `decide` recurses through the 1024-element gap list; bump recursion depth locally.
+set_option maxRecDepth 2000 in
 theorem Q43_gap_min_ratio_le_all :
-    List.All (fun n => Q43_gap_min_ratio <= Q43_grid_ratio n) Q43_gap_range_list := by
+    ∀ n, n ∈ Q43_gap_range_list → Q43_gap_min_ratio <= Q43_grid_ratio n := by
   decide
 
 -- Q43.S252-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
 -- apply-params-poly-n0-ratio-lift-piecewise-gap-bound-generalize:
 -- parameterized gap scan instantiated at k=12.
+set_option maxRecDepth 2000 in
 theorem Q43_gap_min_ratio_le_all_k12 :
-    List.All
-        (fun n => Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ <= Q43_grid_ratio n)
-        (Q43_gap_range_list_k Q43_gap_k) := by
+    ∀ n, n ∈ Q43_gap_range_list_k Q43_gap_k →
+      Q43_gap_min_ratio_k Q43_gap_k Q43_gap_n_succ <= Q43_grid_ratio n := by
   decide
 
 -- Q43.S267-log2-jump-lemma:
@@ -2536,11 +2538,49 @@ theorem Q43_exists_sq_upper (n : Nat) : ∃ m, n < (m + 1) ^ 2 := by
   have hlt' : n < (n + 1) * (n + 1) := Nat.lt_of_lt_of_le hlt hmul
   simpa [Nat.pow_two] using hlt'
 
-def Q43_floorSqrt (n : Nat) : Nat :=
-  Nat.find (Q43_exists_sq_upper n)
+def Q43_floorSqrt : Nat → Nat
+  | 0 => 0
+  | n + 1 =>
+      let m := Q43_floorSqrt n
+      if _ : (m + 1) ^ 2 <= n + 1 then m + 1 else m
+
+-- Q43.S270-floor-sqrt-lower-bound:
+theorem Q43_floorSqrt_lower (n : Nat) : (Q43_floorSqrt n) ^ 2 <= n := by
+  induction n with
+  | zero =>
+      simp [Q43_floorSqrt]
+  | succ n ih =>
+      by_cases h : (Q43_floorSqrt n + 1) ^ 2 <= n + 1
+      · simp [Q43_floorSqrt, h]
+      ·
+        have hle : (Q43_floorSqrt n) ^ 2 <= n + 1 :=
+          Nat.le_trans ih (Nat.le_succ n)
+        simpa [Q43_floorSqrt, h] using hle
 
 theorem Q43_floorSqrt_upper (n : Nat) : n < (Q43_floorSqrt n + 1) ^ 2 := by
-  simpa [Q43_floorSqrt] using (Nat.find_spec (Q43_exists_sq_upper n))
+  induction n with
+  | zero =>
+      simp [Q43_floorSqrt]
+  | succ n ih =>
+      by_cases h : (Q43_floorSqrt n + 1) ^ 2 <= n + 1
+      ·
+        have hle : n + 1 <= (Q43_floorSqrt n + 1) ^ 2 :=
+          (Nat.succ_le_iff).mpr ih
+        have h_eq : n + 1 = (Q43_floorSqrt n + 1) ^ 2 :=
+          Nat.le_antisymm hle h
+        have hlt : (Q43_floorSqrt n + 1) ^ 2 < (Q43_floorSqrt n + 2) ^ 2 :=
+          Nat.pow_lt_pow_left (Nat.lt_succ_self (Q43_floorSqrt n + 1)) (by decide)
+        have h' : n + 1 < (Q43_floorSqrt n + 2) ^ 2 := by
+          simpa [h_eq] using hlt
+        simpa [Q43_floorSqrt, h] using h'
+      ·
+        have hlt : n + 1 < (Q43_floorSqrt n + 1) ^ 2 :=
+          Nat.lt_of_not_ge h
+        simpa [Q43_floorSqrt, h] using hlt
+
+theorem Q43_floorSqrt_bounds (n : Nat) :
+    (Q43_floorSqrt n) ^ 2 <= n ∧ n < (Q43_floorSqrt n + 1) ^ 2 := by
+  exact ⟨Q43_floorSqrt_lower n, Q43_floorSqrt_upper n⟩
 
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
