@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S266-bitlength-log2-doc
-- `Do-not-repeat (next 2 runs):` Q43.S266-bitlength-log2-doc, Q43.S265-gap-drop-k26-k30
+- `LastStepID:` Q39.S136-globalfixedpair-fixedorientation-contiguous-shift-alt49
+- `Do-not-repeat (next 2 runs):` Q39.S136-globalfixedpair-fixedorientation-contiguous-shift-alt49, Q43.S266-bitlength-log2-doc
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q43: log2 convention tied to bit_length (Python docs); next is a Lean lemma to lift all k.
-Q39: alt48shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt49shift.
+Q39: alt49shift for contiguous blocks with fixedorientation still gives rank 2; the next step is alt50shift.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q39: alt48shift for contiguous blocks with fixedorientation still gives rank 2; 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence->Invariant->Communication/Rank->Invariant->Communication/Rank
+Latest:Communication/Rank->Equivalence->Invariant->Communication/Rank->Invariant

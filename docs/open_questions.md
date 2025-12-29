@@ -11,19 +11,19 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q39 (Tseitin(Grid): depth gap for polynomial size in bounded-depth Frege):**
   - `Priority:` P1
   - `Status:` ACTIVE
-  - `LastStepID:` Q39.S135-globalfixedpair-fixedorientation-contiguous-shift-alt48
-  - `NextStepID:` Q39.S136-globalfixedpair-fixedorientation-contiguous-shift-alt49
+  - `LastStepID:` Q39.S136-globalfixedpair-fixedorientation-contiguous-shift-alt49
+  - `NextStepID:` Q39.S137-globalfixedpair-fixedorientation-contiguous-shift-alt50
   - `LeanTarget:` formal/WIP/Work.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Communication/rank (rank-2 witness).
   - `Artifact:` Counterexample (fixed orientation).
-  - `Update:` toy-counterexample for $k=2$: another cyclic alt-shift (alt48)
+  - `Update:` toy-counterexample for $k=2$: another cyclic alt-shift (alt49)
     with a global fixed-pair and fixed orientation still gives two non-zero different projections, rank 2.
     See `formal/WIP/Work.lean`.
-    (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt48_vec1/vec2).
-  - `Use:` the next test is the next alt-shift (alt49) for contiguous blocks.
+    (Q39_globalfixedpair_fixedorientation_contiguous_shift_alt49_vec1/vec2).
+  - `Use:` the next test is the next alt-shift (alt50) for contiguous blocks.
   - `PublicSurface:` `formal/WIP/Work.lean`
-    (Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt48).
+    (Q39_rank2_globalfixedpair_fixedorientation_contiguous_shift_alt49).
   - `File:` `formal/WIP/Work.lean`. `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? yes (toy-rank, combinatorics).
