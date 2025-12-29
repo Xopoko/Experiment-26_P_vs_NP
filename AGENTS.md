@@ -219,14 +219,53 @@ Requirements:
 
 ## 9) Lenses (choose exactly one per run)
 
-1. Equivalence / translation (reformulate)
+### Core lenses (default; use most of the time)
+
+1. Equivalence / translation (reformulate the target)
 2. Compression / canonization (normal forms)
-3. Invariant (monotone parameter)
+3. Invariant (monotone parameter / potential function)
 4. Duality (NP vs coNP, search vs decision)
-5. Trade‑off (time/space, depth/size, randomness/advice)
+5. Trade-off (time/space, depth/size, randomness/advice)
 6. Communication / rank (matrices, protocols, lower bounds)
 7. Algebraization (arithmetization, ideals, IPS/PC framing)
 8. Model stress test (oracles / relativization)
+
+### Aux lenses (allowed, but limited to avoid drift)
+
+Rule: **Aux lenses must be ≤ 30% of runs** overall.
+Do not use the same aux lens in consecutive runs.
+
+9. Library mining (lemma extraction)
+   - goal: extract “bottleneck” lemmas/defs that unblock multiple proofs
+   - typical artifact: Proof / Reduction
+
+10. Automation / tactic engineering
+   - goal: stabilize and shorten proofs (`simp` sets, `aesop` rules, helper lemmas)
+   - typical artifact: Proof (with measurable simplification)
+
+11. Specification / definitions audit
+   - goal: strengthen types/definitions (remove “discipline-only” invariants; prefer `Fin n → _` / `Vector _ n`)
+   - typical artifact: Proof (refactor) / Reduction (equivalence old↔new)
+
+12. Counterexample / adversarial testing
+   - goal: actively search minimal counterexamples to candidate statements
+   - typical artifact: Counterexample / Toy computation
+
+13. Parameter sweep / empirical map
+   - goal: map where a claim holds/fails in bounded regimes (small n, restricted models)
+   - typical artifact: Toy computation (+ short interpretation)
+
+14. Complexity bookkeeping / asymptotics hygiene
+   - goal: disambiguate growth (bases of log/exp, domains, hidden parameters); extract reusable growth lemmas
+   - typical artifact: Proof / Exact citation
+
+15. Meta-reduction planning (dependency graph / bottleneck analysis)
+   - goal: build a small dependency graph and pick the highest-leverage next lemma/definition
+   - typical artifact: Reduction/Equivalence (Exact) or docs note that updates NextStepID(s)
+
+16. Barrier-driven design
+   - goal: design steps with an explicit intended “exit point” from barriers (or a certified barrier hit)
+   - typical artifact: Barrier certificate (often paired with Proof/Toy in a later run)
 
 ---
 
