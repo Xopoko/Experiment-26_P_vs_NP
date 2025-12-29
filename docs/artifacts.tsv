@@ -205,3 +205,4 @@ Q43.S265-gap-drop-k26-k30	Toy	formal/WIP/Work.lean	PENDING	extend gap-drop check
 Q43.S266-bitlength-log2-doc	Exact citation	formal/WIP/Work.lean	PENDING	Python int.bit_length gives 2**(k-1) <= |x| < 2**k
 Q39.S136-globalfixedpair-fixedorientation-contiguous-shift-alt49	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt49-shift still give rank 2
 Q43.S267-log2-jump-lemma	Proof	formal/WIP/Work.lean	PENDING	log2 jump from explicit bounds on n^2 and (n+1)^2
+Q39.S137-globalfixedpair-fixedorientation-contiguous-shift-alt50	Counterexample	formal/WIP/Work.lean	PENDING	contiguous blocks alt50-shift still give rank 2
