@@ -1742,11 +1742,11 @@ theorem Q43_nk_sq_ge_pow_sub (k : Nat) :
   have hle : 2 ^ (2 * k + 1) <= (Q43_nk k) ^ 2 + 2 ^ (k + 2) := by
     have hsq : (Q43_nk k + 1) ^ 2 = (Q43_nk k) ^ 2 + (2 * Q43_nk k + 1) := by
       simp [Nat.pow_two, Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm,
-        Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
+        Nat.add_assoc, Nat.add_left_comm, Nat.add_comm, Nat.two_mul]
     have h2 : (Q43_nk k) ^ 2 + (2 * Q43_nk k + 1) <= (Q43_nk k) ^ 2 + 2 ^ (k + 2) :=
       Nat.add_le_add_left (Q43_two_nk_add_one_le_pow k) _
     have hstep : (Q43_nk k + 1) ^ 2 <= (Q43_nk k) ^ 2 + 2 ^ (k + 2) := by
-      exact Eq.le.trans hsq.le h2
+      simpa [hsq] using h2
     exact Nat.le_trans hlow hstep
   exact (Nat.sub_le_iff_le_add).2 hle
 
@@ -1763,7 +1763,7 @@ theorem Q43_pow6_succ_le_mul4 (k : Nat) (hk : 4 <= k) :
     have h'' : 4 * (2 * k + 3) <= 8 * k + 12 := by
       simp [Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm, Nat.add_assoc]
     have h''' : 8 * k + (2 * k + 5) = 5 * (2 * k + 1) := by
-      simp [Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm, Nat.add_assoc]
+      omega
     exact Nat.le_trans h'' (by simpa [h'''] using h')
   have hpow :
       (4 * (2 * k + 3)) ^ 6 <= (5 * (2 * k + 1)) ^ 6 :=
@@ -1774,12 +1774,19 @@ theorem Q43_pow6_succ_le_mul4 (k : Nat) (hk : 4 <= k) :
   have hpow'' : 4096 * (2 * k + 3) ^ 6 <= 16384 * (2 * k + 1) ^ 6 :=
     Nat.le_trans hpow' (Nat.mul_le_mul_right _ hcoeff)
   have hpow4 : 16384 * (2 * k + 1) ^ 6 = 4096 * (4 * (2 * k + 1) ^ 6) := by
-    simp [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm]
+    have hconst : 16384 = 4096 * 4 := by decide
+    calc
+      16384 * (2 * k + 1) ^ 6 = (4096 * 4) * (2 * k + 1) ^ 6 := by
+        simpa [hconst]
+      _ = 4096 * (4 * (2 * k + 1) ^ 6) := by
+        simpa using (Nat.mul_assoc 4096 4 ((2 * k + 1) ^ 6))
   have hfinal : 4096 * (2 * k + 3) ^ 6 <= 4096 * (4 * (2 * k + 1) ^ 6) := by
     simpa [hpow4] using hpow''
   have : (2 * k + 3) ^ 6 <= 4 * (2 * k + 1) ^ 6 :=
     Nat.le_of_mul_le_mul_left hfinal (by decide : 0 < 4096)
-  simpa [Nat.mul_add, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using this
+  have hrewrite : 2 * (k + 1) + 1 = 2 * k + 3 := by
+    omega
+  simpa [hrewrite] using this
 
 theorem Q43_pow6_le_three_pow2_ge13 {k : Nat} (hk : 13 <= k) :
     (2 * k + 1) ^ 6 <= 3 * 2 ^ (2 * k + 1) := by
@@ -1802,9 +1809,31 @@ theorem Q43_pow6_le_three_pow2_ge13 {k : Nat} (hk : 13 <= k) :
           Nat.mul_le_mul_left 4 ih
         have hpow :
             4 * (3 * 2 ^ (2 * (13 + m) + 1)) = 3 * 2 ^ (2 * ((13 + m) + 1) + 1) := by
-          simp [Nat.pow_add, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm, Nat.add_assoc,
-            Nat.add_left_comm, Nat.add_comm]
-        exact Nat.le_trans hstep (Nat.le_trans ih4 (by simpa [hpow]))
+          have hpow_add :
+              2 ^ ((2 * (13 + m) + 1) + 2) = 2 ^ (2 * (13 + m) + 1) * 2 ^ 2 := by
+            simpa [Nat.add_assoc] using (Nat.pow_add 2 (2 * (13 + m) + 1) 2)
+          have hpow_mul : 2 ^ (2 * (13 + m) + 1) * 4 = 2 ^ ((2 * (13 + m) + 1) + 2) := by
+            calc
+              2 ^ (2 * (13 + m) + 1) * 4
+                  = 2 ^ (2 * (13 + m) + 1) * 2 ^ 2 := by
+                      simp [Nat.pow_two]
+              _ = 2 ^ ((2 * (13 + m) + 1) + 2) := by
+                      symm
+                      exact hpow_add
+          have hexp : (2 * (13 + m) + 1) + 2 = 2 * ((13 + m) + 1) + 1 := by
+            omega
+          calc
+            4 * (3 * 2 ^ (2 * (13 + m) + 1))
+                = 3 * (2 ^ (2 * (13 + m) + 1) * 4) := by
+                    simp [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm]
+            _ = 3 * 2 ^ ((2 * (13 + m) + 1) + 2) := by
+                    simp [hpow_mul]
+            _ = 3 * 2 ^ (2 * ((13 + m) + 1) + 1) := by
+                    simpa [hexp]
+        have hpow_le :
+            4 * (3 * 2 ^ (2 * (13 + m) + 1)) <= 3 * 2 ^ (2 * ((13 + m) + 1) + 1) :=
+          Nat.le_of_eq hpow
+        exact Nat.le_trans hstep (Nat.le_trans ih4 hpow_le)
   simpa [hk'] using hmain
 
 theorem Q43_pow2_ge_two_mul_add_ge13 {k : Nat} (hk : 13 <= k) : 2 * k + 5 <= 2 ^ k := by
@@ -1819,20 +1848,73 @@ theorem Q43_pow2_ge_two_mul_add_ge13 {k : Nat} (hk : 13 <= k) : 2 * k + 5 <= 2 ^
         decide
     | succ m ih =>
         have hstep1 : 2 * (13 + m.succ) + 5 = (2 * (13 + m) + 5) + 2 := by
-          simp [Nat.mul_add, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
+          omega
         have hstep2 : 2 ^ (13 + m.succ) = 2 * 2 ^ (13 + m) := by
-          simp [Nat.pow_succ, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc, Nat.add_assoc]
+          calc
+            2 ^ (13 + m.succ) = 2 ^ ((13 + m) + 1) := by
+              simp [Nat.succ_eq_add_one, Nat.add_assoc]
+            _ = 2 ^ (13 + m) * 2 := by
+              simpa using (Nat.pow_add_one 2 (13 + m))
+            _ = 2 * 2 ^ (13 + m) := by
+              simp [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
         have hmul : (2 * (13 + m) + 5) + 2 <= 2 * 2 ^ (13 + m) := by
-          have : (2 * (13 + m) + 5) + 2 <= (2 * (13 + m) + 5) + (2 * (13 + m) + 5) := by
-            have hpos : 2 <= 2 * (13 + m) + 5 := by decide
-            exact Nat.add_le_add_left hpos _
-          have hmul2 : (2 * (13 + m) + 5) + (2 * (13 + m) + 5) = 2 * (2 * (13 + m) + 5) := by
-            simp [Nat.two_mul, Nat.add_assoc]
+          have hpos : 2 <= 2 * (13 + m) + 5 := by
+            exact Nat.le_trans (by decide : 2 <= 5) (Nat.le_add_left 5 (2 * (13 + m)))
+          have hdouble :
+              (2 * (13 + m) + 5) + 2 <= (2 * (13 + m) + 5) + (2 * (13 + m) + 5) :=
+            Nat.add_le_add_left hpos _
           have hmul3 : 2 * (2 * (13 + m) + 5) <= 2 * 2 ^ (13 + m) :=
             Nat.mul_le_mul_left 2 ih
-          exact Nat.le_trans (by simpa [hmul3, hmul2] using hmul3) (by simpa [hmul2] using hmul3)
+          have hmul3' :
+              (2 * (13 + m) + 5) + (2 * (13 + m) + 5) <= 2 * 2 ^ (13 + m) := by
+            simpa [Nat.two_mul] using hmul3
+          exact Nat.le_trans hdouble hmul3'
         simpa [hstep1, hstep2, Nat.mul_add, Nat.add_assoc] using hmul
   simpa [hk'] using hmain
+
+-- (a+1)^5 - a^5 >= 5·a^4, via a^(n+1) + (n+1)·a^n <= (a+1)^(n+1).
+theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :
+    a ^ (n + 1) + (n + 1) * a ^ n <= (a + 1) ^ (n + 1) := by
+  induction n with
+  | zero =>
+      simp [Nat.pow_succ, Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm]
+  | succ n ih =>
+      have ih_mul :
+          a * (a ^ (n + 1) + (n + 1) * a ^ n) <= a * (a + 1) ^ (n + 1) :=
+        Nat.mul_le_mul_left a ih
+      have hmono : a ^ (n + 1) <= (a + 1) ^ (n + 1) :=
+        Q43_pow_le_pow_of_le (a := a) (b := a + 1) (n := n + 1) (Nat.le_succ _)
+      have ih' : a ^ (n + 2) + (n + 2) * a ^ (n + 1) <= a * (a + 1) ^ (n + 1) + (a + 1) ^ (n + 1) := by
+        have h1 : a ^ (n + 2) + (n + 1) * a ^ (n + 1) <= a * (a + 1) ^ (n + 1) := by
+          simpa [Nat.pow_succ, Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm,
+            Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using ih_mul
+        have h2 :
+            a ^ (n + 2) + (n + 1) * a ^ (n + 1) + a ^ (n + 1) <=
+              a * (a + 1) ^ (n + 1) + (a + 1) ^ (n + 1) :=
+          Nat.add_le_add h1 hmono
+        -- rewrite `(n+2)·a^(n+1)` as `(n+1)·a^(n+1) + a^(n+1)`
+        have hmul_succ :
+            (n + 2) * a ^ (n + 1) = (n + 1) * a ^ (n + 1) + a ^ (n + 1) := by
+          calc
+            (n + 2) * a ^ (n + 1) = (n + 1 + 1) * a ^ (n + 1) := by
+              simp [Nat.add_assoc]
+            _ = (n + 1) * a ^ (n + 1) + 1 * a ^ (n + 1) := by
+              simpa [Nat.add_assoc] using (Nat.add_mul (n + 1) 1 (a ^ (n + 1)))
+            _ = (n + 1) * a ^ (n + 1) + a ^ (n + 1) := by
+              simp
+        simpa [Nat.add_assoc, hmul_succ] using h2
+      -- rewrite the RHS as `(a+1)^(n+2)`
+      simpa [Nat.pow_succ, Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm,
+        Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using ih'
+
+theorem Q43_pow5_sub_pow5_ge_five_pow4 (a : Nat) :
+    5 * a ^ 4 <= (a + 1) ^ 5 - a ^ 5 := by
+  have hmono : a ^ 5 <= (a + 1) ^ 5 :=
+    Q43_pow_le_pow_of_le (a := a) (b := a + 1) (n := 5) (Nat.le_succ _)
+  have hmain : a ^ 5 + 5 * a ^ 4 <= (a + 1) ^ 5 := by
+    simpa using (Q43_pow_succ_add_mul_le_succ_pow a 4)
+  refine (Nat.le_sub_iff_add_le hmono).2 ?_
+  simpa [Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using hmain
 
 theorem Q43_key_ineq_ge13 {k : Nat} (hk : 13 <= k) :
     (2 * k) * (2 ^ (k + 2) + (2 * k + 1) ^ 5)
@@ -1847,8 +1929,18 @@ theorem Q43_key_ineq_ge13 {k : Nat} (hk : 13 <= k) :
   have hexp : (2 * k + 5) * 2 ^ (k + 2) <= 2 ^ (2 * k + 2) := by
     have hmul : (2 * k + 5) * 2 ^ (k + 2) <= (2 ^ k) * 2 ^ (k + 2) :=
       Nat.mul_le_mul_right _ hpow2
-    simpa [Nat.pow_add, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm, Nat.add_assoc,
-      Nat.add_left_comm, Nat.add_comm, Nat.mul_add, Nat.add_mul] using hmul
+    have hpow : (2 ^ k) * 2 ^ (k + 2) = 2 ^ (2 * k + 2) := by
+      calc
+        (2 ^ k) * 2 ^ (k + 2) = 2 ^ (k + (k + 2)) := by
+          simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using (Nat.pow_add 2 k (k + 2)).symm
+        _ = 2 ^ (2 * k + 2) := by
+          simp [Nat.add_assoc, Nat.add_left_comm, Nat.add_comm, Nat.two_mul]
+    exact Nat.le_trans hmul (by simpa [hpow])
+  have h5B : 5 * 2 ^ (k + 2) <= 2 ^ (2 * k + 2) := by
+    have h5 : 5 <= 2 * k + 5 := Nat.le_add_left 5 (2 * k)
+    have h5mul : 5 * 2 ^ (k + 2) <= (2 * k + 5) * 2 ^ (k + 2) :=
+      Nat.mul_le_mul_right _ h5
+    exact Nat.le_trans h5mul hexp
   have hexp' : (2 * k) * 2 ^ (k + 2) <= 2 ^ (2 * k + 2) - 5 * 2 ^ (k + 2) := by
     have hsum :
         (2 * k) * 2 ^ (k + 2) + 5 * 2 ^ (k + 2) <= 2 ^ (2 * k + 2) := by
@@ -1867,8 +1959,30 @@ theorem Q43_key_ineq_ge13 {k : Nat} (hk : 13 <= k) :
     exact Nat.add_le_add hexp' hpoly
   have hpow : (2 ^ (2 * k + 2) - 5 * 2 ^ (k + 2)) + 3 * 2 ^ (2 * k + 1) =
       5 * (2 ^ (2 * k + 1) - 2 ^ (k + 2)) := by
-    simp [Nat.pow_succ, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc, Nat.add_assoc,
-      Nat.add_left_comm, Nat.add_comm, Nat.mul_add, Nat.add_mul, Nat.two_mul]
+    let A : Nat := 2 ^ (2 * k + 1)
+    let B : Nat := 2 ^ (k + 2)
+    have hA : 2 ^ (2 * k + 2) = 2 * A := by
+      simp [A, Nat.pow_succ, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
+    have h5B' : 5 * B <= 2 * A := by
+      simpa [A, B, hA] using h5B
+    calc
+      (2 ^ (2 * k + 2) - 5 * B) + 3 * A = (2 * A - 5 * B) + 3 * A := by
+        simpa [A, B, hA]
+      _ = 3 * A + (2 * A - 5 * B) := by
+        simpa [Nat.add_comm]
+      _ = 3 * A + 2 * A - 5 * B := by
+        simpa [Nat.add_assoc] using (Nat.add_sub_assoc h5B' (n := 3 * A)).symm
+      _ = (3 + 2) * A - 5 * B := by
+        have h : 3 * A + 2 * A = (3 + 2) * A := by
+          simpa [Nat.add_comm, Nat.add_left_comm, Nat.add_assoc] using (Nat.add_mul 3 2 A).symm
+        simpa [h]
+      _ = 5 * A - 5 * B := by
+        simp
+      _ = 5 * (A - B) := by
+        symm
+        simp [Nat.mul_sub_left_distrib]
+      _ = 5 * (2 ^ (2 * k + 1) - 2 ^ (k + 2)) := by
+        simp [A, B]
   simpa [hpow] using hsum
 
 theorem Q43_grid_ratio_drop_nk_of_ge {k : Nat} (hk : 12 <= k) :
@@ -1877,7 +1991,7 @@ theorem Q43_grid_ratio_drop_nk_of_ge {k : Nat} (hk : 12 <= k) :
   · subst hk12
     simpa [Q43_nk_eq_gap_n12, Q43_gap_n, Q43_gap_n_succ] using Q43_grid_ratio_drop_gap
   ·
-    have hk13 : 13 <= k := Nat.succ_le_iff.2 (Nat.lt_of_le_of_ne hk hk12)
+    have hk13 : 13 <= k := Nat.succ_le_iff.2 (Nat.lt_of_le_of_ne hk (Ne.symm hk12))
     have hk1 : 1 <= k := Nat.le_trans (by decide : 1 <= 13) hk13
     have hlog := Q43_log2_jump_nk (k := k) hk1
     let n : Nat := Q43_nk k
@@ -1908,73 +2022,93 @@ theorem Q43_grid_ratio_drop_nk_of_ge {k : Nat} (hk : 12 <= k) :
         Nat.mul_le_mul_left 5 hn0
       exact Nat.le_trans hmul2 hmul3
     -- turn the k-bound into the cross-multiplication inequality needed for division comparison
-    have hdiff : (2 * n + 1 + (2 * k + 1) ^ 5) * (2 * k) ^ 5
-        <= Q43_grid_size n * ((2 * k + 1) ^ 5 - (2 * k) ^ 5) := by
-      have hd : (2 * k) ^ 5 <= (2 * k + 1) ^ 5 :=
-        Q43_pow_le_pow_of_le (Nat.le_succ _)
-      have hsub : (2 * k + 1) ^ 5 - (2 * k) ^ 5 >= 5 * (2 * k) ^ 4 := by
-        -- (a+1)^5 - a^5 ≥ 5 a^4, with a = 2k
-        have : (2 * k) ^ 5 + 5 * (2 * k) ^ 4 <= (2 * k + 1) ^ 5 := by
-          -- expand (a+1)^5 = a^5 + 5a^4 + ...
-          have hpow :
-              (2 * k + 1) ^ 5 =
-                (2 * k) ^ 5 + 5 * (2 * k) ^ 4 + 10 * (2 * k) ^ 3 + 10 * (2 * k) ^ 2
-                  + 5 * (2 * k) + 1 := by
-            simp [Nat.pow_succ, Nat.pow_two, Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm,
-              Nat.mul_comm, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
-          have hle :
-              (2 * k) ^ 5 + 5 * (2 * k) ^ 4
-                <= (2 * k) ^ 5 + 5 * (2 * k) ^ 4
-                    + (10 * (2 * k) ^ 3 + 10 * (2 * k) ^ 2 + 5 * (2 * k) + 1) :=
-            Nat.le_add_right _ _
-          exact Nat.le_trans hle (by simpa [hpow, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using hpow.symm.le)
-        have hle : 5 * (2 * k) ^ 4 <= (2 * k + 1) ^ 5 - (2 * k) ^ 5 :=
-          (Nat.sub_le_iff_le_add).2 (by simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using this)
-        exact hle
-      have hmul : (2 * n + 1 + (2 * k + 1) ^ 5) * (2 * k) ^ 5 <=
-          (2 * n + 1 + (2 * k + 1) ^ 5) * ((2 * k + 1) ^ 5 - (2 * k) ^ 5) := by
-        exact Nat.mul_le_mul_left _ (Nat.le_trans hsub (Nat.sub_le _ _))
-      -- use 5*grid_size n bound to dominate the numerator
-      have hsize : (2 * n + 1 + (2 * k + 1) ^ 5) * (2 * k) <= 5 * Q43_grid_size n := by
-        simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm, Nat.mul_add, Nat.add_mul, Nat.add_assoc] using hkey'
-      -- scale the (2*k) bound up to power 5
-      have : (2 * n + 1 + (2 * k + 1) ^ 5) * (2 * k) ^ 5 <= 5 * Q43_grid_size n * (2 * k) ^ 4 := by
-        -- (2*k)^5 = (2*k)^(4+1)
-        simpa [Nat.pow_succ, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using
-          (Nat.mul_le_mul_right ((2 * k) ^ 4) hsize)
-      -- (2*k)^4 cancels with the 5·(2*k)^4 in the log-jump gap
-      have hpow4 : 5 * Q43_grid_size n * (2 * k) ^ 4 <= Q43_grid_size n * ((2 * k + 1) ^ 5 - (2 * k) ^ 5) := by
-        exact Nat.mul_le_mul_left _ (Nat.le_trans hsub (Nat.sub_le _ _))
-      exact Nat.le_trans this hpow4
-    -- conclude via division comparison at fixed denominator (2k)^5·(2k+1)^5
-    have hd0 : 0 < (2 * k) ^ 5 := Nat.pow_pos (Nat.mul_pos (by decide) (Nat.pos_of_gt (Nat.lt_of_lt_of_le (by decide : 0 < 13) hk13))) 5
-    have hd1 : 0 < (2 * k + 1) ^ 5 := Nat.pow_pos (by decide) 5
-    have hdiv :
-        (Q43_grid_size (n + 1) + (2 * k + 1) ^ 5) / (2 * k + 1) ^ 5
-          <= Q43_grid_size n / (2 * k) ^ 5 := by
-      -- scale to common denominator and apply monotonicity
-      have hmul' :
-          (2 * k) ^ 5 * (Q43_grid_size (n + 1) + (2 * k + 1) ^ 5) <=
-            Q43_grid_size n * (2 * k + 1) ^ 5 := by
-        simpa [Q43_grid_size, Nat.pow_two, Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm,
-          Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using hdiff
-      have hscaled := Nat.div_le_div_right (c := (2 * k) ^ 5 * (2 * k + 1) ^ 5) hmul'
-      -- cancel the common factors to recover the original division statement
-      simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm,
-        Nat.mul_div_mul_left (m := (2 * k) ^ 5) (n := Q43_grid_size (n + 1) + (2 * k + 1) ^ 5) (k := (2 * k + 1) ^ 5) hd0,
-        Nat.mul_div_mul_right (m := (2 * k + 1) ^ 5) (n := Q43_grid_size n) (k := (2 * k) ^ 5) hd1] using hscaled
+    let d0 : Nat := (2 * k) ^ 5
+    let d1 : Nat := (2 * k + 1) ^ 5
+    have hd01 : d0 <= d1 :=
+      Q43_pow_le_pow_of_le (a := 2 * k) (b := 2 * k + 1) (n := 5) (Nat.le_succ _)
+    have hgap : 5 * (2 * k) ^ 4 <= d1 - d0 := by
+      simpa [d0, d1, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using
+        (Q43_pow5_sub_pow5_ge_five_pow4 (a := 2 * k))
+    have hgap' : 5 * Q43_grid_size n * (2 * k) ^ 4 <= Q43_grid_size n * (d1 - d0) := by
+      have := Nat.mul_le_mul_left (Q43_grid_size n) hgap
+      simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using this
+    have hkey_pow : d0 * (2 * n + 1 + d1) <= 5 * Q43_grid_size n * (2 * k) ^ 4 := by
+      have hmul : (2 * k) ^ 4 * ((2 * k) * (2 * n + 1 + d1)) <= (2 * k) ^ 4 * (5 * Q43_grid_size n) :=
+        Nat.mul_le_mul_left ((2 * k) ^ 4) hkey'
+      have hmul' : d0 * (2 * n + 1 + d1) <= (2 * k) ^ 4 * (5 * Q43_grid_size n) := by
+        simpa [d0, Nat.pow_succ, Nat.mul_assoc] using hmul
+      simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using hmul'
+    have hdiff : d0 * (2 * n + 1 + d1) <= Q43_grid_size n * (d1 - d0) :=
+      Nat.le_trans hkey_pow hgap'
+    have hgrid_succ : Q43_grid_size (n + 1) = Q43_grid_size n + (2 * n + 1) := by
+      simp [Q43_grid_size, Nat.pow_two, Nat.two_mul, Nat.mul_add, Nat.add_mul, Nat.mul_assoc,
+        Nat.mul_left_comm, Nat.mul_comm, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
+    have hcross : d0 * (Q43_grid_size (n + 1) + d1) <= Q43_grid_size n * d1 := by
+      have hplus :
+          d0 * Q43_grid_size n + d0 * (2 * n + 1 + d1)
+            <= d0 * Q43_grid_size n + Q43_grid_size n * (d1 - d0) :=
+        Nat.add_le_add_left hdiff (d0 * Q43_grid_size n)
+      have hleft :
+          d0 * (Q43_grid_size (n + 1) + d1) =
+            d0 * Q43_grid_size n + d0 * (2 * n + 1 + d1) := by
+        calc
+          d0 * (Q43_grid_size (n + 1) + d1)
+              = d0 * (Q43_grid_size n + (2 * n + 1) + d1) := by
+                  simp [hgrid_succ, Nat.add_assoc]
+          _ = d0 * (Q43_grid_size n + (2 * n + 1 + d1)) := by
+                  simp [Nat.add_assoc]
+          _ = d0 * Q43_grid_size n + d0 * (2 * n + 1 + d1) := by
+                  simp [Nat.mul_add, Nat.add_assoc]
+      have hright :
+          d0 * Q43_grid_size n + Q43_grid_size n * (d1 - d0) = Q43_grid_size n * d1 := by
+        have hadd : d1 - d0 + d0 = d1 := Nat.sub_add_cancel hd01
+        have hfirst : d0 * Q43_grid_size n = Q43_grid_size n * d0 := by
+          simpa using (Nat.mul_comm d0 (Q43_grid_size n))
+        calc
+          d0 * Q43_grid_size n + Q43_grid_size n * (d1 - d0)
+              = Q43_grid_size n * d0 + Q43_grid_size n * (d1 - d0) := by
+                  simpa [hfirst]
+          _ = Q43_grid_size n * (d0 + (d1 - d0)) := by
+                  symm
+                  simp [Nat.mul_add, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
+          _ = Q43_grid_size n * (d1 - d0 + d0) := by
+                  simp [Nat.add_assoc, Nat.add_left_comm, Nat.add_comm]
+          _ = Q43_grid_size n * d1 := by
+                  simp [hadd]
+      calc
+        d0 * (Q43_grid_size (n + 1) + d1)
+            = d0 * Q43_grid_size n + d0 * (2 * n + 1 + d1) := hleft
+        _ <= d0 * Q43_grid_size n + Q43_grid_size n * (d1 - d0) := hplus
+        _ = Q43_grid_size n * d1 := hright
+    -- conclude via division comparison at fixed denominator d0·d1
+    have hkpos : 0 < k := Nat.lt_of_lt_of_le (by decide : 0 < 13) hk13
+    have h2kpos : 0 < 2 * k := Nat.mul_pos (by decide : 0 < 2) hkpos
+    have hd0 : 0 < d0 := by
+      simpa [d0] using (Nat.pow_pos h2kpos : 0 < (2 * k) ^ 5)
+    have hd1 : 0 < d1 := by
+      have : 0 < 2 * k + 1 := Nat.succ_pos _
+      simpa [d1] using (Nat.pow_pos this : 0 < (2 * k + 1) ^ 5)
+    have hdiv : (Q43_grid_size (n + 1) + d1) / d1 <= Q43_grid_size n / d0 := by
+      let D : Nat := d0 * d1
+      have hscaled := Nat.div_le_div_right (c := D) (by simpa [D] using hcross)
+      have hleft : (d0 * (Q43_grid_size (n + 1) + d1)) / D = (Q43_grid_size (n + 1) + d1) / d1 := by
+        simpa [D, Nat.mul_assoc] using
+          (Nat.mul_div_mul_left (m := d0) (n := Q43_grid_size (n + 1) + d1) (k := d1) hd0)
+      have hright : (Q43_grid_size n * d1) / D = Q43_grid_size n / d0 := by
+        simpa [D, Nat.mul_assoc] using
+          (Nat.mul_div_mul_right (m := d1) (n := Q43_grid_size n) (k := d0) hd1)
+      simpa [hleft, hright] using hscaled
     have hq :
         Q43_grid_ratio (n + 1) + 1 <= Q43_grid_ratio n := by
-      have hadd : (Q43_grid_size (n + 1) + (2 * k + 1) ^ 5) / (2 * k + 1) ^ 5 =
-          Q43_grid_size (n + 1) / (2 * k + 1) ^ 5 + 1 := by
-        simpa [Nat.add_comm] using Nat.add_div_right (Q43_grid_size (n + 1)) (z := (2 * k + 1) ^ 5) hd1
+      have hadd : (Q43_grid_size (n + 1) + d1) / d1 = Q43_grid_size (n + 1) / d1 + 1 := by
+        simpa [Nat.add_comm] using Nat.add_div_right (Q43_grid_size (n + 1)) (z := d1) hd1
       -- rewrite Q43_grid_ratio using the log2-jump equalities
-      have hr1 : Q43_grid_ratio (n + 1) = Q43_grid_size (n + 1) / (2 * k + 1) ^ 5 := by
-        simp [Q43_grid_ratio, hlog_succ]
-      have hr0 : Q43_grid_ratio n = Q43_grid_size n / (2 * k) ^ 5 := by
-        simp [Q43_grid_ratio, hlog_n]
+      have hr1 : Q43_grid_ratio (n + 1) = Q43_grid_size (n + 1) / d1 := by
+        simp [Q43_grid_ratio, hlog_succ, d1]
+      have hr0 : Q43_grid_ratio n = Q43_grid_size n / d0 := by
+        simp [Q43_grid_ratio, hlog_n, d0]
       -- combine
-      have : Q43_grid_size (n + 1) / (2 * k + 1) ^ 5 + 1 <= Q43_grid_size n / (2 * k) ^ 5 := by
+      have : Q43_grid_size (n + 1) / d1 + 1 <= Q43_grid_size n / d0 := by
         simpa [hadd] using hdiv
       simpa [hr1, hr0] using this
     have : Q43_grid_ratio (n + 1) < Q43_grid_ratio n :=
