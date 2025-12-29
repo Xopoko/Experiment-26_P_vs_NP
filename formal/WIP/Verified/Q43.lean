@@ -3380,12 +3380,17 @@ theorem Q43_gap_min_ratio_drop_global_grid_succ_le :
     simpa [Q43_gap_min_ratio_k] using Q43_gap_min_ratio_drop_global
   exact (Nat.succ_le_iff).2 h
 
+-- Q43.S284-gap-min-global-le-bridge:
+-- turn a succ-le bound into a strict inequality.
+theorem Q43_lt_of_succ_le {a b : Nat} (h : a + 1 <= b) : a < b := by
+  exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _) h
+
 -- Q43.S283-gap-min-global-succ-use:
 -- repackage the +1 bound as a strict inequality.
 theorem Q43_gap_min_ratio_drop_global_grid_of_succ_le
     (h : Q43_gap_min_ratio + 1 <= Q43_grid_ratio Q43_gap_n) :
     Q43_gap_min_ratio < Q43_grid_ratio Q43_gap_n := by
-  exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _) h
+  exact Q43_lt_of_succ_le h
 
 -- Q43.S280-gap-min-global-cleanup:
 -- expose the global drop as a grid_ratio inequality.

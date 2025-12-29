@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S283-gap-min-global-succ-use
-- `Do-not-repeat (next 2 runs):` Q43.S283-gap-min-global-succ-use, Q43.S282-gap-min-global-use
+- `LastStepID:` Q43.S284-gap-min-global-le-bridge
+- `Do-not-repeat (next 2 runs):` Q43.S284-gap-min-global-le-bridge, Q43.S283-gap-min-global-succ-use
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: strict drop now packages via the +1 bound; next route remaining uses through the succ-le eliminator.
+Q43: succ-le now factors through a generic lt bridge; next route remaining uses through that bridge.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: strict drop now packages via the +1 bound; next route remaining uses throug
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence->Invariant->Compression/canonization->Invariant->Trade-off
+Latest:Invariant->Compression/canonization->Invariant->Trade-off->Invariant
