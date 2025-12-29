@@ -2443,6 +2443,36 @@ theorem Q43_gap_min_ratio_le_all_k12 :
         (Q43_gap_range_list_k Q43_gap_k) := by
   decide
 
+-- Q43.S267-log2-jump-lemma:
+-- log2 jump from explicit bounds on n^2 and (n+1)^2.
+theorem Q43_log2_grid_size_eq_of_bounds {n k : Nat} (hn : 0 < n)
+    (hlow : 2 ^ (2 * k) <= Q43_grid_size n)
+    (hhigh : Q43_grid_size n < 2 ^ (2 * k + 1)) :
+    Nat.log2 (Q43_grid_size n) = 2 * k := by
+  have hnne : n ≠ 0 := Nat.ne_of_gt hn
+  have hne : Q43_grid_size n ≠ 0 := by
+    simpa [Q43_grid_size] using (Nat.mul_ne_zero hnne hnne)
+  exact (Nat.log2_eq_iff hne).2 ⟨hlow, hhigh⟩
+
+theorem Q43_log2_grid_size_eq_succ_of_bounds {n k : Nat}
+    (hlow : 2 ^ (2 * k + 1) <= Q43_grid_size (n + 1))
+    (hhigh : Q43_grid_size (n + 1) < 2 ^ (2 * k + 2)) :
+    Nat.log2 (Q43_grid_size (n + 1)) = 2 * k + 1 := by
+  have hpos : n + 1 ≠ 0 := Nat.succ_ne_zero n
+  have hne : Q43_grid_size (n + 1) ≠ 0 := by
+    simpa [Q43_grid_size] using (Nat.mul_ne_zero hpos hpos)
+  exact (Nat.log2_eq_iff hne).2 ⟨hlow, hhigh⟩
+
+theorem Q43_log2_grid_size_jump {n k : Nat} (hn : 0 < n)
+    (hlow : 2 ^ (2 * k) <= Q43_grid_size n)
+    (hhigh : Q43_grid_size n < 2 ^ (2 * k + 1))
+    (hlow' : 2 ^ (2 * k + 1) <= Q43_grid_size (n + 1))
+    (hhigh' : Q43_grid_size (n + 1) < 2 ^ (2 * k + 2)) :
+    Nat.log2 (Q43_grid_size n) = 2 * k ∧
+      Nat.log2 (Q43_grid_size (n + 1)) = 2 * k + 1 := by
+  refine ⟨Q43_log2_grid_size_eq_of_bounds (n:=n) (k:=k) hn hlow hhigh, ?_⟩
+  exact Q43_log2_grid_size_eq_succ_of_bounds (n:=n) (k:=k) hlow' hhigh'
+
 -- TODO(Q43.S137-logn-remaining-scan): replace `True` with the formal flat local-EF(s) evaluation statement.
 theorem Q43_placeholder : True := by
   trivial
