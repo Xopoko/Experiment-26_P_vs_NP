@@ -1,291 +1,361 @@
 # AGENTS.md
+# P vs NP - Verified‑First Research Notebook (Lean 4)
 
-# P vs NP - Verified-First Research Notebook
+This file is the canonical protocol for agents working in this repo.
+If it conflicts with any other document, follow **AGENTS.md**.
 
-## Mission
+## 0) Non‑negotiables (read first)
 
-The goal of the project is to prove or refute the hypothesis **P != NP** in the standard computing model
-(polynomial time on a deterministic Turing machine vs nondeterministic),
-with the result reduced to a **strictly verified kernel**.
+**Truth lives in `formal/`.** Docs are navigation and rationale; they never “prove” anything.
 
-**Solved criterion:**
+**One run = exactly one artifact.** If you cannot finish one artifact, mark the item `BLOCKED` and stop.
 
-- There is a main formal file in the repository (see `formal/`) with a theorem of the form:
-  - `theorem P_ne_NP : P ≠ NP` (or `P_eq_NP : P = NP`),
-  - which **compiles** in the proof assistant (Lean/Coq/Isabelle - choose one),
-  - and depends only on lemmas that:
-    1) formally proved in the same tree, or
-    2) imported from the official standard library (mathlib/Coq stdlib/...).
+**No `sorry` / `admit` / `axiom`** in:
+- `formal/PvNP/Core/`
+- `formal/WIP/Verified/`
 
-Markdown text (`docs/`) is **readable navigation and explanation**, but **the truth is in `formal/`**.
-Doc-comments in `formal/Notes/*.lean` are notes, not formal proofs.
+**No folklore.** Any “known fact” must be backed by an **Exact citation**.
+
+**Keep state bounded.** `docs/agent_brief.md` must not grow without bound.
 
 ---
 
-## Repository: minimal structure
+## 1) Mission and “Solved” condition
 
-- `P_vs_NP.md` -- short status and links (no more than 1-2 screens).
+### Mission
+Build a strictly verified kernel that proves **either**:
+- `P ≠ NP`, or
+- `P = NP`
+
+in the standard complexity model (deterministic vs nondeterministic polynomial time), with the final result reduced to Lean‑checked theorems.
+
+### Solved criterion
+Repository is “solved” only when:
+1) `formal/PvNP/Main.lean` (or the repo’s designated entrypoint under `formal/PvNP/`) contains:
+   - `theorem P_ne_NP : P ≠ NP` **or** `theorem P_eq_NP : P = NP`,
+2) `RUN_MODE=core scripts/verify_all.sh` passes,
+3) the theorem depends only on:
+   - lemmas proved in this repo under `formal/PvNP/Core/`, and
+   - Lean + mathlib standard libraries (no ad‑hoc axioms).
+
+---
+
+## 2) Vocabulary (must use consistently)
+
+- **Item**: an entry in `docs/open_questions.md`.
+- **StepID**: unique run identifier `Qxx.Sy.slug`.
+- **NextStepID**: the next intended StepID for that item.
+- **LeanTarget**: the Lean file the Proof artifact must touch.
+- **Artifact**: the single deliverable of a run (Proof / Counterexample / Exact citation / Toy / Reduction / Barrier).
+- **Oracle**: the verification gate (`scripts/verify_all.sh`, plus any toy scripts).
+- **InfoGain**: `0/1/2` (0 = no new verified/citable info, 1 = local progress, 2 = reusable progress).
+
+---
+
+## 3) Repository contract (minimal)
+
+- `P_vs_NP.md` — short index (status + links), ≤ 1–2 screens.
 - `docs/`
-  - `roadmap.md` -- selected tracks and "dependency tree".
-  - `open_questions.md` -- active backlog of micro-issues (with NextStepID).
-  - `agent_brief.md` -- project RAM (with Do-not-repeat).
-  - `planned.tsv` -- planned artifact queue (Commit = PENDING).
-  - `artifacts.tsv` -- completed artifact log (Commit = git hash).
-  - `sources.md` -- exactly the sources we actually rely on.
+  - `open_questions.md` — active queue. Each ACTIVE item MUST include: `Priority`, `LeanTarget`, `NextStepID`.
+  - `agent_brief.md` — bounded working memory (“Do‑not‑repeat” + current bottleneck).
+  - `roadmap.md` — chosen track(s) and dependency tree.
+  - `sources.md` — the only sources we actually rely on.
+  - `planned.tsv` — queued artifacts (Commit = `PENDING`).
+  - `artifacts.tsv` — completed artifacts (Commit = git hash).
 - `formal/`
-  - `PvNP/Core/` -- authoritative definitions and proofs (no `sorry`/`axiom`).
-  - `WIP/Verified/` -- WIP proofs (no `sorry`/`axiom`).
-  - `WIP/Scratch/` -- scratch space (placeholders allowed; not proof artifacts).
-  - `Notes/` -- long research notes in Lean (doc-comments, Lean-first).
-- `scripts/`
-  - `verify_notebook.py` -- checks markdown structure (if present).
-  - `verify_all.sh` -- general CI gate: markdown + formalization.
-- `agent/logs/` -- run logs (optional).
+  - `PvNP/Core/` — authoritative definitions/proofs (no `sorry`/`axiom`).
+  - `WIP/Verified/` — WIP proofs (still no `sorry`/`axiom`).
+  - `WIP/Scratch/` — scratchpad (placeholders allowed; NOT proof artifacts).
+  - `Notes/` — long-form reasoning as doc-comments; not proofs.
+- `scripts/verify_all.sh` — canonical CI gate.
 
 ---
 
-## Trust model
+## 4) Trust model
 
-Any artifact of type `Proof` is considered "accepted" only if:
+A change is “accepted” only if it is one of:
+- **Lean‑checked proof** (compiled, no forbidden tokens in Core/Verified), or
+- **compiler‑checkable refactor** (renames/reorders, definitional cleanup) that still passes the oracle.
 
-- there is a Lean proof (formally compiled), or
-- it is a trivial step that can be checked by the compiler (like a definition refactor).
-- in `formal/WIP/Verified/` and `formal/PvNP/Core/` there are no `sorry`/`admit`/`axiom`.
-
-External statements are captured **only** as exact references in `docs/sources.md`
-and/or as notes in `formal/Notes/*.lean` (without adding axioms).
+Anything not in the formal layer is treated as **non-authoritative**.
+External statements enter the repo only as **Exact citations** in `docs/sources.md`
+(and optionally as notes in `formal/Notes/*.lean`).
 
 ---
 
-## Semantic gate (anti-noise)
+## 5) Semantic gate (anti‑noise)
 
 In `formal/PvNP/Core/` and `formal/WIP/Verified/`:
 
-- No placeholder declarations: `def X : Prop := True`, `theorem X : True := by ...`,
-  or other "annotation" lemmas. Put those in `formal/Notes/*.lean` or `docs/`.
-- Proof artifacts must be used: either referenced by a later lemma in the same file,
-  discharged against a `LeanTarget` goal in `WIP/Scratch`, or tagged `@[simp]`/`@[aesop]`
-  and demonstrably shorten a proof.
-- Limit homogeneous cases: if you are about to add >5 near-identical `def`/`theorem`
-  blocks (especially `by decide` on constants), stop and generalize into a parameterized lemma instead.
+### Forbidden
+- Placeholder declarations like:
+  - `def X : Prop := True`
+  - `theorem X : True := by ...`
+  - “annotation lemmas” with no mathematical content  
+  Put these in `formal/Notes/*.lean` or `docs/`.
+
+### Required: “usefulness”
+Every new lemma/definition MUST satisfy at least one:
+- used by a later lemma in the same file or in an aggregator (e.g. `Work.lean`),
+- discharges a named `LeanTarget` goal in `formal/WIP/Scratch/`,
+- or is tagged `@[simp]`/`@[aesop]` **and** demonstrably shortens a proof.
+
+### No enumeration instead of theory
+If you are about to add **>5 near-identical blocks** (especially `by decide` on constants):
+**STOP** and generalize (parameterized def/lemma).
+
+### Diff budget
+- Proof artifact changes should stay within ~200 lines.
+- If more is needed, split into multiple runs (multiple StepIDs).
 
 ---
 
-## Role: WORKER
+## 6) Role: WORKER (strict)
 
-In each run you are a WORKER.
-You take **exactly 1 research step** and deliver a verifiable artifact
-(see "Artifacts").
+You are a WORKER. Each run delivers exactly one artifact and then stops.
 
-Required actions:
-
-- update one item `docs/open_questions.md` (status + NextStepID),
-- update `docs/agent_brief.md` (short, without growth),
-- drive away `scripts/verify_all.sh`,
-- make 1 commit with a meaningful message.
-
-Note: active questions in `docs/open_questions.md` must have `LeanTarget:`
-to link Proof steps to a specific Lean file.
+### Mandatory outputs per run
+- Update exactly one item in `docs/open_questions.md` (status + `NextStepID` + short note).
+- Update `docs/agent_brief.md` (bounded; add to Do‑not‑repeat if needed).
+- Append one row to `docs/artifacts.tsv` (Commit = git hash).
+- Run the oracle and commit.
 
 ---
 
-## Research mode: 1 run = 1 artifact
+## 7) Run contract (MUST print first)
 
-### WORKER steps (strict protocol)
+At the start of each run, print:
 
-0) Read `docs/agent_brief.md` and check Do-not-repeat.
-1) Select 1 active item from `docs/open_questions.md`.
-   - If any ACTIVE P0 is not in cooldown, pick it.
-   - Pick P1 only if all P0 are BLOCKED/cooldown.
-2) Pick **one** lens (see below) - don't repeat a lens 2 runs in a row.
-3) Formulate a **formal statement** (definitions + quantifiers).
-   - Before a Lean proof attempt, run retrieval: `rg` in `formal/` and `resources/text_cache/`.
-   - If Lean tools are available, try `#find` / `simp?` / `aesop?` to locate lemmas.
-4) Do a toy test/limited case and try to **kill** the idea first:
-   - counterexample,
-   - reduction to the known,
-   - emphasis on the barrier.
-5) If you survived: bring it to one artifact (below).
-6) Mandatory barrier protocol: relativization / natural proofs / algebrization (not in words, but according to a template).
-7) Update `open_questions.md` And `agent_brief.md`.
-8) `scripts/verify_all.sh` -> commit.
+```
 
-Note: if you cannot add Lean code, choose an artifact **not Proof**.
+Run contract
 
-Diff budget: keep Proof artifacts within ~200 lines changed; otherwise split into multiple runs.
+* SelectedItem: <id/title>
+* Priority: P0/P1
+* Artifact: Proof | Counterexample | Exact citation | Toy | Reduction | Barrier
+* StepID: Qxx.Sy.slug
+* LeanTarget: <path or N/A>
+* Oracle: RUN_MODE=<docs|wip|core> scripts/verify_all.sh
+* FilesToTouch: <explicit list>
+* StopCondition: <what counts as “done” for this run>
+
+```
 
 ---
 
-## Artifacts (exactly one per launch)
+## 8) Workflow (1 run = 1 artifact)
 
-Choose one type and produce it completely.
+### 0) Read state
+- Read `docs/agent_brief.md` (Do‑not‑repeat).
+- Read `docs/open_questions.md`.
 
-Artifact logs:
-- `docs/artifacts.tsv` records completed artifacts only (Commit = git hash).
-- `docs/planned.tsv` records queued/planned items only (Commit = PENDING).
+### 1) Pick one item
+- Prefer `ACTIVE P0` unless blocked/cooldown.
+- Pick `P1` only if all P0 are `BLOCKED`/cooldown.
 
-### 1) Proof
+### 2) Pick one lens (do not repeat lens in consecutive runs)
+See §10.
 
-- Must contain **real Lean code** (not just the text in doc-comments).
-- Add or change `def`/`theorem` in `formal/PvNP/Core/*.lean` (authoritative) or
-  `formal/WIP/Verified/*.lean` (non-authoritative WIP).
-- The file is compiled, `scripts/verify_all.sh` passes.
-- IN `docs/` add a short "human" comment of 5-15 lines and a link to the file.
+### 3) Retrieval before invention
+Before attempting a Lean proof:
+- `rg` over `formal/` and `resources/text_cache/`.
+- Use `#find`, `simp?`, `aesop?` when available.
 
-### 2) Counterexample
+### 4) Kill-first check (required)
+Try to falsify fast:
+- counterexample,
+- reduction to known barrier,
+- small toy case.
 
-- Explicit counterexample/oracle/construction.
-- If possible, formalize it as a small lemmatic fact or at least a toy code.
-- IN `docs/` record: what exactly is refuted, what conditions are needed.
+### 5) Produce exactly one artifact
+See §9.
 
-### 3) Exact citation
+### 6) Barrier check (mandatory when touching separation/lower bounds)
+Fill template in §11 (briefly in `docs/open_questions.md` or in `formal/Notes/*.lean`).
 
-- Don't rewrite "folklore".
-- Give the exact source: authors, year, title, **theorem/lemma number/page**.
-- IN `docs/` add 2-6 lines: how this closes/corrects the open_questions item.
+### 7) Verify + commit
+- Choose `RUN_MODE`:
+  - `docs` if only docs changed
+  - `wip` if touching `formal/WIP/*`
+  - `core` if touching `formal/PvNP/Core/*`
+- Run: `scripts/verify_all.sh`
+- Commit message:
+  - `<StepID>: <ArtifactType> - <one-line summary>`
 
-### 4) Toy computation
-
-- Small experiment/brute force/script that tests a limited case.
-- The result must be reproducible (fixed seed, inputs preserved).
-
-### 5) Reduction/Equivalence (Exact)
-
-- Formally written reduction/equivalence between statements.
-- Ideal: formalized as a theorem.
-- IN `docs/` -- exactly 5-10 lines of meaning + dependencies.
-
-### 6) Barrier certificate
-
-- A short document that the chosen line inevitably runs into a barrier under these conditions.
-- Required: exact source (Exact citation) and explicit link to your step.
+### If stuck
+If the artifact cannot be completed:
+- mark the item `BLOCKED`,
+- write **one-line blocker**,
+- set a new `NextStepID`,
+- stop (no extra edits).
 
 ---
 
-## Lenses (choose one)
+## 9) Artifacts (exactly one)
 
-1) Equivalence (translation to another object/formulation)
-2) Compression/canonization (effective normalization)
-3) Invariant (monotonic parameter)
+### A) Proof
+**Goal:** add real Lean code (def/theorem) in `LeanTarget`.
+
+Requirements:
+- touches `formal/PvNP/Core/*.lean` **or** `formal/WIP/Verified/*.lean` only,
+- compiles (oracle passes),
+- no forbidden tokens in Core/Verified,
+- adds a short doc note (5–15 lines) in `docs/` with a link to the file.
+
+### B) Counterexample
+**Goal:** an explicit construction/oracle/counterexample that refutes a candidate claim.
+
+Requirements:
+- record the exact statement refuted and the minimal assumptions needed,
+- if possible, include a Lean snippet or toy code that checks the counterexample.
+
+### C) Exact citation
+**Goal:** pin down a relied-on fact precisely.
+
+Requirements:
+- authors, year, title,
+- theorem/lemma number **and** page (or arXiv version + statement label),
+- add 2–6 lines: how it closes/corrects the chosen item.
+
+### D) Toy computation
+**Goal:** reproducible small experiment that tests a limited case.
+
+Requirements:
+- fixed seed and preserved inputs,
+- script/check committed under `scripts/` or `resources/`,
+- record result + interpretation in ≤10 lines.
+
+### E) Reduction / Equivalence (Exact)
+**Goal:** a formally written reduction/equivalence between statements.
+
+Requirements:
+- best: formalized as a Lean theorem,
+- docs note: exactly 5–10 lines + dependencies.
+
+### F) Barrier certificate
+**Goal:** demonstrate that a proposed line of attack hits a named barrier under explicit conditions.
+
+Requirements:
+- includes at least one Exact citation,
+- explicitly maps the barrier to the current StepID claim.
+
+---
+
+## 10) Lenses (choose exactly one per run)
+
+1) Equivalence / translation (reformulate the target)
+2) Compression / canonization (normal forms)
+3) Invariant (monotone parameter, potential function)
 4) Duality (NP vs coNP, search vs decision)
-5) Trade-off (time-space, depth-size, randomness-advice)
-6) Communication/rank (matrices, protocols, lower bounds)
-7) Algebraization (IPS/PC, arithmetization, ideals)
-8) Model stress test (oracles/relativization)
+5) Trade-off (time/space, depth/size, randomness/advice)
+6) Communication / rank (matrices, protocols, lower bounds)
+7) Algebraization (arithmetization, ideals, IPS/PC framing)
+8) Model stress test (oracles / relativization)
 
 ---
 
-## Barrier protocol (mandatory, according to template)
+## 11) Barrier protocol (mandatory template)
 
-At the end of each step (in the step note in `formal/Notes/*.lean` or briefly in `docs/open_questions.md`) fill in:
+When the step touches separation/lower bounds, include:
 
-When the step touches separation/lower bounds, include canonical barrier citations
-(Baker-Gill-Solovay 1975, Razborov-Rudich 1997, Aaronson-Wigderson 2008) and ensure
-they are listed in `docs/sources.md`.
+```
 
-### A) Relativization check
+BarrierCheck
 
-- `Relativizes?` yes/no/not sure.
-- If "no": indicate the **specific step** that breaks when adding an oracle (what exactly uses "non-relativizing" information).
-- If "yes/not sure": try to formulate an oracle option and check if
-  whether a well-known counterexample oracle appears.
+* Relativization:
 
-### B) Natural proofs check
+  * Relativizes?: yes/no/unknown
+  * If no: which exact substep breaks under oracle access?
+  * If yes/unknown: name an oracle scenario to test (and known oracle counterexamples if any)
+* NaturalProofs:
 
-If the step concerns **schematic lower bounds via a property of functions**, evaluate:
+  * Applicable?: yes/no
+  * Largeness: >= 2^{-poly(n)} ? (or “rare”)
+  * Constructivity: decidable in poly(2^n) from truth-table?
+  * Usefulness: separates the circuit class from random functions?
+  * Exit point: where do we leave the natural-proofs framework (if we do)?
+* Algebrization:
 
-- `Largeness`: property has density >= 2^{-poly(n)}? (or "rare"?)
-- `Constructivity`: recognized as poly(2^n) by truth table?
-- `Usefulness`: Does the circuit class C separate from the random function?
-  And indicate: **where exactly you leave** the framework of natural proofs (if you do).
+  * Applicable?: yes/no
+  * Algebraizing?: yes/no/unknown
+  * If no: what feature is not preserved by extension oracles?
+  * If yes/unknown: reduce to a known algebrization barrier statement
+* Citations: [BGS75, RR97, AW08, ...]
 
-### C) Algebrization check
-
-If arithmetization/polynomial extensions are used:
-
-- Indicate whether the method is "algebraizing".
-- If not: explain specifically what is not saved with "extension oracle".
-- If yes/not sure: try to reduce it to a known barrier.
+```
 
 ---
 
-## Strategy (required: choose a track and stick to it)
+## 12) Strategy (anti-drift)
 
-The project selects **1 main track** and a maximum of **1 auxiliary**.
-This is recorded in `docs/roadmap.md` and briefly in `docs/agent_brief.md`.
+Project chooses:
+- **1 main track** and
+- **≤ 1 auxiliary track**.
 
-Recommended tracks (example):
+Must be recorded in `docs/roadmap.md` and briefly in `docs/agent_brief.md`.
 
-- Track A: Circuit lower bounds (NP  P/poly) + bypass natural proofs
-- Track B: Proof complexity / IPS / lower bounds -> transfer to diagrams
-- Track C: Algorithmic approach "derive unexpectedly fast algorithms from P=NP"
-- Track D: Algebraic Complexity / GCT (if competent)
-
-**Rule:** 80% of the steps must be in the main track. Otherwise, there is drift and no progress.
+Rule: **≥ 80%** of runs must be in the main track.
 
 ---
 
-## Control tasks (to make sure the pipeline is running)
+## 13) Control tasks (pipeline sanity)
 
-Before a "real breakthrough", it is necessary to run on 3 known facts:
+Before attempting “new separation progress”, verify the pipeline on 3 known facts:
 
-1) Relativization: issue it as Barrier certificate + Exact citation.
-2) Natural proofs: format definitions + barrier as Exact citation and short conclusion.
-3) Algebrization: format it as Exact citation + toy example "why arithmetization doesn't save."
+1) Relativization barrier (BGS-style) as Barrier certificate + Exact citation.
+2) Natural proofs barrier (RR-style) as Exact citation + short conclusion.
+3) Algebrization barrier (AW-style) as Exact citation + toy example.
 
-These 3 must be verified by the pipeline (verify_all + clear links).
-
----
-
-## Source policy and search
-
-- Any "known" -> either `Exact citation`, or don't write.
-- Links should be primary sources (article/book), not blogs, if possible.
-- Each source actually used is recorded in `docs/sources.md`
-  and (if any) is placed in `resources/` with manifest.
+These must pass `scripts/verify_all.sh` and be linkable from `P_vs_NP.md`.
 
 ---
 
-## Text policy (to prevent the repository from becoming bloated)
+## 14) Source policy
 
-- `P_vs_NP.md` - very short, only status and links to key files.
-- IN `docs/` We write only new mathematical content.
-- Long discussions - in `formal/Notes/<Topic>.lean` (doc-comments).
-- If the file is > 4000 lines or > 300KB, we split it into topics.
+- Any “known” claim → **Exact citation** or do not assert it.
+- Prefer primary sources (papers/books) over blogs.
+- Every used source must appear in `docs/sources.md`.
+- If a PDF is used, record it in `resources/manifest.tsv` and store it under `resources/`.
 
 ---
 
-## Anti-loop & progress gate
+## 15) Text / bloat policy
 
-Each run ends:
+- `P_vs_NP.md` stays short (status + links only).
+- In `docs/`, write only new content (no long essays).
+- Long reasoning belongs in `formal/Notes/<Topic>.lean` doc-comments.
+- Split files if > 4000 lines or > 300 KB.
 
-- `StepID: Qxx.Sy.slug` (unique)
+---
+
+## 16) Anti-loop & progress gate
+
+Each run must end with:
+- `StepID: ...`
 - `InfoGain: 0/1/2`
-- and exactly one artifact.
+- exactly one artifact.
 
 Forbidden:
-
-- repeat StepID from `Do-not-repeat` V `docs/agent_brief.md`,
-- make "cosmetic" edits without an artifact,
-- make 2 artifacts per run.
-
-If it doesn't work:
-
-- mark the item as `BLOCKED`,
-- write 1 line "blocker",
-- assign a new NextStepID,
-- stop.
+- repeating StepIDs in the Do‑not‑repeat list,
+- cosmetic edits without an artifact,
+- producing 2 artifacts in one run.
 
 ---
 
-## Git and CI
+## 17) Canonical barrier references (copy into docs/sources.md)
 
-Before commit:
+- [BGS75] Theodore Baker, John Gill, Robert Solovay.
+  “Relativizations of the P = ? NP Question.”
+  *SIAM Journal on Computing* 4(4):431–442, 1975.
+  DOI: https://doi.org/10.1137/0204037
 
-- `scripts/verify_all.sh`
+- [RR97] Alexander A. Razborov, Steven Rudich.
+  “Natural Proofs.”
+  *Journal of Computer and System Sciences* 55(1):24–35, 1997.
+  DOI: https://doi.org/10.1006/jcss.1997.1494
 
-Commit message:
-
-- `<StepID>: <artifact type> - <one-line summary>`
-
----
+- [AW08] Scott Aaronson, Avi Wigderson.
+  “Algebrization: A New Barrier in Complexity Theory.”
+  *Proc. 40th ACM STOC*, 2008, pp. 731–740.
+  DOI: https://doi.org/10.1145/1374376.1374481
+  (Open PDF often available from authors’ pages.)
