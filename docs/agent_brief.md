@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S288-gap-min-global-prune-klist-21-30
-- `Do-not-repeat (next 2 runs):` Q43.S288-gap-min-global-prune-klist-21-30, Q43.S287-gap-min-global-prune-klist
+- `LastStepID:` Q43.S289-gap-min-global-prune-klist-31-40
+- `Do-not-repeat (next 2 runs):` Q43.S289-gap-min-global-prune-klist-31-40, Q43.S288-gap-min-global-prune-klist-21-30
 - `Last InfoGain:` 0
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: pruned k=21..30 gap-range/drop blocks; next prune k=31..40 or consolidate the k-list.
+Q43: pruned k=31..40 gap-range/drop blocks; next prune k=41..50 or consolidate the k-list.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: pruned k=21..30 gap-range/drop blocks; next prune k=31..40 or consolidate t
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Equivalence/translation->Invariant->Compression/canonization->Invariant
+Latest:Equivalence/translation->Invariant->Compression/canonization->Invariant->Compression/canonization

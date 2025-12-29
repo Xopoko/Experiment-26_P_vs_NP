@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S288-gap-min-global-prune-klist-21-30
-  - `NextStepID:` Q43.S289-gap-min-global-prune-klist-31-40
+  - `LastStepID:` Q43.S289-gap-min-global-prune-klist-31-40
+  - `NextStepID:` Q43.S290-gap-min-global-prune-klist-41-50
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -59,8 +59,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Invariant (uniform `k ≥ 12` bridge at `n_k`).
   - `Artifact:` Proof.
-  - `Update:` pruned the unused k=21..30 gap-range/ratio-drop blocks and their n_k=gap_n lemmas.
-  - `Use:` next: prune k=31..40 or consolidate the remaining k-list into a single uniform note.
+  - `Update:` pruned the unused k=31..40 gap-range/ratio-drop blocks.
+  - `Use:` next: prune k=41..50 or consolidate the remaining k-list into a single uniform note.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 0.
