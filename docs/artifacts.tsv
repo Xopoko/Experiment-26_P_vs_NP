@@ -10,3 +10,4 @@ Q39.S143-contiguous-alt-rank2-k117	Counterexample	formal/WIP/Verified/Q39.lean	9
 Q43.S281-gap-drop-nk-k31-k104	Proof	formal/WIP/Verified/Q43.lean	9ef222488dcb625ff2c5e5ffddcc6f756a8a7f19	extend n_k-linked gap-drop counterexamples to k=31..104
 Q43.S282-gap-min-global-use	Proof	formal/WIP/Verified/Q43.lean	42a5a5fd1bcc79f5f68c169de4f044275755c205	succ-le bound derived from the global gap-min drop
 Q43.S283-gap-min-global-succ-use	Proof	formal/WIP/Verified/Q43.lean	c61b43e1cac8e5cf315338481f539645ec55508c	derive strict drop from the succ-le bound
+Q43.S284-gap-min-global-le-bridge	Proof	formal/WIP/Verified/Q43.lean	322594f9e71c0e4df85ccdf7124dd3b12463c4b5	succ-le to lt bridge for global gap-min drop
