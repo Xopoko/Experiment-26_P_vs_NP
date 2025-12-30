@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S323-flat-eval-quasipoly-hr-threshold-nk-base-compare-c
-- `Do-not-repeat (next 2 runs):` Q43.S323-flat-eval-quasipoly-hr-threshold-nk-base-compare-c, Q43.S322-flat-eval-quasipoly-hr-threshold-nk-base-bound
+- `LastStepID:` Q43.S324-flat-eval-quasipoly-hr-threshold-nk-base-k0
+- `Do-not-repeat (next 2 runs):` Q43.S324-flat-eval-quasipoly-hr-threshold-nk-base-k0, Q43.S323-flat-eval-quasipoly-hr-threshold-nk-base-compare-c
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: base ratio now compared to 2*C*c1 via 3*(2*C*c1) <= 2k+1; next pick explicit k0(C).
+Q43: k0(C)=max(13,2*(2*C*c1)) now supplies the base bound; next apply gap-right lift with k>=k0(C).
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: base ratio now compared to 2*C*c1 via 3*(2*C*c1) <= 2k+1; next pick explici
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence->Invariant->Equivalence->Invariant->Equivalence
+Latest:Invariant->Equivalence->Invariant->Equivalence->Invariant

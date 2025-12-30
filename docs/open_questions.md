@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S323-flat-eval-quasipoly-hr-threshold-nk-base-compare-c
-  - `NextStepID:` Q43.S324-flat-eval-quasipoly-hr-threshold-nk-base-k0
+  - `LastStepID:` Q43.S324-flat-eval-quasipoly-hr-threshold-nk-base-k0
+  - `NextStepID:` Q43.S325-flat-eval-quasipoly-hr-threshold-gap-right-apply-k0
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -72,6 +72,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_log2_grid_size_eq_succ_of_ge_nk,
      Q43_grid_ratio_nk_succ_lower,
      Q43_gap_right_base_bound_of_c,
+     Q43_gap_right_k0,
+     Q43_three_mul_le_two_k_succ,
+     Q43_gap_right_base_bound_of_k0,
      Q43_grid_ratio_mono_on_gap_right,
      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right,
      Q43_nk_succ_le_three_pow);
@@ -79,11 +82,10 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Equivalence / translation (bridge n_k into the upper plateau boundary).
   - `Artifact:` Proof.
-  - `Update:` proved the C-dependent comparison
-    `2*C*Q43_thm41_c1_chernoff_ln <= 2^(2k+1)/(2k+1)^5` under `3*(2*C*c1) <= 2k+1` (k>=13);
-    see `docs/q43_s323.md`.
-  - `Use:` next: choose an explicit `k0(C)` to satisfy `3*(2*C*c1) <= 2k+1`,
-    then apply the gap-right lift for `n >= n_k+1`.
+  - `Update:` defined `k0(C)=max(13, 2*(2*C*c1))` and derived the base bound
+    from `k>=k0(C)`, wiring it into the gap-right lift; see `docs/q43_s324.md`.
+  - `Use:` next: apply the gap-right lift with `k>=k0(C)` to reach a concrete
+    `n>=n_k+1` threshold and thread it into the regime-d chain.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

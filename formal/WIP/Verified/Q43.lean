@@ -1885,59 +1885,6 @@ theorem Q43_grid_ratio_mono_on_gap_right {k n m : Nat}
     simp [hlogn, hlogm]
   exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
 
-theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
-    {k n C : Nat} (hk : 1 <= k)
-    (hlo : Q43_nk k + 1 <= n) (hhi : n < 2 ^ (k + 1))
-    (hbase : 2 * C * Q43_thm41_c1_chernoff_ln <= 2 ^ (2 * k + 1) / (2 * k + 1) ^ 5) :
-    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
-  have hn_base : Q43_nk k + 1 < 2 ^ (k + 1) := by
-    have hsq : (Q43_nk k + 1) ^ 2 < 2 ^ (2 * k + 2) :=
-      Q43_nk_succ_sq_lt (k:=k) hk
-    have hexp : (k + 1) * 2 = 2 * k + 2 := by
-      calc
-        (k + 1) * 2 = k * 2 + 1 * 2 := by simp [Nat.add_mul]
-        _ = 2 * k + 2 := by simp [Nat.mul_comm]
-    have hpow' : (2 ^ (k + 1)) ^ 2 = 2 ^ (2 * k + 2) := by
-      calc
-        (2 ^ (k + 1)) ^ 2 = 2 ^ ((k + 1) * 2) := by
-          symm
-          exact (Nat.pow_mul 2 (k + 1) 2)
-        _ = 2 ^ (2 * k + 2) := by
-          simp [hexp]
-    have hsq' : (Q43_nk k + 1) ^ 2 < (2 ^ (k + 1)) ^ 2 := by
-      simpa [hpow'] using hsq
-    by_cases hge : 2 ^ (k + 1) <= Q43_nk k + 1
-    ·
-      have hpow : (2 ^ (k + 1)) ^ 2 <= (Q43_nk k + 1) ^ 2 :=
-        Q43_pow_le_pow_of_le hge
-      exact (False.elim (Nat.lt_irrefl _ (Nat.lt_of_le_of_lt hpow hsq')))
-    · exact Nat.lt_of_not_ge hge
-  have hbase' :
-      2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio (Q43_nk k + 1) := by
-    exact Nat.le_trans hbase (Q43_grid_ratio_nk_succ_lower (k := k) hk)
-  have hmono : Q43_grid_ratio (Q43_nk k + 1) <= Q43_grid_ratio n :=
-    Q43_grid_ratio_mono_on_gap_right (k:=k) (n:=Q43_nk k + 1) (m:=n)
-      (by exact Nat.le_refl _) hlo hn_base hhi hlo
-  have hratio : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio n :=
-    Nat.le_trans hbase' hmono
-  have hnk : 2 ^ k <= Q43_nk k := Q43_nk_ge_pow k
-  have h2k : 2 <= 2 ^ k := by
-    have hk1 : k - 1 + 1 = k := Nat.sub_add_cancel hk
-    have hpos : 0 < 2 ^ (k - 1) := Nat.pow_pos (by decide)
-    have hle : 1 <= 2 ^ (k - 1) := (Nat.succ_le_iff).2 hpos
-    have hmul : 2 <= 2 ^ (k - 1) * 2 := by
-      simpa [Nat.mul_comm] using (Nat.mul_le_mul_right 2 hle)
-    have hpow : 2 ^ k = 2 ^ (k - 1) * 2 := by
-      calc
-        2 ^ k = 2 ^ (k - 1 + 1) := by simp [hk1]
-        _ = 2 ^ (k - 1) * 2 := by
-          simpa [Nat.mul_comm] using (Nat.pow_succ 2 (k - 1))
-    simpa [hpow] using hmul
-  have h2nk : 2 <= Q43_nk k := Nat.le_trans h2k hnk
-  have h2nk1 : 2 <= Q43_nk k + 1 := Nat.le_trans h2nk (Nat.le_succ _)
-  have hn : 2 <= n := Nat.le_trans h2nk1 hlo
-  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio (n:=n) (C:=C) hn hratio
-
 -- Q43.S274-gap-drop-from-jump:
 -- connect the canonical log2 jump point `n_k` with the existing gap-drop counterexamples (k=12..25).
 theorem Q43_floorSqrt_eq_of_sq_bounds {n m : Nat}
@@ -2146,6 +2093,92 @@ theorem Q43_gap_right_base_bound_of_c {k C : Nat} (hk : 13 <= k)
   have hdiv : X <= 2 ^ (2 * k + 1) / B :=
     (Nat.le_div_iff_mul_le hpos).2 hmul3
   simpa [X, B] using hdiv
+
+-- explicit k0(C) to satisfy the gap-right base bound.
+def Q43_gap_right_k0 (C : Nat) : Nat :=
+  Nat.max 13 (2 * (2 * C * Q43_thm41_c1_chernoff_ln))
+
+theorem Q43_three_mul_le_two_k_succ {k X : Nat} (h : 2 * X <= k) :
+    3 * X <= 2 * k + 1 := by
+  have h4 : 4 * X <= 2 * k := by
+    have h2 : 2 * (2 * X) <= 2 * k := Nat.mul_le_mul_left 2 h
+    simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using h2
+  have h3 : 3 * X <= 4 * X := by
+    exact Nat.mul_le_mul_right X (by decide : 3 <= 4)
+  have h4' : 4 * X <= 2 * k + 1 := Nat.le_trans h4 (Nat.le_succ _)
+  exact Nat.le_trans h3 h4'
+
+theorem Q43_gap_right_base_bound_of_k0 {C k : Nat} (hk : Q43_gap_right_k0 C <= k) :
+    2 * C * Q43_thm41_c1_chernoff_ln <= 2 ^ (2 * k + 1) / (2 * k + 1) ^ 5 := by
+  have hk13 : 13 <= k := by
+    have hk0 : 13 <= Q43_gap_right_k0 C := by
+      unfold Q43_gap_right_k0
+      exact Nat.le_max_left _ _
+    exact Nat.le_trans hk0 hk
+  have hk2 : 2 * (2 * C * Q43_thm41_c1_chernoff_ln) <= k := by
+    have hk0 : 2 * (2 * C * Q43_thm41_c1_chernoff_ln) <= Q43_gap_right_k0 C := by
+      unfold Q43_gap_right_k0
+      exact Nat.le_max_right _ _
+    exact Nat.le_trans hk0 hk
+  have hC : 3 * (2 * C * Q43_thm41_c1_chernoff_ln) <= 2 * k + 1 :=
+    Q43_three_mul_le_two_k_succ hk2
+  exact Q43_gap_right_base_bound_of_c (k:=k) (C:=C) hk13 hC
+
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
+    {k n C : Nat} (hk : 1 <= k)
+    (hk0 : Q43_gap_right_k0 C <= k)
+    (hlo : Q43_nk k + 1 <= n) (hhi : n < 2 ^ (k + 1)) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
+  have hbase :
+      2 * C * Q43_thm41_c1_chernoff_ln <= 2 ^ (2 * k + 1) / (2 * k + 1) ^ 5 :=
+    Q43_gap_right_base_bound_of_k0 (C:=C) (k:=k) hk0
+  have hn_base : Q43_nk k + 1 < 2 ^ (k + 1) := by
+    have hsq : (Q43_nk k + 1) ^ 2 < 2 ^ (2 * k + 2) :=
+      Q43_nk_succ_sq_lt (k:=k) hk
+    have hexp : (k + 1) * 2 = 2 * k + 2 := by
+      calc
+        (k + 1) * 2 = k * 2 + 1 * 2 := by simp [Nat.add_mul]
+        _ = 2 * k + 2 := by simp [Nat.mul_comm]
+    have hpow' : (2 ^ (k + 1)) ^ 2 = 2 ^ (2 * k + 2) := by
+      calc
+        (2 ^ (k + 1)) ^ 2 = 2 ^ ((k + 1) * 2) := by
+          symm
+          exact (Nat.pow_mul 2 (k + 1) 2)
+        _ = 2 ^ (2 * k + 2) := by
+          simp [hexp]
+    have hsq' : (Q43_nk k + 1) ^ 2 < (2 ^ (k + 1)) ^ 2 := by
+      simpa [hpow'] using hsq
+    by_cases hge : 2 ^ (k + 1) <= Q43_nk k + 1
+    ·
+      have hpow : (2 ^ (k + 1)) ^ 2 <= (Q43_nk k + 1) ^ 2 :=
+        Q43_pow_le_pow_of_le hge
+      exact (False.elim (Nat.lt_irrefl _ (Nat.lt_of_le_of_lt hpow hsq')))
+    · exact Nat.lt_of_not_ge hge
+  have hbase' :
+      2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio (Q43_nk k + 1) := by
+    exact Nat.le_trans hbase (Q43_grid_ratio_nk_succ_lower (k := k) hk)
+  have hmono : Q43_grid_ratio (Q43_nk k + 1) <= Q43_grid_ratio n :=
+    Q43_grid_ratio_mono_on_gap_right (k:=k) (n:=Q43_nk k + 1) (m:=n)
+      (by exact Nat.le_refl _) hlo hn_base hhi hlo
+  have hratio : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio n :=
+    Nat.le_trans hbase' hmono
+  have hnk : 2 ^ k <= Q43_nk k := Q43_nk_ge_pow k
+  have h2k : 2 <= 2 ^ k := by
+    have hk1 : k - 1 + 1 = k := Nat.sub_add_cancel hk
+    have hpos : 0 < 2 ^ (k - 1) := Nat.pow_pos (by decide)
+    have hle : 1 <= 2 ^ (k - 1) := (Nat.succ_le_iff).2 hpos
+    have hmul : 2 <= 2 ^ (k - 1) * 2 := by
+      simpa [Nat.mul_comm] using (Nat.mul_le_mul_right 2 hle)
+    have hpow : 2 ^ k = 2 ^ (k - 1) * 2 := by
+      calc
+        2 ^ k = 2 ^ (k - 1 + 1) := by simp [hk1]
+        _ = 2 ^ (k - 1) * 2 := by
+          simpa [Nat.mul_comm] using (Nat.pow_succ 2 (k - 1))
+    simpa [hpow] using hmul
+  have h2nk : 2 <= Q43_nk k := Nat.le_trans h2k hnk
+  have h2nk1 : 2 <= Q43_nk k + 1 := Nat.le_trans h2nk (Nat.le_succ _)
+  have hn : 2 <= n := Nat.le_trans h2nk1 hlo
+  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio (n:=n) (C:=C) hn hratio
 
 -- (a+1)^5 - a^5 >= 5·a^4, via a^(n+1) + (n+1)·a^n <= (a+1)^(n+1).
 theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :
