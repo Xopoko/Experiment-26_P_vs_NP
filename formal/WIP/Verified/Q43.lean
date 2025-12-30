@@ -760,6 +760,77 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_iff_simple {n C : Nat} :
       simpa [hpow, L] using h
     simpa [hrewrite, L] using h'
 
+-- Q43.S306-flat-eval-quasipoly-hr-threshold:
+-- connect quasi-poly log2 bounds to the Thm. 4.1 regime-d parameter check.
+theorem Q43_thm41_log2_threshold_c1_grid_param_of_scaled {n N C : Nat} (hn : 2 <= n)
+    (hlog : Nat.log2 N <= C * Nat.log2 (Q43_grid_size n))
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C) :
+    Q43_thm41_log2_threshold_c1_grid_param n N := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hlog' : Nat.log2 N <= C * L := by
+    simpa [L] using hlog
+  have hposlog : 0 < L := by
+    have hlog1 : 1 <= L := by
+      simpa [L] using (Q43_log2_grid_ge_one (n:=n) hn)
+    exact (Nat.succ_le_iff).1 hlog1
+  have hc1 : 0 < Q43_thm41_c1_chernoff_ln := by decide
+  have hpos : 0 < Q43_thm41_c1_chernoff_ln * L ^ 4 := by
+    exact Nat.mul_pos hc1 (Nat.pow_pos hposlog)
+  have hscale' :
+      (2 * C * Q43_thm41_c1_chernoff_ln) * L ^ 5 <= Q43_grid_size n := by
+    simpa [Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple, L] using hscale
+  have hle : C * Q43_thm41_c1_chernoff_ln <= 2 * C * Q43_thm41_c1_chernoff_ln := by
+    calc
+      C * Q43_thm41_c1_chernoff_ln
+          <= C * Q43_thm41_c1_chernoff_ln + C * Q43_thm41_c1_chernoff_ln := by
+            exact Nat.le_add_left _ _
+      _ = 2 * (C * Q43_thm41_c1_chernoff_ln) := by
+            simp [Nat.two_mul]
+      _ = 2 * C * Q43_thm41_c1_chernoff_ln := by
+            simp [Nat.mul_assoc]
+  have hmul' :
+      (C * Q43_thm41_c1_chernoff_ln) * L ^ 5
+        <= (2 * C * Q43_thm41_c1_chernoff_ln) * L ^ 5 := by
+    exact Nat.mul_le_mul_right _ hle
+  have hmul :
+      (C * Q43_thm41_c1_chernoff_ln) * L ^ 5 <= Q43_grid_size n := by
+    exact Nat.le_trans hmul' hscale'
+  have hmul'': (C * L) * (Q43_thm41_c1_chernoff_ln * L ^ 4) <= Q43_grid_size n := by
+    have hmul_eq :
+        (C * L) * (Q43_thm41_c1_chernoff_ln * L ^ 4)
+          = (C * Q43_thm41_c1_chernoff_ln) * L ^ 5 := by
+      calc
+        (C * L) * (Q43_thm41_c1_chernoff_ln * L ^ 4)
+            = (C * Q43_thm41_c1_chernoff_ln) * (L * L ^ 4) := by
+              ac_rfl
+        _ = (C * Q43_thm41_c1_chernoff_ln) * L ^ 5 := by
+              simp [Nat.pow_succ, Nat.mul_comm, Nat.mul_assoc]
+    simpa [hmul_eq] using hmul
+  have hCL :
+      C * L <= Q43_grid_size n / (Q43_thm41_c1_chernoff_ln * L ^ 4) := by
+    exact (Nat.le_div_iff_mul_le hpos).2 hmul''
+  have hfinal :
+      Nat.log2 N <= Q43_grid_size n / (Q43_thm41_c1_chernoff_ln * L ^ 4) :=
+    Nat.le_trans hlog' hCL
+  simpa [Q43_thm41_log2_threshold_c1_grid_param, L] using hfinal
+
+theorem Q43_thm41_log2_threshold_c1_grid_param_of_quasipoly {n N c : Nat} (hn : 2 <= n)
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
+      ((Nat.log2 (Q43_grid_size n)) ^ c)) :
+    Q43_thm41_log2_threshold_c1_grid_param n N := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hlog : Nat.log2 N <= L ^ (c + 1) := by
+    have hlog' : Nat.log2 N <= Nat.log2 (2 ^ (L ^ (c + 1))) := Q43_log2_mono hN
+    simpa [Nat.log2_two_pow, L] using hlog'
+  have hlog_mul : Nat.log2 N <= L ^ c * L := by
+    simpa [Nat.pow_succ, L] using hlog
+  have hscale' :
+      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n (L ^ c) := by
+    simpa [L] using hscale
+  exact Q43_thm41_log2_threshold_c1_grid_param_of_scaled
+    (n:=n) (N:=N) (C:=L ^ c) hn hlog_mul hscale'
+
 theorem Q43_thm41_log2_threshold_c1_grid_powC_iff_mul {n C : Nat}
     (hlog : 1 <= Nat.log2 (Q43_grid_size n)) :
     Q43_thm41_log2_threshold_c1_grid_powC n C ↔

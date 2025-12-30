@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S305-flat-eval-quasipoly-eval-apply
-- `Do-not-repeat (next 2 runs):` Q43.S305-flat-eval-quasipoly-eval-apply, Q43.S304-flat-eval-quasipoly-bridge
+- `LastStepID:` Q43.S306-flat-eval-quasipoly-hr-threshold
+- `Do-not-repeat (next 2 runs):` Q43.S306-flat-eval-quasipoly-hr-threshold, Q43.S305-flat-eval-quasipoly-eval-apply
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: quasi-poly grid bounds now package N + lineMax; next connect to the HR threshold regime.
+Q43: quasi-poly log2 bounds now reach the HR log2 threshold; next bundle regime-d with c1<=|F| and tParam.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: quasi-poly grid bounds now package N + lineMax; next connect to the HR thre
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Trade-off->Invariant->Trade-off->Invariant->Trade-off
+Latest:Invariant->Trade-off->Invariant->Trade-off->Invariant
