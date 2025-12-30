@@ -910,13 +910,85 @@ theorem Q43_flat_eval_statement_of_quasipoly {α : Type} {proof : List (List α)
 def Q43_hrThreshold_log2_bound (n c : Nat) : Prop :=
   (Nat.log2 (Q43_grid_size n)) ^ (c + 1) <= n / 16
 
+-- Q43.S312-flat-eval-quasipoly-hr-threshold-derive-log2-bound:
+-- scaled log2^5 threshold implies the HR log2 bound when c <= 3.
+theorem Q43_hrThreshold_log2_bound_of_scaled {n c : Nat} (hn : 2 <= n) (hc : c <= 3)
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
+      ((Nat.log2 (Q43_grid_size n)) ^ c)) :
+    Q43_hrThreshold_log2_bound n c := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hscale' :
+      (2 * (L ^ c) * Q43_thm41_c1_chernoff_ln) * L ^ 5 <= n ^ 2 := by
+    simpa [Q43_grid_size, Nat.pow_two, L] using hscale
+  have hscale'' : 2 * Q43_thm41_c1_chernoff_ln * L ^ (c + 5) <= n ^ 2 := by
+    simpa [Nat.pow_add, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm, L] using hscale'
+  have hlog : 1 <= L := Q43_log2_grid_ge_one (n := n) hn
+  have hpos : 0 < L := (Nat.succ_le_iff).1 hlog
+  have hC : c + 2 <= 5 := by
+    simpa using (Nat.add_le_add_right hc 2)
+  have h2exp : 2 * (c + 1) <= c + 5 := by
+    calc
+      2 * (c + 1) = 2 * c + 2 := by
+        simp [Nat.mul_add, Nat.mul_one]
+      _ = c + c + 2 := by
+        simp [Nat.two_mul, Nat.add_assoc]
+      _ = c + (c + 2) := by
+        simp [Nat.add_assoc]
+      _ <= c + 5 := by
+        exact Nat.add_le_add_left hC c
+  have hpowexp : L ^ (2 * (c + 1)) <= L ^ (c + 5) :=
+    Nat.pow_le_pow_right hpos h2exp
+  have hbig :
+      (2 * Q43_thm41_c1_chernoff_ln) * L ^ (2 * (c + 1)) <= n ^ 2 := by
+    have hmul :
+        (2 * Q43_thm41_c1_chernoff_ln) * L ^ (2 * (c + 1))
+          <= (2 * Q43_thm41_c1_chernoff_ln) * L ^ (c + 5) :=
+      Nat.mul_le_mul_left _ hpowexp
+    exact Nat.le_trans hmul hscale''
+  have hc1 : 256 <= 2 * Q43_thm41_c1_chernoff_ln := by
+    simp [Q43_thm41_c1_chernoff_ln_eval]
+  have hconst :
+      256 * L ^ (2 * (c + 1))
+        <= (2 * Q43_thm41_c1_chernoff_ln) * L ^ (2 * (c + 1)) :=
+    Nat.mul_le_mul_right _ hc1
+  have h256 : 256 * L ^ (2 * (c + 1)) <= n ^ 2 :=
+    Nat.le_trans hconst hbig
+  have hpow16 : (16 * L ^ (c + 1)) ^ 2 = 256 * L ^ (2 * (c + 1)) := by
+    have hpowmul : (L ^ (c + 1)) ^ 2 = L ^ ((c + 1) * 2) := by
+      symm
+      exact Nat.pow_mul L (c + 1) 2
+    have h16 : (16 : Nat) ^ 2 = 256 := by decide
+    calc
+      (16 * L ^ (c + 1)) ^ 2
+          = 16 ^ 2 * (L ^ (c + 1)) ^ 2 := by
+            simpa using (Nat.mul_pow 16 (L ^ (c + 1)) 2)
+      _ = 16 ^ 2 * L ^ ((c + 1) * 2) := by
+            simp [hpowmul]
+      _ = 16 ^ 2 * L ^ (2 * (c + 1)) := by
+            simp [Nat.mul_comm]
+      _ = 256 * L ^ (2 * (c + 1)) := by
+            simp [h16]
+  have hpow : (16 * L ^ (c + 1)) ^ 2 <= n ^ 2 := by
+    simpa [hpow16] using h256
+  have hle16 : 16 * L ^ (c + 1) <= n := by
+    exact (Nat.pow_le_pow_iff_left (n := 2) (a := 16 * L ^ (c + 1)) (b := n) (by decide)).1 hpow
+  have hmul : L ^ (c + 1) * 16 <= n := by
+    simpa [Nat.mul_comm] using hle16
+  have hdiv : L ^ (c + 1) <= n / 16 :=
+    (Nat.le_div_iff_mul_le (by decide)).2 hmul
+  simpa [Q43_hrThreshold_log2_bound, L] using hdiv
+
 -- Q43.S310-flat-eval-quasipoly-hr-eval-apply:
--- apply the flat evaluation statement to the HR threshold bounds.
+-- apply the flat evaluation statement to the HR threshold bounds via scaled log2^5.
 theorem Q43_hrThreshold_of_flat_eval {α : Type} {proof : List (List α)} {n N c s : Nat}
+    (hn : 2 <= n) (hc : c <= 3)
     (hflat : Q43_flat_eval_statement n N c proof)
-    (hlog : Q43_hrThreshold_log2_bound n c)
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
+      ((Nat.log2 (Q43_grid_size n)) ^ c))
     (hs : s <= n / 32) :
     Q43_hrThreshold n (Q43_tParam (Q43_lineMax proof)) s := by
+  have hlog : Q43_hrThreshold_log2_bound n c :=
+    Q43_hrThreshold_log2_bound_of_scaled (n := n) (c := c) hn hc hscale
   have ht' : Q43_tParam (Q43_lineMax proof) <= n / 16 :=
     Nat.le_trans hflat.2 (by simpa [Q43_hrThreshold_log2_bound] using hlog)
   exact Q43_hrThreshold_of_le ht' hs
