@@ -2300,6 +2300,66 @@ theorem Q43_hrThreshold_of_quasipoly_gap_right {α : Type}
     (proof:=proof) (n:=n) (N:=N) (c:=c) (s:=s) hn hc hflat
     (by simpa [L] using hscale) hs
 
+-- gap-right lower bounds imply n >= 2.
+theorem Q43_gap_right_lower_bound_ge_two {k n : Nat}
+    (hlo : 3 * 2 ^ (k - 1) <= n) : 2 <= n := by
+  have hpow : 1 <= 2 ^ (k - 1) := by
+    have hpos : 0 < 2 ^ (k - 1) := Nat.pow_pos (by decide)
+    exact (Nat.succ_le_iff).2 hpos
+  have h3 : 3 <= 3 * 2 ^ (k - 1) := by
+    simpa [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc] using
+      (Nat.mul_le_mul_left 3 hpow)
+  have h2 : 2 <= 3 := by decide
+  exact Nat.le_trans (Nat.le_trans h2 h3) hlo
+
+-- Q43.S331-flat-eval-quasipoly-hr-threshold-extend-upper:
+-- extend gap-right application by allowing any k >= k0(C).
+theorem Q43_flat_eval_statement_of_quasipoly_gap_right_k {α : Type}
+    {proof : List (List α)} {n N c k : Nat}
+    (hk : 1 <= k)
+    (hk0 : Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) <= k)
+    (hlo : 3 * 2 ^ (k - 1) <= n)
+    (hhi : n < 2 ^ (k + 1))
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1))) :
+    Q43_flat_eval_statement n N c proof := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hn : 2 <= n := Q43_gap_right_lower_bound_ge_two (k:=k) hlo
+  have hscale :
+      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n (L ^ c) :=
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
+      (k:=k) (n:=n) (C:=L ^ c) hk hk0 hlo hhi
+  have hbundle :=
+    Q43_quasipoly_regime_d_ok_param_lineMax
+      (proof:=proof) (n:=n) (N:=N) (c:=c) hn hN hsize (by simpa [L] using hscale)
+  simpa [Q43_flat_eval_statement] using hbundle
+
+theorem Q43_hrThreshold_of_quasipoly_gap_right_k {α : Type}
+    {proof : List (List α)} {n N c k s : Nat}
+    (hk : 1 <= k)
+    (hk0 : Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) <= k)
+    (hc : c <= 3)
+    (hlo : 3 * 2 ^ (k - 1) <= n)
+    (hhi : n < 2 ^ (k + 1))
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hs : s <= n / 32) :
+    Q43_hrThreshold n (Q43_tParam (Q43_lineMax proof)) s := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hn : 2 <= n := Q43_gap_right_lower_bound_ge_two (k:=k) hlo
+  have hflat :
+      Q43_flat_eval_statement n N c proof :=
+    Q43_flat_eval_statement_of_quasipoly_gap_right_k
+      (proof:=proof) (n:=n) (N:=N) (c:=c) (k:=k)
+      hk hk0 hlo hhi hN hsize
+  have hscale :
+      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n (L ^ c) :=
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
+      (k:=k) (n:=n) (C:=L ^ c) hk hk0 hlo hhi
+  exact Q43_hrThreshold_of_flat_eval
+    (proof:=proof) (n:=n) (N:=N) (c:=c) (s:=s) hn hc hflat
+    (by simpa [L] using hscale) hs
+
 -- (a+1)^5 - a^5 >= 5·a^4, via a^(n+1) + (n+1)·a^n <= (a+1)^(n+1).
 theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :
     a ^ (n + 1) + (n + 1) * a ^ n <= (a + 1) ^ (n + 1) := by

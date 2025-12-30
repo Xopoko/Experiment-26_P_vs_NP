@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S330-flat-eval-quasipoly-hr-threshold-hr-apply-gap-right
-  - `NextStepID:` Q43.S331-flat-eval-quasipoly-hr-threshold-extend-upper
+  - `LastStepID:` Q43.S331-flat-eval-quasipoly-hr-threshold-extend-upper
+  - `NextStepID:` Q43.S332-flat-eval-quasipoly-hr-threshold-gap-bridge
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -69,6 +69,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_flat_eval_statement_of_quasipoly,
      Q43_flat_eval_statement_of_quasipoly_gap_right,
      Q43_hrThreshold_of_quasipoly_gap_right,
+     Q43_gap_right_lower_bound_ge_two,
+     Q43_flat_eval_statement_of_quasipoly_gap_right_k,
+     Q43_hrThreshold_of_quasipoly_gap_right_k,
      Q43_hrThreshold_log2_bound,
      Q43_hrThreshold_of_flat_eval,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4,
@@ -88,12 +91,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_nk_succ_le_three_pow);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Equivalence / translation (bridge n_k into the upper plateau boundary).
+  - `Lens:` Equivalence / translation (extend gap-right to k >= k0(C)).
   - `Artifact:` Proof.
-  - `Update:` combined the gap-right flat-eval statement with the HR threshold lemma;
-    see `docs/q43_s330.md`.
-  - `Use:` next: extend the upper bound beyond `2^(k0+1)` or propagate the HR threshold
-    into the final flat-eval claim.
+  - `Update:` extended gap-right to any k >= k0(C) and derived flat-eval + HR threshold;
+    see `docs/q43_s331.md`.
+  - `Use:` next: bridge the k-parameter gap-right into the global gap-min step
+    or propagate into the final flat-eval claim.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
