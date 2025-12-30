@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S319-flat-eval-quasipoly-hr-threshold-upper-plateau-lift
-  - `NextStepID:` Q43.S320-flat-eval-quasipoly-hr-threshold-gap-lift
+  - `LastStepID:` Q43.S320-flat-eval-quasipoly-hr-threshold-gap-lift
+  - `NextStepID:` Q43.S321-flat-eval-quasipoly-hr-threshold-gap-bridge
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -67,14 +67,18 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_flat_eval_statement_of_quasipoly,
      Q43_hrThreshold_log2_bound,
      Q43_hrThreshold_of_flat_eval,
-     Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
+     Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4,
+     Q43_log2_grid_size_eq_succ_of_bounds_self,
+     Q43_log2_grid_size_eq_succ_of_ge_nk,
+     Q43_grid_ratio_mono_on_gap_right,
+     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Equivalence / translation (upper plateau lift from base point).
+  - `Lens:` Invariant (gap-right monotonicity across a constant log2 band).
   - `Artifact:` Proof.
-  - `Update:` lifted ratio bounds across the upper plateau from the base point
-    `3·2^(k-1)`; see `docs/q43_s319.md`.
-  - `Use:` next: handle the gap interval or a bridge across the 2^k jump for explicit n0(c).
+  - `Update:` log2 stays at `2k+1` on `n_k+1 ≤ n < 2^(k+1)` and the ratio bound at `n_k+1`
+    lifts across the gap-right interval; see `docs/q43_s320.md`.
+  - `Use:` next: bridge the upper-plateau bound to `n_k+1` to close the global gap-min step.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

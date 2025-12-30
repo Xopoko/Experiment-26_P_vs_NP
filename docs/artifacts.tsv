@@ -45,3 +45,4 @@ Q43.S316-flat-eval-quasipoly-hr-threshold-c-bound-proof	Proof	formal/WIP/Verifie
 Q43.S317-flat-eval-quasipoly-hr-threshold-n0-bridge	Proof	formal/WIP/Verified/Q43.lean	fe3e2f0cade84a4547e92096f9d1c8f7e691a401	ratio-to-threshold bridge for n>=2; toy n0 proof now uses ratio form
 Q43.S318-flat-eval-quasipoly-hr-threshold-plateau-lift	Proof	formal/WIP/Verified/Q43.lean	a35cf63425323872dc60311e73e8c952e26e058e	lift ratio bound from 2^k across lower plateau to scaled log2^5
 Q43.S319-flat-eval-quasipoly-hr-threshold-upper-plateau-lift	Proof	formal/WIP/Verified/Q43.lean	b96eb8c249d38ef8b1922b5892d4e198bc0d94cb	lift ratio bound from 3·2^(k-1) across upper plateau
+Q43.S320-flat-eval-quasipoly-hr-threshold-gap-lift	Proof	formal/WIP/Verified/Q43.lean	35346fc701d276f894dc20bb7c7f2566860eca35	lift ratio across gap-right via constant log2 band
