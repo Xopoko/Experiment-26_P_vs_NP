@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S320-flat-eval-quasipoly-hr-threshold-gap-lift
-  - `NextStepID:` Q43.S321-flat-eval-quasipoly-hr-threshold-gap-bridge
+  - `LastStepID:` Q43.S321-flat-eval-quasipoly-hr-threshold-gap-bridge
+  - `NextStepID:` Q43.S322-flat-eval-quasipoly-hr-threshold-nk-base-bound
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -71,14 +71,15 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_log2_grid_size_eq_succ_of_bounds_self,
      Q43_log2_grid_size_eq_succ_of_ge_nk,
      Q43_grid_ratio_mono_on_gap_right,
-     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right);
+     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right,
+     Q43_nk_succ_le_three_pow);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (gap-right monotonicity across a constant log2 band).
+  - `Lens:` Equivalence / translation (bridge n_k into the upper plateau boundary).
   - `Artifact:` Proof.
-  - `Update:` log2 stays at `2k+1` on `n_k+1 ≤ n < 2^(k+1)` and the ratio bound at `n_k+1`
-    lifts across the gap-right interval; see `docs/q43_s320.md`.
-  - `Use:` next: bridge the upper-plateau bound to `n_k+1` to close the global gap-min step.
+  - `Update:` isolate the bound `n_k+1 ≤ 3·2^(k-1)` as a helper lemma to bridge
+    the gap-right base point into the upper-plateau boundary; see `docs/q43_s321.md`.
+  - `Use:` next: derive an explicit lower bound for `Q43_grid_ratio (n_k+1)` (k≥k0) to close the gap.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

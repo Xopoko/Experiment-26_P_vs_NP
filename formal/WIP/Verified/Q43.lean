@@ -1696,11 +1696,9 @@ theorem Q43_nk_succ_sq_ge (k : Nat) :
     (Nat.succ_le_iff).2 hupper
   simpa [hsum] using hle
 
-theorem Q43_nk_succ_sq_lt {k : Nat} (hk : 1 <= k) :
-    (Q43_nk k + 1) ^ 2 < 2 ^ (2 * k + 2) := by
+theorem Q43_nk_succ_le_three_pow {k : Nat} (hk : 1 <= k) :
+    Q43_nk k + 1 <= 3 * 2 ^ (k - 1) := by
   let t : Nat := 2 ^ (k - 1)
-  have htpos : 0 < t := by
-    simpa [t] using (Nat.pow_pos (by decide) : 0 < 2 ^ (k - 1))
   have hk1 : k - 1 + 1 = k := Nat.sub_add_cancel hk
   have hpowt : 2 ^ (2 * (k - 1)) = t * t := by
     have hpow' : 2 ^ ((k - 1) * 2) = (2 ^ (k - 1)) ^ 2 := Nat.pow_mul 2 (k - 1) 2
@@ -1747,6 +1745,19 @@ theorem Q43_nk_succ_sq_lt {k : Nat} (hk : 1 <= k) :
   have hnk_lt : Q43_nk k < 3 * t :=
     Q43_floorSqrt_lt_of_lt_sq (n:=2 ^ (2 * k + 1) - 1) (b:=3 * t) hlt_pow
   have hnk_succ_le : Q43_nk k + 1 <= 3 * t := (Nat.succ_le_iff).2 hnk_lt
+  simpa [t] using hnk_succ_le
+
+theorem Q43_nk_succ_sq_lt {k : Nat} (hk : 1 <= k) :
+    (Q43_nk k + 1) ^ 2 < 2 ^ (2 * k + 2) := by
+  let t : Nat := 2 ^ (k - 1)
+  have htpos : 0 < t := by
+    simpa [t] using (Nat.pow_pos (by decide) : 0 < 2 ^ (k - 1))
+  have hk1 : k - 1 + 1 = k := Nat.sub_add_cancel hk
+  have hpowt : 2 ^ (2 * (k - 1)) = t * t := by
+    have hpow' : 2 ^ ((k - 1) * 2) = (2 ^ (k - 1)) ^ 2 := Nat.pow_mul 2 (k - 1) 2
+    simpa [t, Nat.mul_comm, Nat.pow_two] using hpow'
+  have hnk_succ_le : Q43_nk k + 1 <= 3 * t := by
+    simpa [t] using (Q43_nk_succ_le_three_pow (k:=k) hk)
   have hpow_succ : (Q43_nk k + 1) ^ 2 <= (3 * t) ^ 2 :=
     Q43_pow_le_pow_of_le hnk_succ_le
   have hexp2 : 2 * (k - 1) + 4 = 2 * k + 2 := by
@@ -1773,6 +1784,8 @@ theorem Q43_nk_succ_sq_lt {k : Nat} (hk : 1 <= k) :
     have hmul'' : 9 * (t * t) < 16 * (t * t) :=
       (Nat.mul_lt_mul_right (a0 := htpos2)).2 hcoeff'
     simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using hmul''
+  have hpow3 : (3 * t) ^ 2 = 9 * t * t := by
+    simp [Nat.pow_two, Nat.mul_comm, Nat.mul_left_comm]
   have hlt_pow2 : (3 * t) ^ 2 < 2 ^ (2 * k + 2) := by
     calc
       (3 * t) ^ 2 = 9 * t * t := hpow3
