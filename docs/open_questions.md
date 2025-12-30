@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S327-flat-eval-quasipoly-hr-threshold-regime-d-thread
-  - `NextStepID:` Q43.S328-flat-eval-quasipoly-hr-threshold-regime-d-apply-gap-right
+  - `LastStepID:` Q43.S328-flat-eval-quasipoly-hr-threshold-regime-d-apply-gap-right
+  - `NextStepID:` Q43.S329-flat-eval-quasipoly-hr-threshold-flat-eval-apply-gap-right
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -78,6 +78,7 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_gap_right_base_bound_of_k0,
      Q43_gap_right_n0,
      Q43_gap_right_k0_ge_one,
+     Q43_gap_right_n0_ge_two,
      Q43_gap_right_apply_n0,
      Q43_grid_ratio_mono_on_gap_right,
      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right,
@@ -86,9 +87,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Equivalence / translation (bridge n_k into the upper plateau boundary).
   - `Artifact:` Proof.
-  - `Update:` threaded the gap-right n0 bound into the regime-d bundle via
-    `Q43_thm41_regime_d_ok_param_of_gap_right_n0`; see `docs/q43_s327.md`.
-  - `Use:` next: apply the n0-threaded regime-d lemma to the quasi-poly flat-eval chain
+  - `Update:` showed `n0(C) >= 2`, so the gap-right regime-d wrapper no longer
+    needs an explicit `2 <= n` assumption; see `docs/q43_s328.md`.
+  - `Use:` next: apply the gap-right regime-d wrapper to the quasi-poly flat-eval chain
     or extend the upper bound beyond `2^(k0+1)` if needed.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.

@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S327-flat-eval-quasipoly-hr-threshold-regime-d-thread
-- `Do-not-repeat (next 2 runs):` Q43.S327-flat-eval-quasipoly-hr-threshold-regime-d-thread, Q43.S326-flat-eval-quasipoly-hr-threshold-gap-right-global-n0
+- `LastStepID:` Q43.S328-flat-eval-quasipoly-hr-threshold-regime-d-apply-gap-right
+- `Do-not-repeat (next 2 runs):` Q43.S328-flat-eval-quasipoly-hr-threshold-regime-d-apply-gap-right, Q43.S327-flat-eval-quasipoly-hr-threshold-regime-d-thread
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: n0(C) now threads into regime-d bundle; next apply it to the quasi-poly flat-eval chain.
+Q43: gap-right n0 now supplies n>=2 inside the regime-d wrapper; next apply to the quasi-poly flat-eval chain.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: n0(C) now threads into regime-d bundle; next apply it to the quasi-poly fla
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence->Invariant->Equivalence->Invariant->Equivalence
+Latest:Invariant->Equivalence->Invariant->Equivalence->Invariant
