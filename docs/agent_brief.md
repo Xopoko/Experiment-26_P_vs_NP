@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S343-gap-right-hr-threshold-branch-reuse
-- `Do-not-repeat (next 2 runs):` Q43.S343-gap-right-hr-threshold-branch-reuse, Q43.S342-gap-right-hr-threshold-branch-audit
-- `Last InfoGain:` 1
+- `LastStepID:` Q43.S339-gap-right-k-wrapper-audit
+- `Do-not-repeat (next 2 runs):` Q43.S339-gap-right-k-wrapper-audit, Q43.S343-gap-right-hr-threshold-branch-reuse
+- `Last InfoGain:` 0
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: inlined the high branch via the band-log2 lemma; next consider shared flat-eval setup.
+Q43: documented the wrapper audit; next consider shared flat-eval setup.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: inlined the high branch via the band-log2 lemma; next consider shared flat-
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Compression->Invariant->Equivalence->Invariant
+Latest:Specification->Invariant->Compression->Invariant->Equivalence
