@@ -2120,6 +2120,33 @@ theorem Q43_pow2_ge_two_mul_add_ge13 {k : Nat} (hk : 13 <= k) : 2 * k + 5 <= 2 ^
         simpa [hstep1, hstep2, Nat.mul_add, Nat.add_assoc] using hmul
   simpa [hk'] using hmain
 
+-- compare the explicit base bound against a C-dependent threshold (k>=13).
+theorem Q43_gap_right_base_bound_of_c {k C : Nat} (hk : 13 <= k)
+    (hC : 3 * (2 * C * Q43_thm41_c1_chernoff_ln) <= 2 * k + 1) :
+    2 * C * Q43_thm41_c1_chernoff_ln <= 2 ^ (2 * k + 1) / (2 * k + 1) ^ 5 := by
+  let X : Nat := 2 * C * Q43_thm41_c1_chernoff_ln
+  let B : Nat := (2 * k + 1) ^ 5
+  have hpos : 0 < B := by
+    have hbase : 0 < 2 * k + 1 := Nat.succ_pos _
+    exact Nat.pow_pos hbase
+  have hmul1 : 3 * X * B <= (2 * k + 1) * B := by
+    have hmul := Nat.mul_le_mul_right B hC
+    simpa [X, B, Nat.mul_assoc] using hmul
+  have hpow6 : (2 * k + 1) ^ 6 <= 3 * 2 ^ (2 * k + 1) := Q43_pow6_le_three_pow2_ge13 hk
+  have hmul1' : 3 * X * B <= (2 * k + 1) ^ 6 := by
+    have hpow : (2 * k + 1) * B = (2 * k + 1) ^ 6 := by
+      simp [B, Nat.pow_succ, Nat.mul_comm]
+    simpa [hpow] using hmul1
+  have hmul2 : 3 * X * B <= 3 * 2 ^ (2 * k + 1) :=
+    Nat.le_trans hmul1' hpow6
+  have hmul2' : 3 * (X * B) <= 3 * 2 ^ (2 * k + 1) := by
+    simpa [Nat.mul_assoc] using hmul2
+  have hmul3 : X * B <= 2 ^ (2 * k + 1) :=
+    Nat.le_of_mul_le_mul_left hmul2' (by decide : 0 < (3 : Nat))
+  have hdiv : X <= 2 ^ (2 * k + 1) / B :=
+    (Nat.le_div_iff_mul_le hpos).2 hmul3
+  simpa [X, B] using hdiv
+
 -- (a+1)^5 - a^5 >= 5·a^4, via a^(n+1) + (n+1)·a^n <= (a+1)^(n+1).
 theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :
     a ^ (n + 1) + (n + 1) * a ^ n <= (a + 1) ^ (n + 1) := by
