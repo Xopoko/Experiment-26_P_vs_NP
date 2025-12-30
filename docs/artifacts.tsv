@@ -42,3 +42,4 @@ Q43.S313-flat-eval-quasipoly-hr-threshold-remove-c-bound	Counterexample	formal/W
 Q43.S314-flat-eval-quasipoly-hr-threshold-add-n0-bound	Toy	scripts/toy_q43_hr_threshold_n0.py	8d4c20f5532e891c9ceed484a593dd5d5b96db2d	sweep log2^5 vs HR bound over L<=220 for c=0..12
 Q43.S315-flat-eval-quasipoly-hr-threshold-formal-c-bound	Reduction	formal/WIP/Verified/Q43.lean	4fc81329736eb5773d299de52729005a961cbabc	reduce HR log2 bound to power inequality on |F|
 Q43.S316-flat-eval-quasipoly-hr-threshold-c-bound-proof	Proof	formal/WIP/Verified/Q43.lean	655515e0ac4458315171ace8f6918ffcb1cebc29	isolate exponent bound for c<=3
+Q43.S317-flat-eval-quasipoly-hr-threshold-n0-bridge	Proof	formal/WIP/Verified/Q43.lean	fe3e2f0cade84a4547e92096f9d1c8f7e691a401	ratio-to-threshold bridge for n>=2; toy n0 proof now uses ratio form

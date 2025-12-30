@@ -1111,13 +1111,49 @@ theorem Q43_thm41_log2_threshold_c1_grid_powC_of_scaled {n C : Nat} (hn : 2 <= n
   have hlog : 1 <= Nat.log2 (Q43_grid_size n) := Q43_log2_grid_ge_one (n:=n) hn
   exact (Q43_thm41_log2_threshold_c1_grid_powC_iff_mul (n:=n) (C:=C) hlog).2 hmul
 
+-- Q43.S243-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-finish:
+-- rewrite the scaled log2^5 threshold as a ratio bound.
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_iff_ratio {n C : Nat}
+    (hpos : 0 < (Nat.log2 (Q43_grid_size n)) ^ 5) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C
+      ↔ 2 * C * Q43_thm41_c1_chernoff_ln
+          <= Q43_grid_size n / (Nat.log2 (Q43_grid_size n)) ^ 5 := by
+  unfold Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple
+  have h :
+      2 * C * Q43_thm41_c1_chernoff_ln
+          <= Q43_grid_size n / (Nat.log2 (Q43_grid_size n)) ^ 5
+        ↔ (2 * C * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5
+            <= Q43_grid_size n := by
+    simpa using (Nat.le_div_iff_mul_le hpos)
+  exact h.symm
+
+-- Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048:
+-- Nat.log2 floor makes the ratio non-monotone across the 2^k jump.
+def Q43_grid_ratio (n : Nat) : Nat :=
+  Q43_grid_size n / (Nat.log2 (Q43_grid_size n)) ^ 5
+
 -- Q43.S235-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0:
+-- Q43.S317-flat-eval-quasipoly-hr-threshold-n0-bridge:
+-- lift a ratio bound to the scaled log2^5 threshold (n >= 2).
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio {n C : Nat}
+    (hn : 2 <= n)
+    (h : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio n) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
+  have hlog : 1 <= Nat.log2 (Q43_grid_size n) := Q43_log2_grid_ge_one (n:=n) hn
+  have hpos : 0 < (Nat.log2 (Q43_grid_size n)) ^ 5 :=
+    Nat.pow_pos (Nat.succ_le_iff.mp hlog)
+  exact (Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_iff_ratio (n:=n) (C:=C) hpos).2 h
+
 -- toy explicit threshold for C=1.
 def Q43_toy_n0_C1 : Nat := 2 ^ 40
 
 theorem Q43_toy_n0_C1_ok :
     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 1 := by
-  decide
+  have hratio :
+      2 * 1 * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio Q43_toy_n0_C1 := by
+    decide
+  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio
+    (n:=Q43_toy_n0_C1) (C:=1) (hn:=by decide) hratio
 
 -- Q43.S236-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-general:
 -- monotone in C: larger C makes the inequality harder.
@@ -1184,27 +1220,6 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_sides_mono {n m C : 
     Q43_grid_size n <= Q43_grid_size m := by
   exact ⟨Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_lhs_mono (n:=n) (m:=m) (C:=C) h,
     Q43_grid_size_mono h⟩
-
--- Q43.S243-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-threshold-lift-finish:
--- rewrite the scaled log2^5 threshold as a ratio bound.
-theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_iff_ratio {n C : Nat}
-    (hpos : 0 < (Nat.log2 (Q43_grid_size n)) ^ 5) :
-    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C
-      ↔ 2 * C * Q43_thm41_c1_chernoff_ln
-          <= Q43_grid_size n / (Nat.log2 (Q43_grid_size n)) ^ 5 := by
-  unfold Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple
-  have h :
-      2 * C * Q43_thm41_c1_chernoff_ln
-          <= Q43_grid_size n / (Nat.log2 (Q43_grid_size n)) ^ 5
-        ↔ (2 * C * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5
-            <= Q43_grid_size n := by
-    simpa using (Nat.le_div_iff_mul_le hpos)
-  exact h.symm
-
--- Q43.S244-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-ratio-mono-counterexample-2047-2048:
--- Nat.log2 floor makes the ratio non-monotone across the 2^k jump.
-def Q43_grid_ratio (n : Nat) : Nat :=
-  Q43_grid_size n / (Nat.log2 (Q43_grid_size n)) ^ 5
 
 theorem Q43_grid_ratio_drop_2047_2048 :
     Q43_grid_ratio 2048 < Q43_grid_ratio 2047 := by

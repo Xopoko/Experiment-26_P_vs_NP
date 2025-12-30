@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S316-flat-eval-quasipoly-hr-threshold-c-bound-proof
-- `Do-not-repeat (next 2 runs):` Q43.S316-flat-eval-quasipoly-hr-threshold-c-bound-proof, Q43.S315-flat-eval-quasipoly-hr-threshold-formal-c-bound
+- `LastStepID:` Q43.S317-flat-eval-quasipoly-hr-threshold-n0-bridge
+- `Do-not-repeat (next 2 runs):` Q43.S317-flat-eval-quasipoly-hr-threshold-n0-bridge, Q43.S316-flat-eval-quasipoly-hr-threshold-c-bound-proof
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: exponent bound for c<=3 isolated; next bridge to explicit n0(c) or refine scaling.
+Q43: ratio-to-threshold bridge in place; next lift ratio bound across plateaus/jumps for explicit n0(c).
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: exponent bound for c<=3 isolated; next bridge to explicit n0(c) or refine s
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Equivalence->Parameter sweep->Counterexample->Invariant
+Latest:Equivalence->Invariant->Equivalence->Parameter sweep->Counterexample
