@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S335-flat-eval-quasipoly-hr-threshold-gap-left-hr-apply
-  - `NextStepID:` Q43.S336-flat-eval-quasipoly-hr-threshold-gap-band-log2
+  - `LastStepID:` Q43.S341-flat-eval-quasipoly-hr-threshold-gap-right-split-simplify
+  - `NextStepID:` Q43.S342-gap-right-hr-threshold-branch-audit
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -69,13 +69,11 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_flat_eval_statement_of_quasipoly,
      Q43_flat_eval_statement_of_quasipoly_gap_right,
      Q43_flat_eval_statement_of_quasipoly_gap_band_k,
+     Q43_flat_eval_statement_of_quasipoly_gap_band_log2,
      Q43_hrThreshold_of_quasipoly_gap_right,
-     Q43_gap_right_choose_k_of_log2,
-     Q43_hrThreshold_of_quasipoly_gap_right_log2,
-     Q43_gap_right_lower_bound_ge_two,
-     Q43_flat_eval_statement_of_quasipoly_gap_right_k,
+     Q43_gap_right_k0_le_log2_of_pow_le,
      Q43_hrThreshold_of_quasipoly_gap_band_k,
-     Q43_hrThreshold_of_quasipoly_gap_right_k,
+     Q43_hrThreshold_of_quasipoly_gap_band_log2,
      Q43_hrThreshold_log2_bound,
      Q43_hrThreshold_of_flat_eval,
      Q43_log2_grid_size_eq_double_of_le_nk,
@@ -101,11 +99,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_nk_succ_le_three_pow);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Equivalence / translation (extend gap-right to k >= k0(C)).
+  - `Lens:` Invariant (log2-based k choice across the band).
   - `Artifact:` Proof.
-  - `Update:` added band-level flat-eval and HR threshold lemmas using the gap-left cover,
-    and refactored the gap-right k lemmas to call the band versions; see `docs/q43_s335.md`.
-  - `Use:` next: choose k from log2 n across the band to remove the remaining split.
+  - `Update:` simplified the `hhi` branch of `Q43_hrThreshold_of_quasipoly_gap_right` by
+    reusing gap-right helpers and the flat-eval statement; see `docs/q43_s341.md`.
+  - `Use:` next: see if the hhi/¬hhi split can be simplified by reusing the band-log2 lemma or
+    pulling out shared flat-eval setup.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

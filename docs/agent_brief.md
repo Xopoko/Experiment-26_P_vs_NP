@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S335-flat-eval-quasipoly-hr-threshold-gap-left-hr-apply
-- `Do-not-repeat (next 2 runs):` Q43.S335-flat-eval-quasipoly-hr-threshold-gap-left-hr-apply, Q43.S334-flat-eval-quasipoly-hr-threshold-gap-left-cover
+- `LastStepID:` Q43.S341-flat-eval-quasipoly-hr-threshold-gap-right-split-simplify
+- `Do-not-repeat (next 2 runs):` Q43.S341-flat-eval-quasipoly-hr-threshold-gap-right-split-simplify, Q43.S340-flat-eval-quasipoly-hr-threshold-gap-right-exists-inline
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: band-level HR threshold is wired; next choose k from log2 n across the band.
+Q43: simplified the gap-right hhi branch; next audit the split for more reuse.
 
 ## What has already been done (do not repeat)
 
@@ -24,7 +24,7 @@ Q43: band-level HR threshold is wired; next choose k from log2 n across the band
 ## Active "unique" tasks (select one per run)
 
 - Q39 from `docs/open_questions.md` (next alt-shift for contiguous blocks).
-- Q43 from `docs/open_questions.md` (lift the threshold without global monotonicity of the relationship).
+- Q43 from `docs/open_questions.md` (audit the gap-right branch for further reuse).
 
 ## Experiment register (max 12 items; overwrite old ones)
 
@@ -41,4 +41,4 @@ Q43: band-level HR threshold is wired; next choose k from log2 n across the band
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence->Invariant->Equivalence->Invariant->Equivalence
+Latest:Compression->Invariant->Equivalence->Invariant->Equivalence
