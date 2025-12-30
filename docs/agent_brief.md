@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S329-flat-eval-quasipoly-hr-threshold-flat-eval-apply-gap-right
-- `Do-not-repeat (next 2 runs):` Q43.S329-flat-eval-quasipoly-hr-threshold-flat-eval-apply-gap-right, Q43.S328-flat-eval-quasipoly-hr-threshold-regime-d-apply-gap-right
+- `LastStepID:` Q43.S330-flat-eval-quasipoly-hr-threshold-hr-apply-gap-right
+- `Do-not-repeat (next 2 runs):` Q43.S330-flat-eval-quasipoly-hr-threshold-hr-apply-gap-right, Q43.S329-flat-eval-quasipoly-hr-threshold-flat-eval-apply-gap-right
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: gap-right regime-d wrapper now reaches the flat-eval statement; next apply to HR threshold.
+Q43: gap-right chain now yields HR threshold; next extend the upper plateau or propagate to final claim.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: gap-right regime-d wrapper now reaches the flat-eval statement; next apply 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence->Invariant->Equivalence->Invariant->Equivalence
+Latest:Invariant->Equivalence->Invariant->Equivalence->Invariant
