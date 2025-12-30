@@ -993,6 +993,32 @@ theorem Q43_hrThreshold_of_flat_eval {α : Type} {proof : List (List α)} {n N c
     Nat.le_trans hflat.2 (by simpa [Q43_hrThreshold_log2_bound] using hlog)
   exact Q43_hrThreshold_of_le ht' hs
 
+-- Q43.S313-flat-eval-quasipoly-hr-threshold-remove-c-bound:
+-- counterexample: scaled log2^5 does not imply the HR log2 bound for c=9.
+def Q43_hrThreshold_counterexample_n : Nat := 13356869453140769898496
+def Q43_hrThreshold_counterexample_c : Nat := 9
+
+theorem Q43_hrThreshold_counterexample_scaled :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_hrThreshold_counterexample_n
+      ((Nat.log2 (Q43_grid_size Q43_hrThreshold_counterexample_n)) ^
+        Q43_hrThreshold_counterexample_c) := by
+  decide
+
+theorem Q43_hrThreshold_counterexample_fail :
+    Not (Q43_hrThreshold_log2_bound Q43_hrThreshold_counterexample_n
+      Q43_hrThreshold_counterexample_c) := by
+  dsimp [Q43_hrThreshold_log2_bound]
+  decide
+
+theorem Q43_hrThreshold_log2_bound_scaled_not_forall :
+    Not (forall n c,
+      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
+        ((Nat.log2 (Q43_grid_size n)) ^ c) ->
+        Q43_hrThreshold_log2_bound n c) := by
+  intro h
+  exact Q43_hrThreshold_counterexample_fail
+    (h _ _ Q43_hrThreshold_counterexample_scaled)
+
 theorem Q43_quasipoly_regime_d_ok_param_tParam {n N M c : Nat} (hn : 2 <= n)
     (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
     (hM : M <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))

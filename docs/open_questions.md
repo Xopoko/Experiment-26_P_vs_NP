@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S312-flat-eval-quasipoly-hr-threshold-derive-log2-bound
-  - `NextStepID:` Q43.S313-flat-eval-quasipoly-hr-threshold-remove-c-bound
+  - `LastStepID:` Q43.S313-flat-eval-quasipoly-hr-threshold-remove-c-bound
+  - `NextStepID:` Q43.S314-flat-eval-quasipoly-hr-threshold-add-n0-bound
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -70,11 +70,11 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (exponent comparison).
-  - `Artifact:` Proof.
-  - `Update:` proved `Q43_hrThreshold_log2_bound_of_scaled` from the scaled log2^5 threshold with `c <= 3`
-    and recorded the note in `docs/q43_s312.md`.
-  - `Use:` next: remove the `c <= 3` restriction (or replace with an explicit `n0` bound) for the grid regime.
+  - `Lens:` Counterexample / adversarial testing.
+  - `Artifact:` Counterexample.
+  - `Update:` counterexample for c=9 shows scaled log2^5 does not imply the HR log2 bound;
+    see `Q43_hrThreshold_counterexample_*` in `formal/WIP/Verified/Q43.lean` and `docs/q43_s313.md`.
+  - `Use:` next: add an explicit `n0(c)` bound or restrict c in the HR threshold pipeline.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
