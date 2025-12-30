@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S331-flat-eval-quasipoly-hr-threshold-extend-upper
-  - `NextStepID:` Q43.S332-flat-eval-quasipoly-hr-threshold-gap-bridge
+  - `LastStepID:` Q43.S333-flat-eval-quasipoly-hr-threshold-gap-choose-k
+  - `NextStepID:` Q43.S334-flat-eval-quasipoly-hr-threshold-gap-left-cover
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -69,6 +69,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_flat_eval_statement_of_quasipoly,
      Q43_flat_eval_statement_of_quasipoly_gap_right,
      Q43_hrThreshold_of_quasipoly_gap_right,
+     Q43_gap_right_choose_k_of_log2,
+     Q43_hrThreshold_of_quasipoly_gap_right_log2,
      Q43_gap_right_lower_bound_ge_two,
      Q43_flat_eval_statement_of_quasipoly_gap_right_k,
      Q43_hrThreshold_of_quasipoly_gap_right_k,
@@ -93,10 +95,10 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Equivalence / translation (extend gap-right to k >= k0(C)).
   - `Artifact:` Proof.
-  - `Update:` extended gap-right to any k >= k0(C) and derived flat-eval + HR threshold;
-    see `docs/q43_s331.md`.
-  - `Use:` next: bridge the k-parameter gap-right into the global gap-min step
-    or propagate into the final flat-eval claim.
+  - `Update:` chose k = log2 n in the upper-plateau band and wired the witness into
+    the gap-right HR-threshold bridge; see `docs/q43_s333.md`.
+  - `Use:` next: cover the gap-left band (or derive hk0/hlo from the global gap-min
+    coverage) to remove the explicit plateau assumption.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

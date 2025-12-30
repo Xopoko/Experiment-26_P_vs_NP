@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S331-flat-eval-quasipoly-hr-threshold-extend-upper
-- `Do-not-repeat (next 2 runs):` Q43.S331-flat-eval-quasipoly-hr-threshold-extend-upper, Q43.S330-flat-eval-quasipoly-hr-threshold-hr-apply-gap-right
+- `LastStepID:` Q43.S333-flat-eval-quasipoly-hr-threshold-gap-choose-k
+- `Do-not-repeat (next 2 runs):` Q43.S333-flat-eval-quasipoly-hr-threshold-gap-choose-k, Q43.S332-flat-eval-quasipoly-hr-threshold-gap-bridge
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: gap-right chain now uniform for k >= k0; next bridge to global gap-min or propagate to final flat-eval.
+Q43: log2-based k witness is wired for the upper plateau; next cover gap-left or derive hk0/hlo globally.
 
 ## What has already been done (do not repeat)
 
