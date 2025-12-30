@@ -2204,6 +2204,19 @@ theorem Q43_gap_right_apply_n0 {n C : Nat}
   exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
     (k:=Q43_gap_right_k0 C) (n:=n) (C:=C) hk hk0 hlo' hhi
 
+-- Q43.S327-flat-eval-quasipoly-hr-threshold-regime-d-thread:
+-- thread the gap-right n0 threshold into the regime-d bundle.
+theorem Q43_thm41_regime_d_ok_param_of_gap_right_n0 {n N C : Nat}
+    (hn : 2 <= n) (hC : 1 <= C)
+    (hlog : Nat.log2 N <= C * Nat.log2 (Q43_grid_size n))
+    (hlo : Q43_gap_right_n0 C <= n)
+    (hhi : n < 2 ^ (Q43_gap_right_k0 C + 1)) :
+    Q43_thm41_regime_d_ok_param n N := by
+  have hscale :
+      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C :=
+    Q43_gap_right_apply_n0 (n:=n) (C:=C) hlo hhi
+  exact Q43_thm41_regime_d_ok_param_of_scaled (n:=n) (N:=N) (C:=C) hn hC hlog hscale
+
 -- (a+1)^5 - a^5 >= 5·a^4, via a^(n+1) + (n+1)·a^n <= (a+1)^(n+1).
 theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :
     a ^ (n + 1) + (n + 1) * a ^ n <= (a + 1) ^ (n + 1) := by

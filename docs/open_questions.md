@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S326-flat-eval-quasipoly-hr-threshold-gap-right-global-n0
-  - `NextStepID:` Q43.S327-flat-eval-quasipoly-hr-threshold-regime-d-thread
+  - `LastStepID:` Q43.S327-flat-eval-quasipoly-hr-threshold-regime-d-thread
+  - `NextStepID:` Q43.S328-flat-eval-quasipoly-hr-threshold-regime-d-apply-gap-right
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -61,6 +61,7 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_thm41_regime_d_ok_param_of_log2,
      Q43_thm41_c1_le_grid_of_scaled,
      Q43_thm41_regime_d_ok_param_of_scaled,
+     Q43_thm41_regime_d_ok_param_of_gap_right_n0,
      Q43_quasipoly_regime_d_ok_param_lineMax,
      Q43_quasipoly_regime_d_ok_param_tParam,
      Q43_flat_eval_statement,
@@ -85,10 +86,10 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Equivalence / translation (bridge n_k into the upper plateau boundary).
   - `Artifact:` Proof.
-  - `Update:` introduced `n0(C)=3*2^(k0(C)-1)` and a wrapper lemma that applies the
-    gap-right lift directly from `n>=n0(C)` (with `n < 2^(k0+1)`); see `docs/q43_s326.md`.
-  - `Use:` next: propagate the n0(C) form into the regime-d chain or extend the
-    upper bound beyond `2^(k0+1)` if needed.
+  - `Update:` threaded the gap-right n0 bound into the regime-d bundle via
+    `Q43_thm41_regime_d_ok_param_of_gap_right_n0`; see `docs/q43_s327.md`.
+  - `Use:` next: apply the n0-threaded regime-d lemma to the quasi-poly flat-eval chain
+    or extend the upper bound beyond `2^(k0+1)` if needed.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

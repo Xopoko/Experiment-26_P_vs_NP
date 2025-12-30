@@ -52,3 +52,4 @@ Q43.S323-flat-eval-quasipoly-hr-threshold-nk-base-compare-c	Proof	formal/WIP/Ver
 Q43.S324-flat-eval-quasipoly-hr-threshold-nk-base-k0	Proof	formal/WIP/Verified/Q43.lean	5937d15fac64788332b54941c50216481e353583	k0(C)=max(13,2*(2*C*c1)) and base bound into gap-right lift
 Q43.S325-flat-eval-quasipoly-hr-threshold-gap-right-apply-k0	Proof	formal/WIP/Verified/Q43.lean	2f5e0b7ce5417a8b9e8f6d437375cf1064bb0bd3	gap-right lift now assumes 3*2^(k-1) <= n with k>=k0(C)
 Q43.S326-flat-eval-quasipoly-hr-threshold-gap-right-global-n0	Proof	formal/WIP/Verified/Q43.lean	2f9e9ee14e98a02fcb884796bccbb41afb953c35	define n0(C) and apply gap-right lift via k0
+Q43.S327-flat-eval-quasipoly-hr-threshold-regime-d-thread	Proof	formal/WIP/Verified/Q43.lean	d4f1024e7f774c8cae779f47c14201e90685576e	thread gap-right n0 into regime-d bundle
