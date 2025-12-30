@@ -1811,6 +1811,22 @@ theorem Q43_log2_jump_nk {k : Nat} (hk : 1 <= k) :
     (by simpa [Q43_grid_size, Nat.pow_two] using hhigh')
   simpa [Q43_grid_size, Nat.pow_two] using hlog
 
+-- Q43.S322-flat-eval-quasipoly-hr-threshold-nk-base-bound:
+-- explicit ratio lower bound at the log2-jump point n_k+1.
+theorem Q43_grid_ratio_nk_succ_lower {k : Nat} (hk : 1 <= k) :
+    2 ^ (2 * k + 1) / (2 * k + 1) ^ 5 <= Q43_grid_ratio (Q43_nk k + 1) := by
+  have hlog := Q43_log2_jump_nk (k := k) hk
+  have hlog_succ : Nat.log2 (Q43_grid_size (Q43_nk k + 1)) = 2 * k + 1 := by
+    simpa [Q43_grid_size, Nat.pow_two] using hlog.2
+  have hgrid : 2 ^ (2 * k + 1) <= Q43_grid_size (Q43_nk k + 1) := by
+    have hsq : 2 ^ (2 * k + 1) <= (Q43_nk k + 1) ^ 2 := Q43_nk_succ_sq_ge k
+    simpa [Q43_grid_size, Nat.pow_two] using hsq
+  have hdiv :
+      2 ^ (2 * k + 1) / (2 * k + 1) ^ 5
+        <= Q43_grid_size (Q43_nk k + 1) / (2 * k + 1) ^ 5 := by
+    exact Nat.div_le_div_right (c := (2 * k + 1) ^ 5) hgrid
+  simpa [Q43_grid_ratio, hlog_succ] using hdiv
+
 -- Q43.S320-flat-eval-quasipoly-hr-threshold-gap-lift:
 -- log2 |F| stays at 2k+1 on [n_k+1, 2^(k+1)); lift ratio from n_k+1 across the gap.
 theorem Q43_log2_grid_size_eq_succ_of_bounds_self {n k : Nat}
@@ -1872,7 +1888,7 @@ theorem Q43_grid_ratio_mono_on_gap_right {k n m : Nat}
 theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
     {k n C : Nat} (hk : 1 <= k)
     (hlo : Q43_nk k + 1 <= n) (hhi : n < 2 ^ (k + 1))
-    (hbase : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio (Q43_nk k + 1)) :
+    (hbase : 2 * C * Q43_thm41_c1_chernoff_ln <= 2 ^ (2 * k + 1) / (2 * k + 1) ^ 5) :
     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
   have hn_base : Q43_nk k + 1 < 2 ^ (k + 1) := by
     have hsq : (Q43_nk k + 1) ^ 2 < 2 ^ (2 * k + 2) :=
@@ -1896,11 +1912,14 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
         Q43_pow_le_pow_of_le hge
       exact (False.elim (Nat.lt_irrefl _ (Nat.lt_of_le_of_lt hpow hsq')))
     · exact Nat.lt_of_not_ge hge
+  have hbase' :
+      2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio (Q43_nk k + 1) := by
+    exact Nat.le_trans hbase (Q43_grid_ratio_nk_succ_lower (k := k) hk)
   have hmono : Q43_grid_ratio (Q43_nk k + 1) <= Q43_grid_ratio n :=
     Q43_grid_ratio_mono_on_gap_right (k:=k) (n:=Q43_nk k + 1) (m:=n)
       (by exact Nat.le_refl _) hlo hn_base hhi hlo
   have hratio : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio n :=
-    Nat.le_trans hbase hmono
+    Nat.le_trans hbase' hmono
   have hnk : 2 ^ k <= Q43_nk k := Q43_nk_ge_pow k
   have h2k : 2 <= 2 ^ k := by
     have hk1 : k - 1 + 1 = k := Nat.sub_add_cancel hk

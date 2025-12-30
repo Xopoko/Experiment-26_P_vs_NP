@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S321-flat-eval-quasipoly-hr-threshold-gap-bridge
-  - `NextStepID:` Q43.S322-flat-eval-quasipoly-hr-threshold-nk-base-bound
+  - `LastStepID:` Q43.S322-flat-eval-quasipoly-hr-threshold-nk-base-bound
+  - `NextStepID:` Q43.S323-flat-eval-quasipoly-hr-threshold-nk-base-compare-c
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -70,6 +70,7 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4,
      Q43_log2_grid_size_eq_succ_of_bounds_self,
      Q43_log2_grid_size_eq_succ_of_ge_nk,
+     Q43_grid_ratio_nk_succ_lower,
      Q43_grid_ratio_mono_on_gap_right,
      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right,
      Q43_nk_succ_le_three_pow);
@@ -77,9 +78,10 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Equivalence / translation (bridge n_k into the upper plateau boundary).
   - `Artifact:` Proof.
-  - `Update:` isolate the bound `n_k+1 ≤ 3·2^(k-1)` as a helper lemma to bridge
-    the gap-right base point into the upper-plateau boundary; see `docs/q43_s321.md`.
-  - `Use:` next: derive an explicit lower bound for `Q43_grid_ratio (n_k+1)` (k≥k0) to close the gap.
+  - `Update:` proved an explicit base ratio bound at `n_k+1` and wired it into the gap-right lift
+    (hbase compares against `2^(2k+1)/(2k+1)^5`); see `docs/q43_s322.md`.
+  - `Use:` next: compare `2*C*Q43_thm41_c1_chernoff_ln` with the explicit base bound
+    `2^(2k+1)/(2k+1)^5` (pick k0) and apply the gap-right lift.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

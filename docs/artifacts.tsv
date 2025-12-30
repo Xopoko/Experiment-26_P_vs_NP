@@ -47,3 +47,4 @@ Q43.S318-flat-eval-quasipoly-hr-threshold-plateau-lift	Proof	formal/WIP/Verified
 Q43.S319-flat-eval-quasipoly-hr-threshold-upper-plateau-lift	Proof	formal/WIP/Verified/Q43.lean	b96eb8c249d38ef8b1922b5892d4e198bc0d94cb	lift ratio bound from 3·2^(k-1) across upper plateau
 Q43.S320-flat-eval-quasipoly-hr-threshold-gap-lift	Proof	formal/WIP/Verified/Q43.lean	35346fc701d276f894dc20bb7c7f2566860eca35	lift ratio across gap-right via constant log2 band
 Q43.S321-flat-eval-quasipoly-hr-threshold-gap-bridge	Proof	formal/WIP/Verified/Q43.lean	0ed55abe67462789a222eae398c2317ebadc6d89	extract n_k+1 <= 3*2^(k-1) bridge from floorSqrt bound
+Q43.S322-flat-eval-quasipoly-hr-threshold-nk-base-bound	Proof	formal/WIP/Verified/Q43.lean	5bca25c782457ed309af6d42064b4effd37e9995	base ratio bound at n_k+1 and explicit gap-right base
