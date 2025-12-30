@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S341-flat-eval-quasipoly-hr-threshold-gap-right-split-simplify
-  - `NextStepID:` Q43.S342-gap-right-hr-threshold-branch-audit
+  - `LastStepID:` Q43.S343-gap-right-hr-threshold-branch-reuse
+  - `NextStepID:` Q43.S344-gap-right-hr-threshold-shared-setup
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -101,8 +101,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Invariant (log2-based k choice across the band).
   - `Artifact:` Proof.
-  - `Update:` simplified the `hhi` branch of `Q43_hrThreshold_of_quasipoly_gap_right` by
-    reusing gap-right helpers and the flat-eval statement; see `docs/q43_s341.md`.
+  - `Update:` inlined the high branch to reuse `Q43_hrThreshold_of_quasipoly_gap_band_log2`,
+    removing the extra wrapper; see `docs/q43_s343.md`.
   - `Use:` next: see if the hhi/¬hhi split can be simplified by reusing the band-log2 lemma or
     pulling out shared flat-eval setup.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).

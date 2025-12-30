@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S341-flat-eval-quasipoly-hr-threshold-gap-right-split-simplify
-- `Do-not-repeat (next 2 runs):` Q43.S341-flat-eval-quasipoly-hr-threshold-gap-right-split-simplify, Q43.S340-flat-eval-quasipoly-hr-threshold-gap-right-exists-inline
+- `LastStepID:` Q43.S343-gap-right-hr-threshold-branch-reuse
+- `Do-not-repeat (next 2 runs):` Q43.S343-gap-right-hr-threshold-branch-reuse, Q43.S342-gap-right-hr-threshold-branch-audit
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: simplified the gap-right hhi branch; next audit the split for more reuse.
+Q43: inlined the high branch via the band-log2 lemma; next consider shared flat-eval setup.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: simplified the gap-right hhi branch; next audit the split for more reuse.
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Compression->Invariant->Equivalence->Invariant->Equivalence
+Latest:Invariant->Compression->Invariant->Equivalence->Invariant
