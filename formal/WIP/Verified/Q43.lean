@@ -2184,6 +2184,26 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
   have hn : 2 <= n := Nat.le_trans h2nk1 hlo'
   exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio (n:=n) (C:=C) hn hratio
 
+def Q43_gap_right_n0 (C : Nat) : Nat :=
+  3 * 2 ^ (Q43_gap_right_k0 C - 1)
+
+theorem Q43_gap_right_k0_ge_one (C : Nat) : 1 <= Q43_gap_right_k0 C := by
+  have hk13 : 13 <= Q43_gap_right_k0 C := by
+    unfold Q43_gap_right_k0
+    exact Nat.le_max_left _ _
+  exact Nat.le_trans (by decide : 1 <= 13) hk13
+
+theorem Q43_gap_right_apply_n0 {n C : Nat}
+    (hlo : Q43_gap_right_n0 C <= n)
+    (hhi : n < 2 ^ (Q43_gap_right_k0 C + 1)) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
+  have hk : 1 <= Q43_gap_right_k0 C := Q43_gap_right_k0_ge_one C
+  have hk0 : Q43_gap_right_k0 C <= Q43_gap_right_k0 C := Nat.le_refl _
+  have hlo' : 3 * 2 ^ (Q43_gap_right_k0 C - 1) <= n := by
+    simpa [Q43_gap_right_n0] using hlo
+  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
+    (k:=Q43_gap_right_k0 C) (n:=n) (C:=C) hk hk0 hlo' hhi
+
 -- (a+1)^5 - a^5 >= 5·a^4, via a^(n+1) + (n+1)·a^n <= (a+1)^(n+1).
 theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :
     a ^ (n + 1) + (n + 1) * a ^ n <= (a + 1) ^ (n + 1) := by

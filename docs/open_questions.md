@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S325-flat-eval-quasipoly-hr-threshold-gap-right-apply-k0
-  - `NextStepID:` Q43.S326-flat-eval-quasipoly-hr-threshold-gap-right-global-n0
+  - `LastStepID:` Q43.S326-flat-eval-quasipoly-hr-threshold-gap-right-global-n0
+  - `NextStepID:` Q43.S327-flat-eval-quasipoly-hr-threshold-regime-d-thread
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -75,6 +75,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_gap_right_k0,
      Q43_three_mul_le_two_k_succ,
      Q43_gap_right_base_bound_of_k0,
+     Q43_gap_right_n0,
+     Q43_gap_right_k0_ge_one,
+     Q43_gap_right_apply_n0,
      Q43_grid_ratio_mono_on_gap_right,
      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right,
      Q43_nk_succ_le_three_pow);
@@ -82,10 +85,10 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Equivalence / translation (bridge n_k into the upper plateau boundary).
   - `Artifact:` Proof.
-  - `Update:` folded the `n_k+1 <= 3*2^(k-1)` bound into the gap-right lift, so the
-    lemma now takes `3*2^(k-1) <= n` plus `k>=k0(C)`; see `docs/q43_s325.md`.
-  - `Use:` next: choose a concrete `n0(C)` (via k0) so the gap-right lift applies
-    for all `n>=n0`, then thread it into the regime-d chain.
+  - `Update:` introduced `n0(C)=3*2^(k0(C)-1)` and a wrapper lemma that applies the
+    gap-right lift directly from `n>=n0(C)` (with `n < 2^(k0+1)`); see `docs/q43_s326.md`.
+  - `Use:` next: propagate the n0(C) form into the regime-d chain or extend the
+    upper bound beyond `2^(k0+1)` if needed.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
