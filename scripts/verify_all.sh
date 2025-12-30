@@ -7,6 +7,10 @@ if [ "${SKIP_RESOURCE_CHECKS:-}" = "1" ] || [ ! -d resources/downloads ]; then
 fi
 python3 scripts/verify_notebook.py "${verify_args[@]}"
 
+if [ "${REQUIRE_CONTRACT:-}" = "1" ] || [ -n "${CONTRACT_FILE:-}" ]; then
+  python3 scripts/verify_run_contract.py
+fi
+
 if [ -d formal ] && [ -f formal/lakefile.lean ]; then
   if [ "${FORMAL_SKIP:-}" = "1" ] && [ "${ALLOW_FORMAL_SKIP:-}" != "1" ]; then
     echo "FAIL: FORMAL_SKIP=1 requires ALLOW_FORMAL_SKIP=1" >&2

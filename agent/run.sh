@@ -6,11 +6,15 @@ PROMPT_FILE="${PROMPT_FILE:-$ROOT/scripts/agent_prompt.txt}"
 LOG_DIR="${LOG_DIR:-$ROOT/agent/logs}"
 RUN_ID="${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)_pid$$}"
 LOG_FILE="${LOG_FILE:-$LOG_DIR/$RUN_ID.log}"
+CONTRACT_FILE="${CONTRACT_FILE:-$LOG_DIR/$RUN_ID.contract.json}"
+RUN_META_FILE="${RUN_META_FILE:-$LOG_DIR/$RUN_ID.meta.json}"
 LOCK_FILE="${LOCK_FILE:-$LOG_DIR/.agent.lock}"
 REQUIRE_CLEAN="${REQUIRE_CLEAN:-}"
 RUN_MODE="${RUN_MODE:-core}"
+REQUIRE_CONTRACT="${REQUIRE_CONTRACT:-1}"
 
 export RUN_MODE
+export RUN_ID LOG_FILE CONTRACT_FILE RUN_META_FILE REQUIRE_CONTRACT
 
 if [[ ! -f "$PROMPT_FILE" ]]; then
   echo "error: prompt file not found: $PROMPT_FILE" >&2
@@ -76,6 +80,8 @@ cmd=("$ROOT/agent/codex-run.sh" --infinite -C "$ROOT" --file "$PROMPT_FILE" "$@"
   echo "run_id: $RUN_ID"
   echo "require_clean: ${REQUIRE_CLEAN:-0}"
   echo "run_mode: $RUN_MODE"
+  echo "contract_file: $CONTRACT_FILE"
+  echo "run_meta_file: $RUN_META_FILE"
   echo "lock: $LOCK_FILE"
   printf 'cmd:'
   printf ' %q' "${cmd[@]}"

@@ -1,1 +1,1 @@
-[$web-search]($CODEX_HOME/skills/web-search/SKILL.md) Read AGENTS.md. Start the next run.
+[$web-search]($CODEX_HOME/skills/web-search/SKILL.md) Read AGENTS.md. Write run contract via scripts/write_run_contract.py (uses $CONTRACT_FILE) before work; write run meta via scripts/write_run_meta.py (uses $RUN_META_FILE) after verify. Start the next run.

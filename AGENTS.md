@@ -37,8 +37,11 @@ Repo is “solved” only when:
 
 - `P_vs_NP.md` — short index (status + links), ≤ 1–2 screens.
 - `docs/`
-  - `open_questions.md` — active queue; each ACTIVE item MUST include: `Priority`, `LeanTarget`, `NextStepID`.
-  - `agent_brief.md` — bounded working memory, includes “Do‑not‑repeat”.
+  - `open_questions.md` — active queue; each ACTIVE item MUST include:
+    `Priority`, `LeanTarget`, `NextStepID`, `Attempts`, `LastOutcome`, `BlockerType`,
+    `TimeBudget`, `Deps`, `DefinitionOfDone` (plus Oracle fields if not a citation).
+  - `agent_brief.md` — bounded working memory; includes `Do-not-repeat`,
+    `LastApproachTag`, `LastFailureReason`.
   - `roadmap.md` — track(s) + dependency tree.
   - `sources.md` — the only sources we actually rely on.
   - `planned.tsv` — planned artifacts (Commit = `PENDING`).
@@ -97,13 +100,16 @@ Each run: pick exactly one open item and deliver exactly one artifact.
 - Update exactly one item in `docs/open_questions.md` (status + `NextStepID` + short note).
 - Update `docs/agent_brief.md` (bounded; update Do‑not‑repeat when needed).
 - Append exactly one row to `docs/artifacts.tsv` (Commit = git hash).
+- Prefer `scripts/register_artifact.py` (supports `--approach-tag` and `--failure-reason`).
+- Write a run contract JSON via `scripts/write_run_contract.py` (uses `CONTRACT_FILE`).
+- Write a run meta JSON via `scripts/write_run_meta.py` after verification (uses `RUN_META_FILE`).
 - Run oracle + make exactly one git commit.
 
 ---
 
 ## 6) Run contract (print first)
 
-At the start of each run, print:
+At the start of each run, print and persist a contract (write JSON via `scripts/write_run_contract.py`):
 
 ```text
 Run contract
@@ -117,6 +123,27 @@ Run contract
 - StopCondition: <what counts as “done” for this run>
 ```
 
+Contract is enforced by `scripts/verify_run_contract.py` (via `scripts/verify_all.sh` when
+`REQUIRE_CONTRACT=1` or `CONTRACT_FILE` is set). The StepID, Artifact type, and LeanTarget
+must match the artifacts log, and touched files must be within `FilesToTouch` (plus allowlisted
+log files like `agent/logs/*` and `docs/q*_s*.md`).
+
+Minimal contract command:
+
+```bash
+python3 scripts/write_run_contract.py \
+  --selected-item Q43 \
+  --step-id Q43.S123-example \
+  --artifact-type Proof \
+  --lean-target formal/WIP/Verified/Q43.lean \
+  --files-to-touch formal/WIP/Verified/Q43.lean \
+  --files-to-touch docs/open_questions.md \
+  --files-to-touch docs/agent_brief.md \
+  --files-to-touch docs/artifacts.tsv \
+  --oracle-cmd "python3 scripts/toy_q43_gap_sqrt2.py" \
+  --stop-condition "OraclePass && artifact written"
+```
+
 ---
 
 ## 7) Workflow (1 run = 1 artifact)
@@ -127,22 +154,35 @@ Run contract
    * prefer `ACTIVE P0` unless blocked/cooldown,
    * pick `P1` only if all P0 are blocked/cooldown.
 2. Pick exactly one lens (do not repeat lens in consecutive runs).
-3. Retrieval before invention:
+3. Write the run contract JSON via `scripts/write_run_contract.py`.
+4. Retrieval before invention:
 
    * `rg` over `formal/` and `resources/text_cache/`,
    * use `#find`, `simp?`, `aesop?` if available.
-4. Kill-first check (required): try to falsify quickly (counterexample / toy case / barrier hit).
-5. Produce exactly one artifact (see §8).
-6. Barrier check (mandatory when touching separation/lower bounds): fill template §10.
-7. Choose `RUN_MODE` for verification:
+5. Kill-first check (required): try to falsify quickly (counterexample / toy case / barrier hit).
+6. Produce exactly one artifact (see §8).
+7. Barrier check (mandatory when touching separation/lower bounds): fill template §10.
+8. Choose `RUN_MODE` for verification:
 
    * `RUN_MODE=docs` if only docs/notes changed,
    * `RUN_MODE=wip` if touching `formal/WIP/*`,
    * `RUN_MODE=core` if touching `formal/PvNP/Core/*`.
      Run `scripts/verify_all.sh`.
-8. Commit with message:
+9. Write run meta via `scripts/write_run_meta.py` (include outcome and verify exit code).
+10. Commit with message:
 
    * `<StepID>: <ArtifactType> - <one-line summary>`
+
+Minimal run meta command:
+
+```bash
+python3 scripts/write_run_meta.py \
+  --outcome DONE \
+  --selected-item Q43 \
+  --step-id Q43.S123-example \
+  --verify-cmd "RUN_MODE=wip scripts/verify_all.sh" \
+  --verify-exit-code 0
+```
 
 ### If stuck
 
@@ -345,6 +385,7 @@ Each run must end with:
 * `StepID: ...`
 * `InfoGain: 0/1/2`
 * exactly one artifact.
+* `LastApproachTag` and `LastFailureReason` updated in `docs/agent_brief.md`.
 
 Forbidden:
 

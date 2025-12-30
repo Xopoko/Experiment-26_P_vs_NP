@@ -9,6 +9,8 @@ and not by adding to endless lists.
 - `LastStepID:` Q43.S337-gap-right-hr-threshold-without-upper
 - `Do-not-repeat (next 2 runs):` Q43.S337-gap-right-hr-threshold-without-upper, Q43.S334-gap-left-cover
 - `Last InfoGain:` 0
+- `LastApproachTag:` gap-right-hr-threshold-split
+- `LastFailureReason:` none
 
 ## Current direction (keep 1-2 lines)
 

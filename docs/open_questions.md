@@ -3,7 +3,8 @@
 Rule: **each agent run selects exactly 1 item below** and makes measurable progress:
 `Proof` / `Counterexample` / `Exact citation` / `Toy` / `Reduction` / `Barrier` + barrier check.
 Then it updates the item.
-Each active item contains `Success`, `PublicSurface`, `LeanTarget`, and oracle fields
+Each active item contains `Success`, `PublicSurface`, `LeanTarget`, `Attempts`,
+`LastOutcome`, `BlockerType`, `TimeBudget`, `Deps`, `DefinitionOfDone`, and oracle fields
 (`Oracle`, `OraclePass`, `StopRule`) unless it is an `Exact citation`.
 If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
@@ -22,6 +23,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
   - `StopRule:` reached >5 consecutive contiguous alt-shifts with rank=2 (now alt54..alt117);
     stop extending and switch to classification or a barrier certificate; if rank!=2, record the failure and stop.
+  - `Attempts:` 0
+  - `LastOutcome:` INCONCLUSIVE
+  - `BlockerType:` NONE
+  - `TimeBudget:` 2h
+  - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
+  - `DefinitionOfDone:` classify the contiguous alt-shift regime or record a barrier for the XOR step.
   - `Update:` imported contiguous alt-shift witnesses alt54..alt117 into `formal/WIP/Verified/Q39.lean`,
     each `by decide` rank=2, so the stop-rule threshold is exceeded and the next step is classification/barrier.
   - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
@@ -45,6 +52,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
+  - `Attempts:` 0
+  - `LastOutcome:` INCONCLUSIVE
+  - `BlockerType:` NONE
+  - `TimeBudget:` 2h
+  - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`
+  - `DefinitionOfDone:` construct a polylog cost evaluation scheme or pinpoint the exact failure point.
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
     then derive a general gap-drop lemma from the jump.
   - `BarrierCheckRequired:` no

@@ -71,7 +71,14 @@ def _write_artifacts(path: Path, headers: list[str], rows: list[dict[str, str]])
             writer.writerow(row)
 
 
-def _update_agent_brief(path: Path, *, step_id: str, info_gain: str) -> None:
+def _update_agent_brief(
+    path: Path,
+    *,
+    step_id: str,
+    info_gain: str,
+    approach_tag: str | None = None,
+    failure_reason: str | None = None,
+) -> None:
     if not path.exists():
         raise FileNotFoundError(f"missing agent brief: {path}")
 
@@ -105,6 +112,10 @@ def _update_agent_brief(path: Path, *, step_id: str, info_gain: str) -> None:
 
     replace_meta("LastStepID", step_id)
     replace_meta("Last InfoGain", info_gain)
+    if approach_tag:
+        replace_meta("LastApproachTag", approach_tag)
+    if failure_reason:
+        replace_meta("LastFailureReason", failure_reason)
     update_do_not_repeat("Do-not-repeat (next 2 runs)")
 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -116,6 +127,8 @@ def main() -> int:
     parser.add_argument("--type", required=True, choices=sorted(_ALLOWED_TYPES))
     parser.add_argument("--lean-target", required=True, help="Target Lean file")
     parser.add_argument("--info-gain", required=True, choices=["0", "1", "2"])
+    parser.add_argument("--approach-tag", default="", help="Optional approach tag")
+    parser.add_argument("--failure-reason", default="", help="Optional failure reason")
     parser.add_argument("--notes", default="", help="Optional notes")
     parser.add_argument("--commit", default="", help="Commit hash (defaults to HEAD for done log)")
     parser.add_argument("--planned", action="store_true", help="Write to planned log with PENDING commit")
@@ -164,7 +177,13 @@ def main() -> int:
     _write_artifacts(artifacts_path, headers, rows)
 
     if not args.planned:
-        _update_agent_brief(Path(args.agent_brief), step_id=step_id, info_gain=info_gain)
+        _update_agent_brief(
+            Path(args.agent_brief),
+            step_id=step_id,
+            info_gain=info_gain,
+            approach_tag=args.approach_tag.strip() or None,
+            failure_reason=args.failure_reason.strip() or None,
+        )
 
     print(f"OK: registered {step_id} ({art_type})")
     return 0

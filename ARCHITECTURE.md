@@ -7,7 +7,7 @@ This document describes the current structure, flows, and control points of the 
 - Formal truth lives in `formal/` (authoritative: `formal/PvNP/Core/`).
 - `formal/PvNP/Core/` and `formal/WIP/Verified/` cannot contain `sorry`, `admit`, or `axiom`.
 - Docs are navigation and reasoning, not proofs.
-- One run is intended to yield one artifact (protocol text lives in `STRICT.disabled-for-your-current-session.AGENTS.md`).
+- One run is intended to yield one artifact (protocol text lives in `AGENTS.md`).
 - Prompts are single line and `docs/agent_brief.md` stays bounded.
 - `scripts/verify_all.sh` is the canonical gate.
 
@@ -53,8 +53,9 @@ graph TD
 - `README.md` - quick overview and entry point.
 - `P_vs_NP.md` - main index and navigation.
 - `P_vs_NP.diagram.md` / `P_vs_NP.mindmap.md` - repository maps.
-- `STRICT.disabled-for-your-current-session.AGENTS.md` - agent protocol (named as disabled; prompt still points to AGENTS.md).
+- `AGENTS.md` - agent protocol and run contract expectations.
 - `ARCHITECTURE.md` - this file.
+- `Makefile` - convenience targets for verify/doctor workflows.
 
 - `docs/` - written theory and logs (non-authoritative).
   - `00_...` through `16_...` are the main narrative notes.
@@ -80,15 +81,23 @@ graph TD
   - `agent/run_core.sh`, `agent/run_wip.sh` - presets for `RUN_MODE`.
   - `agent/codex-run.sh` - wraps `codex exec`, supports `--infinite`.
   - `agent/logs/` - run logs; `latest.log` symlink.
+  - `agent/logs/*.contract.json` - run contracts (machine-checkable).
+  - `agent/logs/*.meta.json` - run summaries (structured metadata).
 
 - `scripts/` - verification and tooling.
   - `scripts/verify_all.sh` - docs + formal gate.
   - `scripts/verify_notebook.py` - docs structure/resource checks and prompt checks.
+  - `scripts/verify_run_contract.py` - enforce run contract and file-touch rules.
   - `scripts/check_axioms.py` - runs `formal/Checks/AxiomsCheck.lean`.
   - `scripts/register_artifact.py` - append artifact log and update brief.
+  - `scripts/write_run_contract.py` - create run contract JSON.
+  - `scripts/write_run_meta.py` - write structured run metadata.
   - `scripts/agent_prompt.txt` - single-line prompt for runners.
+  - `scripts/doctor.sh` - toolchain sanity checks.
+  - `scripts/verify_changed.sh` - pick `RUN_MODE` from git changes.
   - `scripts/toy_*.py` - oracle checks for Q39/Q43.
   - `scripts/arxiv_search.py` - slice arXiv metadata into `resources/arxiv/`.
+  - `scripts/summarize_runs.py` - aggregate `agent/logs/*.meta.json`.
 
 - `resources/` - bibliography and downloads.
   - `resources/manifest.tsv` - canonical list of sources.
@@ -124,16 +133,21 @@ graph TD
 ### Runner configuration (env vars)
 
 - `PROMPT_FILE`, `LOG_DIR`, `RUN_ID`, `LOG_FILE`, `LOCK_FILE`
+- `CONTRACT_FILE`, `RUN_META_FILE`, `REQUIRE_CONTRACT`
 - `RUN_MODE` (`core` default; `wip` and `docs` are supported)
 - `REQUIRE_CLEAN` (truthy enables git clean check)
 - `LEAN_FORCE_REBUILD` (controls `lake clean` in `scripts/verify_all.sh`)
 - `CODEX_TTY`, `CODEX_SESSION_CYCLES`
 
+Contract/meta helpers:
+- `scripts/write_run_contract.py` writes `CONTRACT_FILE`.
+- `scripts/write_run_meta.py` writes `RUN_META_FILE` (optional run summary).
+
 ## Agent run loop (expected)
 
 ```mermaid
 flowchart TD
-  A["STRICT.disabled-for-your-current-session.AGENTS.md"] --> E["Select 1 item"]
+  A["AGENTS.md"] --> E["Select 1 item"]
   B["scripts/agent_prompt.txt"] --> E
   C["docs/open_questions.md"] --> E
   D["docs/agent_brief.md"] --> E
@@ -145,21 +159,23 @@ flowchart TD
   H --> K["scripts/verify_all.sh"]
   I --> K
   J --> K
-  K --> L["Commit with StepID"]
+  K --> L["Write run meta (scripts/write_run_meta.py)"]
+  L --> M["Commit with StepID"]
 ```
 
 ## Agent reasoning template (per protocol)
 
 ```mermaid
 flowchart TD
-  A["Read STRICT.disabled-for-your-current-session.AGENTS.md"] --> B["Load state: docs/open_questions.md + docs/agent_brief.md"]
+  A["Read AGENTS.md"] --> B["Load state: docs/open_questions.md + docs/agent_brief.md"]
   B --> C{"Anti-loop: StepID in cooldown?"}
   C -->|yes| D["Skip item"]
   C -->|no| E["Rank by Priority + readiness"]
   D --> E
   E --> F["Select exactly 1 item"]
   F --> G["Print run contract (SelectedItem/StepID/Artifact/LeanTarget)"]
-  G --> H["Attempt to falsify or break the claim"]
+  G --> G1["Write run contract JSON (scripts/write_run_contract.py)"]
+  G1 --> H["Attempt to falsify or break the claim"]
   H --> I["Run Oracle (if listed)"]
   I --> J{"Oracle pass?"}
   J -->|no| K["Record failure as artifact or mark BLOCKED"]
@@ -172,7 +188,8 @@ flowchart TD
   P --> Q
   M --> R["scripts/verify_all.sh"]
   Q --> R
-  R --> S["Commit with StepID"]
+  R --> S["Write run meta (scripts/write_run_meta.py)"]
+  S --> T["Commit with StepID"]
 ```
 
 ## Agent outcome routing (single artifact)
@@ -199,7 +216,7 @@ flowchart TD
 ```mermaid
 flowchart TD
   A["docs/agent_brief.md"] --> B["Do-not-repeat (next 2 runs)"]
-  A --> C["LastStepID + Last InfoGain"]
+  A --> C["LastStepID + Last InfoGain + LastApproachTag + LastFailureReason"]
   D["docs/open_questions.md"] --> E["StopRule + OraclePass"]
   B --> F["Exclude cooldown StepIDs"]
   E --> G{"StopRule triggered?"}
@@ -258,10 +275,11 @@ flowchart LR
 ```mermaid
 graph TD
   A[scripts/verify_all.sh] --> B[scripts/verify_notebook.py]
+  B --> B1[scripts/verify_run_contract.py]
   B --> C[Docs structure + logs]
   B --> D[Prompt format check]
   B --> E[Resource link + downloads hygiene]
-  A --> F{formal/lakefile.lean?}
+  B1 --> F{formal/lakefile.lean?}
   F -->|yes| G[Set flags from RUN_MODE + git changes]
   G --> H[Scan Core + WIP/Verified for forbidden tokens]
   H --> I[lake build PvNP]
@@ -275,6 +293,7 @@ graph TD
 Notes:
 
 - Resource checks are skipped when `resources/downloads/` is missing or `SKIP_RESOURCE_CHECKS=1`.
+- Run contracts are verified when `REQUIRE_CONTRACT=1` or `CONTRACT_FILE` is set.
 - `FORMAL_SKIP=1` requires `ALLOW_FORMAL_SKIP=1` or the run fails.
 - `REQUIRE_LEAN=0` requires `ALLOW_REQUIRE_LEAN_SKIP=1` if any `formal/` file changed.
 - `RUN_MODE` defaults:
@@ -334,8 +353,11 @@ flowchart TB
   A --> G["Success"]
   A --> H["PublicSurface"]
   A --> I["Oracle + OraclePass + StopRule (if ACTIVE and not citation)"]
+  A --> K["Attempts + LastOutcome"]
+  A --> L["BlockerType + TimeBudget"]
+  A --> M["Deps + DefinitionOfDone"]
   A --> J{"BarrierCheckRequired?"}
-  J -->|yes| K["BarrierCheck: Relativization/Natural/Algebrization"]
+  J -->|yes| N["BarrierCheck: Relativization/Natural/Algebrization"]
 ```
 
 ## Artifact registration (scripts/register_artifact.py)
@@ -378,7 +400,7 @@ flowchart TD
 
 ## Key control points (where to improve)
 
-- `STRICT.disabled-for-your-current-session.AGENTS.md` - protocol and artifact rules.
+- `AGENTS.md` - protocol and artifact rules.
 - `scripts/agent_prompt.txt` - single-line run prompt.
 - `docs/open_questions.md` - queue quality drives progress.
 - `docs/agent_brief.md` - anti-loop and bounded state.

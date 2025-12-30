@@ -267,6 +267,37 @@ def _verify_open_questions_structure(*, path: Path) -> None:
             if stop_rule is None or not stop_rule.strip():
                 raise AssertionError(f"{path}: {qid}: missing `StopRule:` for ACTIVE item")
 
+            attempts = _extract_backticked_meta(item, key="Attempts")
+            if attempts is None or not attempts.strip():
+                raise AssertionError(f"{path}: {qid}: missing `Attempts:` for ACTIVE item")
+            if not attempts.strip().split()[0].isdigit():
+                raise AssertionError(f"{path}: {qid}: invalid Attempts {attempts!r} (expected integer)")
+
+            last_outcome = _extract_backticked_meta(item, key="LastOutcome")
+            if last_outcome is None or not last_outcome.strip():
+                raise AssertionError(f"{path}: {qid}: missing `LastOutcome:` for ACTIVE item")
+            outcome = last_outcome.strip().split()[0].upper()
+            if outcome not in {"SUCCESS", "FAIL", "INCONCLUSIVE"}:
+                raise AssertionError(
+                    f"{path}: {qid}: invalid LastOutcome {outcome!r} (expected SUCCESS/FAIL/INCONCLUSIVE)"
+                )
+
+            blocker = _extract_backticked_meta(item, key="BlockerType")
+            if blocker is None or not blocker.strip():
+                raise AssertionError(f"{path}: {qid}: missing `BlockerType:` for ACTIVE item")
+
+            time_budget = _extract_backticked_meta(item, key="TimeBudget")
+            if time_budget is None or not time_budget.strip():
+                raise AssertionError(f"{path}: {qid}: missing `TimeBudget:` for ACTIVE item")
+
+            deps = _extract_backticked_meta(item, key="Deps")
+            if deps is None or not deps.strip():
+                raise AssertionError(f"{path}: {qid}: missing `Deps:` for ACTIVE item")
+
+            dod = _extract_backticked_meta(item, key="DefinitionOfDone")
+            if dod is None or not dod.strip():
+                raise AssertionError(f"{path}: {qid}: missing `DefinitionOfDone:` for ACTIVE item")
+
         last_step = _extract_backticked_meta(item, key="LastStepID")
         if last_step is not None and last_step.strip():
             _parse_step_id(last_step, context=f"{path}: {qid}: LastStepID")
@@ -319,6 +350,14 @@ def _verify_agent_brief_structure(*, path: Path) -> None:
     if last_infogain is None:
         raise AssertionError(f"{path}: missing `Last InfoGain:` in Anti-loop section")
     _parse_infogain(last_infogain, context=f"{path}: Anti-loop: Last InfoGain")
+
+    last_approach = _extract_backticked_meta(section, key="LastApproachTag")
+    if last_approach is None or not last_approach.strip():
+        raise AssertionError(f"{path}: missing `LastApproachTag:` in Anti-loop section")
+
+    last_failure = _extract_backticked_meta(section, key="LastFailureReason")
+    if last_failure is None or not last_failure.strip():
+        raise AssertionError(f"{path}: missing `LastFailureReason:` in Anti-loop section")
 
     print(f"OK: verified agent brief Anti-loop structure in {path}")
 
