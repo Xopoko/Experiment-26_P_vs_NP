@@ -814,22 +814,85 @@ theorem Q43_thm41_log2_threshold_c1_grid_param_of_scaled {n N C : Nat} (hn : 2 <
     Nat.le_trans hlog' hCL
   simpa [Q43_thm41_log2_threshold_c1_grid_param, L] using hfinal
 
-theorem Q43_thm41_log2_threshold_c1_grid_param_of_quasipoly {n N c : Nat} (hn : 2 <= n)
+-- Q43.S307-flat-eval-quasipoly-regime-d-bundle:
+-- bundle the regime-d threshold, |F| >= c1, and quasi-poly t-parameter bounds.
+theorem Q43_thm41_c1_le_grid_of_scaled {n C : Nat} (hn : 2 <= n) (hC : 1 <= C)
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C) :
+    Q43_thm41_c1_chernoff_ln <= Q43_grid_size n := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hlog : 1 <= L := by
+    simpa [L] using (Q43_log2_grid_ge_one (n:=n) hn)
+  have hpow_pos : 0 < L ^ 5 := Nat.pow_pos (Nat.succ_le_iff.mp hlog)
+  have hpow_ge_one : 1 <= L ^ 5 := (Nat.succ_le_iff).2 hpow_pos
+  have hC2 : 1 <= 2 * C := by
+    have h2le : 2 <= 2 * C := by
+      simpa using (Nat.mul_le_mul_left 2 hC)
+    exact Nat.le_trans (by decide : 1 <= 2) h2le
+  have hc1 : Q43_thm41_c1_chernoff_ln <= 2 * C * Q43_thm41_c1_chernoff_ln := by
+    simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using
+      (Nat.mul_le_mul_right Q43_thm41_c1_chernoff_ln hC2)
+  have hmul :
+      2 * C * Q43_thm41_c1_chernoff_ln
+        <= (2 * C * Q43_thm41_c1_chernoff_ln) * L ^ 5 := by
+    simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using
+      (Nat.mul_le_mul_left (2 * C * Q43_thm41_c1_chernoff_ln) hpow_ge_one)
+  have hc1' :
+      Q43_thm41_c1_chernoff_ln
+        <= (2 * C * Q43_thm41_c1_chernoff_ln) * L ^ 5 := by
+    exact Nat.le_trans hc1 hmul
+  have hscale' :
+      (2 * C * Q43_thm41_c1_chernoff_ln) * L ^ 5 <= Q43_grid_size n := by
+    simpa [Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple, L] using hscale
+  exact Nat.le_trans hc1' hscale'
+
+theorem Q43_thm41_regime_d_ok_param_of_scaled {n N C : Nat} (hn : 2 <= n) (hC : 1 <= C)
+    (hlog : Nat.log2 N <= C * Nat.log2 (Q43_grid_size n))
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C) :
+    Q43_thm41_regime_d_ok_param n N := by
+  refine ⟨?_, ?_⟩
+  · exact Q43_thm41_log2_threshold_c1_grid_param_of_scaled (n:=n) (N:=N) (C:=C) hn hlog hscale
+  · exact Q43_thm41_c1_le_grid_of_scaled (n:=n) (C:=C) hn hC hscale
+
+theorem Q43_quasipoly_regime_d_ok_param_tParam {n N M c : Nat} (hn : 2 <= n)
     (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hM : M <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
     (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
       ((Nat.log2 (Q43_grid_size n)) ^ c)) :
-    Q43_thm41_log2_threshold_c1_grid_param n N := by
+    Q43_thm41_regime_d_ok_param n N ∧
+      Q43_tParam M <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
   let L := Nat.log2 (Q43_grid_size n)
   have hlog : Nat.log2 N <= L ^ (c + 1) := by
     have hlog' : Nat.log2 N <= Nat.log2 (2 ^ (L ^ (c + 1))) := Q43_log2_mono hN
     simpa [Nat.log2_two_pow, L] using hlog'
   have hlog_mul : Nat.log2 N <= L ^ c * L := by
     simpa [Nat.pow_succ, L] using hlog
+  have hC : 1 <= L ^ c := by
+    have hlog1 : 1 <= L := by
+      simpa [L] using (Q43_log2_grid_ge_one (n:=n) hn)
+    have hpos : 0 < L := (Nat.succ_le_iff).1 hlog1
+    have hpow_pos : 0 < L ^ c := Nat.pow_pos hpos
+    exact (Nat.succ_le_iff).2 hpow_pos
   have hscale' :
       Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n (L ^ c) := by
     simpa [L] using hscale
-  exact Q43_thm41_log2_threshold_c1_grid_param_of_scaled
-    (n:=n) (N:=N) (C:=L ^ c) hn hlog_mul hscale'
+  have hreg :
+      Q43_thm41_regime_d_ok_param n N :=
+    Q43_thm41_regime_d_ok_param_of_scaled
+      (n:=n) (N:=N) (C:=L ^ c) hn hC hlog_mul hscale'
+  have hM' :
+      Q43_tParam M <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) :=
+    Q43_tParam_le_polylog_of_quasipoly (n := Q43_grid_size n) (c := c) (M := M) hM
+  exact ⟨hreg, hM'⟩
+
+theorem Q43_thm41_log2_threshold_c1_grid_param_of_quasipoly {n N c : Nat} (hn : 2 <= n)
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
+      ((Nat.log2 (Q43_grid_size n)) ^ c)) :
+    Q43_thm41_log2_threshold_c1_grid_param n N := by
+  have hbundle :=
+    Q43_quasipoly_regime_d_ok_param_tParam
+      (n:=n) (N:=N) (M:=N) (c:=c) hn hN hN hscale
+  exact hbundle.1.1
 
 theorem Q43_thm41_log2_threshold_c1_grid_powC_iff_mul {n C : Nat}
     (hlog : 1 <= Nat.log2 (Q43_grid_size n)) :

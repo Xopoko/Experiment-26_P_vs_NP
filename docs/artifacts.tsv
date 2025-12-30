@@ -31,3 +31,5 @@ Q43.S301-flat-eval-evaluation-statement	Proof	formal/WIP/Verified/Q43.lean	3f55f
 Q43.S302-flat-eval-proofsize-to-linemax	Proof	formal/WIP/Verified/Q43.lean	0ffe5a5c3e43bf6030066b5ea194db70f9f6a2c4	lineMax t-parameter bound
 Q43.S303-flat-eval-quasipoly-linemax	Proof	formal/WIP/Verified/Q43.lean	90fb543041827f081ff7709f547874fd28ffdf23	quasi-poly lineMax bound
 Q43.S304-flat-eval-quasipoly-bridge	Proof	formal/WIP/Verified/Q43.lean	4dc590d418bd22162883e3b617e609fe654a2d6e	grid-size quasi-poly lineMax bound
+Q43.S306-flat-eval-quasipoly-hr-threshold	Proof	formal/WIP/Verified/Q43.lean	8501a218654769289c6c6208214cc1888808e43e	quasi-poly log2 bounds imply Thm. 4.1 log2 threshold under scaled log2^5
+Q43.S307-flat-eval-quasipoly-regime-d-bundle	Proof	formal/WIP/Verified/Q43.lean	a30364d3647aac3df104b0c84d2262a983a0eb6b	regime-d bundle with c1 bound and quasi-poly t-parameter
