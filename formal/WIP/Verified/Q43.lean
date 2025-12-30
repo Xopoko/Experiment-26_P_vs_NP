@@ -1872,6 +1872,39 @@ theorem Q43_log2_grid_size_eq_succ_of_ge_nk {k n : Nat}
     simpa [Q43_grid_size, Nat.pow_two] using hpow
   exact Q43_log2_grid_size_eq_succ_of_bounds_self (n:=n) (k:=k) hlow' hhigh'
 
+-- log2 |F| stays at 2k on [2^k, n_k]; lift ratio from 2^k across the gap-left.
+theorem Q43_log2_grid_size_eq_double_of_le_nk {k n : Nat}
+    (hlo : 2 ^ k <= n) (hhi : n <= Q43_nk k) :
+    Nat.log2 (Q43_grid_size n) = 2 * k := by
+  have hpos2k : 0 < 2 ^ k := Nat.pow_pos (by decide)
+  have hnpos : 0 < n := Nat.lt_of_lt_of_le hpos2k hlo
+  have hpow2 : 2 ^ (2 * k) = (2 ^ k) ^ 2 := by
+    simpa [Nat.mul_comm] using (Nat.pow_mul 2 k 2)
+  have hlow : 2 ^ (2 * k) <= Q43_grid_size n := by
+    have hpow : (2 ^ k) ^ 2 <= n ^ 2 :=
+      Q43_pow_le_pow_of_le (a := 2 ^ k) (b := n) (n := 2) hlo
+    simpa [Q43_grid_size, Nat.pow_two, hpow2] using hpow
+  have hhigh : Q43_grid_size n < 2 ^ (2 * k + 1) := by
+    have hpow : n ^ 2 <= (Q43_nk k) ^ 2 :=
+      Q43_pow_le_pow_of_le (a := n) (b := Q43_nk k) (n := 2) hhi
+    have hnk : (Q43_nk k) ^ 2 < 2 ^ (2 * k + 1) := Q43_nk_sq_lt k
+    have hpow' : n ^ 2 < 2 ^ (2 * k + 1) := Nat.lt_of_le_of_lt hpow hnk
+    simpa [Q43_grid_size, Nat.pow_two] using hpow'
+  exact Q43_log2_grid_size_eq_of_bounds (n:=n) (k:=k) hnpos hlow hhigh
+
+theorem Q43_grid_ratio_mono_on_gap_left {k n m : Nat}
+    (hn : 2 ^ k <= n) (hm : 2 ^ k <= m)
+    (hn_hi : n <= Q43_nk k) (hm_hi : m <= Q43_nk k)
+    (h : n <= m) :
+    Q43_grid_ratio n <= Q43_grid_ratio m := by
+  have hlogn : Nat.log2 (Q43_grid_size n) = 2 * k :=
+    Q43_log2_grid_size_eq_double_of_le_nk (k:=k) (n:=n) hn hn_hi
+  have hlogm : Nat.log2 (Q43_grid_size m) = 2 * k :=
+    Q43_log2_grid_size_eq_double_of_le_nk (k:=k) (n:=m) hm hm_hi
+  have hlog : Nat.log2 (Q43_grid_size n) = Nat.log2 (Q43_grid_size m) := by
+    simp [hlogn, hlogm]
+  exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
+
 theorem Q43_grid_ratio_mono_on_gap_right {k n m : Nat}
     (hn : Q43_nk k + 1 <= n) (hm : Q43_nk k + 1 <= m)
     (hn_hi : n < 2 ^ (k + 1)) (hm_hi : m < 2 ^ (k + 1))
@@ -2067,6 +2100,26 @@ theorem Q43_pow2_ge_two_mul_add_ge13 {k : Nat} (hk : 13 <= k) : 2 * k + 5 <= 2 ^
         simpa [hstep1, hstep2, Nat.mul_add, Nat.add_assoc] using hmul
   simpa [hk'] using hmain
 
+theorem Q43_pow5_even_le_two_pow5_odd {k : Nat} (hk : 4 <= k) :
+    (2 * k) ^ 5 <= 2 * (2 * k - 1) ^ 5 := by
+  have hmul : 7 * (2 * k) <= 8 * (2 * k - 1) := by
+    omega
+  have hpow : (7 * (2 * k)) ^ 5 <= (8 * (2 * k - 1)) ^ 5 :=
+    Q43_pow_le_pow_of_le hmul
+  have hpow' : 7 ^ 5 * (2 * k) ^ 5 <= 8 ^ 5 * (2 * k - 1) ^ 5 := by
+    simpa [Nat.mul_pow, Nat.mul_left_comm, Nat.mul_comm, Nat.mul_assoc] using hpow
+  have hcoeff : 8 ^ 5 <= 2 * 7 ^ 5 := by decide
+  have hpow'' : 7 ^ 5 * (2 * k) ^ 5 <= 2 * 7 ^ 5 * (2 * k - 1) ^ 5 := by
+    exact Nat.le_trans hpow' (Nat.mul_le_mul_right _ hcoeff)
+  have hpow''' : 7 ^ 5 * (2 * k) ^ 5 <= 7 ^ 5 * (2 * (2 * k - 1) ^ 5) := by
+    calc
+      7 ^ 5 * (2 * k) ^ 5 <= 2 * 7 ^ 5 * (2 * k - 1) ^ 5 := hpow''
+      _ = 7 ^ 5 * (2 * (2 * k - 1) ^ 5) := by
+        ac_rfl
+  have hpos : 0 < 7 ^ 5 := Nat.pow_pos (by decide)
+  have hfinal := Nat.le_of_mul_le_mul_left hpow''' hpos
+  simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using hfinal
+
 -- compare the explicit base bound against a C-dependent threshold (k>=13).
 theorem Q43_gap_right_base_bound_of_c {k C : Nat} (hk : 13 <= k)
     (hC : 3 * (2 * C * Q43_thm41_c1_chernoff_ln) <= 2 * k + 1) :
@@ -2123,6 +2176,57 @@ theorem Q43_gap_right_base_bound_of_k0 {C k : Nat} (hk : Q43_gap_right_k0 C <= k
   have hC : 3 * (2 * C * Q43_thm41_c1_chernoff_ln) <= 2 * k + 1 :=
     Q43_three_mul_le_two_k_succ hk2
   exact Q43_gap_right_base_bound_of_c (k:=k) (C:=C) hk13 hC
+
+theorem Q43_gap_left_base_bound_of_k0 {k C : Nat}
+    (hk0 : Q43_gap_right_k0 C + 1 <= k) :
+    2 * C * Q43_thm41_c1_chernoff_ln <= 2 ^ (2 * k) / (2 * k) ^ 5 := by
+  let X : Nat := 2 * C * Q43_thm41_c1_chernoff_ln
+  have hk13 : 13 <= Q43_gap_right_k0 C := by
+    unfold Q43_gap_right_k0
+    exact Nat.le_max_left _ _
+  have hk14 : 14 <= k := Nat.le_trans (Nat.succ_le_succ hk13) hk0
+  have hk4 : 4 <= k := Nat.le_trans (by decide : 4 <= 14) hk14
+  have hk0' : Q43_gap_right_k0 C <= k - 1 := by
+    omega
+  have hbase :
+      X <= 2 ^ (2 * (k - 1) + 1) / (2 * (k - 1) + 1) ^ 5 := by
+    simpa [X] using (Q43_gap_right_base_bound_of_k0 (C:=C) (k:=k-1) hk0')
+  have hpos : 0 < (2 * (k - 1) + 1) ^ 5 := by
+    have : 0 < 2 * (k - 1) + 1 := by
+      omega
+    exact Nat.pow_pos this
+  have hbase_mul :
+      X * (2 * (k - 1) + 1) ^ 5 <= 2 ^ (2 * (k - 1) + 1) := by
+    exact (Nat.le_div_iff_mul_le hpos).1 hbase
+  have hshift : 2 * (k - 1) + 1 = 2 * k - 1 := by
+    omega
+  have hbase_mul' : X * (2 * k - 1) ^ 5 <= 2 ^ (2 * k - 1) := by
+    simpa [hshift] using hbase_mul
+  have hpow5 : (2 * k) ^ 5 <= 2 * (2 * k - 1) ^ 5 :=
+    Q43_pow5_even_le_two_pow5_odd hk4
+  have hmul1 : X * (2 * k) ^ 5 <= X * (2 * (2 * k - 1) ^ 5) := by
+    exact Nat.mul_le_mul_left X hpow5
+  have hmul2 : X * (2 * (2 * k - 1) ^ 5) <= 2 * 2 ^ (2 * k - 1) := by
+    have h := Nat.mul_le_mul_left 2 hbase_mul'
+    simpa [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm] using h
+  have hmul3 : X * (2 * k) ^ 5 <= 2 ^ (2 * k) := by
+    have h := Nat.le_trans hmul1 hmul2
+    have hpow : 2 * 2 ^ (2 * k - 1) = 2 ^ (2 * k) := by
+      have hsub : 2 * k - 1 + 1 = 2 * k := by
+        omega
+      calc
+        2 * 2 ^ (2 * k - 1) = 2 ^ (2 * k - 1) * 2 := by
+          simp [Nat.mul_comm]
+        _ = 2 ^ ((2 * k - 1) + 1) := by
+          simpa using (Nat.pow_succ 2 (2 * k - 1))
+        _ = 2 ^ (2 * k) := by
+          simp [hsub]
+    simpa [hpow] using h
+  have hpos2 : 0 < (2 * k) ^ 5 := by
+    have : 0 < 2 * k := by
+      omega
+    exact Nat.pow_pos this
+  exact (Nat.le_div_iff_mul_le hpos2).2 (by simpa [X] using hmul3)
 
 theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
     {k n C : Nat} (hk : 1 <= k)
@@ -2183,6 +2287,104 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
   have h2nk1 : 2 <= Q43_nk k + 1 := Nat.le_trans h2nk (Nat.le_succ _)
   have hn : 2 <= n := Nat.le_trans h2nk1 hlo'
   exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio (n:=n) (C:=C) hn hratio
+
+-- cover the gap-left band [2^k, 3*2^(k-1)] using the n_k split.
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_left
+    {k n C : Nat} (hk0 : Q43_gap_right_k0 C + 1 <= k)
+    (hlo : 2 ^ k <= n) (hhi : n <= 3 * 2 ^ (k - 1)) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
+  have hk13 : 13 <= Q43_gap_right_k0 C := by
+    unfold Q43_gap_right_k0
+    exact Nat.le_max_left _ _
+  have hk14 : 14 <= k := Nat.le_trans (Nat.succ_le_succ hk13) hk0
+  have hk4 : 4 <= k := Nat.le_trans (by decide : 4 <= 14) hk14
+  have hk1 : 1 <= k := Nat.le_trans (by decide : 1 <= 4) hk4
+  have hk2 : 2 <= k := Nat.le_trans (by decide : 2 <= 4) hk4
+  have hbase :
+      2 * C * Q43_thm41_c1_chernoff_ln <= 2 ^ (2 * k) / (2 * k) ^ 5 :=
+    Q43_gap_left_base_bound_of_k0 (k:=k) (C:=C) hk0
+  have hlog_base : Nat.log2 (Q43_grid_size (2 ^ k)) = 2 * k :=
+    Q43_log2_grid_size_eq_double_of_le_nk (k:=k) (n:=2 ^ k)
+      (by exact Nat.le_refl _) (Q43_nk_ge_pow k)
+  have hgrid_base : Q43_grid_size (2 ^ k) = 2 ^ (2 * k) := by
+    calc
+      Q43_grid_size (2 ^ k) = (2 ^ k) ^ 2 := by
+        simp [Q43_grid_size, Nat.pow_two]
+      _ = 2 ^ (2 * k) := by
+        symm
+        simpa [Nat.mul_comm] using (Nat.pow_mul 2 k 2)
+  have hbase_ratio :
+      2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio (2 ^ k) := by
+    simpa [Q43_grid_ratio, hlog_base, hgrid_base] using hbase
+  have hk0' : Q43_gap_right_k0 C <= k := by
+    exact Nat.le_trans (Nat.le_succ _) hk0
+  have hbase_right :
+      2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio (Q43_nk k + 1) := by
+    have hbase' :
+        2 * C * Q43_thm41_c1_chernoff_ln <= 2 ^ (2 * k + 1) / (2 * k + 1) ^ 5 :=
+      Q43_gap_right_base_bound_of_k0 (C:=C) (k:=k) hk0'
+    have hratio' :
+        2 ^ (2 * k + 1) / (2 * k + 1) ^ 5 <= Q43_grid_ratio (Q43_nk k + 1) :=
+      Q43_grid_ratio_nk_succ_lower (k:=k) hk1
+    exact Nat.le_trans hbase' hratio'
+  have h2k : 2 <= 2 ^ k := by
+    have hk1' : k - 1 + 1 = k := Nat.sub_add_cancel hk1
+    have hpos : 0 < 2 ^ (k - 1) := Nat.pow_pos (by decide)
+    have hle : 1 <= 2 ^ (k - 1) := (Nat.succ_le_iff).2 hpos
+    have hmul : 2 <= 2 ^ (k - 1) * 2 := by
+      simpa [Nat.mul_comm] using (Nat.mul_le_mul_right 2 hle)
+    have hpow : 2 ^ k = 2 ^ (k - 1) * 2 := by
+      calc
+        2 ^ k = 2 ^ (k - 1 + 1) := by simp [hk1']
+        _ = 2 ^ (k - 1) * 2 := by
+          simpa [Nat.mul_comm] using (Nat.pow_succ 2 (k - 1))
+    simpa [hpow] using hmul
+  have hn2 : 2 <= n := Nat.le_trans h2k hlo
+  by_cases hnk : n <= Q43_nk k
+  ·
+    have hmono : Q43_grid_ratio (2 ^ k) <= Q43_grid_ratio n :=
+      Q43_grid_ratio_mono_on_gap_left (k:=k) (n:=2 ^ k) (m:=n)
+        (by exact Nat.le_refl _) hlo (Q43_nk_ge_pow k) hnk hlo
+    have hratio : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio n :=
+      Nat.le_trans hbase_ratio hmono
+    exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio (n:=n) (C:=C) hn2 hratio
+  ·
+    have hnk_lt : Q43_nk k < n := Nat.lt_of_not_ge hnk
+    have hnk_succ : Q43_nk k + 1 <= n := (Nat.succ_le_iff).2 hnk_lt
+    have h3lt : 3 * 2 ^ (k - 1) < 2 ^ (k + 1) :=
+      Q43_three_mul_pow_lt_pow_succ (k:=k) hk2
+    have hhi' : n < 2 ^ (k + 1) := Nat.lt_of_le_of_lt hhi h3lt
+    have hnk_hi : Q43_nk k + 1 < 2 ^ (k + 1) := by
+      have hnk_le : Q43_nk k + 1 <= 3 * 2 ^ (k - 1) :=
+        Q43_nk_succ_le_three_pow (k:=k) hk1
+      exact Nat.lt_of_le_of_lt hnk_le h3lt
+    have hmono : Q43_grid_ratio (Q43_nk k + 1) <= Q43_grid_ratio n :=
+      Q43_grid_ratio_mono_on_gap_right (k:=k) (n:=Q43_nk k + 1) (m:=n)
+        (by exact Nat.le_refl _) hnk_succ hnk_hi hhi' hnk_succ
+    have hratio : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio n :=
+      Nat.le_trans hbase_right hmono
+    exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio (n:=n) (C:=C) hn2 hratio
+
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_band
+    {k n C : Nat} (hk0 : Q43_gap_right_k0 C + 1 <= k)
+    (hlo : 2 ^ k <= n) (hhi : n < 2 ^ (k + 1)) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
+  by_cases hgap : n <= 3 * 2 ^ (k - 1)
+  ·
+    exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_left
+      (k:=k) (n:=n) (C:=C) hk0 hlo hgap
+  ·
+    have hgap' : 3 * 2 ^ (k - 1) <= n := by
+      exact Nat.le_of_lt (Nat.lt_of_not_ge hgap)
+    have hk13 : 13 <= Q43_gap_right_k0 C := by
+      unfold Q43_gap_right_k0
+      exact Nat.le_max_left _ _
+    have hk14 : 14 <= k := Nat.le_trans (Nat.succ_le_succ hk13) hk0
+    have hk1 : 1 <= k := Nat.le_trans (by decide : 1 <= 14) hk14
+    have hk0' : Q43_gap_right_k0 C <= k := by
+      exact Nat.le_trans (Nat.le_succ _) hk0
+    exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
+      (k:=k) (n:=n) (C:=C) hk1 hk0' hgap' hhi
 
 def Q43_gap_right_n0 (C : Nat) : Nat :=
   3 * 2 ^ (Q43_gap_right_k0 C - 1)
@@ -2391,32 +2593,130 @@ theorem Q43_gap_right_lower_bound_ge_two {k n : Nat}
   have h2 : 2 <= 3 := by decide
   exact Nat.le_trans (Nat.le_trans h2 h3) hlo
 
+-- Q43.S335-flat-eval-quasipoly-hr-threshold-gap-left-hr-apply:
+-- apply the gap-left cover by lifting the scaled threshold across the full band.
+theorem Q43_flat_eval_statement_of_quasipoly_gap_band_k {α : Type}
+    {proof : List (List α)} {n N c k : Nat}
+    (hk0 : Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1 <= k)
+    (hlo : 2 ^ k <= n)
+    (hhi : n < 2 ^ (k + 1))
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1))) :
+    Q43_flat_eval_statement n N c proof := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hk0' : Q43_gap_right_k0 (L ^ c) + 1 <= k := by
+    simpa [L] using hk0
+  have hk1 : 1 <= k := by
+    have hk0_ge_one : 1 <= Q43_gap_right_k0 (L ^ c) :=
+      Q43_gap_right_k0_ge_one (L ^ c)
+    have hk0_le : Q43_gap_right_k0 (L ^ c) <= k :=
+      Nat.le_trans (Nat.le_succ _) hk0'
+    exact Nat.le_trans hk0_ge_one hk0_le
+  have h2k : 2 <= 2 ^ k := by
+    have hk1' : k - 1 + 1 = k := Nat.sub_add_cancel hk1
+    have hpos : 0 < 2 ^ (k - 1) := Nat.pow_pos (by decide)
+    have hle : 1 <= 2 ^ (k - 1) := (Nat.succ_le_iff).2 hpos
+    have hmul : 2 <= 2 ^ (k - 1) * 2 := by
+      simpa [Nat.mul_comm] using (Nat.mul_le_mul_right 2 hle)
+    have hpow : 2 ^ k = 2 ^ (k - 1) * 2 := by
+      calc
+        2 ^ k = 2 ^ (k - 1 + 1) := by simp [hk1']
+        _ = 2 ^ (k - 1) * 2 := by
+          simpa [Nat.mul_comm] using (Nat.pow_succ 2 (k - 1))
+    simpa [hpow] using hmul
+  have hn : 2 <= n := Nat.le_trans h2k hlo
+  have hscale :
+      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n (L ^ c) :=
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_band
+      (k:=k) (n:=n) (C:=L ^ c) hk0' hlo hhi
+  have hbundle :=
+    Q43_quasipoly_regime_d_ok_param_lineMax
+      (proof:=proof) (n:=n) (N:=N) (c:=c) hn hN hsize (by simpa [L] using hscale)
+  simpa [Q43_flat_eval_statement] using hbundle
+
 -- Q43.S331-flat-eval-quasipoly-hr-threshold-extend-upper:
 -- extend gap-right application by allowing any k >= k0(C).
 theorem Q43_flat_eval_statement_of_quasipoly_gap_right_k {α : Type}
     {proof : List (List α)} {n N c k : Nat}
-    (hk : 1 <= k)
-    (hk0 : Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) <= k)
+    (hk0 : Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1 <= k)
     (hlo : 3 * 2 ^ (k - 1) <= n)
     (hhi : n < 2 ^ (k + 1))
     (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
     (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1))) :
     Q43_flat_eval_statement n N c proof := by
   let L := Nat.log2 (Q43_grid_size n)
-  have hn : 2 <= n := Q43_gap_right_lower_bound_ge_two (k:=k) hlo
+  have hk13 : 13 <= Q43_gap_right_k0 (L ^ c) := by
+    unfold Q43_gap_right_k0
+    exact Nat.le_max_left _ _
+  have hk14 : 14 <= k := Nat.le_trans (Nat.succ_le_succ hk13) hk0
+  have hk1 : 1 <= k := Nat.le_trans (by decide : 1 <= 14) hk14
+  have hlo2 : 2 ^ k <= n := by
+    have hk1' : k - 1 + 1 = k := Nat.sub_add_cancel hk1
+    have hmul : 2 ^ (k - 1) * 2 <= 3 * 2 ^ (k - 1) := by
+      have h2le3 : 2 <= 3 := by decide
+      have hmul' : 2 * 2 ^ (k - 1) <= 3 * 2 ^ (k - 1) :=
+        Nat.mul_le_mul_right _ h2le3
+      simpa [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc] using hmul'
+    have hpow : 2 ^ k = 2 ^ (k - 1) * 2 := by
+      calc
+        2 ^ k = 2 ^ (k - 1 + 1) := by simp [hk1']
+        _ = 2 ^ (k - 1) * 2 := by
+          simpa [Nat.mul_comm] using (Nat.pow_succ 2 (k - 1))
+    have hpow' : 2 ^ k <= 3 * 2 ^ (k - 1) := by
+      simpa [hpow] using hmul
+    exact Nat.le_trans hpow' hlo
+  exact Q43_flat_eval_statement_of_quasipoly_gap_band_k
+    (proof:=proof) (n:=n) (N:=N) (c:=c) (k:=k)
+    hk0 hlo2 hhi hN hsize
+
+theorem Q43_hrThreshold_of_quasipoly_gap_band_k {α : Type}
+    {proof : List (List α)} {n N c k s : Nat}
+    (hk0 : Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1 <= k)
+    (hc : c <= 3)
+    (hlo : 2 ^ k <= n)
+    (hhi : n < 2 ^ (k + 1))
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hs : s <= n / 32) :
+    Q43_hrThreshold n (Q43_tParam (Q43_lineMax proof)) s := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hk0' : Q43_gap_right_k0 (L ^ c) + 1 <= k := by
+    simpa [L] using hk0
+  have hk1 : 1 <= k := by
+    have hk0_ge_one : 1 <= Q43_gap_right_k0 (L ^ c) :=
+      Q43_gap_right_k0_ge_one (L ^ c)
+    have hk0_le : Q43_gap_right_k0 (L ^ c) <= k :=
+      Nat.le_trans (Nat.le_succ _) hk0'
+    exact Nat.le_trans hk0_ge_one hk0_le
+  have h2k : 2 <= 2 ^ k := by
+    have hk1' : k - 1 + 1 = k := Nat.sub_add_cancel hk1
+    have hpos : 0 < 2 ^ (k - 1) := Nat.pow_pos (by decide)
+    have hle : 1 <= 2 ^ (k - 1) := (Nat.succ_le_iff).2 hpos
+    have hmul : 2 <= 2 ^ (k - 1) * 2 := by
+      simpa [Nat.mul_comm] using (Nat.mul_le_mul_right 2 hle)
+    have hpow : 2 ^ k = 2 ^ (k - 1) * 2 := by
+      calc
+        2 ^ k = 2 ^ (k - 1 + 1) := by simp [hk1']
+        _ = 2 ^ (k - 1) * 2 := by
+          simpa [Nat.mul_comm] using (Nat.pow_succ 2 (k - 1))
+    simpa [hpow] using hmul
+  have hn : 2 <= n := Nat.le_trans h2k hlo
+  have hflat :
+      Q43_flat_eval_statement n N c proof :=
+    Q43_flat_eval_statement_of_quasipoly_gap_band_k
+      (proof:=proof) (n:=n) (N:=N) (c:=c) (k:=k)
+      hk0 hlo hhi hN hsize
   have hscale :
       Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n (L ^ c) :=
-    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
-      (k:=k) (n:=n) (C:=L ^ c) hk hk0 hlo hhi
-  have hbundle :=
-    Q43_quasipoly_regime_d_ok_param_lineMax
-      (proof:=proof) (n:=n) (N:=N) (c:=c) hn hN hsize (by simpa [L] using hscale)
-  simpa [Q43_flat_eval_statement] using hbundle
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_band
+      (k:=k) (n:=n) (C:=L ^ c) hk0' hlo hhi
+  exact Q43_hrThreshold_of_flat_eval
+    (proof:=proof) (n:=n) (N:=N) (c:=c) (s:=s) hn hc hflat
+    (by simpa [L] using hscale) hs
 
 theorem Q43_hrThreshold_of_quasipoly_gap_right_k {α : Type}
     {proof : List (List α)} {n N c k s : Nat}
-    (hk : 1 <= k)
-    (hk0 : Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) <= k)
+    (hk0 : Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1 <= k)
     (hc : c <= 3)
     (hlo : 3 * 2 ^ (k - 1) <= n)
     (hhi : n < 2 ^ (k + 1))
@@ -2425,19 +2725,29 @@ theorem Q43_hrThreshold_of_quasipoly_gap_right_k {α : Type}
     (hs : s <= n / 32) :
     Q43_hrThreshold n (Q43_tParam (Q43_lineMax proof)) s := by
   let L := Nat.log2 (Q43_grid_size n)
-  have hn : 2 <= n := Q43_gap_right_lower_bound_ge_two (k:=k) hlo
-  have hflat :
-      Q43_flat_eval_statement n N c proof :=
-    Q43_flat_eval_statement_of_quasipoly_gap_right_k
-      (proof:=proof) (n:=n) (N:=N) (c:=c) (k:=k)
-      hk hk0 hlo hhi hN hsize
-  have hscale :
-      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n (L ^ c) :=
-    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right
-      (k:=k) (n:=n) (C:=L ^ c) hk hk0 hlo hhi
-  exact Q43_hrThreshold_of_flat_eval
-    (proof:=proof) (n:=n) (N:=N) (c:=c) (s:=s) hn hc hflat
-    (by simpa [L] using hscale) hs
+  have hk13 : 13 <= Q43_gap_right_k0 (L ^ c) := by
+    unfold Q43_gap_right_k0
+    exact Nat.le_max_left _ _
+  have hk14 : 14 <= k := Nat.le_trans (Nat.succ_le_succ hk13) hk0
+  have hk1 : 1 <= k := Nat.le_trans (by decide : 1 <= 14) hk14
+  have hlo2 : 2 ^ k <= n := by
+    have hk1' : k - 1 + 1 = k := Nat.sub_add_cancel hk1
+    have hmul : 2 ^ (k - 1) * 2 <= 3 * 2 ^ (k - 1) := by
+      have h2le3 : 2 <= 3 := by decide
+      have hmul' : 2 * 2 ^ (k - 1) <= 3 * 2 ^ (k - 1) :=
+        Nat.mul_le_mul_right _ h2le3
+      simpa [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc] using hmul'
+    have hpow : 2 ^ k = 2 ^ (k - 1) * 2 := by
+      calc
+        2 ^ k = 2 ^ (k - 1 + 1) := by simp [hk1']
+        _ = 2 ^ (k - 1) * 2 := by
+          simpa [Nat.mul_comm] using (Nat.pow_succ 2 (k - 1))
+    have hpow' : 2 ^ k <= 3 * 2 ^ (k - 1) := by
+      simpa [hpow] using hmul
+    exact Nat.le_trans hpow' hlo
+  exact Q43_hrThreshold_of_quasipoly_gap_band_k
+    (proof:=proof) (n:=n) (N:=N) (c:=c) (k:=k) (s:=s)
+    hk0 hc hlo2 hhi hN hsize hs
 
 -- (a+1)^5 - a^5 >= 5·a^4, via a^(n+1) + (n+1)·a^n <= (a+1)^(n+1).
 theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :

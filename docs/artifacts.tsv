@@ -57,3 +57,5 @@ Q43.S328-flat-eval-quasipoly-hr-threshold-regime-d-apply-gap-right	Proof	formal/
 Q43.S329-flat-eval-quasipoly-hr-threshold-flat-eval-apply-gap-right	Proof	formal/WIP/Verified/Q43.lean	9bfd17919c82be67439ef772770deb84fb6ecf66	apply gap-right regime-d wrapper to flat-eval chain
 Q43.S330-flat-eval-quasipoly-hr-threshold-hr-apply-gap-right	Proof	formal/WIP/Verified/Q43.lean	cad9737e04feeaf519e2d4849ccb8c5cf5102a66	apply gap-right flat-eval to HR threshold
 Q43.S331-flat-eval-quasipoly-hr-threshold-extend-upper	Proof	formal/WIP/Verified/Q43.lean	827f48c9a95f0fc802b5b52f761d0ab1bd6bfc92	extend gap-right to k>=k0
+Q43.S333-flat-eval-quasipoly-hr-threshold-gap-choose-k	Proof	formal/WIP/Verified/Q43.lean	b73f480c1e9b98587dc9a15357392588e8cf69c8	log2-based k witness for gap-right HR threshold
+Q43.S335-flat-eval-quasipoly-hr-threshold-gap-left-hr-apply	Proof	formal/WIP/Verified/Q43.lean	7809d93a670f48a7da948ccc01c890f2a010deec	apply gap-left band to HR threshold

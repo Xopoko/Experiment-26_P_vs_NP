@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S333-flat-eval-quasipoly-hr-threshold-gap-choose-k
-  - `NextStepID:` Q43.S334-flat-eval-quasipoly-hr-threshold-gap-left-cover
+  - `LastStepID:` Q43.S335-flat-eval-quasipoly-hr-threshold-gap-left-hr-apply
+  - `NextStepID:` Q43.S336-flat-eval-quasipoly-hr-threshold-gap-band-log2
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -68,14 +68,22 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_flat_eval_statement,
      Q43_flat_eval_statement_of_quasipoly,
      Q43_flat_eval_statement_of_quasipoly_gap_right,
+     Q43_flat_eval_statement_of_quasipoly_gap_band_k,
      Q43_hrThreshold_of_quasipoly_gap_right,
      Q43_gap_right_choose_k_of_log2,
      Q43_hrThreshold_of_quasipoly_gap_right_log2,
      Q43_gap_right_lower_bound_ge_two,
      Q43_flat_eval_statement_of_quasipoly_gap_right_k,
+     Q43_hrThreshold_of_quasipoly_gap_band_k,
      Q43_hrThreshold_of_quasipoly_gap_right_k,
      Q43_hrThreshold_log2_bound,
      Q43_hrThreshold_of_flat_eval,
+     Q43_log2_grid_size_eq_double_of_le_nk,
+     Q43_grid_ratio_mono_on_gap_left,
+     Q43_pow5_even_le_two_pow5_odd,
+     Q43_gap_left_base_bound_of_k0,
+     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_left,
+     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_band,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4,
      Q43_log2_grid_size_eq_succ_of_bounds_self,
      Q43_log2_grid_size_eq_succ_of_ge_nk,
@@ -95,10 +103,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Equivalence / translation (extend gap-right to k >= k0(C)).
   - `Artifact:` Proof.
-  - `Update:` chose k = log2 n in the upper-plateau band and wired the witness into
-    the gap-right HR-threshold bridge; see `docs/q43_s333.md`.
-  - `Use:` next: cover the gap-left band (or derive hk0/hlo from the global gap-min
-    coverage) to remove the explicit plateau assumption.
+  - `Update:` added band-level flat-eval and HR threshold lemmas using the gap-left cover,
+    and refactored the gap-right k lemmas to call the band versions; see `docs/q43_s335.md`.
+  - `Use:` next: choose k from log2 n across the band to remove the remaining split.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
