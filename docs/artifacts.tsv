@@ -62,3 +62,4 @@ Q43.S335-flat-eval-quasipoly-hr-threshold-gap-left-hr-apply	Proof	formal/WIP/Ver
 Q43.S341-flat-eval-quasipoly-hr-threshold-gap-right-split-simplify	Proof	formal/WIP/Verified/Q43.lean	a1c2eccf872563ff449199131e08a38153b19bb4	simplify gap-right hhi branch with helper lemmas
 Q43.S343-gap-right-hr-threshold-branch-reuse	Proof	formal/WIP/Verified/Q43.lean	a80ec0d4f1dc18c64c014546ffb887e59040b32e	reuse band-log2 lemma in gap-right split
 Q43.S339-gap-right-k-wrapper-audit	Proof	formal/WIP/Verified/Q43.lean	3bf24d18deceb26cab3ecfdb4ef9f29420d5b2e8	document gap-right wrapper audit
+Q43.S334-gap-left-cover	Proof	formal/WIP/Verified/Q43.lean	42a34345a8b0accc48ec5f36e8b7625688a1372a	gap-left cover note for scaled log2^5 threshold
