@@ -2228,6 +2228,51 @@ theorem Q43_thm41_regime_d_ok_param_of_gap_right_n0 {n N C : Nat}
     Q43_gap_right_apply_n0 (n:=n) (C:=C) hlo hhi
   exact Q43_thm41_regime_d_ok_param_of_scaled (n:=n) (N:=N) (C:=C) hn hC hlog hscale
 
+-- Q43.S329-flat-eval-quasipoly-hr-threshold-flat-eval-apply-gap-right:
+-- apply the gap-right regime-d wrapper to the quasi-poly flat-eval chain.
+theorem Q43_quasipoly_regime_d_ok_param_lineMax_of_gap_right {α : Type}
+    {proof : List (List α)} {n N c : Nat}
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hlo : Q43_gap_right_n0 ((Nat.log2 (Q43_grid_size n)) ^ c) <= n)
+    (hhi : n < 2 ^ (Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1)) :
+    Q43_thm41_regime_d_ok_param n N ∧
+      Q43_tParam (Q43_lineMax proof) <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hbounds :=
+    Q43_quasipoly_grid_eval_bounds (proof:=proof) (n:=n) (N:=N) (c:=c) hN hsize
+  have hlog : Nat.log2 N <= L ^ (c + 1) := by
+    simpa [L] using hbounds.1
+  have hlog_mul : Nat.log2 N <= L ^ c * L := by
+    simpa [Nat.pow_succ, L] using hlog
+  have hlo' : Q43_gap_right_n0 (L ^ c) <= n := by
+    simpa [L] using hlo
+  have hn : 2 <= n := Nat.le_trans (Q43_gap_right_n0_ge_two (C:=L ^ c)) hlo'
+  have hlog1 : 1 <= L := by
+    simpa [L] using (Q43_log2_grid_ge_one (n:=n) hn)
+  have hpos : 0 < L := (Nat.succ_le_iff).1 hlog1
+  have hpow_pos : 0 < L ^ c := Nat.pow_pos hpos
+  have hC : 1 <= L ^ c := (Nat.succ_le_iff).2 hpow_pos
+  have hreg : Q43_thm41_regime_d_ok_param n N :=
+    Q43_thm41_regime_d_ok_param_of_gap_right_n0
+      (n:=n) (N:=N) (C:=L ^ c) hC hlog_mul hlo' (by simpa [L] using hhi)
+  have hM :
+      Q43_tParam (Q43_lineMax proof) <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
+    simpa [L] using hbounds.2
+  exact ⟨hreg, hM⟩
+
+@[simp] theorem Q43_flat_eval_statement_of_quasipoly_gap_right {α : Type}
+    {proof : List (List α)} {n N c : Nat}
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hlo : Q43_gap_right_n0 ((Nat.log2 (Q43_grid_size n)) ^ c) <= n)
+    (hhi : n < 2 ^ (Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1)) :
+    Q43_flat_eval_statement n N c proof := by
+  have hbundle :=
+    Q43_quasipoly_regime_d_ok_param_lineMax_of_gap_right
+      (proof:=proof) (n:=n) (N:=N) (c:=c) hN hsize hlo hhi
+  simpa [Q43_flat_eval_statement] using hbundle
+
 -- (a+1)^5 - a^5 >= 5·a^4, via a^(n+1) + (n+1)·a^n <= (a+1)^(n+1).
 theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :
     a ^ (n + 1) + (n + 1) * a ^ n <= (a + 1) ^ (n + 1) := by

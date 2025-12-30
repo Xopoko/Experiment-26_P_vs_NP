@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S328-flat-eval-quasipoly-hr-threshold-regime-d-apply-gap-right
-  - `NextStepID:` Q43.S329-flat-eval-quasipoly-hr-threshold-flat-eval-apply-gap-right
+  - `LastStepID:` Q43.S329-flat-eval-quasipoly-hr-threshold-flat-eval-apply-gap-right
+  - `NextStepID:` Q43.S330-flat-eval-quasipoly-hr-threshold-hr-apply-gap-right
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -62,10 +62,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_thm41_c1_le_grid_of_scaled,
      Q43_thm41_regime_d_ok_param_of_scaled,
      Q43_thm41_regime_d_ok_param_of_gap_right_n0,
+     Q43_quasipoly_regime_d_ok_param_lineMax_of_gap_right,
      Q43_quasipoly_regime_d_ok_param_lineMax,
      Q43_quasipoly_regime_d_ok_param_tParam,
      Q43_flat_eval_statement,
      Q43_flat_eval_statement_of_quasipoly,
+     Q43_flat_eval_statement_of_quasipoly_gap_right,
      Q43_hrThreshold_log2_bound,
      Q43_hrThreshold_of_flat_eval,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4,
@@ -87,9 +89,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Equivalence / translation (bridge n_k into the upper plateau boundary).
   - `Artifact:` Proof.
-  - `Update:` showed `n0(C) >= 2`, so the gap-right regime-d wrapper no longer
-    needs an explicit `2 <= n` assumption; see `docs/q43_s328.md`.
-  - `Use:` next: apply the gap-right regime-d wrapper to the quasi-poly flat-eval chain
+  - `Update:` applied the gap-right regime-d wrapper to the quasi-poly flat-eval chain
+    and bundled it into the flat-eval statement; see `docs/q43_s329.md`.
+  - `Use:` next: combine the gap-right flat-eval statement with the HR threshold lemma
     or extend the upper bound beyond `2^(k0+1)` if needed.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
