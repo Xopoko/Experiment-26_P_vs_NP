@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S313-flat-eval-quasipoly-hr-threshold-remove-c-bound
-- `Do-not-repeat (next 2 runs):` Q43.S313-flat-eval-quasipoly-hr-threshold-remove-c-bound, Q43.S312-flat-eval-quasipoly-hr-threshold-derive-log2-bound
+- `LastStepID:` Q43.S314-flat-eval-quasipoly-hr-threshold-add-n0-bound
+- `Do-not-repeat (next 2 runs):` Q43.S314-flat-eval-quasipoly-hr-threshold-add-n0-bound, Q43.S313-flat-eval-quasipoly-hr-threshold-remove-c-bound
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: scaled log2^5 does not imply the HR log2 bound for c=9; next add explicit n0(c) or restrict c.
+Q43: toy sweep shows no counterexamples for c<=8 (L<=220); next formalize a c-bound or explicit n0(c).
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: scaled log2^5 does not imply the HR log2 bound for c=9; next add explicit n
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Counterexample->Invariant->Trade-off->Invariant->Trade-off
+Latest:Parameter sweep->Counterexample->Invariant->Trade-off->Invariant

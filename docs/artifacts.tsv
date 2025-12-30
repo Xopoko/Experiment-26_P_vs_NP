@@ -39,3 +39,4 @@ Q43.S310-flat-eval-quasipoly-hr-eval-apply	Proof	formal/WIP/Verified/Q43.lean	37
 Q43.S311-flat-eval-quasipoly-hr-threshold-asymptotic	Proof	formal/WIP/Verified/Q43.lean	b46043946f91b0bc5e4c8298ac862174ede8f418	name asymptotic log2^c bound for HR threshold
 Q43.S312-flat-eval-quasipoly-hr-threshold-derive-log2-bound	Proof	formal/WIP/Verified/Q43.lean	7f65b32276a60ff4cba29cd4d6eba63f3f555397	derive HR log2 bound from scaled log2^5 (c<=3)
 Q43.S313-flat-eval-quasipoly-hr-threshold-remove-c-bound	Counterexample	formal/WIP/Verified/Q43.lean	19979981b1dc4581f7462fdb363bd4cf1221af69	scaled log2^5 does not imply HR log2 bound for c=9
+Q43.S314-flat-eval-quasipoly-hr-threshold-add-n0-bound	Toy	scripts/toy_q43_hr_threshold_n0.py	8d4c20f5532e891c9ceed484a593dd5d5b96db2d	sweep log2^5 vs HR bound over L<=220 for c=0..12
