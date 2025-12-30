@@ -129,6 +129,130 @@ graph TD
 - `LEAN_FORCE_REBUILD` (controls `lake clean` in `scripts/verify_all.sh`)
 - `CODEX_TTY`, `CODEX_SESSION_CYCLES`
 
+## Agent run loop (expected)
+
+```mermaid
+flowchart TD
+  A["STRICT.disabled-for-your-current-session.AGENTS.md"] --> E["Select 1 item"]
+  B["scripts/agent_prompt.txt"] --> E
+  C["docs/open_questions.md"] --> E
+  D["docs/agent_brief.md"] --> E
+  E --> F["Run oracle (if listed)"]
+  F --> G["Build artifact (formal or docs/notes)"]
+  G --> H["Update docs/open_questions.md"]
+  G --> I["Update docs/agent_brief.md"]
+  G --> J["Append docs/artifacts.tsv or docs/planned.tsv"]
+  H --> K["scripts/verify_all.sh"]
+  I --> K
+  J --> K
+  K --> L["Commit with StepID"]
+```
+
+## Agent reasoning template (per protocol)
+
+```mermaid
+flowchart TD
+  A["Read STRICT.disabled-for-your-current-session.AGENTS.md"] --> B["Load state: docs/open_questions.md + docs/agent_brief.md"]
+  B --> C{"Anti-loop: StepID in cooldown?"}
+  C -->|yes| D["Skip item"]
+  C -->|no| E["Rank by Priority + readiness"]
+  D --> E
+  E --> F["Select exactly 1 item"]
+  F --> G["Print run contract (SelectedItem/StepID/Artifact/LeanTarget)"]
+  G --> H["Attempt to falsify or break the claim"]
+  H --> I["Run Oracle (if listed)"]
+  I --> J{"Oracle pass?"}
+  J -->|no| K["Record failure as artifact or mark BLOCKED"]
+  J -->|yes| L["Build artifact (Proof/Counterexample/Citation/Toy/Reduction/Barrier)"]
+  K --> M["Update open_questions + agent_brief + logs"]
+  L --> N{"Barrier check required?"}
+  N -->|yes| O["Record Relativization/Natural/Algebrization checks"]
+  N -->|no| P["Skip barrier block"]
+  O --> Q["Update open_questions + agent_brief + logs"]
+  P --> Q
+  M --> R["scripts/verify_all.sh"]
+  Q --> R
+  R --> S["Commit with StepID"]
+```
+
+## Agent outcome routing (single artifact)
+
+```mermaid
+flowchart TD
+  A["Selected item"] --> B{"Can finish 1 artifact now?"}
+  B -->|no| C["Set Status=BLOCKED + NextStepID"]
+  C --> D["Update open_questions + agent_brief + logs"]
+  B -->|yes| E["Artifact type (from item)"]
+  E --> F{"Proof?"}
+  F -->|yes| G["Write Lean in LeanTarget (Core/WIP)"]
+  F -->|no| H{"Exact citation?"}
+  H -->|yes| I["Docs/Notes citation + link"]
+  H -->|no| J["Docs/Notes: Counterexample/Toy/Reduction/Barrier"]
+  G --> K["Verify all + commit"]
+  I --> K
+  J --> K
+  D --> K
+```
+
+## Anti-loop + stop rules
+
+```mermaid
+flowchart TD
+  A["docs/agent_brief.md"] --> B["Do-not-repeat (next 2 runs)"]
+  A --> C["LastStepID + Last InfoGain"]
+  D["docs/open_questions.md"] --> E["StopRule + OraclePass"]
+  B --> F["Exclude cooldown StepIDs"]
+  E --> G{"StopRule triggered?"}
+  G -->|yes| H["Switch NextStepID / mark barrier"]
+  G -->|no| I["Continue selected track"]
+  F --> J["Eligible items"]
+  J --> K["Pick 1 item"]
+```
+
+## Run contract template (printed at start)
+
+```mermaid
+flowchart TD
+  A["Start run"] --> B["SelectedItem (Qxx)"]
+  A --> C["Priority (P0/P1/P2)"]
+  A --> D["Artifact type"]
+  A --> E["StepID"]
+  A --> F["LeanTarget (or N/A)"]
+  A --> G["Oracle command"]
+  A --> H["FilesToTouch"]
+  A --> I["StopCondition"]
+```
+
+## Barrier check template
+
+```mermaid
+flowchart TD
+  A["BarrierCheckRequired: yes"] --> B["Relativization check"]
+  A --> C["Natural proofs check"]
+  A --> D["Algebrization check"]
+  B --> E["Record in open_questions"]
+  C --> E
+  D --> E
+```
+
+## File touch matrix (by artifact type)
+
+```mermaid
+flowchart LR
+  A["Artifact type"] --> B["Proof"]
+  A --> C["Exact citation"]
+  A --> D["Counterexample / Toy / Reduction / Barrier"]
+  B --> E["formal/PvNP/Core or formal/WIP/Verified"]
+  B --> F["docs/open_questions.md + docs/agent_brief.md"]
+  B --> G["docs/artifacts.tsv or docs/planned.tsv"]
+  C --> H["docs/*.md or formal/Notes/*.lean"]
+  C --> F
+  C --> G
+  D --> H
+  D --> F
+  D --> G
+```
+
 ## Verification pipeline
 
 ```mermaid
@@ -166,6 +290,21 @@ Optional toy checks can be executed with:
 python3 scripts/verify_notebook.py --checks path/to/toy_checks.py
 ```
 
+## Docs checks (verify_notebook.py)
+
+```mermaid
+flowchart TD
+  A["scripts/verify_notebook.py"] --> B["Optional --checks (toy_*.py)"]
+  A --> C{"Skip resource checks?"}
+  C -->|no| D["Verify links vs resources/manifest.tsv"]
+  C -->|no| E["Downloads hygiene (resources/downloads)"]
+  A --> F["docs/agent_brief.md bounded + structure"]
+  A --> G["docs/open_questions.md structure"]
+  A --> H["docs/artifacts.tsv (done log)"]
+  A --> I["docs/planned.tsv (planned log)"]
+  A --> J["scripts/agent_prompt.txt (1 line)"]
+```
+
 ## Research artifact flow
 
 ```mermaid
@@ -182,6 +321,33 @@ graph TD
 ```
 
 - `scripts/register_artifact.py` appends to `docs/artifacts.tsv` (or `docs/planned.tsv`) and updates `docs/agent_brief.md`.
+
+## Open question item schema (ACTIVE)
+
+```mermaid
+flowchart TB
+  A["ACTIVE item in docs/open_questions.md"] --> B["Priority (P0/P1/P2)"]
+  A --> C["Status (ACTIVE/BLOCKED/DONE)"]
+  A --> D["LastStepID + NextStepID"]
+  A --> E["LeanTarget"]
+  A --> F["Artifact type"]
+  A --> G["Success"]
+  A --> H["PublicSurface"]
+  A --> I["Oracle + OraclePass + StopRule (if ACTIVE and not citation)"]
+  A --> J{"BarrierCheckRequired?"}
+  J -->|yes| K["BarrierCheck: Relativization/Natural/Algebrization"]
+```
+
+## Artifact registration (scripts/register_artifact.py)
+
+```mermaid
+flowchart TD
+  A["scripts/register_artifact.py"] --> B["Validate StepID/type/LeanTarget"]
+  B --> C{"--planned?"}
+  C -->|no| D["Append docs/artifacts.tsv (Commit=git HEAD)"]
+  C -->|yes| E["Append docs/planned.tsv (Commit=PENDING)"]
+  D --> F["Update docs/agent_brief.md (LastStepID/Do-not-repeat/Last InfoGain)"]
+```
 
 ## Resources and search flow
 
