@@ -1144,17 +1144,6 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio {n C : Nat}
     Nat.pow_pos (Nat.succ_le_iff.mp hlog)
   exact (Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_iff_ratio (n:=n) (C:=C) hpos).2 h
 
--- toy explicit threshold for C=1.
-def Q43_toy_n0_C1 : Nat := 2 ^ 40
-
-theorem Q43_toy_n0_C1_ok :
-    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 1 := by
-  have hratio :
-      2 * 1 * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio Q43_toy_n0_C1 := by
-    decide
-  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio
-    (n:=Q43_toy_n0_C1) (C:=1) (hn:=by decide) hratio
-
 -- Q43.S236-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-general:
 -- monotone in C: larger C makes the inequality harder.
 theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C {n C1 C2 : Nat}
@@ -1171,18 +1160,6 @@ theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C {n C1 C2 : Na
         <= (2 * C2 * Q43_thm41_c1_chernoff_ln) * (Nat.log2 (Q43_grid_size n)) ^ 5 := by
     exact Nat.mul_le_mul_right _ hC''
   exact Nat.le_trans hmul h
-
--- Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula:
--- constant-range explicit threshold for C <= 6.
-def Q43_toy_Cmax : Nat := 6
-
-theorem Q43_toy_n0_Cmax_ok :
-    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 Q43_toy_Cmax := by
-  decide
-
-theorem Q43_toy_n0_C_le_Cmax {C : Nat} (hC : C <= Q43_toy_Cmax) :
-    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 C := by
-  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C hC Q43_toy_n0_Cmax_ok
 
 -- Q43.S238-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-monon-grid:
 -- grid size is monotone in n.
@@ -1305,6 +1282,79 @@ theorem Q43_grid_ratio_mono_on_plateau {k n m : Nat} (hk : 2 <= k)
   have hlog : Nat.log2 (Q43_grid_size n) = Nat.log2 (Q43_grid_size m) := by
     simp [hlogn, hlogm]
   exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
+
+-- Q43.S318-flat-eval-quasipoly-hr-threshold-plateau-lift:
+-- lift a ratio bound from 2^k across the lower plateau.
+theorem Q43_pow_le_five_mul_pow_sub_two {k : Nat} (hk : 2 <= k) :
+    2 ^ k <= 5 * 2 ^ (k - 2) := by
+  have hk' : k - 2 + 2 = k := Nat.sub_add_cancel hk
+  have hpow : 2 ^ k = 4 * 2 ^ (k - 2) := by
+    calc
+      2 ^ k = 2 ^ ((k - 2) + 2) := by simp [hk']
+      _ = 2 ^ (k - 2) * 2 ^ 2 := by simp [Nat.pow_add]
+      _ = 4 * 2 ^ (k - 2) := by
+        simp [Nat.mul_comm]
+  have h4le5 : 4 <= 5 := by decide
+  have hmul : 4 * 2 ^ (k - 2) <= 5 * 2 ^ (k - 2) :=
+    Nat.mul_le_mul_right _ h4le5
+  simpa [hpow, Nat.mul_comm] using hmul
+
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_plateau {k n C : Nat}
+    (hk : 2 <= k) (hlo : 2 ^ k <= n) (hhi : n <= 5 * 2 ^ (k - 2))
+    (hbase : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio (2 ^ k)) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
+  have hmono : Q43_grid_ratio (2 ^ k) <= Q43_grid_ratio n :=
+    Q43_grid_ratio_mono_on_plateau (k:=k) (n:=2 ^ k) (m:=n) hk
+      (by exact Nat.le_refl _) hlo (Q43_pow_le_five_mul_pow_sub_two hk) hhi hlo
+  have hratio : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio n :=
+    Nat.le_trans hbase hmono
+  have hpowpos : 0 < 2 ^ (k - 2) := Nat.pow_pos (by decide)
+  have hpowge : 1 <= 2 ^ (k - 2) := (Nat.succ_le_iff).2 hpowpos
+  have h4le : 4 <= 4 * 2 ^ (k - 2) := by
+    simpa [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc] using
+      (Nat.mul_le_mul_left 4 hpowge)
+  have h2le : 2 <= 4 := by decide
+  have h2k : 2 <= 2 ^ k := by
+    have hpow : 2 ^ k = 4 * 2 ^ (k - 2) := by
+      have hk' : k - 2 + 2 = k := Nat.sub_add_cancel hk
+      calc
+        2 ^ k = 2 ^ ((k - 2) + 2) := by simp [hk']
+        _ = 2 ^ (k - 2) * 2 ^ 2 := by simp [Nat.pow_add]
+        _ = 4 * 2 ^ (k - 2) := by
+          simp [Nat.mul_comm]
+    have h2le' : 2 <= 4 * 2 ^ (k - 2) := Nat.le_trans h2le h4le
+    simpa [hpow] using h2le'
+  have hn : 2 <= n := Nat.le_trans h2k hlo
+  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio (n:=n) (C:=C) hn hratio
+
+-- Q43.S235-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0:
+-- toy explicit threshold for C=1.
+def Q43_toy_n0_C1 : Nat := 2 ^ 40
+
+theorem Q43_toy_n0_C1_ok :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 1 := by
+  have hratio :
+      2 * 1 * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio (2 ^ 40) := by
+    decide
+  have hk : 2 <= (40 : Nat) := by decide
+  have hlo : 2 ^ 40 <= Q43_toy_n0_C1 := by
+    simp [Q43_toy_n0_C1]
+  have hhi : Q43_toy_n0_C1 <= 5 * 2 ^ (40 - 2) := by
+    simpa [Q43_toy_n0_C1] using Q43_pow_le_five_mul_pow_sub_two (k:=40) hk
+  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_plateau
+    (k:=40) (n:=Q43_toy_n0_C1) (C:=1) hk hlo hhi hratio
+
+-- Q43.S237-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-apply-params-poly-n0-formula:
+-- constant-range explicit threshold for C <= 6.
+def Q43_toy_Cmax : Nat := 6
+
+theorem Q43_toy_n0_Cmax_ok :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 Q43_toy_Cmax := by
+  decide
+
+theorem Q43_toy_n0_C_le_Cmax {C : Nat} (hC : C <= Q43_toy_Cmax) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple Q43_toy_n0_C1 C := by
+  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_mono_C hC Q43_toy_n0_Cmax_ok
 
 -- Q43.S248-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
 -- apply-params-poly-n0-ratio-lift-piecewise-intervals-cover:
