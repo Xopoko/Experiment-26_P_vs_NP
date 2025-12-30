@@ -950,6 +950,24 @@ theorem Q43_hrThreshold_log2_bound_iff_pow {n c : Nat} :
       (Nat.le_div_iff_mul_le (by decide : 0 < (16 : Nat))).2 hmul
     simpa [Q43_hrThreshold_log2_bound, L] using hdiv
 
+-- Q43.S316-flat-eval-quasipoly-hr-threshold-c-bound-proof:
+-- exponent comparison for c <= 3.
+theorem Q43_log2_pow_le_pow_of_c_le_3 {L c : Nat} (hL : 0 < L) (hc : c <= 3) :
+    L ^ (2 * (c + 1)) <= L ^ (c + 5) := by
+  have hC : c + 2 <= 5 := by
+    simpa using (Nat.add_le_add_right hc 2)
+  have h2exp : 2 * (c + 1) <= c + 5 := by
+    calc
+      2 * (c + 1) = 2 * c + 2 := by
+        simp [Nat.mul_add, Nat.mul_one]
+      _ = c + c + 2 := by
+        simp [Nat.two_mul, Nat.add_assoc]
+      _ = c + (c + 2) := by
+        simp [Nat.add_assoc]
+      _ <= c + 5 := by
+        exact Nat.add_le_add_left hC c
+  exact Nat.pow_le_pow_right hL h2exp
+
 -- Q43.S312-flat-eval-quasipoly-hr-threshold-derive-log2-bound:
 -- scaled log2^5 threshold implies the HR log2 bound when c <= 3.
 theorem Q43_hrThreshold_log2_bound_of_scaled {n c : Nat} (hn : 2 <= n) (hc : c <= 3)
@@ -964,20 +982,8 @@ theorem Q43_hrThreshold_log2_bound_of_scaled {n c : Nat} (hn : 2 <= n) (hc : c <
     simpa [Nat.pow_add, Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm, L] using hscale'
   have hlog : 1 <= L := Q43_log2_grid_ge_one (n := n) hn
   have hpos : 0 < L := (Nat.succ_le_iff).1 hlog
-  have hC : c + 2 <= 5 := by
-    simpa using (Nat.add_le_add_right hc 2)
-  have h2exp : 2 * (c + 1) <= c + 5 := by
-    calc
-      2 * (c + 1) = 2 * c + 2 := by
-        simp [Nat.mul_add, Nat.mul_one]
-      _ = c + c + 2 := by
-        simp [Nat.two_mul, Nat.add_assoc]
-      _ = c + (c + 2) := by
-        simp [Nat.add_assoc]
-      _ <= c + 5 := by
-        exact Nat.add_le_add_left hC c
   have hpowexp : L ^ (2 * (c + 1)) <= L ^ (c + 5) :=
-    Nat.pow_le_pow_right hpos h2exp
+    Q43_log2_pow_le_pow_of_c_le_3 (L := L) (c := c) hpos hc
   have hbig :
       (2 * Q43_thm41_c1_chernoff_ln) * L ^ (2 * (c + 1)) <= n ^ 2 := by
     have hmul :

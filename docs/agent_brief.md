@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S315-flat-eval-quasipoly-hr-threshold-formal-c-bound
-- `Do-not-repeat (next 2 runs):` Q43.S315-flat-eval-quasipoly-hr-threshold-formal-c-bound, Q43.S314-flat-eval-quasipoly-hr-threshold-add-n0-bound
+- `LastStepID:` Q43.S316-flat-eval-quasipoly-hr-threshold-c-bound-proof
+- `Do-not-repeat (next 2 runs):` Q43.S316-flat-eval-quasipoly-hr-threshold-c-bound-proof, Q43.S315-flat-eval-quasipoly-hr-threshold-formal-c-bound
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: HR bound reduced to `256*log2(|F|)^(2(c+1)) <= |F|`; next prove c-bound or explicit n0(c).
+Q43: exponent bound for c<=3 isolated; next bridge to explicit n0(c) or refine scaling.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: HR bound reduced to `256*log2(|F|)^(2(c+1)) <= |F|`; next prove c-bound or 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Equivalence->Parameter sweep->Counterexample->Invariant->Trade-off
+Latest:Invariant->Equivalence->Parameter sweep->Counterexample->Invariant
