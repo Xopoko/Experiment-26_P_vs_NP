@@ -887,6 +887,24 @@ theorem Q43_quasipoly_regime_d_ok_param_lineMax {α : Type} {proof : List (List 
     Q43_tParam_lineMax_le_polylog_of_quasipoly_grid (proof := proof) (n := n) (c := c) hsize
   exact ⟨hreg, hM'⟩
 
+-- Q43.S309-flat-eval-quasipoly-eval-linemax-bridge:
+-- package the regime-d bundle into the flat evaluation statement (lineMax + proofSize).
+def Q43_flat_eval_statement {α : Type} (n N c : Nat) (proof : List (List α)) : Prop :=
+  Q43_thm41_regime_d_ok_param n N ∧
+    Q43_tParam (Q43_lineMax proof) <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1)
+
+theorem Q43_flat_eval_statement_of_quasipoly {α : Type} {proof : List (List α)} {n N c : Nat}
+    (hn : 2 <= n)
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
+      ((Nat.log2 (Q43_grid_size n)) ^ c)) :
+    Q43_flat_eval_statement n N c proof := by
+  have hbundle :=
+    Q43_quasipoly_regime_d_ok_param_lineMax
+      (proof:=proof) (n:=n) (N:=N) (c:=c) hn hN hsize hscale
+  simpa [Q43_flat_eval_statement] using hbundle
+
 theorem Q43_quasipoly_regime_d_ok_param_tParam {n N M c : Nat} (hn : 2 <= n)
     (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
     (hM : M <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
@@ -902,10 +920,10 @@ theorem Q43_quasipoly_regime_d_ok_param_tParam {n N M c : Nat} (hn : 2 <= n)
   have hline : Q43_lineMax proof = M := by
     simp [proof, Q43_lineMax, Q43_lineSize]
   have hbundle :=
-    Q43_quasipoly_regime_d_ok_param_lineMax
+    Q43_flat_eval_statement_of_quasipoly
       (proof:=proof) (n:=n) (N:=N) (c:=c) hn hN hsize hscale
   have hM' : Q43_tParam M <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
-    simpa [hline] using hbundle.2
+    simpa [Q43_flat_eval_statement, hline] using hbundle.2
   exact ⟨hbundle.1, hM'⟩
 
 theorem Q43_thm41_log2_threshold_c1_grid_param_of_quasipoly {n N c : Nat} (hn : 2 <= n)

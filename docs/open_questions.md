@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S308-flat-eval-quasipoly-regime-d-linemax-apply
-  - `NextStepID:` Q43.S309-flat-eval-quasipoly-eval-linemax-bridge
+  - `LastStepID:` Q43.S309-flat-eval-quasipoly-eval-linemax-bridge
+  - `NextStepID:` Q43.S310-flat-eval-quasipoly-hr-eval-apply
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -63,14 +63,16 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_thm41_regime_d_ok_param_of_scaled,
      Q43_quasipoly_regime_d_ok_param_lineMax,
      Q43_quasipoly_regime_d_ok_param_tParam,
+     Q43_flat_eval_statement,
+     Q43_flat_eval_statement_of_quasipoly,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (lineMax/proofSize monotonicity).
+  - `Lens:` Trade-off (evaluation threshold vs proofSize bounds).
   - `Artifact:` Proof.
-  - `Update:` added `Q43_quasipoly_regime_d_ok_param_lineMax` to apply the regime-d bundle to
-    lineMax/proofSize bounds in the quasi-polynomial setting.
-  - `Use:` next: bridge the regime-d lineMax bundle into the flat evaluation statement with proofSize bounds.
+  - `Update:` defined `Q43_flat_eval_statement` and proved
+    `Q43_flat_eval_statement_of_quasipoly` to bridge the regime-d bundle into the flat evaluation statement.
+  - `Use:` next: apply the flat evaluation statement to the HR threshold/t-parameter step.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
