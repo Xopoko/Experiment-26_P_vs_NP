@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S307-flat-eval-quasipoly-regime-d-bundle
-- `Do-not-repeat (next 2 runs):` Q43.S307-flat-eval-quasipoly-regime-d-bundle, Q43.S306-flat-eval-quasipoly-hr-threshold
+- `LastStepID:` Q43.S308-flat-eval-quasipoly-regime-d-linemax-apply
+- `Do-not-repeat (next 2 runs):` Q43.S308-flat-eval-quasipoly-regime-d-linemax-apply, Q43.S307-flat-eval-quasipoly-regime-d-bundle
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: regime-d bundle now links the log2 threshold with c1<=|F| and a t-parameter bound; next apply to lineMax/proofSize.
+Q43: regime-d bundle now applies to lineMax/proofSize; next bridge into the flat evaluation statement.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: regime-d bundle now links the log2 threshold with c1<=|F| and a t-parameter
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Trade-off->Invariant->Trade-off->Invariant->Trade-off
+Latest:Invariant->Trade-off->Invariant->Trade-off->Invariant

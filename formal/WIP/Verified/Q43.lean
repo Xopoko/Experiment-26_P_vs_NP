@@ -853,13 +853,16 @@ theorem Q43_thm41_regime_d_ok_param_of_scaled {n N C : Nat} (hn : 2 <= n) (hC : 
   · exact Q43_thm41_log2_threshold_c1_grid_param_of_scaled (n:=n) (N:=N) (C:=C) hn hlog hscale
   · exact Q43_thm41_c1_le_grid_of_scaled (n:=n) (C:=C) hn hC hscale
 
-theorem Q43_quasipoly_regime_d_ok_param_tParam {n N M c : Nat} (hn : 2 <= n)
+-- Q43.S308-flat-eval-quasipoly-regime-d-linemax-apply:
+-- apply the regime-d bundle to lineMax via proofSize in the quasi-poly regime.
+theorem Q43_quasipoly_regime_d_ok_param_lineMax {α : Type} {proof : List (List α)} {n N c : Nat}
+    (hn : 2 <= n)
     (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
-    (hM : M <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
     (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
       ((Nat.log2 (Q43_grid_size n)) ^ c)) :
     Q43_thm41_regime_d_ok_param n N ∧
-      Q43_tParam M <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
+      Q43_tParam (Q43_lineMax proof) <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
   let L := Nat.log2 (Q43_grid_size n)
   have hlog : Nat.log2 N <= L ^ (c + 1) := by
     have hlog' : Nat.log2 N <= Nat.log2 (2 ^ (L ^ (c + 1))) := Q43_log2_mono hN
@@ -880,9 +883,30 @@ theorem Q43_quasipoly_regime_d_ok_param_tParam {n N M c : Nat} (hn : 2 <= n)
     Q43_thm41_regime_d_ok_param_of_scaled
       (n:=n) (N:=N) (C:=L ^ c) hn hC hlog_mul hscale'
   have hM' :
-      Q43_tParam M <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) :=
-    Q43_tParam_le_polylog_of_quasipoly (n := Q43_grid_size n) (c := c) (M := M) hM
+      Q43_tParam (Q43_lineMax proof) <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) :=
+    Q43_tParam_lineMax_le_polylog_of_quasipoly_grid (proof := proof) (n := n) (c := c) hsize
   exact ⟨hreg, hM'⟩
+
+theorem Q43_quasipoly_regime_d_ok_param_tParam {n N M c : Nat} (hn : 2 <= n)
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hM : M <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hscale : Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
+      ((Nat.log2 (Q43_grid_size n)) ^ c)) :
+    Q43_thm41_regime_d_ok_param n N ∧
+      Q43_tParam M <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
+  let proof : List (List Unit) := [List.replicate M ()]
+  have hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)) := by
+    have hsize_eq : Q43_proofSize proof = M := by
+      simp [proof, Q43_proofSize, Q43_lineSize]
+    simpa [hsize_eq] using hM
+  have hline : Q43_lineMax proof = M := by
+    simp [proof, Q43_lineMax, Q43_lineSize]
+  have hbundle :=
+    Q43_quasipoly_regime_d_ok_param_lineMax
+      (proof:=proof) (n:=n) (N:=N) (c:=c) hn hN hsize hscale
+  have hM' : Q43_tParam M <= (Nat.log2 (Q43_grid_size n)) ^ (c + 1) := by
+    simpa [hline] using hbundle.2
+  exact ⟨hbundle.1, hM'⟩
 
 theorem Q43_thm41_log2_threshold_c1_grid_param_of_quasipoly {n N c : Nat} (hn : 2 <= n)
     (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
