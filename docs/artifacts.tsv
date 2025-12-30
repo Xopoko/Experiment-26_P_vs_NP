@@ -35,3 +35,4 @@ Q43.S306-flat-eval-quasipoly-hr-threshold	Proof	formal/WIP/Verified/Q43.lean	850
 Q43.S307-flat-eval-quasipoly-regime-d-bundle	Proof	formal/WIP/Verified/Q43.lean	a30364d3647aac3df104b0c84d2262a983a0eb6b	regime-d bundle with c1 bound and quasi-poly t-parameter
 Q43.S308-flat-eval-quasipoly-regime-d-linemax-apply	Proof	formal/WIP/Verified/Q43.lean	bda57e6c0f9e7403ef22993504da284affbdaa78	regime-d bundle applied to lineMax/proofSize
 Q43.S309-flat-eval-quasipoly-eval-linemax-bridge	Proof	formal/WIP/Verified/Q43.lean	64e099d32513e298363602d8b45a855d7d7e9857	flat evaluation statement from quasi-poly proofSize
+Q43.S310-flat-eval-quasipoly-hr-eval-apply	Proof	formal/WIP/Verified/Q43.lean	37b6be15f7213690df25f7fd77f96a13eb380e2a	apply flat evaluation statement to HR threshold

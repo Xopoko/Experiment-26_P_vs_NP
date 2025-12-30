@@ -905,6 +905,17 @@ theorem Q43_flat_eval_statement_of_quasipoly {α : Type} {proof : List (List α)
       (proof:=proof) (n:=n) (N:=N) (c:=c) hn hN hsize hscale
   simpa [Q43_flat_eval_statement] using hbundle
 
+-- Q43.S310-flat-eval-quasipoly-hr-eval-apply:
+-- apply the flat evaluation statement to the HR threshold bounds.
+theorem Q43_hrThreshold_of_flat_eval {α : Type} {proof : List (List α)} {n N c s : Nat}
+    (hflat : Q43_flat_eval_statement n N c proof)
+    (ht : (Nat.log2 (Q43_grid_size n)) ^ (c + 1) <= n / 16)
+    (hs : s <= n / 32) :
+    Q43_hrThreshold n (Q43_tParam (Q43_lineMax proof)) s := by
+  have ht' : Q43_tParam (Q43_lineMax proof) <= n / 16 :=
+    Nat.le_trans hflat.2 ht
+  exact Q43_hrThreshold_of_le ht' hs
+
 theorem Q43_quasipoly_regime_d_ok_param_tParam {n N M c : Nat} (hn : 2 <= n)
     (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
     (hM : M <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))

@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S309-flat-eval-quasipoly-eval-linemax-bridge
-- `Do-not-repeat (next 2 runs):` Q43.S309-flat-eval-quasipoly-eval-linemax-bridge, Q43.S308-flat-eval-quasipoly-regime-d-linemax-apply
+- `LastStepID:` Q43.S310-flat-eval-quasipoly-hr-eval-apply
+- `Do-not-repeat (next 2 runs):` Q43.S310-flat-eval-quasipoly-hr-eval-apply, Q43.S309-flat-eval-quasipoly-eval-linemax-bridge
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: flat evaluation statement now bundled; next apply it to the HR threshold/t-parameter step.
+Q43: flat evaluation statement now yields HR threshold; next show log2^c bound implies tParam <= n/16.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: flat evaluation statement now bundled; next apply it to the HR threshold/t-
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Trade-off->Invariant->Trade-off->Invariant->Trade-off
+Latest:Invariant->Trade-off->Invariant->Trade-off->Invariant
