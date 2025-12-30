@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S324-flat-eval-quasipoly-hr-threshold-nk-base-k0
-  - `NextStepID:` Q43.S325-flat-eval-quasipoly-hr-threshold-gap-right-apply-k0
+  - `LastStepID:` Q43.S325-flat-eval-quasipoly-hr-threshold-gap-right-apply-k0
+  - `NextStepID:` Q43.S326-flat-eval-quasipoly-hr-threshold-gap-right-global-n0
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -82,10 +82,10 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Equivalence / translation (bridge n_k into the upper plateau boundary).
   - `Artifact:` Proof.
-  - `Update:` defined `k0(C)=max(13, 2*(2*C*c1))` and derived the base bound
-    from `k>=k0(C)`, wiring it into the gap-right lift; see `docs/q43_s324.md`.
-  - `Use:` next: apply the gap-right lift with `k>=k0(C)` to reach a concrete
-    `n>=n_k+1` threshold and thread it into the regime-d chain.
+  - `Update:` folded the `n_k+1 <= 3*2^(k-1)` bound into the gap-right lift, so the
+    lemma now takes `3*2^(k-1) <= n` plus `k>=k0(C)`; see `docs/q43_s325.md`.
+  - `Use:` next: choose a concrete `n0(C)` (via k0) so the gap-right lift applies
+    for all `n>=n0`, then thread it into the regime-d chain.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
