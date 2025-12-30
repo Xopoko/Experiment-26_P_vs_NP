@@ -910,6 +910,46 @@ theorem Q43_flat_eval_statement_of_quasipoly {α : Type} {proof : List (List α)
 def Q43_hrThreshold_log2_bound (n c : Nat) : Prop :=
   (Nat.log2 (Q43_grid_size n)) ^ (c + 1) <= n / 16
 
+-- Q43.S315-flat-eval-quasipoly-hr-threshold-formal-c-bound:
+-- rewrite the HR log2 bound as a square inequality on |F|.
+theorem Q43_hrThreshold_log2_bound_iff_pow {n c : Nat} :
+    Q43_hrThreshold_log2_bound n c ↔
+      256 * (Nat.log2 (Q43_grid_size n)) ^ (2 * (c + 1)) <= Q43_grid_size n := by
+  let L := Nat.log2 (Q43_grid_size n)
+  have hpowmul : (L ^ (c + 1)) ^ 2 = L ^ (2 * (c + 1)) := by
+    symm
+    simpa [Nat.mul_comm] using (Nat.pow_mul L (c + 1) 2)
+  have h16 : (16 : Nat) ^ 2 = 256 := by decide
+  have hpow : (L ^ (c + 1) * 16) ^ 2 = 256 * L ^ (2 * (c + 1)) := by
+    calc
+      (L ^ (c + 1) * 16) ^ 2
+          = (L ^ (c + 1)) ^ 2 * 16 ^ 2 := by
+              simpa using (Nat.mul_pow (L ^ (c + 1)) 16 2)
+      _ = 16 ^ 2 * (L ^ (c + 1)) ^ 2 := by
+              simp [Nat.mul_comm]
+      _ = 256 * L ^ (2 * (c + 1)) := by
+              simp [h16, hpowmul, Nat.mul_comm]
+  constructor
+  · intro h
+    have hmul : L ^ (c + 1) * 16 <= n :=
+      (Nat.le_div_iff_mul_le (by decide : 0 < (16 : Nat))).1
+        (by simpa [Q43_hrThreshold_log2_bound, L] using h)
+    have hsq : (L ^ (c + 1) * 16) ^ 2 <= n ^ 2 :=
+      (Nat.pow_le_pow_iff_left (n := 2) (a := L ^ (c + 1) * 16) (b := n) (by decide)).2 hmul
+    have hsq' : 256 * L ^ (2 * (c + 1)) <= n ^ 2 := by
+      simpa [hpow] using hsq
+    simpa [Q43_grid_size, Nat.pow_two, L] using hsq'
+  · intro h
+    have hsq : (L ^ (c + 1) * 16) ^ 2 <= n ^ 2 := by
+      have : 256 * L ^ (2 * (c + 1)) <= n ^ 2 := by
+        simpa [Q43_grid_size, Nat.pow_two, L] using h
+      simpa [hpow] using this
+    have hmul : L ^ (c + 1) * 16 <= n :=
+      (Nat.pow_le_pow_iff_left (n := 2) (a := L ^ (c + 1) * 16) (b := n) (by decide)).1 hsq
+    have hdiv : L ^ (c + 1) <= n / 16 :=
+      (Nat.le_div_iff_mul_le (by decide : 0 < (16 : Nat))).2 hmul
+    simpa [Q43_hrThreshold_log2_bound, L] using hdiv
+
 -- Q43.S312-flat-eval-quasipoly-hr-threshold-derive-log2-bound:
 -- scaled log2^5 threshold implies the HR log2 bound when c <= 3.
 theorem Q43_hrThreshold_log2_bound_of_scaled {n c : Nat} (hn : 2 <= n) (hc : c <= 3)
@@ -953,30 +993,10 @@ theorem Q43_hrThreshold_log2_bound_of_scaled {n c : Nat} (hn : 2 <= n) (hc : c <
     Nat.mul_le_mul_right _ hc1
   have h256 : 256 * L ^ (2 * (c + 1)) <= n ^ 2 :=
     Nat.le_trans hconst hbig
-  have hpow16 : (16 * L ^ (c + 1)) ^ 2 = 256 * L ^ (2 * (c + 1)) := by
-    have hpowmul : (L ^ (c + 1)) ^ 2 = L ^ ((c + 1) * 2) := by
-      symm
-      exact Nat.pow_mul L (c + 1) 2
-    have h16 : (16 : Nat) ^ 2 = 256 := by decide
-    calc
-      (16 * L ^ (c + 1)) ^ 2
-          = 16 ^ 2 * (L ^ (c + 1)) ^ 2 := by
-            simpa using (Nat.mul_pow 16 (L ^ (c + 1)) 2)
-      _ = 16 ^ 2 * L ^ ((c + 1) * 2) := by
-            simp [hpowmul]
-      _ = 16 ^ 2 * L ^ (2 * (c + 1)) := by
-            simp [Nat.mul_comm]
-      _ = 256 * L ^ (2 * (c + 1)) := by
-            simp [h16]
-  have hpow : (16 * L ^ (c + 1)) ^ 2 <= n ^ 2 := by
-    simpa [hpow16] using h256
-  have hle16 : 16 * L ^ (c + 1) <= n := by
-    exact (Nat.pow_le_pow_iff_left (n := 2) (a := 16 * L ^ (c + 1)) (b := n) (by decide)).1 hpow
-  have hmul : L ^ (c + 1) * 16 <= n := by
-    simpa [Nat.mul_comm] using hle16
-  have hdiv : L ^ (c + 1) <= n / 16 :=
-    (Nat.le_div_iff_mul_le (by decide)).2 hmul
-  simpa [Q43_hrThreshold_log2_bound, L] using hdiv
+  have hpow :
+      256 * (Nat.log2 (Q43_grid_size n)) ^ (2 * (c + 1)) <= Q43_grid_size n := by
+    simpa [Q43_grid_size, Nat.pow_two, L] using h256
+  exact (Q43_hrThreshold_log2_bound_iff_pow (n := n) (c := c)).2 hpow
 
 -- Q43.S310-flat-eval-quasipoly-hr-eval-apply:
 -- apply the flat evaluation statement to the HR threshold bounds via scaled log2^5.
