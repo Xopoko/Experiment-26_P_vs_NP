@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S318-flat-eval-quasipoly-hr-threshold-plateau-lift
-- `Do-not-repeat (next 2 runs):` Q43.S318-flat-eval-quasipoly-hr-threshold-plateau-lift, Q43.S317-flat-eval-quasipoly-hr-threshold-n0-bridge
+- `LastStepID:` Q43.S319-flat-eval-quasipoly-hr-threshold-upper-plateau-lift
+- `Do-not-repeat (next 2 runs):` Q43.S319-flat-eval-quasipoly-hr-threshold-upper-plateau-lift, Q43.S318-flat-eval-quasipoly-hr-threshold-plateau-lift
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: lower-plateau ratio lift in place; next extend to upper plateau/gap for explicit n0(c).
+Q43: upper-plateau ratio lift in place; next handle the gap interval for explicit n0(c).
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: lower-plateau ratio lift in place; next extend to upper plateau/gap for exp
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Equivalence->Invariant->Equivalence->Parameter sweep
+Latest:Equivalence->Invariant->Equivalence->Invariant->Equivalence

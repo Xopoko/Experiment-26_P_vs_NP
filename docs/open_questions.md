@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S318-flat-eval-quasipoly-hr-threshold-plateau-lift
-  - `NextStepID:` Q43.S319-flat-eval-quasipoly-hr-threshold-upper-plateau-lift
+  - `LastStepID:` Q43.S319-flat-eval-quasipoly-hr-threshold-upper-plateau-lift
+  - `NextStepID:` Q43.S320-flat-eval-quasipoly-hr-threshold-gap-lift
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -70,11 +70,11 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (plateau monotonicity of grid_ratio).
+  - `Lens:` Equivalence / translation (upper plateau lift from base point).
   - `Artifact:` Proof.
-  - `Update:` lifted ratio bounds from 2^k across the lower plateau and used it to
-    re-prove the toy n0 bound; see `docs/q43_s318.md`.
-  - `Use:` next: extend the lift to the upper plateau or the gap interval for explicit n0(c).
+  - `Update:` lifted ratio bounds across the upper plateau from the base point
+    `3·2^(k-1)`; see `docs/q43_s319.md`.
+  - `Use:` next: handle the gap interval or a bridge across the 2^k jump for explicit n0(c).
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.

@@ -1340,7 +1340,8 @@ theorem Q43_toy_n0_C1_ok :
   have hlo : 2 ^ 40 <= Q43_toy_n0_C1 := by
     simp [Q43_toy_n0_C1]
   have hhi : Q43_toy_n0_C1 <= 5 * 2 ^ (40 - 2) := by
-    simpa [Q43_toy_n0_C1] using Q43_pow_le_five_mul_pow_sub_two (k:=40) hk
+    dsimp [Q43_toy_n0_C1]
+    exact Q43_pow_le_five_mul_pow_sub_two (k:=40) hk
   exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_plateau
     (k:=40) (n:=Q43_toy_n0_C1) (C:=1) hk hlo hhi hratio
 
@@ -1455,6 +1456,48 @@ theorem Q43_grid_ratio_mono_on_plateau_upper {k n m : Nat} (hk : 2 <= k)
   have hlog : Nat.log2 (Q43_grid_size n) = Nat.log2 (Q43_grid_size m) := by
     simp [hlogn, hlogm]
   exact Q43_grid_ratio_mono_of_log2_eq (n:=n) (m:=m) h hlog
+
+-- Q43.S319-flat-eval-quasipoly-hr-threshold-upper-plateau-lift:
+-- lift a ratio bound across the upper plateau.
+theorem Q43_three_mul_pow_lt_pow_succ {k : Nat} (hk : 2 <= k) :
+    3 * 2 ^ (k - 1) < 2 ^ (k + 1) := by
+  have hk1 : 1 <= k := Nat.le_trans (by decide : 1 <= 2) hk
+  have hpos : 0 < 2 ^ (k - 1) := Nat.pow_pos (by decide)
+  have hmul : 3 * 2 ^ (k - 1) < 4 * 2 ^ (k - 1) :=
+    (Nat.mul_lt_mul_right (a0 := hpos)).2 (by decide : 3 < 4)
+  have hpow : 2 ^ (k + 1) = 4 * 2 ^ (k - 1) := by
+    have hk1' : k - 1 + 1 = k := Nat.sub_add_cancel hk1
+    have hkp : k + 1 = (k - 1) + 2 := by
+      calc
+        k + 1 = (k - 1 + 1) + 1 := by
+          simp [hk1']
+        _ = (k - 1) + 2 := by simp [Nat.add_assoc]
+    calc
+      2 ^ (k + 1) = 2 ^ ((k - 1) + 2) := by simp [hkp]
+      _ = 2 ^ (k - 1) * 2 ^ 2 := by simp [Nat.pow_add]
+      _ = 4 * 2 ^ (k - 1) := by
+        simp [Nat.mul_comm]
+  simpa [hpow, Nat.mul_comm] using hmul
+
+theorem Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_plateau_upper
+    {k n C : Nat} (hk : 2 <= k)
+    (hlo : 3 * 2 ^ (k - 1) <= n) (hhi : n < 2 ^ (k + 1))
+    (hbase : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio (3 * 2 ^ (k - 1))) :
+    Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n C := by
+  have hmono : Q43_grid_ratio (3 * 2 ^ (k - 1)) <= Q43_grid_ratio n :=
+    Q43_grid_ratio_mono_on_plateau_upper (k:=k) (n:=3 * 2 ^ (k - 1)) (m:=n) hk
+      (by exact Nat.le_refl _) hlo (Q43_three_mul_pow_lt_pow_succ hk) hhi hlo
+  have hratio : 2 * C * Q43_thm41_c1_chernoff_ln <= Q43_grid_ratio n :=
+    Nat.le_trans hbase hmono
+  have hpowpos : 0 < 2 ^ (k - 1) := Nat.pow_pos (by decide)
+  have hpowge : 1 <= 2 ^ (k - 1) := (Nat.succ_le_iff).2 hpowpos
+  have h3le : 3 <= 3 * 2 ^ (k - 1) := by
+    simpa [Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc] using
+      (Nat.mul_le_mul_left 3 hpowge)
+  have h2le : 2 <= 3 := by decide
+  have h2k : 2 <= 3 * 2 ^ (k - 1) := Nat.le_trans h2le h3le
+  have hn : 2 <= n := Nat.le_trans h2k hlo
+  exact Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio (n:=n) (C:=C) hn hratio
 
 -- Q43.S249-flat-eval-hr-depth-range-constants-a0-c1c2-log2-verify-regime-d-criterion-bound-
 -- apply-params-poly-n0-ratio-lift-piecewise-gap-bridge:
