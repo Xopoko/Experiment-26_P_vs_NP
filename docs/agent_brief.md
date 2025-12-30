@@ -6,14 +6,14 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S310-flat-eval-quasipoly-hr-eval-apply
-- `Do-not-repeat (next 2 runs):` Q43.S310-flat-eval-quasipoly-hr-eval-apply, Q43.S309-flat-eval-quasipoly-eval-linemax-bridge
+- `LastStepID:` Q43.S311-flat-eval-quasipoly-hr-threshold-asymptotic
+- `Do-not-repeat (next 2 runs):` Q43.S311-flat-eval-quasipoly-hr-threshold-asymptotic, Q43.S310-flat-eval-quasipoly-hr-eval-apply
 - `Last InfoGain:` 1
 
 ## Current direction (keep 1-2 lines)
 
 Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: flat evaluation statement now yields HR threshold; next show log2^c bound implies tParam <= n/16.
+Q43: asymptotic log2^c bound is named for HR threshold; next derive it from the scaled log2^5 regime.
 
 ## What has already been done (do not repeat)
 
@@ -41,4 +41,4 @@ Q43: flat evaluation statement now yields HR threshold; next show log2^c bound i
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Trade-off->Invariant->Trade-off->Invariant
+Latest:Trade-off->Invariant->Trade-off->Invariant->Trade-off

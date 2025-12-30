@@ -39,8 +39,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S310-flat-eval-quasipoly-hr-eval-apply
-  - `NextStepID:` Q43.S311-flat-eval-quasipoly-hr-threshold-asymptotic
+  - `LastStepID:` Q43.S311-flat-eval-quasipoly-hr-threshold-asymptotic
+  - `NextStepID:` Q43.S312-flat-eval-quasipoly-hr-threshold-derive-log2-bound
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
@@ -65,15 +65,17 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
      Q43_quasipoly_regime_d_ok_param_tParam,
      Q43_flat_eval_statement,
      Q43_flat_eval_statement_of_quasipoly,
+     Q43_hrThreshold_log2_bound,
      Q43_hrThreshold_of_flat_eval,
      Q43_pow_succ_add_mul_le_succ_pow, Q43_pow5_sub_pow5_ge_five_pow4);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (threshold monotonicity).
+  - `Lens:` Trade-off (threshold scaling).
   - `Artifact:` Proof.
-  - `Update:` proved `Q43_hrThreshold_of_flat_eval` to apply the flat evaluation statement
-    to the HR threshold bounds for tParam(lineMax) and s.
-  - `Use:` next: show the asymptotic log2^c bound implies tParam <= n/16 for the grid regime.
+  - `Update:` introduced `Q43_hrThreshold_log2_bound` and wired it into `Q43_hrThreshold_of_flat_eval`
+    to name the asymptotic log2^c bound needed for the HR threshold.
+  - `Use:` next: derive `Q43_hrThreshold_log2_bound` from the scaled log2^5 threshold
+    (or explicit n0) for the grid regime.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
   - `InfoGain:` 1.
