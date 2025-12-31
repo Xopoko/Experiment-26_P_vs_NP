@@ -45,13 +45,13 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P0
   - `Status:` BLOCKED
-  - `LastStepID:` Q43.S363-band-log2-predicate-refactor
-  - `NextStepID:` Q43.S364-band-log2-support-witness
+  - `LastStepID:` Q43.S364-band-log2-support-witness
+  - `NextStepID:` Q43.S365-band-log2-support-implementation
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
-  - `Attempts:` 20
+  - `Attempts:` 21
   - `LastOutcome:` BLOCKED
   - `BlockerType:` BARRIER_NATURAL_PROOFS
   - `TimeBudget:` 2h
@@ -111,13 +111,13 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Q43_nk_succ_le_three_pow);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Meta-reduction planning (predicate refactor).
+  - `Lens:` Equivalence / translation (support-witness predicate).
   - `Artifact:` Reduction.
-  - `Update:` Reduction note recorded in `docs/q43_s363.md`.
-  - `Use:` next: implement a support witness predicate that cannot be read by a P-time truth-table check.
+  - `Update:` Reduction note recorded in `docs/q43_s364.md`.
+  - `Use:` next: implement the support-witness predicate in Lean and verify the PIT/IPS mapping survives.
   - `BarrierCheck:` see `docs/q43_s359.md`; exit plan in `docs/q43_s360.md`.
   - `InfoGain:` 1.
-    Details: `docs/q43_s363.md`.
+    Details: `docs/q43_s364.md`.
 
 ## Completed (archive)
 
