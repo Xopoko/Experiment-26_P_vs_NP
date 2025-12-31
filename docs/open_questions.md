@@ -14,8 +14,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P1
   - `Status:` BLOCKED
-  - `LastStepID:` Q39.S163-gadget-support-audit
-  - `NextStepID:` Q39.S164-gadget-support-audit-retry
+  - `LastStepID:` Q39.S164-gadget-support-audit-retry
+  - `NextStepID:` Q39.S165-globalfixedpair-fixedorientation-contiguous-shift-alt78
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Model stress test (oracle).
@@ -23,20 +23,20 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Oracle:` `python3 scripts/toy_q39_rank2.py --alt 118`
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
   - `StopRule:` if the entropy-stopper pre-check keeps emitting `STOP` (cooldown/cycle) while contiguous alt-shifts stay rank-2, record the blockage and pivot to the nonrelativizing gadget plan (S158); if rank!=2, record the failure and stop.
-  - `Attempts:` 19
-  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42)
+  - `Attempts:` 20
+  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42, score 5.3; doc `docs/q39_s164.md` records the pause and queues `Q39.S165-globalfixedpair-fixedorientation-contiguous-shift-alt78`)
   - `BlockerType:` BARRIER_ENTROPY
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
-  - `DefinitionOfDone:` wait for the entropy-stopper policy to return `CONTINUE`, inspect the gadget support guard as described in `docs/q39_s163.md`, and reissue the audit once the score drops (follow-up Step: `Q39.S164-gadget-support-audit-retry`).
-  - `Update:` Barrier notes recorded in `docs/q39_s158.md`, `docs/q39_s159.md`, `docs/q39_s161.md`, and `docs/q39_s162.md`; `docs/q39_s163.md` now records the entropy STOP and queues the retry step.
+  - `DefinitionOfDone:` wait for the entropy-stopper policy to return `CONTINUE`, inspect the gadget support guard as described in `docs/q39_s163.md`, and reissue the audit once the score drops (follow-up Step: `Q39.S165-globalfixedpair-fixedorientation-contiguous-shift-alt78`).
+  - `Update:` Barrier notes recorded in `docs/q39_s158.md`, `docs/q39_s159.md`, `docs/q39_s161.md`, and `docs/q39_s162.md`; `docs/q39_s163.md`/`docs/q39_s164.md` now records the entropy STOP and queue the retry step.
   - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`, `docs/q39_s158.md`, `docs/q39_s159.md`, `docs/q39_s160.md`, `docs/q39_s161.md`, `docs/q39_s162.md`, `docs/q39_s163.md`
     (contiguous alt-shift vectors up to alt117; gadget plans + stopper-policy notes in the new docs).
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? no (the gadget now runs on oracle-specific advice, so arithmetic-only translations no longer apply); see `docs/q39_s160.md`.
     - `B) Natural proofs check:` Applicable? no (the barrier talks about mapping translation, not circuit-size properties).
     - `C) Algebrization check:` Applicable? yes (XOR arithmetic steps persist under AW08-style algebraic oracles); see `docs/q39_s157.md`.
-  - `Success:` `scripts/stopper_advice.py --mode pre` returned `STOP` (score 2.5) so the gadget support audit could not start; `docs/q39_s163.md` records the blockage and the retry step `Q39.S164-gadget-support-audit-retry`.
+  - `Success:` `scripts/stopper_advice.py --mode pre` returned `STOP` (score 5.3) so the gadget support audit could not start; `docs/q39_s164.md` records the blockage and the retry step `Q39.S165-globalfixedpair-fixedorientation-contiguous-shift-alt78`.
     Context: node - syntactically simulate Gaussian elimination step; fixed partitions break, even-batching does not help.
     Note: the orientation invariance of the frontier is fixed in `formal/WIP/Verified/Q39.lean`.
     Details: `formal/Notes/TseitinQ39.lean` (Section 16.153-Section 16.177) and summary in `formal/Notes/TseitinLocalEF.lean` §16.187.
