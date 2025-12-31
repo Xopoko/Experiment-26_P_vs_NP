@@ -46,19 +46,18 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Priority:` P0
   - `Status:` BLOCKED
   - `LastStepID:` Q43.S366-escape-natural-proof
-  - `NextStepID:` Q43.S366-escape-natural-proof
+  - `NextStepID:` Q43.S367-nonuniform-support-implementation
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
-  - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
-  - `Attempts:` 23
-  - `LastOutcome:` BLOCKED
+  - `StopRule:` if the entropy stopper pre-check keeps emitting `STOP` (score ≥ 2.5) while the non-natural support predicate is still unformalized, record the pause and pivot to the nonuniform-support plan.
+  - `Attempts:` 24
+  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42)
   - `BlockerType:` BARRIER_ENTROPY
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`
-  - `DefinitionOfDone:` wait for the entropy-stopper score to drop or introduce a substantively different artifact before reattempting the non-natural support predicate (Q43.S366).
-  - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
-    then derive a general gap-drop lemma from the jump.
+  - `DefinitionOfDone:` record the entropy-stopper pause, document the nonuniform-support strategy (Q43.S367) that injects per-instance advice, and describe what the support witness must encode before reissuing the oracle experiment.
+  - `GeneralizationTarget:` encode the log2 jump with a polylog-sized per-instance support witness and show the ratio drop persists once advice fixes the global support layout.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Verified/Q43.lean`
     (Q43_nk, Q43_log2_jump_nk, Q43_grid_ratio_drop_nk_of_ge, Q43_grid_ratio_drop_nk,
@@ -110,12 +109,13 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right,
     Q43_nk_succ_le_three_pow);
     `scripts/toy_q43_gap_sqrt2.py`
-  - `Success:` blocked by the entropy-stopper policy before the non-natural support predicate could be formalized (S366).
+    `docs/q43_s367.md`
+  - `Success:` blocked by the entropy-stopper policy (pre-check exit 42) before the non-natural support predicate could be formalized (S366); the new nonuniform-support detour lives in `docs/q43_s367.md`.
   - `Lens:` Barrier-driven design (natural-proofs barrier + entropy-stopper).
   - `Artifact:` Barrier.
-  - `Update:` Entropy-stopper block recorded in `docs/q43_s366.md`; keeper plan is to reissue S366 once the score drops or pivot to a new idea.
-  - `Use:` next: monitor `agent/logs/*` and wait for the entropy score to fall before re-running `Q43.S366-escape-natural-proof`, or craft S367 with new constraints.
-  - `BarrierCheck:` see `docs/q43_s366.md`.
+  - `Update:` Entropy-stopper block recorded in `docs/q43_s366.md`; keeper plan is now to pursue Q43.S367-nonuniform-support-implementation (see `docs/q43_s367.md`).
+  - `Use:` next: flesh out the nonuniform support predicate, prove the support witness contains the desired global layout, and re-run the toy/oracle once the predicate is updated.
+  - `BarrierCheck:` see `docs/q43_s367.md`.
   - `InfoGain:` 0.
     Details: `docs/q43_s366.md`.
 
