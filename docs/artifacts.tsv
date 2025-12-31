@@ -79,3 +79,4 @@ Q00.S003-entropy-pruner-toy-integration	Toy	N/A	226cba3ab5e8eeb1f85ee704b01fdf40
 Q39.S146-contiguous-alt-rank2-classify-or-barrier	Barrier	formal/WIP/Verified/Q39.lean	363584549de579c7bfae3110352818bccb38e22e	natural-proofs barrier note for rank-only route
 Q39.S147-nonrelativizing-xor-step-oracle-break	Barrier	formal/WIP/Verified/Q39.lean	f53768e89850e5e4961034c4ed6c1fff910a5db9	natural-proofs barrier guardrail for XOR-step route
 Q43.S352-band-log2-setup-bundle	Barrier	N/A	6eb683562d3dab59dd651cc63e9c759709077fa2	entropy stopper STOP; barrier note docs/q43_s352.md
+Q39.S148-oracle-xor-step-model-stress	Barrier	formal/WIP/Verified/Q39.lean	87e10479aae31f4b564c05da0e027556688277c2	entropy stopper STOP; barrier note docs/q39_s148.md
