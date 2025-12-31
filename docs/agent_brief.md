@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S365-natural-proof-barrier
-- `Do-not-repeat (next 2 runs):` Q43.S365-natural-proof-barrier, Q43.S364-band-log2-support-witness
+- `LastStepID:` Q39.S154-oracle-xor-nonrelativizing-exit
+- `Do-not-repeat (next 2 runs):` Q39.S154-oracle-xor-nonrelativizing-exit, Q43.S365-natural-proof-barrier
 - `Last InfoGain:` 1
-- `LastApproachTag:` barrier-driven-design
-- `LastFailureReason:` natural-proofs-barrier
+- `LastApproachTag:` model-stress-test
+- `LastFailureReason:` relativization
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by relativization barrier; resume at Q39.S154-oracle-xor-nonrelativizing-exit. Q43: BLOCKED by natural-proofs barrier; recorded in `docs/q43_s365.md`; resume at Q43.S366-escape-natural-proof.
+Q39: BLOCKED by relativization barrier; recorded in `docs/q39_s154.md`; resume at Q39.S155-contiguous-alt-shift-classification. Q43: BLOCKED by natural-proofs barrier; recorded in `docs/q43_s365.md`; resume at Q43.S366-escape-natural-proof.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -25,7 +25,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Active "unique" tasks (select one per run)
 
-- Q39 from `docs/open_questions.md` (blocked; resume at Q39.S154-oracle-xor-nonrelativizing-exit).
+- Q39 from `docs/open_questions.md` (blocked; resume at Q39.S155-contiguous-alt-shift-classification).
 - Q43 from `docs/open_questions.md` (blocked; resume at Q43.S366-escape-natural-proof).
 
 ## Experiment register (max 12 items; overwrite old ones)
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Barrier-driven design->Equivalence/translation->Meta-reduction planning->Specification/definitions audit->Barrier-driven design
+Latest:Model stress test->Barrier-driven design->Equivalence/translation->Meta-reduction planning->Specification/definitions audit
