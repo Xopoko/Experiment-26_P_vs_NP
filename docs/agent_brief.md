@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S164-gadget-support-audit-retry
-- `Do-not-repeat (next 2 runs):` Q39.S164-gadget-support-audit-retry, Q43.S379-nonuniform-support-witness-finalize8
+- `LastStepID:` Q39.S165-globalfixedpair-fixedorientation-contiguous-shift-alt78
+- `Do-not-repeat (next 2 runs):` Q39.S165-globalfixedpair-fixedorientation-contiguous-shift-alt78, Q39.S164-gadget-support-audit-retry
 - `Last InfoGain:` 0
 - `LastApproachTag:` Model stress test
-- `LastFailureReason:` entropy-stopper policy (score 5.3)
+- `LastFailureReason:` entropy-stopper policy (score 5.1)
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by the entropy-stopper pre-check (score 5.3) before the gadget-support audit could start again; `docs/q39_s164.md` now records the STOP and `Q39.S165-globalfixedpair-fixedorientation-contiguous-shift-alt78` waits for a cooler policy value. Q43: BLOCKED again by the entropy-stopper policy (score 6.7) before the support witness layout could be finalized; `docs/q43_s379.md` now logs the blockage and queues `Q43.S380-nonuniform-support-witness-finalize9` once the policy cools. Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
+Q39: BLOCKED by the entropy-stopper pre-check (score 5.1) before the gadget-support audit could start again; `docs/q39_s165.md` now records the STOP and `Q39.S166-globalfixedpair-fixedorientation-contiguous-shift-alt79` waits for a cooler policy value. Q43: BLOCKED again by the entropy-stopper policy (score 6.7) before the support witness layout could be finalized; `docs/q43_s379.md` now logs the blockage and queues `Q43.S380-nonuniform-support-witness-finalize9` once the policy cools. Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
 
@@ -24,7 +24,7 @@ Q39: BLOCKED by the entropy-stopper pre-check (score 5.3) before the gadget-supp
 
 ## Active "unique" tasks (select one per run)
 
-- Q39 from `docs/open_questions.md` (blocked; entropy-stopper STOP (score 5.3) is recorded in `docs/q39_s164.md` and the next attempt is `Q39.S165-globalfixedpair-fixedorientation-contiguous-shift-alt78`).
+- Q39 from `docs/open_questions.md` (blocked; entropy-stopper STOP (score 5.1) is recorded in `docs/q39_s165.md` and the next attempt is `Q39.S166-globalfixedpair-fixedorientation-contiguous-shift-alt79`).
 - Q43 from `docs/open_questions.md` (blocked; entropy-stopper STOP (score 6.7) is recorded in `docs/q43_s379.md` and the next attempt is `Q43.S380-nonuniform-support-witness-finalize9`).
 
 ## Experiment register (max 12 items; overwrite old ones)
@@ -42,4 +42,4 @@ Q39: BLOCKED by the entropy-stopper pre-check (score 5.3) before the gadget-supp
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Model stress test->Model stress test->Barrier-driven design->Model stress test->Barrier-driven design
+Latest:Model stress test->Model stress test->Model stress test->Barrier-driven design->Model stress test
