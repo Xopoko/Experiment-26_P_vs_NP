@@ -45,13 +45,13 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` BLOCKED
-  - `LastStepID:` Q43.S350-band-log2-setup-bundle
-  - `NextStepID:` Q43.S351-band-log2-setup-bundle
+  - `LastStepID:` Q43.S351-band-log2-setup-bundle
+  - `NextStepID:` Q43.S352-band-log2-setup-bundle
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
-  - `Attempts:` 7
+  - `Attempts:` 8
   - `LastOutcome:` BLOCKED
   - `BlockerType:` ENTROPY_STOPPER
   - `TimeBudget:` 2h
@@ -113,7 +113,7 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Invariant (log2-based k choice across the band).
   - `Artifact:` Proof.
-  - `Update:` Entropy Stopper STOP (pre-check); no proof changes; note in `docs/q43_s350.md`.
+  - `Update:` Entropy Stopper STOP (pre-check); no proof changes; note in `docs/q43_s351.md`.
   - `Use:` next: see if the hhi/¬hhi split can be simplified by reusing the band-log2 lemma or
     pulling out shared flat-eval setup.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).

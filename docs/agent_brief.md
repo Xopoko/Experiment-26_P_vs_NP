@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S350-band-log2-setup-bundle
-- `Do-not-repeat (next 2 runs):` Q43.S350-band-log2-setup-bundle, Q43.S349-band-log2-setup-bundle
+- `LastStepID:` Q43.S351-band-log2-setup-bundle
+- `Do-not-repeat (next 2 runs):` Q43.S351-band-log2-setup-bundle, Q43.S350-band-log2-setup-bundle
 - `Last InfoGain:` 0
 - `LastApproachTag:` entropy-stop-barrier
 - `LastFailureReason:` entropy-stopper
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by entropy stopper; resume at Q39.S146-contiguous-alt-rank2-classify-or-barrier. Q43: BLOCKED by entropy stopper; resume at Q43.S351-band-log2-setup-bundle.
+Q39: BLOCKED by entropy stopper; resume at Q39.S146-contiguous-alt-rank2-classify-or-barrier. Q43: BLOCKED by entropy stopper; resume at Q43.S352-band-log2-setup-bundle.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
 
 ## What has already been done (do not repeat)
@@ -26,7 +26,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
 ## Active "unique" tasks (select one per run)
 
 - Q39 from `docs/open_questions.md` (blocked; resume at Q39.S146-contiguous-alt-rank2-classify-or-barrier).
-- Q43 from `docs/open_questions.md` (blocked; resume at Q43.S351-band-log2-setup-bundle).
+- Q43 from `docs/open_questions.md` (blocked; resume at Q43.S352-band-log2-setup-bundle).
 
 ## Experiment register (max 12 items; overwrite old ones)
 
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Barrier-driven design->Invariant->Equivalence->Compression->Parameter sweep
+Latest:Invariant->Barrier-driven design->Equivalence->Compression->Parameter sweep

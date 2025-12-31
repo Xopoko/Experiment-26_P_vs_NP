@@ -74,3 +74,4 @@ Q39.S144-contiguous-alt-rank2-classify-or-barrier	Barrier	N/A	5ea08768f878d88049
 Q39.S145-merge-q39-notes	Barrier	N/A	3ae964e9e6708d6acf90d825f2532c9f2c9e94d0	entropy stopper STOP; merge deferred
 Q43.S349-band-log2-setup-bundle	Barrier	N/A	3ea1ea642a80a5a5a3b0e892ac6cc35851b774a1	entropy stopper STOP; run blocked
 Q43.S350-band-log2-setup-bundle	Barrier	N/A	ec402ac683e3a73262f9ae9e65b49cbf30452d79	entropy stopper STOP; run blocked
+Q43.S351-band-log2-setup-bundle	Barrier	N/A	2e0176f09461fa0f23156b78a77b5e2eabbc58e9	entropy stopper STOP; run blocked
