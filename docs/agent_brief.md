@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S359-band-log2-pit-mapping-lemma
-- `Do-not-repeat (next 2 runs):` Q43.S359-band-log2-pit-mapping-lemma, Q43.S358-band-log2-pit-reduction
+- `LastStepID:` Q43.S360-band-log2-pit-nonnatural-exit
+- `Do-not-repeat (next 2 runs):` Q43.S360-band-log2-pit-nonnatural-exit, Q43.S359-band-log2-pit-mapping-lemma
 - `Last InfoGain:` 1
-- `LastApproachTag:` model-stress-test
+- `LastApproachTag:` barrier-driven-design
 - `LastFailureReason:` natural-proofs-barrier
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by relativization barrier; resume at Q39.S153-oracle-xor-mapping-lemma. Q43: BLOCKED by natural-proofs barrier; resume at Q43.S360-band-log2-pit-nonnatural-exit.
+Q39: BLOCKED by relativization barrier; resume at Q39.S153-oracle-xor-mapping-lemma. Q43: BLOCKED by natural-proofs barrier; resume at Q43.S361-band-log2-density-bound.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -26,7 +26,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 ## Active "unique" tasks (select one per run)
 
 - Q39 from `docs/open_questions.md` (blocked; resume at Q39.S153-oracle-xor-mapping-lemma).
-- Q43 from `docs/open_questions.md` (blocked; resume at Q43.S360-band-log2-pit-nonnatural-exit).
+- Q43 from `docs/open_questions.md` (blocked; resume at Q43.S361-band-log2-density-bound).
 
 ## Experiment register (max 12 items; overwrite old ones)
 
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Model stress test->Meta-reduction planning->Equivalence/translation->Meta-reduction planning->Model stress test
+Latest:Barrier-driven design->Model stress test->Meta-reduction planning->Equivalence/translation->Meta-reduction planning

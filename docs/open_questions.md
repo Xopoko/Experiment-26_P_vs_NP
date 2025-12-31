@@ -45,13 +45,13 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P0
   - `Status:` BLOCKED
-  - `LastStepID:` Q43.S359-band-log2-pit-mapping-lemma
-  - `NextStepID:` Q43.S360-band-log2-pit-nonnatural-exit
+  - `LastStepID:` Q43.S360-band-log2-pit-nonnatural-exit
+  - `NextStepID:` Q43.S361-band-log2-density-bound
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
-  - `Attempts:` 16
+  - `Attempts:` 17
   - `LastOutcome:` BLOCKED
   - `BlockerType:` BARRIER_NATURAL_PROOFS
   - `TimeBudget:` 2h
@@ -111,14 +111,13 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Q43_nk_succ_le_three_pow);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Model stress test (relativization/natural-proofs check).
-  - `Artifact:` Barrier.
-  - `Update:` Barrier certificate recorded in `docs/q43_s359.md`.
-  - `Use:` next: see if the hhi/¬hhi split can be simplified by reusing the band-log2 lemma or
-    pulling out shared flat-eval setup.
-  - `BarrierCheck:` see `docs/q43_s359.md` (relativization/natural-proofs focus).
+  - `Lens:` Barrier-driven design (natural-proofs exit plan).
+  - `Artifact:` Reduction.
+  - `Update:` Reduction note recorded in `docs/q43_s360.md`.
+  - `Use:` next: prove non-largeness (density bound) or non-constructivity for the band-log2 predicate.
+  - `BarrierCheck:` see `docs/q43_s359.md`; exit plan in `docs/q43_s360.md`.
   - `InfoGain:` 1.
-    Details: `docs/q43_s359.md`.
+    Details: `docs/q43_s360.md`.
 
 ## Completed (archive)
 
