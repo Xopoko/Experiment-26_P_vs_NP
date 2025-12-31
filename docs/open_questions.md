@@ -40,22 +40,22 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Context: node - syntactically simulate Gaussian elimination step; fixed partitions break, even-batching does not help.
     Note: the orientation invariance of the frontier is fixed in `formal/WIP/Verified/Q39.lean`.
     Details: `formal/Notes/TseitinQ39.lean` (Section 16.153-Section 16.177) and summary in `formal/Notes/TseitinLocalEF.lean` §16.187.
--- [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
+- [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
 
   - `Priority:` P0
   - `Status:` BLOCKED
-  - `LastStepID:` Q43.S369-nonuniform-support-witness-retry
-  - `NextStepID:` Q43.S370-nonuniform-support-witness-retry2
+  - `LastStepID:` Q43.S370-nonuniform-support-witness-retry2
+  - `NextStepID:` Q43.S371-nonuniform-support-witness-retry3
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if the entropy stopper pre-check keeps emitting `STOP` (score ≥ 2.5) while the non-natural support predicate is still unformalized, record the pause and pivot to the nonuniform-support plan.
-  - `Attempts:` 27
-  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42)
-  - `BlockerType:` BARRIER_ENTROPY
+  - `Attempts:` 28
+  - `LastOutcome:` BLOCKED (pending per-instance support witness encoding)
+  - `BlockerType:` BARRIER_SUPPORT
   - `TimeBudget:` 2h
-  - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`, `docs/q43_s368.md`
-  - `DefinitionOfDone:` encode the advice witness, verify the ratio drop still occurs via `scripts/toy_q43_gap_sqrt2.py`, and record the barrier/resume plan; when the entropy score cools the follow-up Step `Q43.S370-nonuniform-support-witness-retry2` should pick up the witness implementation.
+  - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`, `docs/q43_s369.md`
+  - `DefinitionOfDone:` encode the advice witness, verify the ratio drop still occurs via `scripts/toy_q43_gap_sqrt2.py`, and record the barrier/resume plan; after the layout encoding stabilizes run `Q43.S371-nonuniform-support-witness-retry3`.
   - `GeneralizationTarget:` encode the log2 jump with a polylog-sized per-instance support witness and show the ratio drop persists once advice fixes the global support layout.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Verified/Q43.lean`
@@ -110,14 +110,14 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     `scripts/toy_q43_gap_sqrt2.py`
     `docs/q43_s367.md`
     `docs/q43_s369.md`
-  - `Success:` entropy-stopper pre-check returned `STOP` before the witness could be formalized, so `docs/q43_s369.md` now records the blockage and queues `Q43.S370-nonuniform-support-witness-retry2`.
-  - `Lens:` Barrier-driven design (per-instance support advice vs entropy guard).
+  - `Success:` `docs/q43_s370.md` records the support-witness barrier while the encoding remains unresolved.
+  - `Lens:` Model stress test (per-instance support layout)
   - `Artifact:` Barrier.
-  - `Update:` `docs/q43_s369.md` log the STOP decision, fail to write the witness, and schedule the retry Step `Q43.S370-nonuniform-support-witness-retry2`.
-  - `Use:` next: wait for the entropy policy to drop below 2.5, then reissue the witness encoding attempt once the support bits can be introduced without another STOP.
-  - `BarrierCheck:` see `docs/q43_s367.md`.
+  - `Update:` `docs/q43_s370.md` records the layout barrier and queues `Q43.S371-nonuniform-support-witness-retry3`.
+  - `Use:` next: finalize the advice witness layout, prove it captures the desired support bits, and rerun the toy/oracle once the encoding is complete.
+  - `BarrierCheck:` see `docs/q43_s370.md`.
   - `InfoGain:` 0.
-    Details: `docs/q43_s369.md`.
+    Details: `docs/q43_s370.md`.
 
 ## Completed (archive)
 

@@ -112,3 +112,4 @@ Q39.S161-gadget-toy-run	Barrier	formal/WIP/Verified/Q39.lean	31027b2f06d158eeceb
 Q39.S162-gadget-toy-run-retry	Barrier	formal/WIP/Verified/Q39.lean	cd9cae586bad5bb69e351de1b8cb578a1da056c1	Toy rerun rank=2 despite gadget guard; documented in docs/q39_s162.md.
 Q39.S163-gadget-support-audit	Barrier	formal/WIP/Verified/Q39.lean	86721e3579a21ca79cc4dd72127d6fb4bc911e57	Entropy-stopper STOP (score 2.5) before the gadget-support audit; barrier note recorded in docs/q39_s163.md.
 Q43.S369-nonuniform-support-witness-retry	Barrier	formal/WIP/Verified/Q43.lean	abd45eef17374d68428100c33bb4e13bd4a7eb83	Entropy-stopper STOP (score 3.3) before the witness could be written; barrier note recorded in docs/q43_s369.md.
+Q43.S370-nonuniform-support-witness-retry2	Barrier	formal/WIP/Verified/Q43.lean	42669cf544e4e1bde023299f3e55f6e39d377dbf	Barrier note in docs/q43_s370.md; NextStep Q43.S371 pending

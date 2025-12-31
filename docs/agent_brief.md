@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S369-nonuniform-support-witness-retry
-- `Do-not-repeat (next 2 runs):` Q43.S369-nonuniform-support-witness-retry, Q43.S368-nonuniform-support-witness
+- `LastStepID:` Q43.S370-nonuniform-support-witness-retry2
+- `Do-not-repeat (next 2 runs):` Q43.S370-nonuniform-support-witness-retry2, Q43.S369-nonuniform-support-witness-retry
 - `Last InfoGain:` 0
-- `LastApproachTag:` barrier-driven design
-- `LastFailureReason:` entropy-stopper policy (score 3.3)
+- `LastApproachTag:` Model stress test
+- `LastFailureReason:` per-instance support witness encoding unresolved
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by the entropy-stopper pre-check (score 2.5) before the gadget-support audit could start; `docs/q39_s163.md` now records the STOP and `Q39.S164-gadget-support-audit-retry` waits for a cooler policy value. Q43: BLOCKED again by the entropy-stopper policy (score 3.3) before the nonuniform support witness could be written; `docs/q43_s369.md` logs the latest STOP and we will wait for the policy to dip before reissuing `Q43.S370-nonuniform-support-witness-retry2`.
+Q39: BLOCKED by the entropy-stopper pre-check (score 2.5) before the gadget-support audit could start; `docs/q39_s163.md` now records the STOP and `Q39.S164-gadget-support-audit-retry` waits for a cooler policy value. Q43: BLOCKED because the per-instance support witness encoding is still unresolved even though the stopper now continues; `docs/q43_s370.md` records the layout barrier and we will restart with `Q43.S371-nonuniform-support-witness-retry3` once the advice layout stabilizes.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -26,7 +26,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 ## Active "unique" tasks (select one per run)
 
 - Q39 from `docs/open_questions.md` (blocked; entropy-stopper pre-check prevented the audit S163; retry as Q39.S164-gadget-support-audit-retry).
-- Q43 from `docs/open_questions.md` (blocked; entropy-stopper pre-check stopped both the S366 and S368 attempts, so we are logging the barrier note in Q43.S368 and will reissue Q43.S369 once the policy allows).
+- Q43 from `docs/open_questions.md` (blocked; the support-witness encoding is still unresolved and `docs/q43_s370.md` records the barrier before `Q43.S371-nonuniform-support-witness-retry3`).
 
 ## Experiment register (max 12 items; overwrite old ones)
 
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Barrier-driven design->Barrier-driven design->Model stress test->Specification / definitions audit->Barrier-driven design
+Latest:Model stress test->Barrier-driven design->Barrier-driven design->Model stress test->Specification / definitions audit
