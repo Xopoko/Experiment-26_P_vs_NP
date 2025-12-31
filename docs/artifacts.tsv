@@ -105,3 +105,4 @@ Q39.S156-globalfixedpair-fixedorientation-contiguous-shift-alt69	Barrier	formal/
 Q43.S367-nonuniform-support-implementation	Barrier	formal/WIP/Verified/Q43.lean	6f4bf110e91f1bb1208771c7a7b9b330b6a10378	Entropy stopper STOP; nonuniform support plan recorded.
 Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70	Barrier	formal/WIP/Verified/Q39.lean	6a0e6bbbc0706612e67f353e9c48f48d7565cb84	Entropy stopper pre-check STOP; plan S158 nonrelativizing gadget.
 Q39.S158-nonrelativizing-gadget	Barrier	formal/WIP/Verified/Q39.lean	d8fb05cbcac48fe3b49b602a6af99d27e503e6cf	Nonrelativizing gadget plan recorded.
+Q39.S159-nonrelativizing-gadget-implementation	Barrier	formal/WIP/Verified/Q39.lean	d8080d3f5c7539a2c4d3e294d3d5226f7721f5c5	Gadget implementation plan recorded in docs/q39_s159.md.

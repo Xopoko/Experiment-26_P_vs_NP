@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S158-nonrelativizing-gadget
-- `Do-not-repeat (next 2 runs):` Q39.S158-nonrelativizing-gadget, Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70
+- `LastStepID:` Q39.S159-nonrelativizing-gadget-implementation
+- `Do-not-repeat (next 2 runs):` Q39.S159-nonrelativizing-gadget-implementation, Q39.S158-nonrelativizing-gadget
 - `Last InfoGain:` 0
 - `LastApproachTag:` model-stress-test
 - `LastFailureReason:` relativization
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by the entropy-stopper pre-check (score 1.7, cooldown) before the contiguous alt70 toy could run; new plan is Q39.S158-nonrelativizing-gadget (see `docs/q39_s158.md`) until the gadget is sketched. Q43: BLOCKED by the entropy-stopper policy (score 2.0) before the non-natural support predicate could be formalized; new plan is Q43.S367-nonuniform-support-implementation (see `docs/q43_s367.md`) while the policy score cools down.
+Q39: BLOCKED by the entropy-stopper pre-check (score 1.7, cooldown) before the contiguous alt70 toy could run; new plan is Q39.S159-nonrelativizing-gadget-implementation (see `docs/q39_s159.md`) while the gadget is shaped and S160 gadget-check waits. Q43: BLOCKED by the entropy-stopper policy (score 2.0) before the non-natural support predicate could be formalized; new plan is Q43.S367-nonuniform-support-implementation (see `docs/q43_s367.md`) while the policy score cools down.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -25,7 +25,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Active "unique" tasks (select one per run)
 
-- Q39 from `docs/open_questions.md` (blocked; entropy-stopper pre-check hit for the alt70 run; document Q39.S158-nonrelativizing-gadget before reissuing).
+- Q39 from `docs/open_questions.md` (blocked; entropy-stopper pre-check hit for the alt70 run; document Q39.S159-nonrelativizing-gadget-implementation before reissuing).
 - Q43 from `docs/open_questions.md` (blocked; entropy-stopper pre-check stopped the S366 attempt, so document Q43.S367-nonuniform-support-implementation before reissuing).
 
 ## Experiment register (max 12 items; overwrite old ones)

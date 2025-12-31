@@ -14,8 +14,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P1
   - `Status:` BLOCKED
-  - `LastStepID:` Q39.S158-nonrelativizing-gadget
-  - `NextStepID:` Q39.S158-nonrelativizing-gadget
+  - `LastStepID:` Q39.S159-nonrelativizing-gadget-implementation
+  - `NextStepID:` Q39.S160-gadget-toy-check
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Model stress test (oracle).
@@ -23,20 +23,20 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Oracle:` `python3 scripts/toy_q39_rank2.py --alt 118`
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
   - `StopRule:` if the entropy-stopper pre-check keeps emitting `STOP` (cooldown/cycle) while contiguous alt-shifts stay rank-2, record the blockage and pivot to the nonrelativizing gadget plan (S158); if rank!=2, record the failure and stop.
-  - `Attempts:` 14
-  - `LastOutcome:` BARRIER (nonrelativizing gadget recorded ahead of oracle)
+  - `Attempts:` 15
+  - `LastOutcome:` BARRIER (nonrelativizing gadget implementation planned)
   - `BlockerType:` BARRIER_RELATIVIZATION
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
-  - `DefinitionOfDone:` add the gadget plan in `docs/q39_s158.md`, explain how it breaks the contiguous transformation, and specify what oracle-specific data the gadget must encode before we try the toy again.
-  - `Update:` Barrier note recorded in `docs/q39_s158.md`; plan S158 now describes the nonrelativizing gadget needed to escape the RR/Katz/AW barrier.
-  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`, `docs/q39_s158.md`
-    (contiguous alt-shift vectors up to alt117; gadget plan + stopper-policy notes in the new doc).
+  - `DefinitionOfDone:` implement the gadget note in `docs/q39_s159.md`, describe the oracle-specific support bit, and confirm the toy/oracle is ready to rerun with the gadget; record the next step S160 for the gadget toy check.
+  - `Update:` Barrier notes recorded in `docs/q39_s158.md` and `docs/q39_s159.md`; S158 now references the implementation plan, and S159 captures the gadget details needed to break the RR/Katz/AW barrier.
+  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`, `docs/q39_s158.md`, `docs/q39_s159.md`
+    (contiguous alt-shift vectors up to alt117; gadget plans + stopper-policy notes in the new docs).
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? unknown (the gadget injects oracle-specific data that may break the arithmetic-only mapping); see `docs/q39_s158.md`.
+    - `A) Relativization check:` Relativizes? no (the gadget runs on oracle-specific advice, so arithmetic-only translations no longer apply); see `docs/q39_s159.md`.
     - `B) Natural proofs check:` Applicable? no (the barrier talks about mapping translation, not circuit-size properties).
     - `C) Algebrization check:` Applicable? yes (XOR arithmetic steps persist under AW08-style algebraic oracles); see `docs/q39_s157.md`.
-  - `Success:` documented the nonrelativizing gadget plan (S158) that aims to break the contiguous XOR mapping by injecting oracle-specific information; the toy run awaits the stopper score to lift.
+  - `Success:` documented the nonrelativizing gadget implementation plan (S159) tying the shift to oracle-specific advice; the toy run and S160 gadget check are pending once the stopper allows another attempt.
     Context: node - syntactically simulate Gaussian elimination step; fixed partitions break, even-batching does not help.
     Note: the orientation invariance of the frontier is fixed in `formal/WIP/Verified/Q39.lean`.
     Details: `formal/Notes/TseitinQ39.lean` (Section 16.153-Section 16.177) and summary in `formal/Notes/TseitinLocalEF.lean` §16.187.
