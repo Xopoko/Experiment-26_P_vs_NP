@@ -45,15 +45,15 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P0
   - `Status:` BLOCKED
-  - `LastStepID:` Q43.S355-band-log2-stopper-reset
-  - `NextStepID:` Q43.S356-band-log2-stopper-retry
+  - `LastStepID:` Q43.S356-band-log2-stopper-retry
+  - `NextStepID:` Q43.S357-band-log2-exit-plan
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
-  - `Attempts:` 12
+  - `Attempts:` 13
   - `LastOutcome:` BLOCKED
-  - `BlockerType:` ENTROPY_STOPPER
+  - `BlockerType:` BARRIER_RELATIVIZATION
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`
   - `DefinitionOfDone:` construct a polylog cost evaluation scheme or pinpoint the exact failure point.
@@ -111,9 +111,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Q43_nk_succ_le_three_pow);
     `scripts/toy_q43_gap_sqrt2.py`
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
-  - `Lens:` Invariant (entropy-stopper barrier note).
-  - `Artifact:` Proof.
-  - `Update:` Entropy Stopper STOP (pre-check); barrier note in `docs/q43_s355.md`.
+  - `Lens:` Invariant (barrier certificate).
+  - `Artifact:` Barrier.
+  - `Update:` Barrier certificate recorded in `docs/q43_s356.md`.
   - `Use:` next: see if the hhi/¬hhi split can be simplified by reusing the band-log2 lemma or
     pulling out shared flat-eval setup.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
