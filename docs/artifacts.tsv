@@ -99,3 +99,4 @@ Q43.S363-band-log2-predicate-refactor	Reduction	formal/WIP/Verified/Q43.lean	24f
 Q43.S364-band-log2-support-witness	Reduction	formal/WIP/Verified/Q43.lean	d1dc20535752d7fe3c820b86ad177fd6e7925b04	support-witness reduction note
 Q43.S365-natural-proof-barrier	Exact citation	N/A	5b9a92006f3c6d34a573355c0a9607f2b17d68b9	Natural-proofs barrier cite recorded in docs/q43_s365.md
 Q39.S154-oracle-xor-nonrelativizing-exit	Barrier	formal/WIP/Verified/Q39.lean	33a3d058e0bbf9e041f780891ca5d19bb5d44aa7	Relativization barrier note in docs/q39_s154.md
+Q43.S366-escape-natural-proof	Barrier	formal/WIP/Verified/Q43.lean	b8b321b62d7b85f766c112aa3d1abe77a2074f62	Entropy-stopper policy (score 2.5) forced early block before the non-natural support predicate was formalized

@@ -45,18 +45,18 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P0
   - `Status:` BLOCKED
-  - `LastStepID:` Q43.S364-band-log2-support-witness
+  - `LastStepID:` Q43.S366-escape-natural-proof
   - `NextStepID:` Q43.S366-escape-natural-proof
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
-  - `Attempts:` 22
+  - `Attempts:` 23
   - `LastOutcome:` BLOCKED
-  - `BlockerType:` BARRIER_NATURAL_PROOFS
+  - `BlockerType:` BARRIER_ENTROPY
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`
-  - `DefinitionOfDone:` construct a polylog cost evaluation scheme or document the natural-proofs obstruction and sketch a non-natural exit (see Q43.S366).
+  - `DefinitionOfDone:` wait for the entropy-stopper score to drop or introduce a substantively different artifact before reattempting the non-natural support predicate (Q43.S366).
   - `GeneralizationTarget:` define `n_k := floor(sqrt(2^(2k+1)-1))`, show the log2 jump at `n_k^2`,
     then derive a general gap-drop lemma from the jump.
   - `BarrierCheckRequired:` no
@@ -110,14 +110,14 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple_of_ratio_gap_right,
     Q43_nk_succ_le_three_pow);
     `scripts/toy_q43_gap_sqrt2.py`
-  - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or a documented natural-proofs barrier that guides the search for a non-natural exit (S366)
-  - `Lens:` Barrier-driven design (natural-proofs barrier).
-  - `Artifact:` Reduction.
-  - `Update:` Natural-proofs barrier citation recorded in `docs/q43_s365.md`; follow-up plan Q43.S366-escape-natural-proof.
-  - `Use:` next: read `docs/q43_s365.md` for the natural-proofs barrier and explore non-natural support predicates in Q43.S366.
-  - `BarrierCheck:` see `docs/q43_s359.md`; exit plan in `docs/q43_s360.md`.
-  - `InfoGain:` 1.
-    Details: `docs/q43_s364.md`.
+  - `Success:` blocked by the entropy-stopper policy before the non-natural support predicate could be formalized (S366).
+  - `Lens:` Barrier-driven design (natural-proofs barrier + entropy-stopper).
+  - `Artifact:` Barrier.
+  - `Update:` Entropy-stopper block recorded in `docs/q43_s366.md`; keeper plan is to reissue S366 once the score drops or pivot to a new idea.
+  - `Use:` next: monitor `agent/logs/*` and wait for the entropy score to fall before re-running `Q43.S366-escape-natural-proof`, or craft S367 with new constraints.
+  - `BarrierCheck:` see `docs/q43_s366.md`.
+  - `InfoGain:` 0.
+    Details: `docs/q43_s366.md`.
 
 ## Completed (archive)
 
