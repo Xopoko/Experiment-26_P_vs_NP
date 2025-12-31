@@ -82,3 +82,4 @@ Q43.S352-band-log2-setup-bundle	Barrier	N/A	6eb683562d3dab59dd651cc63e9c75970907
 Q39.S148-oracle-xor-step-model-stress	Barrier	formal/WIP/Verified/Q39.lean	87e10479aae31f4b564c05da0e027556688277c2	entropy stopper STOP; barrier note docs/q39_s148.md
 Q43.S353-band-log2-stopper-review	Barrier	N/A	904084940a5417398a5a5542e081caf27e89f845	entropy stopper STOP; barrier note docs/q43_s353.md
 Q39.S149-oracle-xor-step-stopreview	Barrier	formal/WIP/Verified/Q39.lean	ad8369555d9fa160e468aaf58de0351a9269b5b8	entropy stopper STOP; barrier note docs/q39_s149.md
+Q43.S354-band-log2-stopper-cooldown	Barrier	N/A	51102e38c88b8870b033566f14b39753a2c58aa2	entropy stopper STOP; barrier note docs/q43_s354.md
