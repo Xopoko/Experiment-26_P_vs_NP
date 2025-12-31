@@ -88,3 +88,4 @@ Q39.S150-oracle-xor-step-cooldown	Barrier	formal/WIP/Verified/Q39.lean	5076c50ef
 Q43.S356-band-log2-stopper-retry	Barrier	formal/WIP/Verified/Q43.lean	dc63444a5a94050bcb4dff47bc971d9d18693d47	barrier certificate for band-log2 retry (relativization/natural-proofs check)
 Q39.S151-oracle-xor-step-retry	Barrier	formal/WIP/Verified/Q39.lean	c40cd66c1f0bc875db7793904dc14e35f4e73398	barrier certificate for XOR-step retry (relativization/natural-proofs check)
 Q43.S357-band-log2-exit-plan	Reduction	formal/WIP/Verified/Q43.lean	09df3bcc015d31918f49c0fe777bde67787bc890	exit plan reduction: link band-log2 gap to PIT/IPS soundness
+Q43.S358-band-log2-pit-reduction	Reduction	formal/WIP/Verified/Q43.lean	498532ec1f55ed438d406a6b88c654e8b9b54539	reduction note: map band-log2 gap to PIT/IPS soundness
