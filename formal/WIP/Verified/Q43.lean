@@ -2637,6 +2637,15 @@ theorem Q43_gap_right_k0_le_log2_of_pow_le {n C : Nat}
     exact Nat.ne_of_gt (Nat.lt_of_lt_of_le hpos hpow)
   exact (Nat.le_log2 hnne).2 hpow
 
+theorem Q43_gap_right_k0_le_log2_of_not_lt {n c : Nat}
+    (hhi : ¬ n < 2 ^ (Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1)) :
+    Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1 <= Nat.log2 n := by
+  have hpow :
+      2 ^ (Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1) <= n :=
+    Nat.le_of_not_lt hhi
+  exact Q43_gap_right_k0_le_log2_of_pow_le
+    (n:=n) (C:=(Nat.log2 (Q43_grid_size n)) ^ c) hpow
+
 -- Q43.S345-gap-right-shared-setup-lemma:
 -- bundle the gap-right bounds into the shared flat-eval setup.
 theorem Q43_gap_right_flat_eval_setup {α : Type}
@@ -2673,15 +2682,12 @@ theorem Q43_hrThreshold_of_quasipoly_gap_right {α : Type}
     (hlo : Q43_gap_right_n0 ((Nat.log2 (Q43_grid_size n)) ^ c) <= n)
     (hs : s <= n / 32) :
     Q43_hrThreshold n (Q43_tParam (Q43_lineMax proof)) s := by
-  let L := Nat.log2 (Q43_grid_size n)
-  by_cases hhi : n < 2 ^ (Q43_gap_right_k0 (L ^ c) + 1)
+  by_cases hhi :
+      n < 2 ^ (Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1)
   ·
-    have hhi' :
-        n < 2 ^ (Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1) := by
-      simpa [L] using hhi
     have hsetup :=
       Q43_gap_right_flat_eval_setup
-        (proof:=proof) (n:=n) (N:=N) (c:=c) hN hsize hlo hhi'
+        (proof:=proof) (n:=n) (N:=N) (c:=c) hN hsize hlo hhi
     have hn : 2 <= n := hsetup.1
     have hscale :
         Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
@@ -2690,13 +2696,12 @@ theorem Q43_hrThreshold_of_quasipoly_gap_right {α : Type}
     exact Q43_hrThreshold_of_flat_eval
       (proof:=proof) (n:=n) (N:=N) (c:=c) (s:=s) hn hc hflat hscale hs
   ·
-    have hpow_le : 2 ^ (Q43_gap_right_k0 (L ^ c) + 1) <= n := by
-      exact Nat.le_of_not_lt hhi
-    have hk0 : Q43_gap_right_k0 (L ^ c) + 1 <= Nat.log2 n :=
-      Q43_gap_right_k0_le_log2_of_pow_le (n:=n) (C:=L ^ c) hpow_le
+    have hk0 :
+        Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1 <= Nat.log2 n :=
+      Q43_gap_right_k0_le_log2_of_not_lt (n:=n) (c:=c) hhi
     exact Q43_hrThreshold_of_quasipoly_gap_band_log2
       (proof:=proof) (n:=n) (N:=N) (c:=c) (s:=s)
-      (by simpa [L] using hk0) hc hN hsize hs
+      hk0 hc hN hsize hs
 
 -- (a+1)^5 - a^5 >= 5·a^4, via a^(n+1) + (n+1)·a^n <= (a+1)^(n+1).
 theorem Q43_pow_succ_add_mul_le_succ_pow (a n : Nat) :

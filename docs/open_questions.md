@@ -46,13 +46,13 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S346-gap-right-shared-setup-reuse
-  - `NextStepID:` Q43.S347-gap-right-band-log2-simplify
+  - `LastStepID:` Q43.S347-gap-right-band-log2-simplify
+  - `NextStepID:` Q43.S348-band-log2-setup-bundle
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
-  - `Attempts:` 3
+  - `Attempts:` 4
   - `LastOutcome:` SUCCESS
   - `BlockerType:` NONE
   - `TimeBudget:` 2h
@@ -114,7 +114,7 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Invariant (log2-based k choice across the band).
   - `Artifact:` Proof.
-  - `Update:` reused the shared setup in the top gap-right HR threshold split; note in `docs/q43_s346.md`.
+  - `Update:` simplified the band/log2 split using a not-lt log2 helper; note in `docs/q43_s347.md`.
   - `Use:` next: see if the hhi/¬hhi split can be simplified by reusing the band-log2 lemma or
     pulling out shared flat-eval setup.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).

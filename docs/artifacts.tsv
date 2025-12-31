@@ -68,3 +68,4 @@ Q00.S001-entropy-stopper-v1	Toy	N/A	0c3b07ebcdfff9fd2e33ae3803b9ddbcc74e1398	Ent
 Q43.S344-toy-gap-right-log2-jump	Toy	scripts/toy_q43_gap_sqrt2.py	9b6bcbb35c8a56bee749d7d35e02dff674e646ba	toy check for log2 jump / ratio drop across k=12..104
 Q43.S345-gap-right-shared-setup-lemma	Proof	formal/WIP/Verified/Q43.lean	954ea9f7071cd84ffb6aa3c43b2c3c2d84b5bb8e	bundle gap-right flat-eval setup and reuse in HR low regime
 Q43.S346-gap-right-shared-setup-reuse	Proof	formal/WIP/Verified/Q43.lean	c73d8394af7b28a6feaa1d304b62a50b93252817	reuse shared setup in top gap-right HR split
+Q43.S347-gap-right-band-log2-simplify	Proof	formal/WIP/Verified/Q43.lean	38434ce4521e98eb9cfb7c4d2544e301a55b648e	simplify band/log2 split with not-lt log2 helper
