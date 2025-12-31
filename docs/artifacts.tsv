@@ -93,3 +93,4 @@ Q39.S152-oracle-xor-exit-plan	Reduction	formal/WIP/Verified/Q39.lean	05099243b12
 Q43.S359-band-log2-pit-mapping-lemma	Barrier	formal/WIP/Verified/Q43.lean	79741c6146bc9f4cb3cae95bdcf404b0dea1af48	barrier certificate for PIT/IPS mapping lemma (natural-proofs/relativization check)
 Q43.S360-band-log2-pit-nonnatural-exit	Reduction	formal/WIP/Verified/Q43.lean	8df0cd6d30f369732b1a5053d726b8d3e86f1952	reduction note: exit the RR97 barrier via non-large/non-constructive predicate
 Q39.S153-oracle-xor-mapping-lemma	Barrier	formal/WIP/Verified/Q39.lean	a4259aed557ce89a1ddc6305bc21ec82eb7d82d6	relativization barrier for XOR mapping lemma (Katz05)
+Q43.S361-band-log2-density-bound	Barrier	formal/WIP/Verified/Q43.lean	12e2bb96c2eb3a8ad877374ae97894daa7ce8318	density bound unavailable for band-log2 predicate (RR97 barrier)
