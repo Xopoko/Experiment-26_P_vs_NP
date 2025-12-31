@@ -121,3 +121,4 @@ Q43.S375-nonuniform-support-witness-finalize4	Barrier	formal/WIP/Verified/Q43.le
 Q43.S376-nonuniform-support-witness-finalize5	Barrier	formal/WIP/Verified/Q43.lean	da926a17ff89d3d564e6ed487428f576ae5642e8	Entropy-stopper STOP (score 5.2) before witness layout; doc docs/q43_s376.md
 Q43.S377-nonuniform-support-witness-finalize6	Barrier	formal/WIP/Verified/Q43.lean	43e397b97c7ca5700071d6cbfd1dbadecdbab6b9	Entropy-stopper STOP (score 5.7) before witness layout; doc docs/q43_s377.md
 Q43.S378-nonuniform-support-witness-finalize7	Barrier	formal/WIP/Verified/Q43.lean	662addb70beabbc9d8770d12ac2dbb1f93582dad	Entropy-stopper STOP (score 6.2) before witness layout; doc docs/q43_s378.md
+Q43.S379-nonuniform-support-witness-finalize8	Barrier	N/A	5d15a491115bba3272468d4b1491fd8ef6f1670e	Entropy stopper STOP (score 6.7) before witness layout; doc docs/q43_s379.md
