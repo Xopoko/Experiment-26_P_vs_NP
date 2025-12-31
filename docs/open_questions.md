@@ -13,8 +13,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q39 (Tseitin(Grid): depth gap for polynomial size in bounded-depth Frege):**
   - `Priority:` P1
   - `Status:` BLOCKED
-  - `LastStepID:` Q39.S144-contiguous-alt-rank2-classify-or-barrier
-  - `NextStepID:` Q39.S145-contiguous-alt-rank2-classify-or-barrier
+  - `LastStepID:` Q39.S145-merge-q39-notes
+  - `NextStepID:` Q39.S146-contiguous-alt-rank2-classify-or-barrier
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Communication/rank (projection rank witness).
@@ -23,13 +23,13 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
   - `StopRule:` reached >5 consecutive contiguous alt-shifts with rank=2 (now alt54..alt117);
     stop extending and switch to classification or a barrier certificate; if rank!=2, record the failure and stop.
-  - `Attempts:` 0
-  - `LastOutcome:` INCONCLUSIVE
+  - `Attempts:` 1
+  - `LastOutcome:` BLOCKED
   - `BlockerType:` ENTROPY_STOPPER
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
   - `DefinitionOfDone:` classify the contiguous alt-shift regime or record a barrier for the XOR step.
-  - `Update:` Entropy Stopper STOP (repeat_failure + zero_infogain_streak); no proof edits; note in `docs/q39_s144.md`.
+  - `Update:` Entropy Stopper STOP (merge-q39-notes deferred); keep classification/barrier as the next step.
   - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
     (contiguous alt-shift vectors up to alt117).
   - `File:` `scripts/toy_q39_rank2.py`. `InfoGain:` 1.
