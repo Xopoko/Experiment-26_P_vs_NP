@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S362-band-log2-constructivity-bound
-- `Do-not-repeat (next 2 runs):` Q43.S362-band-log2-constructivity-bound, Q43.S361-band-log2-density-bound
+- `LastStepID:` Q43.S363-band-log2-predicate-refactor
+- `Do-not-repeat (next 2 runs):` Q43.S363-band-log2-predicate-refactor, Q43.S362-band-log2-constructivity-bound
 - `Last InfoGain:` 1
-- `LastApproachTag:` specification-audit
+- `LastApproachTag:` meta-reduction-planning
 - `LastFailureReason:` natural-proofs-barrier
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by relativization barrier; resume at Q39.S154-oracle-xor-nonrelativizing-exit. Q43: BLOCKED by natural-proofs barrier; resume at Q43.S363-band-log2-predicate-refactor.
+Q39: BLOCKED by relativization barrier; resume at Q39.S154-oracle-xor-nonrelativizing-exit. Q43: BLOCKED by natural-proofs barrier; resume at Q43.S364-band-log2-support-witness.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -26,7 +26,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 ## Active "unique" tasks (select one per run)
 
 - Q39 from `docs/open_questions.md` (blocked; resume at Q39.S154-oracle-xor-nonrelativizing-exit).
-- Q43 from `docs/open_questions.md` (blocked; resume at Q43.S363-band-log2-predicate-refactor).
+- Q43 from `docs/open_questions.md` (blocked; resume at Q43.S364-band-log2-support-witness).
 
 ## Experiment register (max 12 items; overwrite old ones)
 
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Specification/definitions audit->Barrier-driven design->Model stress test->Barrier-driven design->Model stress test
+Latest:Meta-reduction planning->Specification/definitions audit->Barrier-driven design->Model stress test->Barrier-driven design

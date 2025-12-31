@@ -95,3 +95,4 @@ Q43.S360-band-log2-pit-nonnatural-exit	Reduction	formal/WIP/Verified/Q43.lean	8d
 Q39.S153-oracle-xor-mapping-lemma	Barrier	formal/WIP/Verified/Q39.lean	a4259aed557ce89a1ddc6305bc21ec82eb7d82d6	relativization barrier for XOR mapping lemma (Katz05)
 Q43.S361-band-log2-density-bound	Barrier	formal/WIP/Verified/Q43.lean	12e2bb96c2eb3a8ad877374ae97894daa7ce8318	density bound unavailable for band-log2 predicate (RR97 barrier)
 Q43.S362-band-log2-constructivity-bound	Barrier	formal/WIP/Verified/Q43.lean	d03ec0cf857dc3a9d9383f099349e9978e9d256a	constructivity exit blocked by RR97 definition
+Q43.S363-band-log2-predicate-refactor	Reduction	formal/WIP/Verified/Q43.lean	24fcdd2ba36b97718e847f020d79130f4174afe6	predicate refactor note with support witness
