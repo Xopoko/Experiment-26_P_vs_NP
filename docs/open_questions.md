@@ -44,18 +44,18 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P0
   - `Status:` BLOCKED
-  - `LastStepID:` Q43.S375-nonuniform-support-witness-finalize4
-  - `NextStepID:` Q43.S376-nonuniform-support-witness-finalize5
+  - `LastStepID:` Q43.S376-nonuniform-support-witness-finalize5
+  - `NextStepID:` Q43.S377-nonuniform-support-witness-finalize6
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if the entropy stopper pre-check keeps emitting `STOP` (score ≥ 2.5) while the non-natural support predicate is still unformalized, record the pause and pivot to the nonuniform-support plan.
-  - `Attempts:` 33
-  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42, score 4.7; doc `docs/q43_s375.md` records the pause and queues `Q43.S376-nonuniform-support-witness-finalize5`)
+  - `Attempts:` 34
+  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42, score 5.2; doc `docs/q43_s376.md` records the pause and queues `Q43.S377-nonuniform-support-witness-finalize6`)
   - `BlockerType:` BARRIER_ENTROPY
   - `TimeBudget:` 2h
-  - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`, `docs/q43_s372.md`, `docs/q43_s373.md`, `docs/q43_s374.md`, `docs/q43_s375.md`
-  - `DefinitionOfDone:` once the entropy-stopper policy returns `CONTINUE`, formalize the per-instance advice witness layout (follow-up Step: `Q43.S376-nonuniform-support-witness-finalize5`).
+  - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`, `docs/q43_s372.md`, `docs/q43_s373.md`, `docs/q43_s374.md`, `docs/q43_s375.md`, `docs/q43_s376.md`
+  - `DefinitionOfDone:` once the entropy-stopper policy returns `CONTINUE`, formalize the per-instance advice witness layout (follow-up Step: `Q43.S377-nonuniform-support-witness-finalize6`).
   - `GeneralizationTarget:` encode the log2 jump with a polylog-sized per-instance support witness and show the ratio drop persists once advice fixes the global support layout.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Verified/Q43.lean`
@@ -114,11 +114,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     `docs/q43_s373.md`
     `docs/q43_s374.md`
     `docs/q43_s375.md`
-  - `Success:` entropy-stopper pre-check returned `STOP` (score 4.7) before the witness layout could be completed; `docs/q43_s375.md` now records the blockage and schedules `Q43.S376-nonuniform-support-witness-finalize5`.
-  - `Lens:` Barrier-driven design (entropy/oracle cooldown).
+    `docs/q43_s376.md`
+  - `Success:` entropy-stopper pre-check returned `STOP` (score 5.2) before the witness layout could be completed; `docs/q43_s376.md` now records the blockage and schedules `Q43.S377-nonuniform-support-witness-finalize6`.
+  - `Lens:` Model stress test (entropy/oracle cooldown).
   - `Artifact:` Barrier.
-  - `Update:` `docs/q43_s375.md` logs the entropy STOP (score 4.7) and queues the retry step.
-  - `Use:` next: wait for the entropy policy to lower the score and then formalize the layout in `Q43.S376-nonuniform-support-witness-finalize5`.
+  - `Update:` `docs/q43_s376.md` logs the entropy STOP (score 5.2) and queues the retry step.
+  - `Use:` next: wait for the entropy policy to lower the score and then formalize the layout in `Q43.S377-nonuniform-support-witness-finalize6`.
   - `BarrierCheck:`
     - `Relativization:`
       - Relativizes?: unknown
@@ -137,7 +138,7 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
       - If yes: the advice must be reintroduced in algebraic oracles for the barrier to stay visible.
     - `Citations:` [RR97], [AW08], [`scripts/stopper_advice.py policy v1`]
   - `InfoGain:` 0.
-    Details: `docs/q43_s375.md`.
+    Details: `docs/q43_s376.md`.
 
 ## Completed (archive)
 

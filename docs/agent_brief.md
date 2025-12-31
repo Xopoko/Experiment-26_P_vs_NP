@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S375-nonuniform-support-witness-finalize4
-- `Do-not-repeat (next 2 runs):` Q43.S375-nonuniform-support-witness-finalize4, Q43.S374-nonuniform-support-witness-finalize3
+- `LastStepID:` Q43.S376-nonuniform-support-witness-finalize5
+- `Do-not-repeat (next 2 runs):` Q43.S376-nonuniform-support-witness-finalize5, Q43.S375-nonuniform-support-witness-finalize4
 - `Last InfoGain:` 0
-- `LastApproachTag:` Barrier-driven design
-- `LastFailureReason:` entropy-stopper policy (score 4.7)
+- `LastApproachTag:` Model stress test
+- `LastFailureReason:` entropy-stopper policy (score 5.2)
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by the entropy-stopper pre-check (score 2.5) before the gadget-support audit could start; `docs/q39_s163.md` now records the STOP and `Q39.S164-gadget-support-audit-retry` waits for a cooler policy value. Q43: BLOCKED again by the entropy-stopper policy (score 4.7) before the support witness layout could be finalized; `docs/q43_s375.md` now logs the barrier and queues `Q43.S376-nonuniform-support-witness-finalize5` once the policy cools. Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
+Q39: BLOCKED by the entropy-stopper pre-check (score 2.5) before the gadget-support audit could start; `docs/q39_s163.md` now records the STOP and `Q39.S164-gadget-support-audit-retry` waits for a cooler policy value. Q43: BLOCKED again by the entropy-stopper policy (score 5.2) before the support witness layout could be finalized; `docs/q43_s376.md` now logs the barrier and queues `Q43.S377-nonuniform-support-witness-finalize6` once the policy cools. Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
 
@@ -25,7 +25,7 @@ Q39: BLOCKED by the entropy-stopper pre-check (score 2.5) before the gadget-supp
 ## Active "unique" tasks (select one per run)
 
 - Q39 from `docs/open_questions.md` (blocked; entropy-stopper pre-check prevented the audit S163; retry as Q39.S164-gadget-support-audit-retry).
-- Q43 from `docs/open_questions.md` (blocked; entropy-stopper STOP (score 4.7) is recorded in `docs/q43_s375.md` and the next attempt is `Q43.S376-nonuniform-support-witness-finalize5`).
+- Q43 from `docs/open_questions.md` (blocked; entropy-stopper STOP (score 5.2) is recorded in `docs/q43_s376.md` and the next attempt is `Q43.S377-nonuniform-support-witness-finalize6`).
 
 ## Experiment register (max 12 items; overwrite old ones)
 
@@ -42,4 +42,4 @@ Q39: BLOCKED by the entropy-stopper pre-check (score 2.5) before the gadget-supp
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Barrier-driven design->Model stress test->Barrier-driven design->Barrier-driven design->Model stress test
+Latest:Model stress test->Barrier-driven design->Model stress test->Barrier-driven design->Barrier-driven design
