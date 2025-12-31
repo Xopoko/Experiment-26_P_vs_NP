@@ -107,3 +107,4 @@ Q39.S158-nonrelativizing-gadget	Barrier	formal/WIP/Verified/Q39.lean	d8fb05cbcac
 Q39.S159-nonrelativizing-gadget-implementation	Barrier	formal/WIP/Verified/Q39.lean	d8080d3f5c7539a2c4d3e294d3d5226f7721f5c5	Gadget implementation plan recorded in docs/q39_s159.md.
 Q39.S160-gadget-toy-check	Barrier	formal/WIP/Verified/Q39.lean	09631adf5ddeab2bbed74d633d078a35bacc9f0f	Documented gadget toy check plan in docs/q39_s160.md.
 Q43.S367-nonuniform-support-implementation	Barrier	formal/WIP/Verified/Q43.lean	22e1b53ddcf0284b3cc723bacf43515f50d8d3ba	Recorded the per-instance support witness sketch in docs/q43_s367.md.
+Q43.S368-nonuniform-support-witness	Barrier	formal/WIP/Verified/Q43.lean	8887a88d57651fe4641eead2f19452f6facff8d7	Entropy-stopper STOP (score 3.2) before the witness could be written; barrier note recorded in docs/q43_s368.md.
