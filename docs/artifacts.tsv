@@ -90,3 +90,4 @@ Q39.S151-oracle-xor-step-retry	Barrier	formal/WIP/Verified/Q39.lean	c40cd66c1f0b
 Q43.S357-band-log2-exit-plan	Reduction	formal/WIP/Verified/Q43.lean	09df3bcc015d31918f49c0fe777bde67787bc890	exit plan reduction: link band-log2 gap to PIT/IPS soundness
 Q43.S358-band-log2-pit-reduction	Reduction	formal/WIP/Verified/Q43.lean	498532ec1f55ed438d406a6b88c654e8b9b54539	reduction note: map band-log2 gap to PIT/IPS soundness
 Q39.S152-oracle-xor-exit-plan	Reduction	formal/WIP/Verified/Q39.lean	05099243b12f8930d80819703e71d7b735eed3ee	exit plan reduction: link XOR-step to PIT/IPS soundness
+Q43.S359-band-log2-pit-mapping-lemma	Barrier	formal/WIP/Verified/Q43.lean	79741c6146bc9f4cb3cae95bdcf404b0dea1af48	barrier certificate for PIT/IPS mapping lemma (natural-proofs/relativization check)
