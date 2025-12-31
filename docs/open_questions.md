@@ -45,17 +45,17 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Priority:` P0
   - `Status:` BLOCKED
   - `LastStepID:` Q43.S366-escape-natural-proof
-  - `NextStepID:` Q43.S367-nonuniform-support-implementation
+  - `NextStepID:` Q43.S368-nonuniform-support-witness
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if the entropy stopper pre-check keeps emitting `STOP` (score ≥ 2.5) while the non-natural support predicate is still unformalized, record the pause and pivot to the nonuniform-support plan.
-  - `Attempts:` 24
-  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42)
+  - `Attempts:` 25
+  - `LastOutcome:` BARRIER (recorded the nonuniform support witness plan before rerunning the toy)
   - `BlockerType:` BARRIER_ENTROPY
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`
-  - `DefinitionOfDone:` record the entropy-stopper pause, document the nonuniform-support strategy (Q43.S367) that injects per-instance advice, and describe what the support witness must encode before reissuing the oracle experiment.
+  - `DefinitionOfDone:` write down the per-instance support witness encoding, prove it keeps the ratio drop in place, and prepare to reissue the toy once entropy-stop policy permits (follow-up Step: Q43.S368-nonuniform-support-witness).
   - `GeneralizationTarget:` encode the log2 jump with a polylog-sized per-instance support witness and show the ratio drop persists once advice fixes the global support layout.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Verified/Q43.lean`
@@ -109,10 +109,10 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Q43_nk_succ_le_three_pow);
     `scripts/toy_q43_gap_sqrt2.py`
     `docs/q43_s367.md`
-  - `Success:` blocked by the entropy-stopper policy (pre-check exit 42) before the non-natural support predicate could be formalized (S366); the new nonuniform-support detour lives in `docs/q43_s367.md`.
+  - `Success:` recorded the entropy-stopper pause and fleshed out the nonuniform support plan (S367) in `docs/q43_s367.md`, so we are ready to formalize the witness once the policy allows.
   - `Lens:` Barrier-driven design (natural-proofs barrier + entropy-stopper).
   - `Artifact:` Barrier.
-  - `Update:` Entropy-stopper block recorded in `docs/q43_s366.md`; keeper plan is now to pursue Q43.S367-nonuniform-support-implementation (see `docs/q43_s367.md`).
+  - `Update:` Entropy-stopper block recorded in `docs/q43_s366.md`; `docs/q43_s367.md` now contains an implementation sketch for the per-instance support witness and the updated barrier rationale.
   - `Use:` next: flesh out the nonuniform support predicate, prove the support witness contains the desired global layout, and re-run the toy/oracle once the predicate is updated.
   - `BarrierCheck:` see `docs/q43_s367.md`.
   - `InfoGain:` 0.
