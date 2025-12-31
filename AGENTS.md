@@ -98,7 +98,7 @@ Each run: pick exactly one open item and deliver exactly one artifact.
 
 ### Mandatory outputs per run
 - Update exactly one item in `docs/open_questions.md` (status + `NextStepID` + short note).
-- Update `docs/agent_brief.md` (bounded; update Do‑not‑repeat when needed).
+- Update `docs/agent_brief.md` (bounded; update Do‑not‑repeat, `LastFailureReason`, `LastApproachTag`, `Last InfoGain`).
 - Append exactly one row to `docs/artifacts.tsv` (Commit = git hash).
 - Prefer `scripts/register_artifact.py` (supports `--approach-tag` and `--failure-reason`).
 - Write a run contract JSON via `scripts/write_run_contract.py` (uses `CONTRACT_FILE`).
@@ -146,6 +146,35 @@ python3 scripts/write_run_contract.py \
 ```
 
 ---
+
+## 6.5) Entropy stopper (required)
+
+The entropy stopper is a **pre/post gate** driven by `scripts/entropy_features.py` and
+`scripts/stopper_policy.json`. It reads the run contract, open_questions state, agent brief,
+and recent run metadata to decide whether to STOP or CONTINUE.
+
+### Pre-check (must run before any work)
+
+1) Ensure the run contract JSON exists (written by `scripts/write_run_contract.py`).
+   If `CONTRACT_FILE` is not set, pass `--out <path>` to `write_run_contract.py`
+   and use that same path in `--contract`.
+2) Run:
+
+```bash
+python3 scripts/stopper_advice.py --contract "$CONTRACT_FILE" --mode pre
+```
+
+3) Interpret exit codes:
+   - `0` -> CONTINUE
+   - `42` -> STOP: mark `Status=BLOCKED` or produce a `Barrier` artifact, set `NextStepID`,
+     set `LastFailureReason: entropy-stopper`, then proceed to verify + run meta + commit.
+   - any other code -> FAIL: stop and report the error.
+
+### Post-check (always run after verification)
+
+After verification, run `scripts/write_run_meta.py`. If `CONTRACT_FILE` is set and the contract
+exists, it will call `scripts/stopper_advice.py --mode post --json` and embed the `entropy`
+block into the run meta output.
 
 ## 7) Workflow (1 run = 1 artifact)
 

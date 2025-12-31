@@ -51,10 +51,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
   - `DefinitionOfDone:` classify the contiguous alt-shift regime or record a barrier for the XOR step.
-  - `Update:` Entropy Stopper STOP; recorded a natural-proofs barrier note; see `docs/q39_s147.md`.
-  - `PublicSurface:` `docs/q39_s147.md`, `docs/q39_s146.md`, `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
+  - `Update:` Entropy Stopper STOP; recorded a natural-proofs barrier note.
+  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
     (contiguous alt-shift vectors up to alt117).
-  - `File:` `docs/q39_s147.md`. `InfoGain:` 1.
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? unknown (rank-only reasoning appears oracle-agnostic). If yes/unknown: test with oracle gates in the XOR-step lines; check rank-2 witness stability.
     - `B) Natural proofs check:` Applicable? yes (if the rank witness is upgraded to a large constructive property). Largeness/constructivity unknown. Exit point: use a non-natural or non-constructive witness. [RR97]
@@ -135,7 +134,7 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Invariant (log2-based k choice across the band).
   - `Artifact:` Proof.
-  - `Update:` Entropy Stopper STOP (pre-check); no proof changes; note in `docs/q43_s351.md`.
+  - `Update:` Entropy Stopper STOP (pre-check); no proof changes.
   - `Use:` next: see if the hhi/¬hhi split can be simplified by reusing the band-log2 lemma or
     pulling out shared flat-eval setup.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).

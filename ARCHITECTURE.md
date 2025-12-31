@@ -52,7 +52,6 @@ graph TD
 
 - `README.md` - quick overview and entry point.
 - `P_vs_NP.md` - main index and navigation.
-- `P_vs_NP.diagram.md` / `P_vs_NP.mindmap.md` - repository maps.
 - `AGENTS.md` - agent protocol and run contract expectations.
 - `ARCHITECTURE.md` - this file.
 - `Makefile` - convenience targets for verify/doctor workflows.
@@ -64,7 +63,7 @@ graph TD
   - `docs/artifacts.tsv` - completed artifacts (Commit = git hash).
   - `docs/planned.tsv` - queued artifacts (Commit = PENDING).
   - `docs/roadmap.md`, `docs/sources.md` - route and citations.
-  - `docs/q43_s*.md` - step-by-step Q43 work log snapshots.
+  - `docs/entropy_pruner.md` - toy SAT entropy-pruner workflow notes.
 
 - `formal/` - Lean 4 proof layer.
   - `formal/PvNP/Core/` - authoritative definitions and lemmas.
@@ -74,6 +73,7 @@ graph TD
   - `formal/WIP.lean` - imports `WIP/Verified/Work.lean`.
   - `formal/Notes/` and `formal/Notes.lean` - long notes as doc-comments.
   - `formal/Checks/AxiomsCheck.lean` - axioms audit.
+  - `formal/README.md` - Lean layer overview and build commands.
   - `formal/lakefile.lean`, `formal/lean-toolchain`, `formal/lake-manifest.json` - build config.
 
 - `agent/` - local runner scripts.
@@ -88,6 +88,9 @@ graph TD
   - `scripts/verify_all.sh` - docs + formal gate.
   - `scripts/verify_notebook.py` - docs structure/resource checks and prompt checks.
   - `scripts/verify_run_contract.py` - enforce run contract and file-touch rules.
+  - `scripts/stopper_advice.py` - STOP/CONTINUE suggestion from entropy features.
+  - `scripts/entropy_features.py` - compute entropy signals from run contracts + logs.
+  - `scripts/stopper_policy.json` - weights/thresholds for the stopper.
   - `scripts/check_axioms.py` - runs `formal/Checks/AxiomsCheck.lean`.
   - `scripts/register_artifact.py` - append artifact log and update brief.
   - `scripts/write_run_contract.py` - create run contract JSON.
@@ -95,6 +98,7 @@ graph TD
   - `scripts/agent_prompt.txt` - single-line prompt for runners.
   - `scripts/doctor.sh` - toolchain sanity checks.
   - `scripts/verify_changed.sh` - pick `RUN_MODE` from git changes.
+  - `scripts/entropy_pruner/` - toy SAT entropy-pruner sandbox (dataset/train/eval).
   - `scripts/toy_*.py` - oracle checks for Q39/Q43.
   - `scripts/arxiv_search.py` - slice arXiv metadata into `resources/arxiv/`.
   - `scripts/summarize_runs.py` - aggregate `agent/logs/*.meta.json`.
@@ -102,9 +106,11 @@ graph TD
 - `resources/` - bibliography and downloads.
   - `resources/manifest.tsv` - canonical list of sources.
   - `resources/download_resources.py` - downloader + listing helper.
-- `resources/downloads/` - gitignored cache of PDFs/HTML.
   - `resources/extract_text_cache.py` - build `resources/text_cache/` (gitignored).
-  - `resources/arxiv/pvnp_slice.tsv` - curated arXiv slice.
+  - `resources/text_cache/` - extracted PDF text cache (gitignored).
+  - `resources/downloads/` - gitignored cache of PDFs/HTML.
+  - `resources/arxiv/` - arXiv slice + README.
+    - `resources/arxiv/pvnp_slice.tsv` - curated arXiv slice.
   - `resources/README.md` - usage notes.
 
 - `image/` - README assets.
@@ -151,7 +157,9 @@ flowchart TD
   B["scripts/agent_prompt.txt"] --> E
   C["docs/open_questions.md"] --> E
   D["docs/agent_brief.md"] --> E
-  E --> F["Run oracle (if listed)"]
+  E --> E1["Write run contract (scripts/write_run_contract.py)"]
+  E1 --> E2["Stopper advice (scripts/stopper_advice.py --mode pre)"]
+  E2 --> F["Run oracle (if listed)"]
   F --> G["Build artifact (formal or docs/notes)"]
   G --> H["Update docs/open_questions.md"]
   G --> I["Update docs/agent_brief.md"]
@@ -175,7 +183,8 @@ flowchart TD
   E --> F["Select exactly 1 item"]
   F --> G["Print run contract (SelectedItem/StepID/Artifact/LeanTarget)"]
   G --> G1["Write run contract JSON (scripts/write_run_contract.py)"]
-  G1 --> H["Attempt to falsify or break the claim"]
+  G1 --> G2["Stopper advice (scripts/stopper_advice.py --mode pre)"]
+  G2 --> H["Attempt to falsify or break the claim"]
   H --> I["Run Oracle (if listed)"]
   I --> J{"Oracle pass?"}
   J -->|no| K["Record failure as artifact or mark BLOCKED"]
@@ -371,6 +380,13 @@ flowchart TD
   D --> F["Update docs/agent_brief.md (LastStepID/Do-not-repeat/Last InfoGain)"]
 ```
 
+## Entropy stopper + pruner (toy tools)
+
+- `scripts/entropy_features.py` computes STOP/CONTINUE features from run contracts, `docs/open_questions.md`, `docs/agent_brief.md`, and recent `agent/logs/*.meta.json`.
+- `scripts/stopper_advice.py` uses `scripts/stopper_policy.json` to emit STOP/CONTINUE; exits 42 on STOP.
+- `scripts/entropy_pruner/` is a toy SAT sandbox (dataset generation, stopper training, pruning evaluation) with outputs typically written under `agent/logs/`.
+- `docs/entropy_pruner.md` and `scripts/entropy_pruner/README.md` document the toy workflow.
+
 ## Resources and search flow
 
 ```mermaid
@@ -404,6 +420,7 @@ flowchart TD
 - `scripts/agent_prompt.txt` - single-line run prompt.
 - `docs/open_questions.md` - queue quality drives progress.
 - `docs/agent_brief.md` - anti-loop and bounded state.
+- `scripts/stopper_advice.py` and `scripts/stopper_policy.json` - entropy-based stop/continue gate.
 - `docs/artifacts.tsv` / `docs/planned.tsv` - artifact tracking.
 - `formal/PvNP/Core/` - authoritative zone.
 - `formal/WIP/Verified/` - current Lean target surface.
@@ -433,4 +450,4 @@ flowchart TD
 
 - Active queue items live in `docs/open_questions.md`.
 - Q39 and Q43 remain the primary active Lean targets (`formal/WIP/Verified/Q39.lean`, `formal/WIP/Verified/Q43.lean`).
-- The Q43 step log series lives in `docs/q43_s*.md`.
+- Entropy-pruner notes live in `docs/entropy_pruner.md` with code under `scripts/entropy_pruner/`.
