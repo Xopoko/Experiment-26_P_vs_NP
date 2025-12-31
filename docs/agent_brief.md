@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S155-contiguous-alt-shift-classification
-- `Do-not-repeat (next 2 runs):` Q39.S155-contiguous-alt-shift-classification, Q43.S366-escape-natural-proof
+- `LastStepID:` Q39.S156-globalfixedpair-fixedorientation-contiguous-shift-alt69
+- `Do-not-repeat (next 2 runs):` Q39.S156-globalfixedpair-fixedorientation-contiguous-shift-alt69, Q43.S366-escape-natural-proof
 - `Last InfoGain:` 1
 - `LastApproachTag:` model-stress-test
 - `LastFailureReason:` relativization
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by relativization barrier; recorded in `docs/q39_s155.md`; resume at Q39.S156-globalfixedpair-fixedorientation-contiguous-shift-alt69. Q43: BLOCKED by natural-proofs barrier and the entropy-stopper policy; log in `docs/q43_s366.md` and retry Q43.S366-escape-natural-proof once the score drops.
+Q39: BLOCKED by relativization barrier; recorded in `docs/q39_s156.md`; resume at Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70. Q43: BLOCKED by natural-proofs barrier and the entropy-stopper policy; log in `docs/q43_s366.md` and retry Q43.S366-escape-natural-proof once the score drops.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -25,7 +25,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Active "unique" tasks (select one per run)
 
-- Q39 from `docs/open_questions.md` (blocked; resume at Q39.S155-contiguous-alt-shift-classification).
+- Q39 from `docs/open_questions.md` (blocked; resume at Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70).
 - Q43 from `docs/open_questions.md` (blocked; wait for the entropy-stopper signal before retrying Q43.S366-escape-natural-proof).
 
 ## Experiment register (max 12 items; overwrite old ones)

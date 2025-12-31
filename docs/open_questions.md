@@ -14,8 +14,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P1
   - `Status:` BLOCKED
-  - `LastStepID:` Q39.S155-contiguous-alt-shift-classification
-  - `NextStepID:` Q39.S156-globalfixedpair-fixedorientation-contiguous-shift-alt69
+  - `LastStepID:` Q39.S156-globalfixedpair-fixedorientation-contiguous-shift-alt69
+  - `NextStepID:` Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Model stress test (oracle).
@@ -24,20 +24,20 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
   - `StopRule:` reached >5 consecutive contiguous alt-shifts with rank=2 (now alt54..alt117);
     stop extending and switch to classification or a barrier certificate; if rank!=2, record the failure and stop.
-  - `Attempts:` 11
+  - `Attempts:` 12
   - `LastOutcome:` BLOCKED
   - `BlockerType:` BARRIER_RELATIVIZATION
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
-  - `DefinitionOfDone:` describe the contiguous alt-shift regime and record why it stays rank 2; prepare the next barrier step (Q39.S156).
-  - `Update:` Classification note recorded in `docs/q39_s155.md`.
+  - `DefinitionOfDone:` document the extension to `alt69` and keep track of why the XOR mapping remains relativizing; set up `Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70`.
+  - `Update:` Barrier note recorded in `docs/q39_s156.md`.
   - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
     (contiguous alt-shift vectors up to alt117).
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? yes (the XOR mapping stays arithmetic/log2 only). See `docs/q39_s155.md` for the contiguous alt-shift classification and the BGS75/Katz05 counterexample.
-    - `B) Natural proofs check:` Applicable? no (the barrier is about mapping translation, not circuit-size properties).
-    - `C) Algebrization check:` Applicable? yes (the XOR arithmetic steps persist under AW08-style algebraic oracles). Exit point: introduce oracle-dependent/non-relativizing gadgets.
-  - `Success:` recorded the contiguous alt-shift classification (rank=2 invariant) and documented why the XOR step stays relativizing (see `docs/q39_s155.md`).
+    - `A) Relativization check:` Relativizes? yes (the XOR mapping stays arithmetic/log2 only and is oracle-agnostic); see `docs/q39_s156.md`.
+    - `B) Natural proofs check:` Applicable? no (the barrier talks about mapping translation, not circuit-size properties).
+    - `C) Algebrization check:` Applicable? yes (XOR arithmetic steps persist under AW08-style algebraic oracles); see `docs/q39_s156.md`.
+  - `Success:` recorded the contiguous alt-shift classification (rank=2 invariant) and documented why the XOR step stays relativizing (see `docs/q39_s156.md`).
     Context: node - syntactically simulate Gaussian elimination step; fixed partitions break, even-batching does not help.
     Note: the orientation invariance of the frontier is fixed in `formal/WIP/Verified/Q39.lean`.
     Details: `formal/Notes/TseitinQ39.lean` (Section 16.153-Section 16.177) and summary in `formal/Notes/TseitinLocalEF.lean` §16.187.

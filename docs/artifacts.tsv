@@ -101,3 +101,4 @@ Q43.S365-natural-proof-barrier	Exact citation	N/A	5b9a92006f3c6d34a573355c0a9607
 Q39.S154-oracle-xor-nonrelativizing-exit	Barrier	formal/WIP/Verified/Q39.lean	33a3d058e0bbf9e041f780891ca5d19bb5d44aa7	Relativization barrier note in docs/q39_s154.md
 Q43.S366-escape-natural-proof	Barrier	formal/WIP/Verified/Q43.lean	b8b321b62d7b85f766c112aa3d1abe77a2074f62	Entropy-stopper policy (score 2.5) forced early block before the non-natural support predicate was formalized
 Q39.S155-contiguous-alt-shift-classification	Barrier	formal/WIP/Verified/Q39.lean	bcdbc651dd8976a82013073d48fff485e7c97f01	Contiguous alt-shift classification note in docs/q39_s155.md
+Q39.S156-globalfixedpair-fixedorientation-contiguous-shift-alt69	Barrier	formal/WIP/Verified/Q39.lean	56aef0682bca38cc5456b1bbd2c9778e51103095	Alt69 contiguous shift rank-2 barrier recorded in docs/q39_s156.md
