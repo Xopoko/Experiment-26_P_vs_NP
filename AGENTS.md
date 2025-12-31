@@ -102,6 +102,7 @@ Each run: pick exactly one open item and deliver exactly one artifact.
 - Append exactly one row to `docs/artifacts.tsv` (Commit = git hash).
 - Prefer `scripts/register_artifact.py` (supports `--approach-tag` and `--failure-reason`).
 - Write a run contract JSON via `scripts/write_run_contract.py` (uses `CONTRACT_FILE`).
+- Run `scripts/stopper_advice.py --contract "$CONTRACT_FILE" --mode pre` and honor STOP (exit 42).
 - Write a run meta JSON via `scripts/write_run_meta.py` after verification (uses `RUN_META_FILE`).
 - Run oracle + make exactly one git commit.
 
@@ -155,21 +156,24 @@ python3 scripts/write_run_contract.py \
    * pick `P1` only if all P0 are blocked/cooldown.
 2. Pick exactly one lens (do not repeat lens in consecutive runs).
 3. Write the run contract JSON via `scripts/write_run_contract.py`.
-4. Retrieval before invention:
+4. Run Entropy Stopper pre-check: `scripts/stopper_advice.py --contract "$CONTRACT_FILE" --mode pre`.
+   If it returns STOP (exit 42), immediately produce a `BLOCKED`/`Barrier` artifact,
+   set `NextStepID`, verify, write meta, commit, and stop.
+5. Retrieval before invention:
 
    * `rg` over `formal/` and `resources/text_cache/`,
    * use `#find`, `simp?`, `aesop?` if available.
-5. Kill-first check (required): try to falsify quickly (counterexample / toy case / barrier hit).
-6. Produce exactly one artifact (see §8).
-7. Barrier check (mandatory when touching separation/lower bounds): fill template §10.
-8. Choose `RUN_MODE` for verification:
+6. Kill-first check (required): try to falsify quickly (counterexample / toy case / barrier hit).
+7. Produce exactly one artifact (see §8).
+8. Barrier check (mandatory when touching separation/lower bounds): fill template §10.
+9. Choose `RUN_MODE` for verification:
 
    * `RUN_MODE=docs` if only docs/notes changed,
    * `RUN_MODE=wip` if touching `formal/WIP/*`,
    * `RUN_MODE=core` if touching `formal/PvNP/Core/*`.
      Run `scripts/verify_all.sh`.
-9. Write run meta via `scripts/write_run_meta.py` (include outcome and verify exit code).
-10. Commit with message:
+10. Write run meta via `scripts/write_run_meta.py` (include outcome and verify exit code).
+11. Commit with message:
 
    * `<StepID>: <ArtifactType> - <one-line summary>`
 
@@ -184,6 +188,9 @@ python3 scripts/write_run_meta.py \
   --verify-exit-code 0
 ```
 
+If `CONTRACT_FILE` is set, run meta will embed an `entropy` block computed from
+`scripts/stopper_advice.py --mode post`.
+
 ### If stuck
 
 If the artifact cannot be completed:
@@ -192,6 +199,9 @@ If the artifact cannot be completed:
 * write 1‑line blocker,
 * set a new `NextStepID`,
 * stop (no extra edits).
+
+If Entropy Stopper returns STOP (exit 42), treat it as an early `BLOCKED`/`Barrier`
+decision and follow the same stop procedure.
 
 ---
 
