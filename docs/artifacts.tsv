@@ -76,3 +76,4 @@ Q43.S349-band-log2-setup-bundle	Barrier	N/A	3ea1ea642a80a5a5a3b0e892ac6cc35851b7
 Q43.S350-band-log2-setup-bundle	Barrier	N/A	ec402ac683e3a73262f9ae9e65b49cbf30452d79	entropy stopper STOP; run blocked
 Q43.S351-band-log2-setup-bundle	Barrier	N/A	2e0176f09461fa0f23156b78a77b5e2eabbc58e9	entropy stopper STOP; run blocked
 Q00.S003-entropy-pruner-toy-integration	Toy	N/A	226cba3ab5e8eeb1f85ee704b01fdf40b3ad479d	SAT entropy-pruner sandbox (dataset/train/run + docs)
+Q39.S146-contiguous-alt-rank2-classify-or-barrier	Barrier	formal/WIP/Verified/Q39.lean	363584549de579c7bfae3110352818bccb38e22e	natural-proofs barrier note for rank-only route

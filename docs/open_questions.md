@@ -35,30 +35,30 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q39 (Tseitin(Grid): depth gap for polynomial size in bounded-depth Frege):**
   - `Priority:` P1
   - `Status:` BLOCKED
-  - `LastStepID:` Q39.S145-merge-q39-notes
-  - `NextStepID:` Q39.S146-contiguous-alt-rank2-classify-or-barrier
+  - `LastStepID:` Q39.S146-contiguous-alt-rank2-classify-or-barrier
+  - `NextStepID:` Q39.S147-nonrelativizing-xor-step-oracle-break
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Communication/rank (projection rank witness).
-  - `Artifact:` Counterexample.
+  - `Artifact:` Barrier.
   - `Oracle:` `python3 scripts/toy_q39_rank2.py --alt 118`
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
   - `StopRule:` reached >5 consecutive contiguous alt-shifts with rank=2 (now alt54..alt117);
     stop extending and switch to classification or a barrier certificate; if rank!=2, record the failure and stop.
-  - `Attempts:` 1
-  - `LastOutcome:` BLOCKED
-  - `BlockerType:` ENTROPY_STOPPER
+  - `Attempts:` 2
+  - `LastOutcome:` INCONCLUSIVE
+  - `BlockerType:` BARRIER
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
   - `DefinitionOfDone:` classify the contiguous alt-shift regime or record a barrier for the XOR step.
-  - `Update:` Entropy Stopper STOP (merge-q39-notes deferred); keep classification/barrier as the next step.
-  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
+  - `Update:` Recorded a natural-proofs barrier note for the rank-only route; see `docs/q39_s146.md`.
+  - `PublicSurface:` `docs/q39_s146.md`, `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
     (contiguous alt-shift vectors up to alt117).
-  - `File:` `scripts/toy_q39_rank2.py`. `InfoGain:` 1.
+  - `File:` `docs/q39_s146.md`. `InfoGain:` 1.
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? yes (finite combinatorial rank check).
-    - `B) Natural proofs check:` N/A (no property of Boolean functions/circuits).
-    - `C) Algebrization check:` N/A (no arithmetization/polynomial extensions).
+    - `A) Relativization check:` Relativizes? unknown (rank-only reasoning appears oracle-agnostic). If yes/unknown: test with oracle gates in the XOR-step lines and check the rank-2 witness persists.
+    - `B) Natural proofs check:` Applicable? yes (if the rank witness is upgraded to a large constructive property). Largeness/constructivity unknown. Exit point: use a non-natural or non-constructive step. [RR97]
+    - `C) Algebrization check:` Applicable? unknown. If yes/unknown: reduce to an AW08-style algebrizing oracle.
   - `Success:` either an explicit upper at depth $O(\log N/\log\log N)$, or a barrier/counterexample for the "XOR step" in bounded-depth Frege
   Context: node - syntactically simulate Gaussian elimination step; fixed partitions break, even-batching does not help.
   Note: the orientation invariance of the frontier is fixed in `formal/WIP/Verified/Q39.lean`.

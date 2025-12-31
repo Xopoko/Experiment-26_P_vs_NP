@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q00.S003-entropy-pruner-toy-integration
-- `Do-not-repeat (next 2 runs):` Q00.S003-entropy-pruner-toy-integration, Q43.S351-band-log2-setup-bundle
+- `LastStepID:` Q39.S146-contiguous-alt-rank2-classify-or-barrier
+- `Do-not-repeat (next 2 runs):` Q39.S146-contiguous-alt-rank2-classify-or-barrier, Q00.S003-entropy-pruner-toy-integration
 - `Last InfoGain:` 1
-- `LastApproachTag:` entropy-pruner-toy
-- `LastFailureReason:` none
+- `LastApproachTag:` rank-barrier-naturalproofs
+- `LastFailureReason:` barrier-natural-proofs
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by entropy stopper; resume at Q39.S146-contiguous-alt-rank2-classify-or-barrier. Q43: BLOCKED by entropy stopper; resume at Q43.S352-band-log2-setup-bundle.
+Q39: BARRIER certificate recorded; resume at Q39.S147-nonrelativizing-xor-step-oracle-break. Q43: BLOCKED by entropy stopper; resume at Q43.S352-band-log2-setup-bundle.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -25,7 +25,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Active "unique" tasks (select one per run)
 
-- Q39 from `docs/open_questions.md` (blocked; resume at Q39.S146-contiguous-alt-rank2-classify-or-barrier).
+- Q39 from `docs/open_questions.md` (blocked; resume at Q39.S147-nonrelativizing-xor-step-oracle-break).
 - Q43 from `docs/open_questions.md` (blocked; resume at Q43.S352-band-log2-setup-bundle).
 
 ## Experiment register (max 12 items; overwrite old ones)
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Barrier-driven design->Equivalence->Compression->Parameter sweep
+Latest:Communication/rank->Invariant->Barrier-driven design->Equivalence->Compression
