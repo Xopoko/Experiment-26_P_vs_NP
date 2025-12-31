@@ -10,6 +10,28 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
 ## Active
 
+- [ ] **Q00 (Infra: Entropy-Pruner toy integration):**
+  - `Priority:` P1
+  - `Status:` BLOCKED
+  - `LastStepID:` Q00.S003-entropy-pruner-toy-integration
+  - `NextStepID:` Q00.S004-entropy-pruner-proof-adapter
+  - `LeanTarget:` N/A
+  - `BarrierCheckRequired:` no
+  - `Lens:` Parameter sweep (toy sandbox).
+  - `Artifact:` Toy.
+  - `Oracle:` `RUN_MODE=docs scripts/verify_all.sh`
+  - `OraclePass:` exit 0
+  - `StopRule:` entropy stopper STOP -> record barrier, defer integration.
+  - `Attempts:` 1
+  - `LastOutcome:` BLOCKED
+  - `BlockerType:` ENTROPY_STOPPER
+  - `TimeBudget:` 1h
+  - `Deps:` `scripts/entropy_pruner/*`, `docs/entropy_pruner.md`
+  - `DefinitionOfDone:` add toy module + docs + smoke tests; no Lean/runner changes.
+  - `Update:` Entropy Stopper STOP (zero info gain streak); integration deferred.
+  - `PublicSurface:` `scripts/entropy_pruner/*`, `docs/entropy_pruner.md`
+  - `Success:` baseline vs pruning comparison runnable via scripts/entropy_pruner.
+
 - [ ] **Q39 (Tseitin(Grid): depth gap for polynomial size in bounded-depth Frege):**
   - `Priority:` P1
   - `Status:` BLOCKED

@@ -6,16 +6,16 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S351-band-log2-setup-bundle
-- `Do-not-repeat (next 2 runs):` Q43.S351-band-log2-setup-bundle, Q43.S350-band-log2-setup-bundle
-- `Last InfoGain:` 0
+- `LastStepID:` Q00.S003-entropy-pruner-toy-integration
+- `Do-not-repeat (next 2 runs):` Q00.S003-entropy-pruner-toy-integration, Q43.S351-band-log2-setup-bundle
+- `Last InfoGain:` 1
 - `LastApproachTag:` entropy-stop-barrier
 - `LastFailureReason:` entropy-stopper
 
 ## Current direction (keep 1-2 lines)
 
 Q39: BLOCKED by entropy stopper; resume at Q39.S146-contiguous-alt-rank2-classify-or-barrier. Q43: BLOCKED by entropy stopper; resume at Q43.S352-band-log2-setup-bundle.
-Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
+Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner integration blocked by entropy stopper; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
 
