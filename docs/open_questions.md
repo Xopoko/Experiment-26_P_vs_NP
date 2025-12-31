@@ -40,22 +40,22 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Context: node - syntactically simulate Gaussian elimination step; fixed partitions break, even-batching does not help.
     Note: the orientation invariance of the frontier is fixed in `formal/WIP/Verified/Q39.lean`.
     Details: `formal/Notes/TseitinQ39.lean` (Section 16.153-Section 16.177) and summary in `formal/Notes/TseitinLocalEF.lean` §16.187.
-- [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
+- [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):
 
   - `Priority:` P0
   - `Status:` BLOCKED
-  - `LastStepID:` Q43.S371-nonuniform-support-witness-retry3
-  - `NextStepID:` Q43.S372-nonuniform-support-witness-finalize
+  - `LastStepID:` Q43.S372-nonuniform-support-witness-finalize
+  - `NextStepID:` Q43.S373-nonuniform-support-witness-finalize2
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if the entropy stopper pre-check keeps emitting `STOP` (score ≥ 2.5) while the non-natural support predicate is still unformalized, record the pause and pivot to the nonuniform-support plan.
-  - `Attempts:` 29
-  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42, score 3.5; doc `docs/q43_s371.md` records the pause)
+  - `Attempts:` 30
+  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42, score 3.6; doc `docs/q43_s372.md` records the pause and queues `Q43.S373-nonuniform-support-witness-finalize2`)
   - `BlockerType:` BARRIER_ENTROPY
   - `TimeBudget:` 2h
-  - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`, `docs/q43_s370.md`
-  - `DefinitionOfDone:` wait for the entropy stopper policy to return `CONTINUE`, then formalize the advice witness layout (follow-up Step: `Q43.S372-nonuniform-support-witness-finalize`).
+  - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`, `docs/q43_s372.md`
+  - `DefinitionOfDone:` once the entropy-stopper policy returns `CONTINUE`, formalize the per-instance advice witness layout (follow-up Step: `Q43.S373-nonuniform-support-witness-finalize2`).
   - `GeneralizationTarget:` encode the log2 jump with a polylog-sized per-instance support witness and show the ratio drop persists once advice fixes the global support layout.
   - `BarrierCheckRequired:` no
   - `PublicSurface:` `formal/WIP/Verified/Q43.lean`
@@ -64,7 +64,7 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Q43_log2_poly_bound, Q43_tParam_le_log2_poly_bound, Q43_tParam_lineMax_le_log2_poly_bound,
     Q43_tParam_le_polylog_of_quasipoly, Q43_tParam_lineMax_le_polylog_of_quasipoly,
     Q43_tParam_lineMax_le_polylog_of_quasipoly_grid,
-    Q43_quasipoly_grid_eval_bounds, Q43_tParam_lineMax_le_polylog_of_quasipoly_grid_twice,
+    Q43_tParam_lineMax_le_polylog_of_quasipoly_grid_twice,
     Q43_thm41_log2_threshold_c1_grid_param_of_scaled,
     Q43_thm41_log2_threshold_c1_grid_param_of_quasipoly,
     Q43_thm41_log2_threshold_c1_grid_param_of_log2,
@@ -98,8 +98,6 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     Q43_grid_ratio_nk_succ_lower,
     Q43_gap_right_base_bound_of_c,
     Q43_gap_right_k0,
-    Q43_three_mul_le_two_k_succ,
-    Q43_gap_right_base_bound_of_k0,
     Q43_gap_right_n0,
     Q43_gap_right_k0_ge_one,
     Q43_gap_right_n0_ge_two,
@@ -112,14 +110,31 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     `docs/q43_s369.md`
     `docs/q43_s370.md`
     `docs/q43_s371.md`
-  - `Success:` entropy-stopper pre-check returned `STOP` (score 3.5) before the witness could be touched; `docs/q43_s371.md` now records the blockage and queues `Q43.S372-nonuniform-support-witness-finalize`.
+    `docs/q43_s372.md`
+  - `Success:` entropy-stopper pre-check returned `STOP` (score 3.6) before the witness layout could be completed; `docs/q43_s372.md` now records the blockage and schedules `Q43.S373-nonuniform-support-witness-finalize2`.
   - `Lens:` Barrier-driven design (per-instance advice vs entropy guard).
   - `Artifact:` Barrier.
-  - `Update:` `docs/q43_s371.md` logs the STOP decision and schedules `Q43.S372-nonuniform-support-witness-finalize`.
-  - `Use:` next: wait for the entropy policy to allow advice, then resume the witness encoding once the layout is stable.
-  - `BarrierCheck:` see `docs/q43_s371.md`.
+  - `Update:` `docs/q43_s372.md` logs the entropy STOP (score 3.6) and queues the retry step.
+  - `Use:` next: wait for the entropy policy to lower the score and then formalize the layout in `Q43.S373-nonuniform-support-witness-finalize2`.
+  - `BarrierCheck:`
+    - `Relativization:`
+      - Relativizes?: unknown
+      - If no: random advice states cannot rebuild the layout, so the barrier remains nonrelativizing.
+      - If yes: we still need the advice to survive extension queries, so the barrier hinges on advice persistence.
+    - `NaturalProofs:`
+      - Applicable?: yes — without the witness the predicate remains large and constructive, so RR97 forbids the gap drop.
+      - Largeness: the gap-left/gap-right families keep density ≥ 2^{-poly(n)} until we anchor the witness.
+      - Constructivity: the advice witness destroys the single poly-time generator; the stopper only allows it when the entropy score drops.
+      - Usefulness: the predicate separates the circuit class from random functions once it is grounded by the witness.
+      - Exit point: once the policy helps us write the witness, RR97 no longer applies.
+    - `Algebrization:`
+      - Applicable?: unknown
+      - Algebraizing?: unknown
+      - If no: advice prevents polynomial extensions from reconstructing the layout.
+      - If yes: the advice must be reintroduced in algebraic oracles for the barrier to stay visible.
+    - `Citations:` [RR97], [AW08], [`scripts/stopper_advice.py policy v1`]
   - `InfoGain:` 0.
-    Details: `docs/q43_s371.md`.
+    Details: `docs/q43_s372.md`.
 
 ## Completed (archive)
 

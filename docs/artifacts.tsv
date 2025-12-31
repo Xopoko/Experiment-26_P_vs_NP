@@ -114,3 +114,4 @@ Q39.S163-gadget-support-audit	Barrier	formal/WIP/Verified/Q39.lean	86721e3579a21
 Q43.S369-nonuniform-support-witness-retry	Barrier	formal/WIP/Verified/Q43.lean	abd45eef17374d68428100c33bb4e13bd4a7eb83	Entropy-stopper STOP (score 3.3) before the witness could be written; barrier note recorded in docs/q43_s369.md.
 Q43.S370-nonuniform-support-witness-retry2	Barrier	formal/WIP/Verified/Q43.lean	42669cf544e4e1bde023299f3e55f6e39d377dbf	Barrier note in docs/q43_s370.md; NextStep Q43.S371 pending
 Q43.S371-nonuniform-support-witness-retry3	Barrier	formal/WIP/Verified/Q43.lean	dead0ebdbb13235b180c439a334b5cc1b821e803	Entropy stopper STOP (score 3.5) before witness; barrier note docs/q43_s371.md; NextStep Q43.S372-nonuniform-support-witness-finalize
+Q43.S372-nonuniform-support-witness-finalize	Barrier	formal/WIP/Verified/Q43.lean	91e3b455550177ee07e1b026089c8e0dc5c96455	entropy stopper STOP (score 3.6) before witness layout; doc docs/q43_s372.md
