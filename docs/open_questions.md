@@ -14,30 +14,29 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P1
   - `Status:` BLOCKED
-  - `LastStepID:` Q39.S156-globalfixedpair-fixedorientation-contiguous-shift-alt69
-  - `NextStepID:` Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70
+  - `LastStepID:` Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70
+  - `NextStepID:` Q39.S158-nonrelativizing-gadget
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Model stress test (oracle).
   - `Artifact:` Barrier.
   - `Oracle:` `python3 scripts/toy_q39_rank2.py --alt 118`
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
-  - `StopRule:` reached >5 consecutive contiguous alt-shifts with rank=2 (now alt54..alt117);
-    stop extending and switch to classification or a barrier certificate; if rank!=2, record the failure and stop.
-  - `Attempts:` 12
-  - `LastOutcome:` BLOCKED
-  - `BlockerType:` BARRIER_RELATIVIZATION
+  - `StopRule:` if the entropy-stopper pre-check keeps emitting `STOP` (cooldown/cycle) while contiguous alt-shifts stay rank-2, record the blockage and pivot to the nonrelativizing gadget plan (S158); if rank!=2, record the failure and stop.
+  - `Attempts:` 13
+  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42, score 1.7)
+  - `BlockerType:` BARRIER_ENTROPY
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
-  - `DefinitionOfDone:` document the extension to `alt69` and keep track of why the XOR mapping remains relativizing; set up `Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70`.
-  - `Update:` Barrier note recorded in `docs/q39_s156.md`.
-  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
-    (contiguous alt-shift vectors up to alt117).
+  - `DefinitionOfDone:` record the entropy-stopper pause, explain why the contiguous pair at `alt70` remains rank 2 (see `docs/q39_s157.md`), and describe what the upcoming nonrelativizing gadget must accomplish before the contiguous orbit can restart.
+  - `Update:` Barrier note recorded in `docs/q39_s157.md`; the contiguous alt70 attempt was blocked at the entropy-stopper pre-check before the toy ran.
+  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`, `docs/q39_s157.md`
+    (contiguous alt-shift vectors up to alt117; stopper-policy notes in the new doc).
   - `BarrierCheck:`
-    - `A) Relativization check:` Relativizes? yes (the XOR mapping stays arithmetic/log2 only and is oracle-agnostic); see `docs/q39_s156.md`.
+    - `A) Relativization check:` Relativizes? yes (the XOR mapping stays arithmetic/log2 only and is oracle-agnostic); see `docs/q39_s157.md`.
     - `B) Natural proofs check:` Applicable? no (the barrier talks about mapping translation, not circuit-size properties).
-    - `C) Algebrization check:` Applicable? yes (XOR arithmetic steps persist under AW08-style algebraic oracles); see `docs/q39_s156.md`.
-  - `Success:` recorded the contiguous alt-shift classification (rank=2 invariant) and documented why the XOR step stays relativizing (see `docs/q39_s156.md`).
+    - `C) Algebrization check:` Applicable? yes (XOR arithmetic steps persist under AW08-style algebraic oracles); see `docs/q39_s157.md`.
+  - `Success:` blocked at the entropy-stopper pre-check (exit 42, score 1.7, cooldown) before the contiguous alt70 toy could run; `docs/q39_s157.md` records that the mapping remains relativizing and sets up the gadget plan.
     Context: node - syntactically simulate Gaussian elimination step; fixed partitions break, even-batching does not help.
     Note: the orientation invariance of the frontier is fixed in `formal/WIP/Verified/Q39.lean`.
     Details: `formal/Notes/TseitinQ39.lean` (Section 16.153-Section 16.177) and summary in `formal/Notes/TseitinLocalEF.lean` §16.187.
