@@ -69,3 +69,4 @@ Q43.S344-toy-gap-right-log2-jump	Toy	scripts/toy_q43_gap_sqrt2.py	9b6bcbb35c8a56
 Q43.S345-gap-right-shared-setup-lemma	Proof	formal/WIP/Verified/Q43.lean	954ea9f7071cd84ffb6aa3c43b2c3c2d84b5bb8e	bundle gap-right flat-eval setup and reuse in HR low regime
 Q43.S346-gap-right-shared-setup-reuse	Proof	formal/WIP/Verified/Q43.lean	c73d8394af7b28a6feaa1d304b62a50b93252817	reuse shared setup in top gap-right HR split
 Q43.S347-gap-right-band-log2-simplify	Proof	formal/WIP/Verified/Q43.lean	38434ce4521e98eb9cfb7c4d2544e301a55b648e	simplify band/log2 split with not-lt log2 helper
+Q43.S348-band-log2-setup-bundle	Barrier	N/A	c615a6b1b09156d757407a45f464b24e8c72daaa	entropy stopper STOP; run blocked
