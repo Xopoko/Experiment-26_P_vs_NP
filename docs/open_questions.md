@@ -46,14 +46,14 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 - [ ] **Q43 (flat local-EF(s): are there "small" evaluations for poly-size proofs?):**
   - `Priority:` P0
   - `Status:` ACTIVE
-  - `LastStepID:` Q43.S337-gap-right-hr-threshold-without-upper
-  - `NextStepID:` Q43.S344-gap-right-hr-threshold-shared-setup
+  - `LastStepID:` Q43.S344-toy-gap-right-log2-jump
+  - `NextStepID:` Q43.S345-gap-right-shared-setup-lemma
   - `LeanTarget:` formal/WIP/Verified/Q43.lean
   - `Oracle:` `python3 scripts/toy_q43_gap_sqrt2.py`
   - `OraclePass:` exit 0 with all k-lines ending `-> ok` (failures: 0; k=12..104).
   - `StopRule:` if uniform `k ≥ 12` is insufficient to recover the global gap-min bridge, record the dependency and stop.
-  - `Attempts:` 0
-  - `LastOutcome:` INCONCLUSIVE
+  - `Attempts:` 1
+  - `LastOutcome:` SUCCESS
   - `BlockerType:` NONE
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q43.lean`, `scripts/toy_q43_gap_sqrt2.py`
@@ -114,13 +114,12 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Success:` either a scheme for constructing cost-$t$ evaluations (with $t=\mathrm{polylog}(n)$) for each line of a flat local-EF(s)-proof, or an exact point of failure (where multi-switching/representation requires nesting or global support)
   - `Lens:` Invariant (log2-based k choice across the band).
   - `Artifact:` Proof.
-  - `Update:` recorded the gap-right HR threshold split without the upper-plateau hypothesis;
-    see `docs/q43_s337.md`.
+  - `Update:` ran `scripts/toy_q43_gap_sqrt2.py` across k=12..104; all ok; note in `docs/q43_s344.md`.
   - `Use:` next: see if the hhi/¬hhi split can be simplified by reusing the band-log2 lemma or
     pulling out shared flat-eval setup.
   - `BarrierCheck:` A) Relativizes? yes (Nat arithmetic over fixed constants).
     B) Natural proofs check: N/A. C) Algebrization check: N/A.
-  - `InfoGain:` 0.
+  - `InfoGain:` 1.
   Details (context and audit parameter): `formal/Notes/TseitinLocalEF.lean` §16.191–§16.280.
 
 ## Completed (archive)

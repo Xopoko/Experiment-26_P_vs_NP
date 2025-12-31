@@ -6,10 +6,10 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q00.S001-entropy-stopper-v1
-- `Do-not-repeat (next 2 runs):` Q43.S337-gap-right-hr-threshold-without-upper, Q43.S334-gap-left-cover
+- `LastStepID:` Q43.S344-toy-gap-right-log2-jump
+- `Do-not-repeat (next 2 runs):` Q43.S344-toy-gap-right-log2-jump, Q43.S337-gap-right-hr-threshold-without-upper
 - `Last InfoGain:` 1
-- `LastApproachTag:` entropy-stopper-v1
+- `LastApproachTag:` param-sweep-toy
 - `LastFailureReason:` none
 
 ## Current direction (keep 1-2 lines)
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Specification->Invariant->Compression->Specification->Invariant
+Latest:Parameter sweep->Specification->Invariant->Compression->Specification

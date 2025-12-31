@@ -65,3 +65,4 @@ Q43.S339-gap-right-k-wrapper-audit	Proof	formal/WIP/Verified/Q43.lean	3bf24d18de
 Q43.S334-gap-left-cover	Proof	formal/WIP/Verified/Q43.lean	42a34345a8b0accc48ec5f36e8b7625688a1372a	gap-left cover note for scaled log2^5 threshold
 Q43.S337-gap-right-hr-threshold-without-upper	Proof	formal/WIP/Verified/Q43.lean	a1c2eccf872563ff449199131e08a38153b19bb4	drop explicit upper-plateau hypothesis in gap-right HR threshold
 Q00.S001-entropy-stopper-v1	Toy	N/A	0c3b07ebcdfff9fd2e33ae3803b9ddbcc74e1398	Entropy Stopper v1 tooling
+Q43.S344-toy-gap-right-log2-jump	Toy	scripts/toy_q43_gap_sqrt2.py	9b6bcbb35c8a56bee749d7d35e02dff674e646ba	toy check for log2 jump / ratio drop across k=12..104
