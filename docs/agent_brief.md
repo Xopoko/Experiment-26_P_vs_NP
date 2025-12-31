@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S163-gadget-support-audit
-- `Do-not-repeat (next 2 runs):` Q39.S163-gadget-support-audit, Q39.S162-gadget-toy-run-retry
+- `LastStepID:` Q43.S369-nonuniform-support-witness-retry
+- `Do-not-repeat (next 2 runs):` Q43.S369-nonuniform-support-witness-retry, Q43.S368-nonuniform-support-witness
 - `Last InfoGain:` 0
 - `LastApproachTag:` barrier-driven design
-- `LastFailureReason:` entropy-stopper policy (score 2.5)
+- `LastFailureReason:` entropy-stopper policy (score 3.3)
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by the entropy-stopper pre-check (score 2.5) before the gadget-support audit could start; `docs/q39_s163.md` now records the STOP and `Q39.S164-gadget-support-audit-retry` waits for a cooler policy value. Q43: BLOCKED again by the entropy-stopper policy (score 3.2) before the nonuniform support witness could be written; record Q43.S368 as the STOP note and wait for the policy to cool before reissuing Q43.S369.
+Q39: BLOCKED by the entropy-stopper pre-check (score 2.5) before the gadget-support audit could start; `docs/q39_s163.md` now records the STOP and `Q39.S164-gadget-support-audit-retry` waits for a cooler policy value. Q43: BLOCKED again by the entropy-stopper policy (score 3.3) before the nonuniform support witness could be written; `docs/q43_s369.md` logs the latest STOP and we will wait for the policy to dip before reissuing `Q43.S370-nonuniform-support-witness-retry2`.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Barrier-driven design->Model stress test->Specification / definitions audit->Barrier-driven design->Model stress test
+Latest:Barrier-driven design->Barrier-driven design->Model stress test->Specification / definitions audit->Barrier-driven design
