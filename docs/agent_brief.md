@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S345-gap-right-shared-setup-lemma
-- `Do-not-repeat (next 2 runs):` Q43.S345-gap-right-shared-setup-lemma, Q43.S344-toy-gap-right-log2-jump
+- `LastStepID:` Q43.S346-gap-right-shared-setup-reuse
+- `Do-not-repeat (next 2 runs):` Q43.S346-gap-right-shared-setup-reuse, Q43.S345-gap-right-shared-setup-lemma
 - `Last InfoGain:` 1
-- `LastApproachTag:` invariant-shared-setup
+- `LastApproachTag:` compression-shared-setup
 - `LastFailureReason:` none
 
 ## Current direction (keep 1-2 lines)
 
-Q39: contiguous alt-shifts through alt117; next classification or barrier. Q43: shared gap-right setup lemma; next reuse in band/log2 split.
+Q39: contiguous alt-shifts through alt117; next classification or barrier. Q43: shared setup reused; next simplify band/log2 split.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
 
 ## What has already been done (do not repeat)
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Parameter sweep->Specification->Invariant->Compression
+Latest:Compression->Invariant->Parameter sweep->Specification->Invariant
