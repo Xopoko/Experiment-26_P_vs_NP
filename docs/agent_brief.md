@@ -6,16 +6,16 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S337-gap-right-hr-threshold-without-upper
+- `LastStepID:` Q00.S001-entropy-stopper-v1
 - `Do-not-repeat (next 2 runs):` Q43.S337-gap-right-hr-threshold-without-upper, Q43.S334-gap-left-cover
-- `Last InfoGain:` 0
-- `LastApproachTag:` gap-right-hr-threshold-split
+- `Last InfoGain:` 1
+- `LastApproachTag:` entropy-stopper-v1
 - `LastFailureReason:` none
 
 ## Current direction (keep 1-2 lines)
 
-Q39: contiguous alt-shifts now through alt117; next step is classification or barrier.
-Q43: recorded the gap-right HR threshold split; next consider shared flat-eval setup.
+Q39: contiguous alt-shifts through alt117; next classification or barrier. Q43: gap-right HR split; consider shared flat-eval setup.
+Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
 
 ## What has already been done (do not repeat)
 

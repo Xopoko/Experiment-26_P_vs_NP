@@ -125,6 +125,10 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
 ## Completed (archive)
 
+- [x] **Q00 (Entropy Stopper v1 tooling):**
+  closed: added stopper policy + entropy features + advice integration; run meta now embeds entropy decisions.
+  `StepID:` Q00.S001-entropy-stopper-v1. `InfoGain:` 1. `NextStepID:` Q00.S002-entropy-tuning.
+
 - [x] **Q44 (repo hygiene: remove legacy notebook checks):**
   closed: deleted `code/verify_checks.py`, `scripts/verify_notebook.py` now only performs structural checks,
   optional toy checks are launched via `--checks`. `StepID:` Q44.S1-drop-legacy-checks. `InfoGain:` 1.

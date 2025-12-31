@@ -29,6 +29,9 @@ def main() -> int:
     outcome_counts = Counter()
     item_counts = Counter()
     item_outcomes: dict[str, Counter[str]] = defaultdict(Counter)
+    entropy_decisions = Counter()
+    entropy_scores: list[float] = []
+    entropy_signal_counts: list[int] = []
 
     for path in meta_files:
         try:
@@ -43,6 +46,18 @@ def main() -> int:
         item_counts[item] += 1
         item_outcomes[item][outcome] += 1
 
+        entropy = data.get("entropy")
+        if isinstance(entropy, dict):
+            decision = entropy.get("decision")
+            if isinstance(decision, str) and decision:
+                entropy_decisions[decision] += 1
+            score = entropy.get("score")
+            if isinstance(score, (int, float)):
+                entropy_scores.append(float(score))
+            signals = entropy.get("signals")
+            if isinstance(signals, list):
+                entropy_signal_counts.append(len(signals))
+
     total = sum(outcome_counts.values())
     print(f"Total runs: {total}")
     print("Outcomes:")
@@ -55,6 +70,16 @@ def main() -> int:
             f"{k}:{v}" for k, v in item_outcomes[item].most_common()
         )
         print(f"- {item}: {count} ({outcomes})")
+
+    if entropy_scores:
+        avg_score = sum(entropy_scores) / len(entropy_scores)
+        print(f"Entropy avg score: {avg_score:.2f} (n={len(entropy_scores)})")
+    if entropy_signal_counts:
+        avg_signals = sum(entropy_signal_counts) / len(entropy_signal_counts)
+        print(f"Entropy avg signals: {avg_signals:.1f}")
+    if entropy_decisions:
+        decisions = ", ".join(f"{k}:{v}" for k, v in entropy_decisions.most_common())
+        print(f"Entropy decisions: {decisions}")
 
     return 0
 

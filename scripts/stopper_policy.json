@@ -1,0 +1,12 @@
+{
+  "policy_version": "v1",
+  "threshold": 1.0,
+  "weights": {
+    "attempts": 0.25,
+    "repeat_failure": 0.50,
+    "zero_infogain_streak": 0.75,
+    "cooldown_hit": 0.75,
+    "recent_verify_fail": 0.50
+  },
+  "notes": "Heuristic baseline; tuned later by train_stopper."
+}

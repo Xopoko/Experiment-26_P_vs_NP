@@ -6,6 +6,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -35,6 +36,63 @@ def _git_changed_files() -> list[str]:
     return sorted(files)
 
 
+def _extract_backticked_meta(lines: list[str], key: str) -> str | None:
+    needle = f"`{key}:`"
+    for line in lines:
+        if needle not in line:
+            continue
+        return line.split(needle, 1)[1].strip()
+    return None
+
+
+def _parse_int(value: str | None) -> int | None:
+    if value is None:
+        return None
+    raw = value.strip().split()[0] if value.strip() else ""
+    if not raw.lstrip("-").isdigit():
+        return None
+    return int(raw)
+
+
+def _agent_brief_meta(path: Path) -> tuple[int | None, str | None]:
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return None, None
+    info_gain = _parse_int(_extract_backticked_meta(lines, "Last InfoGain"))
+    failure_reason = _extract_backticked_meta(lines, "LastFailureReason")
+    return info_gain, failure_reason.strip() if failure_reason else None
+
+
+def _compute_entropy(contract_path: Path) -> dict[str, object] | None:
+    cmd = [
+        sys.executable,
+        "scripts/stopper_advice.py",
+        "--contract",
+        str(contract_path),
+        "--mode",
+        "post",
+        "--json",
+    ]
+    res = subprocess.run(cmd, check=False, capture_output=True, text=True)
+    if res.returncode not in {0, 42}:
+        print(
+            f"WARN: stopper_advice failed (exit {res.returncode})",
+            file=sys.stderr,
+        )
+        return None
+    stdout = (res.stdout or "").strip()
+    if not stdout:
+        print("WARN: stopper_advice returned empty output", file=sys.stderr)
+        return None
+    try:
+        data = json.loads(stdout)
+    except json.JSONDecodeError as exc:
+        print(f"WARN: stopper_advice JSON parse error: {exc}", file=sys.stderr)
+        return None
+    return data if isinstance(data, dict) else None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Write a structured run meta JSON.")
     parser.add_argument("--outcome", required=True, choices=["DONE", "BLOCKED", "FAIL"])
@@ -56,6 +114,14 @@ def main() -> int:
         raise SystemExit("missing RUN_ID or RUN_META_FILE (or --run-id/--out)")
 
     touched = [] if args.no_scan_git else _git_changed_files()
+    info_gain, failure_reason = _agent_brief_meta(Path("docs/agent_brief.md"))
+
+    entropy = None
+    contract_file = os.environ.get("CONTRACT_FILE")
+    if contract_file:
+        contract_path = Path(contract_file)
+        if contract_path.exists():
+            entropy = _compute_entropy(contract_path)
 
     payload = {
         "schema_version": 1,
@@ -67,7 +133,10 @@ def main() -> int:
         "touched_files": touched,
         "verify_cmd": args.verify_cmd.strip(),
         "verify_exit_code": args.verify_exit_code,
+        "info_gain": info_gain,
+        "last_failure_reason": failure_reason,
         "notes": args.notes.strip(),
+        "entropy": entropy,
     }
 
     out_path = Path(args.out)
