@@ -86,3 +86,4 @@ Q43.S354-band-log2-stopper-cooldown	Barrier	N/A	51102e38c88b8870b033566f14b39753
 Q43.S355-band-log2-stopper-reset	Barrier	N/A	b03ed41587a274691d5363058243cbed22287f53	entropy stopper STOP; barrier note docs/q43_s355.md
 Q39.S150-oracle-xor-step-cooldown	Barrier	formal/WIP/Verified/Q39.lean	5076c50ef8df5adcb07aa4de360542a5b3c9368e	entropy stopper STOP; barrier note docs/q39_s150.md
 Q43.S356-band-log2-stopper-retry	Barrier	formal/WIP/Verified/Q43.lean	dc63444a5a94050bcb4dff47bc971d9d18693d47	barrier certificate for band-log2 retry (relativization/natural-proofs check)
+Q39.S151-oracle-xor-step-retry	Barrier	formal/WIP/Verified/Q39.lean	c40cd66c1f0bc875db7793904dc14e35f4e73398	barrier certificate for XOR-step retry (relativization/natural-proofs check)

@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S356-band-log2-stopper-retry
-- `Do-not-repeat (next 2 runs):` Q43.S356-band-log2-stopper-retry, Q39.S150-oracle-xor-step-cooldown
+- `LastStepID:` Q39.S151-oracle-xor-step-retry
+- `Do-not-repeat (next 2 runs):` Q39.S151-oracle-xor-step-retry, Q43.S356-band-log2-stopper-retry
 - `Last InfoGain:` 0
-- `LastApproachTag:` invariant
+- `LastApproachTag:` model-stress-test
 - `LastFailureReason:` barrier-relativization
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by entropy stopper; resume at Q39.S151-oracle-xor-step-retry. Q43: BLOCKED by relativization barrier; resume at Q43.S357-band-log2-exit-plan.
+Q39: BLOCKED by relativization barrier; resume at Q39.S152-oracle-xor-exit-plan. Q43: BLOCKED by relativization barrier; resume at Q43.S357-band-log2-exit-plan.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -25,7 +25,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Active "unique" tasks (select one per run)
 
-- Q39 from `docs/open_questions.md` (blocked; resume at Q39.S151-oracle-xor-step-retry).
+- Q39 from `docs/open_questions.md` (blocked; resume at Q39.S152-oracle-xor-exit-plan).
 - Q43 from `docs/open_questions.md` (blocked; resume at Q43.S357-band-log2-exit-plan).
 
 ## Experiment register (max 12 items; overwrite old ones)
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Invariant->Model stress test->Invariant->Meta-reduction planning->Barrier-driven design
+Latest:Model stress test->Invariant->Model stress test->Invariant->Meta-reduction planning
