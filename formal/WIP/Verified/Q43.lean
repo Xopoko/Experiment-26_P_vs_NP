@@ -2637,15 +2637,18 @@ theorem Q43_gap_right_k0_le_log2_of_pow_le {n C : Nat}
     exact Nat.ne_of_gt (Nat.lt_of_lt_of_le hpos hpow)
   exact (Nat.le_log2 hnne).2 hpow
 
-theorem Q43_hrThreshold_of_quasipoly_gap_right_low {α : Type}
-    {proof : List (List α)} {n N c s : Nat}
-    (hc : c <= 3)
+-- Q43.S345-gap-right-shared-setup-lemma:
+-- bundle the gap-right bounds into the shared flat-eval setup.
+theorem Q43_gap_right_flat_eval_setup {α : Type}
+    {proof : List (List α)} {n N c : Nat}
     (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
     (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
     (hlo : Q43_gap_right_n0 ((Nat.log2 (Q43_grid_size n)) ^ c) <= n)
-    (hhi : n < 2 ^ (Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1))
-    (hs : s <= n / 32) :
-    Q43_hrThreshold n (Q43_tParam (Q43_lineMax proof)) s := by
+    (hhi : n < 2 ^ (Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1)) :
+    2 <= n ∧
+      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
+        ((Nat.log2 (Q43_grid_size n)) ^ c) ∧
+      Q43_flat_eval_statement n N c proof := by
   let L := Nat.log2 (Q43_grid_size n)
   have hlo' : Q43_gap_right_n0 (L ^ c) <= n := by
     simpa [L] using hlo
@@ -2655,11 +2658,30 @@ theorem Q43_hrThreshold_of_quasipoly_gap_right_low {α : Type}
     Q43_gap_right_apply_n0 (n:=n) (C:=L ^ c) hlo' (by simpa [L] using hhi)
   have hflat : Q43_flat_eval_statement n N c proof :=
     Q43_flat_eval_statement_of_quasipoly_gap_right
-      (proof:=proof) (n:=n) (N:=N) (c:=c) hN hsize
-      (by simpa [L] using hlo) (by simpa [L] using hhi)
+      (proof:=proof) (n:=n) (N:=N) (c:=c) hN hsize hlo hhi
+  refine ⟨hn, ?_, hflat⟩
+  simpa [L] using hscale
+
+theorem Q43_hrThreshold_of_quasipoly_gap_right_low {α : Type}
+    {proof : List (List α)} {n N c s : Nat}
+    (hc : c <= 3)
+    (hN : N <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hsize : Q43_proofSize proof <= 2 ^ ((Nat.log2 (Q43_grid_size n)) ^ (c + 1)))
+    (hlo : Q43_gap_right_n0 ((Nat.log2 (Q43_grid_size n)) ^ c) <= n)
+    (hhi : n < 2 ^ (Q43_gap_right_k0 ((Nat.log2 (Q43_grid_size n)) ^ c) + 1))
+    (hs : s <= n / 32) :
+    Q43_hrThreshold n (Q43_tParam (Q43_lineMax proof)) s := by
+  have hsetup :=
+    Q43_gap_right_flat_eval_setup
+      (proof:=proof) (n:=n) (N:=N) (c:=c) hN hsize hlo hhi
+  have hn : 2 <= n := hsetup.1
+  have hscale :
+      Q43_thm41_log2_threshold_c1_grid_pow5_scaled_simple n
+        ((Nat.log2 (Q43_grid_size n)) ^ c) := hsetup.2.1
+  have hflat : Q43_flat_eval_statement n N c proof := hsetup.2.2
   exact Q43_hrThreshold_of_flat_eval
     (proof:=proof) (n:=n) (N:=N) (c:=c) (s:=s) hn hc hflat
-    (by simpa [L] using hscale) hs
+    hscale hs
 
 -- Q43.S330-flat-eval-quasipoly-hr-threshold-hr-apply-gap-right:
 -- use the gap-right flat-eval statement to obtain the HR threshold,
