@@ -12,9 +12,9 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
 - [ ] **Q39 (Tseitin(Grid): depth gap for polynomial size in bounded-depth Frege):**
   - `Priority:` P1
-  - `Status:` ACTIVE
-  - `LastStepID:` Q39.S143-contiguous-alt-rank2-k117
-  - `NextStepID:` Q39.S144-contiguous-alt-rank2-classify-or-barrier
+  - `Status:` BLOCKED
+  - `LastStepID:` Q39.S144-contiguous-alt-rank2-classify-or-barrier
+  - `NextStepID:` Q39.S145-contiguous-alt-rank2-classify-or-barrier
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Communication/rank (projection rank witness).
@@ -25,12 +25,11 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
     stop extending and switch to classification or a barrier certificate; if rank!=2, record the failure and stop.
   - `Attempts:` 0
   - `LastOutcome:` INCONCLUSIVE
-  - `BlockerType:` NONE
+  - `BlockerType:` ENTROPY_STOPPER
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
   - `DefinitionOfDone:` classify the contiguous alt-shift regime or record a barrier for the XOR step.
-  - `Update:` imported contiguous alt-shift witnesses alt54..alt117 into `formal/WIP/Verified/Q39.lean`,
-    each `by decide` rank=2, so the stop-rule threshold is exceeded and the next step is classification/barrier.
+  - `Update:` Entropy Stopper STOP (repeat_failure + zero_infogain_streak); no proof edits; note in `docs/q39_s144.md`.
   - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
     (contiguous alt-shift vectors up to alt117).
   - `File:` `scripts/toy_q39_rank2.py`. `InfoGain:` 1.

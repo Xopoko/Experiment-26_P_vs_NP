@@ -70,3 +70,4 @@ Q43.S345-gap-right-shared-setup-lemma	Proof	formal/WIP/Verified/Q43.lean	954ea9f
 Q43.S346-gap-right-shared-setup-reuse	Proof	formal/WIP/Verified/Q43.lean	c73d8394af7b28a6feaa1d304b62a50b93252817	reuse shared setup in top gap-right HR split
 Q43.S347-gap-right-band-log2-simplify	Proof	formal/WIP/Verified/Q43.lean	38434ce4521e98eb9cfb7c4d2544e301a55b648e	simplify band/log2 split with not-lt log2 helper
 Q43.S348-band-log2-setup-bundle	Barrier	N/A	c615a6b1b09156d757407a45f464b24e8c72daaa	entropy stopper STOP; run blocked
+Q39.S144-contiguous-alt-rank2-classify-or-barrier	Barrier	N/A	5ea08768f878d88049908c97740e37c2e8e18f27	entropy stopper STOP; run blocked

@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q43.S348-band-log2-setup-bundle
-- `Do-not-repeat (next 2 runs):` Q43.S348-band-log2-setup-bundle, Q43.S347-gap-right-band-log2-simplify
+- `LastStepID:` Q39.S144-contiguous-alt-rank2-classify-or-barrier
+- `Do-not-repeat (next 2 runs):` Q39.S144-contiguous-alt-rank2-classify-or-barrier, Q43.S348-band-log2-setup-bundle
 - `Last InfoGain:` 0
 - `LastApproachTag:` entropy-stop-barrier
 - `LastFailureReason:` entropy-stopper
 
 ## Current direction (keep 1-2 lines)
 
-Q39: contiguous alt-shifts through alt117; next classification or barrier. Q43: BLOCKED by entropy stopper; resume at Q43.S349-band-log2-setup-bundle.
+Q39: BLOCKED by entropy stopper; resume at Q39.S145-contiguous-alt-rank2-classify-or-barrier. Q43: BLOCKED by entropy stopper; resume at Q43.S349-band-log2-setup-bundle.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
 
 ## What has already been done (do not repeat)
@@ -25,8 +25,8 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice).
 
 ## Active "unique" tasks (select one per run)
 
-- Q39 from `docs/open_questions.md` (next alt-shift for contiguous blocks).
-- Q43 from `docs/open_questions.md` (audit the gap-right branch for further reuse).
+- Q39 from `docs/open_questions.md` (blocked; resume at Q39.S145-contiguous-alt-rank2-classify-or-barrier).
+- Q43 from `docs/open_questions.md` (blocked; resume at Q43.S349-band-log2-setup-bundle).
 
 ## Experiment register (max 12 items; overwrite old ones)
 
