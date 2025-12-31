@@ -14,8 +14,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P1
   - `Status:` BLOCKED
-  - `LastStepID:` Q39.S148-oracle-xor-step-model-stress
-  - `NextStepID:` Q39.S149-oracle-xor-step-stopreview
+  - `LastStepID:` Q39.S149-oracle-xor-step-stopreview
+  - `NextStepID:` Q39.S150-oracle-xor-step-cooldown
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Model stress test (oracles/relativization).
@@ -24,13 +24,13 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
   - `StopRule:` reached >5 consecutive contiguous alt-shifts with rank=2 (now alt54..alt117);
     stop extending and switch to classification or a barrier certificate; if rank!=2, record the failure and stop.
-  - `Attempts:` 4
+  - `Attempts:` 5
   - `LastOutcome:` BLOCKED
   - `BlockerType:` ENTROPY_STOPPER
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
   - `DefinitionOfDone:` classify the contiguous alt-shift regime or record a barrier for the XOR step.
-  - `Update:` Entropy Stopper STOP (pre-check); barrier note in `docs/q39_s148.md`.
+  - `Update:` Entropy Stopper STOP (pre-check); barrier note in `docs/q39_s149.md`.
   - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`
     (contiguous alt-shift vectors up to alt117).
   - `BarrierCheck:`
