@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70
-- `Do-not-repeat (next 2 runs):` Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70, Q43.S367-nonuniform-support-implementation
+- `LastStepID:` Q39.S158-nonrelativizing-gadget
+- `Do-not-repeat (next 2 runs):` Q39.S158-nonrelativizing-gadget, Q39.S157-globalfixedpair-fixedorientation-contiguous-shift-alt70
 - `Last InfoGain:` 0
 - `LastApproachTag:` model-stress-test
-- `LastFailureReason:` entropy-stopper
+- `LastFailureReason:` relativization
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by the entropy-stopper pre-check (score 1.7, cooldown) before the contiguous alt70 toy could run; new plan is Q39.S158-nonrelativizing-gadget (see `docs/q39_s157.md`) until the gadget is sketched. Q43: BLOCKED by the entropy-stopper policy (score 2.0) before the non-natural support predicate could be formalized; new plan is Q43.S367-nonuniform-support-implementation (see `docs/q43_s367.md`) while the policy score cools down.
+Q39: BLOCKED by the entropy-stopper pre-check (score 1.7, cooldown) before the contiguous alt70 toy could run; new plan is Q39.S158-nonrelativizing-gadget (see `docs/q39_s158.md`) until the gadget is sketched. Q43: BLOCKED by the entropy-stopper policy (score 2.0) before the non-natural support predicate could be formalized; new plan is Q43.S367-nonuniform-support-implementation (see `docs/q43_s367.md`) while the policy score cools down.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
