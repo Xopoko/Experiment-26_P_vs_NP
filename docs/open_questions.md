@@ -14,8 +14,8 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
 
   - `Priority:` P1
   - `Status:` BLOCKED
-  - `LastStepID:` Q39.S161-gadget-toy-run
-  - `NextStepID:` Q39.S162-gadget-toy-run-retry
+  - `LastStepID:` Q39.S162-gadget-toy-run-retry
+  - `NextStepID:` Q39.S163-gadget-support-audit
   - `LeanTarget:` formal/WIP/Verified/Q39.lean
   - `BarrierCheckRequired:` yes
   - `Lens:` Model stress test (oracle).
@@ -23,20 +23,20 @@ If `BarrierCheckRequired: yes`, then the block `BarrierCheck` required.
   - `Oracle:` `python3 scripts/toy_q39_rank2.py --alt 118`
   - `OraclePass:` exit 0 and report `rank=2` (nonzero distinct vectors).
   - `StopRule:` if the entropy-stopper pre-check keeps emitting `STOP` (cooldown/cycle) while contiguous alt-shifts stay rank-2, record the blockage and pivot to the nonrelativizing gadget plan (S158); if rank!=2, record the failure and stop.
-  - `Attempts:` 17
-  - `LastOutcome:` BLOCKED (entropy-stopper pre-check exit 42)
-  - `BlockerType:` BARRIER_ENTROPY
+  - `Attempts:` 18
+  - `LastOutcome:` BARRIER (toy rerun still rank 2)
+  - `BlockerType:` BARRIER_RELATIVIZATION
   - `TimeBudget:` 2h
   - `Deps:` `formal/WIP/Verified/Q39.lean`, `scripts/toy_q39_rank2.py`
-  - `DefinitionOfDone:` wait for the entropy-stopper policy to return `CONTINUE`, rerun the gadget toy (`python3 scripts/toy_q39_rank2.py --alt 118`), and document either the rank-2 continuation or another STOP before moving on to `Q39.S162-gadget-toy-run-retry`.
-  - `Update:` Barrier notes recorded in `docs/q39_s158.md`, `docs/q39_s159.md`, and `docs/q39_s161.md`; `docs/q39_s161.md` now logs the entropy STOP and sets the retry Step.
-  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`, `docs/q39_s158.md`, `docs/q39_s159.md`, `docs/q39_s160.md`
+  - `DefinitionOfDone:` analyze why the gadget toy still gives rank 2, inspect whether additional support bits or a different guard can break the uniform shift, and record the follow-up `Q39.S163-gadget-support-audit`.
+  - `Update:` Barrier notes recorded in `docs/q39_s158.md`, `docs/q39_s159.md`, `docs/q39_s161.md`, and now `docs/q39_s162.md`; the latest doc logs the toy re-run, and we built `Q39.S163-gadget-support-audit` as the next analysis step.
+  - `PublicSurface:` `scripts/toy_q39_rank2.py`, `formal/WIP/Verified/Q39.lean`, `docs/q39_s158.md`, `docs/q39_s159.md`, `docs/q39_s160.md`, `docs/q39_s161.md`, `docs/q39_s162.md`
     (contiguous alt-shift vectors up to alt117; gadget plans + stopper-policy notes in the new docs).
   - `BarrierCheck:`
     - `A) Relativization check:` Relativizes? no (the gadget now runs on oracle-specific advice, so arithmetic-only translations no longer apply); see `docs/q39_s160.md`.
     - `B) Natural proofs check:` Applicable? no (the barrier talks about mapping translation, not circuit-size properties).
     - `C) Algebrization check:` Applicable? yes (XOR arithmetic steps persist under AW08-style algebraic oracles); see `docs/q39_s157.md`.
-  - `Success:` the entropy-stopper pre-check (score 3.8) returned `STOP` before the toy could run, so the blockage is captured in `docs/q39_s161.md` and `Q39.S162-gadget-toy-run-retry` is queued as the retry.
+  - `Success:` the entropy-stopper pre-check returned `CONTINUE`, we re-ran `scripts/toy_q39_rank2.py --alt 118` with the gadget guard, and the rank stayed at 2; `docs/q39_s162.md` records the vectors and the NextStep `Q39.S163-gadget-support-audit`.
     Context: node - syntactically simulate Gaussian elimination step; fixed partitions break, even-batching does not help.
     Note: the orientation invariance of the frontier is fixed in `formal/WIP/Verified/Q39.lean`.
     Details: `formal/Notes/TseitinQ39.lean` (Section 16.153-Section 16.177) and summary in `formal/Notes/TseitinLocalEF.lean` §16.187.

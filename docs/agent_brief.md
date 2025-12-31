@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S161-gadget-toy-run
-- `Do-not-repeat (next 2 runs):` Q39.S161-gadget-toy-run, Q39.S160-gadget-toy-check
+- `LastStepID:` Q39.S162-gadget-toy-run-retry
+- `Do-not-repeat (next 2 runs):` Q39.S162-gadget-toy-run-retry, Q39.S161-gadget-toy-run
 - `Last InfoGain:` 0
 - `LastApproachTag:` model-stress-test
-- `LastFailureReason:` entropy-stopper policy (score 3.8)
+- `LastFailureReason:` gadget toy still rank 2
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED again by the entropy-stopper pre-check (score 3.8) before the gadget toy run could execute; `docs/q39_s161.md` now captures the STOP note and `Q39.S162-gadget-toy-run-retry` waits for a cooler policy value. Q43: BLOCKED again by the entropy-stopper policy (score 3.2) before the nonuniform support witness could be written; record Q43.S368 as the STOP note and wait for the policy to cool before reissuing Q43.S369.
+Q39: BLOCKED after rerunning the gadget toy (rank stayed 2); `docs/q39_s162.md` records the output and we now audit the support layout in `Q39.S163-gadget-support-audit`. Q43: BLOCKED again by the entropy-stopper policy (score 3.2) before the nonuniform support witness could be written; record Q43.S368 as the STOP note and wait for the policy to cool before reissuing Q43.S369.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -25,7 +25,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Active "unique" tasks (select one per run)
 
-- Q39 from `docs/open_questions.md` (blocked; entropy-stopper pre-check hit for the alt70 run; document Q39.S160-gadget-toy-check before reissuing).
+- Q39 from `docs/open_questions.md` (blocked; gadget toy rerun (S162) still rank 2; audit support layout in Q39.S163).
 - Q43 from `docs/open_questions.md` (blocked; entropy-stopper pre-check stopped both the S366 and S368 attempts, so we are logging the barrier note in Q43.S368 and will reissue Q43.S369 once the policy allows).
 
 ## Experiment register (max 12 items; overwrite old ones)
