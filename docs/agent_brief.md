@@ -6,15 +6,15 @@ and not by adding to endless lists.
 
 ## Anti-loop (update, don't bloat)
 
-- `LastStepID:` Q39.S148-oracle-xor-step-model-stress
-- `Do-not-repeat (next 2 runs):` Q39.S148-oracle-xor-step-model-stress, Q43.S352-band-log2-setup-bundle
+- `LastStepID:` Q43.S353-band-log2-stopper-review
+- `Do-not-repeat (next 2 runs):` Q43.S353-band-log2-stopper-review, Q39.S148-oracle-xor-step-model-stress
 - `Last InfoGain:` 0
-- `LastApproachTag:` model-stress-test
+- `LastApproachTag:` barrier-driven-design
 - `LastFailureReason:` entropy-stopper
 
 ## Current direction (keep 1-2 lines)
 
-Q39: BLOCKED by entropy stopper; resume at Q39.S149-oracle-xor-step-stopreview. Q43: BLOCKED by entropy stopper; resume at Q43.S353-band-log2-stopper-review.
+Q39: BLOCKED by entropy stopper; resume at Q39.S149-oracle-xor-step-stopreview. Q43: BLOCKED by entropy stopper; resume at Q43.S354-band-log2-stopper-cooldown.
 Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 toy entropy-pruner sandbox installed; next Q00.S004-entropy-pruner-proof-adapter.
 
 ## What has already been done (do not repeat)
@@ -26,7 +26,7 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 ## Active "unique" tasks (select one per run)
 
 - Q39 from `docs/open_questions.md` (blocked; resume at Q39.S149-oracle-xor-step-stopreview).
-- Q43 from `docs/open_questions.md` (blocked; resume at Q43.S353-band-log2-stopper-review).
+- Q43 from `docs/open_questions.md` (blocked; resume at Q43.S354-band-log2-stopper-cooldown).
 
 ## Experiment register (max 12 items; overwrite old ones)
 
@@ -43,4 +43,4 @@ Infra: Entropy Stopper v1 installed (policy v1; run meta entropy + advice). Q00 
 
 ## Lenses (keep the last 5; update, do not increase)
 
-Latest:Model stress test->Barrier-driven design->Model stress test->Communication/rank->Invariant
+Latest:Barrier-driven design->Model stress test->Barrier-driven design->Model stress test->Communication/rank
